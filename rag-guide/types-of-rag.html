@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Types of RAG - AI Engineering Visualized</title>
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="guide.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="fundamentals.html" class="tab-btn active">RAG Guide</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">RAG Documentation</div>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. RAG Fundamentals</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">2. Vector Databases</a>
+        <a href="types-of-rag.html" class="guide-sidebar-link active">3. Types of RAG</a>
+        <a href="evaluation.html" class="guide-sidebar-link">4. Evaluation</a>
+        <a href="development.html" class="guide-sidebar-link">5. Development</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Part 3</span>
+        <h1 class="guide-title">Types of RAG Architectures</h1>
+        <p class="guide-intro">As RAG matures, basic "Naive RAG" is being replaced by sophisticated architectures to handle complex reasoning, multi-modal data, and self-correction.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>21. Evolution of RAG</h2>
+        
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Naive RAG</h3>
+            <p class="gc-desc">The standard pipeline: Embed query → Search DB → Augment Prompt → Generate.<br><br><em>Best for:</em> Simple QA over clean documents.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Advanced RAG</h3>
+            <p class="gc-desc">Introduces pre-retrieval (query routing/rewriting) and post-retrieval (reranking using Cross-Encoders).<br><br><em>Best for:</em> Production enterprise systems.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Hybrid RAG</h3>
+            <p class="gc-desc">Combines dense vector search (semantic) with sparse keyword search (BM25) to get the best of both worlds.<br><br><em>Best for:</em> Domain-specific jargon (e.g. medical acronyms).</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Agentic RAG</h3>
+            <p class="gc-desc">An AI agent is given RAG as a tool. It reasons if it needs to search, constructs the query itself, and can search multiple times.<br><br><em>Best for:</em> Complex, multi-part questions.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Graph RAG</h3>
+            <p class="gc-desc">Instead of vector chunks, data is stored in a Knowledge Graph (nodes and relationships).<br><br><em>Best for:</em> Tracing complex relationships (e.g., fraud detection, supply chain).</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Multi-modal RAG</h3>
+            <p class="gc-desc">Retrieving not just text, but images, charts, and audio using multi-modal embedding models (like CLIP).<br><br><em>Best for:</em> Analyzing slide decks, scanned PDFs, or videos.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Corrective RAG (CRAG)</h3>
+            <p class="gc-desc">The system evaluates retrieved documents. If they are irrelevant, it automatically triggers a web search to find the correct answer.<br><br><em>Best for:</em> Questions requiring external real-time verification.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Self-RAG</h3>
+            <p class="gc-desc">The LLM is trained to generate reflection tokens. It critiques its own retrieved context and generation, deciding whether to retry.<br><br><em>Best for:</em> Highly sensitive applications prioritizing faithfulness.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>22. When to Use Each Type</h2>
+        <div class="guide-code">
+          <span class="code-comment">/* Decision Matrix */</span><br><br>
+          <span class="code-keyword">if</span> (needs_to_connect_distant_entities) <span class="code-func">use_graph_rag</span>();<br>
+          <span class="code-keyword">else if</span> (query_has_specific_product_SKUs) <span class="code-func">use_hybrid_rag</span>();<br>
+          <span class="code-keyword">else if</span> (question_requires_multi_step_logic) <span class="code-func">use_agentic_rag</span>();<br>
+          <span class="code-keyword">else if</span> (contains_charts_and_graphs) <span class="code-func">use_multi_modal_rag</span>();<br>
+          <span class="code-keyword">else</span> <span class="code-func">use_advanced_rag_with_reranking</span>();
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>

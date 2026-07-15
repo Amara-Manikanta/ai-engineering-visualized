@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vector Databases - AI Engineering Visualized</title>
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="guide.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="fundamentals.html" class="tab-btn active">RAG Guide</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">RAG Documentation</div>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. RAG Fundamentals</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link active">2. Vector Databases</a>
+        <a href="types-of-rag.html" class="guide-sidebar-link">3. Types of RAG</a>
+        <a href="evaluation.html" class="guide-sidebar-link">4. Evaluation</a>
+        <a href="development.html" class="guide-sidebar-link">5. Development</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Part 2</span>
+        <h1 class="guide-title">Vector Databases</h1>
+        <p class="guide-intro">Traditional databases search by keywords. Vector databases search by meaning.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>13. What is a Vector Database?</h2>
+        
+        <div class="guide-card">
+          <p class="gc-desc">A vector database is a specialized database designed to store, manage, and search embedding vectors. Instead of matching exact strings like SQL, a vector database uses Approximate Nearest Neighbor (ANN) algorithms to find vectors that are mathematically closest to your query vector.</p>
+        </div>
+
+        <div class="guide-callout">
+          <div class="guide-callout-title">💡 Why use one?</div>
+          <p>At scale, computing cosine similarity between your query and a million document chunks is too slow. Vector databases use specialized indexes (like HNSW) to reduce search times from minutes to milliseconds.</p>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>14. Popular Vector Databases</h2>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Pinecone</h3>
+            <p class="gc-desc">Fully managed, closed-source SaaS. extremely popular for its ease of use and serverless architecture.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Milvus</h3>
+            <p class="gc-desc">Open-source, highly scalable. Built for massive enterprise workloads handling billions of vectors.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Chroma</h3>
+            <p class="gc-desc">AI-native, open-source database optimized for developer experience. Great for rapid prototyping.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Qdrant</h3>
+            <p class="gc-desc">Written in Rust, extremely fast, open-source, and supports advanced payload filtering.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">FAISS</h3>
+            <p class="gc-desc">A library by Meta. Not a full database, but the underlying engine for rapid vector similarity search.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">pgvector</h3>
+            <p class="gc-desc">An extension for PostgreSQL. Allows you to keep your vectors right next to your relational data.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>15. Indexing Methods</h2>
+        <p>How do vector databases achieve millisecond search times over billions of vectors? By using specialized indexes.</p>
+        
+        <div class="guide-grid">
+          <div class="guide-card">
+            <div class="gc-icon">📏</div>
+            <h3 class="gc-title">Flat (Exact Search)</h3>
+            <p class="gc-desc">Compares the query to every single vector (brute force).<br><br><strong>Pros:</strong> 100% accurate (perfect recall).<br><strong>Cons:</strong> Extremely slow at scale.</p>
+          </div>
+          <div class="guide-card">
+            <div class="gc-icon">🕸️</div>
+            <h3 class="gc-title">HNSW (Hierarchical Navigable Small World)</h3>
+            <p class="gc-desc">Builds a multi-layered graph of vectors. Search drops down through layers to quickly zoom in on neighbors.<br><br><strong>Pros:</strong> Very fast, highly accurate.<br><strong>Cons:</strong> High memory consumption.</p>
+          </div>
+          <div class="guide-card">
+            <div class="gc-icon">🗂️</div>
+            <h3 class="gc-title">IVF (Inverted File Index)</h3>
+            <p class="gc-desc">Clusters vectors into groups (Voronoi cells). Search only checks the closest cluster.<br><br><strong>Pros:</strong> Speeds up search significantly.<br><strong>Cons:</strong> Can miss edge-case vectors.</p>
+          </div>
+          <div class="guide-card">
+            <div class="gc-icon">📉</div>
+            <h3 class="gc-title">PQ (Product Quantization)</h3>
+            <p class="gc-desc">Compresses vectors by splitting them into sub-vectors and replacing them with short codes.<br><br><strong>Pros:</strong> Massive memory reduction (up to 97%).<br><strong>Cons:</strong> Lossy compression degrades accuracy.</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>

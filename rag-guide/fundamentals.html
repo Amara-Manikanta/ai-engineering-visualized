@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAG Fundamentals - AI Engineering Visualized</title>
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="guide.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="fundamentals.html" class="tab-btn active">RAG Guide</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">RAG Documentation</div>
+        <a href="fundamentals.html" class="guide-sidebar-link active">1. RAG Fundamentals</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">2. Vector Databases</a>
+        <a href="types-of-rag.html" class="guide-sidebar-link">3. Types of RAG</a>
+        <a href="evaluation.html" class="guide-sidebar-link">4. Evaluation</a>
+        <a href="development.html" class="guide-sidebar-link">5. Development</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Part 1</span>
+        <h1 class="guide-title">RAG Fundamentals</h1>
+        <p class="guide-intro">Everything you need to know about Retrieval-Augmented Generation (RAG): what it is, why it was created, and its pros and cons.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>1. What is RAG?</h2>
+        
+        <div class="guide-card">
+          <div class="gc-icon">🔍</div>
+          <h3 class="gc-title">Definition</h3>
+          <p class="gc-desc">Retrieval-Augmented Generation (RAG) is an AI framework that retrieves factual data from an external knowledge base and provides it to a Large Language Model (LLM) to ground its responses in accurate, up-to-date information.</p>
+        </div>
+
+        <h3>End-to-End Workflow & Architecture</h3>
+        <p>A standard RAG pipeline operates in two distinct phases: <strong>Indexing</strong> (data preparation) and <strong>Retrieval/Generation</strong> (answering the user).</p>
+        
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Phase 1: Indexing</h3>
+            <ul class="gc-list">
+              <li>Parse raw documents (PDFs, URLs, DBs).</li>
+              <li>Split text into overlapping chunks.</li>
+              <li>Convert chunks to vector embeddings.</li>
+              <li>Store in a Vector Database (e.g. Milvus).</li>
+            </ul>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Phase 2: Runtime</h3>
+            <ul class="gc-list">
+              <li>User submits a query.</li>
+              <li>Query is converted to an embedding.</li>
+              <li>Vector DB returns top-K similar chunks.</li>
+              <li>LLM generates a response using the chunks.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>2. Why RAG? (Problems with standalone LLMs)</h2>
+        <p>Standalone Large Language Models (LLMs) are incredibly powerful, but they suffer from several inherent flaws that make them risky for enterprise use.</p>
+        
+        <div class="guide-callout warning">
+          <div class="guide-callout-title">⚠️ The Hallucination Problem</div>
+          <p>LLMs are probabilistic word-guessers. When they don't know a fact, they will confidently invent one. RAG fixes this by forcing the LLM to read from a factual context window.</p>
+        </div>
+
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Knowledge Cutoff</h3>
+            <p class="gc-desc">LLMs are frozen in time after their training run completes. RAG allows you to inject real-time data without retraining.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Private Enterprise Data</h3>
+            <p class="gc-desc">LLMs don't know your company's proprietary documents. Fine-tuning on private data is expensive and poses security risks.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>3. Advantages of RAG</h2>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Reduced Hallucinations</h3>
+            <p class="gc-desc">Responses are grounded in retrieved context rather than latent memory.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Source Citations</h3>
+            <p class="gc-desc">Since the LLM uses retrieved chunks, you can easily trace and cite the exact source document and page number.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Cost-Effective</h3>
+            <p class="gc-desc">Vector indexing is pennies compared to the tens of thousands of dollars required for continuous fine-tuning.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Access Control</h3>
+            <p class="gc-desc">You can restrict vector retrieval based on user permissions, something impossible with baked-in fine-tuning.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>4. Limitations of RAG</h2>
+        <div class="guide-grid">
+          <div class="guide-card" style="border-left: 4px solid #f97316;">
+            <h3 class="gc-title">Retrieval Dependency</h3>
+            <p class="gc-desc">If the search engine fails to find the right chunk, the LLM will fail to answer the question. "Garbage in, Garbage out."</p>
+          </div>
+          <div class="guide-card" style="border-left: 4px solid #f97316;">
+            <h3 class="gc-title">Latency & Cost</h3>
+            <p class="gc-desc">Running an embedding model, querying a vector DB, and sending huge context prompts to an LLM adds significant latency and token costs.</p>
+          </div>
+          <div class="guide-card" style="border-left: 4px solid #f97316;">
+            <h3 class="gc-title">Context Window Limits</h3>
+            <p class="gc-desc">Even with large context windows (128k+ tokens), putting too many chunks in the prompt can lead to the "Lost in the Middle" phenomenon.</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>

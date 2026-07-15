@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Evaluation - AI Engineering Visualized</title>
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="guide.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="fundamentals.html" class="tab-btn active">RAG Guide</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">RAG Documentation</div>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. RAG Fundamentals</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">2. Vector Databases</a>
+        <a href="types-of-rag.html" class="guide-sidebar-link">3. Types of RAG</a>
+        <a href="evaluation.html" class="guide-sidebar-link active">4. Evaluation</a>
+        <a href="development.html" class="guide-sidebar-link">5. Development</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Part 4</span>
+        <h1 class="guide-title">Evaluating a RAG System</h1>
+        <p class="guide-intro">How do you know if your RAG pipeline is actually working? You need robust, automated evaluation metrics to measure retrieval quality and generation faithfulness.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>28. Core Evaluation Metrics</h2>
+        
+        <div class="guide-grid">
+          <div class="guide-card">
+            <div class="gc-icon">🎯</div>
+            <h3 class="gc-title">Context Relevance (Precision)</h3>
+            <p class="gc-desc">Did the retriever find the right chunks? Or did it pull in noisy, irrelevant data? High precision means every retrieved chunk is useful.</p>
+          </div>
+          <div class="guide-card">
+            <div class="gc-icon">🧲</div>
+            <h3 class="gc-title">Context Recall</h3>
+            <p class="gc-desc">Did the retriever find ALL the necessary information to answer the question? High recall means nothing important was missed.</p>
+          </div>
+          <div class="guide-card">
+            <div class="gc-icon">🛡️</div>
+            <h3 class="gc-title">Faithfulness (Groundedness)</h3>
+            <p class="gc-desc">Is the final answer derived STRICTLY from the retrieved context? If the LLM makes up a fact not found in the chunks, faithfulness fails (Hallucination).</p>
+          </div>
+          <div class="guide-card">
+            <div class="gc-icon">✅</div>
+            <h3 class="gc-title">Answer Relevance</h3>
+            <p class="gc-desc">Does the final answer actually address the user's original query? The answer might be faithful to the context, but completely useless to the user.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>29. Common Problems in RAG</h2>
+        <div class="guide-callout warning">
+          <div class="guide-callout-title">⚠️ The "Lost in the Middle" Phenomenon</div>
+          <p>When you feed an LLM a massive context window filled with dozens of retrieved chunks, it tends to pay attention to the chunks at the very beginning and the very end, while ignoring the chunks in the middle.</p>
+        </div>
+
+        <ul class="gc-list" style="font-size: 1.1rem;">
+          <li><strong>Poor Retrieval:</strong> The vector database fails to find the right chunk because the query didn't semantically match the document text (solved by query expansion or Hybrid RAG).</li>
+          <li><strong>Bad Chunking:</strong> Chunks are cut mid-sentence or mid-paragraph, stripping away vital context (solved by semantic or structural chunking).</li>
+          <li><strong>Duplicate Chunks:</strong> The same information is retrieved multiple times from slightly different pages, wasting context window space.</li>
+          <li><strong>Hallucinations:</strong> The LLM ignores the prompt instructions and relies on its own pre-trained memory to answer the question.</li>
+        </ul>
+      </section>
+      
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>

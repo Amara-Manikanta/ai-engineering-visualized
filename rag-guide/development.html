@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Development - AI Engineering Visualized</title>
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="guide.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="fundamentals.html" class="tab-btn active">RAG Guide</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">RAG Documentation</div>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. RAG Fundamentals</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">2. Vector Databases</a>
+        <a href="types-of-rag.html" class="guide-sidebar-link">3. Types of RAG</a>
+        <a href="evaluation.html" class="guide-sidebar-link">4. Evaluation</a>
+        <a href="development.html" class="guide-sidebar-link active">5. Development</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Part 5</span>
+        <h1 class="guide-title">Building a RAG App</h1>
+        <p class="guide-intro">The ecosystem for building RAG applications is exploding. Here are the top languages, frameworks, and a sample project structure to get you started.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>30. Languages & Frameworks</h2>
+        
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Python 🐍</h3>
+            <p class="gc-desc">The undisputed king of AI development. If you are building RAG, 95% of the tutorials, documentation, and leading frameworks are written in Python.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">TypeScript 💻</h3>
+            <p class="gc-desc">Rapidly catching up, especially for full-stack developers building Next.js apps with integrated AI features using Vercel AI SDK.</p>
+          </div>
+        </div>
+
+        <h3>Top Frameworks</h3>
+        <ul class="gc-list" style="font-size: 1.1rem;">
+          <li><strong>LangChain:</strong> The most popular and comprehensive framework for building LLM apps. Huge ecosystem of integrations.</li>
+          <li><strong>LlamaIndex:</strong> Highly specialized for RAG. Phenomenal for advanced data ingestion, parsing, and query routing.</li>
+          <li><strong>LangGraph:</strong> An extension of LangChain specifically designed for building cyclical, stateful AI Agents.</li>
+          <li><strong>DSPy:</strong> A radical new approach that optimizes prompts programmatically rather than writing them manually.</li>
+          <li><strong>Haystack:</strong> A robust, modular framework by deepset, favored by many enterprises for highly customized NLP pipelines.</li>
+        </ul>
+      </section>
+
+      <section class="guide-section">
+        <h2>33. Sample RAG Project Structure</h2>
+        <p>A production-ready RAG application should separate concerns: ingestion, retrieval, and generation.</p>
+
+        <div class="guide-code">
+project/
+├── documents/            <span class="code-comment"># Raw PDFs, text files, markdown</span>
+├── vector_db/            <span class="code-comment"># Local persistent store (e.g. ChromaDB folder)</span>
+│
+├── embedder.py           <span class="code-comment"># Logic to chunk text and call OpenAI Embeddings API</span>
+├── retriever.py          <span class="code-comment"># Logic to search vector DB and return top-K chunks</span>
+├── prompts.py            <span class="code-comment"># System prompts and RAG templates</span>
+│
+├── rag_pipeline.py       <span class="code-comment"># Orchestrator: glues retriever and LLM together</span>
+├── app.py                <span class="code-comment"># FastAPI or Streamlit frontend</span>
+│
+└── requirements.txt      <span class="code-comment"># langchain, openai, chromadb, etc.</span>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>
