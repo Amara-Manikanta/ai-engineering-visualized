@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG from Scratch – Interactive Explainer</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-icon">🤖</span>
+        <span class="logo-text">RAG<span class="logo-accent"> from Scratch</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><button class="tab-btn active" data-tab="tab-rag">RAG Pipeline</button></li>
+        <li><button class="tab-btn" data-tab="tab-mcp">MCP Pipeline</button></li>
+        <li><button class="tab-btn" data-tab="tab-claude">Claude Features</button></li>
+        <li><button class="tab-btn" data-tab="tab-aitools">AI Tools</button></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── MAIN TABS CONTAINER ─── -->
+  <main class="main-content">
+
+  <!-- ==========================================
+       TAB 1: RAG PIPELINE
+       ========================================== -->
+  <div id="tab-rag" class="tab-pane active">  <!-- ─── HERO ─── -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-glow g1"></div>
+      <div class="hero-glow g2"></div>
+      <div class="hero-glow g3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Interactive Learning Guide
+      </div>
+      <h1 class="hero-title">
+        RAG <span class="title-gradient">from Scratch</span>
+      </h1>
+      <p class="hero-sub">Indexing &rarr; Retrieval &rarr; Augmented &rarr; Generation</p>
+      <p class="hero-desc">
+        A deep-dive, step-by-step animated explainer of <strong>Retrieval-Augmented Generation</strong> —
+        the architecture that lets LLMs answer questions with your own data, accurately and with context.
+      </p>
+      <div class="hero-btns">
+        <a href="#overview" class="btn btn-primary">Start Learning ↓</a>
+        <a href="#demo" class="btn btn-outline">Live Demo →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">4</span><span class="stat-label">Core Stages</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Concepts Explained</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Animated</span></div>
+      </div>
+    </div>
+    <!-- Floating cards -->
+    <div class="floating-cards">
+      <div class="fc fc1">📄 PDF</div>
+      <div class="fc fc2">🔍 Query</div>
+      <div class="fc fc3">🧠 LLM</div>
+      <div class="fc fc4">💬 Response</div>
+      <div class="fc fc5">📊 Vectors</div>
+    </div>
+  </section>
+
+  <!-- ─── OVERVIEW ─── -->
+  <section id="overview" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">What is RAG?</div>
+        <h2 class="section-title">Retrieval-Augmented Generation</h2>
+        <p class="section-desc">
+          RAG is a framework that enhances Large Language Models (LLMs) by connecting them to external knowledge bases.
+          Instead of relying solely on training data, RAG <em>retrieves</em> relevant documents at query-time and feeds
+          them to the LLM as context — resulting in more accurate, up-to-date, and grounded responses.
+        </p>
+      </div>
+
+      <!-- Why RAG card -->
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🧠</div>
+          <h3>Without RAG</h3>
+          <p>LLMs answer from training data only. They can hallucinate, miss recent events, and have no access to private documents.</p>
+          <div class="why-tag danger">⚠ Hallucinations possible</div>
+        </div>
+        <div class="why-arrow">→</div>
+        <div class="why-card highlight">
+          <div class="why-icon">🚀</div>
+          <h3>With RAG</h3>
+          <p>LLMs retrieve relevant chunks from your knowledge base first, then generate answers grounded in real, current data.</p>
+          <div class="why-tag success">✅ Grounded & accurate</div>
+        </div>
+      </div>
+
+      <!-- Pipeline overview mini -->
+      <div class="pipeline-overview">
+        <h3 class="pipeline-title">The Full RAG Pipeline</h3>
+        <div class="pipeline-stages">
+          <div class="ps-item" onclick="scrollToSection('indexing')">
+            <div class="ps-icon idx-color">📁</div>
+            <div class="ps-label">Indexing</div>
+            <div class="ps-desc">Parse, chunk, embed, store</div>
+          </div>
+          <div class="ps-arrow">→</div>
+          <div class="ps-item" onclick="scrollToSection('retrieval')">
+            <div class="ps-icon ret-color">🔍</div>
+            <div class="ps-label">Retrieval (R)</div>
+            <div class="ps-desc">Encode query, semantic search</div>
+          </div>
+          <div class="ps-arrow">→</div>
+          <div class="ps-item" onclick="scrollToSection('augmented')">
+            <div class="ps-icon aug-color">⚙️</div>
+            <div class="ps-label">Augmented (A)</div>
+            <div class="ps-desc">Combine chunks + query</div>
+          </div>
+          <div class="ps-arrow">→</div>
+          <div class="ps-item" onclick="scrollToSection('generation')">
+            <div class="ps-icon gen-color">💬</div>
+            <div class="ps-label">Generate (G)</div>
+            <div class="ps-desc">LLM generates response</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STAGE 1: INDEXING ─── -->
+  <section id="indexing" class="section stage-section idx-bg">
+    <div class="container">
+      <div class="stage-header">
+        <div class="stage-badge idx-badge">Stage 1</div>
+        <h2 class="stage-title">📁 Indexing</h2>
+        <p class="stage-subtitle">
+          Preparing your knowledge base — documents are parsed, chunked, embedded into vectors, and stored in a vector database.
+        </p>
+      </div>
+
+      <!-- Animation Stage -->
+      <div class="anim-container" id="idx-anim">
+        <div class="anim-controls">
+          <button class="ctrl-btn" onclick="idxAnim.prev()">‹ Prev</button>
+          <span class="step-indicator" id="idx-step-label">Step 1 of 5</span>
+          <button class="ctrl-btn primary" onclick="idxAnim.next()">Next ›</button>
+          <button class="ctrl-btn reset" onclick="idxAnim.reset()">↺ Reset</button>
+          <button class="ctrl-btn play" id="idx-play-btn" onclick="idxAnim.togglePlay()">▶ Play</button>
+        </div>
+        <div class="step-dots" id="idx-dots"></div>
+
+        <div class="pipeline-canvas idx-canvas">
+          <!-- Node: PDF -->
+          <div class="node" id="idx-pdf" data-step="1">
+            <div class="node-icon pdf-icon">
+              <div class="pdf-body">
+                <span class="pdf-label">PDF</span>
+                <div class="pdf-lines"><div></div><div></div><div></div></div>
+              </div>
+            </div>
+            <div class="node-label">Document</div>
+            <div class="node-tooltip">Raw PDF, DOCX, or any document<br>you want to make queryable.</div>
+          </div>
+
+          <!-- Arrow 1 -->
+          <div class="arrow-wrap" id="idx-arr1">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">parse</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: TXT -->
+          <div class="node" id="idx-txt" data-step="2">
+            <div class="node-icon txt-icon">
+              <div class="txt-body">
+                <span class="txt-label">TXT</span>
+                <div class="txt-lines"><div></div><div></div><div></div><div></div></div>
+              </div>
+            </div>
+            <div class="node-label">Text</div>
+            <div class="node-tooltip">All content extracted as<br>plain text for processing.</div>
+          </div>
+
+          <!-- Arrow 2 -->
+          <div class="arrow-wrap" id="idx-arr2">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">chunk</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Chunks -->
+          <div class="node" id="idx-chunks" data-step="3">
+            <div class="node-icon chunks-icon">
+              <div class="chunk-grid">
+                <div class="chunk-sq c1"></div>
+                <div class="chunk-sq c2"></div>
+                <div class="chunk-sq c3"></div>
+                <div class="chunk-sq c4"></div>
+              </div>
+            </div>
+            <div class="node-label">Chunks</div>
+            <div class="node-tooltip">Text split into overlapping<br>fixed-size segments (~512 tokens).</div>
+          </div>
+
+          <!-- Arrow 3 (goes up to Embedding Model) -->
+          <div class="arrow-wrap vertical-arrow" id="idx-arr3">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">embed</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Embedding Model -->
+          <div class="node" id="idx-emb-model" data-step="4">
+            <div class="node-icon emb-model-icon">
+              <div class="emb-grid">
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+            <div class="node-label">Embedding Model</div>
+            <div class="node-tooltip">Converts text chunks into<br>dense numerical vectors<br>(e.g. OpenAI, BERT, Cohere).</div>
+          </div>
+
+          <!-- Arrow 4 (goes down to Embeddings) -->
+          <div class="arrow-wrap vertical-arrow" id="idx-arr4">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Embeddings -->
+          <div class="node" id="idx-embeddings" data-step="5">
+            <div class="node-icon embeddings-icon">
+              <div class="emb-vec-grid">
+                <div class="evg-sq"></div><div class="evg-sq"></div><div class="evg-sq"></div>
+                <div class="evg-sq"></div><div class="evg-sq"></div><div class="evg-sq"></div>
+              </div>
+            </div>
+            <div class="node-label">Embeddings</div>
+            <div class="node-tooltip">Dense vectors representing<br>semantic meaning of each chunk.</div>
+          </div>
+
+          <!-- Arrow 5 (goes left to Milvus) -->
+          <div class="arrow-wrap" id="idx-arr5" style="flex-direction:row-reverse;">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">store</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Milvus -->
+          <div class="node" id="idx-milvus" data-step="6">
+            <div class="node-icon milvus-icon">
+              <div class="eye-outer">
+                <div class="eye-inner">
+                  <div class="eye-pupil"></div>
+                </div>
+              </div>
+            </div>
+            <div class="node-label">Milvus<br><small>Vector database</small></div>
+            <div class="node-tooltip">High-performance vector store<br>for similarity search at scale.<br>(Alternatives: Pinecone, Weaviate, Chroma)</div>
+          </div>
+        </div>
+
+        <!-- Step explanation -->
+        <div class="step-explainer" id="idx-explainer">
+          <div class="se-step-num" id="idx-se-num">Step 1</div>
+          <h4 class="se-title" id="idx-se-title">Document Input</h4>
+          <p class="se-desc" id="idx-se-desc">Start with any document — PDFs, Word files, web pages, or text files. These are your knowledge sources that you want the AI to be able to query and reason over.</p>
+          <div class="se-key" id="idx-se-key">
+            <span class="se-key-label">Key insight:</span> The quality and structure of your source documents directly impacts the quality of RAG responses.
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Cards -->
+      <div class="notes-section">
+        <h3 class="notes-title">📝 Indexing — Detailed Notes</h3>
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="nc-icon">📄</div>
+            <h4>1. Document Parsing</h4>
+            <p>Raw documents (PDF, DOCX, HTML, etc.) are loaded and converted into plain text. Libraries like <code>PyMuPDF</code>, <code>pdfplumber</code>, or <code>LangChain loaders</code> handle this. The goal is clean, extractable text.</p>
+            <div class="nc-code">
+              <span class="code-label">Tools:</span>
+              <code>PyMuPDF · pdfplumber · unstructured · LangChain</code>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">✂️</div>
+            <h4>2. Text Chunking</h4>
+            <p>Long documents are split into smaller <strong>overlapping chunks</strong> (typically 256–1024 tokens with 20–50 token overlap). This ensures no context is lost at boundaries and each chunk is small enough to be semantically focused.</p>
+            <div class="nc-code">
+              <span class="code-label">Strategy:</span>
+              <code>Fixed-size · Sentence · Semantic · Recursive</code>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🔢</div>
+            <h4>3. Embedding Generation</h4>
+            <p>Each chunk is passed through an <strong>Embedding Model</strong> which converts text into a dense numerical vector (e.g. 1536 dimensions for OpenAI). Semantically similar texts produce numerically similar vectors.</p>
+            <div class="nc-code">
+              <span class="code-label">Models:</span>
+              <code>text-embedding-ada-002 · BAAI/bge · Cohere · E5</code>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">💾</div>
+            <h4>4. Vector Storage (Milvus)</h4>
+            <p>The embedding vectors (along with the original chunk text as metadata) are stored in a <strong>vector database</strong> like Milvus. These databases are optimized for fast Approximate Nearest Neighbor (ANN) search.</p>
+            <div class="nc-code">
+              <span class="code-label">Options:</span>
+              <code>Milvus · Pinecone · Weaviate · Chroma · FAISS</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CHUNKING TECHNIQUES ─── -->
+  <section id="chunking" class="section chunk-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Deep Dive</div>
+        <h2 class="section-title">✂️ AI Chunking Techniques</h2>
+        <p class="section-desc">
+          <em>Different ways to split documents. Better chunks. Better answers.</em><br>
+          How you split text dramatically affects retrieval quality — here are the 6 essential strategies.
+        </p>
+      </div>
+
+      <!-- 6-card grid -->
+      <div class="chunk-grid">
+
+        <!-- 1. Fixed-Size -->
+        <div class="chunk-card" id="ck1">
+          <div class="ck-header ck-fixed">
+            <div class="ck-num">1</div>
+            <div class="ck-title">Fixed-Size Chunking</div>
+          </div>
+          <p class="ck-desc">Split by a fixed number of tokens or words (e.g., 500 words or 1000 tokens). The simplest, fastest strategy.</p>
+          <div class="ck-visual ckv-fixed">
+            <div class="ckv-doc">📄 Source Doc</div>
+            <div class="ckv-arrow">→</div>
+            <div class="ckv-blocks">
+              <div class="ckb fixed-b">Chunk 1</div>
+              <div class="ckb fixed-b">Chunk 2</div>
+              <div class="ckb fixed-b">Chunk 3</div>
+              <div class="ckb fixed-b">Chunk 4</div>
+              <div class="ckb fixed-b faded">…</div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Simple &amp; fast</span>
+            <span class="ck-pro">✅ Easy to implement</span>
+            <span class="ck-con">⚠ Splits mid-sentence</span>
+          </div>
+          <div class="ck-when">Best for: Plain text, quick prototypes</div>
+        </div>
+
+        <!-- 2. Sliding Window -->
+        <div class="chunk-card" id="ck2">
+          <div class="ck-header ck-sliding">
+            <div class="ck-num">2</div>
+            <div class="ck-title">Sliding Window Chunking</div>
+          </div>
+          <p class="ck-desc">Create overlapping chunks so context is preserved at boundaries. Chunk 2 starts before Chunk 1 ends.</p>
+          <div class="ck-visual ckv-sliding">
+            <div class="ckv-overlap-blocks">
+              <div class="ck-overlap-row">
+                <div class="ckb slide-b s1">Chunk 1<span class="cb-range">(1–5)</span></div>
+              </div>
+              <div class="ck-overlap-row off1">
+                <div class="ckb slide-b s2">Chunk 2<span class="cb-range">(4–8)</span></div>
+              </div>
+              <div class="ck-overlap-row off2">
+                <div class="ckb slide-b s3">Chunk 3<span class="cb-range">(7–11)</span></div>
+              </div>
+              <div class="ck-overlap-row off3">
+                <div class="ckb slide-b s4">Chunk 4<span class="cb-range">(10–14)</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Preserves boundary context</span>
+            <span class="ck-pro">✅ No info loss</span>
+            <span class="ck-con">⚠ More chunks to store</span>
+          </div>
+          <div class="ck-when">Best for: Dense documents, technical content</div>
+        </div>
+
+        <!-- 3. Semantic -->
+        <div class="chunk-card" id="ck3">
+          <div class="ck-header ck-semantic">
+            <div class="ck-num">3</div>
+            <div class="ck-title">Semantic Chunking</div>
+          </div>
+          <p class="ck-desc">Group content by meaning and topic similarity using embeddings. Chunks respect semantic boundaries, not fixed sizes.</p>
+          <div class="ck-visual ckv-semantic">
+            <div class="ckb sem-b s-topic1">Topic 1<br><small>Insurance Basics</small></div>
+            <div class="ckb sem-b s-topic2">Topic 2<br><small>Claim Process</small></div>
+            <div class="ckb sem-b s-topic3">Topic 3<br><small>Exclusions</small></div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ High relevance</span>
+            <span class="ck-pro">✅ Better understanding</span>
+            <span class="ck-con">⚠ Needs embedding model</span>
+          </div>
+          <div class="ck-when">Best for: Mixed-topic documents, FAQs</div>
+        </div>
+
+        <!-- 4. Hierarchical -->
+        <div class="chunk-card" id="ck4">
+          <div class="ck-header ck-hierarchical">
+            <div class="ck-num">4</div>
+            <div class="ck-title">Hierarchical Chunking</div>
+          </div>
+          <p class="ck-desc">Split by document structure — sections, subsections, and paragraphs. Maintains the logical relationships in the document.</p>
+          <div class="ck-visual ckv-hierarchical">
+            <div class="hier-tree">
+              <div class="ht-node ht-doc">Document</div>
+              <div class="ht-children">
+                <div class="ht-branch">
+                  <div class="ht-node ht-sec">Section 1</div>
+                  <div class="ht-children">
+                    <div class="ht-node ht-sub">Sub 1</div>
+                    <div class="ht-node ht-sub">Sub 2</div>
+                  </div>
+                </div>
+                <div class="ht-branch">
+                  <div class="ht-node ht-sec">Section 2</div>
+                  <div class="ht-children">
+                    <div class="ht-node ht-sub">Sub 1</div>
+                    <div class="ht-node ht-sub">Sub 2</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Maintains structure</span>
+            <span class="ck-pro">✅ Keeps relationships</span>
+            <span class="ck-con">⚠ Requires structured docs</span>
+          </div>
+          <div class="ck-when">Best for: Reports, books, legal docs</div>
+        </div>
+
+        <!-- 5. Recursive -->
+        <div class="chunk-card" id="ck5">
+          <div class="ck-header ck-recursive">
+            <div class="ck-num">5</div>
+            <div class="ck-title">Recursive Chunking</div>
+          </div>
+          <p class="ck-desc">Recursively split using a priority order: Headings → Paragraphs → Sentences → Words. Falls back to finer splits only when needed.</p>
+          <div class="ck-visual ckv-recursive">
+            <div class="rec-ladder">
+              <div class="rec-level rl1"><span>Headings</span><div class="rec-bar"></div></div>
+              <div class="rec-arrow">↓</div>
+              <div class="rec-level rl2"><span>Paragraphs</span><div class="rec-bar"></div></div>
+              <div class="rec-arrow">↓</div>
+              <div class="rec-level rl3"><span>Sentences</span><div class="rec-bar"></div></div>
+              <div class="rec-arrow">↓</div>
+              <div class="rec-level rl4"><span>Words</span><div class="rec-bar"></div></div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Flexible &amp; adaptive</span>
+            <span class="ck-pro">✅ Natural boundaries</span>
+            <span class="ck-con">⚠ More complex logic</span>
+          </div>
+          <div class="ck-when">Best for: General-purpose RAG (most popular)</div>
+        </div>
+
+        <!-- 6. Document-Aware -->
+        <div class="chunk-card" id="ck6">
+          <div class="ck-header ck-docaware">
+            <div class="ck-num">6</div>
+            <div class="ck-title">Document-Aware Chunking</div>
+          </div>
+          <p class="ck-desc">Split based on document element types — headings, paragraphs, tables, lists, code blocks, and images are treated differently.</p>
+          <div class="ck-visual ckv-docaware">
+            <div class="da-elements">
+              <div class="da-el da-h"><span class="da-icon">H</span> Heading</div>
+              <div class="da-el da-p"><span class="da-icon">≡</span> Paragraph</div>
+              <div class="da-el da-t"><span class="da-icon">⊞</span> Table</div>
+              <div class="da-el da-l"><span class="da-icon">☰</span> List</div>
+              <div class="da-el da-c"><span class="da-icon">&lt;/&gt;</span> Code Block</div>
+              <div class="da-el da-i"><span class="da-icon">🖼</span> Figure</div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Respects layout</span>
+            <span class="ck-pro">✅ Great for mixed docs</span>
+            <span class="ck-con">⚠ Needs doc parser</span>
+          </div>
+          <div class="ck-when">Best for: PDFs, slides, structured reports</div>
+        </div>
+
+      </div><!-- /chunk-grid -->
+
+      <!-- Comparison table -->
+      <div class="chunk-comparison">
+        <h3 class="notes-title">📊 Technique Comparison</h3>
+        <div class="ct-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Technique</th>
+                <th>Overlap</th>
+                <th>Semantic Awareness</th>
+                <th>Implementation</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1️⃣ Fixed-Size</td><td>❌ None</td><td>❌ None</td><td>⭐ Very Easy</td><td>Quick prototypes</td></tr>
+              <tr><td>2️⃣ Sliding Window</td><td>✅ Yes</td><td>❌ None</td><td>⭐⭐ Easy</td><td>Dense text</td></tr>
+              <tr><td>3️⃣ Semantic</td><td>✅ Natural</td><td>✅✅ High</td><td>⭐⭐⭐ Medium</td><td>Topic-mixed docs</td></tr>
+              <tr><td>4️⃣ Hierarchical</td><td>✅ Structural</td><td>✅ Medium</td><td>⭐⭐⭐ Medium</td><td>Books, reports</td></tr>
+              <tr class="highlight-row"><td>5️⃣ Recursive</td><td>✅ Adaptive</td><td>✅ Medium</td><td>⭐⭐⭐ Medium</td><td>✅ General-purpose</td></tr>
+              <tr><td>6️⃣ Document-Aware</td><td>✅ Element-level</td><td>✅✅ High</td><td>⭐⭐⭐⭐ Complex</td><td>PDFs, slides</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- From Chunks to Insights pipeline -->
+      <div class="chunks-to-insights">
+        <h3 class="notes-title">🔁 From Chunks to Insights</h3>
+        <div class="cti-pipeline">
+          <div class="cti-node">
+            <div class="cti-icon">✂️</div>
+            <div class="cti-label">Chunks</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">🔢</div>
+            <div class="cti-label">Embeddings</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">💾</div>
+            <div class="cti-label">Vector DB</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">🔍</div>
+            <div class="cti-label">Retrieval</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">🧠</div>
+            <div class="cti-label">LLM</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node cti-final">
+            <div class="cti-icon">💬</div>
+            <div class="cti-label">Accurate Response</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── STAGE 2: RETRIEVAL ─── -->
+  <section id="retrieval" class="section stage-section ret-bg">
+    <div class="container">
+      <div class="stage-header">
+        <div class="stage-badge ret-badge">Stage 2</div>
+        <h2 class="stage-title">🔍 Retrieval (R)</h2>
+        <p class="stage-subtitle">
+          At query time — the user's question is encoded into a vector and semantically matched against stored embeddings to retrieve the most relevant chunks.
+        </p>
+      </div>
+
+      <!-- Animation Stage -->
+      <div class="anim-container" id="ret-anim">
+        <div class="anim-controls">
+          <button class="ctrl-btn" onclick="retAnim.prev()">‹ Prev</button>
+          <span class="step-indicator" id="ret-step-label">Step 1 of 5</span>
+          <button class="ctrl-btn primary" onclick="retAnim.next()">Next ›</button>
+          <button class="ctrl-btn reset" onclick="retAnim.reset()">↺ Reset</button>
+          <button class="ctrl-btn play" id="ret-play-btn" onclick="retAnim.togglePlay()">▶ Play</button>
+        </div>
+        <div class="step-dots" id="ret-dots"></div>
+
+        <div class="pipeline-canvas ret-canvas">
+          <!-- User -->
+          <div class="node" id="ret-user" data-step="1">
+            <div class="node-icon user-icon">
+              <div class="user-head"></div>
+              <div class="user-body"></div>
+            </div>
+            <div class="node-label">User</div>
+            <div class="node-tooltip">The end user asking a question<br>in natural language.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr1">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Query -->
+          <div class="node" id="ret-query" data-step="2">
+            <div class="node-icon query-icon">
+              <div class="query-bubble">?</div>
+            </div>
+            <div class="node-label">Query</div>
+            <div class="node-tooltip">"What is the return policy?"<br>"Summarize chapter 3"<br>Any natural language question.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr2">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">encode</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Embedding Model -->
+          <div class="node" id="ret-emb-model" data-step="3">
+            <div class="node-icon emb-model-icon small-emb">
+              <div class="emb-grid">
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+            <div class="node-label">Embedding<br>Model</div>
+            <div class="node-tooltip">Same model used during indexing!<br>Encodes the query into a vector.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr3">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Embedding vector -->
+          <div class="node" id="ret-emb-vec" data-step="4">
+            <div class="node-icon emb-vec-icon">
+              <div class="vec-bars">
+                <div class="vb" style="height:60%"></div>
+                <div class="vb" style="height:90%"></div>
+                <div class="vb" style="height:45%"></div>
+                <div class="vb" style="height:75%"></div>
+                <div class="vb" style="height:55%"></div>
+              </div>
+            </div>
+            <div class="node-label">Embedding</div>
+            <div class="node-tooltip">A dense vector [0.23, -0.41, 0.87, ...]<br>representing query semantics.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr4">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">semantic search</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Milvus -->
+          <div class="node" id="ret-milvus" data-step="5">
+            <div class="node-icon milvus-icon">
+              <div class="eye-outer">
+                <div class="eye-inner">
+                  <div class="eye-pupil"></div>
+                </div>
+              </div>
+            </div>
+            <div class="node-label">Milvus<br><small>Vector database</small></div>
+            <div class="node-tooltip">Computes cosine similarity<br>between query vector and all<br>stored chunk vectors. Returns top-K.</div>
+          </div>
+
+          <!-- Returns arrow down -->
+          <div class="arrow-wrap ret-returns-arr" id="ret-arr5">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">returns</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Relevant chunks -->
+          <div class="node" id="ret-chunks" data-step="6">
+            <div class="node-icon rel-chunks-icon">
+              <div class="rel-chunk rc1"></div>
+              <div class="rel-chunk rc2"></div>
+            </div>
+            <div class="node-label">Relevant Chunks</div>
+            <div class="node-tooltip">Top-K most semantically similar<br>chunks to the user's query.<br>These become the context.</div>
+          </div>
+        </div>
+
+        <div class="step-explainer" id="ret-explainer">
+          <div class="se-step-num" id="ret-se-num">Step 1</div>
+          <h4 class="se-title" id="ret-se-title">User Asks a Question</h4>
+          <p class="se-desc" id="ret-se-desc">A user types a natural language question. This is the query that will drive the entire retrieval process. The system needs to find the most relevant pieces of information from the knowledge base to answer this question.</p>
+          <div class="se-key" id="ret-se-key">
+            <span class="se-key-label">Key insight:</span> RAG is query-driven — retrieval happens fresh for every user question, in real time.
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="notes-section">
+        <h3 class="notes-title">📝 Retrieval — Detailed Notes</h3>
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="nc-icon">👤</div>
+            <h4>1. User Query</h4>
+            <p>The user submits a question in plain language. Unlike keyword search, RAG understands the <em>intent</em> and <em>meaning</em> of the question — not just matching exact words.</p>
+            <div class="nc-code"><span class="code-label">Example:</span><code>"What are the symptoms of flu?"</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🔢</div>
+            <h4>2. Query Encoding</h4>
+            <p>The query is run through the <strong>same embedding model</strong> used during indexing. This creates a query vector in the same vector space as the document chunks — enabling meaningful comparison.</p>
+            <div class="nc-code"><span class="code-label">Critical:</span><code>Same model for indexing & retrieval!</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🎯</div>
+            <h4>3. Semantic Search</h4>
+            <p>The query vector is compared to all stored chunk vectors using <strong>cosine similarity</strong> or dot product. This finds chunks that are semantically close even if different words are used. Much smarter than keyword matching.</p>
+            <div class="nc-code"><span class="code-label">Math:</span><code>similarity = cos(query_vec, chunk_vec)</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">📦</div>
+            <h4>4. Top-K Relevant Chunks</h4>
+            <p>Milvus returns the <strong>top-K</strong> most similar chunks (typically K=3 to 10). These chunks contain the most relevant information from your knowledge base to answer the user's question.</p>
+            <div class="nc-code"><span class="code-label">Typical:</span><code>K=3 to 10 chunks returned</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STAGE 3: AUGMENTED ─── -->
+  <section id="augmented" class="section stage-section aug-bg">
+    <div class="container">
+      <div class="stage-header">
+        <div class="stage-badge aug-badge">Stage 3</div>
+        <h2 class="stage-title">⚙️ Augmented (A)</h2>
+        <p class="stage-subtitle">
+          The retrieved chunks and the user's original query are <em>combined</em> into a rich, context-filled prompt ready for the LLM.
+        </p>
+      </div>
+
+      <div class="anim-container" id="aug-anim">
+        <div class="anim-controls">
+          <button class="ctrl-btn" onclick="augAnim.prev()">‹ Prev</button>
+          <span class="step-indicator" id="aug-step-label">Step 1 of 3</span>
+          <button class="ctrl-btn primary" onclick="augAnim.next()">Next ›</button>
+          <button class="ctrl-btn reset" onclick="augAnim.reset()">↺ Reset</button>
+          <button class="ctrl-btn play" id="aug-play-btn" onclick="augAnim.togglePlay()">▶ Play</button>
+        </div>
+        <div class="step-dots" id="aug-dots"></div>
+
+        <div class="pipeline-canvas aug-canvas">
+          <!-- Relevant chunks input -->
+          <div class="node" id="aug-chunks" data-step="1">
+            <div class="node-icon rel-chunks-icon">
+              <div class="rel-chunk rc1"></div>
+              <div class="rel-chunk rc2"></div>
+              <div class="rel-chunk rc3"></div>
+            </div>
+            <div class="node-label">Relevant Chunks</div>
+            <div class="node-tooltip">The top-K chunks retrieved<br>from the vector database.</div>
+          </div>
+
+          <div class="arrow-wrap" id="aug-arr1">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">combine</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Context box -->
+          <div class="node" id="aug-context" data-step="2">
+            <div class="node-icon context-icon">
+              <div class="ctx-box">
+                <div class="ctx-line long"></div>
+                <div class="ctx-line medium"></div>
+                <div class="ctx-line long"></div>
+                <div class="ctx-line short"></div>
+              </div>
+            </div>
+            <div class="node-label">Context</div>
+            <div class="node-tooltip">The retrieved chunks assembled<br>into a structured context block.</div>
+          </div>
+
+          <!-- User query comes in from top -->
+          <div class="node aug-query-node" id="aug-uquery" data-step="2">
+            <div class="node-icon query-icon">
+              <div class="query-bubble">?</div>
+            </div>
+            <div class="node-label">User Query</div>
+            <div class="node-tooltip">The original user question<br>is kept intact.</div>
+          </div>
+
+          <div class="arrow-wrap" id="aug-arr2">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Final Prompt -->
+          <div class="node" id="aug-prompt" data-step="3">
+            <div class="node-icon prompt-icon">
+              <div class="prompt-box">
+                <div class="pb-section context-section">
+                  <span>Context</span>
+                </div>
+                <div class="pb-section query-section">
+                  <span>Query</span>
+                </div>
+              </div>
+            </div>
+            <div class="node-label">Prompt<br><small>(query + context)</small></div>
+            <div class="node-tooltip">A structured prompt containing<br>both the retrieved context and<br>the user's original question.</div>
+          </div>
+        </div>
+
+        <div class="step-explainer" id="aug-explainer">
+          <div class="se-step-num" id="aug-se-num">Step 1</div>
+          <h4 class="se-title" id="aug-se-title">Retrieved Chunks Ready</h4>
+          <p class="se-desc" id="aug-se-desc">The relevant chunks retrieved from the vector database are now available. These chunks contain the factual information needed to answer the user's query accurately.</p>
+          <div class="se-key" id="aug-se-key">
+            <span class="se-key-label">Key insight:</span> The "A" in RAG stands for Augmented — we augment the LLM's knowledge with retrieved real-world context.
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt Template Visualizer -->
+      <div class="prompt-visualizer">
+        <h3 class="notes-title">🖋️ What the Final Prompt Looks Like</h3>
+        <div class="prompt-template">
+          <div class="pt-section sys">
+            <div class="pt-label">System Message</div>
+            <div class="pt-content">You are a helpful assistant. Use ONLY the context provided below to answer the user's question. If the answer is not in the context, say "I don't know."</div>
+          </div>
+          <div class="pt-section ctx">
+            <div class="pt-label">Context (Retrieved Chunks)</div>
+            <div class="pt-content">
+              <strong>[Chunk 1]:</strong> "The return policy allows returns within 30 days of purchase with a valid receipt..."<br><br>
+              <strong>[Chunk 2]:</strong> "Refunds are processed within 5–7 business days to the original payment method..."<br><br>
+              <strong>[Chunk 3]:</strong> "Items must be in original condition with all tags attached for a full refund..."
+            </div>
+          </div>
+          <div class="pt-section qry">
+            <div class="pt-label">User Query</div>
+            <div class="pt-content">"What is the return policy and how long do refunds take?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notes-section">
+        <h3 class="notes-title">📝 Augmentation — Detailed Notes</h3>
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="nc-icon">📋</div>
+            <h4>1. Context Assembly</h4>
+            <p>Retrieved chunks are concatenated and formatted into a <strong>context block</strong>. Good RAG implementations add chunk metadata (source, page number) for traceability and citation.</p>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">📝</div>
+            <h4>2. Prompt Engineering</h4>
+            <p>A carefully crafted system prompt instructs the LLM to answer <em>only</em> from the provided context. This prevents hallucinations and keeps answers grounded in your data.</p>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🔗</div>
+            <h4>3. Query + Context = Prompt</h4>
+            <p>The final prompt combines: <strong>System instructions + Retrieved context + User question</strong>. This complete prompt is what gets sent to the LLM in the next stage.</p>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">⚖️</div>
+            <h4>4. Context Window Limits</h4>
+            <p>LLMs have a maximum context window (e.g., 128K tokens for GPT-4o). The number of retrieved chunks must fit within this limit along with the system prompt and user query.</p>
+            <div class="nc-code"><span class="code-label">Balance:</span><code>More chunks = more context but more cost</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STAGE 4: GENERATION ─── -->
+  <section id="generation" class="section stage-section gen-bg">
+    <div class="container">
+      <div class="stage-header">
+        <div class="stage-badge gen-badge">Stage 4</div>
+        <h2 class="stage-title">💬 Generate (G)</h2>
+        <p class="stage-subtitle">
+          The augmented prompt is fed to an LLM which generates a coherent, accurate, and context-grounded response.
+        </p>
+      </div>
+
+      <div class="anim-container" id="gen-anim">
+        <div class="anim-controls">
+          <button class="ctrl-btn" onclick="genAnim.prev()">‹ Prev</button>
+          <span class="step-indicator" id="gen-step-label">Step 1 of 3</span>
+          <button class="ctrl-btn primary" onclick="genAnim.next()">Next ›</button>
+          <button class="ctrl-btn reset" onclick="genAnim.reset()">↺ Reset</button>
+          <button class="ctrl-btn play" id="gen-play-btn" onclick="genAnim.togglePlay()">▶ Play</button>
+        </div>
+        <div class="step-dots" id="gen-dots"></div>
+
+        <div class="pipeline-canvas gen-canvas">
+          <!-- Prompt input -->
+          <div class="node" id="gen-prompt" data-step="1">
+            <div class="node-icon prompt-icon">
+              <div class="prompt-box">
+                <div class="pb-section context-section"><span>Context</span></div>
+                <div class="pb-section query-section"><span>Query</span></div>
+              </div>
+            </div>
+            <div class="node-label">Prompt<br><small>(query + context)</small></div>
+            <div class="node-tooltip">The complete augmented prompt<br>with system instructions, context<br>chunks, and user question.</div>
+          </div>
+
+          <div class="arrow-wrap" id="gen-arr1">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">feed</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- LLM -->
+          <div class="node" id="gen-llm" data-step="2">
+            <div class="node-icon llm-icon">
+              <div class="llm-circle">
+                <span class="llm-text">LLM</span>
+                <div class="llm-orbit o1"></div>
+                <div class="llm-orbit o2"></div>
+                <div class="llm-orbit o3"></div>
+              </div>
+            </div>
+            <div class="node-label">Large Language Model</div>
+            <div class="node-tooltip">GPT-4, Claude, Gemini, Llama...<br>The LLM reads the full prompt<br>and generates a response.</div>
+          </div>
+
+          <div class="arrow-wrap" id="gen-arr2">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">generate</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Response -->
+          <div class="node" id="gen-response" data-step="3">
+            <div class="node-icon response-icon">
+              <div class="response-doc">
+                <div class="resp-icon-top">A≡</div>
+                <div class="resp-lines">
+                  <div class="rl"></div>
+                  <div class="rl short"></div>
+                  <div class="rl"></div>
+                  <div class="rl medium"></div>
+                </div>
+              </div>
+            </div>
+            <div class="node-label">Response</div>
+            <div class="node-tooltip">A coherent, grounded answer<br>based on your actual documents.<br>No hallucinations!</div>
+          </div>
+        </div>
+
+        <!-- Typewriter Response -->
+        <div class="step-explainer" id="gen-explainer">
+          <div class="se-step-num" id="gen-se-num">Step 1</div>
+          <h4 class="se-title" id="gen-se-title">Augmented Prompt Ready</h4>
+          <p class="se-desc" id="gen-se-desc">The complete prompt — containing the system message, retrieved context chunks, and user's question — is ready to be sent to the Large Language Model.</p>
+          <div class="se-key" id="gen-se-key">
+            <span class="se-key-label">Key insight:</span> The LLM doesn't need to memorize facts — it reads the context and reasons over it in real time.
+          </div>
+        </div>
+
+        <!-- Typewriter demo -->
+        <div class="typewriter-demo" id="typewriter-demo" style="display:none">
+          <div class="tw-header">
+            <span class="tw-badge">🤖 LLM Response (Streaming)</span>
+            <button class="tw-replay" onclick="replayTypewriter()">↺ Replay</button>
+          </div>
+          <div class="tw-content" id="tw-content"></div>
+        </div>
+      </div>
+
+      <div class="notes-section">
+        <h3 class="notes-title">📝 Generation — Detailed Notes</h3>
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="nc-icon">🤖</div>
+            <h4>1. The LLM</h4>
+            <p>Any capable LLM can be used — <strong>GPT-4, Claude, Gemini, Llama</strong>, or any open-source model. The LLM reads the entire prompt and generates a natural language response token by token.</p>
+            <div class="nc-code"><span class="code-label">Models:</span><code>GPT-4o · Claude 3 · Gemini · Llama 3</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">✅</div>
+            <h4>2. Grounded Responses</h4>
+            <p>Because the LLM is explicitly told to answer <em>only</em> from the provided context, responses are grounded in your actual data. If the answer isn't in the context, the LLM says "I don't know" instead of hallucinating.</p>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">📡</div>
+            <h4>3. Streaming</h4>
+            <p>Modern LLM APIs support <strong>streaming</strong> — tokens are sent to the UI as they're generated, creating the familiar "typing" effect. This improves perceived response time significantly.</p>
+            <div class="nc-code"><span class="code-label">API:</span><code>stream=True in OpenAI API call</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">📎</div>
+            <h4>4. Citations & Sources</h4>
+            <p>Advanced RAG systems include <strong>source citations</strong> in the response — telling users which document and page the answer came from. This builds trust and allows verification.</p>
+            <div class="nc-code"><span class="code-label">Pattern:</span><code>Answer + [Source: doc.pdf, p.12]</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── LIVE DEMO ─── -->
+  <section id="demo" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Interactive Demo</div>
+        <h2 class="section-title">🚀 Full RAG Pipeline — Live Walkthrough</h2>
+        <p class="section-desc">Watch the entire RAG pipeline animate end-to-end. Select a sample query and hit "Run RAG Pipeline" to see how data flows from document to response.</p>
+      </div>
+
+      <div class="demo-wrapper">
+        <div class="demo-query-section">
+          <label class="demo-label">Choose a sample query:</label>
+          <div class="demo-queries">
+            <button class="dq-btn active" onclick="selectQuery(this, 0)">What is the return policy?</button>
+            <button class="dq-btn" onclick="selectQuery(this, 1)">Explain photosynthesis</button>
+            <button class="dq-btn" onclick="selectQuery(this, 2)">How does machine learning work?</button>
+          </div>
+          <button class="btn btn-primary demo-run-btn" id="demo-run-btn" onclick="runFullDemo()">
+            ▶ Run RAG Pipeline
+          </button>
+        </div>
+
+        <!-- Full Pipeline Visual -->
+        <div class="full-pipeline" id="full-pipeline">
+          <div class="fp-stage" id="fp-idx">
+            <div class="fp-stage-title idx-color">📁 Indexing</div>
+            <div class="fp-nodes">
+              <div class="fp-node" id="fp-pdf">📄 PDF</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-txt">📝 Text</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-chunks2">✂️ Chunks</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-emb">🔢 Embeddings</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-db">💾 Milvus</div>
+            </div>
+          </div>
+          <div class="fp-divider">↓ query time ↓</div>
+          <div class="fp-stage" id="fp-ret">
+            <div class="fp-stage-title ret-color">🔍 Retrieval</div>
+            <div class="fp-nodes">
+              <div class="fp-node" id="fp-user2">👤 User</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-query2">❓ Query</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-encode">🔢 Encode</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-search">🔍 Search</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-relchunks">📦 Top-K Chunks</div>
+            </div>
+          </div>
+          <div class="fp-divider">↓ augment ↓</div>
+          <div class="fp-stage" id="fp-aug">
+            <div class="fp-stage-title aug-color">⚙️ Augmented</div>
+            <div class="fp-nodes">
+              <div class="fp-node" id="fp-chunks3">📦 Chunks</div>
+              <div class="fp-arr">+</div>
+              <div class="fp-node" id="fp-uquery3">❓ Query</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-prompt3">📋 Prompt</div>
+            </div>
+          </div>
+          <div class="fp-divider">↓ generate ↓</div>
+          <div class="fp-stage" id="fp-gen">
+            <div class="fp-stage-title gen-color">💬 Generate</div>
+            <div class="fp-nodes">
+              <div class="fp-node" id="fp-prompt4">📋 Prompt</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-llm2">🤖 LLM</div>
+              <div class="fp-arr">→</div>
+              <div class="fp-node" id="fp-resp">💬 Response</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Response output -->
+        <div class="demo-response" id="demo-response" style="display:none">
+          <div class="dr-header">
+            <span class="dr-badge">🤖 AI Response</span>
+            <span class="dr-time" id="dr-time"></span>
+          </div>
+          <div class="dr-query" id="dr-query-display"></div>
+          <div class="dr-text" id="dr-text"></div>
+          <div class="dr-sources">
+            <span class="ds-label">📎 Sources:</span>
+            <span class="ds-chip">knowledge_base.pdf · p.4</span>
+            <span class="ds-chip">docs/policy.txt · §2.3</span>
+            <span class="ds-chip">faq.docx · §1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SUMMARY ─── -->
+  <section id="summary" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Summary</div>
+        <h2 class="section-title">🎓 Key Takeaways</h2>
+      </div>
+      <div class="takeaways-grid">
+        <div class="ta-card">
+          <div class="ta-num">01</div>
+          <h4>RAG = Retrieval + Generation</h4>
+          <p>RAG combines a retrieval system (vector search) with a generative model (LLM). Neither alone is as powerful as both together.</p>
+        </div>
+        <div class="ta-card">
+          <div class="ta-num">02</div>
+          <h4>Embeddings are the key</h4>
+          <p>Vector embeddings allow semantic understanding — finding meaning, not just matching keywords. The quality of embeddings directly impacts retrieval quality.</p>
+        </div>
+        <div class="ta-card">
+          <div class="ta-num">03</div>
+          <h4>Chunking strategy matters</h4>
+          <p>How you split documents affects what's retrievable. Too large = noisy context. Too small = missing context. Overlap prevents information loss at boundaries.</p>
+        </div>
+        <div class="ta-card">
+          <div class="ta-num">04</div>
+          <h4>Grounding prevents hallucination</h4>
+          <p>By instructing the LLM to only use provided context, RAG dramatically reduces hallucination — the LLM admits uncertainty instead of making things up.</p>
+        </div>
+        <div class="ta-card">
+          <div class="ta-num">05</div>
+          <h4>Scalable to any data</h4>
+          <p>RAG works with PDFs, databases, APIs, web pages — any text source. Vector databases like Milvus scale to billions of vectors with millisecond search.</p>
+        </div>
+        <div class="ta-card">
+          <div class="ta-num">06</div>
+          <h4>Real-time & always current</h4>
+          <p>Unlike fine-tuning, RAG knowledge can be updated instantly — just re-index new documents. No retraining required. Perfect for dynamic, changing knowledge bases.</p>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="comparison-table">
+        <h3>RAG vs Fine-Tuning vs Prompt Engineering</h3>
+        <div class="ct-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th class="highlight-col">RAG</th>
+                <th>Fine-Tuning</th>
+                <th>Prompt Engineering</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Knowledge update</td><td class="highlight-col">✅ Instant</td><td>❌ Retrain needed</td><td>⚠ Manual</td></tr>
+              <tr><td>Hallucination</td><td class="highlight-col">✅ Reduced</td><td>⚠ Still possible</td><td>❌ High risk</td></tr>
+              <tr><td>Private data</td><td class="highlight-col">✅ Yes</td><td>✅ Yes (expensive)</td><td>❌ Limited</td></tr>
+              <tr><td>Cost</td><td class="highlight-col">💲 Moderate</td><td>💲💲💲 High</td><td>💲 Low</td></tr>
+              <tr><td>Complexity</td><td class="highlight-col">⚙ Medium</td><td>⚙⚙⚙ High</td><td>⚙ Low</td></tr>
+              <tr><td>Source citations</td><td class="highlight-col">✅ Easy</td><td>❌ Hard</td><td>❌ Hard</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div><!-- /tab-rag -->
+
+  <!-- ==========================================
+       TAB 2: MCP PIPELINE
+       ========================================== -->
+  <div id="tab-mcp" class="tab-pane">
+    <section id="mcp-hero" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Model Context Protocol</div>
+          <h2 class="section-title">Connecting LLMs to the Real World</h2>
+          <p class="section-desc">An open standard that enables AI models to securely interact with local and remote data sources, tools, and services.</p>
+        </div>
+        
+        <div class="anim-container" id="mcp-anim">
+          <div class="anim-controls">
+            <button class="ctrl-btn" onclick="mcpAnim.prev()">‹ Prev</button>
+            <span class="step-indicator" id="mcp-step-label">Step 1 of 6</span>
+            <button class="ctrl-btn primary" onclick="mcpAnim.next()">Next ›</button>
+            <button class="ctrl-btn reset" onclick="mcpAnim.reset()">↺ Reset</button>
+            <button class="ctrl-btn play" id="mcp-play-btn" onclick="mcpAnim.togglePlay()">▶ Play</button>
+          </div>
+          <div class="step-dots" id="mcp-dots"></div>
+
+          <div class="pipeline-canvas mcp-canvas">
+            <!-- Node: User -->
+            <div class="node" id="mcp-user" data-step="1">
+              <div class="node-icon user-icon">
+                <div class="user-head"></div>
+                <div class="user-body"></div>
+              </div>
+              <div class="node-label">User Prompt</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr1">
+              <div class="arrow-line"></div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: Claude -->
+            <div class="node" id="mcp-llm" data-step="2">
+              <div class="node-icon llm-icon">
+                <div class="llm-circle"><span class="llm-text">LLM</span></div>
+              </div>
+              <div class="node-label">Claude</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr2">
+              <div class="arrow-line"></div>
+              <div class="arrow-label">tool call</div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: MCP Client -->
+            <div class="node" id="mcp-client" data-step="3">
+              <div class="node-icon mcp-client-icon">
+                <div class="mcp-plug-left"></div>
+              </div>
+              <div class="node-label">MCP Client</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr3">
+              <div class="arrow-line"></div>
+              <div class="arrow-label">JSON-RPC</div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: MCP Server -->
+            <div class="node" id="mcp-server" data-step="4">
+              <div class="node-icon mcp-server-icon">
+                <div class="mcp-plug-right"></div>
+              </div>
+              <div class="node-label">MCP Server</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr4">
+              <div class="arrow-line"></div>
+              <div class="arrow-label">execute</div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: External Data -->
+            <div class="node" id="mcp-data" data-step="5">
+              <div class="node-icon data-icon">
+                <div class="db-stack"><div></div><div></div><div></div></div>
+              </div>
+              <div class="node-label">Database / API</div>
+            </div>
+            
+          </div>
+          
+          <div class="step-explainer mcp-explainer-box" id="mcp-explainer">
+            <div class="se-step-num" id="mcp-se-num">Step 1</div>
+            <h4 class="se-title" id="mcp-se-title">User Request</h4>
+            <p class="se-desc" id="mcp-se-desc">The user asks Claude a question that requires external information.</p>
+            <div class="se-key" id="mcp-se-key">
+              <span class="se-key-label">Key insight:</span> The LLM cannot access data on its own.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div><!-- /tab-mcp -->
+
+  <!-- ==========================================
+       TAB 3: CLAUDE FEATURES
+       ========================================== -->
+  <div id="tab-claude" class="tab-pane">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Claude Code</div>
+          <h2 class="section-title">12 Features Every Engineer Must Know</h2>
+          <p class="section-desc">Master your AI coding assistant with these powerful workflows and configuration options.</p>
+        </div>
+        
+        <div class="claude-features-grid">
+          <!-- 1 -->
+          <div class="cf-card border-orange">
+            <div class="cf-header bg-orange"><span class="cf-num">1</span> CLAUDE.md</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-orange">📄</div>
+              <p>Project memory file — custom rules, stack info, and commands Claude reads every session.</p>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="cf-card border-cyan">
+            <div class="cf-header bg-cyan"><span class="cf-num">2</span> Permissions</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-cyan">🔒</div>
+              <p>Control what Claude can and can't touch — whitelist or block tools per session.</p>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="cf-card border-purple">
+            <div class="cf-header bg-purple"><span class="cf-num">3</span> Plan Mode</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-purple">📝</div>
+              <p>Review the plan before Claude acts — approve, edit, or reject each step first.</p>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="cf-card border-green">
+            <div class="cf-header bg-green"><span class="cf-num">4</span> Checkpoints</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-green">⏱️</div>
+              <p>Revert to any point in time — automatic git snapshots let you undo any mistake.</p>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="cf-card border-orange">
+            <div class="cf-header bg-orange"><span class="cf-num">5</span> Skills</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-orange">🛠️</div>
+              <p>Reusable instructions Claude follows automatically — store in <code>.claude/skills/</code>.</p>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="cf-card border-cyan">
+            <div class="cf-header bg-cyan"><span class="cf-num">6</span> Hooks</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-cyan">⚡</div>
+              <p>Run custom logic at key moments — shell scripts on PreToolUse, PostToolUse events.</p>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="cf-card border-green">
+            <div class="cf-header bg-green"><span class="cf-num">7</span> MCP</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-green">🔌</div>
+              <p>Connect Claude to any external tool — databases, APIs, and services via Model Context Protocol.</p>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="cf-card border-pink">
+            <div class="cf-header bg-pink"><span class="cf-num">8</span> Plugins</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-pink">🧩</div>
+              <p>Extend Claude with third-party integrations — add tools without writing custom code.</p>
+            </div>
+          </div>
+          <!-- 9 -->
+          <div class="cf-card border-green">
+            <div class="cf-header bg-green"><span class="cf-num">9</span> Context</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-green">🧠</div>
+              <p>Feed Claude what it needs and manage the current context — files, history, and rules.</p>
+            </div>
+          </div>
+          <!-- 10 -->
+          <div class="cf-card border-purple">
+            <div class="cf-header bg-purple"><span class="cf-num">10</span> Slash Commands</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-purple">⌨️</div>
+              <p>Trigger actions with a single command — store templates in <code>.claude/commands/</code>.</p>
+            </div>
+          </div>
+          <!-- 11 -->
+          <div class="cf-card border-cyan">
+            <div class="cf-header bg-cyan"><span class="cf-num">11</span> Compaction</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-cyan">🗜️</div>
+              <p>Compress long conversations to save tokens — keep context fresh without losing key info.</p>
+            </div>
+          </div>
+          <!-- 12 -->
+          <div class="cf-card border-purple">
+            <div class="cf-header bg-purple"><span class="cf-num">12</span> Subagents</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-purple">🤖</div>
+              <p>Spawn parallel agents for complex tasks — divide and conquer multi-step workflows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div><!-- /tab-claude -->
+
+  <!-- ==========================================
+       TAB 4: AI TOOLS 2026
+       ========================================== -->
+  <div id="tab-aitools" class="tab-pane">
+  <section id="ai-tools" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Bonus Section</div>
+        <h2 class="section-title">🏆 The Best AI Tools of 2026</h2>
+        <p class="section-desc">A curated pyramid of the most impactful AI tools — organized by use case, from specialized builders at the top to automation powerhouses at the base.</p>
+      </div>
+
+      <div class="ai-pyramid">
+
+        <!-- Tier 1: General Assistants -->
+        <div class="pyramid-tier tier-1" data-tier="1">
+          <div class="tier-left">
+            <div class="tier-dot" style="background:#f97316"></div>
+            <div class="tier-meta">
+              <div class="tier-name" style="color:#f97316">General Assistants</div>
+              <div class="tier-tagline">Ask anything. Get anything done.</div>
+            </div>
+          </div>
+          <div class="tier-tools">
+            <div class="tool-chip t-orange">🌟 Claude</div>
+            <div class="tool-chip t-orange">ChatGPT</div>
+            <div class="tool-chip t-orange">Perplexity</div>
+          </div>
+        </div>
+
+        <!-- Tier 2: Development -->
+        <div class="pyramid-tier tier-2" data-tier="2">
+          <div class="tier-left">
+            <div class="tier-dot" style="background:#22c55e"></div>
+            <div class="tier-meta">
+              <div class="tier-name" style="color:#22c55e">Development / Programming</div>
+              <div class="tier-tagline">Code better. Ship faster.</div>
+            </div>
+          </div>
+          <div class="tier-tools">
+            <div class="tool-chip t-green">Cursor</div>
+            <div class="tool-chip t-green">Lovable</div>
+            <div class="tool-chip t-green">Replit</div>
+            <div class="tool-chip t-green">Base44</div>
+          </div>
+        </div>
+
+        <!-- Tier 3: Content Creation -->
+        <div class="pyramid-tier tier-3" data-tier="3">
+          <div class="tier-left">
+            <div class="tier-dot" style="background:#ec4899"></div>
+            <div class="tier-meta">
+              <div class="tier-name" style="color:#ec4899">Content Creation</div>
+              <div class="tier-tagline">Create content that connects.</div>
+            </div>
+          </div>
+          <div class="tier-tools">
+            <div class="tool-chip t-pink">Manus AI</div>
+            <div class="tool-chip t-pink">HeyGen</div>
+            <div class="tool-chip t-pink">Synthesia</div>
+            <div class="tool-chip t-pink">Descript</div>
+            <div class="tool-chip t-pink">Opus Clip</div>
+            <div class="tool-chip t-pink">Beehiiv</div>
+          </div>
+        </div>
+
+        <!-- Tier 4: Productivity -->
+        <div class="pyramid-tier tier-4" data-tier="4">
+          <div class="tier-left">
+            <div class="tier-dot" style="background:#ef4444"></div>
+            <div class="tier-meta">
+              <div class="tier-name" style="color:#ef4444">Productivity</div>
+              <div class="tier-tagline">Do more in less time.</div>
+            </div>
+          </div>
+          <div class="tier-tools">
+            <div class="tool-chip t-red">Grammarly</div>
+            <div class="tool-chip t-red">NotebookLM</div>
+            <div class="tool-chip t-red">Otio AI</div>
+            <div class="tool-chip t-red">Gamma</div>
+            <div class="tool-chip t-red">Granola</div>
+            <div class="tool-chip t-red">Read AI</div>
+            <div class="tool-chip t-red">Wisp Flow</div>
+          </div>
+        </div>
+
+        <!-- Tier 5: Creativity -->
+        <div class="pyramid-tier tier-5" data-tier="5">
+          <div class="tier-left">
+            <div class="tier-dot" style="background:#a855f7"></div>
+            <div class="tier-meta">
+              <div class="tier-name" style="color:#a855f7">Creativity</div>
+              <div class="tier-tagline">Turn ideas into stunning reality.</div>
+            </div>
+          </div>
+          <div class="tier-tools">
+            <div class="tool-chip t-purple">ElevenLabs</div>
+            <div class="tool-chip t-purple">Suno</div>
+            <div class="tool-chip t-purple">Midjourney</div>
+            <div class="tool-chip t-purple">Runway</div>
+            <div class="tool-chip t-purple">Kling</div>
+            <div class="tool-chip t-purple">Pika Labs</div>
+            <div class="tool-chip t-purple">Figma</div>
+            <div class="tool-chip t-purple">Canva</div>
+            <div class="tool-chip t-purple">Google Veo</div>
+            <div class="tool-chip t-purple">Higgsfield</div>
+          </div>
+        </div>
+
+        <!-- Tier 6: Automation -->
+        <div class="pyramid-tier tier-6" data-tier="6">
+          <div class="tier-left">
+            <div class="tier-dot" style="background:#eab308"></div>
+            <div class="tier-meta">
+              <div class="tier-name" style="color:#eab308">Automation &amp; Integration</div>
+              <div class="tier-tagline">Automate workflows. Integrate everything.</div>
+            </div>
+          </div>
+          <div class="tier-tools">
+            <div class="tool-chip t-yellow">Softr</div>
+            <div class="tool-chip t-yellow">n8n</div>
+            <div class="tool-chip t-yellow">Zapier</div>
+            <div class="tool-chip t-yellow">Lindy AI</div>
+            <div class="tool-chip t-yellow">Claude Code</div>
+            <div class="tool-chip t-yellow">Chatbase</div>
+            <div class="tool-chip t-yellow">Gemini</div>
+            <div class="tool-chip t-yellow">Notion AI</div>
+            <div class="tool-chip t-yellow">Apify</div>
+            <div class="tool-chip t-yellow">Clay</div>
+          </div>
+        </div>
+
+      </div><!-- /ai-pyramid -->
+
+      <!-- Benefits row -->
+      <div class="ai-benefits">
+        <div class="ai-benefit">
+          <div class="ab-icon">🎯</div>
+          <div class="ab-text">Save hours every week</div>
+        </div>
+        <div class="ai-benefit">
+          <div class="ab-icon">📈</div>
+          <div class="ab-text">Boost creativity and productivity</div>
+        </div>
+        <div class="ai-benefit">
+          <div class="ab-icon">🤖</div>
+          <div class="ab-text">Automate repetitive tasks</div>
+        </div>
+        <div class="ai-benefit">
+          <div class="ab-icon">😊</div>
+          <div class="ab-text">Focus on what really matters</div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+  </div><!-- /tab-aitools -->
+
+  </main><!-- /main-content -->
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 RAG from Scratch</div>
+      <p class="footer-desc">An interactive animated guide to Retrieval-Augmented Generation.</p>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#indexing">Indexing</a>
+        <a href="#retrieval">Retrieval</a>
+        <a href="#augmented">Augmented</a>
+        <a href="#generation">Generation</a>
+        <a href="#demo">Demo</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — RAG Explainer © 2025</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
