@@ -74,4 +74,4 @@ ai-engineering-visualized/
 
 ---
 
-Built with ❤️ — © 2026 AI Engineering Visualized
+Built with ❤️ by Amara Manikanta Dileep — © 2026 AI Engineering Visualized
