@@ -41,13 +41,15 @@
     </div>
   </header>
 
-  <!-- ML SUB NAV -->
+    <!-- ML SUB NAV -->
   <div class="sub-nav">
     <div class="container">
       <a href="index.html">Overview</a>
       <a href="supervised.html" class="active">Supervised</a>
-      <a href="unsupervised.html">Unsupervised</a>
+      <a href="logistic-regression.html">Logistic Reg</a>
+      <a href="knn.html">KNN</a>
       <a href="decision-trees.html">Decision Trees</a>
+      <a href="unsupervised.html">Unsupervised</a>
       <span class="sub-nav-divider">|</span>
       <a href="transformers.html">Transformers</a>
     </div>
@@ -56,8 +58,15 @@
   <div class="guide-layout" style="max-width: 1300px; margin: 40px auto 0; padding-top: 20px;">
     <!-- LEFT SIDEBAR -->
     <aside class="guide-sidebar">
-      <div class="guide-sidebar-group">
+            <div class="guide-sidebar-group">
         <div class="guide-sidebar-title">Machine Learning</div>
+        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
+        <a href="supervised.html" class="guide-sidebar-link active">2. Supervised Learning</a>
+        <a href="logistic-regression.html" class="guide-sidebar-link">3. Logistic Regression</a>
+        <a href="knn.html" class="guide-sidebar-link">4. K-Nearest Neighbors</a>
+        <a href="decision-trees.html" class="guide-sidebar-link">5. Decision Trees</a>
+        <a href="unsupervised.html" class="guide-sidebar-link">6. Unsupervised Learning</a>
+      </div>
         <a href="index.html" class="guide-sidebar-link">1. Overview</a>
         <a href="supervised.html" class="guide-sidebar-link active">2. Supervised Learning</a>
         <a href="unsupervised.html" class="guide-sidebar-link">3. Unsupervised Learning</a>
@@ -85,6 +94,38 @@
             <p class="gc-desc">Predicts a category label. Examples: spam detection, image classification.<br><br><strong>Algorithms:</strong> Logistic Regression, SVM, Decision Trees, Neural Networks.</p>
           </div>
         </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Classification Details</h2>
+        <p>Classification assigns input data to one of a finite set of discrete categories.</p>
+        
+        <div class="guide-grid" style="margin-top: 20px;">
+          <div class="guide-card">
+            <h3 class="gc-title">Binary Classification</h3>
+            <p class="gc-desc">Involves two classes.<br><em>Ex: Spam vs Not Spam, Disease vs No Disease.</em></p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Multi-Class Classification</h3>
+            <p class="gc-desc">Involves more than two classes.<br><em>Ex: Handwritten digits (0-9), Animal types.</em></p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Multi-Label Classification</h3>
+            <p class="gc-desc">An instance can belong to multiple classes at once.<br><em>Ex: Image tagging (e.g., "beach", "sunset").</em></p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">Common Classification Algorithms</h3>
+        <ul class="gc-list" style="font-size: 1rem;">
+          <li><strong>Logistic Regression:</strong> Linear model for binary classification.</li>
+          <li><strong>Decision Trees:</strong> Tree-like model splitting on features.</li>
+          <li><strong>Random Forest:</strong> Ensemble of decision trees.</li>
+          <li><strong>SVM:</strong> Finds the best separating hyperplane.</li>
+          <li><strong>Naive Bayes:</strong> Probabilistic model assuming feature independence.</li>
+          <li><strong>K-Nearest Neighbors (KNN):</strong> Classifies based on majority class of nearest points.</li>
+          <li><strong>Neural Networks:</strong> Deep learning for complex non-linear data.</li>
+          <li><strong>Gradient Boosting (XGBoost):</strong> Sequential ensemble building to reduce errors.</li>
+        </ul>
       </section>
 
       <section class="guide-section">
