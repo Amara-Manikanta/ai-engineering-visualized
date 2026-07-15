@@ -1751,6 +1751,7 @@ header {
 .mnav-item.open .mnav-arrow { transform: rotate(180deg); }
 
 /* Dropdown panel */
+/* Dropdown panel */
 .mnav-dropdown {
   position: absolute;
   top: calc(100% + 4px);
@@ -1765,6 +1766,16 @@ header {
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 9999;
 }
+/* Invisible bridge to prevent hover loss in the gap */
+.mnav-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
 .mnav-item.open .mnav-dropdown,
 .mnav-item.has-dd:hover .mnav-dropdown {
   opacity: 1; pointer-events: auto;

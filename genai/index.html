@@ -90,13 +90,83 @@
           <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
         </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
-  <div class="coming-soon">
-    <div class="cs-badge">🚧</div>
-    <div class="cs-pill">Generative AI</div>
-    <div class="cs-title">Generative AI Overview</div>
-    <p class="cs-sub">This section is under construction. Comprehensive content and interactive visualizations are coming soon!</p>
-    <a href="../index.html" class="btn btn-primary" style="margin-top:16px;">← Back to Home</a>
-  </div>
+  <main class="main-content">
+    <section class="concepts-section" id="concepts" style="padding-top: 60px; text-align: center; min-height: 70vh;">
+      <div class="section-label">Generative AI</div>
+      <h2 class="concepts-title">Explore Core Concepts</h2>
+      <p class="section-desc" style="margin-bottom: 50px;">Deep dive into AI Models, Inference, Prompt Engineering, Embeddings, Fine-tuning, and Quantization.</p>
+      
+      <div class="cards-grid" style="text-align: left; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; padding: 0 24px;">
+        
+        <!-- AI Models -->
+        <a href="../llms/index.html" class="concept-card card-rag">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🧠</span>
+          </div>
+          <h3 class="card-title">AI Models</h3>
+          <p class="card-desc">Understand how large language models are trained and how they work under the hood.</p>
+          <div class="card-cta">Explore →</div>
+        </a>
+        
+        <!-- LLM Inference -->
+        <a href="../llm-inference/index.html" class="concept-card card-mcp">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">⚡</span>
+          </div>
+          <h3 class="card-title">LLM Inference</h3>
+          <p class="card-desc">Learn about the mechanics of generating tokens, from decoding strategies to KV caching.</p>
+          <div class="card-cta">Explore →</div>
+        </a>
+        
+        <!-- Prompt Engineering -->
+        <a href="../prompting/index.html" class="concept-card card-agents">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">✍️</span>
+          </div>
+          <h3 class="card-title">Prompt Engineering</h3>
+          <p class="card-desc">Master techniques like Few-Shot, Chain of Thought, and ReAct to get better outputs.</p>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <!-- Embeddings -->
+        <a href="../embeddings/index.html" class="concept-card card-rag">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🔢</span>
+          </div>
+          <h3 class="card-title">Embeddings</h3>
+          <p class="card-desc">See how text is converted into high-dimensional vectors to capture semantic meaning.</p>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <!-- Fine-tuning -->
+        <a href="fine-tuning.html" class="concept-card card-mcp">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🔧</span>
+          </div>
+          <h3 class="card-title">Fine-tuning</h3>
+          <p class="card-desc">Explore methods like LoRA and QLoRA for efficiently adapting models to new tasks.</p>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <!-- Quantization -->
+        <a href="quantization.html" class="concept-card card-agents">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🗜️</span>
+          </div>
+          <h3 class="card-title">Quantization</h3>
+          <p class="card-desc">Learn how model weights are compressed from 16-bit to 8-bit or 4-bit to run on local hardware.</p>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+      </div>
+    </section>
+  </main>
   <footer><p class="footer-copy" style="text-align:center;padding:30px;color:var(--text3);font-size:0.85rem;">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p></footer>
   <script src="../script.js?v=7"></script>
 </body>
