@@ -1724,13 +1724,13 @@ header {
 }
 
 /* Nav list */
-.mega-nav { flex-grow: 1; overflow: hidden; }
+/* IMPORTANT: overflow must be visible so dropdowns can escape the nav bar */
+.mega-nav { flex-grow: 1; overflow: visible; min-width: 0; }
 .mnav-list {
   list-style: none; display: flex; gap: 0;
-  align-items: center; flex-wrap: nowrap; overflow-x: auto;
-  scrollbar-width: none;
+  align-items: center; flex-wrap: nowrap;
+  overflow: visible;   /* never clip — dropdowns live inside here */
 }
-.mnav-list::-webkit-scrollbar { display: none; }
 .mnav-item { position: relative; }
 
 /* Trigger link/button */
@@ -1752,21 +1752,20 @@ header {
 
 /* Dropdown panel */
 .mnav-dropdown {
-  position: absolute; top: calc(100% + 8px); left: 50%;
-  transform: translateX(-50%);
-  min-width: 180px;
+  position: fixed;   /* fixed so it's never clipped by any ancestor overflow */
+  min-width: 190px;
   background: #0d1225;
   border: 1px solid var(--border2);
   border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
   opacity: 0; pointer-events: none;
-  transform: translateX(-50%) translateY(-8px);
+  transform: translateY(-6px);
   transition: opacity 0.18s ease, transform 0.18s ease;
-  z-index: 2000;
+  z-index: 9999;
 }
 .mnav-item.open .mnav-dropdown {
   opacity: 1; pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 .mnav-dd-inner { padding: 10px 6px; }
 .mnav-dd-head {
@@ -1853,3 +1852,22 @@ header {
   .hamburger { display: none !important; }
   .mobile-drawer { display: none !important; }
 }
+
+/* ── SPLIT LABEL + ARROW BUTTON ─────────────────────────── */
+.mnav-group-wrap {
+  display: flex; align-items: center; gap: 0;
+  border-radius: 8px; overflow: hidden;
+}
+.mnav-label {
+  border-radius: 8px 0 0 8px;
+  padding-right: 8px;
+}
+.mnav-arrow-btn {
+  display: flex; align-items: center; justify-content: center;
+  padding: 8px 8px; height: 100%;
+  background: none; border: none; cursor: pointer;
+  color: var(--text2); border-radius: 0 8px 8px 0;
+  transition: background 0.2s, color 0.2s;
+}
+.mnav-arrow-btn:hover { background: var(--surface2); color: var(--text); }
+.mnav-item.open .mnav-arrow-btn { color: var(--idx); }

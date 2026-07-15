@@ -882,45 +882,66 @@ function calculateSimilarity() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   MEGA-NAV INTERACTION
+   MEGA-NAV INTERACTION — v2 (fixed positioning + split nav)
    ═══════════════════════════════════════════════════════════ */
 (function initMegaNav() {
-  // Desktop dropdowns
   const items = document.querySelectorAll('.mnav-item.has-dd');
-  let currentOpen = null;
 
   function closeAll() {
     items.forEach(item => {
       item.classList.remove('open');
-      const btn = item.querySelector('.mnav-trigger');
+      const btn = item.querySelector('.mnav-arrow-btn');
       if (btn) btn.setAttribute('aria-expanded', 'false');
+      const dd = item.querySelector('.mnav-dropdown');
+      if (dd) { dd.style.top = ''; dd.style.left = ''; }
     });
-    currentOpen = null;
     overlay.classList.remove('active');
   }
 
-  // Create overlay for outside-click close
+  function positionDropdown(item) {
+    const dd = item.querySelector('.mnav-dropdown');
+    if (!dd) return;
+    const rect = item.getBoundingClientRect();
+    // Place dropdown just below the nav item, horizontally centered
+    const ddW = dd.offsetWidth || 190;
+    let left = rect.left + rect.width / 2 - ddW / 2;
+    // Clamp to viewport
+    if (left < 8) left = 8;
+    if (left + ddW > window.innerWidth - 8) left = window.innerWidth - 8 - ddW;
+    dd.style.top  = (rect.bottom + 6) + 'px';
+    dd.style.left = left + 'px';
+  }
+
+  // Invisible overlay catches outside clicks
   const overlay = document.createElement('div');
   overlay.className = 'mnav-overlay';
   document.body.appendChild(overlay);
   overlay.addEventListener('click', closeAll);
 
   items.forEach(item => {
-    const trigger = item.querySelector('.mnav-trigger');
-    if (!trigger) return;
+    // Toggle via the arrow button only
+    const arrowBtn = item.querySelector('.mnav-arrow-btn');
+    if (arrowBtn) {
+      arrowBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = item.classList.contains('open');
+        closeAll();
+        if (!isOpen) {
+          item.classList.add('open');
+          arrowBtn.setAttribute('aria-expanded', 'true');
+          positionDropdown(item);
+          overlay.classList.add('active');
+        }
+      });
+    }
 
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = item.classList.contains('open');
-      closeAll();
-      if (!isOpen) {
-        item.classList.add('open');
-        trigger.setAttribute('aria-expanded', 'true');
-        currentOpen = item;
-        overlay.classList.add('active');
-      }
-    });
+    // Reposition on scroll/resize
+    window.addEventListener('scroll', () => {
+      if (item.classList.contains('open')) positionDropdown(item);
+    }, { passive: true });
   });
+
+  window.addEventListener('resize', closeAll);
 
   // Close on Escape
   document.addEventListener('keydown', e => {
@@ -932,12 +953,12 @@ function calculateSimilarity() {
   if (header) {
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 10);
-    });
+    }, { passive: true });
   }
 
-  // ── Mobile hamburger ────────────────────────────────────
+  // ── Mobile hamburger ─────────────────────────────────────
   const hamburger = document.getElementById('hamburger');
-  const drawer = document.getElementById('mobile-drawer');
+  const drawer    = document.getElementById('mobile-drawer');
 
   if (hamburger && drawer) {
     hamburger.addEventListener('click', () => {
@@ -950,8 +971,7 @@ function calculateSimilarity() {
   // Mobile accordion groups
   document.querySelectorAll('.mobile-group-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const group = btn.closest('.mobile-group');
-      group.classList.toggle('open');
+      btn.closest('.mobile-group').classList.toggle('open');
     });
   });
 })();
