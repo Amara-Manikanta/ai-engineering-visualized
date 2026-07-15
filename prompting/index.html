@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Engineering | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Prompt Engineering</div>
+          <h2 class="section-title">✍️ The Art of Talking to AI</h2>
+          <p class="section-desc">Prompt engineering is the skill of designing inputs to get the best outputs from LLMs. A better prompt = dramatically better results — no training required.</p>
+        </div>
+
+        <!-- Technique cards -->
+        <div class="pe-grid">
+
+          <!-- 1. Zero-Shot -->
+          <div class="pe-card">
+            <div class="pe-header pe-zero"><span class="pe-num">01</span><span class="pe-technique">Zero-Shot Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Directly instruct the model with no examples. Relies entirely on the model's pre-trained knowledge.</p>
+              <div class="pe-compare">
+                <div class="pe-weak">
+                  <div class="pe-label bad">❌ Weak</div>
+                  <div class="pe-prompt-box">"Translate this."</div>
+                </div>
+                <div class="pe-strong">
+                  <div class="pe-label good">✅ Strong</div>
+                  <div class="pe-prompt-box">"Translate the following English text to French. Preserve the formal tone.<br><br>Text: 'The meeting has been rescheduled.'"</div>
+                </div>
+              </div>
+              <div class="pe-tip">💡 Be specific about task, format, audience, and tone.</div>
+            </div>
+          </div>
+
+          <!-- 2. Few-Shot -->
+          <div class="pe-card">
+            <div class="pe-header pe-few"><span class="pe-num">02</span><span class="pe-technique">Few-Shot Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Provide 2-5 input→output examples before your actual question. The model learns the pattern from your examples.</p>
+              <div class="pe-example-box">
+                <div class="pe-ex-row"><span class="pe-ex-label">Example 1:</span> Sentiment("I love it!") → Positive</div>
+                <div class="pe-ex-row"><span class="pe-ex-label">Example 2:</span> Sentiment("Terrible service") → Negative</div>
+                <div class="pe-ex-row pe-ex-query"><span class="pe-ex-label">Query:</span> Sentiment("It was okay, I guess") → ?</div>
+              </div>
+              <div class="pe-tip">💡 Use 3-5 diverse examples covering edge cases.</div>
+            </div>
+          </div>
+
+          <!-- 3. Chain of Thought -->
+          <div class="pe-card">
+            <div class="pe-header pe-cot"><span class="pe-num">03</span><span class="pe-technique">Chain-of-Thought (CoT)</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Ask the model to reason step-by-step before giving the final answer. Dramatically improves accuracy on complex tasks.</p>
+              <div class="pe-cot-flow">
+                <div class="pe-cot-step">🤔 Think step by step...</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step">📝 Step 1: Identify known values</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step">📝 Step 2: Apply formula</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step">📝 Step 3: Verify result</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step pe-cot-final">✅ Final Answer</div>
+              </div>
+              <div class="pe-tip">💡 Add "Let's think step by step" or "Think before answering".</div>
+            </div>
+          </div>
+
+          <!-- 4. Role Prompting -->
+          <div class="pe-card">
+            <div class="pe-header pe-role"><span class="pe-num">04</span><span class="pe-technique">Role Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Assign a persona or expert role to the model. It "becomes" that expert and adjusts its tone, depth, and knowledge accordingly.</p>
+              <div class="pe-role-examples">
+                <div class="pe-role-chip">👨‍⚕️ "You are a senior cardiologist..."</div>
+                <div class="pe-role-chip">👩‍💻 "You are a 10x Python engineer..."</div>
+                <div class="pe-role-chip">🎓 "You are a Socratic philosophy professor..."</div>
+                <div class="pe-role-chip">🔒 "You are a cybersecurity expert..."</div>
+              </div>
+              <div class="pe-tip">💡 Combine role + task + format for best results.</div>
+            </div>
+          </div>
+
+          <!-- 5. Tree of Thoughts -->
+          <div class="pe-card">
+            <div class="pe-header pe-tot"><span class="pe-num">05</span><span class="pe-technique">Tree of Thoughts (ToT)</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">The model explores <strong>multiple reasoning branches</strong> simultaneously, evaluates each path, and selects the best one — like a chess player thinking several moves ahead.</p>
+              <div class="pe-tree">
+                <div class="pe-tree-root">Problem</div>
+                <div class="pe-tree-row">
+                  <div class="pe-tree-branch"><div class="pe-tree-node">Path A</div><div class="pe-tree-leaf bad-path">Dead end ✗</div></div>
+                  <div class="pe-tree-branch"><div class="pe-tree-node">Path B</div><div class="pe-tree-leaf good-path">✅ Best answer</div></div>
+                  <div class="pe-tree-branch"><div class="pe-tree-node">Path C</div><div class="pe-tree-leaf bad-path">Dead end ✗</div></div>
+                </div>
+              </div>
+              <div class="pe-tip">💡 Best for complex problem-solving, puzzles, and planning tasks.</div>
+            </div>
+          </div>
+
+          <!-- 6. ReAct -->
+          <div class="pe-card">
+            <div class="pe-header pe-react"><span class="pe-num">06</span><span class="pe-technique">ReAct Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Interleave <strong>Reasoning</strong> and <strong>Action</strong>. The model thinks out loud, takes an action (e.g., search), observes the result, then reasons again. The backbone of modern AI agents.</p>
+              <div class="pe-react-flow">
+                <div class="pe-react-step thought">💭 Thought: I need to find today's stock price</div>
+                <div class="pe-react-step action">⚡ Action: search("AAPL stock price today")</div>
+                <div class="pe-react-step observe">👁️ Observation: AAPL = $195.32</div>
+                <div class="pe-react-step thought">💭 Thought: Now I can answer the question</div>
+                <div class="pe-react-step answer">✅ Answer: Apple's stock is $195.32</div>
+              </div>
+              <div class="pe-tip">💡 This is what powers LangGraph and tool-using agents.</div>
+            </div>
+          </div>
+
+          <!-- 7. Structured Output -->
+          <div class="pe-card">
+            <div class="pe-header pe-struct"><span class="pe-num">07</span><span class="pe-technique">Structured Output</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Force the model to return output in a specific format — JSON, XML, Markdown tables, or custom schemas. Essential for programmatic use.</p>
+              <div class="pe-code-mini"><pre>"Return ONLY valid JSON:
+{
+  \"sentiment\": \"positive|negative|neutral\",
+  \"confidence\": 0.0-1.0,
+  \"reason\": \"one sentence\"
+}"</pre></div>
+              <div class="pe-tip">💡 Use with OpenAI's <code>response_format</code> or Pydantic models for reliability.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Best Practices -->
+        <div class="pe-best-practices">
+          <h3 class="notes-title">⚡ Golden Rules of Prompt Engineering</h3>
+          <div class="pe-rules-grid">
+            <div class="pe-rule good-rule">✅ Be specific and unambiguous</div>
+            <div class="pe-rule good-rule">✅ Give context and background</div>
+            <div class="pe-rule good-rule">✅ Specify output format</div>
+            <div class="pe-rule good-rule">✅ Define the audience</div>
+            <div class="pe-rule good-rule">✅ Iterate and refine</div>
+            <div class="pe-rule good-rule">✅ Use delimiters (""" or XML tags)</div>
+            <div class="pe-rule bad-rule">❌ Assume the model knows context</div>
+            <div class="pe-rule bad-rule">❌ Use vague instructions</div>
+            <div class="pe-rule bad-rule">❌ Ask too many things at once</div>
+            <div class="pe-rule bad-rule">❌ Ignore system prompts</div>
+            <div class="pe-rule bad-rule">❌ Forget to validate output</div>
+            <div class="pe-rule bad-rule">❌ Use negatives (say what TO do)</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

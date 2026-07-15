@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Models | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">AI Models</div>
+          <h2 class="section-title">🧠 8 Specialized AI Model Architectures</h2>
+          <p class="section-desc">Not all AI models are the same. Each architecture is purpose-built for a specific task — from text generation to image segmentation to action planning.</p>
+        </div>
+
+        <div class="llm-grid">
+
+          <!-- LLM -->
+          <div class="llm-card lc-indigo">
+            <div class="llm-card-header"><span class="llm-tag">LLM</span><span class="llm-name">Large Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔤 Tokenization</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔢 Embedding</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">⚙️ Transformer</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">The foundation of modern AI. Trained on massive text datasets to predict the next token. Powers ChatGPT, Claude, Gemini, and Llama.</div>
+            <div class="llm-examples"><span>GPT-4</span><span>Claude</span><span>Gemini</span><span>Llama</span></div>
+          </div>
+
+          <!-- LCM -->
+          <div class="llm-card lc-cyan">
+            <div class="llm-card-header"><span class="llm-tag">LCM</span><span class="llm-name">Large Concept Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">✂️ Sentence Segmentation</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔭 SONAR Embedding</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🌊 Diffusion</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Meta's concept-level model. Operates on <strong>semantic concepts</strong> rather than tokens. Uses SONAR embeddings and a diffusion process — language-agnostic reasoning.</div>
+            <div class="llm-examples"><span>Meta LCM</span><span>SONAR</span></div>
+          </div>
+
+          <!-- LAM -->
+          <div class="llm-card lc-orange">
+            <div class="llm-card-header"><span class="llm-tag">LAM</span><span class="llm-name">Large Action Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input Processing</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">👁️ Perception System</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🎯 Intent Recognition</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📋 Task Breakdown</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📅 Action Planning</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">⚡ Feedback Integration</div>
+            </div>
+            <div class="llm-desc">Designed to <strong>take actions</strong> in the world — browse the web, click buttons, run code. Built for agentic tasks, not just conversation. Powers computer-use AI.</div>
+            <div class="llm-examples"><span>Rabbit R1</span><span>Claude Computer Use</span></div>
+          </div>
+
+          <!-- MoE -->
+          <div class="llm-card lc-purple">
+            <div class="llm-card-header"><span class="llm-tag">MoE</span><span class="llm-name">Mixture of Experts</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔀 Router Mechanism</div><div class="lf-arrow">↓</div>
+              <div class="lf-node moe-experts">🧑‍💼 Expert 1 &nbsp; 🧑‍💻 Expert 2 &nbsp; 🧑‍🔬 Expert 3</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔝 Top-K Selection</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">⚖️ Weighted Combination</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Uses a <strong>router</strong> to activate only a few specialist sub-networks per token. Massive model capacity with lower compute cost. Used in GPT-4, Mixtral, and Gemini.</div>
+            <div class="llm-examples"><span>GPT-4</span><span>Mixtral 8x7B</span><span>Gemini</span></div>
+          </div>
+
+          <!-- VLM -->
+          <div class="llm-card lc-green">
+            <div class="llm-card-header"><span class="llm-tag">VLM</span><span class="llm-name">Vision Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-row"><div class="lf-node">🖼️ Image Input</div><div class="lf-node">📝 Text Input</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">👁️ Vision Encoder</div><div class="lf-node">🔤 Text Encoder</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔗 Projection Interface</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🧠 Multimodal Processor</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Understands both <strong>images and text</strong> together. Can answer questions about images, generate captions, perform visual reasoning, and analyze charts.</div>
+            <div class="llm-examples"><span>GPT-4o</span><span>LLaVA</span><span>Gemini Pro Vision</span></div>
+          </div>
+
+          <!-- SLM -->
+          <div class="llm-card lc-yellow">
+            <div class="llm-card-header"><span class="llm-tag">SLM</span><span class="llm-name">Small Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input Processing</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📦 Compact Tokenization</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">⚡ Efficient Transformer</div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">📉 Model Quantization</div><div class="lf-node">💾 Memory Optimization</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📱 Edge Deployment</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Compact, efficient LLMs that run <strong>on-device</strong> — phones, laptops, edge hardware. Sacrifices some capability for privacy, speed, and offline operation.</div>
+            <div class="llm-examples"><span>Phi-3</span><span>Gemma 2B</span><span>Llama 3.2 1B</span></div>
+          </div>
+
+          <!-- MLM -->
+          <div class="llm-card lc-pink">
+            <div class="llm-card-header"><span class="llm-tag">MLM</span><span class="llm-name">Masked Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Text Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🎭 Token Masking [MASK]</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔢 Embedding Layer</div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">⬅️ Left Context</div><div class="lf-node">➡️ Right Context</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔄 Bidirectional Attention</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">🎯 Feature Representation</div>
+            </div>
+            <div class="llm-desc">Trained by masking words and predicting them using <strong>both left and right context</strong>. Not for generation — for understanding. Powers NER, classification, and embeddings.</div>
+            <div class="llm-examples"><span>BERT</span><span>RoBERTa</span><span>DeBERTa</span></div>
+          </div>
+
+          <!-- SAM -->
+          <div class="llm-card lc-red">
+            <div class="llm-card-header"><span class="llm-tag">SAM</span><span class="llm-name">Segment Anything Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-row"><div class="lf-node">💬 Prompt Input</div><div class="lf-node">🖼️ Image Input</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">🔤 Prompt Encoder</div><div class="lf-node">👁️ Image Encoder</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔗 Image Embedding</div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">🎭 Mask Decoder</div><div class="lf-node">📊 Feature Correlation</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">✂️ Segmentation Output</div>
+            </div>
+            <div class="llm-desc">Meta's foundation model for <strong>image segmentation</strong>. Given any prompt (point, box, or text), it can precisely segment any object in any image — zero-shot.</div>
+            <div class="llm-examples"><span>SAM 2</span><span>Meta AI</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

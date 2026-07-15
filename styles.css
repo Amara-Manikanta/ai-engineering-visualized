@@ -1570,3 +1570,82 @@ footer {
   .lg-concepts { grid-template-columns: 1fr; }
   .pe-tree-row { flex-direction: column; align-items: center; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SUB-NAVIGATION STYLES
+   ═══════════════════════════════════════════════════════════ */
+.sub-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 90;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.sub-nav .container {
+  display: flex; gap: 20px; overflow-x: auto; padding: 12px 20px;
+}
+.sub-nav a {
+  color: var(--text2); font-size: 0.9rem; font-weight: 600;
+  text-decoration: none; padding: 6px 12px; border-radius: 6px;
+  white-space: nowrap; transition: all 0.2s;
+}
+.sub-nav a:hover { color: var(--text); background: var(--surface2); }
+.sub-nav a.active { color: var(--idx); background: rgba(99,102,241,0.1); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   DETAILED LANGGRAPH PATTERNS
+   ═══════════════════════════════════════════════════════════ */
+.patterns-detailed-list {
+  display: flex; flex-direction: column; gap: 40px; margin-bottom: 60px;
+}
+.pattern-detail-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+}
+.pd-header {
+  display: flex; align-items: center; gap: 16px; padding: 20px 24px;
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+}
+.pd-icon { font-size: 2rem; }
+.pd-title { font-size: 1.3rem; font-weight: 700; color: var(--text); margin: 0; }
+.pd-body {
+  padding: 24px; display: flex; flex-direction: column; gap: 20px;
+}
+.pd-body p { font-size: 0.95rem; color: var(--text2); line-height: 1.6; margin: 0; }
+
+.pd-flow {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: var(--bg3); border-radius: 12px; padding: 30px;
+  border: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono', monospace;
+}
+.pd-node {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
+  text-align: center; z-index: 2; position: relative;
+}
+.pd-arrow { color: var(--text3); font-size: 1.2rem; }
+.pd-arrow-loop { color: var(--text3); font-size: 0.8rem; font-style: italic; margin-top: 8px; }
+.pd-arrow-loop.wide { margin-top: 20px; }
+
+.pd-cycle-box {
+  border: 2px dashed rgba(99,102,241,0.3); border-radius: 12px;
+  padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  position: relative; width: 100%; max-width: 400px;
+}
+.pd-cycle-box.reflection { border-color: rgba(236,72,153,0.3); }
+.pd-split-nodes { display: flex; gap: 20px; width: 100%; justify-content: space-around; }
+.pd-col { display: flex; flex-direction: column; align-items: center; }
+
+.pd-arrow-split {
+  display: flex; justify-content: space-around; width: 100%;
+  color: var(--text3); text-align: center; font-size: 1.2rem;
+}
+.pd-path { display: flex; flex-direction: column; align-items: center; }
+.path-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); font-family: 'Inter', sans-serif;}
+
+.pd-node.start { border-color: var(--idx); background: rgba(99,102,241,0.1); }
+.pd-node.end { border-color: var(--gen); background: rgba(16,185,129,0.1); }
+.pd-node.llm { border-color: var(--ret); background: rgba(6,182,212,0.1); }
+.pd-node.tool { border-color: #f97316; background: rgba(249,115,22,0.1); }
+.pd-node.worker { border-color: var(--aug); background: rgba(168,85,247,0.1); }
+.pd-node.critic { border-color: #ec4899; background: rgba(236,72,153,0.1); }

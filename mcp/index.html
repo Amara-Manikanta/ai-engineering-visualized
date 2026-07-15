@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCP Pipeline | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+<section id="mcp-hero" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Model Context Protocol</div>
+          <h2 class="section-title">Connecting LLMs to the Real World</h2>
+          <p class="section-desc">An open standard that enables AI models to securely interact with local and remote data sources, tools, and services.</p>
+        </div>
+        
+        <div class="anim-container" id="mcp-anim">
+          <div class="anim-controls">
+            <button class="ctrl-btn" onclick="mcpAnim.prev()">‹ Prev</button>
+            <span class="step-indicator" id="mcp-step-label">Step 1 of 6</span>
+            <button class="ctrl-btn primary" onclick="mcpAnim.next()">Next ›</button>
+            <button class="ctrl-btn reset" onclick="mcpAnim.reset()">↺ Reset</button>
+            <button class="ctrl-btn play" id="mcp-play-btn" onclick="mcpAnim.togglePlay()">▶ Play</button>
+          </div>
+          <div class="step-dots" id="mcp-dots"></div>
+
+          <div class="pipeline-canvas mcp-canvas">
+            <!-- Node: User -->
+            <div class="node" id="mcp-user" data-step="1">
+              <div class="node-icon user-icon">
+                <div class="user-head"></div>
+                <div class="user-body"></div>
+              </div>
+              <div class="node-label">User Prompt</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr1">
+              <div class="arrow-line"></div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: Claude -->
+            <div class="node" id="mcp-llm" data-step="2">
+              <div class="node-icon llm-icon">
+                <div class="llm-circle"><span class="llm-text">LLM</span></div>
+              </div>
+              <div class="node-label">Claude</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr2">
+              <div class="arrow-line"></div>
+              <div class="arrow-label">tool call</div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: MCP Client -->
+            <div class="node" id="mcp-client" data-step="3">
+              <div class="node-icon mcp-client-icon">
+                <div class="mcp-plug-left"></div>
+              </div>
+              <div class="node-label">MCP Client</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr3">
+              <div class="arrow-line"></div>
+              <div class="arrow-label">JSON-RPC</div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: MCP Server -->
+            <div class="node" id="mcp-server" data-step="4">
+              <div class="node-icon mcp-server-icon">
+                <div class="mcp-plug-right"></div>
+              </div>
+              <div class="node-label">MCP Server</div>
+            </div>
+
+            <div class="arrow-wrap" id="mcp-arr4">
+              <div class="arrow-line"></div>
+              <div class="arrow-label">execute</div>
+              <div class="arrow-particle"></div>
+            </div>
+
+            <!-- Node: External Data -->
+            <div class="node" id="mcp-data" data-step="5">
+              <div class="node-icon data-icon">
+                <div class="db-stack"><div></div><div></div><div></div></div>
+              </div>
+              <div class="node-label">Database / API</div>
+            </div>
+            
+          </div>
+          
+          <div class="step-explainer mcp-explainer-box" id="mcp-explainer">
+            <div class="se-step-num" id="mcp-se-num">Step 1</div>
+            <h4 class="se-title" id="mcp-se-title">User Request</h4>
+            <p class="se-desc" id="mcp-se-desc">The user asks Claude a question that requires external information.</p>
+            <div class="se-key" id="mcp-se-key">
+              <span class="se-key-label">Key insight:</span> The LLM cannot access data on its own.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

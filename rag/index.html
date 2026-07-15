@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG Pipeline | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+
+<div class="sub-nav">
+  <div class="container">
+    <a href="index.html">Overview</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="chunking.html">Chunking</a>
+    <a href="retrieval.html">Retrieval</a>
+    <a href="generation.html">Generation</a>
+  </div>
+</div>
+<section id="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-glow g1"></div>
+      <div class="hero-glow g2"></div>
+      <div class="hero-glow g3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Interactive Learning Guide
+      </div>
+      <h1 class="hero-title">
+        RAG <span class="title-gradient">from Scratch</span>
+      </h1>
+      <p class="hero-sub">Indexing &rarr; Retrieval &rarr; Augmented &rarr; Generation</p>
+      <p class="hero-desc">
+        A deep-dive, step-by-step animated explainer of <strong>Retrieval-Augmented Generation</strong> —
+        the architecture that lets LLMs answer questions with your own data, accurately and with context.
+      </p>
+      <div class="hero-btns">
+        <a href="#overview" class="btn btn-primary">Start Learning ↓</a>
+        <a href="#demo" class="btn btn-outline">Live Demo →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">4</span><span class="stat-label">Core Stages</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Concepts Explained</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Animated</span></div>
+      </div>
+    </div>
+    <!-- Floating cards -->
+    <div class="floating-cards">
+      <div class="fc fc1">📄 PDF</div>
+      <div class="fc fc2">🔍 Query</div>
+      <div class="fc fc3">🧠 LLM</div>
+      <div class="fc fc4">💬 Response</div>
+      <div class="fc fc5">📊 Vectors</div>
+    </div>
+  </section>
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

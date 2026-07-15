@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LangGraph Concepts | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+
+<div class="sub-nav">
+  <div class="container">
+    <a href="index.html">Core Concepts & Demo</a>
+    <a href="patterns.html">Common Patterns</a>
+  </div>
+</div>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">LangGraph</div>
+          <h2 class="section-title">🔗 Building Stateful AI Agents</h2>
+          <p class="section-desc">LangGraph is a library for building stateful, multi-actor applications with LLMs, modeled as graphs. Think of it as the <strong>orchestration layer</strong> for complex AI agent workflows that need cycles, branching, and persistent memory.</p>
+        </div>
+
+        <!-- Key concepts grid -->
+        <div class="lg-concepts">
+          <div class="lg-concept-card">
+            <div class="lgc-icon">🔵</div>
+            <div class="lgc-title">Nodes</div>
+            <div class="lgc-desc">Individual processing units — an LLM call, a tool execution, or any Python function. Each node receives state and returns updated state.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">➡️</div>
+            <div class="lgc-title">Edges</div>
+            <div class="lgc-desc">Connections between nodes. <strong>Normal edges</strong> always go from A→B. <strong>Conditional edges</strong> route dynamically based on state (if/else branching).</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">📦</div>
+            <div class="lgc-title">State</div>
+            <div class="lgc-desc">A shared TypedDict object passed through every node. Each node can read and update the state. This is how information flows through the graph.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">🔄</div>
+            <div class="lgc-title">Cycles</div>
+            <div class="lgc-desc">Unlike basic pipelines, LangGraph supports <strong>loops</strong>. An agent can think → act → observe → think again in a repeating cycle until it decides to stop.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">💾</div>
+            <div class="lgc-title">Checkpointing</div>
+            <div class="lgc-desc">Built-in persistence. Save graph state to memory or a database. Resume execution from any checkpoint — perfect for long-running or interrupted tasks.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">🎭</div>
+            <div class="lgc-title">Multi-Actor</div>
+            <div class="lgc-desc">Multiple agents can run as separate nodes in the same graph. Use for supervisor patterns, debating agents, or parallel task execution.</div>
+          </div>
+        </div>
+
+        <!-- Animation -->
+        <div class="anim-container" id="lg-anim">
+          <div class="section-header" style="margin-bottom:20px">
+            <div class="section-tag">Interactive Demo</div>
+            <h3 class="section-title" style="font-size:1.5rem">ReAct Agent Graph — Step by Step</h3>
+          </div>
+          <div class="anim-controls">
+            <button class="ctrl-btn" onclick="lgAnim.prev()">‹ Prev</button>
+            <span class="step-indicator" id="lg-step-label">Step 1 of 6</span>
+            <button class="ctrl-btn primary" onclick="lgAnim.next()">Next ›</button>
+            <button class="ctrl-btn reset" onclick="lgAnim.reset()">↺ Reset</button>
+            <button class="ctrl-btn play" id="lg-play-btn" onclick="lgAnim.togglePlay()">▶ Play</button>
+          </div>
+          <div class="step-dots" id="lg-dots"></div>
+
+          <div class="pipeline-canvas lg-canvas">
+            <div class="node" id="lg-start" data-step="1">
+              <div class="node-icon lg-start-icon"><span style="font-size:1.3rem">🟢</span></div>
+              <div class="node-label">__start__</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr1"><div class="arrow-line"></div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-state" data-step="2">
+              <div class="node-icon lg-state-icon"><div class="lg-state-box"><span>{ state }</span></div></div>
+              <div class="node-label">Initialize State</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr2"><div class="arrow-line"></div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-agent" data-step="3">
+              <div class="node-icon lg-agent-icon"><div class="lg-agent-brain"></div></div>
+              <div class="node-label">Agent Node (LLM)</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr3"><div class="arrow-line"></div><div class="arrow-label">conditional</div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-tools" data-step="4">
+              <div class="node-icon lg-tools-icon"><span style="font-size:1.3rem">🔧</span></div>
+              <div class="node-label">Tool Node</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr4"><div class="arrow-line"></div><div class="arrow-label">loop back</div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-end" data-step="5">
+              <div class="node-icon lg-end-icon"><span style="font-size:1.3rem">🔴</span></div>
+              <div class="node-label">__end__</div>
+            </div>
+          </div>
+
+          <div class="step-explainer" id="lg-explainer">
+            <div class="se-step-num" id="lg-se-num">Step 1</div>
+            <h4 class="se-title" id="lg-se-title">Graph Starts</h4>
+            <p class="se-desc" id="lg-se-desc">The LangGraph runtime starts execution at the <code>__start__</code> entrypoint. The initial user message is passed in.</p>
+            <div class="se-key" id="lg-se-key"><span class="se-key-label">Key insight:</span> Every LangGraph app has a designated start node.</div>
+          </div>
+        </div>
+
+        <!-- Code example -->
+        <div class="lg-code-block">
+          <div class="notes-title">📄 Minimal LangGraph Agent — Code</div>
+          <div class="code-window">
+            <div class="code-header"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="code-title">agent.py</span></div>
+            <pre class="code-body"><code><span class="c"># 1. Define State</span>
+<span class="k">from</span> langgraph.graph <span class="k">import</span> StateGraph, END
+<span class="k">from</span> typing <span class="k">import</span> TypedDict, Annotated
+<span class="k">import</span> operator
+
+<span class="k">class</span> <span class="cn">AgentState</span>(TypedDict):
+    messages: Annotated[list, operator.add]
+
+<span class="c"># 2. Define Nodes</span>
+<span class="k">def</span> <span class="fn">call_llm</span>(state: AgentState):
+    response = llm.invoke(state[<span class="s">"messages"</span>])
+    <span class="k">return</span> {<span class="s">"messages"</span>: [response]}
+
+<span class="k">def</span> <span class="fn">should_continue</span>(state: AgentState):
+    last = state[<span class="s">"messages"</span>][-<span class="n">1</span>]
+    <span class="k">if</span> last.tool_calls: <span class="k">return</span> <span class="s">"tools"</span>
+    <span class="k">return</span> END
+
+<span class="c"># 3. Build Graph</span>
+graph = StateGraph(AgentState)
+graph.add_node(<span class="s">"agent"</span>, call_llm)
+graph.add_node(<span class="s">"tools"</span>, tool_executor)
+graph.set_entry_point(<span class="s">"agent"</span>)
+graph.add_conditional_edges(<span class="s">"agent"</span>, should_continue)
+graph.add_edge(<span class="s">"tools"</span>, <span class="s">"agent"</span>)  <span class="c"># Loop back!</span>
+
+app = graph.compile()</code></pre>
+          </div>
+        </div>
+
+        <!-- Use cases -->
+        </div></section>
+  
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

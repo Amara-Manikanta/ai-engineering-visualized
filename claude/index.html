@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Features | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Claude Code</div>
+          <h2 class="section-title">12 Features Every Engineer Must Know</h2>
+          <p class="section-desc">Master your AI coding assistant with these powerful workflows and configuration options.</p>
+        </div>
+        
+        <div class="claude-features-grid">
+          <!-- 1 -->
+          <div class="cf-card border-orange">
+            <div class="cf-header bg-orange"><span class="cf-num">1</span> CLAUDE.md</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-orange">📄</div>
+              <p>Project memory file — custom rules, stack info, and commands Claude reads every session.</p>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="cf-card border-cyan">
+            <div class="cf-header bg-cyan"><span class="cf-num">2</span> Permissions</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-cyan">🔒</div>
+              <p>Control what Claude can and can't touch — whitelist or block tools per session.</p>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="cf-card border-purple">
+            <div class="cf-header bg-purple"><span class="cf-num">3</span> Plan Mode</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-purple">📝</div>
+              <p>Review the plan before Claude acts — approve, edit, or reject each step first.</p>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="cf-card border-green">
+            <div class="cf-header bg-green"><span class="cf-num">4</span> Checkpoints</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-green">⏱️</div>
+              <p>Revert to any point in time — automatic git snapshots let you undo any mistake.</p>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="cf-card border-orange">
+            <div class="cf-header bg-orange"><span class="cf-num">5</span> Skills</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-orange">🛠️</div>
+              <p>Reusable instructions Claude follows automatically — store in <code>.claude/skills/</code>.</p>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="cf-card border-cyan">
+            <div class="cf-header bg-cyan"><span class="cf-num">6</span> Hooks</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-cyan">⚡</div>
+              <p>Run custom logic at key moments — shell scripts on PreToolUse, PostToolUse events.</p>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="cf-card border-green">
+            <div class="cf-header bg-green"><span class="cf-num">7</span> MCP</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-green">🔌</div>
+              <p>Connect Claude to any external tool — databases, APIs, and services via Model Context Protocol.</p>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="cf-card border-pink">
+            <div class="cf-header bg-pink"><span class="cf-num">8</span> Plugins</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-pink">🧩</div>
+              <p>Extend Claude with third-party integrations — add tools without writing custom code.</p>
+            </div>
+          </div>
+          <!-- 9 -->
+          <div class="cf-card border-green">
+            <div class="cf-header bg-green"><span class="cf-num">9</span> Context</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-green">🧠</div>
+              <p>Feed Claude what it needs and manage the current context — files, history, and rules.</p>
+            </div>
+          </div>
+          <!-- 10 -->
+          <div class="cf-card border-purple">
+            <div class="cf-header bg-purple"><span class="cf-num">10</span> Slash Commands</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-purple">⌨️</div>
+              <p>Trigger actions with a single command — store templates in <code>.claude/commands/</code>.</p>
+            </div>
+          </div>
+          <!-- 11 -->
+          <div class="cf-card border-cyan">
+            <div class="cf-header bg-cyan"><span class="cf-num">11</span> Compaction</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-cyan">🗜️</div>
+              <p>Compress long conversations to save tokens — keep context fresh without losing key info.</p>
+            </div>
+          </div>
+          <!-- 12 -->
+          <div class="cf-card border-purple">
+            <div class="cf-header bg-purple"><span class="cf-num">12</span> Subagents</div>
+            <div class="cf-body">
+              <div class="cf-icon-large text-purple">🤖</div>
+              <p>Spawn parallel agents for complex tasks — divide and conquer multi-step workflows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chunking - RAG | AI Engineering Visualized</title>
+  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+<main class="main-content">
+
+<div class="sub-nav">
+  <div class="container">
+    <a href="index.html">Overview</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="chunking.html">Chunking</a>
+    <a href="retrieval.html">Retrieval</a>
+    <a href="generation.html">Generation</a>
+  </div>
+</div>
+<section id="chunking" class="section chunk-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Deep Dive</div>
+        <h2 class="section-title">✂️ AI Chunking Techniques</h2>
+        <p class="section-desc">
+          <em>Different ways to split documents. Better chunks. Better answers.</em><br>
+          How you split text dramatically affects retrieval quality — here are the 6 essential strategies.
+        </p>
+      </div>
+
+      <!-- 6-card grid -->
+      <div class="chunk-grid">
+
+        <!-- 1. Fixed-Size -->
+        <div class="chunk-card" id="ck1">
+          <div class="ck-header ck-fixed">
+            <div class="ck-num">1</div>
+            <div class="ck-title">Fixed-Size Chunking</div>
+          </div>
+          <p class="ck-desc">Split by a fixed number of tokens or words (e.g., 500 words or 1000 tokens). The simplest, fastest strategy.</p>
+          <div class="ck-visual ckv-fixed">
+            <div class="ckv-doc">📄 Source Doc</div>
+            <div class="ckv-arrow">→</div>
+            <div class="ckv-blocks">
+              <div class="ckb fixed-b">Chunk 1</div>
+              <div class="ckb fixed-b">Chunk 2</div>
+              <div class="ckb fixed-b">Chunk 3</div>
+              <div class="ckb fixed-b">Chunk 4</div>
+              <div class="ckb fixed-b faded">…</div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Simple &amp; fast</span>
+            <span class="ck-pro">✅ Easy to implement</span>
+            <span class="ck-con">⚠ Splits mid-sentence</span>
+          </div>
+          <div class="ck-when">Best for: Plain text, quick prototypes</div>
+        </div>
+
+        <!-- 2. Sliding Window -->
+        <div class="chunk-card" id="ck2">
+          <div class="ck-header ck-sliding">
+            <div class="ck-num">2</div>
+            <div class="ck-title">Sliding Window Chunking</div>
+          </div>
+          <p class="ck-desc">Create overlapping chunks so context is preserved at boundaries. Chunk 2 starts before Chunk 1 ends.</p>
+          <div class="ck-visual ckv-sliding">
+            <div class="ckv-overlap-blocks">
+              <div class="ck-overlap-row">
+                <div class="ckb slide-b s1">Chunk 1<span class="cb-range">(1–5)</span></div>
+              </div>
+              <div class="ck-overlap-row off1">
+                <div class="ckb slide-b s2">Chunk 2<span class="cb-range">(4–8)</span></div>
+              </div>
+              <div class="ck-overlap-row off2">
+                <div class="ckb slide-b s3">Chunk 3<span class="cb-range">(7–11)</span></div>
+              </div>
+              <div class="ck-overlap-row off3">
+                <div class="ckb slide-b s4">Chunk 4<span class="cb-range">(10–14)</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Preserves boundary context</span>
+            <span class="ck-pro">✅ No info loss</span>
+            <span class="ck-con">⚠ More chunks to store</span>
+          </div>
+          <div class="ck-when">Best for: Dense documents, technical content</div>
+        </div>
+
+        <!-- 3. Semantic -->
+        <div class="chunk-card" id="ck3">
+          <div class="ck-header ck-semantic">
+            <div class="ck-num">3</div>
+            <div class="ck-title">Semantic Chunking</div>
+          </div>
+          <p class="ck-desc">Group content by meaning and topic similarity using embeddings. Chunks respect semantic boundaries, not fixed sizes.</p>
+          <div class="ck-visual ckv-semantic">
+            <div class="ckb sem-b s-topic1">Topic 1<br><small>Insurance Basics</small></div>
+            <div class="ckb sem-b s-topic2">Topic 2<br><small>Claim Process</small></div>
+            <div class="ckb sem-b s-topic3">Topic 3<br><small>Exclusions</small></div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ High relevance</span>
+            <span class="ck-pro">✅ Better understanding</span>
+            <span class="ck-con">⚠ Needs embedding model</span>
+          </div>
+          <div class="ck-when">Best for: Mixed-topic documents, FAQs</div>
+        </div>
+
+        <!-- 4. Hierarchical -->
+        <div class="chunk-card" id="ck4">
+          <div class="ck-header ck-hierarchical">
+            <div class="ck-num">4</div>
+            <div class="ck-title">Hierarchical Chunking</div>
+          </div>
+          <p class="ck-desc">Split by document structure — sections, subsections, and paragraphs. Maintains the logical relationships in the document.</p>
+          <div class="ck-visual ckv-hierarchical">
+            <div class="hier-tree">
+              <div class="ht-node ht-doc">Document</div>
+              <div class="ht-children">
+                <div class="ht-branch">
+                  <div class="ht-node ht-sec">Section 1</div>
+                  <div class="ht-children">
+                    <div class="ht-node ht-sub">Sub 1</div>
+                    <div class="ht-node ht-sub">Sub 2</div>
+                  </div>
+                </div>
+                <div class="ht-branch">
+                  <div class="ht-node ht-sec">Section 2</div>
+                  <div class="ht-children">
+                    <div class="ht-node ht-sub">Sub 1</div>
+                    <div class="ht-node ht-sub">Sub 2</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Maintains structure</span>
+            <span class="ck-pro">✅ Keeps relationships</span>
+            <span class="ck-con">⚠ Requires structured docs</span>
+          </div>
+          <div class="ck-when">Best for: Reports, books, legal docs</div>
+        </div>
+
+        <!-- 5. Recursive -->
+        <div class="chunk-card" id="ck5">
+          <div class="ck-header ck-recursive">
+            <div class="ck-num">5</div>
+            <div class="ck-title">Recursive Chunking</div>
+          </div>
+          <p class="ck-desc">Recursively split using a priority order: Headings → Paragraphs → Sentences → Words. Falls back to finer splits only when needed.</p>
+          <div class="ck-visual ckv-recursive">
+            <div class="rec-ladder">
+              <div class="rec-level rl1"><span>Headings</span><div class="rec-bar"></div></div>
+              <div class="rec-arrow">↓</div>
+              <div class="rec-level rl2"><span>Paragraphs</span><div class="rec-bar"></div></div>
+              <div class="rec-arrow">↓</div>
+              <div class="rec-level rl3"><span>Sentences</span><div class="rec-bar"></div></div>
+              <div class="rec-arrow">↓</div>
+              <div class="rec-level rl4"><span>Words</span><div class="rec-bar"></div></div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Flexible &amp; adaptive</span>
+            <span class="ck-pro">✅ Natural boundaries</span>
+            <span class="ck-con">⚠ More complex logic</span>
+          </div>
+          <div class="ck-when">Best for: General-purpose RAG (most popular)</div>
+        </div>
+
+        <!-- 6. Document-Aware -->
+        <div class="chunk-card" id="ck6">
+          <div class="ck-header ck-docaware">
+            <div class="ck-num">6</div>
+            <div class="ck-title">Document-Aware Chunking</div>
+          </div>
+          <p class="ck-desc">Split based on document element types — headings, paragraphs, tables, lists, code blocks, and images are treated differently.</p>
+          <div class="ck-visual ckv-docaware">
+            <div class="da-elements">
+              <div class="da-el da-h"><span class="da-icon">H</span> Heading</div>
+              <div class="da-el da-p"><span class="da-icon">≡</span> Paragraph</div>
+              <div class="da-el da-t"><span class="da-icon">⊞</span> Table</div>
+              <div class="da-el da-l"><span class="da-icon">☰</span> List</div>
+              <div class="da-el da-c"><span class="da-icon">&lt;/&gt;</span> Code Block</div>
+              <div class="da-el da-i"><span class="da-icon">🖼</span> Figure</div>
+            </div>
+          </div>
+          <div class="ck-pros">
+            <span class="ck-pro">✅ Respects layout</span>
+            <span class="ck-pro">✅ Great for mixed docs</span>
+            <span class="ck-con">⚠ Needs doc parser</span>
+          </div>
+          <div class="ck-when">Best for: PDFs, slides, structured reports</div>
+        </div>
+
+      </div><!-- /chunk-grid -->
+
+      <!-- Comparison table -->
+      <div class="chunk-comparison">
+        <h3 class="notes-title">📊 Technique Comparison</h3>
+        <div class="ct-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Technique</th>
+                <th>Overlap</th>
+                <th>Semantic Awareness</th>
+                <th>Implementation</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1️⃣ Fixed-Size</td><td>❌ None</td><td>❌ None</td><td>⭐ Very Easy</td><td>Quick prototypes</td></tr>
+              <tr><td>2️⃣ Sliding Window</td><td>✅ Yes</td><td>❌ None</td><td>⭐⭐ Easy</td><td>Dense text</td></tr>
+              <tr><td>3️⃣ Semantic</td><td>✅ Natural</td><td>✅✅ High</td><td>⭐⭐⭐ Medium</td><td>Topic-mixed docs</td></tr>
+              <tr><td>4️⃣ Hierarchical</td><td>✅ Structural</td><td>✅ Medium</td><td>⭐⭐⭐ Medium</td><td>Books, reports</td></tr>
+              <tr class="highlight-row"><td>5️⃣ Recursive</td><td>✅ Adaptive</td><td>✅ Medium</td><td>⭐⭐⭐ Medium</td><td>✅ General-purpose</td></tr>
+              <tr><td>6️⃣ Document-Aware</td><td>✅ Element-level</td><td>✅✅ High</td><td>⭐⭐⭐⭐ Complex</td><td>PDFs, slides</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- From Chunks to Insights pipeline -->
+      <div class="chunks-to-insights">
+        <h3 class="notes-title">🔁 From Chunks to Insights</h3>
+        <div class="cti-pipeline">
+          <div class="cti-node">
+            <div class="cti-icon">✂️</div>
+            <div class="cti-label">Chunks</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">🔢</div>
+            <div class="cti-label">Embeddings</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">💾</div>
+            <div class="cti-label">Vector DB</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">🔍</div>
+            <div class="cti-label">Retrieval</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node">
+            <div class="cti-icon">🧠</div>
+            <div class="cti-label">LLM</div>
+          </div>
+          <div class="cti-arrow"><div class="cti-line"></div></div>
+          <div class="cti-node cti-final">
+            <div class="cti-icon">💬</div>
+            <div class="cti-label">Accurate Response</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+<footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -202,7 +202,9 @@ class StepAnimator {
 }
 
 /* ── INDEXING ANIMATION ─────────────────────────────────── */
-const idxAnim = new StepAnimator({
+let idxAnim = null;
+if (document.getElementById("idx-explainer")) {
+  idxAnim = new StepAnimator({
   labelId: 'idx-step-label',
   explainerId: 'idx-explainer',
   playBtnId: 'idx-play-btn',
@@ -271,7 +273,9 @@ const idxAnim = new StepAnimator({
 });
 
 /* ── RETRIEVAL ANIMATION ─────────────────────────────────── */
-const retAnim = new StepAnimator({
+let retAnim = null;
+if (document.getElementById("ret-explainer")) {
+  retAnim = new StepAnimator({
   labelId: 'ret-step-label',
   explainerId: 'ret-explainer',
   playBtnId: 'ret-play-btn',
@@ -340,7 +344,9 @@ const retAnim = new StepAnimator({
 });
 
 /* ── AUGMENTED ANIMATION ──────────────────────────────── */
-const augAnim = new StepAnimator({
+let augAnim = null;
+if (document.getElementById("aug-explainer")) {
+  augAnim = new StepAnimator({
   labelId: 'aug-step-label',
   explainerId: 'aug-explainer',
   playBtnId: 'aug-play-btn',
@@ -379,7 +385,9 @@ const augAnim = new StepAnimator({
 });
 
 /* ── GENERATION ANIMATION ───────────────────────────────── */
-const genAnim = new StepAnimator({
+let genAnim = null;
+if (document.getElementById("gen-explainer")) {
+  genAnim = new StepAnimator({
   labelId: 'gen-step-label',
   explainerId: 'gen-explainer',
   playBtnId: 'gen-play-btn',
@@ -674,7 +682,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ─── MCP ANIMATION LOGIC ───
-const mcpAnim = new StepAnimator({
+let mcpAnim = null;
+if (document.getElementById("mcp-explainer")) {
+  mcpAnim = new StepAnimator({
   steps: [
     {
       nodes: ['mcp-user'],
@@ -732,9 +742,12 @@ const mcpAnim = new StepAnimator({
   playBtnId: 'mcp-play-btn',
   dotsId: 'mcp-dots'
 });
+}
 
 // ─── LANGGRAPH ANIMATION ───
-const lgAnim = new StepAnimator({
+let lgAnim = null;
+if (document.getElementById("lg-explainer")) {
+  lgAnim = new StepAnimator({
   steps: [
     {
       nodes: ['lg-start'],
@@ -792,3 +805,4 @@ const lgAnim = new StepAnimator({
   playBtnId: 'lg-play-btn',
   dotsId: 'lg-dots'
 });
+}

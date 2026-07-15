@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LangGraph Patterns | AI Engineering Visualized</title>
+  <meta name="description" content="Common LangGraph patterns including ReAct, Supervisor, Parallel Map-Reduce, and Reflection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <!-- ─── HEADER & NAV ─── -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering Visualized</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../rag/index.html" class="tab-btn">RAG Pipeline</a></li>
+        <li><a href="../mcp/index.html" class="tab-btn">MCP Pipeline</a></li>
+        <li><a href="index.html" class="tab-btn active">LangGraph</a></li>
+        <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+        <li><a href="../prompting/index.html" class="tab-btn">Prompt Engineering</a></li>
+        <li><a href="../claude/index.html" class="tab-btn">Claude Features</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <div class="container">
+      <a href="index.html">Core Concepts & Demo</a>
+      <a href="patterns.html" class="active">Common Patterns</a>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Architecture</div>
+          <h2 class="section-title">🚀 Advanced LangGraph Patterns</h2>
+          <p class="section-desc">Once you understand the basic node-and-edge structure, you can compose graphs into powerful multi-agent architectures. Here are the four most common patterns.</p>
+        </div>
+
+        <div class="patterns-detailed-list">
+
+          <!-- 1. ReAct Agent -->
+          <div class="pattern-detail-card">
+            <div class="pd-header">
+              <span class="pd-icon">🎯</span>
+              <h3 class="pd-title">1. The ReAct Agent (Tool-Calling Loop)</h3>
+            </div>
+            <div class="pd-body">
+              <p>The foundation of agentic AI. The agent receives a task, <strong>Reasons</strong> about what to do, takes an <strong>Action</strong> (calls a tool), and <strong>Observes</strong> the result. It repeats this cycle until the task is complete.</p>
+              
+              <div class="pd-flow">
+                <div class="pd-node start">User Input</div>
+                <div class="pd-arrow">↓</div>
+                <div class="pd-cycle-box">
+                  <div class="pd-node llm">LLM Node (Reasoning)</div>
+                  <div class="pd-arrow-split">
+                    <div class="pd-path"><span class="path-label">Has tool call</span><br>↓</div>
+                    <div class="pd-path"><span class="path-label">Final Answer</span><br>↓</div>
+                  </div>
+                  <div class="pd-split-nodes">
+                    <div class="pd-col">
+                      <div class="pd-node tool">Tool Node (Action)</div>
+                      <div class="pd-arrow-loop">↺ (Loop back to LLM)</div>
+                    </div>
+                    <div class="pd-col">
+                      <div class="pd-node end">Output</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Supervisor -->
+          <div class="pattern-detail-card">
+            <div class="pd-header">
+              <span class="pd-icon">👔</span>
+              <h3 class="pd-title">2. Supervisor (Hierarchical Routing)</h3>
+            </div>
+            <div class="pd-body">
+              <p>A central "Supervisor" LLM orchestrates multiple specialized worker agents. It looks at the task, decides which worker should handle it, passes the state to them, and collects the response.</p>
+              
+              <div class="pd-flow">
+                <div class="pd-node start">User Request</div>
+                <div class="pd-arrow">↓</div>
+                <div class="pd-node llm supervisor">Supervisor LLM</div>
+                <div class="pd-arrow-split three-way">
+                  <div class="pd-path"><span class="path-label">Needs Code</span><br>↙</div>
+                  <div class="pd-path"><span class="path-label">Needs Search</span><br>↓</div>
+                  <div class="pd-path"><span class="path-label">Needs Math</span><br>↘</div>
+                </div>
+                <div class="pd-split-nodes three-way">
+                  <div class="pd-col"><div class="pd-node worker">Coder Agent</div></div>
+                  <div class="pd-col"><div class="pd-node worker">Researcher Agent</div></div>
+                  <div class="pd-col"><div class="pd-node worker">Math Agent</div></div>
+                </div>
+                <div class="pd-arrow-loop wide">↑ (Return to Supervisor) ↑</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Parallel (Map-Reduce) -->
+          <div class="pattern-detail-card">
+            <div class="pd-header">
+              <span class="pd-icon">🌐</span>
+              <h3 class="pd-title">3. Parallel Execution (Map-Reduce)</h3>
+            </div>
+            <div class="pd-body">
+              <p>When a task can be broken into independent sub-tasks (e.g., reviewing 5 different documents), the graph fans out to process them simultaneously, then fans in to aggregate the results. Massively speeds up workflows.</p>
+              
+              <div class="pd-flow">
+                <div class="pd-node start">Large Task</div>
+                <div class="pd-arrow">↓</div>
+                <div class="pd-node split-node">Fan-Out (Map)</div>
+                <div class="pd-arrow-split three-way">
+                  <div class="pd-path">↓</div><div class="pd-path">↓</div><div class="pd-path">↓</div>
+                </div>
+                <div class="pd-split-nodes three-way">
+                  <div class="pd-col"><div class="pd-node worker">Worker (Task 1)</div></div>
+                  <div class="pd-col"><div class="pd-node worker">Worker (Task 2)</div></div>
+                  <div class="pd-col"><div class="pd-node worker">Worker (Task 3)</div></div>
+                </div>
+                <div class="pd-arrow-split three-way reverse">
+                  <div class="pd-path">↘</div><div class="pd-path">↓</div><div class="pd-path">↙</div>
+                </div>
+                <div class="pd-node merge-node">Fan-In (Reduce)</div>
+                <div class="pd-arrow">↓</div>
+                <div class="pd-node end">Final Aggregation</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Reflection -->
+          <div class="pattern-detail-card">
+            <div class="pd-header">
+              <span class="pd-icon">🔍</span>
+              <h3 class="pd-title">4. Reflection (Self-Correction)</h3>
+            </div>
+            <div class="pd-body">
+              <p>Two distinct roles: A <strong>Generator</strong> creates the output (code, text, translation), and a <strong>Critic</strong> evaluates it against a rubric. If it fails, the Critic provides feedback and loops it back to the Generator to try again.</p>
+              
+              <div class="pd-flow">
+                <div class="pd-node start">Prompt</div>
+                <div class="pd-arrow">↓</div>
+                <div class="pd-cycle-box reflection">
+                  <div class="pd-node llm">Generator Node</div>
+                  <div class="pd-arrow">↓ <span class="path-label">(Draft Output)</span></div>
+                  <div class="pd-node critic">Critic Node</div>
+                  <div class="pd-arrow-split">
+                    <div class="pd-path"><span class="path-label">Fails (Feedback)</span><br>↺</div>
+                    <div class="pd-path"><span class="path-label">Passes</span><br>↓</div>
+                  </div>
+                </div>
+                <div class="pd-node end">Final High-Quality Output</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="../rag/index.html">RAG Pipeline</a>
+        <a href="../mcp/index.html">MCP Pipeline</a>
+        <a href="index.html">LangGraph</a>
+        <a href="../llms/index.html">AI Models</a>
+        <a href="../prompting/index.html">Prompt Engineering</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
