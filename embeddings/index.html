@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embeddings Deep Dive | AI Engineering Visualized</title>
+  <meta name="description" content="Understand Vector Embeddings, similarity metrics (Cosine, Euclidean, Dot Product), and compare top embedding models." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="embeddings.css" />
+</head>
+<body>
+
+  <!-- ─── HEADER & NAV ─── -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="logo-accent">Visualized</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+        <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+        <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+        <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+        <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+        <li><a href="index.html" class="tab-btn active">Embeddings</a></li>
+        <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+        <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+        <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <div class="container">
+      <a href="#what">What is an Embedding?</a>
+      <a href="#math">Similarity Math</a>
+      <a href="#interactive">Interactive Demo</a>
+      <a href="#models">Model Comparison</a>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- HERO / WHAT IS AN EMBEDDING -->
+    <section class="section" id="what">
+      <div class="emb-hero-glow"></div>
+      <div class="container">
+        <div class="section-tag">Deep Dive</div>
+        <h1 class="section-title">Vector Embeddings</h1>
+        <p class="section-desc">Embeddings are how AI models understand the meaning of words. They convert text into high-dimensional arrays of numbers where semantic similarity equals mathematical closeness.</p>
+
+        <!-- Animation Container -->
+        <div class="anim-container">
+          <div class="stage-header">
+            <h2 class="stage-title" style="font-size: 1.8rem;">How meaning becomes math</h2>
+          </div>
+          
+          <!-- Control Buttons -->
+          <div class="anim-controls">
+            <button id="emb-play-btn" class="ctrl-btn">▶ Play Animation</button>
+            <button id="emb-reset-btn" class="ctrl-btn" onclick="embAnim.reset()">↻ Reset</button>
+          </div>
+
+          <!-- Network Diagram -->
+          <div class="network">
+            <div id="emb-word" class="node" style="left:50%; top:10%;">"Apple"</div>
+            <div id="emb-model" class="node" style="left:50%; top:45%; background:rgba(139,92,246,0.1); border-color:var(--aug);">Embedding Model</div>
+            <div id="emb-vector" class="node" style="left:50%; top:80%; width: 280px; font-family:var(--mono); background:rgba(16,185,129,0.1); border-color:var(--gen);">
+              [0.34, -0.12, 0.88, ... 1536 dims]
+            </div>
+
+            <!-- Arrows -->
+            <svg class="arrow-svg" id="emb-arr1"><path d="M 50% 25% L 50% 35%" stroke="rgba(255,255,255,0.2)" stroke-width="2" marker-end="url(#arrow)" /></svg>
+            <svg class="arrow-svg" id="emb-arr2"><path d="M 50% 55% L 50% 70%" stroke="rgba(255,255,255,0.2)" stroke-width="2" marker-end="url(#arrow)" /></svg>
+          </div>
+
+          <!-- Explainer Box -->
+          <div class="explainer-box">
+            <div class="exp-label" id="emb-step-label">Step 1</div>
+            <h3 class="exp-title" id="emb-explainer-title">Text Input</h3>
+            <p class="exp-desc" id="emb-explainer-desc">A word or sentence is fed into the system.</p>
+            <div class="exp-key" id="emb-explainer-key">Computers can't do math on letters, so we must translate.</div>
+          </div>
+          <div class="dots-container" id="emb-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MATH: SIMILARITY METRICS -->
+    <section class="section alt-section" id="math">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Vector Math</div>
+          <h2 class="section-title">Measuring Similarity</h2>
+          <p class="section-desc">Once text is converted to vectors, we need a mathematical way to determine how "close" two concepts are in multi-dimensional space.</p>
+        </div>
+
+        <div class="math-grid">
+          
+          <!-- Cosine Similarity -->
+          <div class="math-card card-cosine">
+            <div class="mc-header">
+              <span class="mc-icon">📐</span>
+              <h3 class="mc-title">Cosine Similarity</h3>
+            </div>
+            <div class="mc-body">
+              <p>Measures the <strong>angle</strong> between two vectors. It ignores the magnitude (length) of the vectors, focusing purely on direction. This is the <strong>industry standard</strong> for text embeddings.</p>
+              <div class="mc-formula">
+                cos(θ) = <span class="frac">A · B<br><hr>||A|| ||B||</span>
+              </div>
+              <div class="mc-range">Range: -1 (Opposite) to 1 (Identical)</div>
+            </div>
+          </div>
+
+          <!-- Euclidean Distance -->
+          <div class="math-card card-euclidean">
+            <div class="mc-header">
+              <span class="mc-icon">📏</span>
+              <h3 class="mc-title">Euclidean Distance (L2)</h3>
+            </div>
+            <div class="mc-body">
+              <p>Measures the <strong>straight-line distance</strong> between the endpoints of two vectors. It is highly sensitive to the magnitude (length) of the vectors.</p>
+              <div class="mc-formula">
+                d(A, B) = √Σ(Aᵢ - Bᵢ)²
+              </div>
+              <div class="mc-range">Range: 0 (Identical) to ∞</div>
+            </div>
+          </div>
+
+          <!-- Dot Product -->
+          <div class="math-card card-dot">
+            <div class="mc-header">
+              <span class="mc-icon">✖️</span>
+              <h3 class="mc-title">Dot Product</h3>
+            </div>
+            <div class="mc-body">
+              <p>Measures both <strong>angle and magnitude</strong>. If vectors are normalized (length of 1), Dot Product is mathematically identical to Cosine Similarity. It is faster to compute.</p>
+              <div class="mc-formula">
+                A · B = Σ(Aᵢ × Bᵢ)
+              </div>
+              <div class="mc-range">Range: -∞ to ∞ (or -1 to 1 if normalized)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE DEMO -->
+    <section class="section" id="interactive">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Playground</div>
+          <h2 class="section-title">Interactive Similarity Calculator</h2>
+          <p class="section-desc">Type two sentences below to see how semantically similar they are. (Note: This is a fast, lightweight browser simulation of cosine similarity).</p>
+        </div>
+
+        <div class="calc-container">
+          <div class="calc-inputs">
+            <div class="input-group">
+              <label>Sentence A</label>
+              <textarea id="sent-a" rows="3">The quick brown fox jumps over the lazy dog.</textarea>
+            </div>
+            <div class="input-group">
+              <label>Sentence B</label>
+              <textarea id="sent-b" rows="3">A fast auburn canine leaps across a sleepy hound.</textarea>
+            </div>
+          </div>
+          
+          <div class="calc-action">
+            <button class="btn btn-primary" onclick="calculateSimilarity()">Calculate Similarity</button>
+          </div>
+
+          <div class="calc-result" id="calc-result">
+            <div class="cr-score">
+              <span id="score-val">--</span><span class="cr-pct">%</span>
+            </div>
+            <div class="cr-label">Semantic Overlap</div>
+            <div class="cr-bar"><div class="cr-fill" id="score-fill" style="width: 0%;"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EMBEDDING MODELS COMPARISON -->
+    <section class="section alt-section" id="models">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Landscape</div>
+          <h2 class="section-title">Top Embedding Models</h2>
+          <p class="section-desc">Not all embeddings are created equal. Models balance dimensionality (accuracy) against speed and storage cost. Here is a comparison of popular models.</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="models-table">
+            <thead>
+              <tr>
+                <th>Model Provider</th>
+                <th>Model Name</th>
+                <th>Dimensions</th>
+                <th>Context Length</th>
+                <th>Accuracy (MTEB)</th>
+                <th>Speed / Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>OpenAI</strong></td>
+                <td><code>text-embedding-3-large</code></td>
+                <td>3072</td>
+                <td>8191 tokens</td>
+                <td><span class="badge success">Very High</span></td>
+                <td>Commercial API</td>
+              </tr>
+              <tr>
+                <td><strong>OpenAI</strong></td>
+                <td><code>text-embedding-3-small</code></td>
+                <td>1536</td>
+                <td>8191 tokens</td>
+                <td><span class="badge success">High</span></td>
+                <td>Commercial API</td>
+              </tr>
+              <tr>
+                <td><strong>BAAI</strong></td>
+                <td><code>bge-large-en-v1.5</code></td>
+                <td>1024</td>
+                <td>512 tokens</td>
+                <td><span class="badge success">High</span></td>
+                <td>Open Source (Fast)</td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft</strong></td>
+                <td><code>e5-large-v2</code></td>
+                <td>1024</td>
+                <td>512 tokens</td>
+                <td><span class="badge success">High</span></td>
+                <td>Open Source</td>
+              </tr>
+              <tr>
+                <td><strong>Nomic AI</strong></td>
+                <td><code>nomic-embed-text-v1.5</code></td>
+                <td>768</td>
+                <td>8192 tokens</td>
+                <td><span class="badge">Good</span></td>
+                <td>Open / Matryoshka</td>
+              </tr>
+              <tr>
+                <td><strong>Jina AI</strong></td>
+                <td><code>jina-embeddings-v2-base-en</code></td>
+                <td>768</td>
+                <td>8192 tokens</td>
+                <td><span class="badge">Good</span></td>
+                <td>Open Source</td>
+              </tr>
+              <tr>
+                <td><strong>Alibaba</strong></td>
+                <td><code>gte-large</code></td>
+                <td>1024</td>
+                <td>512 tokens</td>
+                <td><span class="badge success">High</span></td>
+                <td>Open Source</td>
+              </tr>
+              <tr>
+                <td><strong>SentenceTransformers</strong></td>
+                <td><code>all-MiniLM-L6-v2</code></td>
+                <td>384</td>
+                <td>256 tokens</td>
+                <td><span class="badge warning">Moderate</span></td>
+                <td>Extremely Fast</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="info-card" style="margin-top:20px; border-left: 3px solid #8b5cf6;">
+          <div class="ic-title">💡 Matryoshka Representation Learning (MRL)</div>
+          <div class="ic-desc">Modern models like OpenAI's v3 and Nomic support MRL. This allows you to "truncate" the vector (e.g., store only the first 256 dimensions instead of 3072) to save massive amounts of database storage space, while only losing a tiny fraction of accuracy.</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, Agents, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="../rag/index.html">RAG Pipeline</a>
+        <a href="../mcp/index.html">MCP</a>
+        <a href="../agents/index.html">Agents</a>
+        <a href="../langgraph/index.html">LangGraph</a>
+        <a href="../llm-inference/index.html">LLM Inference</a>
+        <a href="../llms/index.html">AI Models</a>
+        <a href="../prompting/index.html">Prompting</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
