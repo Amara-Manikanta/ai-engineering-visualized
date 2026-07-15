@@ -43,6 +43,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: 64px;
 }
 
 /* ── SCROLLBAR ──────────────────────────────────────────── */
@@ -1577,7 +1578,7 @@ footer {
 .sub-nav {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; z-index: 90;
+  position: sticky; top: 64px; z-index: 90;
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
 .sub-nav .container {
