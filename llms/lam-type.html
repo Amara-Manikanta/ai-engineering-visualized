@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Large Action Model (LAM) | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=11" />
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
+      <nav class="mega-nav" id="mega-nav">
+        <ul class="mnav-list">
+          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
+          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link">🤖 Machine Learning</a></li>
+          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link" style="color:var(--text)">✨ Generative AI</a></li>
+          <li class="mnav-item"><a href="../rag/index.html" class="mnav-link">🔍 RAG</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">Generative AI</div>
+        <a href="../genai/index.html" class="guide-sidebar-link">1. Overview</a>
+        <a href="../llms/index.html" class="guide-sidebar-link active">2. AI Models</a>
+        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
+          <a href="../llms/llm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Large Language Model (LLM)</a>
+          <a href="../llms/slm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Small Language Model (SLM)</a>
+          <a href="../llms/lcm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Large Concept Model (LCM)</a>
+          <a href="../llms/lam-type.html" class="guide-sidebar-sublink active" style="color: var(--text); font-weight: 600; text-decoration: none;">- Large Action Model (LAM)</a>
+          <a href="../llms/moe-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Mixture of Experts (MoE)</a>
+          <a href="../llms/vlm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Vision Language Model (VLM)</a>
+        </div>
+        <a href="../llm-inference/index.html" class="guide-sidebar-link">3. LLM Inference</a>
+        <a href="../prompting/index.html" class="guide-sidebar-link">4. Prompt Engineering</a>
+        <a href="../embeddings/index.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="../genai/fine-tuning.html" class="guide-sidebar-link">6. Fine-Tuning</a>
+        <a href="../genai/quantization.html" class="guide-sidebar-link">7. Quantization</a>
+      </div>
+    </aside>
+
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Model Type</span>
+        <h1 class="guide-title">Large Action Model (LAM)</h1>
+        <p class="guide-intro">Models built specifically to take actions across software interfaces.</p>
+      </div>
+      <section class="guide-section">
+          <h2>How it Works</h2>
+          <p>LAMs translate natural language into actionable sequences, such as API calls, web browsing interactions, or UI clicks. They are trained on demonstrations of users navigating interfaces.</p>
+          <div class="guide-card">
+            <h3>Example</h3>
+            <p><strong>Claude Computer Use:</strong> Giving the model the ability to move a mouse, type on a keyboard, and visually parse a desktop screen to automate tasks.</p>
+          </div>
+        </section>
+    </main>
+  </div>
+  <script src="../script.js?v=11"></script>
+</body>
+</html>

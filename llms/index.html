@@ -81,7 +81,28 @@
         </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
 
-<main class="main-content">
+<div class="guide-layout">
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">Generative AI</div>
+        <a href="../genai/index.html" class="guide-sidebar-link">1. Overview</a>
+        <a href="../llms/index.html" class="guide-sidebar-link active">2. AI Models</a>
+        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
+          <a href="../llms/llm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Large Language Model (LLM)</a>
+          <a href="../llms/slm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Small Language Model (SLM)</a>
+          <a href="../llms/lcm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Large Concept Model (LCM)</a>
+          <a href="../llms/lam-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Large Action Model (LAM)</a>
+          <a href="../llms/moe-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Mixture of Experts (MoE)</a>
+          <a href="../llms/vlm-type.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Vision Language Model (VLM)</a>
+        </div>
+        <a href="../llm-inference/index.html" class="guide-sidebar-link">3. LLM Inference</a>
+        <a href="../prompting/index.html" class="guide-sidebar-link">4. Prompt Engineering</a>
+        <a href="../embeddings/index.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="../genai/fine-tuning.html" class="guide-sidebar-link">6. Fine-Tuning</a>
+        <a href="../genai/quantization.html" class="guide-sidebar-link">7. Quantization</a>
+      </div>
+    </aside>
+    <main class="guide-content">
 
     <section class="section">
       <div class="container">
@@ -94,7 +115,7 @@
         <div class="llm-grid">
 
           <!-- LLM -->
-          <div class="llm-card lc-indigo">
+          <a href="llm-type.html" style="text-decoration: none; color: inherit; display: block;"><div class="llm-card lc-indigo" style="cursor: pointer; height: 100%;">
             <div class="llm-card-header"><span class="llm-tag">LLM</span><span class="llm-name">Large Language Model</span></div>
             <div class="llm-flow">
               <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
@@ -107,8 +128,9 @@
             <div class="llm-examples"><span>GPT-4</span><span>Claude</span><span>Gemini</span><span>Llama</span></div>
           </div>
 
+          </a>
           <!-- LCM -->
-          <div class="llm-card lc-cyan">
+          <a href="lcm-type.html" style="text-decoration: none; color: inherit; display: block;"><div class="llm-card lc-cyan" style="cursor: pointer; height: 100%;">
             <div class="llm-card-header"><span class="llm-tag">LCM</span><span class="llm-name">Large Concept Model</span></div>
             <div class="llm-flow">
               <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
@@ -121,8 +143,9 @@
             <div class="llm-examples"><span>Meta LCM</span><span>SONAR</span></div>
           </div>
 
+          </a>
           <!-- LAM -->
-          <div class="llm-card lc-orange">
+          <a href="lam-type.html" style="text-decoration: none; color: inherit; display: block;"><div class="llm-card lc-orange" style="cursor: pointer; height: 100%;">
             <div class="llm-card-header"><span class="llm-tag">LAM</span><span class="llm-name">Large Action Model</span></div>
             <div class="llm-flow">
               <div class="lf-node">📝 Input Processing</div><div class="lf-arrow">↓</div>
@@ -136,8 +159,9 @@
             <div class="llm-examples"><span>Rabbit R1</span><span>Claude Computer Use</span></div>
           </div>
 
+          </a>
           <!-- MoE -->
-          <div class="llm-card lc-purple">
+          <a href="moe-type.html" style="text-decoration: none; color: inherit; display: block;"><div class="llm-card lc-purple" style="cursor: pointer; height: 100%;">
             <div class="llm-card-header"><span class="llm-tag">MoE</span><span class="llm-name">Mixture of Experts</span></div>
             <div class="llm-flow">
               <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
@@ -151,8 +175,9 @@
             <div class="llm-examples"><span>GPT-4</span><span>Mixtral 8x7B</span><span>Gemini</span></div>
           </div>
 
+          </a>
           <!-- VLM -->
-          <div class="llm-card lc-green">
+          <a href="vlm-type.html" style="text-decoration: none; color: inherit; display: block;"><div class="llm-card lc-green" style="cursor: pointer; height: 100%;">
             <div class="llm-card-header"><span class="llm-tag">VLM</span><span class="llm-name">Vision Language Model</span></div>
             <div class="llm-flow">
               <div class="lf-row"><div class="lf-node">🖼️ Image Input</div><div class="lf-node">📝 Text Input</div></div><div class="lf-arrow">↓</div>
@@ -165,6 +190,7 @@
             <div class="llm-examples"><span>GPT-4o</span><span>LLaVA</span><span>Gemini Pro Vision</span></div>
           </div>
 
+          </a>
           <!-- SLM -->
           <div class="llm-card lc-yellow">
             <div class="llm-card-header"><span class="llm-tag">SLM</span><span class="llm-name">Small Language Model</span></div>
@@ -195,6 +221,7 @@
             <div class="llm-examples"><span>BERT</span><span>RoBERTa</span><span>DeBERTa</span></div>
           </div>
 
+          </a>
           <!-- SAM -->
           <div class="llm-card lc-red">
             <div class="llm-card-header"><span class="llm-tag">SAM</span><span class="llm-name">Segment Anything Model</span></div>
@@ -214,6 +241,7 @@
     </section>
   
 </main>
+  </div>
 <footer>
     <div class="footer-inner">
       <div class="footer-logo">🤖 AI Engineering Visualized</div>
