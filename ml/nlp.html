@@ -4,20 +4,120 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Natural Language Processing | AI Engineering Visualized</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../styles.css?v=8"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=9" />
   <style>
-    .coming-soon { display:flex; flex-direction:column; align-items:center; justify-content:center;
-      min-height:70vh; text-align:center; padding:40px 20px; gap:24px; }
-    .cs-badge { font-size:4rem; }
-    .cs-title { font-size:3rem; font-weight:800;
-      background:linear-gradient(135deg,#fff,#a5b4fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .cs-sub { font-size:1.2rem; color:var(--text2); max-width:500px; line-height:1.7; }
-    .cs-pill { display:inline-block; padding:6px 16px; border-radius:20px;
-      background:rgba(99,102,241,0.15); color:var(--idx); font-size:0.85rem; font-weight:700;
-      border:1px solid rgba(99,102,241,0.3); }
+    /* NLP Specific Animation Styles */
+    .nlp-anim-container {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .anim-node {
+      padding: 12px 24px;
+      background: var(--surface);
+      border: 2px solid var(--border2);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      text-align: center;
+      position: relative;
+    }
+    
+    .anim-node.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .anim-node.highlight {
+      border-color: var(--gen);
+      box-shadow: 0 0 15px rgba(16,185,129,0.3);
+      color: var(--gen);
+    }
+    
+    .anim-node.danger {
+      border-color: #ef4444;
+      box-shadow: 0 0 15px rgba(239,68,68,0.3);
+      color: #ef4444;
+    }
+
+    .anim-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    
+    .anim-arrow {
+      color: var(--text3);
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    
+    .anim-arrow.visible {
+      opacity: 1;
+    }
+    
+    .anim-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    
+    .anim-btn {
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    
+    .anim-btn:hover {
+      background: rgba(99,102,241,0.1);
+      border-color: var(--idx);
+    }
+
+    .pos-tag {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      background: rgba(99,102,241,0.2);
+      color: #a5b4fc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .pos-tag.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -25,71 +125,17 @@
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
-      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item has-dd" data-group="ml">
-          <div class="mnav-group-wrap">
-            <a href="../ml/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🤖</span>Machine Learning</a>
-            <button class="mnav-arrow-btn" aria-label="Open Machine Learning menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div>
-            <div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a><a href="../python/index.html" class="mnav-dd-link">Python</a><a href="../ml/supervised.html" class="mnav-dd-link">Supervised</a><a href="../ml/unsupervised.html" class="mnav-dd-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mnav-dd-link">Deep Learning</a><a href="../ml/nlp.html" class="mnav-dd-link">NLP</a><a href="../ml/decision-trees.html" class="mnav-dd-link">Decision Trees</a><a href="../ml/knn.html" class="mnav-dd-link">KNN</a><a href="../ml/logistic-regression.html" class="mnav-dd-link">Logistic Regression</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="genai">
-          <div class="mnav-group-wrap">
-            <a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Generative AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div>
-            <div class="mnav-dd-links"><a href="../llms/index.html" class="mnav-dd-link">AI Models</a><a href="../llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="../prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mnav-dd-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mnav-dd-link">Fine-tuning</a><a href="../genai/quantization.html" class="mnav-dd-link">Quantization</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="rag">
-          <div class="mnav-group-wrap">
-            <a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a>
-            <button class="mnav-arrow-btn" aria-label="Open RAG menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div>
-            <div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Introduction</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector Databases</a><a href="../rag/retrieval.html" class="mnav-dd-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mnav-dd-link">Types of RAG</a><a href="../rag/evaluation.html" class="mnav-dd-link">Evaluation</a><a href="../rag/development.html" class="mnav-dd-link">Development</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="agents">
-          <div class="mnav-group-wrap">
-            <a href="../agents/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🕸️</span>Agentic AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Agentic AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div>
-            <div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="../mcp/index.html" class="mnav-dd-link">MCP</a><a href="../langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="models">
-          <div class="mnav-group-wrap">
-            <a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a>
-            <button class="mnav-arrow-btn" aria-label="Open Models menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div>
-            <div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a><a href="../models/gpt.html" class="mnav-dd-link">GPT</a><a href="../models/gemini.html" class="mnav-dd-link">Gemini</a><a href="../models/llama.html" class="mnav-dd-link">Llama</a><a href="../models/qwen.html" class="mnav-dd-link">Qwen</a><a href="../models/deepseek.html" class="mnav-dd-link">DeepSeek</a><a href="../models/mistral.html" class="mnav-dd-link">Mistral</a></div>
-          </div></div>
-        </li><li class="mnav-item"><a href="../projects/index.html" class="mnav-link">🚀 Projects</a></li><li class="mnav-item"><a href="../resources/index.html" class="mnav-link">📚 Resources</a></li></ul></nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav class="mega-nav" id="mega-nav">
+        <!-- Minimal nav block for the script -->
+        <ul class="mnav-list">
+          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
+          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link" style="color:var(--text)">🤖 Machine Learning</a></li>
+          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link">✨ Generative AI</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="mobile-drawer" id="mobile-drawer"><ul class="mobile-nav-list"><li><a href="../index.html" class="mobile-nav-link">🏠 Home</a></li><li class="mobile-group">
-          <button class="mobile-group-btn">🤖 Machine Learning <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../ml/index.html" class="mobile-child-link">Introduction</a><a href="../python/index.html" class="mobile-child-link">Python</a><a href="../ml/supervised.html" class="mobile-child-link">Supervised</a><a href="../ml/unsupervised.html" class="mobile-child-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mobile-child-link">Deep Learning</a><a href="../ml/nlp.html" class="mobile-child-link">NLP</a><a href="../ml/decision-trees.html" class="mobile-child-link">Decision Trees</a><a href="../ml/knn.html" class="mobile-child-link">KNN</a><a href="../ml/logistic-regression.html" class="mobile-child-link">Logistic Regression</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">✨ Generative AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../llms/index.html" class="mobile-child-link">AI Models</a><a href="../llm-inference/index.html" class="mobile-child-link">LLM Inference</a><a href="../prompting/index.html" class="mobile-child-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mobile-child-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mobile-child-link">Fine-tuning</a><a href="../genai/quantization.html" class="mobile-child-link">Quantization</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🔍 RAG <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../rag/fundamentals.html" class="mobile-child-link">Introduction</a><a href="../rag/chunking.html" class="mobile-child-link">Chunking</a><a href="../rag/vector-dbs.html" class="mobile-child-link">Vector Databases</a><a href="../rag/retrieval.html" class="mobile-child-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mobile-child-link">Types of RAG</a><a href="../rag/evaluation.html" class="mobile-child-link">Evaluation</a><a href="../rag/development.html" class="mobile-child-link">Development</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🕸️ Agentic AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../agents/index.html" class="mobile-child-link">AI Agents</a><a href="../mcp/index.html" class="mobile-child-link">MCP</a><a href="../langgraph/index.html" class="mobile-child-link">LangGraph</a><a href="../agents/langchain.html" class="mobile-child-link">LangChain</a><a href="../agents/tool-calling.html" class="mobile-child-link">Tool Calling</a><a href="../agents/memory.html" class="mobile-child-link">Memory</a><a href="../agents/multi-agent.html" class="mobile-child-link">Multi-Agent</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🧩 Models <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
-        </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
+
   <div class="guide-layout">
     <!-- LEFT SIDEBAR -->
     <aside class="guide-sidebar">
@@ -103,9 +149,12 @@
         <a href="unsupervised.html" class="guide-sidebar-link">6. Unsupervised Learning</a>
         <a href="deep-learning.html" class="guide-sidebar-link">7. Deep Learning</a>
         <a href="nlp.html" class="guide-sidebar-link active">8. NLP</a>
-        <a href="spam-detection.html" class="guide-sidebar-link">9. Spam Detection</a>
-        <a href="syntactic-processing.html" class="guide-sidebar-link">10. Syntactic Processing</a>
-        <a href="spell-corrector.html" class="guide-sidebar-link">11. Spell Corrector</a>
+        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 8px;">
+          <a href="#lexical" style="color: var(--text2); text-decoration: none;">- Tokenization & TF-IDF</a>
+          <a href="#spam" style="color: var(--text2); text-decoration: none;">- Spam Detection</a>
+          <a href="#syntactic" style="color: var(--text2); text-decoration: none;">- Syntactic Processing</a>
+          <a href="#spell" style="color: var(--text2); text-decoration: none;">- Spell Corrector</a>
+        </div>
       </div>
     </aside>
 
@@ -114,72 +163,232 @@
       <div class="guide-header">
         <span class="guide-tag">NLP</span>
         <h1 class="guide-title">Natural Language Processing</h1>
-        <p class="guide-intro">Techniques and algorithms for processing, analyzing, and generating human language text.</p>
+        <p class="guide-intro">Interactive explorations of the algorithms that allow machines to understand, process, and generate human language.</p>
       </div>
 
-      <section class="guide-section">
-        <h2>Lexical Processing</h2>
-        <p>The foundational step in NLP involves breaking down text into basic units and normalizing them.</p>
-        <div class="guide-grid">
-          <div class="guide-card">
-            <h3 class="gc-title">Tokenization</h3>
-            <p class="gc-desc">Splitting text into individual words or sub-words (tokens).</p>
+      <!-- SECTION 1 -->
+      <section class="guide-section" id="lexical">
+        <h2>Tokenization & TF-IDF</h2>
+        <p>Before a machine learning model can understand text, it must be broken down into chunks (tokens) and converted into numerical formats. This process removes noise like stopwords and standardizes words through stemming.</p>
+        
+        <div class="nlp-anim-container" id="anim-lexical">
+          <div class="anim-row" id="lex-row-1">
+            <div class="anim-node" id="lex-n1">"The quick brown fox is running!"</div>
           </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Stemming & Lemmatization</h3>
-            <p class="gc-desc">Reducing words to their root forms. Stemming is rule-based and aggressive, while Lemmatization uses dictionary context.</p>
+          <div class="anim-arrow" id="lex-a1">↓</div>
+          <div class="anim-row" id="lex-row-2">
+            <div class="anim-node" id="lex-t1">The</div>
+            <div class="anim-node" id="lex-t2">quick</div>
+            <div class="anim-node" id="lex-t3">brown</div>
+            <div class="anim-node" id="lex-t4">fox</div>
+            <div class="anim-node" id="lex-t5">is</div>
+            <div class="anim-node" id="lex-t6">running</div>
           </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Stopwords</h3>
-            <p class="gc-desc">Filtering out highly common words (like 'the', 'is', 'in') that carry little semantic value.</p>
+          <div class="anim-arrow" id="lex-a2">↓</div>
+          <div class="anim-row" id="lex-row-3">
+            <div class="anim-node" id="lex-s1">quick</div>
+            <div class="anim-node" id="lex-s2">brown</div>
+            <div class="anim-node" id="lex-s3">fox</div>
+            <div class="anim-node" id="lex-s4">run</div>
           </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Edit Distance</h3>
-            <p class="gc-desc">Measuring similarity between strings by counting the minimum operations to transform one into the other (e.g., Levenshtein distance).</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="guide-section">
-        <h2>Text Representation</h2>
-        <p>Machine learning models require numerical inputs, so text must be converted into vectors.</p>
-        <div class="guide-grid" style="margin-top: 20px;">
-          <div class="guide-card">
-            <h3 class="gc-title">Bag of Words (BoW)</h3>
-            <p class="gc-desc">Represents text as a frequency count of words, ignoring grammar and word order.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">TF-IDF</h3>
-            <p class="gc-desc">Term Frequency-Inverse Document Frequency. Weighs words by how frequently they appear in a document relative to the entire corpus.</p>
+          <div class="anim-controls">
+            <button class="anim-btn" onclick="playLexical()">Play Animation</button>
+            <button class="anim-btn" onclick="resetLexical()">Reset</button>
           </div>
         </div>
       </section>
 
-      <section class="guide-section">
-        <h2>Applications & Advanced Concepts</h2>
-        <p>Core tasks built on top of basic NLP processing.</p>
-        <div class="guide-grid" style="margin-top: 20px;">
-          <div class="guide-card">
-            <h3 class="gc-title">Spam Detection</h3>
-            <p class="gc-desc">Using text representation and classification algorithms to identify unwanted messages in datasets like SMSSpamCollection.</p>
+      <!-- SECTION 2 -->
+      <section class="guide-section" id="spam">
+        <h2>Spam Detection Pipeline</h2>
+        <p>Using a Naive Bayes Classifier on Bag-of-Words representations allows us to determine if a message is Ham (normal) or Spam based on term probabilities.</p>
+        
+        <div class="nlp-anim-container" id="anim-spam">
+          <div class="anim-row">
+            <div class="anim-node" id="spam-n1">"WINNER!! Claim prize now!"</div>
+            <div class="anim-arrow" id="spam-a1">→</div>
+            <div class="anim-node" id="spam-n2">[0, 1, 0, 1, 1...]</div>
+            <div class="anim-arrow" id="spam-a2">→</div>
+            <div class="anim-node" id="spam-n3">Naive Bayes<br><small>P(Spam|Text)</small></div>
+            <div class="anim-arrow" id="spam-a3">→</div>
+            <div class="anim-node" id="spam-n4">SPAM</div>
           </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Spell Correction</h3>
-            <p class="gc-desc">Utilizing edit distance and phonetic algorithms like Soundex to suggest corrections for misspelled words.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Beam Search</h3>
-            <p class="gc-desc">A heuristic search algorithm used in sequence generation tasks to explore the most likely sequences of words.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Syntactic Processing</h3>
-            <p class="gc-desc">Analyzing the grammatical structure of sentences to understand relationships between words.</p>
+          <div class="anim-controls">
+            <button class="anim-btn" onclick="playSpam()">Play Animation</button>
+            <button class="anim-btn" onclick="resetSpam()">Reset</button>
           </div>
         </div>
       </section>
+
+      <!-- SECTION 3 -->
+      <section class="guide-section" id="syntactic">
+        <h2>Syntactic Processing (POS Tagging)</h2>
+        <p>Understanding grammatical structure is crucial. Hidden Markov Models (HMM) and the Viterbi Algorithm calculate the most probable sequence of tags for a given sentence.</p>
+        
+        <div class="nlp-anim-container" id="anim-syn">
+          <div class="anim-row">
+            <div class="anim-node" id="syn-w1">The<span class="pos-tag" id="syn-t1">DET</span></div>
+            <div class="anim-arrow" id="syn-a1">→</div>
+            <div class="anim-node" id="syn-w2">fox<span class="pos-tag" id="syn-t2">NOUN</span></div>
+            <div class="anim-arrow" id="syn-a2">→</div>
+            <div class="anim-node" id="syn-w3">jumps<span class="pos-tag" id="syn-t3">VERB</span></div>
+          </div>
+          <div class="anim-controls">
+            <button class="anim-btn" onclick="playSyn()">Play Animation</button>
+            <button class="anim-btn" onclick="resetSyn()">Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 -->
+      <section class="guide-section" id="spell">
+        <h2>Spell Corrector (Edit Distance)</h2>
+        <p>Calculating the Levenshtein Distance (minimum insertions, deletions, substitutions) allows models to generate candidate corrections, which are then scored by a Language Model.</p>
+        
+        <div class="nlp-anim-container" id="anim-spell">
+          <div class="anim-row">
+            <div class="anim-node" id="spell-n1">"speling"</div>
+            <div class="anim-arrow" id="spell-a1">→</div>
+            <div class="anim-node" id="spell-n2">
+              Candidates:<br>
+              <small id="spell-c1">spelling (Dist: 1)</small><br>
+              <small id="spell-c2">peeling (Dist: 2)</small>
+            </div>
+            <div class="anim-arrow" id="spell-a2">→</div>
+            <div class="anim-node" id="spell-n3">LM Prob:<br><small>P(spelling) > P(peeling)</small></div>
+            <div class="anim-arrow" id="spell-a3">→</div>
+            <div class="anim-node highlight" id="spell-n4">"spelling"</div>
+          </div>
+          <div class="anim-controls">
+            <button class="anim-btn" onclick="playSpell()">Play Animation</button>
+            <button class="anim-btn" onclick="resetSpell()">Reset</button>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
-  <footer><p class="footer-copy" style="text-align:center;padding:30px;color:var(--text3);font-size:0.85rem;">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p></footer>
-  <script src="../script.js?v=8"></script>
+  
+  <script>
+    // Simple timeouts for animations
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+    // Lexical Animation
+    async function playLexical() {
+      resetLexical();
+      document.getElementById('lex-n1').classList.add('visible');
+      await sleep(800);
+      document.getElementById('lex-a1').classList.add('visible');
+      await sleep(400);
+      
+      const tokens = ['lex-t1','lex-t2','lex-t3','lex-t4','lex-t5','lex-t6'];
+      for(let t of tokens) {
+        document.getElementById(t).classList.add('visible');
+        await sleep(200);
+      }
+      
+      await sleep(800);
+      // Remove stopwords
+      document.getElementById('lex-t1').style.opacity = '0.2';
+      document.getElementById('lex-t5').style.opacity = '0.2';
+      
+      await sleep(600);
+      document.getElementById('lex-a2').classList.add('visible');
+      await sleep(400);
+      
+      const stems = ['lex-s1','lex-s2','lex-s3','lex-s4'];
+      for(let s of stems) {
+        document.getElementById(s).classList.add('visible');
+        await sleep(200);
+      }
+      document.getElementById('lex-s4').classList.add('highlight');
+    }
+    
+    function resetLexical() {
+      document.querySelectorAll('#anim-lexical .anim-node').forEach(el => { el.classList.remove('visible', 'highlight'); el.style.opacity = ''; });
+      document.querySelectorAll('#anim-lexical .anim-arrow').forEach(el => el.classList.remove('visible'));
+    }
+
+    // Spam Animation
+    async function playSpam() {
+      resetSpam();
+      document.getElementById('spam-n1').classList.add('visible');
+      await sleep(800);
+      document.getElementById('spam-a1').classList.add('visible');
+      await sleep(400);
+      document.getElementById('spam-n2').classList.add('visible');
+      await sleep(800);
+      document.getElementById('spam-a2').classList.add('visible');
+      await sleep(400);
+      document.getElementById('spam-n3').classList.add('visible', 'highlight');
+      await sleep(1000);
+      document.getElementById('spam-a3').classList.add('visible');
+      await sleep(400);
+      document.getElementById('spam-n4').classList.add('visible', 'danger');
+    }
+    
+    function resetSpam() {
+      document.querySelectorAll('#anim-spam .anim-node').forEach(el => el.classList.remove('visible', 'highlight', 'danger'));
+      document.querySelectorAll('#anim-spam .anim-arrow').forEach(el => el.classList.remove('visible'));
+    }
+
+    // Syntactic Animation
+    async function playSyn() {
+      resetSyn();
+      const words = ['syn-w1', 'syn-w2', 'syn-w3'];
+      const arrows = ['syn-a1', 'syn-a2'];
+      const tags = ['syn-t1', 'syn-t2', 'syn-t3'];
+      
+      for(let i=0; i<words.length; i++) {
+        document.getElementById(words[i]).classList.add('visible');
+        await sleep(600);
+        document.getElementById(tags[i]).classList.add('visible');
+        document.getElementById(words[i]).classList.add('highlight');
+        await sleep(600);
+        document.getElementById(words[i]).classList.remove('highlight');
+        
+        if (i < arrows.length) {
+          document.getElementById(arrows[i]).classList.add('visible');
+          await sleep(400);
+        }
+      }
+    }
+    
+    function resetSyn() {
+      document.querySelectorAll('#anim-syn .anim-node').forEach(el => el.classList.remove('visible', 'highlight'));
+      document.querySelectorAll('#anim-syn .anim-arrow').forEach(el => el.classList.remove('visible'));
+      document.querySelectorAll('#anim-syn .pos-tag').forEach(el => el.classList.remove('visible'));
+    }
+
+    // Spell Corrector Animation
+    async function playSpell() {
+      resetSpell();
+      document.getElementById('spell-n1').classList.add('visible', 'danger');
+      await sleep(800);
+      document.getElementById('spell-a1').classList.add('visible');
+      await sleep(400);
+      document.getElementById('spell-n2').classList.add('visible');
+      
+      await sleep(600);
+      document.getElementById('spell-c1').style.color = 'var(--gen)';
+      
+      await sleep(800);
+      document.getElementById('spell-a2').classList.add('visible');
+      await sleep(400);
+      document.getElementById('spell-n3').classList.add('visible');
+      
+      await sleep(1000);
+      document.getElementById('spell-a3').classList.add('visible');
+      await sleep(400);
+      document.getElementById('spell-n4').classList.add('visible', 'highlight');
+    }
+    
+    function resetSpell() {
+      document.querySelectorAll('#anim-spell .anim-node').forEach(el => el.classList.remove('visible', 'highlight', 'danger'));
+      document.querySelectorAll('#anim-spell .anim-arrow').forEach(el => el.classList.remove('visible'));
+      document.getElementById('spell-c1').style.color = '';
+    }
+  </script>
+  <script src="../script.js?v=9"></script>
 </body>
 </html>
