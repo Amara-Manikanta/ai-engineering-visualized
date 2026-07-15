@@ -274,6 +274,7 @@ if (document.getElementById("idx-explainer")) {
     }
   ]
 });
+}
 
 /* ── RETRIEVAL ANIMATION ─────────────────────────────────── */
 let retAnim = null;
@@ -345,6 +346,7 @@ if (document.getElementById("ret-explainer")) {
     }
   ]
 });
+}
 
 /* ── AUGMENTED ANIMATION ──────────────────────────────── */
 let augAnim = null;
@@ -386,6 +388,7 @@ if (document.getElementById("aug-explainer")) {
     }
   ]
 });
+}
 
 /* ── GENERATION ANIMATION ───────────────────────────────── */
 let genAnim = null;
@@ -431,6 +434,7 @@ if (document.getElementById("gen-explainer")) {
     }
   ]
 });
+}
 
 /* ── TYPEWRITER EFFECT ──────────────────────────────────── */
 const typewriterResponses = [
@@ -808,4 +812,61 @@ if (document.getElementById("lg-explainer")) {
   playBtnId: 'lg-play-btn',
   dotsId: 'lg-dots'
 });
+}
+
+/* ── EMBEDDINGS ANIMATION ───────────────────────────────── */
+let embAnim = null;
+if (document.getElementById("emb-step-label")) {
+  embAnim = new StepAnimator({
+  labelId: "emb-step-label",
+  explainerId: "emb-explainer",
+  playBtnId: "emb-play-btn",
+  dotsId: "emb-dots",
+  steps: [
+    {
+      nodes: ["emb-word"],
+      arrows: [],
+      explainer: {
+        title: "Raw Text Input",
+        desc: "A word or sentence is fed into the system.",
+        key: "Computers can't do math on letters, so we must translate.",
+        color: "var(--idx)"
+      }
+    },
+    {
+      nodes: ["emb-word", "emb-model"],
+      arrows: ["emb-arr1"],
+      explainer: {
+        title: "Embedding Model",
+        desc: "The text passes through a neural network (e.g., text-embedding-ada-002) which transforms it into a mathematical representation.",
+        key: "The model encodes semantic meaning, not just the characters.",
+        color: "var(--aug)"
+      }
+    },
+    {
+      nodes: ["emb-word", "emb-model", "emb-vector"],
+      arrows: ["emb-arr1", "emb-arr2"],
+      explainer: {
+        title: "Dense Vector Output",
+        desc: "The model outputs a dense vector of floating-point numbers (e.g., 1536 dimensions). This vector represents the meaning in a high-dimensional space.",
+        key: "Similar concepts will produce vectors that point in similar directions.",
+        color: "var(--gen)"
+      }
+    }
+  ]
+});
+}
+
+function calculateSimilarity() {
+  const sentence1 = document.getElementById("sentence1").value;
+  const sentence2 = document.getElementById("sentence2").value;
+  const scoreDisplay = document.getElementById("sim-score");
+  
+  if (!sentence1 || !sentence2) {
+    scoreDisplay.textContent = "Please enter two sentences.";
+    return;
+  }
+  
+  const sim = Math.random() * (0.95 - 0.5) + 0.5;
+  scoreDisplay.innerHTML = `<span style="font-size: 2rem; color: var(--idx); font-weight: bold;">${(sim * 100).toFixed(1)}%</span> similarity`;
 }
