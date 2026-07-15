@@ -864,15 +864,19 @@ if (document.getElementById("emb-step-label")) {
 }
 
 function calculateSimilarity() {
-  const sentence1 = document.getElementById("sentence1").value;
-  const sentence2 = document.getElementById("sentence2").value;
-  const scoreDisplay = document.getElementById("sim-score");
+  const sentA = document.getElementById("sent-a").value;
+  const sentB = document.getElementById("sent-b").value;
+  const scoreVal = document.getElementById("score-val");
+  const scoreFill = document.getElementById("score-fill");
   
-  if (!sentence1 || !sentence2) {
-    scoreDisplay.textContent = "Please enter two sentences.";
+  if (!sentA || !sentB) {
+    scoreVal.textContent = "--";
+    scoreFill.style.width = "0%";
     return;
   }
   
   const sim = Math.random() * (0.95 - 0.5) + 0.5;
-  scoreDisplay.innerHTML = `<span style="font-size: 2rem; color: var(--idx); font-weight: bold;">${(sim * 100).toFixed(1)}%</span> similarity`;
+  const percentage = (sim * 100).toFixed(1);
+  scoreVal.textContent = percentage;
+  scoreFill.style.width = percentage + "%";
 }
