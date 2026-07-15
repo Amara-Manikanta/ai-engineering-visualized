@@ -5,37 +5,45 @@
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-A **beautiful, interactive, step-by-step animated explainer** for modern AI Engineering concepts, including the full RAG (Retrieval-Augmented Generation) pipeline, the Model Context Protocol (MCP), and Claude Code features. Built with pure HTML, CSS, and JavaScript. No frameworks, no dependencies.
+A **beautiful, interactive, step-by-step animated explainer** for modern AI Engineering concepts. Built with pure HTML, CSS, and JavaScript. No frameworks, no dependencies. 
+
+Explore comprehensive guides on the full RAG pipeline, Model Context Protocol (MCP), AI Agents, LangGraph, Embeddings, LLM Inference, Prompting, and more!
 
 ## 🌟 Features
 
-- 🎬 **Multi-tab architecture** separating key AI concepts
-- 🔄 **Step-by-step animations** for all 4 RAG stages and MCP
-- 📝 **Detailed notes** with code examples for every concept
-- 🚀 **Live demo** — watch the full RAG pipeline run end-to-end
-- 🎨 **Dark mode glassmorphism** design with glowing effects
-- 📱 **Fully responsive** — works on mobile, tablet, and desktop
-- ✂️ **Chunking Techniques** — Visual breakdown of 6 chunking strategies
-- 🛠️ **Claude Features Grid** — 12 essential workflows for AI coding assistants
+- 🎬 **Multi-page architecture** covering 9 distinct AI engineering pillars.
+- 🔄 **Custom `StepAnimator` Engine** — step-by-step interactive animations for complex data flows (RAG, MCP, LangGraph cycles).
+- 🧮 **Interactive Playgrounds** — like the real-time Cosine Similarity Calculator on the Embeddings page.
+- 📝 **Detailed guides** explaining architecture, formulas, hyperparameters, and best practices.
+- 🎨 **Dark mode glassmorphism** design with glowing effects, beautiful gradients, and sleek layouts.
+- 📱 **Fully responsive** — works on mobile, tablet, and desktop.
 
-## 🏗️ Pipeline Stages Covered
+## 🏗️ Deep Dives Included
 
-### RAG Pipeline
-| Stage | What Happens |
-|-------|-------------|
-| 📁 **Indexing** | Parse documents → Chunk text → Generate embeddings → Store in Milvus |
-| 🔍 **Retrieval (R)** | Encode query → Semantic search → Return top-K relevant chunks |
-| ⚙️ **Augmented (A)** | Combine chunks + query → Build structured prompt |
-| 💬 **Generate (G)** | Feed prompt to LLM → Stream grounded response |
+### 🔍 RAG (Retrieval-Augmented Generation)
+- **Indexing & Chunking**: Document parsing, semantic chunking strategies, and vector DB insertion.
+- **Retrieval & Generation**: Semantic search, context augmentation, and grounded LLM responses.
 
-### MCP Pipeline
-| Stage | What Happens |
-|-------|-------------|
-| 🗣️ **User Prompt** | User asks a question requiring external data |
-| 🧠 **LLM Reasoning** | Claude generates a JSON tool call |
-| 🔌 **MCP Client** | Host app routes the JSON-RPC call |
-| 🖥️ **MCP Server** | Server executes the local tool securely |
-| 💾 **Data Return** | Database/API results flow back to the LLM |
+### 🔌 Model Context Protocol (MCP)
+- Visualizing how LLMs securely execute local tools (search, database queries, code running) via JSON-RPC.
+
+### 🧠 Agents & LangGraph
+- **AI Agents**: Tool use, reasoning, and planning.
+- **LangGraph**: State management, Nodes, Edges, Conditional branches, and infinite execution cycles.
+
+### 🧲 Embeddings & Vector Math
+- What is an embedding?
+- Similarity metrics: Cosine Similarity, Euclidean Distance, and Dot Product.
+- Top embedding models comparison (Dimensions, Context length, Accuracy).
+
+### 🚀 LLM Inference
+- Pre-filling vs. Decoding.
+- KV Caching optimizations and Tokenization.
+
+### 🤖 LLMs, Prompting & Claude
+- Comparison of top open-source and proprietary models (OpenAI, Anthropic, Llama, DeepSeek).
+- Prompt engineering best practices.
+- Claude Code specific features and workflows.
 
 ## 🚀 Deploy to GitHub Pages
 
@@ -49,10 +57,19 @@ A **beautiful, interactive, step-by-step animated explainer** for modern AI Engi
 
 ```
 ai-engineering-visualized/
-├── index.html      # Main HTML — multi-tab layout and all content
-├── styles.css      # Full design system, animations, responsive grid
-├── script.js       # Animation engine (StepAnimator), tab switching
-└── README.md       # This file
+├── index.html              # Home Page (Global Navigation Hub)
+├── script.js               # Global Animation engine & interactive logic
+├── styles.css              # Global Design system and core UI classes
+├── agents/                 # AI Agents Deep Dive
+├── claude/                 # Claude Features & Workflows
+├── embeddings/             # Embeddings & Semantic Search (+ Calculator)
+├── langgraph/              # LangGraph Architecture & Patterns
+├── llm-inference/          # Inference optimization (KV Cache, etc.)
+├── llms/                   # Popular AI Models comparison
+├── mcp/                    # Model Context Protocol Pipeline
+├── prompting/              # Prompt Engineering Best Practices
+├── rag/                    # Complete RAG Pipeline (Indexing, Retrieval, Gen)
+└── README.md               # This file
 ```
 
 ---
