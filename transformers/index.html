@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transformers & Gen AI | AI Engineering Visualized</title>
+  <meta name="description" content="Interactive visual explainer of Generative AI, Transformer architecture, Tokenization, Embeddings and Attention mechanism — inspired by transformer-explainer."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="transformers.css" />
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="logo-accent">Visualized</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="tab-btn">Home</a></li>
+        <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+        <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+        <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+        <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+        <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+        <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+        <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+        <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+        <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+        <li><a href="index.html" class="tab-btn active">Transformers</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SUB NAV -->
+  <div class="sub-nav">
+    <div class="container">
+      <a href="#genai">Gen AI</a>
+      <a href="#ai-types">Types of AI</a>
+      <a href="#language-models">Language Models</a>
+      <a href="#transformer">Transformer</a>
+      <a href="#tokenization">Tokenization</a>
+      <a href="#embeddings">Embeddings</a>
+      <a href="#attention">Attention</a>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- HERO                                                    -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="hero" class="t-hero">
+      <div class="t-hero-bg">
+        <canvas id="neural-canvas"></canvas>
+      </div>
+      <div class="t-hero-content">
+        <div class="t-badge">Interactive Visual Explainer</div>
+        <h1 class="t-hero-title">
+          Transformers &amp;<br><span class="t-gradient">Generative AI</span>
+        </h1>
+        <p class="t-hero-sub">From raw text to intelligent generation — understand how Transformers work, step by step, with live animations.</p>
+        <div class="t-hero-btns">
+          <a href="#genai" class="btn btn-primary">Start Exploring ↓</a>
+          <a href="#attention" class="btn btn-outline">Jump to Attention</a>
+        </div>
+        <div class="t-hero-pills">
+          <span class="t-pill">🤖 Gen AI</span>
+          <span class="t-pill">📜 Tokenization</span>
+          <span class="t-pill">🧮 Embeddings</span>
+          <span class="t-pill">👁️ Attention</span>
+          <span class="t-pill">🔄 Encoder-Decoder</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 1 · WHAT IS GEN AI                              -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="genai" class="t-section">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">01</span>
+          <h2 class="t-section-title">What is Generative AI?</h2>
+          <p class="t-section-desc">Generative AI involves models that can create new data that resembles a training dataset — from text, to images, music, and code.</p>
+        </div>
+
+        <div class="genai-split">
+          <div class="genai-text">
+            <p>Generative AI models are trained to <strong>understand patterns</strong> in data and produce outputs that look and feel like the real thing. Unlike traditional AI that classifies or predicts, Gen AI creates.</p>
+            <p>The key breakthrough was the <strong>Transformer architecture</strong> (2017), which allowed models to process entire sequences in parallel and understand long-range dependencies — making large-scale generation possible.</p>
+            <div class="genai-examples">
+              <div class="genai-ex">📝 <span>Text</span> ChatGPT, Gemini, Claude</div>
+              <div class="genai-ex">🖼️ <span>Images</span> DALL·E, Stable Diffusion</div>
+              <div class="genai-ex">🎵 <span>Music</span> Suno, Udio</div>
+              <div class="genai-ex">💻 <span>Code</span> GitHub Copilot, Cursor</div>
+            </div>
+          </div>
+          <div class="genai-anim-container">
+            <div class="genai-anim">
+              <div class="ga-input">Raw Text Input</div>
+              <div class="ga-arrow" id="ga-arrow1"></div>
+              <div class="ga-box ga-transformer">
+                <div class="ga-box-label">Transformer</div>
+                <div class="ga-particles" id="ga-particles"></div>
+              </div>
+              <div class="ga-arrow" id="ga-arrow2"></div>
+              <div class="ga-outputs">
+                <div class="ga-out ga-out1">📝 Text</div>
+                <div class="ga-out ga-out2">🖼️ Image</div>
+                <div class="ga-out ga-out3">💻 Code</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- AI HISTORY TIMELINE                                     -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="ai-history" class="t-section alt">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">AI Journey</span>
+          <h2 class="t-section-title">Understanding AI's History</h2>
+          <p class="t-section-desc">From Alan Turing's test in the 1950s to today's powerful generative models — a visual journey through 7 decades of AI.</p>
+        </div>
+        <div class="timeline-scroll">
+          <div class="timeline-track">
+            <div class="tl-node" data-year="1950s" data-color="#8b5cf6">
+              <div class="tl-circle" style="background:#8b5cf6">1950s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>Alan Turing's Test</strong><br>
+                McCarthy coins "Artificial Intelligence"
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="1960s" data-color="#ec4899">
+              <div class="tl-circle" style="background:#ec4899">1960s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>ELIZA &amp; SHRDLU</strong><br>
+                First NLP chatbots
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="1970s" data-color="#10b981">
+              <div class="tl-circle" style="background:#10b981">1970s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>Expert Systems</strong><br>
+                Rise of rule-based AI
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="1980s" data-color="#3b82f6">
+              <div class="tl-circle" style="background:#3b82f6">1980s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>ML Boom</strong><br>
+                Machine learning algorithms emerge
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="1990s" data-color="#8b5cf6">
+              <div class="tl-circle" style="background:#8b5cf6">1990s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>Neural Networks</strong><br>
+                Backpropagation &amp; SVMs
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="2000s" data-color="#f59e0b">
+              <div class="tl-circle" style="background:#f59e0b">2000s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>Deep Learning Rise</strong><br>
+                GPUs unlock large models
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="2010s" data-color="#10b981">
+              <div class="tl-circle" style="background:#10b981">2010s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>NLP &amp; Vision</strong><br>
+                BERT, GPT, ImageNet winners
+              </div>
+            </div>
+            <div class="tl-connector">→</div>
+            <div class="tl-node" data-year="2020s" data-color="#3b82f6">
+              <div class="tl-circle" style="background:#3b82f6">2020s</div>
+              <div class="tl-line"></div>
+              <div class="tl-content">
+                <strong>Gen AI Era</strong><br>
+                GPT-4, Gemini, autonomous AI agents
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 2 · TYPES OF AI                                 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="ai-types" class="t-section">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">02</span>
+          <h2 class="t-section-title">Different Types of AI</h2>
+          <p class="t-section-desc">AI is not a monolith. Different AI systems are designed for fundamentally different purposes.</p>
+        </div>
+        <div class="ai-types-grid">
+          <div class="ai-type-card" data-color="#6366f1">
+            <div class="atc-icon">🔬</div>
+            <h3>Diagnostic / Descriptive</h3>
+            <p>Analyzes historical data to understand <em>what happened</em> and why. Focuses on assessing correctness of past behavior.</p>
+            <div class="atc-example">EX: Fraud detection reports</div>
+          </div>
+          <div class="ai-type-card" data-color="#3b82f6">
+            <div class="atc-icon">📈</div>
+            <h3>Predictive AI</h3>
+            <p>Forecasts future outcomes based on historical patterns. Concerned with answering: <em>What will happen next?</em></p>
+            <div class="atc-example">EX: Stock price models</div>
+          </div>
+          <div class="ai-type-card" data-color="#10b981">
+            <div class="atc-icon">🎯</div>
+            <h3>Prescriptive AI</h3>
+            <p>Determines the <em>optimal course of action</em> by providing data-driven recommendations.</p>
+            <div class="atc-example">EX: Route optimization</div>
+          </div>
+          <div class="ai-type-card highlight-card" data-color="#ec4899">
+            <div class="atc-icon">✨</div>
+            <h3>Generative / Cognitive</h3>
+            <p>Produces new content: code, articles, images, music. This is what powers ChatGPT, DALL·E, and Suno.</p>
+            <div class="atc-example">EX: GPT-4, Stable Diffusion</div>
+          </div>
+          <div class="ai-type-card" data-color="#f59e0b">
+            <div class="atc-icon">⚡</div>
+            <h3>Reactive AI</h3>
+            <p>Responds to specific inputs with predetermined responses. No memory, no learning from experience.</p>
+            <div class="atc-example">EX: Deep Blue chess engine</div>
+          </div>
+          <div class="ai-type-card" data-color="#8b5cf6">
+            <div class="atc-icon">🧠</div>
+            <h3>Limited Memory AI</h3>
+            <p>Uses <em>past experiences</em> to inform current decisions. Modern ML models fall into this category.</p>
+            <div class="atc-example">EX: Self-driving cars</div>
+          </div>
+          <div class="ai-type-card" data-color="#6366f1">
+            <div class="atc-icon">💡</div>
+            <h3>Narrow AI (Weak AI)</h3>
+            <p>Designed to perform a specific, limited range of tasks. Highly capable within its domain but nothing else.</p>
+            <div class="atc-example">EX: Image classifiers</div>
+          </div>
+          <div class="ai-type-card" data-color="#ec4899">
+            <div class="atc-icon">🌐</div>
+            <h3>General AI (Strong AI)</h3>
+            <p>Can understand, learn, and apply knowledge across a wide range of tasks like human intelligence. <em>Still theoretical.</em></p>
+            <div class="atc-example">EX: Hypothetical AGI</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 3 · LANGUAGE MODELS                             -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="language-models" class="t-section alt">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">03</span>
+          <h2 class="t-section-title">What are Language Models?</h2>
+          <p class="t-section-desc">Generative AI applications are powered by language models — specialized ML models for natural language processing.</p>
+        </div>
+        <div class="lm-split">
+          <div class="lm-definition">
+            <div class="lm-def-box">
+              <div class="lm-def-icon">📖</div>
+              <p>A <strong>Language Model (LM)</strong> is a machine learning model trained to understand, generate, and manipulate natural language. At its core, it <em>predicts the next token</em> in a sequence given all the previous ones.</p>
+            </div>
+            <div class="lm-tasks">
+              <h4>NLP Tasks Language Models Power:</h4>
+              <div class="lm-task-list">
+                <div class="lm-task"><span class="lm-task-icon">😊</span> Sentiment Analysis &amp; Text Classification</div>
+                <div class="lm-task"><span class="lm-task-icon">📄</span> Text Summarization</div>
+                <div class="lm-task"><span class="lm-task-icon">🔗</span> Semantic Similarity Comparison</div>
+                <div class="lm-task"><span class="lm-task-icon">✍️</span> New Natural Language Generation</div>
+                <div class="lm-task"><span class="lm-task-icon">🌍</span> Machine Translation</div>
+              </div>
+            </div>
+          </div>
+          <div class="lm-prediction-demo">
+            <h4>Next Token Prediction Demo</h4>
+            <div class="lm-demo-sentence" id="lm-demo-sentence">
+              <span class="tok tok-done">The</span>
+              <span class="tok tok-done">quick</span>
+              <span class="tok tok-done">brown</span>
+              <span class="tok tok-done">fox</span>
+              <span class="tok tok-done">jumps</span>
+              <span class="tok tok-active" id="tok-current">over</span>
+            </div>
+            <div class="lm-candidates" id="lm-candidates">
+              <div class="lm-cand" style="width:85%"><span>the</span><strong>85%</strong></div>
+              <div class="lm-cand" style="width:8%"><span>a</span><strong>8%</strong></div>
+              <div class="lm-cand" style="width:4%"><span>his</span><strong>4%</strong></div>
+              <div class="lm-cand" style="width:3%"><span>every</span><strong>3%</strong></div>
+            </div>
+            <button class="btn btn-primary" id="lm-next-btn" style="margin-top:20px;">Next Token →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 4 · TRANSFORMER ARCHITECTURE                    -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="transformer" class="t-section">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">04</span>
+          <h2 class="t-section-title">The Transformer Architecture</h2>
+          <p class="t-section-desc">Introduced in "Attention is All You Need" (Vaswani et al., 2017). Click each component below to learn how it works.</p>
+        </div>
+
+        <!-- Architecture Diagram -->
+        <div class="arch-diagram" id="arch-diagram">
+          <!-- Step counter -->
+          <div class="arch-step-counter">Step <span id="arch-step-num">1</span> / 5</div>
+
+          <!-- Input Side -->
+          <div class="arch-col arch-input-col">
+            <div class="arch-block arch-docs" id="arch-block-docs" data-step="1">
+              <div class="arch-block-icon">📄</div>
+              <div class="arch-block-label">Documents</div>
+            </div>
+            <div class="arch-flow-arrow">↓</div>
+          </div>
+
+          <!-- Encoder-Decoder box -->
+          <div class="arch-center-col">
+            <div class="arch-main-box">
+              <div class="arch-enc-dec">
+                <div class="arch-block arch-encoder" id="arch-block-enc" data-step="2">
+                  <div class="arch-block-num">2</div>
+                  <div class="arch-block-label">Encoder</div>
+                  <div class="arch-block-sublabel">Tokenize → Embed → Attend</div>
+                </div>
+                <div class="arch-block arch-decoder" id="arch-block-dec" data-step="4">
+                  <div class="arch-block-num">4</div>
+                  <div class="arch-block-label">Decoder</div>
+                  <div class="arch-block-sublabel">Cross-attend → Generate</div>
+                </div>
+              </div>
+
+              <!-- Embeddings output -->
+              <div class="arch-embeddings-panel" id="arch-block-emb" data-step="3">
+                <div class="arch-emb-title">3 · Embeddings</div>
+                <div class="arch-emb-rows">
+                  <div class="emb-row"><span class="emb-word">🐕 dog</span> <span class="emb-vec">[10, 3, 2]</span></div>
+                  <div class="emb-row"><span class="emb-word">🐈 cat</span> <span class="emb-vec">[10, 3, 1]</span></div>
+                  <div class="emb-row"><span class="emb-word">🐶 puppy</span> <span class="emb-vec">[5, 2, 1]</span></div>
+                  <div class="emb-row"><span class="emb-word">🛹 skateboard</span> <span class="emb-vec">[-3, 3, 2]</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output Side -->
+          <div class="arch-col arch-output-col">
+            <div class="arch-block arch-prompt" id="arch-block-prompt" data-step="5">
+              <div class="arch-block-icon">💬</div>
+              <div class="arch-block-label">Output Generation</div>
+              <div class="arch-output-demo">
+                <div class="arch-input-text">When my dog was…</div>
+                <div class="arch-output-text" id="arch-output-text">a puppy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Explainer box -->
+        <div class="arch-explainer" id="arch-explainer">
+          <div class="arch-exp-step" id="arch-exp-1">
+            <h3>Step 1 · Document Ingestion</h3>
+            <p>The model is trained with a large volume of natural language text — from the internet, books, and code. This corpus teaches the model patterns in language.</p>
+          </div>
+          <div class="arch-exp-step hidden" id="arch-exp-2">
+            <h3>Step 2 · Encoder</h3>
+            <p>The encoder takes input token sequences and uses the <strong>self-attention mechanism</strong> to determine relationships between tokens — which words influence which other words in the same sequence.</p>
+          </div>
+          <div class="arch-exp-step hidden" id="arch-exp-3">
+            <h3>Step 3 · Embeddings</h3>
+            <p>The encoder's output is a collection of <strong>vectors</strong> (multi-valued numeric arrays) where each element represents a semantic attribute of a token. Related words cluster near each other in this high-dimensional space.</p>
+          </div>
+          <div class="arch-exp-step hidden" id="arch-exp-4">
+            <h3>Step 4 · Decoder</h3>
+            <p>The decoder works on a new sequence of tokens and uses the embeddings generated by the encoder to produce an appropriate natural language output. It uses <strong>cross-attention</strong> to reference the encoder's context.</p>
+          </div>
+          <div class="arch-exp-step hidden" id="arch-exp-5">
+            <h3>Step 5 · Generation</h3>
+            <p>Given "When my dog was", the model uses attention over the input tokens and the encoder embeddings to predict the most probable next token — and continues until it generates a complete sequence like "a puppy".</p>
+          </div>
+        </div>
+        <div class="arch-controls">
+          <button class="btn btn-outline" id="arch-prev">← Previous</button>
+          <button class="btn btn-primary" id="arch-next">Next Step →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 5 · TOKENIZATION                                -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="tokenization" class="t-section alt">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">05</span>
+          <h2 class="t-section-title">Tokenization</h2>
+          <p class="t-section-desc">Tokenization is the process of breaking text into smaller units called <strong>tokens</strong> — the atomic units a language model processes.</p>
+        </div>
+
+        <div class="tok-demo-container">
+          <div class="tok-input-area">
+            <label>Enter text to tokenize:</label>
+            <textarea id="tok-input" rows="3" placeholder="Type something…">The Transformer model is a deep learning architecture.</textarea>
+            <button class="btn btn-primary" id="tok-btn" style="margin-top:12px;">Tokenize ✂️</button>
+          </div>
+          <div class="tok-output-area">
+            <div class="tok-stats" id="tok-stats"></div>
+            <div class="tok-tokens" id="tok-tokens"></div>
+            <div class="tok-ids" id="tok-ids"></div>
+          </div>
+        </div>
+
+        <div class="tok-explainer">
+          <div class="tok-exp-item">
+            <div class="tok-exp-icon">📝</div>
+            <h4>Word Tokenization</h4>
+            <p>Splits on whitespace. Simple but fails on punctuation and new words.</p>
+            <div class="tok-example"><span class="tok-chip blue">Hello</span><span class="tok-chip blue">world</span><span class="tok-chip blue">!</span></div>
+          </div>
+          <div class="tok-exp-item">
+            <div class="tok-exp-icon">🔠</div>
+            <h4>Subword Tokenization (BPE)</h4>
+            <p>Splits rare words into known subword pieces. Used by GPT and most modern LLMs.</p>
+            <div class="tok-example"><span class="tok-chip purple">Trans</span><span class="tok-chip purple">form</span><span class="tok-chip purple">er</span></div>
+          </div>
+          <div class="tok-exp-item">
+            <div class="tok-exp-icon">🔤</div>
+            <h4>Character Tokenization</h4>
+            <p>Treats each character as a token. Very granular, very long sequences.</p>
+            <div class="tok-example"><span class="tok-chip green">A</span><span class="tok-chip green">I</span><span class="tok-chip green"> </span><span class="tok-chip green">i</span><span class="tok-chip green">s</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 6 · EMBEDDINGS                                  -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="embeddings" class="t-section">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">06</span>
+          <h2 class="t-section-title">Embeddings</h2>
+          <p class="t-section-desc">Embeddings represent complex data as numerical vectors — capturing meaning so machines can process it mathematically.</p>
+        </div>
+
+        <div class="emb-layout">
+          <div class="emb-text">
+            <p>An <strong>embedding</strong> is a dense vector of floating-point numbers. The key property is that <em>semantically similar items produce similar vectors</em>.</p>
+            <p>Word2Vec famously discovered that:</p>
+            <div class="emb-formula">
+              king − man + woman ≈ queen
+            </div>
+            <p>This arithmetic works because the embedding space encodes meaning — not just individual words, but the relationships between them.</p>
+
+            <div class="emb-code-block">
+              <div class="code-header">
+                <span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span>
+                <span class="code-title">Word Embedding with Word2Vec</span>
+              </div>
+<pre class="code-body"><span class="ck">from</span> gensim.models <span class="ck">import</span> Word2Vec
+
+<span class="cc"># Sample sentences</span>
+sentences = [["I", "love", "NLP"],
+             ["Transformers", "are", "amazing"]]
+
+<span class="cc"># Train Word2Vec model</span>
+model = Word2Vec(sentences, vector_size=<span class="cn">50</span>,
+                 window=<span class="cn">5</span>, min_count=<span class="cn">1</span>)
+
+<span class="cc"># Get the embedding for a word</span>
+embedding = model.wv[<span class="cs">"NLP"</span>]
+<span class="ck">print</span>(embedding)  <span class="cc"># [0.23, -0.11, ...]</span></pre>
+            </div>
+          </div>
+
+          <div class="emb-visual">
+            <h4>2D Embedding Space Visualization</h4>
+            <div class="emb-canvas-container">
+              <canvas id="emb-canvas" width="400" height="380"></canvas>
+            </div>
+            <p class="emb-canvas-note">Hover over dots to see words. Similar meanings cluster together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SECTION 7 · ATTENTION                                   -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="attention" class="t-section alt">
+      <div class="container">
+        <div class="t-section-header">
+          <span class="t-tag">07</span>
+          <h2 class="t-section-title">The Attention Mechanism</h2>
+          <p class="t-section-desc">Attention allows the model to focus on the most relevant parts of the input when predicting each token. Click on a word to see which tokens it attends to.</p>
+        </div>
+
+        <div class="attn-layout">
+          <div class="attn-heatmap-section">
+            <h4>Attention Heatmap</h4>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:16px;">Click a word in the sentence to see where it pays attention.</p>
+            <div class="attn-sentence" id="attn-sentence">
+              <span class="attn-word" data-idx="0">The</span>
+              <span class="attn-word" data-idx="1">cat</span>
+              <span class="attn-word" data-idx="2">sat</span>
+              <span class="attn-word" data-idx="3">on</span>
+              <span class="attn-word" data-idx="4">the</span>
+              <span class="attn-word" data-idx="5">mat</span>
+            </div>
+            <div class="attn-grid-container">
+              <canvas id="attn-canvas" width="420" height="420"></canvas>
+              <div class="attn-grid-labels" id="attn-labels"></div>
+            </div>
+          </div>
+
+          <div class="attn-explainer-col">
+            <h4>How Attention Works</h4>
+            <ol class="attn-steps">
+              <li>
+                <div class="attn-step-num">Q</div>
+                <div class="attn-step-text"><strong>Query</strong> — the current token asking "who should I pay attention to?"</div>
+              </li>
+              <li>
+                <div class="attn-step-num">K</div>
+                <div class="attn-step-text"><strong>Key</strong> — each token broadcasts what kind of information it holds.</div>
+              </li>
+              <li>
+                <div class="attn-step-num">V</div>
+                <div class="attn-step-text"><strong>Value</strong> — the actual information to retrieve if attention is high.</div>
+              </li>
+              <li>
+                <div class="attn-step-num">⊗</div>
+                <div class="attn-step-text"><strong>Score</strong> — Q·K<sup>T</sup> / √d gives us how much each token should contribute.</div>
+              </li>
+            </ol>
+
+            <div class="attn-formula-box">
+              <div class="attn-formula-title">Attention Formula</div>
+              <div class="attn-formula">
+                Attention(Q,K,V) = softmax( QK<sup>T</sup> / √d<sub>k</sub> ) · V
+              </div>
+            </div>
+
+            <div class="attn-info-box" id="attn-info">
+              <p>👆 Click a word above to see its attention pattern.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-head attention -->
+        <div class="mha-section">
+          <h3>Multi-Head Attention</h3>
+          <p>Instead of running attention once, the Transformer runs it <strong>multiple times in parallel</strong>, each with different learned weight matrices. This lets the model attend to different types of relationships simultaneously.</p>
+          <div class="mha-heads">
+            <div class="mha-head" data-head="1">
+              <div class="mha-head-label">Head 1</div>
+              <div class="mha-head-focus">Syntactic roles</div>
+              <div class="mha-head-bar" style="background:#6366f1;width:90%"></div>
+            </div>
+            <div class="mha-head" data-head="2">
+              <div class="mha-head-label">Head 2</div>
+              <div class="mha-head-focus">Coreference</div>
+              <div class="mha-head-bar" style="background:#ec4899;width:75%"></div>
+            </div>
+            <div class="mha-head" data-head="3">
+              <div class="mha-head-label">Head 3</div>
+              <div class="mha-head-focus">Positional proximity</div>
+              <div class="mha-head-bar" style="background:#10b981;width:60%"></div>
+            </div>
+            <div class="mha-head" data-head="4">
+              <div class="mha-head-label">Head 4</div>
+              <div class="mha-head-focus">Semantic similarity</div>
+              <div class="mha-head-bar" style="background:#f59e0b;width:85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to Transformers, RAG, MCP, LangGraph, and modern AI architectures.</p>
+      <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+  <script src="transformers.js"></script>
+</body>
+</html>
