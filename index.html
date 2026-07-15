@@ -3,95 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Engineering Visualized</title>
-  <meta name="description" content="A detailed interactive animated guide to modern AI Engineering concepts." />
+  <title>AI Engineering Visualized — Interactive AI Concepts</title>
+  <meta name="description" content="An interactive, step-by-step animated guide to RAG, MCP, LangGraph, LLM Inference, Agent Architecture and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .home-hero {
-      text-align: center;
-      padding: 100px 20px 60px;
-    }
-    .home-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--idx), var(--ret));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
-    }
-    .home-subtitle {
-      font-size: 1.2rem;
-      color: var(--text2);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .nav-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-      padding: 0 20px 100px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .nav-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: all 0.3s;
-    }
-    .nav-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      background: var(--surface2);
-      border-color: var(--idx);
-    }
-    .nc-icon {
-      font-size: 2.5rem;
-    }
-    .nc-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .nc-desc {
-      font-size: 0.95rem;
-      color: var(--text2);
-      line-height: 1.5;
-    }
-    /* Dynamic grid */
-    .nc-rag { border-top: 4px solid var(--idx); }
-    .nc-mcp { border-top: 4px solid var(--ret); }
-    .nc-langgraph { border-top: 4px solid #f97316; }
-    .nc-llms { border-top: 4px solid var(--aug); }
-    .nc-prompting { border-top: 4px solid var(--gen); }
-    .nc-claude { border-top: 4px solid #06b6d4; }
-  </style>
+  <link rel="stylesheet" href="home.css" />
 </head>
 <body>
 
-  <!-- ─── HEADER & NAV ─── -->
+  <!-- ─── HEADER ─── -->
   <header>
     <div class="header-inner">
       <a href="./index.html" class="logo">
         <span class="logo-icon">🧠</span>
-        <span class="logo-text">AI Engineering Visualized</span>
+        <span class="logo-text">AI Engineering <span class="logo-accent">Visualized</span></span>
       </a>
       <ul class="nav-links">
-        <li><a href="rag/index.html" class="tab-btn">RAG Pipeline</a></li>
-        <li><a href="mcp/index.html" class="tab-btn">MCP Pipeline</a></li>
+        <li><a href="rag/index.html" class="tab-btn">RAG</a></li>
+        <li><a href="mcp/index.html" class="tab-btn">MCP</a></li>
+        <li><a href="agents/index.html" class="tab-btn">Agents</a></li>
         <li><a href="langgraph/index.html" class="tab-btn">LangGraph</a></li>
+        <li><a href="llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
         <li><a href="llms/index.html" class="tab-btn">AI Models</a></li>
-        <li><a href="prompting/index.html" class="tab-btn">Prompt Engineering</a></li>
-        <li><a href="claude/index.html" class="tab-btn">Claude Features</a></li>
+        <li><a href="prompting/index.html" class="tab-btn">Prompting</a></li>
+        <li><a href="claude/index.html" class="tab-btn">Claude</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -99,62 +36,171 @@
     </div>
   </header>
 
-  <main class="main-content">
-    <div class="home-hero">
-      <h1 class="home-title">AI Engineering Visualized</h1>
-      <p class="home-subtitle">An interactive, step-by-step animated guide to the architectures, protocols, and workflows powering modern AI.</p>
-    </div>
+  <main>
+    <!-- ─── HERO ─── -->
+    <section class="home-hero">
+      <div class="hero-glow-left"></div>
+      <div class="hero-glow-right"></div>
+      <div class="hero-grid-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-badge">✨ Interactive AI Learning Platform</div>
+        <h1 class="hero-title">
+          Understand AI<br>
+          <span class="title-gradient">Engineering</span><br>
+          Visually
+        </h1>
+        <p class="hero-subtitle">
+          Step-by-step animated explainers for RAG, MCP, Agent Architecture, LLM Inference, LangGraph, and more. Built for engineers who want to truly understand how modern AI works.
+        </p>
+        <div class="hero-actions">
+          <a href="rag/index.html" class="btn btn-primary">Start with RAG →</a>
+          <a href="#concepts" class="btn btn-ghost">Browse All Concepts</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">8</span><span class="stat-label">Concepts</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Animations</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Free & Open</span></div>
+        </div>
+      </div>
+    </section>
 
-    <div class="nav-cards">
-      <a href="rag/index.html" class="nav-card nc-rag">
-        <div class="nc-icon">📚</div>
-        <div class="nc-title">RAG Pipeline</div>
-        <div class="nc-desc">Interactive explainer of Retrieval-Augmented Generation. See exactly how Indexing, Chunking, Retrieval, and Generation work.</div>
-      </a>
-      
-      <a href="mcp/index.html" class="nav-card nc-mcp">
-        <div class="nc-icon">🔌</div>
-        <div class="nc-title">Model Context Protocol</div>
-        <div class="nc-desc">Watch how the MCP connects LLMs to local files, databases, and APIs securely using a standard Client-Server architecture.</div>
-      </a>
+    <!-- ─── CONCEPT CARDS ─── -->
+    <section class="concepts-section" id="concepts">
+      <div class="section-label">What you'll learn</div>
+      <h2 class="concepts-title">Explore AI Concepts</h2>
+      <div class="cards-grid">
 
-      <a href="langgraph/index.html" class="nav-card nc-langgraph">
-        <div class="nc-icon">🔗</div>
-        <div class="nc-title">LangGraph Agents</div>
-        <div class="nc-desc">Learn how to build stateful, multi-actor AI applications with nodes, edges, cycles, and shared state memory.</div>
-      </a>
+        <a href="rag/index.html" class="concept-card card-rag">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">📚</span>
+            <span class="card-badge">4 steps</span>
+          </div>
+          <h3 class="card-title">RAG Pipeline</h3>
+          <p class="card-desc">Retrieval-Augmented Generation — see how Indexing, Chunking, Retrieval, and Generation work together to give LLMs accurate knowledge.</p>
+          <div class="card-tags">
+            <span>Indexing</span><span>Chunking</span><span>Retrieval</span><span>Vector DB</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
 
-      <a href="llms/index.html" class="nav-card nc-llms">
-        <div class="nc-icon">🧠</div>
-        <div class="nc-title">AI Model Architectures</div>
-        <div class="nc-desc">Explore the flow diagrams of 8 specialized models: LLM, LAM, MoE, VLM, SLM, MLM, and SAM.</div>
-      </a>
+        <a href="mcp/index.html" class="concept-card card-mcp">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🔌</span>
+            <span class="card-badge">5 steps</span>
+          </div>
+          <h3 class="card-title">Model Context Protocol</h3>
+          <p class="card-desc">Watch how MCP connects LLMs to local files, databases, GitHub, and APIs using a standard Client-Server architecture.</p>
+          <div class="card-tags">
+            <span>Client</span><span>Server</span><span>Tools</span><span>JSON-RPC</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
 
-      <a href="prompting/index.html" class="nav-card nc-prompting">
-        <div class="nc-icon">✍️</div>
-        <div class="nc-title">Prompt Engineering</div>
-        <div class="nc-desc">Master the art of talking to AI. Discover techniques like Chain-of-Thought, ReAct, Tree of Thoughts, and Few-Shot.</div>
-      </a>
+        <a href="agents/index.html" class="concept-card card-agents">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🤖</span>
+            <span class="card-badge">New</span>
+          </div>
+          <h3 class="card-title">AI Agent Architecture</h3>
+          <p class="card-desc">Understand how agents work: the core loop, skills, subagents, hooks, the extension stack, and real-world workflows.</p>
+          <div class="card-tags">
+            <span>Skills</span><span>Subagents</span><span>Hooks</span><span>ReAct</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
 
-      <a href="claude/index.html" class="nav-card nc-claude">
-        <div class="nc-icon">⚙️</div>
-        <div class="nc-title">Claude Code Features</div>
-        <div class="nc-desc">12 essential AI coding assistant workflows every engineer should know, mapped out in a visual grid.</div>
-      </a>
-    </div>
+        <a href="langgraph/index.html" class="concept-card card-langgraph">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🔗</span>
+            <span class="card-badge">5 steps</span>
+          </div>
+          <h3 class="card-title">LangGraph Agents</h3>
+          <p class="card-desc">Build stateful, multi-actor AI applications with nodes, edges, shared state, and cycles. Includes ReAct, Supervisor, and Reflection patterns.</p>
+          <div class="card-tags">
+            <span>Nodes</span><span>State</span><span>Cycles</span><span>Patterns</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <a href="llm-inference/index.html" class="concept-card card-llminference">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">⚡</span>
+            <span class="card-badge">New</span>
+          </div>
+          <h3 class="card-title">LLM Inference Pipeline</h3>
+          <p class="card-desc">How do LLMs actually generate text? Walk through the full pipeline: Tokenizer → Embedding → Transformer → Sampling → Output.</p>
+          <div class="card-tags">
+            <span>Tokenizer</span><span>Attention</span><span>KV Cache</span><span>Sampling</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <a href="llms/index.html" class="concept-card card-llms">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">🧠</span>
+            <span class="card-badge">8 models</span>
+          </div>
+          <h3 class="card-title">AI Model Architectures</h3>
+          <p class="card-desc">Explore flow diagrams of 8 specialized models: LLM, LAM, MoE, VLM, SLM, MLM, LCM and SAM with real-world examples.</p>
+          <div class="card-tags">
+            <span>MoE</span><span>VLM</span><span>SLM</span><span>SAM</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <a href="prompting/index.html" class="concept-card card-prompting">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">✍️</span>
+            <span class="card-badge">7 techniques</span>
+          </div>
+          <h3 class="card-title">Prompt Engineering</h3>
+          <p class="card-desc">Master techniques from Zero-Shot to ReAct. Visual diagrams, before/after comparisons, and 12 golden rules.</p>
+          <div class="card-tags">
+            <span>CoT</span><span>Few-Shot</span><span>ReAct</span><span>ToT</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+        <a href="claude/index.html" class="concept-card card-claude">
+          <div class="card-glow"></div>
+          <div class="card-top">
+            <span class="card-icon">⚙️</span>
+            <span class="card-badge">12 features</span>
+          </div>
+          <h3 class="card-title">Claude Code Features</h3>
+          <p class="card-desc">12 essential AI coding assistant workflows — from slash commands to multi-file editing — every engineer should master.</p>
+          <div class="card-tags">
+            <span>CLAUDE.md</span><span>MCP</span><span>Skills</span><span>Hooks</span>
+          </div>
+          <div class="card-cta">Explore →</div>
+        </a>
+
+      </div>
+    </section>
   </main>
 
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">🤖 AI Engineering Visualized</div>
-      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, Agent Architecture, LLM Inference, LangGraph, and modern AI models.</p>
       <div class="footer-links">
         <a href="rag/index.html">RAG Pipeline</a>
-        <a href="mcp/index.html">MCP Pipeline</a>
+        <a href="mcp/index.html">MCP</a>
+        <a href="agents/index.html">Agents</a>
         <a href="langgraph/index.html">LangGraph</a>
+        <a href="llm-inference/index.html">LLM Inference</a>
         <a href="llms/index.html">AI Models</a>
-        <a href="prompting/index.html">Prompt Engineering</a>
+        <a href="prompting/index.html">Prompting</a>
       </div>
       <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
     </div>

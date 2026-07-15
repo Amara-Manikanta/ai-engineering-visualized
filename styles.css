@@ -1649,3 +1649,22 @@ footer {
 .pd-node.tool { border-color: #f97316; background: rgba(249,115,22,0.1); }
 .pd-node.worker { border-color: var(--aug); background: rgba(168,85,247,0.1); }
 .pd-node.critic { border-color: #ec4899; background: rgba(236,72,153,0.1); }
+
+/* ── NEW HEADER ────────────────────────────────────────────────── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(8,12,26,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+
+.header-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { font-size: 1.4rem; }
+.logo-text { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.logo-accent { color: var(--idx); }

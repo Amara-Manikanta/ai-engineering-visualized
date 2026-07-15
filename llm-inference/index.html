@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM Inference Pipeline | AI Engineering Visualized</title>
+  <meta name="description" content="How LLMs actually generate text: Tokenizer, Embedding Layer, Transformer Blocks, KV Cache, Sampling Strategies, and Speculative Decoding." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="llminference.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="logo-accent">Visualized</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+        <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+        <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+        <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+        <li><a href="index.html" class="tab-btn active">LLM Inference</a></li>
+        <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+        <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+        <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <div class="container">
+      <a href="#input">Input</a>
+      <a href="#tokenizer">Tokenizer</a>
+      <a href="#embedding">Embedding</a>
+      <a href="#transformer">Transformer</a>
+      <a href="#sampling">Sampling</a>
+      <a href="#speculative">Speculative</a>
+      <a href="#streaming">Streaming</a>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- HERO -->
+    <section class="llmi-hero" id="input">
+      <div class="llmi-hero-glow"></div>
+      <div class="container">
+        <div class="section-tag">Deep Dive</div>
+        <h1 class="llmi-title">How LLMs Actually Generate Text</h1>
+        <p class="llmi-sub">Most people treat LLMs as a black box. This guide breaks open the entire inference pipeline — from the moment you press Enter to the token that appears on your screen.</p>
+
+        <!-- Two-phase overview -->
+        <div class="phase-overview">
+          <div class="phase-card phase-prefill">
+            <div class="pc-label">PREFILL PHASE</div>
+            <div class="pc-title">Process Input</div>
+            <div class="pc-desc">All input tokens are processed in parallel. Compute-bound. Fast on GPUs.</div>
+            <div class="pc-steps">Steps 1 → 4</div>
+          </div>
+          <div class="phase-arrow">→</div>
+          <div class="phase-card phase-decode">
+            <div class="pc-label">DECODE PHASE</div>
+            <div class="pc-title">Generate Output</div>
+            <div class="pc-desc">Tokens are generated one at a time, autoregressively. Memory-bound.</div>
+            <div class="pc-steps">Steps 5 → 9</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 1: TOKENIZER -->
+    <section class="section" id="tokenizer">
+      <div class="container">
+        <div class="step-label">Step 2</div>
+        <h2 class="section-title">🔤 Tokenizer</h2>
+        <p class="section-desc">Text is not fed directly to the model. It is first broken into <strong>tokens</strong> — subword units that balance vocabulary size with coverage. Then each token gets a numeric ID.</p>
+
+        <div class="tokenizer-demo">
+          <div class="tok-input">
+            <div class="tok-label">User Input</div>
+            <div class="tok-text">"What is gravity?"</div>
+          </div>
+          <div class="tok-arrow">↓ Tokenize</div>
+          <div class="tok-tokens">
+            <div class="tok-chip t-what">What</div>
+            <div class="tok-sep">|</div>
+            <div class="tok-chip t-is">is</div>
+            <div class="tok-sep">|</div>
+            <div class="tok-chip t-grav">grav</div>
+            <div class="tok-sep">|</div>
+            <div class="tok-chip t-ity">ity</div>
+            <div class="tok-sep">|</div>
+            <div class="tok-chip t-q">?</div>
+          </div>
+          <div class="tok-arrow">↓ Token IDs (BPE Vocabulary)</div>
+          <div class="tok-ids">
+            <div class="tok-id">2601</div>
+            <div class="tok-id">318</div>
+            <div class="tok-id">26110</div>
+            <div class="tok-id">879</div>
+            <div class="tok-id">30</div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="ic-title">Why Subwords?</div>
+            <div class="ic-desc">Splitting into full words creates a huge vocabulary (millions of entries). Characters are too granular. Subwords (BPE, WordPiece) balance efficiency — ~50,000 token vocabulary covers all English text.</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Token ≠ Word</div>
+            <div class="ic-desc">"gravity" becomes ["grav", "ity"] — two tokens. "GPT-4" might be ["G", "PT", "-", "4"]. Code and non-English text often tokenize less efficiently, using more tokens per word.</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Context Window</div>
+            <div class="ic-desc">LLMs have a maximum context length measured in tokens (e.g., 128K for GPT-4o). Once you exceed this, the oldest tokens are dropped. This is why very long conversations lose early context.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: EMBEDDING -->
+    <section class="section alt-section" id="embedding">
+      <div class="container">
+        <div class="step-label">Step 3</div>
+        <h2 class="section-title">📐 Embedding Layer</h2>
+        <p class="section-desc">Each token ID is looked up in a massive <strong>embedding matrix</strong> to get its vector representation. The model has learned a unique high-dimensional vector for every token in its vocabulary.</p>
+
+        <div class="embedding-demo">
+          <div class="emb-tokens">
+            <div class="emb-tok">2601<br><span>What</span></div>
+            <div class="emb-tok">318<br><span>is</span></div>
+            <div class="emb-tok">26110<br><span>grav</span></div>
+            <div class="emb-tok">879<br><span>ity</span></div>
+            <div class="emb-tok">30<br><span>?</span></div>
+          </div>
+          <div class="emb-arrow">↓ Look up in Embedding Matrix</div>
+          <div class="emb-matrix">
+            <div class="em-row">
+              <div class="em-cell fill-1"></div><div class="em-cell fill-2"></div>
+              <div class="em-cell fill-3"></div><div class="em-cell fill-1"></div>
+              <div class="em-dots">···</div>
+            </div>
+            <div class="em-row">
+              <div class="em-cell fill-2"></div><div class="em-cell fill-3"></div>
+              <div class="em-cell fill-1"></div><div class="em-cell fill-2"></div>
+              <div class="em-dots">···</div>
+            </div>
+            <div class="em-row">
+              <div class="em-cell fill-3"></div><div class="em-cell fill-1"></div>
+              <div class="em-cell fill-2"></div><div class="em-cell fill-3"></div>
+              <div class="em-dots">···</div>
+            </div>
+            <div class="em-label">Embedding Matrix<br>(seq_len × d_model)</div>
+          </div>
+          <div class="emb-spec">d_model = 4096 dimensional vectors (GPT-4 class)</div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="ic-title">What is d_model?</div>
+            <div class="ic-desc">The embedding dimension. GPT-2 uses 768, GPT-3 uses 12,288, GPT-4 reportedly 4096+. Larger d_model = more expressive representations but more compute and memory.</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Position Encoding</div>
+            <div class="ic-desc">Transformers have no inherent notion of order. Positional encodings (or RoPE, ALiBi) are added to embeddings to tell the model the order of tokens in the sequence.</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Learned Representations</div>
+            <div class="ic-desc">The embedding matrix is learned during training. Semantically similar tokens end up with geometrically close vectors — the geometry of meaning that enables semantic reasoning.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: TRANSFORMER -->
+    <section class="section" id="transformer">
+      <div class="container">
+        <div class="step-label">Step 4 — The Core</div>
+        <h2 class="section-title">⚡ Transformer Block (×N Layers)</h2>
+        <p class="section-desc">The embedding vectors flow through N identical transformer blocks (e.g., ×96 in GPT-4 class models). Each block has two major sub-components: <strong>Multi-Head Self-Attention</strong> and a <strong>Feed-Forward Network</strong>.</p>
+
+        <div class="transformer-layout">
+          <div class="transformer-block">
+            <div class="tb-title">🔬 Multi-Head Self-Attention</div>
+            <div class="attention-flow">
+              <div class="qkv-grid">
+                <div class="qkv-box q-box">
+                  <div class="qkv-label">Q</div>
+                  <div class="qkv-desc">Query<br>What am I<br>looking for?</div>
+                  <div class="qkv-size">(d_model × d_k)</div>
+                </div>
+                <div class="qkv-box k-box">
+                  <div class="qkv-label">K</div>
+                  <div class="qkv-desc">Key<br>What do I<br>contain?</div>
+                  <div class="qkv-size">(d_model × d_k)</div>
+                </div>
+                <div class="qkv-box v-box">
+                  <div class="qkv-label">V</div>
+                  <div class="qkv-desc">Value<br>What info do<br>I pass on?</div>
+                  <div class="qkv-size">(d_model × d_k)</div>
+                </div>
+              </div>
+              <div class="attn-formula">
+                softmax(<span class="formula-frac">QKᵀ / √d_k</span>) × V
+              </div>
+              <div class="kv-cache-box">
+                <div class="kvc-title">⚡ KV Cache</div>
+                <div class="kvc-desc">Stores previous K,V pairs across decode steps. Avoids recomputing attention for old tokens — but grows linearly with sequence length and is the <strong>main memory bottleneck</strong>.</div>
+                <div class="kvc-grid">
+                  <div class="kvc-item kvc-k">K (t₁)</div>
+                  <div class="kvc-item kvc-k">K (t₂)</div>
+                  <div class="kvc-item kvc-k">K (t₃)</div>
+                  <div class="kvc-item kvc-v">V (t₁)</div>
+                  <div class="kvc-item kvc-v">V (t₂)</div>
+                  <div class="kvc-item kvc-v">V (t₃)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="residual-block">+ Add & LayerNorm</div>
+
+            <div class="tb-title" style="margin-top:20px">🔁 Feed-Forward Network (FFN)</div>
+            <div class="ffn-flow">
+              <div class="ffn-box">Linear<br><span>(d_model × d_ff)</span></div>
+              <div class="ffn-arrow">→</div>
+              <div class="ffn-box ffn-act">ReLU / SwiGLU</div>
+              <div class="ffn-arrow">→</div>
+              <div class="ffn-box">Linear<br><span>(d_ff × d_model)</span></div>
+            </div>
+            <div class="ffn-note">d_ff is typically 4× larger than d_model. This is where the model stores learned facts and patterns.</div>
+
+            <div class="residual-block">+ Add & LayerNorm</div>
+          </div>
+
+          <div class="transformer-notes">
+            <div class="tn-card">
+              <div class="tn-icon">🔢</div>
+              <div class="tn-title">Depth = Power</div>
+              <div class="tn-desc">×96 layers in GPT-4 class models. Each layer refines the representation — early layers focus on syntax, later layers handle semantics and world knowledge.</div>
+            </div>
+            <div class="tn-card">
+              <div class="tn-icon">⚡</div>
+              <div class="tn-title">FlashAttention</div>
+              <div class="tn-desc">Fuses attention ops to reduce High Bandwidth Memory (HBM) reads. 2-4x faster than naive attention, especially on long sequences.</div>
+            </div>
+            <div class="tn-card">
+              <div class="tn-icon">💾</div>
+              <div class="tn-title">Quantization</div>
+              <div class="tn-desc">INT8/INT4 weights reduce memory 2-4x with minimal accuracy loss. Enables running large models on consumer hardware (e.g., llama.cpp).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: LM HEAD & SAMPLING -->
+    <section class="section alt-section" id="sampling">
+      <div class="container">
+        <div class="step-label">Steps 5 & 6</div>
+        <h2 class="section-title">🎲 LM Head + Sampling Strategy</h2>
+        <p class="section-desc">After the transformer stack, a final linear layer maps from d_model back to vocabulary size (~128K tokens). Softmax converts logits to probabilities. Then a <strong>sampling strategy</strong> picks the next token.</p>
+
+        <div class="lmhead-flow">
+          <div class="lmh-box">Final Hidden State</div>
+          <div class="lmh-arrow">→ Linear (d_model × 128K) →</div>
+          <div class="lmh-box lmh-logits">Logits (128K values, unnormalized)</div>
+          <div class="lmh-arrow">→ Softmax →</div>
+          <div class="lmh-box lmh-probs">Probabilities (sum to 1.0)</div>
+        </div>
+
+        <div class="sampling-grid">
+          <div class="sampling-card">
+            <div class="sc-header sc-greedy">Greedy</div>
+            <div class="sc-body">
+              <div class="sc-title">Pick argmax</div>
+              <div class="sc-desc">Always pick the single highest-probability token. Fast, deterministic, but often repetitive and boring. Temperature = 0.</div>
+              <div class="sc-tag">Deterministic</div>
+            </div>
+          </div>
+          <div class="sampling-card">
+            <div class="sc-header sc-topk">Top-K</div>
+            <div class="sc-body">
+              <div class="sc-title">Sample from top K tokens</div>
+              <div class="sc-desc">Restrict sampling to the K most likely tokens (e.g., K=50), then sample from that pool. Balances quality and diversity.</div>
+              <div class="sc-tag">Semi-Random</div>
+            </div>
+          </div>
+          <div class="sampling-card">
+            <div class="sc-header sc-topp">Top-P (Nucleus)</div>
+            <div class="sc-body">
+              <div class="sc-title">Sample from cumulative probability threshold</div>
+              <div class="sc-desc">Include tokens until their cumulative probability reaches P (e.g., 0.9). Adapts dynamically — fewer tokens when confident, more when uncertain.</div>
+              <div class="sc-tag">Adaptive</div>
+            </div>
+          </div>
+          <div class="sampling-card">
+            <div class="sc-header sc-temp">Temperature</div>
+            <div class="sc-body">
+              <div class="sc-title">Controls randomness</div>
+              <div class="sc-desc">T → 0: greedy/deterministic. T = 1: unchanged probabilities. T → ∞: uniform random. Creative tasks use T~0.7-1.0; factual tasks use T~0-0.3.</div>
+              <div class="sc-tag sc-temp-tag">Tunable</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5: SPECULATIVE DECODING -->
+    <section class="section" id="speculative">
+      <div class="container">
+        <div class="step-label">Step 7 — Speed Trick</div>
+        <h2 class="section-title">🚀 Speculative Decoding</h2>
+        <p class="section-desc">A clever trick to make LLM inference 2-4x faster: a small <strong>Draft Model</strong> quickly generates K candidate tokens, then the large <strong>Target Model</strong> verifies them all in a single forward pass.</p>
+
+        <div class="speculative-diagram">
+          <div class="spec-row">
+            <div class="spec-box spec-draft">
+              <div class="spec-label">Draft Model (Small)</div>
+              <div class="spec-desc">Generates K candidate tokens quickly</div>
+              <div class="spec-tokens-row">
+                <div class="st grav">Grav</div>
+                <div class="st ity">ity</div>
+                <div class="st is">is</div>
+                <div class="st a">a</div>
+              </div>
+            </div>
+            <div class="spec-arrow-mid">→ Verify in Parallel →</div>
+            <div class="spec-box spec-target">
+              <div class="spec-label">Target Model (Large)</div>
+              <div class="spec-desc">Verifies 4 tokens in one forward pass</div>
+              <div class="spec-tokens-row">
+                <div class="st accept">Grav ✓</div>
+                <div class="st accept">ity ✓</div>
+                <div class="st reject">is ✗</div>
+                <div class="st reject">a ✗</div>
+              </div>
+            </div>
+          </div>
+          <div class="spec-result">
+            Next tokens generated: <strong>Grav + ity</strong> (accepted) | Large model resamples from "is" onward
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="ic-title">Why It Works</div>
+            <div class="ic-desc">LLMs verify tokens much faster than they generate them (batch processing is more efficient than sequential). Each verification pass is essentially free compared to generation.</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Speed Gains</div>
+            <div class="ic-desc">2-4x inference speedup in practice. Used in production by Google (Gemini), Anthropic, and OpenAI. The smaller the draft model gap, the better the acceptance rate.</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Draft Model Choice</div>
+            <div class="ic-desc">The draft model must be from the same model family for high acceptance rates. E.g., Gemini Nano drafts for Gemini Ultra, or Llama 3.2-1B drafts for Llama 3-70B.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6: STREAMING OUTPUT -->
+    <section class="section alt-section" id="streaming">
+      <div class="container">
+        <div class="step-label">Steps 8 & 9</div>
+        <h2 class="section-title">📡 Detokenizer & Streaming Output</h2>
+        <p class="section-desc">After sampling the next token ID, it's converted back to text by the <strong>Detokenizer</strong>. The token is immediately streamed to the user — which is why ChatGPT appears to type character-by-character.</p>
+
+        <div class="streaming-flow">
+          <div class="sf-step">
+            <div class="sf-label">Token IDs Generated</div>
+            <div class="sf-ids">
+              <span>2610</span><span>879</span><span>318</span><span>256</span><span>17042</span><span>318</span><span>257</span><span class="sf-dots">···</span><span>30</span>
+            </div>
+          </div>
+          <div class="sf-arrow">↓ Detokenizer</div>
+          <div class="sf-step">
+            <div class="sf-label">Text Output (streamed token by token)</div>
+            <div class="sf-text">
+              <span class="sf-word">Gravity</span>
+              <span class="sf-word">is</span>
+              <span class="sf-word">a</span>
+              <span class="sf-word">fundamental</span>
+              <span class="sf-word">force</span>
+              <span class="sf-word">that</span>
+              <span class="sf-cursor">|</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="key-point" style="margin-top: 30px;">
+          <span class="kp-label">⚡ Server-Sent Events</span>
+          <span>The streaming you see in ChatGPT/Claude is powered by <strong>Server-Sent Events (SSE)</strong>. Each token is sent over an HTTP stream as soon as it's generated, rather than waiting for the full response to complete. This dramatically improves <strong>Time to First Token (TTFT)</strong> perceived latency.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, Agents, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="../rag/index.html">RAG Pipeline</a>
+        <a href="../mcp/index.html">MCP</a>
+        <a href="../agents/index.html">Agents</a>
+        <a href="../langgraph/index.html">LangGraph</a>
+        <a href="index.html">LLM Inference</a>
+        <a href="../llms/index.html">AI Models</a>
+        <a href="../prompting/index.html">Prompting</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>

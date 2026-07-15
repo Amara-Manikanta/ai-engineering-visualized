@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent Architecture | AI Engineering Visualized</title>
+  <meta name="description" content="Understand AI Agent Architecture: Skills, MCP, Subagents, Hooks, the Core Agent Loop, and real-world workflows." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="agents.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="logo-accent">Visualized</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+        <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+        <li><a href="index.html" class="tab-btn active">Agents</a></li>
+        <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+        <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+        <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+        <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+        <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <div class="container">
+      <a href="#overview" class="active">Overview</a>
+      <a href="#core-loop">Core Loop</a>
+      <a href="#skills">Skills</a>
+      <a href="#subagents">Subagents</a>
+      <a href="#hooks">Hooks</a>
+      <a href="#stack">Agent Stack</a>
+      <a href="#realworld">Real-World</a>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- HERO -->
+    <section class="agent-hero" id="overview">
+      <div class="agent-hero-glow"></div>
+      <div class="container">
+        <div class="section-tag">Architecture</div>
+        <h1 class="agent-hero-title">AI Agent Architecture</h1>
+        <p class="agent-hero-sub">Agents are AI systems that can <strong>perceive</strong>, <strong>reason</strong>, <strong>act</strong>, and <strong>observe</strong> in a loop — using tools, memory, and sub-agents to complete complex tasks autonomously.</p>
+
+        <!-- Summary Definition Cards -->
+        <div class="agent-defs">
+          <div class="agent-def-card def-skills">
+            <div class="adc-icon">📘</div>
+            <div class="adc-label">Skills</div>
+            <div class="adc-value">= KNOWLEDGE (what to do)</div>
+          </div>
+          <div class="agent-def-card def-mcp">
+            <div class="adc-icon">🔌</div>
+            <div class="adc-label">MCP</div>
+            <div class="adc-value">= ABILITY (connect to world)</div>
+          </div>
+          <div class="agent-def-card def-subagents">
+            <div class="adc-icon">👥</div>
+            <div class="adc-label">Subagents</div>
+            <div class="adc-value">= DELEGATION (parallel work)</div>
+          </div>
+          <div class="agent-def-card def-hooks">
+            <div class="adc-icon">⚡</div>
+            <div class="adc-label">Hooks</div>
+            <div class="adc-value">= AUTOMATION (runs outside loop)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE AGENT LOOP -->
+    <section class="section" id="core-loop">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Step 1</div>
+          <h2 class="section-title">🔄 The Core Agent Loop</h2>
+          <p class="section-desc">The heart of every AI agent is an infinite loop that cycles between four phases. This is also known as the <strong>ReAct pattern</strong> (Reason + Act).</p>
+        </div>
+
+        <div class="loop-diagram">
+          <div class="loop-center">
+            <div class="loop-core">
+              <span class="loop-core-icon">🤖</span>
+              <span class="loop-core-label">Agent Core</span>
+              <span class="loop-core-sub">LLM ↔ Tools</span>
+            </div>
+          </div>
+          <div class="loop-node ln-perceive">
+            <span class="ln-icon">👁️</span>
+            <span class="ln-label">PERCEIVE</span>
+            <span class="ln-desc">Read input: user message, tool outputs, context files</span>
+          </div>
+          <div class="loop-node ln-reason">
+            <span class="ln-icon">💭</span>
+            <span class="ln-label">REASON</span>
+            <span class="ln-desc">LLM thinks: what is the goal? What tool do I need next?</span>
+          </div>
+          <div class="loop-node ln-act">
+            <span class="ln-icon">⚡</span>
+            <span class="ln-label">ACT</span>
+            <span class="ln-desc">Execute: call a tool, write code, read a file, make an API call</span>
+          </div>
+          <div class="loop-node ln-observe">
+            <span class="ln-icon">📊</span>
+            <span class="ln-label">OBSERVE</span>
+            <span class="ln-desc">Get the result back. Add it to context. Repeat.</span>
+          </div>
+          <div class="loop-node ln-repeat">
+            <span class="ln-icon">🔁</span>
+            <span class="ln-label">REPEAT</span>
+            <span class="ln-desc">Until task is complete or stopping condition is met</span>
+          </div>
+          <!-- SVG arrows -->
+          <svg class="loop-arrows" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="rgba(99,102,241,0.6)" />
+              </marker>
+            </defs>
+            <circle cx="220" cy="220" r="130" fill="none" stroke="rgba(99,102,241,0.15)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <path d="M 220 90 A 130 130 0 0 1 350 220" fill="none" stroke="rgba(99,102,241,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <path d="M 350 220 A 130 130 0 0 1 220 350" fill="none" stroke="rgba(99,102,241,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <path d="M 220 350 A 130 130 0 0 1 90 220" fill="none" stroke="rgba(99,102,241,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <path d="M 90 220 A 130 130 0 0 1 220 90" fill="none" stroke="rgba(99,102,241,0.5)" stroke-width="2" marker-end="url(#arrowhead)"/>
+          </svg>
+        </div>
+
+        <div class="loop-note">
+          <span class="loop-note-icon">💡</span>
+          <span>Under <strong>Linux Foundation</strong> governance, the ReAct pattern is the foundation for most modern agent frameworks including LangGraph, AutoGen, and CrewAI.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section alt-section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Component 1</div>
+          <h2 class="section-title">📘 Skills — The Agent's Knowledge</h2>
+          <p class="section-desc">Skills are reusable instruction modules that teach the agent <em>what to do</em> and <em>how to behave</em> in specific scenarios. They are loaded on-demand, not always in context.</p>
+        </div>
+
+        <div class="skills-layout">
+          <div class="skills-filetree">
+            <div class="ft-root">📁 .claude/skills/</div>
+            <div class="ft-item ft-indent1">📄 deploy/SKILL.md</div>
+            <div class="ft-item ft-indent1">📄 code-review/SKILL.md</div>
+            <div class="ft-item ft-indent1">📄 testing/SKILL.md</div>
+            <div class="ft-item ft-indent1">📄 security-audit/SKILL.md</div>
+            <div class="ft-bullets">
+              <div>✅ Reusable instruction modules</div>
+              <div>✅ Loaded on-demand (progressive disclosure)</div>
+              <div>✅ Scoped to a task or domain</div>
+            </div>
+          </div>
+          <div class="skills-cards">
+            <div class="skill-card">
+              <div class="sc-num">01</div>
+              <div class="sc-title">Specificity</div>
+              <div class="sc-desc">Each skill covers one domain. A "deploy" skill knows exactly what commands to run, what to check, what can go wrong.</div>
+            </div>
+            <div class="skill-card">
+              <div class="sc-num">02</div>
+              <div class="sc-title">On-Demand Loading</div>
+              <div class="sc-desc">Skills aren't loaded until needed. This saves context window space and keeps the agent focused.</div>
+            </div>
+            <div class="skill-card">
+              <div class="sc-num">03</div>
+              <div class="sc-title">Progressive Disclosure</div>
+              <div class="sc-desc">Start with a short description. The agent loads the full instructions only when the skill is triggered.</div>
+            </div>
+            <div class="skill-card">
+              <div class="sc-num">04</div>
+              <div class="sc-title">Composable</div>
+              <div class="sc-desc">Skills can reference other skills. A "release" skill might call the "test" + "deploy" + "notify" skills in sequence.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBAGENTS -->
+    <section class="section" id="subagents">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Component 2</div>
+          <h2 class="section-title">👥 Subagents — Delegation & Parallelism</h2>
+          <p class="section-desc">Subagents are independent workers with their own context, model, and permissions. The main agent delegates complex sub-tasks to them and waits for results.</p>
+        </div>
+
+        <div class="subagents-diagram">
+          <div class="sa-main">
+            <div class="sa-main-icon">🎯</div>
+            <div class="sa-main-label">Orchestrator Agent</div>
+            <div class="sa-main-sub">Breaks the task, delegates, aggregates</div>
+          </div>
+          <div class="sa-arrows-row">
+            <div class="sa-arrow-line"></div>
+            <div class="sa-arrow-line"></div>
+            <div class="sa-arrow-line"></div>
+          </div>
+          <div class="sa-workers">
+            <div class="sa-worker">
+              <div class="sa-w-icon">💻</div>
+              <div class="sa-w-title">Code Reviewer</div>
+              <div class="sa-w-tools">Read, Grep, Analyze</div>
+              <div class="sa-w-isolation">Isolated context</div>
+            </div>
+            <div class="sa-worker">
+              <div class="sa-w-icon">🔍</div>
+              <div class="sa-w-title">Researcher</div>
+              <div class="sa-w-tools">Search, Fetch, Summarize</div>
+              <div class="sa-w-isolation">Own model</div>
+            </div>
+            <div class="sa-worker">
+              <div class="sa-w-icon">🚀</div>
+              <div class="sa-w-title">Deployer</div>
+              <div class="sa-w-tools">Bash, SSH, Docker</div>
+              <div class="sa-w-isolation">Own permissions</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="key-point">
+          <span class="kp-label">💡 Key Insight</span>
+          <span>Subagents run in <strong>parallel</strong>. While one researches, another writes code, another runs tests. This is why complex tasks that would take hours can complete in minutes.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOOKS -->
+    <section class="section alt-section" id="hooks">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Component 3</div>
+          <h2 class="section-title">⚡ Hooks — Deterministic Automation</h2>
+          <p class="section-desc">Hooks are event-driven scripts that run <em>outside</em> the agent's control. They automate responses to system events — deterministically, without the LLM deciding when to trigger them.</p>
+        </div>
+
+        <div class="hooks-grid">
+          <div class="hook-card">
+            <div class="hook-type pre-tool">PRE-TOOL</div>
+            <div class="hook-title">Before Execution</div>
+            <div class="hook-desc">Runs before any tool call. Use for validation, security checks, or logging. Can block the action.</div>
+            <div class="hook-example">Example: Check if bash command is safe before running</div>
+          </div>
+          <div class="hook-card">
+            <div class="hook-type post-tool">POST-TOOL</div>
+            <div class="hook-title">After Execution</div>
+            <div class="hook-desc">Runs after a tool completes. Use for post-processing, formatting output, or triggering downstream actions.</div>
+            <div class="hook-example">Example: Auto-format code after every file write</div>
+          </div>
+          <div class="hook-card">
+            <div class="hook-type on-edit">ON-EDIT</div>
+            <div class="hook-title">On File Change</div>
+            <div class="hook-desc">Fires whenever a file is modified. Use for running linters, tests, or build systems automatically.</div>
+            <div class="hook-example">Example: Run ESLint whenever a .ts file changes</div>
+          </div>
+          <div class="hook-card">
+            <div class="hook-type on-notify">ON-NOTIFY</div>
+            <div class="hook-title">Alerts & Logging</div>
+            <div class="hook-desc">Fires when the agent sends a notification. Use for alerts, Slack messages, or structured logging.</div>
+            <div class="hook-example">Example: Send Slack message when deploy completes</div>
+          </div>
+        </div>
+
+        <div class="hooks-note">
+          <span class="hn-icon">⚠️</span>
+          <div>
+            <strong>Deterministic — NOT controlled by the LLM.</strong> This is the key difference. Hooks are guaranteed to run every time their event fires, regardless of what the agent is thinking. They provide predictability in an otherwise probabilistic system.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENT EXTENSION STACK -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Architecture</div>
+          <h2 class="section-title">🏗️ The Agent Extension Stack</h2>
+          <p class="section-desc">All the components stack together in a layered architecture. The bottom layers provide foundation and context; higher layers provide capabilities.</p>
+        </div>
+
+        <div class="stack-diagram">
+          <div class="stack-layer sl-plugins">
+            <span class="sl-icon">🧩</span>
+            <span class="sl-label">PLUGINS</span>
+            <span class="sl-sub">Extend platform capabilities</span>
+          </div>
+          <div class="stack-layer sl-skills">
+            <span class="sl-icon">📘</span>
+            <span class="sl-label">SKILLS</span>
+            <span class="sl-sub">Teach the agent what to do</span>
+          </div>
+          <div class="stack-layer sl-mcp">
+            <span class="sl-icon">🔌</span>
+            <span class="sl-label">MCP ↔ TOOLS</span>
+            <span class="sl-sub">Connect to external world</span>
+          </div>
+          <div class="stack-layer sl-subagents">
+            <span class="sl-icon">👥</span>
+            <span class="sl-label">SUBAGENTS</span>
+            <span class="sl-sub">Delegate complex parallel work</span>
+          </div>
+          <div class="stack-layer sl-hooks">
+            <span class="sl-icon">⚡</span>
+            <span class="sl-label">HOOKS</span>
+            <span class="sl-sub">Automate responses to events</span>
+          </div>
+          <div class="stack-layer sl-claude">
+            <span class="sl-icon">📝</span>
+            <span class="sl-label">CLAUDE.md</span>
+            <span class="sl-sub">Foundation & Context — always-on project memory</span>
+          </div>
+        </div>
+
+        <div class="when-to-use">
+          <h3 class="wtu-title">When to use what?</h3>
+          <div class="wtu-table">
+            <div class="wtu-header">
+              <span>Component</span><span>Purpose</span><span>Analogy</span>
+            </div>
+            <div class="wtu-row">
+              <span class="wtu-name skills-color">Skills</span>
+              <span>Teach agent what to do</span>
+              <span class="wtu-analogy">Training Manual 📖</span>
+            </div>
+            <div class="wtu-row">
+              <span class="wtu-name mcp-color">MCP</span>
+              <span>Connect to external systems</span>
+              <span class="wtu-analogy">USB-C Port 🔌</span>
+            </div>
+            <div class="wtu-row">
+              <span class="wtu-name sub-color">Subagents</span>
+              <span>Delegate complex work</span>
+              <span class="wtu-analogy">Team Members 👥</span>
+            </div>
+            <div class="wtu-row">
+              <span class="wtu-name hook-color">Hooks</span>
+              <span>Automate responses to events</span>
+              <span class="wtu-analogy">Tripwires 🪤</span>
+            </div>
+            <div class="wtu-row">
+              <span class="wtu-name claude-color">CLAUDE.md</span>
+              <span>Always-on project context</span>
+              <span class="wtu-analogy">Sticky Note on Monitor 📌</span>
+            </div>
+            <div class="wtu-row">
+              <span class="wtu-name plug-color">Plugins</span>
+              <span>Extend platform capabilities</span>
+              <span class="wtu-analogy">App Package 📦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REAL WORLD EXAMPLE -->
+    <section class="section alt-section" id="realworld">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Example</div>
+          <h2 class="section-title">🌍 Real-World Example Walk-Through</h2>
+          <p class="section-desc">Here's how all the pieces come together in a realistic competitive-analysis workflow.</p>
+        </div>
+
+        <div class="rwe-steps">
+          <div class="rwe-step">
+            <div class="rwe-num">1</div>
+            <div class="rwe-content">
+              <div class="rwe-title">CLAUDE.md Loads Project Context</div>
+              <div class="rwe-desc">When the agent starts, it automatically reads CLAUDE.md which tells it: "You are a market analyst for Acme Corp. Our main competitors are X, Y, Z."</div>
+            </div>
+          </div>
+          <div class="rwe-step">
+            <div class="rwe-num">2</div>
+            <div class="rwe-content">
+              <div class="rwe-title">Skill Activates — Competitive Analysis Framework</div>
+              <div class="rwe-desc">The user says "analyze our competitors." The agent loads the <code>competitive-analysis/SKILL.md</code>, which provides a structured framework (market share, features, pricing, sentiment).</div>
+            </div>
+          </div>
+          <div class="rwe-step">
+            <div class="rwe-num">3</div>
+            <div class="rwe-content">
+              <div class="rwe-title">MCP Searches Google Drive</div>
+              <div class="rwe-desc">The agent uses the Google Drive MCP server to pull the latest product roadmaps, pitch decks, and customer feedback documents directly.</div>
+            </div>
+          </div>
+          <div class="rwe-step">
+            <div class="rwe-num">4</div>
+            <div class="rwe-content">
+              <div class="rwe-title">Subagent: Market Researcher Gathers Web Data</div>
+              <div class="rwe-desc">A "market-researcher" subagent is spun up with search and fetch tools. It independently crawls competitor websites, reads their blog posts, and summarizes findings.</div>
+            </div>
+          </div>
+          <div class="rwe-step">
+            <div class="rwe-num">5</div>
+            <div class="rwe-content">
+              <div class="rwe-title">Subagent: Technical Analyst Reviews Repos</div>
+              <div class="rwe-desc">In parallel, a "technical-analyst" subagent uses the GitHub MCP server to analyze competitor public repos — tracking commit velocity, star growth, and feature releases.</div>
+            </div>
+          </div>
+          <div class="rwe-step final-step">
+            <div class="rwe-num">6</div>
+            <div class="rwe-content">
+              <div class="rwe-title">Hook Auto-Formats Output & Runs Linter</div>
+              <div class="rwe-desc">When the agent writes the final report, a POST-TOOL hook fires automatically — formatting the markdown, adding table of contents, and running a spell-check. No manual step needed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
+      <div class="footer-links">
+        <a href="../rag/index.html">RAG Pipeline</a>
+        <a href="../mcp/index.html">MCP</a>
+        <a href="index.html">Agents</a>
+        <a href="../langgraph/index.html">LangGraph</a>
+        <a href="../llm-inference/index.html">LLM Inference</a>
+        <a href="../llms/index.html">AI Models</a>
+        <a href="../prompting/index.html">Prompting</a>
+      </div>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
