@@ -90,12 +90,91 @@
           <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
         </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
-  <div class="coming-soon">
-    <div class="cs-badge">🚧</div>
-    <div class="cs-pill">Machine Learning</div>
-    <div class="cs-title">Natural Language Processing</div>
-    <p class="cs-sub">This section is under construction. Comprehensive content and interactive visualizations are coming soon!</p>
-    <a href="../index.html" class="btn btn-primary" style="margin-top:16px;">← Back to Home</a>
+  <div class="guide-layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">Machine Learning</div>
+        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
+        <a href="supervised.html" class="guide-sidebar-link">2. Supervised Learning</a>
+        <a href="logistic-regression.html" class="guide-sidebar-link">3. Logistic Regression</a>
+        <a href="knn.html" class="guide-sidebar-link">4. K-Nearest Neighbors</a>
+        <a href="decision-trees.html" class="guide-sidebar-link">5. Decision Trees</a>
+        <a href="unsupervised.html" class="guide-sidebar-link">6. Unsupervised Learning</a>
+        <a href="deep-learning.html" class="guide-sidebar-link">7. Deep Learning</a>
+        <a href="nlp.html" class="guide-sidebar-link active">8. NLP</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">NLP</span>
+        <h1 class="guide-title">Natural Language Processing</h1>
+        <p class="guide-intro">Techniques and algorithms for processing, analyzing, and generating human language text.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>Lexical Processing</h2>
+        <p>The foundational step in NLP involves breaking down text into basic units and normalizing them.</p>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Tokenization</h3>
+            <p class="gc-desc">Splitting text into individual words or sub-words (tokens).</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Stemming & Lemmatization</h3>
+            <p class="gc-desc">Reducing words to their root forms. Stemming is rule-based and aggressive, while Lemmatization uses dictionary context.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Stopwords</h3>
+            <p class="gc-desc">Filtering out highly common words (like 'the', 'is', 'in') that carry little semantic value.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Edit Distance</h3>
+            <p class="gc-desc">Measuring similarity between strings by counting the minimum operations to transform one into the other (e.g., Levenshtein distance).</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Text Representation</h2>
+        <p>Machine learning models require numerical inputs, so text must be converted into vectors.</p>
+        <div class="guide-grid" style="margin-top: 20px;">
+          <div class="guide-card">
+            <h3 class="gc-title">Bag of Words (BoW)</h3>
+            <p class="gc-desc">Represents text as a frequency count of words, ignoring grammar and word order.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">TF-IDF</h3>
+            <p class="gc-desc">Term Frequency-Inverse Document Frequency. Weighs words by how frequently they appear in a document relative to the entire corpus.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Applications & Advanced Concepts</h2>
+        <p>Core tasks built on top of basic NLP processing.</p>
+        <div class="guide-grid" style="margin-top: 20px;">
+          <div class="guide-card">
+            <h3 class="gc-title">Spam Detection</h3>
+            <p class="gc-desc">Using text representation and classification algorithms to identify unwanted messages in datasets like SMSSpamCollection.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Spell Correction</h3>
+            <p class="gc-desc">Utilizing edit distance and phonetic algorithms like Soundex to suggest corrections for misspelled words.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Beam Search</h3>
+            <p class="gc-desc">A heuristic search algorithm used in sequence generation tasks to explore the most likely sequences of words.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Syntactic Processing</h3>
+            <p class="gc-desc">Analyzing the grammatical structure of sentences to understand relationships between words.</p>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
   <footer><p class="footer-copy" style="text-align:center;padding:30px;color:var(--text3);font-size:0.85rem;">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p></footer>
   <script src="../script.js?v=8"></script>
