@@ -898,19 +898,7 @@ function calculateSimilarity() {
     overlay.classList.remove('active');
   }
 
-  function positionDropdown(item) {
-    const dd = item.querySelector('.mnav-dropdown');
-    if (!dd) return;
-    const rect = item.getBoundingClientRect();
-    // Place dropdown just below the nav item, horizontally centered
-    const ddW = dd.offsetWidth || 190;
-    let left = rect.left + rect.width / 2 - ddW / 2;
-    // Clamp to viewport
-    if (left < 8) left = 8;
-    if (left + ddW > window.innerWidth - 8) left = window.innerWidth - 8 - ddW;
-    dd.style.top  = (rect.bottom + 6) + 'px';
-    dd.style.left = left + 'px';
-  }
+  // No JS positioning needed, CSS handles absolute positioning
 
   // Invisible overlay catches outside clicks
   const overlay = document.createElement('div');
@@ -919,26 +907,21 @@ function calculateSimilarity() {
   overlay.addEventListener('click', closeAll);
 
   items.forEach(item => {
-    // Toggle via the arrow button only
+    // Toggle via the arrow button only (for mobile/click support)
     const arrowBtn = item.querySelector('.mnav-arrow-btn');
     if (arrowBtn) {
       arrowBtn.addEventListener('click', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         const isOpen = item.classList.contains('open');
         closeAll();
         if (!isOpen) {
           item.classList.add('open');
           arrowBtn.setAttribute('aria-expanded', 'true');
-          positionDropdown(item);
           overlay.classList.add('active');
         }
       });
     }
-
-    // Reposition on scroll/resize
-    window.addEventListener('scroll', () => {
-      if (item.classList.contains('open')) positionDropdown(item);
-    }, { passive: true });
   });
 
   window.addEventListener('resize', closeAll);

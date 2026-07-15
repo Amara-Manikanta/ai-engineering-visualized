@@ -1727,11 +1727,11 @@ header {
 /* IMPORTANT: overflow must be visible so dropdowns can escape the nav bar */
 .mega-nav { flex-grow: 1; overflow: visible; min-width: 0; }
 .mnav-list {
-  list-style: none; display: flex; gap: 0;
+  list-style: none; display: flex; gap: 2px;
   align-items: center; flex-wrap: nowrap;
-  overflow: visible;   /* never clip — dropdowns live inside here */
+  overflow: visible;
 }
-.mnav-item { position: relative; }
+.mnav-item { position: relative; display: flex; align-items: center; }
 
 /* Trigger link/button */
 .mnav-link {
@@ -1752,21 +1752,25 @@ header {
 
 /* Dropdown panel */
 .mnav-dropdown {
-  position: fixed;   /* fixed so it's never clipped by any ancestor overflow */
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
   min-width: 190px;
   background: #0d1225;
   border: 1px solid var(--border2);
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.7);
   opacity: 0; pointer-events: none;
-  transform: translateY(-6px);
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 9999;
 }
-.mnav-item.open .mnav-dropdown {
+.mnav-item.open .mnav-dropdown,
+.mnav-item.has-dd:hover .mnav-dropdown {
   opacity: 1; pointer-events: auto;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
+
 .mnav-dd-inner { padding: 10px 6px; }
 .mnav-dd-head {
   display: flex; align-items: center; gap: 8px;
@@ -1855,19 +1859,291 @@ header {
 
 /* ── SPLIT LABEL + ARROW BUTTON ─────────────────────────── */
 .mnav-group-wrap {
-  display: flex; align-items: center; gap: 0;
-  border-radius: 8px; overflow: hidden;
+  display: flex;
+  flex-direction: row;    /* force horizontal row — label then arrow */
+  align-items: center;
+  gap: 0;
+  /* NO overflow:hidden — it was clipping the arrow button */
 }
 .mnav-label {
   border-radius: 8px 0 0 8px;
-  padding-right: 8px;
+  padding-right: 4px;
 }
 .mnav-arrow-btn {
   display: flex; align-items: center; justify-content: center;
-  padding: 8px 8px; height: 100%;
+  padding: 8px 6px;
   background: none; border: none; cursor: pointer;
   color: var(--text2); border-radius: 0 8px 8px 0;
   transition: background 0.2s, color 0.2s;
+  font-size: 0.65rem;
+  line-height: 1;
 }
 .mnav-arrow-btn:hover { background: var(--surface2); color: var(--text); }
 .mnav-item.open .mnav-arrow-btn { color: var(--idx); }
+.mnav-item.open .mnav-arrow { display: inline-block; transform: rotate(180deg); }
+/* RAG Guide Specific Styles */
+
+/* custom property for sub-nav height, used for sticky offset */
+:root { --subnav-h: 45px; }
+
+.guide-layout {
+  display: flex;
+  min-height: calc(100vh - 64px - var(--subnav-h));
+  max-width: 1400px;
+  margin: 0 auto;
+  /* No extra margin-top or padding-top; the sticky sub-nav already creates separation */
+}
+
+/* Sidebar */
+.guide-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 30px 0;
+  position: sticky;
+  /* Account for fixed header (64px) + sticky sub-nav (45px) */
+  top: calc(64px + var(--subnav-h));
+  height: calc(100vh - 64px - var(--subnav-h));
+  overflow-y: auto;
+  background: rgba(8,12,26,0.5);
+  backdrop-filter: blur(10px);
+}
+
+.guide-sidebar-group {
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.guide-sidebar-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 15px;
+  font-weight: 700;
+  padding-left: 15px;
+}
+
+.guide-sidebar-link {
+  display: block;
+  padding: 10px 15px;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  margin-bottom: 5px;
+}
+
+.guide-sidebar-link:hover {
+  background: var(--surface);
+  color: #fff;
+}
+
+.guide-sidebar-link.active {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--idx);
+  font-weight: 600;
+  border-left: 3px solid var(--idx);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Content Area */
+.guide-content {
+  flex-grow: 1;
+  padding: 50px 60px;
+  max-width: 900px;
+  min-width: 0;
+}
+
+.guide-header {
+  margin-bottom: 40px;
+}
+
+.guide-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(236, 72, 153, 0.1);
+  color: var(--gen);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.guide-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.guide-intro {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* Content Blocks */
+.guide-section {
+  margin-bottom: 60px;
+}
+
+.guide-section h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.guide-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--text);
+  margin-top: 40px;
+}
+
+.guide-section p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* Grids and Cards */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-color: rgba(99,102,241,0.5);
+}
+
+.gc-icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.gc-title {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.gc-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.gc-list {
+  list-style: none;
+  margin-top: 15px;
+}
+
+.gc-list li {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.gc-list li::before {
+  content: '✓';
+  color: var(--idx);
+  font-weight: bold;
+}
+
+/* Callouts */
+.guide-callout {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 4px solid var(--aug);
+  padding: 25px;
+  border-radius: 0 12px 12px 0;
+  margin: 30px 0;
+}
+.guide-callout.warning {
+  background: rgba(249, 115, 22, 0.05);
+  border-left-color: #f97316;
+}
+.guide-callout-title {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Code */
+.guide-code {
+  background: #0f1423;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  overflow-x: auto;
+  line-height: 1.6;
+  margin: 25px 0;
+}
+.code-comment { color: #64748b; }
+.code-keyword { color: #c678dd; }
+.code-string { color: #98c379; }
+.code-func { color: #61afef; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .guide-layout {
+    flex-direction: column;
+  }
+  .guide-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    top: 0;
+  }
+  .guide-content {
+    padding: 30px 20px;
+  }
+}
+
+/* Make the dropdown trigger easier */
+.mnav-item.has-dd:hover .mnav-dropdown {
+  opacity: 1; pointer-events: auto;
+  transform: translateY(0);
+}
+.mnav-item.has-dd:hover .mnav-arrow {
+  transform: rotate(180deg);
+}
+
+/* Also ensure guide-layout works on smaller screens */
+@media (max-width: 900px) {
+  .guide-layout { flex-direction: column; }
+  .guide-sidebar { width: 100%; height: auto; position: static; padding: 20px; border-right: none; border-bottom: 1px solid var(--border); }
+}
