@@ -3,13 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Logistic Regression | AI Engineering Visualized</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=7" />
-  <link rel="stylesheet" href="../rag/guide.css" />
-  <link rel="stylesheet" href="ml.css" />
+  <title>Tool Calling | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../styles.css?v=7"/>
+  <style>
+    .coming-soon { display:flex; flex-direction:column; align-items:center; justify-content:center;
+      min-height:70vh; text-align:center; padding:40px 20px; gap:24px; }
+    .cs-badge { font-size:4rem; }
+    .cs-title { font-size:3rem; font-weight:800;
+      background:linear-gradient(135deg,#fff,#a5b4fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .cs-sub { font-size:1.2rem; color:var(--text2); max-width:500px; line-height:1.7; }
+    .cs-pill { display:inline-block; padding:6px 16px; border-radius:20px;
+      background:rgba(99,102,241,0.15); color:var(--idx); font-size:0.85rem; font-weight:700;
+      border:1px solid rgba(99,102,241,0.3); }
+  </style>
 </head>
 <body>
   <!-- GLOBAL HEADER -->
@@ -77,159 +86,14 @@
         </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul>
     </div>
   </header>
-
-    <!-- ML SUB NAV -->
-  <div class="sub-nav">
-    <div class="container">
-      <a href="index.html">Overview</a>
-      <a href="supervised.html">Supervised</a>
-      <a href="logistic-regression.html" class="active">Logistic Reg</a>
-      <a href="knn.html">KNN</a>
-      <a href="decision-trees.html">Decision Trees</a>
-      <a href="unsupervised.html">Unsupervised</a>
-      <span class="sub-nav-divider">|</span>
-      <a href="transformers.html">Transformers</a>
-    </div>
+  <div class="coming-soon">
+    <div class="cs-badge">🚧</div>
+    <div class="cs-pill">Agentic AI</div>
+    <div class="cs-title">Tool Calling</div>
+    <p class="cs-sub">This section is under construction. Comprehensive content and interactive visualizations are coming soon!</p>
+    <a href="../index.html" class="btn btn-primary" style="margin-top:16px;">← Back to Home</a>
   </div>
-
-  <div class="guide-layout" style="max-width: 1300px; margin: 40px auto 0; padding-top: 20px;">
-    <!-- LEFT SIDEBAR -->
-    <aside class="guide-sidebar">
-            <div class="guide-sidebar-group">
-        <div class="guide-sidebar-title">Machine Learning</div>
-        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
-        <a href="supervised.html" class="guide-sidebar-link">2. Supervised Learning</a>
-        <a href="logistic-regression.html" class="guide-sidebar-link active">3. Logistic Regression</a>
-        <a href="knn.html" class="guide-sidebar-link">4. K-Nearest Neighbors</a>
-        <a href="decision-trees.html" class="guide-sidebar-link">5. Decision Trees</a>
-        <a href="unsupervised.html" class="guide-sidebar-link">6. Unsupervised Learning</a>
-      </div>
-        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
-        <a href="supervised.html" class="guide-sidebar-link">2. Supervised Learning</a>
-        <a href="logistic-regression.html" class="guide-sidebar-link active">3. Logistic Regression</a>
-        <a href="knn.html" class="guide-sidebar-link">4. K-Nearest Neighbors</a>
-        <a href="decision-trees.html" class="guide-sidebar-link">5. Decision Trees</a>
-        <a href="unsupervised.html" class="guide-sidebar-link">6. Unsupervised Learning</a>
-      </div>
-    </aside>
-
-    <!-- CONTENT -->
-    <main class="guide-content">
-      <div class="guide-header">
-        <span class="guide-tag">Algorithms</span>
-        <h1 class="guide-title">Logistic Regression</h1>
-        <p class="guide-intro">A supervised machine learning algorithm used primarily for binary classification problems by predicting probabilities.</p>
-      </div>
-
-      <section class="guide-section">
-        <h2>1. Overview & Use Cases</h2>
-        <p>Unlike linear regression which predicts continuous values, logistic regression predicts the <strong>probability</strong> that an example belongs to a particular class (usually binary: 0 or 1). It generalizes to multiclass problems via extensions like multinomial logistic regression.</p>
-        
-        <div class="guide-grid" style="margin-top: 20px;">
-          <div class="guide-card">
-            <h3 class="gc-title">Common Use Cases</h3>
-            <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem;">
-              <li>Spam vs Not Spam emails</li>
-              <li>Success or Failure of a product</li>
-              <li>Medical diagnosis (Disease present/absent)</li>
-              <li>Credit risk assessment (Default/No default)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="guide-section">
-        <h2>2. Core Mathematical Concepts</h2>
-        <div class="guide-callout" style="margin-bottom: 20px;">
-          <div class="guide-callout-title">The Sigmoid Function</div>
-          <p>The logistic function transforms any real-valued number into an output between 0 and 1.</p>
-          <div style="font-family: var(--mono); background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 1rem; text-align: center;">
-            S(x) = 1 / (1 + e<sup>-x</sup>)
-          </div>
-        </div>
-
-        <div class="guide-callout" style="margin-bottom: 20px;">
-          <div class="guide-callout-title">Model Equation</div>
-          <p>We apply the Sigmoid function to a linear equation:</p>
-          <div style="font-family: var(--mono); background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 1rem; text-align: center;">
-            P(y=1 | X) = 1 / (1 + e<sup>-(β₀ + β₁X₁ + ... + βₙXₙ)</sup>)
-          </div>
-          <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">Where <strong>β₀</strong> is the intercept (bias) and <strong>β₁...βₙ</strong> are the coefficients. To predict a class, we typically apply a threshold (predict 1 if P ≥ 0.5, else 0).</p>
-        </div>
-      </section>
-
-      <section class="guide-section">
-        <h2>3. Training & Loss Function</h2>
-        <p>Logistic regression parameters are found by maximizing the likelihood of observed data. More commonly, we optimize the log-likelihood (sum of logs for numerical stability), which is equivalent to minimizing the <strong>Binary Cross-Entropy Loss (Log Loss)</strong>.</p>
-        
-        <div class="guide-grid" style="margin-top: 20px;">
-          <div class="guide-card">
-            <h3 class="gc-title">Log Loss Formula</h3>
-            <div style="font-family: var(--mono); font-size: 0.85rem; color: #a5b4fc; margin-top: 10px;">
-              Loss = - (1/N) Σ [ yᵢ log(pᵢ) + (1-yᵢ) log(1-pᵢ) ]
-            </div>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Optimization</h3>
-            <p class="gc-desc" style="margin-top: 10px;">Typically trained using Maximum Likelihood Estimation via Gradient Descent (or variants like SGD/Batch GD).</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="guide-section">
-        <h2>4. Model Interpretation & Assumptions</h2>
-        <ul class="gc-list" style="font-size: 1rem;">
-          <li><strong>Coefficients (β):</strong> Represent the log-odds change in the outcome for a unit increase in the feature. Exponentiating a coefficient yields the <em>odds ratio</em>.</li>
-          <li><strong>Intercept (β₀):</strong> The log-odds of the outcome when all features are 0.</li>
-        </ul>
-        <h3 style="margin-top: 30px;">Key Assumptions</h3>
-        <ul class="gc-list" style="font-size: 1rem;">
-          <li>The log-odds of the outcome is a linear combination of features.</li>
-          <li>Observations are independent.</li>
-          <li>No exact multicollinearity among features.</li>
-          <li>Requires large sample sizes for stable estimates.</li>
-        </ul>
-      </section>
-
-      <section class="guide-section">
-        <h2>5. Advantages vs Disadvantages</h2>
-        <div class="guide-card" style="padding:0; overflow:hidden;">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
-            <thead>
-              <tr style="background: rgba(99,102,241,0.15); color: #fff;">
-                <th style="padding: 16px; border-bottom: 1px solid var(--border); width: 50%;">Advantages</th>
-                <th style="padding: 16px; border-bottom: 1px solid var(--border); width: 50%;">Disadvantages</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Simple, interpretable, and fast to train.</td>
-                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Assumes linear relationship in log-odds.</td>
-              </tr>
-              <tr>
-                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Outputs calibrated probabilities, not just classes.</td>
-                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Can struggle with complex, highly non-linear data.</td>
-              </tr>
-              <tr>
-                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Works very well for linearly separable data.</td>
-                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Sensitive to outliers and multicollinearity.</td>
-              </tr>
-              <tr>
-                <td style="padding: 16px; color: var(--text-muted);">Serves as a foundation for neural networks.</td>
-                <td style="padding: 16px; color: var(--text-muted);">Requires careful feature engineering.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <footer>
-    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
-  </footer>
-
+  <footer><p class="footer-copy" style="text-align:center;padding:30px;color:var(--text3);font-size:0.85rem;">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p></footer>
   <script src="../script.js?v=7"></script>
 </body>
 </html>

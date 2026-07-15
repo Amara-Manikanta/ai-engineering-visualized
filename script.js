@@ -880,3 +880,78 @@ function calculateSimilarity() {
   scoreVal.textContent = percentage;
   scoreFill.style.width = percentage + "%";
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MEGA-NAV INTERACTION
+   ═══════════════════════════════════════════════════════════ */
+(function initMegaNav() {
+  // Desktop dropdowns
+  const items = document.querySelectorAll('.mnav-item.has-dd');
+  let currentOpen = null;
+
+  function closeAll() {
+    items.forEach(item => {
+      item.classList.remove('open');
+      const btn = item.querySelector('.mnav-trigger');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+    currentOpen = null;
+    overlay.classList.remove('active');
+  }
+
+  // Create overlay for outside-click close
+  const overlay = document.createElement('div');
+  overlay.className = 'mnav-overlay';
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', closeAll);
+
+  items.forEach(item => {
+    const trigger = item.querySelector('.mnav-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains('open');
+      closeAll();
+      if (!isOpen) {
+        item.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+        currentOpen = item;
+        overlay.classList.add('active');
+      }
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAll();
+  });
+
+  // Header scroll shadow
+  const header = document.getElementById('site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  }
+
+  // ── Mobile hamburger ────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('mobile-drawer');
+
+  if (hamburger && drawer) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      closeAll();
+    });
+  }
+
+  // Mobile accordion groups
+  document.querySelectorAll('.mobile-group-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.mobile-group');
+      group.classList.toggle('open');
+    });
+  });
+})();
