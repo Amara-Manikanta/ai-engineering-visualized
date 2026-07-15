@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css?v=6" />
-  <link rel="stylesheet" href="transformers.css" />
+  <link rel="stylesheet" href="ml.css" />
 </head>
 <body>
 
@@ -31,7 +31,7 @@
         <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
         <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
         <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
-        <li><a href="index.html" class="tab-btn active">Transformers</a></li>
+        <li><a href="../ml/index.html" class="tab-btn">Machine Learning</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -40,15 +40,15 @@
   </header>
 
   <!-- SUB NAV -->
+    <!-- ML SUB NAV -->
   <div class="sub-nav">
     <div class="container">
-      <a href="#genai">Gen AI</a>
-      <a href="#ai-types">Types of AI</a>
-      <a href="#language-models">Language Models</a>
-      <a href="#transformer">Transformer</a>
-      <a href="#tokenization">Tokenization</a>
-      <a href="#embeddings">Embeddings</a>
-      <a href="#attention">Attention</a>
+      <a href="index.html">Overview</a>
+      <a href="supervised.html">Supervised</a>
+      <a href="unsupervised.html">Unsupervised</a>
+      <a href="decision-trees.html">Decision Trees</a>
+      <span class="sub-nav-divider">|</span>
+      <a href="transformers.html" class="active">Transformers</a>
     </div>
   </div>
 
@@ -623,6 +623,6 @@ embedding = model.wv[<span class="cs">"NLP"</span>]
   </footer>
 
   <script src="../script.js?v=6"></script>
-  <script src="transformers.js"></script>
+  <script src="ml.js"></script>
 </body>
 </html>

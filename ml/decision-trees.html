@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Decision Trees | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="../rag/guide.css" />
+  <link rel="stylesheet" href="ml.css" />
+  <style>
+    /* Decision Tree Animation Styles */
+    .dt-anim-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      margin: 40px 0;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .dt-node {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      padding: 12px 24px;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.5s ease;
+      text-align: center;
+    }
+    
+    .dt-leaf {
+      background: rgba(16,185,129,0.2);
+      border: 1px solid #10b981;
+      color: #6ee7b7;
+    }
+    .dt-leaf.alt {
+      background: rgba(244,63,94,0.2);
+      border: 1px solid #f43f5e;
+      color: #fda4af;
+    }
+
+    .dt-line {
+      position: absolute;
+      background: rgba(255,255,255,0.2);
+      transform-origin: top center;
+      transition: all 0.5s ease;
+      z-index: 1;
+      width: 2px;
+    }
+
+    .dt-label {
+      position: absolute;
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      z-index: 3;
+      transition: opacity 0.3s;
+    }
+
+    .dt-controls {
+      margin-top: 30px;
+      display: flex;
+      gap: 16px;
+      z-index: 4;
+    }
+    
+    /* Layout positioning */
+    .node-root { top: 20px; left: 50%; transform: translateX(-50%); }
+    .node-l1 { top: 140px; left: 25%; transform: translateX(-50%) scale(0); opacity: 0; }
+    .node-r1 { top: 140px; left: 75%; transform: translateX(-50%) scale(0); opacity: 0; }
+    .node-l2 { top: 260px; left: 12.5%; transform: translateX(-50%) scale(0); opacity: 0; }
+    .node-r2 { top: 260px; left: 37.5%; transform: translateX(-50%) scale(0); opacity: 0; }
+    
+    .dt-show { transform: translateX(-50%) scale(1) !important; opacity: 1 !important; }
+    
+    .line-l1 { top: 60px; left: 50%; height: 0; transform: rotate(58deg); }
+    .line-r1 { top: 60px; left: 50%; height: 0; transform: rotate(-58deg); }
+    .line-l2 { top: 180px; left: 25%; height: 0; transform: rotate(45deg); }
+    .line-r2 { top: 180px; left: 25%; height: 0; transform: rotate(-45deg); }
+    
+    .line-show-l1 { height: 150px !important; }
+    .line-show-r1 { height: 150px !important; }
+    .line-show-l2 { height: 110px !important; }
+    .line-show-r2 { height: 110px !important; }
+
+    .label-l1, .label-r1, .label-l2, .label-r2 { opacity: 0; }
+    .label-l1 { top: 90px; left: 35%; }
+    .label-r1 { top: 90px; left: 60%; }
+    .label-l2 { top: 210px; left: 16%; }
+    .label-r2 { top: 210px; left: 29%; }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="index.html" class="tab-btn active">Machine Learning</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ML SUB NAV -->
+  <div class="sub-nav">
+    <div class="container">
+      <a href="index.html">Overview</a>
+      <a href="supervised.html">Supervised</a>
+      <a href="unsupervised.html">Unsupervised</a>
+      <a href="decision-trees.html" class="active">Decision Trees</a>
+      <span class="sub-nav-divider">|</span>
+      <a href="transformers.html">Transformers</a>
+    </div>
+  </div>
+
+  <div class="guide-layout" style="max-width: 1300px; margin: 40px auto 0; padding-top: 20px;">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">Machine Learning</div>
+        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
+        <a href="supervised.html" class="guide-sidebar-link">2. Supervised Learning</a>
+        <a href="unsupervised.html" class="guide-sidebar-link">3. Unsupervised Learning</a>
+        <a href="decision-trees.html" class="guide-sidebar-link active">4. Decision Trees</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Algorithms</span>
+        <h1 class="guide-title">Decision Trees</h1>
+        <p class="guide-intro">A supervised machine learning algorithm used for both classification and regression tasks.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>Interactive Decision Tree Animation</h2>
+        <p>A Decision Tree splits data based on the most significant features. At each node, the algorithm asks a yes/no question, branching based on the answer until a final decision (leaf node) is reached.</p>
+        
+        <div class="dt-anim-container">
+          <!-- Lines -->
+          <div class="dt-line line-l1" id="l-l1"></div>
+          <div class="dt-line line-r1" id="l-r1"></div>
+          <div class="dt-line line-l2" id="l-l2"></div>
+          <div class="dt-line line-r2" id="l-r2"></div>
+          
+          <!-- Labels -->
+          <div class="dt-label label-l1" id="lbl-l1">Yes</div>
+          <div class="dt-label label-r1" id="lbl-r1">No</div>
+          <div class="dt-label label-l2" id="lbl-l2">Yes</div>
+          <div class="dt-label label-r2" id="lbl-r2">No</div>
+
+          <!-- Nodes -->
+          <div class="dt-node node-root" style="position: absolute;">Is Age &lt; 30?</div>
+          
+          <div class="dt-node node-l1" id="n-l1" style="position: absolute;">Eats Pizza?</div>
+          <div class="dt-node dt-leaf alt node-r1" id="n-r1" style="position: absolute;">Prediction: Unfit</div>
+          
+          <div class="dt-node dt-leaf alt node-l2" id="n-l2" style="position: absolute;">Prediction: Unfit</div>
+          <div class="dt-node dt-leaf node-r2" id="n-r2" style="position: absolute;">Prediction: Fit</div>
+          
+          <div style="flex-grow:1;"></div>
+          
+          <div class="dt-controls">
+            <button class="btn btn-primary" id="btn-split1">Split Root Node</button>
+            <button class="btn btn-outline" id="btn-split2" disabled>Split Left Node</button>
+            <button class="btn btn-outline" id="btn-reset">Reset</button>
+          </div>
+        </div>
+        
+      </section>
+
+      <section class="guide-section">
+        <h2>Structure of a Decision Tree</h2>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Root Node</h3>
+            <p class="gc-desc">Represents the entire dataset and the initial decision to be made.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Internal Nodes</h3>
+            <p class="gc-desc">Represent decisions or tests on attributes. Each internal node has one or more branches.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Branches</h3>
+            <p class="gc-desc">Represent the outcome of a decision or test, leading to another node.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Leaf Nodes</h3>
+            <p class="gc-desc">Represent the final decision or prediction. No further splits occur at these nodes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Metrics for Splitting</h2>
+        <p>When constructing decision trees, different metrics are used to determine the best way to split the dataset.</p>
+        
+        <div class="guide-callout" style="margin-bottom: 20px;">
+          <div class="guide-callout-title">1. Gini Impurity (Classification)</div>
+          <p>Measures the likelihood of incorrectly classifying a randomly chosen element if it was randomly labeled according to the distribution of labels in the subset.</p>
+          <div style="font-family: var(--mono); background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem;">
+            Gini = 1 - Σ(p_i²)
+          </div>
+          <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Goal:</strong> Minimize Gini impurity. <strong>Range:</strong> 0 (pure) to 0.5 (impure).</p>
+        </div>
+
+        <div class="guide-callout" style="margin-bottom: 20px;">
+          <div class="guide-callout-title">2. Entropy & Information Gain (Classification)</div>
+          <p>Entropy measures randomness or disorder. Information gain is the reduction in entropy after a split.</p>
+          <div style="font-family: var(--mono); background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem;">
+            Entropy = -Σ(p_i * log₂(p_i))<br>
+            Information Gain = Entropy(parent) - Σ( (n_k/n) * Entropy(k) )
+          </div>
+          <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Goal:</strong> Maximize information gain. <strong>Range:</strong> 0 (pure) to log(n) (impure).</p>
+        </div>
+
+        <div class="guide-callout" style="margin-bottom: 20px;">
+          <div class="guide-callout-title">3. Variance Reduction / MSE (Regression)</div>
+          <p>Used to minimize the variance of the target variable in each split.</p>
+          <div style="font-family: var(--mono); background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem;">
+            Variance = (1/n) * Σ(y_i - μ)²
+          </div>
+          <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Goal:</strong> Minimize the variance of target values within child nodes.</p>
+        </div>
+
+        <div class="guide-callout" style="margin-bottom: 20px;">
+          <div class="guide-callout-title">4. Mean Absolute Error / MAE (Regression)</div>
+          <p>Measures the average of the absolute differences between predicted values and actual values.</p>
+          <div style="font-family: var(--mono); background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem;">
+            MAE = (1/n) * Σ|y_i - ŷ_i|
+          </div>
+          <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Goal:</strong> Minimize the absolute difference.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+  <script>
+    // Decision Tree Animation Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn1 = document.getElementById('btn-split1');
+      const btn2 = document.getElementById('btn-split2');
+      const btnReset = document.getElementById('btn-reset');
+
+      btn1.addEventListener('click', () => {
+        document.getElementById('l-l1').classList.add('line-show-l1');
+        document.getElementById('l-r1').classList.add('line-show-r1');
+        
+        setTimeout(() => {
+          document.getElementById('lbl-l1').style.opacity = '1';
+          document.getElementById('lbl-r1').style.opacity = '1';
+          document.getElementById('n-l1').classList.add('dt-show');
+          document.getElementById('n-r1').classList.add('dt-show');
+        }, 300);
+        
+        btn1.disabled = true;
+        btn1.className = 'btn btn-outline';
+        btn2.disabled = false;
+        btn2.className = 'btn btn-primary';
+      });
+
+      btn2.addEventListener('click', () => {
+        document.getElementById('l-l2').classList.add('line-show-l2');
+        document.getElementById('l-r2').classList.add('line-show-r2');
+        
+        setTimeout(() => {
+          document.getElementById('lbl-l2').style.opacity = '1';
+          document.getElementById('lbl-r2').style.opacity = '1';
+          document.getElementById('n-l2').classList.add('dt-show');
+          document.getElementById('n-r2').classList.add('dt-show');
+        }, 300);
+        
+        btn2.disabled = true;
+        btn2.className = 'btn btn-outline';
+      });
+
+      btnReset.addEventListener('click', () => {
+        document.querySelectorAll('.dt-show').forEach(el => el.classList.remove('dt-show'));
+        document.querySelectorAll('.dt-line').forEach(el => {
+          el.classList.remove('line-show-l1', 'line-show-r1', 'line-show-l2', 'line-show-r2');
+        });
+        document.querySelectorAll('.dt-label').forEach(el => el.style.opacity = '0');
+        
+        btn1.disabled = false;
+        btn1.className = 'btn btn-primary';
+        btn2.disabled = true;
+        btn2.className = 'btn btn-outline';
+      });
+    });
+  </script>
+</body>
+</html>

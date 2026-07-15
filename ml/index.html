@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Machine Learning | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="../rag/guide.css" />
+  <link rel="stylesheet" href="ml.css" />
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="index.html" class="tab-btn active">Machine Learning</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ML SUB NAV -->
+  <div class="sub-nav">
+    <div class="container">
+      <a href="index.html" class="active">Overview</a>
+      <a href="supervised.html">Supervised</a>
+      <a href="unsupervised.html">Unsupervised</a>
+      <a href="decision-trees.html">Decision Trees</a>
+      <span class="sub-nav-divider">|</span>
+      <a href="transformers.html">Transformers</a>
+    </div>
+  </div>
+
+  <div class="guide-layout" style="max-width: 1300px; margin: 40px auto 0; padding-top: 20px;">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">Machine Learning</div>
+        <a href="index.html" class="guide-sidebar-link active">1. Overview</a>
+        <a href="supervised.html" class="guide-sidebar-link">2. Supervised Learning</a>
+        <a href="unsupervised.html" class="guide-sidebar-link">3. Unsupervised Learning</a>
+        <a href="decision-trees.html" class="guide-sidebar-link">4. Decision Trees</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Machine Learning</span>
+        <h1 class="guide-title">Introduction to Machine Learning</h1>
+        <p class="guide-intro">The foundation of modern AI. Learn the key concepts, libraries, workflows, and challenges in ML.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>Key Python Libraries</h2>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">NumPy</h3>
+            <p class="gc-desc">The fundamental package for scientific computing with Python. Provides support for large, multi-dimensional arrays and matrices.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Pandas</h3>
+            <p class="gc-desc">Provides high-performance, easy-to-use data structures (DataFrames) and data analysis tools.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Scikit-learn</h3>
+            <p class="gc-desc">Simple and efficient tools for predictive data analysis. Features various classification, regression, and clustering algorithms.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Matplotlib & SciPy</h3>
+            <p class="gc-desc">Matplotlib is for plotting and visualization, while SciPy provides algorithms for optimization, integration, and statistics.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Supervised vs Unsupervised Learning</h2>
+        <div class="guide-card" style="padding:0; overflow:hidden;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+            <thead>
+              <tr style="background: rgba(99,102,241,0.15); color: #fff;">
+                <th style="padding: 16px; border-bottom: 1px solid var(--border);">Feature</th>
+                <th style="padding: 16px; border-bottom: 1px solid var(--border);">Supervised Learning</th>
+                <th style="padding: 16px; border-bottom: 1px solid var(--border);">Unsupervised Learning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--text);">Data</td>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Requires labeled data</td>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">No labels required</td>
+              </tr>
+              <tr>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--text);">Goal</td>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Predict outputs</td>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Discover hidden patterns</td>
+              </tr>
+              <tr>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--text);">Methods</td>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Classification, Regression</td>
+                <td style="padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-muted);">Clustering, Dimensionality Reduction</td>
+              </tr>
+              <tr>
+                <td style="padding: 16px; font-weight: bold; color: var(--text);">Applications</td>
+                <td style="padding: 16px; color: var(--text-muted);">Spam detection, trend prediction</td>
+                <td style="padding: 16px; color: var(--text-muted);">Market basket analysis, anomaly detection</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Typical ML Workflow</h2>
+        <ul class="gc-list" style="font-size: 1.05rem;">
+          <li><strong>1. Data Collection:</strong> Gather relevant and clean data from various sources.</li>
+          <li><strong>2. Preprocessing:</strong> Handle missing values, encode variables, normalize/scale features.</li>
+          <li><strong>3. Feature Engineering:</strong> Identify important attributes, create new features.</li>
+          <li><strong>4. Model Selection:</strong> Choose algorithm (regression, classification, clustering).</li>
+          <li><strong>5. Model Training:</strong> Fit the model to the training data.</li>
+          <li><strong>6. Evaluation:</strong> Assess performance using validation strategies and metrics.</li>
+          <li><strong>7. Hyperparameter Tuning:</strong> Adjust parameters for better generalization.</li>
+          <li><strong>8. Deployment:</strong> Integrate into production systems.</li>
+        </ul>
+      </section>
+
+      <section class="guide-section">
+        <h2>Common Challenges</h2>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title" style="color: #fca5a5;">Overfitting</h3>
+            <p class="gc-desc">Model performs exceptionally well on training data but poorly on unseen test data because it memorized noise.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title" style="color: #fca5a5;">Underfitting</h3>
+            <p class="gc-desc">Model is too simple to capture the underlying patterns in the data.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title" style="color: #fca5a5;">Data Leakage</h3>
+            <p class="gc-desc">When information from outside the training dataset is accidentally used to create the model.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title" style="color: #fca5a5;">Imbalanced Data</h3>
+            <p class="gc-desc">Unequal class distribution (e.g. 99% non-fraud, 1% fraud) severely skewing classification performance.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>

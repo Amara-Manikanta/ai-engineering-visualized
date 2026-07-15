@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supervised Learning | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=6" />
+  <link rel="stylesheet" href="../rag/guide.css" />
+  <link rel="stylesheet" href="ml.css" />
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-tabs">
+          <li><a href="../index.html" class="tab-btn">Home</a></li>
+          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
+          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+          <li><a href="index.html" class="tab-btn active">Machine Learning</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ML SUB NAV -->
+  <div class="sub-nav">
+    <div class="container">
+      <a href="index.html">Overview</a>
+      <a href="supervised.html" class="active">Supervised</a>
+      <a href="unsupervised.html">Unsupervised</a>
+      <a href="decision-trees.html">Decision Trees</a>
+      <span class="sub-nav-divider">|</span>
+      <a href="transformers.html">Transformers</a>
+    </div>
+  </div>
+
+  <div class="guide-layout" style="max-width: 1300px; margin: 40px auto 0; padding-top: 20px;">
+    <!-- LEFT SIDEBAR -->
+    <aside class="guide-sidebar">
+      <div class="guide-sidebar-group">
+        <div class="guide-sidebar-title">Machine Learning</div>
+        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
+        <a href="supervised.html" class="guide-sidebar-link active">2. Supervised Learning</a>
+        <a href="unsupervised.html" class="guide-sidebar-link">3. Unsupervised Learning</a>
+        <a href="decision-trees.html" class="guide-sidebar-link">4. Decision Trees</a>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="guide-content">
+      <div class="guide-header">
+        <span class="guide-tag">Supervised</span>
+        <h1 class="guide-title">Supervised Learning</h1>
+        <p class="guide-intro">Models trained on labeled datasets where the output is known, aimed at finding hidden patterns.</p>
+      </div>
+
+      <section class="guide-section">
+        <h2>Primary Types</h2>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <h3 class="gc-title">Regression</h3>
+            <p class="gc-desc">Predicts a continuous value. Examples: house prices, stock trends.<br><br><strong>Algorithms:</strong> Linear Regression, Ridge, Lasso, Polynomial.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Classification</h3>
+            <p class="gc-desc">Predicts a category label. Examples: spam detection, image classification.<br><br><strong>Algorithms:</strong> Logistic Regression, SVM, Decision Trees, Neural Networks.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section">
+        <h2>Regression Techniques</h2>
+        <div class="guide-callout">
+          <div class="guide-callout-title">Simple Linear Regression</div>
+          <p>Equation: <code>y = β0 + β1x + ε</code></p>
+          <ul style="margin-left: 20px; font-size: 0.95rem; color: var(--text-muted);">
+            <li><strong>y:</strong> Dependent variable (target)</li>
+            <li><strong>x:</strong> Independent variable (feature)</li>
+            <li><strong>β0:</strong> Intercept</li>
+            <li><strong>β1:</strong> Slope</li>
+            <li><strong>ε:</strong> Error term</li>
+          </ul>
+        </div>
+        <div class="guide-callout">
+          <div class="guide-callout-title">Multiple Linear Regression</div>
+          <p>Uses multiple independent variables to predict the dependent variable.</p>
+        </div>
+        
+        <p style="color:var(--text-muted); font-size: 0.95rem;"><strong>Advanced Regression Algorithms:</strong> Ordinal Regression, Poisson Regression, Bayesian Linear Regression, Boosted Decision Tree Regression, Neural Network Regression.</p>
+      </section>
+
+      <section class="guide-section">
+        <h2>Model Evaluation Metrics</h2>
+        
+        <div class="guide-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="guide-card">
+            <h3 class="gc-title">Training vs Out-of-Sample Accuracy</h3>
+            <p class="gc-desc"><strong>Training Accuracy:</strong> Model's accuracy on training data. High accuracy may indicate overfitting.<br><br><strong>Out-of-Sample Accuracy:</strong> Accuracy on unseen data. Helps assess generalization capability.</p>
+          </div>
+          <div class="guide-card">
+            <h3 class="gc-title">Error Metrics (Regression)</h3>
+            <ul style="margin-left: 20px; font-size: 0.85rem; color: var(--text-muted);">
+              <li><strong>R-Squared (R²):</strong> Proportion of variance explained by the model. Higher is better.</li>
+              <li><strong>MAE:</strong> Average of absolute differences between predictions and actuals.</li>
+              <li><strong>MSE:</strong> Average of squared differences. Penalizes large errors.</li>
+              <li><strong>RMSE:</strong> Square root of MSE. Interpretable in original units.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">K-Fold Cross-Validation</h3>
+        <p style="color:var(--text-muted); font-size:1rem; margin-bottom: 20px;">Splits data into <em>k</em> subsets, trains on <em>k-1</em> subsets, validates on the remaining subset. Benefits include better data utilization and reduced overfitting.</p>
+        
+        <div style="background: #0d1117; padding: 20px; border-radius: 12px; font-family: var(--mono); font-size: 0.85rem; color: #e2e8f0; overflow-x: auto; border: 1px solid var(--border);">
+<pre style="margin: 0;"><span style="color: #c678dd;">from</span> sklearn.model_selection <span style="color: #c678dd;">import</span> KFold, cross_val_score
+<span style="color: #c678dd;">from</span> sklearn.linear_model <span style="color: #c678dd;">import</span> LogisticRegression
+<span style="color: #c678dd;">from</span> sklearn.datasets <span style="color: #c678dd;">import</span> load_iris
+
+X, y = load_iris(return_X_y=<span style="color: #d19a66;">True</span>)
+model = LogisticRegression(max_iter=<span style="color: #d19a66;">200</span>)
+kf = KFold(n_splits=<span style="color: #d19a66;">5</span>, shuffle=<span style="color: #d19a66;">True</span>, random_state=<span style="color: #d19a66;">42</span>)
+
+cv_scores = cross_val_score(model, X, y, cv=kf)
+<span style="color: #56b6c2;">print</span>(<span style="color: #98c379;">f"Mean CV Score: {cv_scores.mean():.2f}"</span>)</pre>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
+  </footer>
+
+  <script src="../script.js?v=6"></script>
+</body>
+</html>
