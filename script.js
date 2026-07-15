@@ -732,3 +732,63 @@ const mcpAnim = new StepAnimator({
   playBtnId: 'mcp-play-btn',
   dotsId: 'mcp-dots'
 });
+
+// ─── LANGGRAPH ANIMATION ───
+const lgAnim = new StepAnimator({
+  steps: [
+    {
+      nodes: ['lg-start'],
+      arrows: [],
+      explainer: {
+        title: "Graph Starts",
+        desc: "The LangGraph runtime starts execution at the __start__ entrypoint. The initial user message is passed into the graph as input.",
+        key: "Every LangGraph app has a designated start node that receives the initial input.",
+        color: 'var(--gen)'
+      }
+    },
+    {
+      nodes: ['lg-start', 'lg-state'],
+      arrows: ['lg-arr1'],
+      explainer: {
+        title: "State Initialized",
+        desc: "A shared State object (TypedDict) is created and populated with the input. Every node in the graph reads from and writes to this same state object.",
+        key: "State is the single source of truth — all nodes communicate through it.",
+        color: 'var(--ret)'
+      }
+    },
+    {
+      nodes: ['lg-start', 'lg-state', 'lg-agent'],
+      arrows: ['lg-arr1', 'lg-arr2'],
+      explainer: {
+        title: "Agent Node (LLM) Runs",
+        desc: "The LLM agent node reads the current state (messages), reasons about what to do next, and decides: either call a tool or give a final answer.",
+        key: "The agent is just a function: State in → State out. The LLM decides what happens next.",
+        color: 'var(--idx)'
+      }
+    },
+    {
+      nodes: ['lg-start', 'lg-state', 'lg-agent', 'lg-tools'],
+      arrows: ['lg-arr1', 'lg-arr2', 'lg-arr3'],
+      explainer: {
+        title: "Conditional Edge — Tool Call Detected",
+        desc: "A conditional edge function checks if the LLM's response contains tool calls. If yes, it routes to the Tool Node. If no, it routes to __end__ and returns the final answer.",
+        key: "Conditional edges are how LangGraph implements if/else branching in agent workflows.",
+        color: '#f97316'
+      }
+    },
+    {
+      nodes: ['lg-start', 'lg-state', 'lg-agent', 'lg-tools', 'lg-end'],
+      arrows: ['lg-arr1', 'lg-arr2', 'lg-arr3', 'lg-arr4'],
+      explainer: {
+        title: "Tool Executes & Loops Back",
+        desc: "The Tool Node executes the requested tool (e.g., search, code runner, database query), adds the result to state, and routes back to the Agent Node — creating a cycle.",
+        key: "Cycles are LangGraph's superpower. The agent can tool-call as many times as needed before finishing.",
+        color: 'var(--aug)'
+      }
+    }
+  ],
+  labelId: 'lg-step-label',
+  explainerId: 'lg-explainer',
+  playBtnId: 'lg-play-btn',
+  dotsId: 'lg-dots'
+});

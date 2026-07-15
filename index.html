@@ -22,6 +22,9 @@
       <ul class="nav-links">
         <li><button class="tab-btn active" data-tab="tab-rag">RAG Pipeline</button></li>
         <li><button class="tab-btn" data-tab="tab-mcp">MCP Pipeline</button></li>
+        <li><button class="tab-btn" data-tab="tab-langgraph">LangGraph</button></li>
+        <li><button class="tab-btn" data-tab="tab-llms">AI Models</button></li>
+        <li><button class="tab-btn" data-tab="tab-prompting">Prompt Engineering</button></li>
         <li><button class="tab-btn" data-tab="tab-claude">Claude Features</button></li>
         <li><button class="tab-btn" data-tab="tab-aitools">AI Tools</button></li>
       </ul>
@@ -1557,22 +1560,456 @@
   </section>
   </div><!-- /tab-aitools -->
 
+  <!-- ==========================================
+       TAB: LANGGRAPH
+       ========================================== -->
+  <div id="tab-langgraph" class="tab-pane">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">LangGraph</div>
+          <h2 class="section-title">🔗 Building Stateful AI Agents</h2>
+          <p class="section-desc">LangGraph is a library for building stateful, multi-actor applications with LLMs, modeled as graphs. Think of it as the <strong>orchestration layer</strong> for complex AI agent workflows that need cycles, branching, and persistent memory.</p>
+        </div>
+
+        <!-- Key concepts grid -->
+        <div class="lg-concepts">
+          <div class="lg-concept-card">
+            <div class="lgc-icon">🔵</div>
+            <div class="lgc-title">Nodes</div>
+            <div class="lgc-desc">Individual processing units — an LLM call, a tool execution, or any Python function. Each node receives state and returns updated state.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">➡️</div>
+            <div class="lgc-title">Edges</div>
+            <div class="lgc-desc">Connections between nodes. <strong>Normal edges</strong> always go from A→B. <strong>Conditional edges</strong> route dynamically based on state (if/else branching).</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">📦</div>
+            <div class="lgc-title">State</div>
+            <div class="lgc-desc">A shared TypedDict object passed through every node. Each node can read and update the state. This is how information flows through the graph.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">🔄</div>
+            <div class="lgc-title">Cycles</div>
+            <div class="lgc-desc">Unlike basic pipelines, LangGraph supports <strong>loops</strong>. An agent can think → act → observe → think again in a repeating cycle until it decides to stop.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">💾</div>
+            <div class="lgc-title">Checkpointing</div>
+            <div class="lgc-desc">Built-in persistence. Save graph state to memory or a database. Resume execution from any checkpoint — perfect for long-running or interrupted tasks.</div>
+          </div>
+          <div class="lg-concept-card">
+            <div class="lgc-icon">🎭</div>
+            <div class="lgc-title">Multi-Actor</div>
+            <div class="lgc-desc">Multiple agents can run as separate nodes in the same graph. Use for supervisor patterns, debating agents, or parallel task execution.</div>
+          </div>
+        </div>
+
+        <!-- Animation -->
+        <div class="anim-container" id="lg-anim">
+          <div class="section-header" style="margin-bottom:20px">
+            <div class="section-tag">Interactive Demo</div>
+            <h3 class="section-title" style="font-size:1.5rem">ReAct Agent Graph — Step by Step</h3>
+          </div>
+          <div class="anim-controls">
+            <button class="ctrl-btn" onclick="lgAnim.prev()">‹ Prev</button>
+            <span class="step-indicator" id="lg-step-label">Step 1 of 6</span>
+            <button class="ctrl-btn primary" onclick="lgAnim.next()">Next ›</button>
+            <button class="ctrl-btn reset" onclick="lgAnim.reset()">↺ Reset</button>
+            <button class="ctrl-btn play" id="lg-play-btn" onclick="lgAnim.togglePlay()">▶ Play</button>
+          </div>
+          <div class="step-dots" id="lg-dots"></div>
+
+          <div class="pipeline-canvas lg-canvas">
+            <div class="node" id="lg-start" data-step="1">
+              <div class="node-icon lg-start-icon"><span style="font-size:1.3rem">🟢</span></div>
+              <div class="node-label">__start__</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr1"><div class="arrow-line"></div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-state" data-step="2">
+              <div class="node-icon lg-state-icon"><div class="lg-state-box"><span>{ state }</span></div></div>
+              <div class="node-label">Initialize State</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr2"><div class="arrow-line"></div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-agent" data-step="3">
+              <div class="node-icon lg-agent-icon"><div class="lg-agent-brain"></div></div>
+              <div class="node-label">Agent Node (LLM)</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr3"><div class="arrow-line"></div><div class="arrow-label">conditional</div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-tools" data-step="4">
+              <div class="node-icon lg-tools-icon"><span style="font-size:1.3rem">🔧</span></div>
+              <div class="node-label">Tool Node</div>
+            </div>
+            <div class="arrow-wrap" id="lg-arr4"><div class="arrow-line"></div><div class="arrow-label">loop back</div><div class="arrow-particle"></div></div>
+            <div class="node" id="lg-end" data-step="5">
+              <div class="node-icon lg-end-icon"><span style="font-size:1.3rem">🔴</span></div>
+              <div class="node-label">__end__</div>
+            </div>
+          </div>
+
+          <div class="step-explainer" id="lg-explainer">
+            <div class="se-step-num" id="lg-se-num">Step 1</div>
+            <h4 class="se-title" id="lg-se-title">Graph Starts</h4>
+            <p class="se-desc" id="lg-se-desc">The LangGraph runtime starts execution at the <code>__start__</code> entrypoint. The initial user message is passed in.</p>
+            <div class="se-key" id="lg-se-key"><span class="se-key-label">Key insight:</span> Every LangGraph app has a designated start node.</div>
+          </div>
+        </div>
+
+        <!-- Code example -->
+        <div class="lg-code-block">
+          <div class="notes-title">📄 Minimal LangGraph Agent — Code</div>
+          <div class="code-window">
+            <div class="code-header"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="code-title">agent.py</span></div>
+            <pre class="code-body"><code><span class="c"># 1. Define State</span>
+<span class="k">from</span> langgraph.graph <span class="k">import</span> StateGraph, END
+<span class="k">from</span> typing <span class="k">import</span> TypedDict, Annotated
+<span class="k">import</span> operator
+
+<span class="k">class</span> <span class="cn">AgentState</span>(TypedDict):
+    messages: Annotated[list, operator.add]
+
+<span class="c"># 2. Define Nodes</span>
+<span class="k">def</span> <span class="fn">call_llm</span>(state: AgentState):
+    response = llm.invoke(state[<span class="s">"messages"</span>])
+    <span class="k">return</span> {<span class="s">"messages"</span>: [response]}
+
+<span class="k">def</span> <span class="fn">should_continue</span>(state: AgentState):
+    last = state[<span class="s">"messages"</span>][-<span class="n">1</span>]
+    <span class="k">if</span> last.tool_calls: <span class="k">return</span> <span class="s">"tools"</span>
+    <span class="k">return</span> END
+
+<span class="c"># 3. Build Graph</span>
+graph = StateGraph(AgentState)
+graph.add_node(<span class="s">"agent"</span>, call_llm)
+graph.add_node(<span class="s">"tools"</span>, tool_executor)
+graph.set_entry_point(<span class="s">"agent"</span>)
+graph.add_conditional_edges(<span class="s">"agent"</span>, should_continue)
+graph.add_edge(<span class="s">"tools"</span>, <span class="s">"agent"</span>)  <span class="c"># Loop back!</span>
+
+app = graph.compile()</code></pre>
+          </div>
+        </div>
+
+        <!-- Use cases -->
+        <div class="notes-title" style="margin-top:40px">🚀 Common LangGraph Patterns</div>
+        <div class="lg-patterns">
+          <div class="lg-pattern"><div class="lgp-icon">🎯</div><div class="lgp-title">ReAct Agent</div><div class="lgp-desc">Think → Act → Observe loop. Agent reasons, calls tools, observes results, reasons again.</div></div>
+          <div class="lg-pattern"><div class="lgp-icon">👔</div><div class="lgp-title">Supervisor</div><div class="lgp-desc">A supervisor LLM routes tasks to specialized worker agents and aggregates results.</div></div>
+          <div class="lg-pattern"><div class="lgp-icon">🌐</div><div class="lgp-title">Parallel</div><div class="lgp-desc">Fan-out to multiple agents simultaneously, then join their results — like map-reduce for AI.</div></div>
+          <div class="lg-pattern"><div class="lgp-icon">🔍</div><div class="lgp-title">Reflection</div><div class="lgp-desc">Agent generates output, a critic reviews it, agent revises — iterative self-improvement loop.</div></div>
+        </div>
+
+      </div>
+    </section>
+  </div><!-- /tab-langgraph -->
+
+  <!-- ==========================================
+       TAB: AI MODELS (8 types)
+       ========================================== -->
+  <div id="tab-llms" class="tab-pane">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">AI Models</div>
+          <h2 class="section-title">🧠 8 Specialized AI Model Architectures</h2>
+          <p class="section-desc">Not all AI models are the same. Each architecture is purpose-built for a specific task — from text generation to image segmentation to action planning.</p>
+        </div>
+
+        <div class="llm-grid">
+
+          <!-- LLM -->
+          <div class="llm-card lc-indigo">
+            <div class="llm-card-header"><span class="llm-tag">LLM</span><span class="llm-name">Large Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔤 Tokenization</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔢 Embedding</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">⚙️ Transformer</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">The foundation of modern AI. Trained on massive text datasets to predict the next token. Powers ChatGPT, Claude, Gemini, and Llama.</div>
+            <div class="llm-examples"><span>GPT-4</span><span>Claude</span><span>Gemini</span><span>Llama</span></div>
+          </div>
+
+          <!-- LCM -->
+          <div class="llm-card lc-cyan">
+            <div class="llm-card-header"><span class="llm-tag">LCM</span><span class="llm-name">Large Concept Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">✂️ Sentence Segmentation</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔭 SONAR Embedding</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🌊 Diffusion</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Meta's concept-level model. Operates on <strong>semantic concepts</strong> rather than tokens. Uses SONAR embeddings and a diffusion process — language-agnostic reasoning.</div>
+            <div class="llm-examples"><span>Meta LCM</span><span>SONAR</span></div>
+          </div>
+
+          <!-- LAM -->
+          <div class="llm-card lc-orange">
+            <div class="llm-card-header"><span class="llm-tag">LAM</span><span class="llm-name">Large Action Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input Processing</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">👁️ Perception System</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🎯 Intent Recognition</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📋 Task Breakdown</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📅 Action Planning</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">⚡ Feedback Integration</div>
+            </div>
+            <div class="llm-desc">Designed to <strong>take actions</strong> in the world — browse the web, click buttons, run code. Built for agentic tasks, not just conversation. Powers computer-use AI.</div>
+            <div class="llm-examples"><span>Rabbit R1</span><span>Claude Computer Use</span></div>
+          </div>
+
+          <!-- MoE -->
+          <div class="llm-card lc-purple">
+            <div class="llm-card-header"><span class="llm-tag">MoE</span><span class="llm-name">Mixture of Experts</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔀 Router Mechanism</div><div class="lf-arrow">↓</div>
+              <div class="lf-node moe-experts">🧑‍💼 Expert 1 &nbsp; 🧑‍💻 Expert 2 &nbsp; 🧑‍🔬 Expert 3</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔝 Top-K Selection</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">⚖️ Weighted Combination</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Uses a <strong>router</strong> to activate only a few specialist sub-networks per token. Massive model capacity with lower compute cost. Used in GPT-4, Mixtral, and Gemini.</div>
+            <div class="llm-examples"><span>GPT-4</span><span>Mixtral 8x7B</span><span>Gemini</span></div>
+          </div>
+
+          <!-- VLM -->
+          <div class="llm-card lc-green">
+            <div class="llm-card-header"><span class="llm-tag">VLM</span><span class="llm-name">Vision Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-row"><div class="lf-node">🖼️ Image Input</div><div class="lf-node">📝 Text Input</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">👁️ Vision Encoder</div><div class="lf-node">🔤 Text Encoder</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔗 Projection Interface</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🧠 Multimodal Processor</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Understands both <strong>images and text</strong> together. Can answer questions about images, generate captions, perform visual reasoning, and analyze charts.</div>
+            <div class="llm-examples"><span>GPT-4o</span><span>LLaVA</span><span>Gemini Pro Vision</span></div>
+          </div>
+
+          <!-- SLM -->
+          <div class="llm-card lc-yellow">
+            <div class="llm-card-header"><span class="llm-tag">SLM</span><span class="llm-name">Small Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Input Processing</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📦 Compact Tokenization</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">⚡ Efficient Transformer</div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">📉 Model Quantization</div><div class="lf-node">💾 Memory Optimization</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">📱 Edge Deployment</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">💬 Output</div>
+            </div>
+            <div class="llm-desc">Compact, efficient LLMs that run <strong>on-device</strong> — phones, laptops, edge hardware. Sacrifices some capability for privacy, speed, and offline operation.</div>
+            <div class="llm-examples"><span>Phi-3</span><span>Gemma 2B</span><span>Llama 3.2 1B</span></div>
+          </div>
+
+          <!-- MLM -->
+          <div class="llm-card lc-pink">
+            <div class="llm-card-header"><span class="llm-tag">MLM</span><span class="llm-name">Masked Language Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-node">📝 Text Input</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🎭 Token Masking [MASK]</div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔢 Embedding Layer</div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">⬅️ Left Context</div><div class="lf-node">➡️ Right Context</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔄 Bidirectional Attention</div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">🎯 Feature Representation</div>
+            </div>
+            <div class="llm-desc">Trained by masking words and predicting them using <strong>both left and right context</strong>. Not for generation — for understanding. Powers NER, classification, and embeddings.</div>
+            <div class="llm-examples"><span>BERT</span><span>RoBERTa</span><span>DeBERTa</span></div>
+          </div>
+
+          <!-- SAM -->
+          <div class="llm-card lc-red">
+            <div class="llm-card-header"><span class="llm-tag">SAM</span><span class="llm-name">Segment Anything Model</span></div>
+            <div class="llm-flow">
+              <div class="lf-row"><div class="lf-node">💬 Prompt Input</div><div class="lf-node">🖼️ Image Input</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">🔤 Prompt Encoder</div><div class="lf-node">👁️ Image Encoder</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node">🔗 Image Embedding</div><div class="lf-arrow">↓</div>
+              <div class="lf-row"><div class="lf-node">🎭 Mask Decoder</div><div class="lf-node">📊 Feature Correlation</div></div><div class="lf-arrow">↓</div>
+              <div class="lf-node lf-out">✂️ Segmentation Output</div>
+            </div>
+            <div class="llm-desc">Meta's foundation model for <strong>image segmentation</strong>. Given any prompt (point, box, or text), it can precisely segment any object in any image — zero-shot.</div>
+            <div class="llm-examples"><span>SAM 2</span><span>Meta AI</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div><!-- /tab-llms -->
+
+  <!-- ==========================================
+       TAB: PROMPT ENGINEERING
+       ========================================== -->
+  <div id="tab-prompting" class="tab-pane">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Prompt Engineering</div>
+          <h2 class="section-title">✍️ The Art of Talking to AI</h2>
+          <p class="section-desc">Prompt engineering is the skill of designing inputs to get the best outputs from LLMs. A better prompt = dramatically better results — no training required.</p>
+        </div>
+
+        <!-- Technique cards -->
+        <div class="pe-grid">
+
+          <!-- 1. Zero-Shot -->
+          <div class="pe-card">
+            <div class="pe-header pe-zero"><span class="pe-num">01</span><span class="pe-technique">Zero-Shot Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Directly instruct the model with no examples. Relies entirely on the model's pre-trained knowledge.</p>
+              <div class="pe-compare">
+                <div class="pe-weak">
+                  <div class="pe-label bad">❌ Weak</div>
+                  <div class="pe-prompt-box">"Translate this."</div>
+                </div>
+                <div class="pe-strong">
+                  <div class="pe-label good">✅ Strong</div>
+                  <div class="pe-prompt-box">"Translate the following English text to French. Preserve the formal tone.<br><br>Text: 'The meeting has been rescheduled.'"</div>
+                </div>
+              </div>
+              <div class="pe-tip">💡 Be specific about task, format, audience, and tone.</div>
+            </div>
+          </div>
+
+          <!-- 2. Few-Shot -->
+          <div class="pe-card">
+            <div class="pe-header pe-few"><span class="pe-num">02</span><span class="pe-technique">Few-Shot Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Provide 2-5 input→output examples before your actual question. The model learns the pattern from your examples.</p>
+              <div class="pe-example-box">
+                <div class="pe-ex-row"><span class="pe-ex-label">Example 1:</span> Sentiment("I love it!") → Positive</div>
+                <div class="pe-ex-row"><span class="pe-ex-label">Example 2:</span> Sentiment("Terrible service") → Negative</div>
+                <div class="pe-ex-row pe-ex-query"><span class="pe-ex-label">Query:</span> Sentiment("It was okay, I guess") → ?</div>
+              </div>
+              <div class="pe-tip">💡 Use 3-5 diverse examples covering edge cases.</div>
+            </div>
+          </div>
+
+          <!-- 3. Chain of Thought -->
+          <div class="pe-card">
+            <div class="pe-header pe-cot"><span class="pe-num">03</span><span class="pe-technique">Chain-of-Thought (CoT)</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Ask the model to reason step-by-step before giving the final answer. Dramatically improves accuracy on complex tasks.</p>
+              <div class="pe-cot-flow">
+                <div class="pe-cot-step">🤔 Think step by step...</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step">📝 Step 1: Identify known values</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step">📝 Step 2: Apply formula</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step">📝 Step 3: Verify result</div>
+                <div class="pe-cot-arrow">↓</div>
+                <div class="pe-cot-step pe-cot-final">✅ Final Answer</div>
+              </div>
+              <div class="pe-tip">💡 Add "Let's think step by step" or "Think before answering".</div>
+            </div>
+          </div>
+
+          <!-- 4. Role Prompting -->
+          <div class="pe-card">
+            <div class="pe-header pe-role"><span class="pe-num">04</span><span class="pe-technique">Role Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Assign a persona or expert role to the model. It "becomes" that expert and adjusts its tone, depth, and knowledge accordingly.</p>
+              <div class="pe-role-examples">
+                <div class="pe-role-chip">👨‍⚕️ "You are a senior cardiologist..."</div>
+                <div class="pe-role-chip">👩‍💻 "You are a 10x Python engineer..."</div>
+                <div class="pe-role-chip">🎓 "You are a Socratic philosophy professor..."</div>
+                <div class="pe-role-chip">🔒 "You are a cybersecurity expert..."</div>
+              </div>
+              <div class="pe-tip">💡 Combine role + task + format for best results.</div>
+            </div>
+          </div>
+
+          <!-- 5. Tree of Thoughts -->
+          <div class="pe-card">
+            <div class="pe-header pe-tot"><span class="pe-num">05</span><span class="pe-technique">Tree of Thoughts (ToT)</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">The model explores <strong>multiple reasoning branches</strong> simultaneously, evaluates each path, and selects the best one — like a chess player thinking several moves ahead.</p>
+              <div class="pe-tree">
+                <div class="pe-tree-root">Problem</div>
+                <div class="pe-tree-row">
+                  <div class="pe-tree-branch"><div class="pe-tree-node">Path A</div><div class="pe-tree-leaf bad-path">Dead end ✗</div></div>
+                  <div class="pe-tree-branch"><div class="pe-tree-node">Path B</div><div class="pe-tree-leaf good-path">✅ Best answer</div></div>
+                  <div class="pe-tree-branch"><div class="pe-tree-node">Path C</div><div class="pe-tree-leaf bad-path">Dead end ✗</div></div>
+                </div>
+              </div>
+              <div class="pe-tip">💡 Best for complex problem-solving, puzzles, and planning tasks.</div>
+            </div>
+          </div>
+
+          <!-- 6. ReAct -->
+          <div class="pe-card">
+            <div class="pe-header pe-react"><span class="pe-num">06</span><span class="pe-technique">ReAct Prompting</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Interleave <strong>Reasoning</strong> and <strong>Action</strong>. The model thinks out loud, takes an action (e.g., search), observes the result, then reasons again. The backbone of modern AI agents.</p>
+              <div class="pe-react-flow">
+                <div class="pe-react-step thought">💭 Thought: I need to find today's stock price</div>
+                <div class="pe-react-step action">⚡ Action: search("AAPL stock price today")</div>
+                <div class="pe-react-step observe">👁️ Observation: AAPL = $195.32</div>
+                <div class="pe-react-step thought">💭 Thought: Now I can answer the question</div>
+                <div class="pe-react-step answer">✅ Answer: Apple's stock is $195.32</div>
+              </div>
+              <div class="pe-tip">💡 This is what powers LangGraph and tool-using agents.</div>
+            </div>
+          </div>
+
+          <!-- 7. Structured Output -->
+          <div class="pe-card">
+            <div class="pe-header pe-struct"><span class="pe-num">07</span><span class="pe-technique">Structured Output</span></div>
+            <div class="pe-body">
+              <p class="pe-desc">Force the model to return output in a specific format — JSON, XML, Markdown tables, or custom schemas. Essential for programmatic use.</p>
+              <div class="pe-code-mini"><pre>"Return ONLY valid JSON:
+{
+  \"sentiment\": \"positive|negative|neutral\",
+  \"confidence\": 0.0-1.0,
+  \"reason\": \"one sentence\"
+}"</pre></div>
+              <div class="pe-tip">💡 Use with OpenAI's <code>response_format</code> or Pydantic models for reliability.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Best Practices -->
+        <div class="pe-best-practices">
+          <h3 class="notes-title">⚡ Golden Rules of Prompt Engineering</h3>
+          <div class="pe-rules-grid">
+            <div class="pe-rule good-rule">✅ Be specific and unambiguous</div>
+            <div class="pe-rule good-rule">✅ Give context and background</div>
+            <div class="pe-rule good-rule">✅ Specify output format</div>
+            <div class="pe-rule good-rule">✅ Define the audience</div>
+            <div class="pe-rule good-rule">✅ Iterate and refine</div>
+            <div class="pe-rule good-rule">✅ Use delimiters (""" or XML tags)</div>
+            <div class="pe-rule bad-rule">❌ Assume the model knows context</div>
+            <div class="pe-rule bad-rule">❌ Use vague instructions</div>
+            <div class="pe-rule bad-rule">❌ Ask too many things at once</div>
+            <div class="pe-rule bad-rule">❌ Ignore system prompts</div>
+            <div class="pe-rule bad-rule">❌ Forget to validate output</div>
+            <div class="pe-rule bad-rule">❌ Use negatives (say what TO do)</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div><!-- /tab-prompting -->
+
   </main><!-- /main-content -->
 
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-logo">🤖 RAG from Scratch</div>
-      <p class="footer-desc">An interactive animated guide to Retrieval-Augmented Generation.</p>
+      <div class="footer-logo">🤖 AI Engineering Visualized</div>
+      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
       <div class="footer-links">
-        <a href="#hero">Home</a>
-        <a href="#indexing">Indexing</a>
-        <a href="#retrieval">Retrieval</a>
-        <a href="#augmented">Augmented</a>
-        <a href="#generation">Generation</a>
-        <a href="#demo">Demo</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
+        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
       </div>
-      <p class="footer-copy">Built with ❤️ — RAG Explainer © 2025</p>
+      <p class="footer-copy">Built with ❤️ — AI Engineering Visualized © 2026</p>
     </div>
   </footer>
 
