@@ -5,13 +5,19 @@
 /* ── NAV SCROLL & HAMBURGER ─────────────────────────────── */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  if (navbar) {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }
   highlightNavLink();
 });
 
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
+const hamburger = document.getElementById('hamburger');
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks) navLinks.classList.toggle('open');
+  });
+}
 
 function highlightNavLink() {
   const sections = document.querySelectorAll('section[id]');
