@@ -1591,6 +1591,14 @@ footer {
 }
 .sub-nav a:hover { color: var(--text); background: var(--surface2); }
 .sub-nav a.active { color: var(--idx); background: rgba(99,102,241,0.1); }
+.sub-nav-divider {
+  color: var(--border);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  user-select: none;
+}
 
 
 /* ═══════════════════════════════════════════════════════════

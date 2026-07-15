@@ -11,34 +11,47 @@
 <body>
 
   <!-- GLOBAL HEADER -->
-  <header>
+    <header>
     <div class="header-inner">
       <a href="../index.html" class="logo">
         <span class="logo-icon">🧠</span>
-        <span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span>
+        <span class="logo-text">AI Engineering <span class="logo-accent">Visualized</span></span>
       </a>
-      <nav class="main-nav">
-        <ul class="nav-tabs">
-          <li><a href="../index.html" class="tab-btn">Home</a></li>
-          <li><a href="../rag/index.html" class="tab-btn">RAG</a></li>
-          <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
-          <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
-          <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
-          <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
-          <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
-          <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
-          <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
-          <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
-          <li><a href="fundamentals.html" class="tab-btn active">RAG Guide</a></li>
-        </ul>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="tab-btn">Home</a></li>
+        <li><a href="../rag/index.html" class="tab-btn active">RAG</a></li>
+        <li><a href="../mcp/index.html" class="tab-btn">MCP</a></li>
+        <li><a href="../agents/index.html" class="tab-btn">Agents</a></li>
+        <li><a href="../langgraph/index.html" class="tab-btn">LangGraph</a></li>
+        <li><a href="../llm-inference/index.html" class="tab-btn">LLM Inference</a></li>
+        <li><a href="../embeddings/index.html" class="tab-btn">Embeddings</a></li>
+        <li><a href="../llms/index.html" class="tab-btn">AI Models</a></li>
+        <li><a href="../prompting/index.html" class="tab-btn">Prompting</a></li>
+        <li><a href="../claude/index.html" class="tab-btn">Claude</a></li>
+      </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <div class="guide-layout">
+<div class="sub-nav">
+  <div class="container">
+    <a href="index.html">Overview</a>
+    <a href="indexing.html">Indexing</a>
+    <a href="chunking.html">Chunking</a>
+    <a href="retrieval.html">Retrieval</a>
+    <a href="generation.html">Generation</a>
+    <span class="sub-nav-divider">|</span>
+    <a href="fundamentals.html">Fundamentals</a>
+    <a href="vector-dbs.html">Vector DBs</a>
+    <a href="types-of-rag.html">Types of RAG</a>
+    <a href="evaluation.html">Evaluation</a>
+    <a href="development.html">Development</a>
+  </div>
+</div>
+
+  <div class="guide-layout" style="max-width:1300px;margin:80px auto 0;padding-top:20px;">
     <!-- LEFT SIDEBAR -->
     <aside class="guide-sidebar">
       <div class="guide-sidebar-group">
