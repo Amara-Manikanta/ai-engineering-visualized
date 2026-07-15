@@ -54,6 +54,9 @@ class StepAnimator {
     this.dotsEl = document.getElementById(config.dotsId);
     this.playInterval = null;
     this.isPlaying = false;
+    if (this.playBtn) {
+      this.playBtn.addEventListener('click', () => this.togglePlay());
+    }
     this.buildDots();
     this.init();
   }
