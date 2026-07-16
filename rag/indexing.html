@@ -51,6 +51,195 @@
         <h1 class="guide-title">Indexing</h1>
         <p class="guide-intro">Transforming prepared text into searchable vectors.</p>
       </div>
+
+<section id="indexing" class="section stage-section idx-bg">
+    <div class="container">
+      <div class="stage-header">
+        <div class="stage-badge idx-badge">Stage 1</div>
+        <h2 class="stage-title">📁 Indexing</h2>
+        <p class="stage-subtitle">
+          Preparing your knowledge base — documents are parsed, chunked, embedded into vectors, and stored in a vector database.
+        </p>
+      </div>
+
+      <!-- Animation Stage -->
+      <div class="anim-container" id="idx-anim">
+        <div class="anim-controls">
+          <button class="ctrl-btn" onclick="idxAnim.prev()">‹ Prev</button>
+          <span class="step-indicator" id="idx-step-label">Step 1 of 5</span>
+          <button class="ctrl-btn primary" onclick="idxAnim.next()">Next ›</button>
+          <button class="ctrl-btn reset" onclick="idxAnim.reset()">↺ Reset</button>
+          <button class="ctrl-btn play" id="idx-play-btn" onclick="idxAnim.togglePlay()">▶ Play</button>
+        </div>
+        <div class="step-dots" id="idx-dots"></div>
+
+        <div class="pipeline-canvas idx-canvas">
+          <!-- Node: PDF -->
+          <div class="node" id="idx-pdf" data-step="1">
+            <div class="node-icon pdf-icon">
+              <div class="pdf-body">
+                <span class="pdf-label">PDF</span>
+                <div class="pdf-lines"><div></div><div></div><div></div></div>
+              </div>
+            </div>
+            <div class="node-label">Document</div>
+            <div class="node-tooltip">Raw PDF, DOCX, or any document<br>you want to make queryable.</div>
+          </div>
+
+          <!-- Arrow 1 -->
+          <div class="arrow-wrap" id="idx-arr1">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">parse</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: TXT -->
+          <div class="node" id="idx-txt" data-step="2">
+            <div class="node-icon txt-icon">
+              <div class="txt-body">
+                <span class="txt-label">TXT</span>
+                <div class="txt-lines"><div></div><div></div><div></div><div></div></div>
+              </div>
+            </div>
+            <div class="node-label">Text</div>
+            <div class="node-tooltip">All content extracted as<br>plain text for processing.</div>
+          </div>
+
+          <!-- Arrow 2 -->
+          <div class="arrow-wrap" id="idx-arr2">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">chunk</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Chunks -->
+          <div class="node" id="idx-chunks" data-step="3">
+            <div class="node-icon chunks-icon">
+              <div class="chunk-grid">
+                <div class="chunk-sq c1"></div>
+                <div class="chunk-sq c2"></div>
+                <div class="chunk-sq c3"></div>
+                <div class="chunk-sq c4"></div>
+              </div>
+            </div>
+            <div class="node-label">Chunks</div>
+            <div class="node-tooltip">Text split into overlapping<br>fixed-size segments (~512 tokens).</div>
+          </div>
+
+          <!-- Arrow 3 (goes up to Embedding Model) -->
+          <div class="arrow-wrap vertical-arrow" id="idx-arr3">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">embed</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Embedding Model -->
+          <div class="node" id="idx-emb-model" data-step="4">
+            <div class="node-icon emb-model-icon">
+              <div class="emb-grid">
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+            <div class="node-label">Embedding Model</div>
+            <div class="node-tooltip">Converts text chunks into<br>dense numerical vectors<br>(e.g. OpenAI, BERT, Cohere).</div>
+          </div>
+
+          <!-- Arrow 4 (goes down to Embeddings) -->
+          <div class="arrow-wrap vertical-arrow" id="idx-arr4">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Embeddings -->
+          <div class="node" id="idx-embeddings" data-step="5">
+            <div class="node-icon embeddings-icon">
+              <div class="emb-vec-grid">
+                <div class="evg-sq"></div><div class="evg-sq"></div><div class="evg-sq"></div>
+                <div class="evg-sq"></div><div class="evg-sq"></div><div class="evg-sq"></div>
+              </div>
+            </div>
+            <div class="node-label">Embeddings</div>
+            <div class="node-tooltip">Dense vectors representing<br>semantic meaning of each chunk.</div>
+          </div>
+
+          <!-- Arrow 5 (goes left to Milvus) -->
+          <div class="arrow-wrap" id="idx-arr5" style="flex-direction:row-reverse;">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">store</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Node: Milvus -->
+          <div class="node" id="idx-milvus" data-step="6">
+            <div class="node-icon milvus-icon">
+              <div class="eye-outer">
+                <div class="eye-inner">
+                  <div class="eye-pupil"></div>
+                </div>
+              </div>
+            </div>
+            <div class="node-label">Milvus<br><small>Vector database</small></div>
+            <div class="node-tooltip">High-performance vector store<br>for similarity search at scale.<br>(Alternatives: Pinecone, Weaviate, Chroma)</div>
+          </div>
+        </div>
+
+        <!-- Step explanation -->
+        <div class="step-explainer" id="idx-explainer">
+          <div class="se-step-num" id="idx-se-num">Step 1</div>
+          <h4 class="se-title" id="idx-se-title">Document Input</h4>
+          <p class="se-desc" id="idx-se-desc">Start with any document — PDFs, Word files, web pages, or text files. These are your knowledge sources that you want the AI to be able to query and reason over.</p>
+          <div class="se-key" id="idx-se-key">
+            <span class="se-key-label">Key insight:</span> The quality and structure of your source documents directly impacts the quality of RAG responses.
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Cards -->
+      <div class="notes-section">
+        <h3 class="notes-title">📝 Indexing — Detailed Notes</h3>
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="nc-icon">📄</div>
+            <h4>1. Document Parsing</h4>
+            <p>Raw documents (PDF, DOCX, HTML, etc.) are loaded and converted into plain text. Libraries like <code>PyMuPDF</code>, <code>pdfplumber</code>, or <code>LangChain loaders</code> handle this. The goal is clean, extractable text.</p>
+            <div class="nc-code">
+              <span class="code-label">Tools:</span>
+              <code>PyMuPDF · pdfplumber · unstructured · LangChain</code>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">✂️</div>
+            <h4>2. Text Chunking</h4>
+            <p>Long documents are split into smaller <strong>overlapping chunks</strong> (typically 256–1024 tokens with 20–50 token overlap). This ensures no context is lost at boundaries and each chunk is small enough to be semantically focused.</p>
+            <div class="nc-code">
+              <span class="code-label">Strategy:</span>
+              <code>Fixed-size · Sentence · Semantic · Recursive</code>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🔢</div>
+            <h4>3. Embedding Generation</h4>
+            <p>Each chunk is passed through an <strong>Embedding Model</strong> which converts text into a dense numerical vector (e.g. 1536 dimensions for OpenAI). Semantically similar texts produce numerically similar vectors.</p>
+            <div class="nc-code">
+              <span class="code-label">Models:</span>
+              <code>text-embedding-ada-002 · BAAI/bge · Cohere · E5</code>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">💾</div>
+            <h4>4. Vector Storage (Milvus)</h4>
+            <p>The embedding vectors (along with the original chunk text as metadata) are stored in a <strong>vector database</strong> like Milvus. These databases are optimized for fast Approximate Nearest Neighbor (ANN) search.</p>
+            <div class="nc-code">
+              <span class="code-label">Options:</span>
+              <code>Milvus · Pinecone · Weaviate · Chroma · FAISS</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
       <section class="guide-section">
           <h2 id="what-is-indexing">What is Indexing?</h2>
           <p>Indexing is the offline process of taking clean, chunked documents, passing them through an embedding model to generate numerical vectors, and loading those vectors into a database for fast querying.</p>

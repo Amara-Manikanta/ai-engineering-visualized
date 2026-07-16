@@ -51,6 +51,171 @@
         <h1 class="guide-title">Retrieval & Reranking</h1>
         <p class="guide-intro">Finding the most relevant context for the LLM.</p>
       </div>
+
+<section id="retrieval" class="section stage-section ret-bg">
+    <div class="container">
+      <div class="stage-header">
+        <div class="stage-badge ret-badge">Stage 2</div>
+        <h2 class="stage-title">🔍 Retrieval (R)</h2>
+        <p class="stage-subtitle">
+          At query time — the user's question is encoded into a vector and semantically matched against stored embeddings to retrieve the most relevant chunks.
+        </p>
+      </div>
+
+      <!-- Animation Stage -->
+      <div class="anim-container" id="ret-anim">
+        <div class="anim-controls">
+          <button class="ctrl-btn" onclick="retAnim.prev()">‹ Prev</button>
+          <span class="step-indicator" id="ret-step-label">Step 1 of 5</span>
+          <button class="ctrl-btn primary" onclick="retAnim.next()">Next ›</button>
+          <button class="ctrl-btn reset" onclick="retAnim.reset()">↺ Reset</button>
+          <button class="ctrl-btn play" id="ret-play-btn" onclick="retAnim.togglePlay()">▶ Play</button>
+        </div>
+        <div class="step-dots" id="ret-dots"></div>
+
+        <div class="pipeline-canvas ret-canvas">
+          <!-- User -->
+          <div class="node" id="ret-user" data-step="1">
+            <div class="node-icon user-icon">
+              <div class="user-head"></div>
+              <div class="user-body"></div>
+            </div>
+            <div class="node-label">User</div>
+            <div class="node-tooltip">The end user asking a question<br>in natural language.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr1">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Query -->
+          <div class="node" id="ret-query" data-step="2">
+            <div class="node-icon query-icon">
+              <div class="query-bubble">?</div>
+            </div>
+            <div class="node-label">Query</div>
+            <div class="node-tooltip">"What is the return policy?"<br>"Summarize chapter 3"<br>Any natural language question.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr2">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">encode</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Embedding Model -->
+          <div class="node" id="ret-emb-model" data-step="3">
+            <div class="node-icon emb-model-icon small-emb">
+              <div class="emb-grid">
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+                <span>+</span><span>+</span><span>+</span>
+              </div>
+            </div>
+            <div class="node-label">Embedding<br>Model</div>
+            <div class="node-tooltip">Same model used during indexing!<br>Encodes the query into a vector.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr3">
+            <div class="arrow-line"></div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Embedding vector -->
+          <div class="node" id="ret-emb-vec" data-step="4">
+            <div class="node-icon emb-vec-icon">
+              <div class="vec-bars">
+                <div class="vb" style="height:60%"></div>
+                <div class="vb" style="height:90%"></div>
+                <div class="vb" style="height:45%"></div>
+                <div class="vb" style="height:75%"></div>
+                <div class="vb" style="height:55%"></div>
+              </div>
+            </div>
+            <div class="node-label">Embedding</div>
+            <div class="node-tooltip">A dense vector [0.23, -0.41, 0.87, ...]<br>representing query semantics.</div>
+          </div>
+
+          <div class="arrow-wrap" id="ret-arr4">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">semantic search</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Milvus -->
+          <div class="node" id="ret-milvus" data-step="5">
+            <div class="node-icon milvus-icon">
+              <div class="eye-outer">
+                <div class="eye-inner">
+                  <div class="eye-pupil"></div>
+                </div>
+              </div>
+            </div>
+            <div class="node-label">Milvus<br><small>Vector database</small></div>
+            <div class="node-tooltip">Computes cosine similarity<br>between query vector and all<br>stored chunk vectors. Returns top-K.</div>
+          </div>
+
+          <!-- Returns arrow down -->
+          <div class="arrow-wrap ret-returns-arr" id="ret-arr5">
+            <div class="arrow-line"></div>
+            <div class="arrow-label">returns</div>
+            <div class="arrow-particle"></div>
+          </div>
+
+          <!-- Relevant chunks -->
+          <div class="node" id="ret-chunks" data-step="6">
+            <div class="node-icon rel-chunks-icon">
+              <div class="rel-chunk rc1"></div>
+              <div class="rel-chunk rc2"></div>
+            </div>
+            <div class="node-label">Relevant Chunks</div>
+            <div class="node-tooltip">Top-K most semantically similar<br>chunks to the user's query.<br>These become the context.</div>
+          </div>
+        </div>
+
+        <div class="step-explainer" id="ret-explainer">
+          <div class="se-step-num" id="ret-se-num">Step 1</div>
+          <h4 class="se-title" id="ret-se-title">User Asks a Question</h4>
+          <p class="se-desc" id="ret-se-desc">A user types a natural language question. This is the query that will drive the entire retrieval process. The system needs to find the most relevant pieces of information from the knowledge base to answer this question.</p>
+          <div class="se-key" id="ret-se-key">
+            <span class="se-key-label">Key insight:</span> RAG is query-driven — retrieval happens fresh for every user question, in real time.
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="notes-section">
+        <h3 class="notes-title">📝 Retrieval — Detailed Notes</h3>
+        <div class="notes-grid">
+          <div class="note-card">
+            <div class="nc-icon">👤</div>
+            <h4>1. User Query</h4>
+            <p>The user submits a question in plain language. Unlike keyword search, RAG understands the <em>intent</em> and <em>meaning</em> of the question — not just matching exact words.</p>
+            <div class="nc-code"><span class="code-label">Example:</span><code>"What are the symptoms of flu?"</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🔢</div>
+            <h4>2. Query Encoding</h4>
+            <p>The query is run through the <strong>same embedding model</strong> used during indexing. This creates a query vector in the same vector space as the document chunks — enabling meaningful comparison.</p>
+            <div class="nc-code"><span class="code-label">Critical:</span><code>Same model for indexing & retrieval!</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">🎯</div>
+            <h4>3. Semantic Search</h4>
+            <p>The query vector is compared to all stored chunk vectors using <strong>cosine similarity</strong> or dot product. This finds chunks that are semantically close even if different words are used. Much smarter than keyword matching.</p>
+            <div class="nc-code"><span class="code-label">Math:</span><code>similarity = cos(query_vec, chunk_vec)</code></div>
+          </div>
+          <div class="note-card">
+            <div class="nc-icon">📦</div>
+            <h4>4. Top-K Relevant Chunks</h4>
+            <p>Milvus returns the <strong>top-K</strong> most similar chunks (typically K=3 to 10). These chunks contain the most relevant information from your knowledge base to answer the user's question.</p>
+            <div class="nc-code"><span class="code-label">Typical:</span><code>K=3 to 10 chunks returned</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
       <section class="guide-section">
           <h2 id="similarity-search">Query Embedding & Similarity Search</h2>
           <p>When a user asks a question, the text is immediately embedded into a query vector using the <em>exact same embedding model</em> used during indexing. A Top-K similarity search is performed to return the closest chunks.</p>
