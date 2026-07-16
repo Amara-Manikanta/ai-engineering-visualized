@@ -39,25 +39,86 @@
         <div class="guide-sidebar-title" style="margin-top: 15px;">Advanced Concepts</div>
         <a href="evaluation.html" class="guide-sidebar-link">9. Evaluation</a>
         <a href="development.html" class="guide-sidebar-link">10. Development</a>
-        <a href="advanced-rag.html" class="guide-sidebar-link">11. Advanced RAG</a>
+        <a href="types-of-rag.html" class="guide-sidebar-link active">11. Types of RAG</a>
+        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
+          <a href="naive-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Naive RAG</a>
+          <a href="advanced-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Advanced RAG</a>
+          <a href="hybrid-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Hybrid RAG</a>
+          <a href="agentic-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Agentic RAG</a>
+          <a href="graph-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Graph RAG</a>
+          <a href="multimodal-rag.html" class="guide-sidebar-sublink active" style="color: var(--text); font-weight: 600; text-decoration: none;">- Multi-modal RAG</a>
+          <a href="crag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Corrective RAG</a>
+          <a href="self-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Self-RAG</a>
+        </div>
         <a href="advanced-retrieval.html" class="guide-sidebar-link">12. Advanced Retrieval</a>
       </div>
     </aside>
 
     <main class="guide-content">
       <div class="guide-header">
-        <span class="guide-tag">RAG Type</span>
+        <span class="guide-tag">Architecture Type</span>
         <h1 class="guide-title">Multi-modal RAG</h1>
-        <p class="guide-intro">Retrieving and generating across text, images, and audio.</p>
+        <p class="guide-intro">Retrieves images, video frames, and text simultaneously into a Vision-Language Model.</p>
       </div>
+      
       <section class="guide-section">
-          <h2>How it Works</h2>
-          <p>Standard RAG only uses text. Multi-modal RAG uses models like CLIP to project images and text into the exact same vector space. You can search for an image using text, or search for text using an image. The retrieved images/text are passed to a Vision-Language Model (VLM) for generation.</p>
-          <div class="guide-card">
-            <h3>Example Use Case</h3>
-            <p>Analyzing corporate slide decks. A user asks "What was the revenue growth trend in the Q2 presentation?" The system retrieves the image of a bar chart from the slides and the VLM reads the chart to answer.</p>
-          </div>
-        </section>
+        <div class="pipeline-canvas" style="position:relative; height:450px; background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:24px;">
+            
+            <div id="m-img" style="position:absolute; left:5%; top:30%; padding:10px; border:2px dashed var(--text2); text-align:center; border-radius:8px; opacity:0; transition:all 0.5s;">🖼️<br><span style="font-size:0.7em">Image Upload</span></div>
+            <div id="m-txt" style="position:absolute; left:5%; top:60%; padding:10px; border:2px solid var(--text2); text-align:center; border-radius:8px; opacity:0; transition:all 0.5s;">📝<br><span style="font-size:0.7em">Text Query</span></div>
+            
+            <div id="m-arr1" style="position:absolute; left:18%; top:45%; transform:rotate(15deg); opacity:0; transition:all 0.5s;">➔</div>
+            <div id="m-arr2" style="position:absolute; left:18%; top:55%; transform:rotate(-15deg); opacity:0; transition:all 0.5s;">➔</div>
+            
+            <div id="m-clip" style="position:absolute; left:25%; top:50%; transform:translateY(-50%); width:100px; padding:10px; background:var(--cyan); color:white; text-align:center; border-radius:8px; opacity:0; transition:all 0.5s;">CLIP Embedder<br><span style="font-size:0.7em">Shared Space</span></div>
+            
+            <div id="m-arr3" style="position:absolute; left:42%; top:50%; transform:translateY(-50%); opacity:0; transition:all 0.5s;">➔</div>
+            
+            <div id="m-db" style="position:absolute; left:48%; top:50%; transform:translateY(-50%); width:100px; padding:10px; background:var(--blue); color:white; text-align:center; border-radius:8px; opacity:0; transition:all 0.5s;">Vector DB<br><span style="font-size:0.7em">Find Images & Text</span></div>
+            
+            <div id="m-arr4" style="position:absolute; left:65%; top:50%; transform:translateY(-50%); opacity:0; transition:all 0.5s;">➔</div>
+            
+            <div id="m-vlm" style="position:absolute; left:75%; top:50%; transform:translateY(-50%); width:80px; padding:10px; background:var(--purple); color:white; text-align:center; border-radius:8px; font-weight:bold; opacity:0; transition:all 0.5s;">VLM<br><span style="font-size:0.7em">(GPT-4o)</span></div>
+
+            <div id="m-desc" style="position:absolute; bottom:20px; left:20px; right:20px; text-align:center; color:var(--text2); font-size:0.95em; height:40px; transition:opacity 0.3s ease;">Click Play to see Multi-modal retrieval.</div>
+        </div>
+        
+        <div class="canvas-controls" style="display:flex; gap:12px; justify-content:center;">
+          <button class="btn btn-primary" id="m-play" style="padding:10px 24px; border-radius:24px; border:none; cursor:pointer; font-weight:600; background:var(--primary); color:white;">▶ Play Animation</button>
+          <button class="btn btn-secondary" id="m-reset" style="padding:10px 24px; border-radius:24px; border:1px solid var(--border); cursor:pointer; font-weight:600; background:var(--surface); color:var(--text);">↺ Reset</button>
+        </div>
+      </section>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const playBtn = document.getElementById('m-play'); const resetBtn = document.getElementById('m-reset'); const desc = document.getElementById('m-desc');
+            let step = 0; let playing = false; let timeout;
+            
+            const steps = [
+                { show: ['m-img', 'm-txt'], desc: '1. User uploads a photo of a part and asks "How do I fix this?"' },
+                { show: ['m-arr1', 'm-arr2', 'm-clip'], desc: '2. A multimodal embedder (like CLIP) embeds both into the same vector space.' },
+                { show: ['m-arr3', 'm-db'], desc: '3. DB searches for similar images (diagrams) AND matching text (manuals).' },
+                { show: ['m-arr4', 'm-vlm'], desc: '4. The retrieved diagrams and text are fed into a Vision-Language Model to generate the answer.' }
+            ];
+            
+            function runStep() {
+                if(step >= steps.length) { playing = false; playBtn.innerHTML = '▶ Replay'; return; }
+                steps[step].show.forEach(id => document.getElementById(id).style.opacity = '1');
+                desc.style.opacity = 0;
+                setTimeout(() => { desc.innerText = steps[step].desc; desc.style.opacity = 1; }, 150);
+                step++; timeout = setTimeout(runStep, 2200);
+            }
+            
+            playBtn.addEventListener('click', () => { if(playing) return; if(step >= steps.length) resetAnim(); playing = true; runStep(); });
+            resetBtn.addEventListener('click', resetAnim);
+            
+            function resetAnim() {
+                clearTimeout(timeout); playing = false; step = 0; playBtn.innerHTML = '▶ Play Animation';
+                ['m-img','m-txt','m-arr1','m-arr2','m-clip','m-arr3','m-db','m-arr4','m-vlm'].forEach(id => document.getElementById(id).style.opacity = '0');
+                desc.innerText = 'Click Play to see Multi-modal retrieval.';
+            }
+        });
+      </script>
     </main>
   </div>
   <script src="../script.js?v=11"></script>
