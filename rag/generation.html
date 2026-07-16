@@ -2,402 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generation - RAG | AI Engineering Visualized</title>
-  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generation | AI Engineering Visualized</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=8" />
+  <link rel="stylesheet" href="../styles.css?v=12" />
 </head>
 <body>
-  <!-- GLOBAL HEADER -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
-      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item has-dd" data-group="ml">
-          <div class="mnav-group-wrap">
-            <a href="../ml/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🤖</span>Machine Learning</a>
-            <button class="mnav-arrow-btn" aria-label="Open Machine Learning menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div>
-            <div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a><a href="../python/index.html" class="mnav-dd-link">Python</a><a href="../ml/supervised.html" class="mnav-dd-link">Supervised</a><a href="../ml/unsupervised.html" class="mnav-dd-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mnav-dd-link">Deep Learning</a><a href="../ml/nlp.html" class="mnav-dd-link">NLP</a><a href="../ml/decision-trees.html" class="mnav-dd-link">Decision Trees</a><a href="../ml/knn.html" class="mnav-dd-link">KNN</a><a href="../ml/logistic-regression.html" class="mnav-dd-link">Logistic Regression</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="genai">
-          <div class="mnav-group-wrap">
-            <a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Generative AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div>
-            <div class="mnav-dd-links"><a href="../llms/index.html" class="mnav-dd-link">AI Models</a><a href="../llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="../prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mnav-dd-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mnav-dd-link">Fine-tuning</a><a href="../genai/quantization.html" class="mnav-dd-link">Quantization</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="rag">
-          <div class="mnav-group-wrap">
-            <a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a>
-            <button class="mnav-arrow-btn" aria-label="Open RAG menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div>
-            <div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Introduction</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector Databases</a><a href="../rag/retrieval.html" class="mnav-dd-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mnav-dd-link">Types of RAG</a><a href="../rag/evaluation.html" class="mnav-dd-link">Evaluation</a><a href="../rag/development.html" class="mnav-dd-link">Development</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="agents">
-          <div class="mnav-group-wrap">
-            <a href="../agents/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🕸️</span>Agentic AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Agentic AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div>
-            <div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="../mcp/index.html" class="mnav-dd-link">MCP</a><a href="../langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="models">
-          <div class="mnav-group-wrap">
-            <a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a>
-            <button class="mnav-arrow-btn" aria-label="Open Models menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div>
-            <div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a><a href="../models/gpt.html" class="mnav-dd-link">GPT</a><a href="../models/gemini.html" class="mnav-dd-link">Gemini</a><a href="../models/llama.html" class="mnav-dd-link">Llama</a><a href="../models/qwen.html" class="mnav-dd-link">Qwen</a><a href="../models/deepseek.html" class="mnav-dd-link">DeepSeek</a><a href="../models/mistral.html" class="mnav-dd-link">Mistral</a></div>
-          </div></div>
-        </li><li class="mnav-item"><a href="../projects/index.html" class="mnav-link">🚀 Projects</a></li><li class="mnav-item"><a href="../resources/index.html" class="mnav-link">📚 Resources</a></li></ul></nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav class="mega-nav" id="mega-nav">
+        <ul class="mnav-list">
+          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
+          <li class="mnav-item"><a href="../python/index.html" class="mnav-link">🐍 Python</a></li>
+          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link">🤖 Machine Learning</a></li>
+          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link">✨ Generative AI</a></li>
+          <li class="mnav-item"><a href="../rag/index.html" class="mnav-link" style="color:var(--text)">🔍 RAG</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="mobile-drawer" id="mobile-drawer"><ul class="mobile-nav-list"><li><a href="../index.html" class="mobile-nav-link">🏠 Home</a></li><li class="mobile-group">
-          <button class="mobile-group-btn">🤖 Machine Learning <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../ml/index.html" class="mobile-child-link">Introduction</a><a href="../python/index.html" class="mobile-child-link">Python</a><a href="../ml/supervised.html" class="mobile-child-link">Supervised</a><a href="../ml/unsupervised.html" class="mobile-child-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mobile-child-link">Deep Learning</a><a href="../ml/nlp.html" class="mobile-child-link">NLP</a><a href="../ml/decision-trees.html" class="mobile-child-link">Decision Trees</a><a href="../ml/knn.html" class="mobile-child-link">KNN</a><a href="../ml/logistic-regression.html" class="mobile-child-link">Logistic Regression</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">✨ Generative AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../llms/index.html" class="mobile-child-link">AI Models</a><a href="../llm-inference/index.html" class="mobile-child-link">LLM Inference</a><a href="../prompting/index.html" class="mobile-child-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mobile-child-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mobile-child-link">Fine-tuning</a><a href="../genai/quantization.html" class="mobile-child-link">Quantization</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🔍 RAG <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../rag/fundamentals.html" class="mobile-child-link">Introduction</a><a href="../rag/chunking.html" class="mobile-child-link">Chunking</a><a href="../rag/vector-dbs.html" class="mobile-child-link">Vector Databases</a><a href="../rag/retrieval.html" class="mobile-child-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mobile-child-link">Types of RAG</a><a href="../rag/evaluation.html" class="mobile-child-link">Evaluation</a><a href="../rag/development.html" class="mobile-child-link">Development</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🕸️ Agentic AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../agents/index.html" class="mobile-child-link">AI Agents</a><a href="../mcp/index.html" class="mobile-child-link">MCP</a><a href="../langgraph/index.html" class="mobile-child-link">LangGraph</a><a href="../agents/langchain.html" class="mobile-child-link">LangChain</a><a href="../agents/tool-calling.html" class="mobile-child-link">Tool Calling</a><a href="../agents/memory.html" class="mobile-child-link">Memory</a><a href="../agents/multi-agent.html" class="mobile-child-link">Multi-Agent</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🧩 Models <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
-        </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
 
-<div class="guide-layout">
+  <div class="guide-layout">
     <aside class="guide-sidebar">
       <div class="guide-sidebar-group">
         <div class="guide-sidebar-title">RAG Pipeline</div>
-        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
-        <a href="fundamentals.html" class="guide-sidebar-link">2. Fundamentals</a>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. Fundamentals</a>
+        <a href="data-prep.html" class="guide-sidebar-link">2. Data Preparation</a>
         <a href="indexing.html" class="guide-sidebar-link">3. Indexing</a>
         <a href="chunking.html" class="guide-sidebar-link">4. Chunking</a>
-        <a href="retrieval.html" class="guide-sidebar-link">5. Retrieval</a>
-        <a href="generation.html" class="guide-sidebar-link active">6. Generation</a>
+        <a href="embeddings.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">6. Vector Databases</a>
+        <a href="retrieval.html" class="guide-sidebar-link">7. Retrieval</a>
+        <a href="generation.html" class="guide-sidebar-link active">8. Generation</a>
         <div class="guide-sidebar-title" style="margin-top: 15px;">Advanced Concepts</div>
-        <a href="types-of-rag.html" class="guide-sidebar-link">7. Types of RAG</a>
-        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
-          <a href="naive-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Naive RAG</a>
-          <a href="advanced-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Advanced RAG</a>
-          <a href="hybrid-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Hybrid RAG</a>
-          <a href="agentic-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Agentic RAG</a>
-          <a href="graph-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Graph RAG</a>
-          <a href="multimodal-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Multi-modal RAG</a>
-          <a href="crag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Corrective RAG</a>
-          <a href="self-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Self-RAG</a>
-        </div>
-        <a href="vector-dbs.html" class="guide-sidebar-link">8. Vector DBs</a>
         <a href="evaluation.html" class="guide-sidebar-link">9. Evaluation</a>
         <a href="development.html" class="guide-sidebar-link">10. Development</a>
+        <a href="advanced-rag.html" class="guide-sidebar-link">11. Advanced RAG</a>
+        <a href="advanced-retrieval.html" class="guide-sidebar-link">12. Advanced Retrieval</a>
       </div>
     </aside>
+
     <main class="guide-content">
-
-<section id="augmented" class="section stage-section aug-bg">
-    <div class="container">
-      <div class="stage-header">
-        <div class="stage-badge aug-badge">Stage 3</div>
-        <h2 class="stage-title">⚙️ Augmented (A)</h2>
-        <p class="stage-subtitle">
-          The retrieved chunks and the user's original query are <em>combined</em> into a rich, context-filled prompt ready for the LLM.
-        </p>
+      <div class="guide-header">
+        <span class="guide-tag">Part 8</span>
+        <h1 class="guide-title">Generation</h1>
+        <p class="guide-intro">Synthesizing the retrieved context into a final answer.</p>
       </div>
+      <section class="guide-section">
+          <h2 id="prompt-construction">Prompt Construction & Context Injection</h2>
+          <p>The generation step is entirely reliant on the System Prompt. The retrieved chunks are formatted and injected directly into the prompt template alongside the user's query.</p>
+          
+          <h2 id="system-prompt">The System Prompt</h2>
+          <p>A strong RAG prompt usually looks like this:</p>
+          <pre><code>You are a helpful assistant. Use ONLY the provided context to answer the question.
+If the answer is not in the context, say "I don't know". Do not make up facts.
 
-      <div class="anim-container" id="aug-anim">
-        <div class="anim-controls">
-          <button class="ctrl-btn" onclick="augAnim.prev()">‹ Prev</button>
-          <span class="step-indicator" id="aug-step-label">Step 1 of 3</span>
-          <button class="ctrl-btn primary" onclick="augAnim.next()">Next ›</button>
-          <button class="ctrl-btn reset" onclick="augAnim.reset()">↺ Reset</button>
-          <button class="ctrl-btn play" id="aug-play-btn" onclick="augAnim.togglePlay()">▶ Play</button>
-        </div>
-        <div class="step-dots" id="aug-dots"></div>
+Context:
+{context}
 
-        <div class="pipeline-canvas aug-canvas">
-          <!-- Relevant chunks input -->
-          <div class="node" id="aug-chunks" data-step="1">
-            <div class="node-icon rel-chunks-icon">
-              <div class="rel-chunk rc1"></div>
-              <div class="rel-chunk rc2"></div>
-              <div class="rel-chunk rc3"></div>
-            </div>
-            <div class="node-label">Relevant Chunks</div>
-            <div class="node-tooltip">The top-K chunks retrieved<br>from the vector database.</div>
-          </div>
+Question:
+{query}</code></pre>
 
-          <div class="arrow-wrap" id="aug-arr1">
-            <div class="arrow-line"></div>
-            <div class="arrow-label">combine</div>
-            <div class="arrow-particle"></div>
-          </div>
+          <h2 id="citations">Citation Generation & Formatting</h2>
+          <p>Advanced RAG systems force the LLM to output citations (e.g., <code>[Doc 1]</code>). This is done by injecting the metadata source alongside the chunk text in the prompt. The UI then parses these brackets and creates clickable footnotes.</p>
 
-          <!-- Context box -->
-          <div class="node" id="aug-context" data-step="2">
-            <div class="node-icon context-icon">
-              <div class="ctx-box">
-                <div class="ctx-line long"></div>
-                <div class="ctx-line medium"></div>
-                <div class="ctx-line long"></div>
-                <div class="ctx-line short"></div>
-              </div>
-            </div>
-            <div class="node-label">Context</div>
-            <div class="node-tooltip">The retrieved chunks assembled<br>into a structured context block.</div>
-          </div>
-
-          <!-- User query comes in from top -->
-          <div class="node aug-query-node" id="aug-uquery" data-step="2">
-            <div class="node-icon query-icon">
-              <div class="query-bubble">?</div>
-            </div>
-            <div class="node-label">User Query</div>
-            <div class="node-tooltip">The original user question<br>is kept intact.</div>
-          </div>
-
-          <div class="arrow-wrap" id="aug-arr2">
-            <div class="arrow-line"></div>
-            <div class="arrow-particle"></div>
-          </div>
-
-          <!-- Final Prompt -->
-          <div class="node" id="aug-prompt" data-step="3">
-            <div class="node-icon prompt-icon">
-              <div class="prompt-box">
-                <div class="pb-section context-section">
-                  <span>Context</span>
-                </div>
-                <div class="pb-section query-section">
-                  <span>Query</span>
-                </div>
-              </div>
-            </div>
-            <div class="node-label">Prompt<br><small>(query + context)</small></div>
-            <div class="node-tooltip">A structured prompt containing<br>both the retrieved context and<br>the user's original question.</div>
-          </div>
-        </div>
-
-        <div class="step-explainer" id="aug-explainer">
-          <div class="se-step-num" id="aug-se-num">Step 1</div>
-          <h4 class="se-title" id="aug-se-title">Retrieved Chunks Ready</h4>
-          <p class="se-desc" id="aug-se-desc">The relevant chunks retrieved from the vector database are now available. These chunks contain the factual information needed to answer the user's query accurately.</p>
-          <div class="se-key" id="aug-se-key">
-            <span class="se-key-label">Key insight:</span> The "A" in RAG stands for Augmented — we augment the LLM's knowledge with retrieved real-world context.
-          </div>
-        </div>
-      </div>
-
-      <!-- Prompt Template Visualizer -->
-      <div class="prompt-visualizer">
-        <h3 class="notes-title">🖋️ What the Final Prompt Looks Like</h3>
-        <div class="prompt-template">
-          <div class="pt-section sys">
-            <div class="pt-label">System Message</div>
-            <div class="pt-content">You are a helpful assistant. Use ONLY the context provided below to answer the user's question. If the answer is not in the context, say "I don't know."</div>
-          </div>
-          <div class="pt-section ctx">
-            <div class="pt-label">Context (Retrieved Chunks)</div>
-            <div class="pt-content">
-              <strong>[Chunk 1]:</strong> "The return policy allows returns within 30 days of purchase with a valid receipt..."<br><br>
-              <strong>[Chunk 2]:</strong> "Refunds are processed within 5–7 business days to the original payment method..."<br><br>
-              <strong>[Chunk 3]:</strong> "Items must be in original condition with all tags attached for a full refund..."
-            </div>
-          </div>
-          <div class="pt-section qry">
-            <div class="pt-label">User Query</div>
-            <div class="pt-content">"What is the return policy and how long do refunds take?"</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="notes-section">
-        <h3 class="notes-title">📝 Augmentation — Detailed Notes</h3>
-        <div class="notes-grid">
-          <div class="note-card">
-            <div class="nc-icon">📋</div>
-            <h4>1. Context Assembly</h4>
-            <p>Retrieved chunks are concatenated and formatted into a <strong>context block</strong>. Good RAG implementations add chunk metadata (source, page number) for traceability and citation.</p>
-          </div>
-          <div class="note-card">
-            <div class="nc-icon">📝</div>
-            <h4>2. Prompt Engineering</h4>
-            <p>A carefully crafted system prompt instructs the LLM to answer <em>only</em> from the provided context. This prevents hallucinations and keeps answers grounded in your data.</p>
-          </div>
-          <div class="note-card">
-            <div class="nc-icon">🔗</div>
-            <h4>3. Query + Context = Prompt</h4>
-            <p>The final prompt combines: <strong>System instructions + Retrieved context + User question</strong>. This complete prompt is what gets sent to the LLM in the next stage.</p>
-          </div>
-          <div class="note-card">
-            <div class="nc-icon">⚖️</div>
-            <h4>4. Context Window Limits</h4>
-            <p>LLMs have a maximum context window (e.g., 128K tokens for GPT-4o). The number of retrieved chunks must fit within this limit along with the system prompt and user query.</p>
-            <div class="nc-code"><span class="code-label">Balance:</span><code>More chunks = more context but more cost</code></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-<section id="generation" class="section stage-section gen-bg">
-    <div class="container">
-      <div class="stage-header">
-        <div class="stage-badge gen-badge">Stage 4</div>
-        <h2 class="stage-title">💬 Generate (G)</h2>
-        <p class="stage-subtitle">
-          The augmented prompt is fed to an LLM which generates a coherent, accurate, and context-grounded response.
-        </p>
-      </div>
-
-      <div class="anim-container" id="gen-anim">
-        <div class="anim-controls">
-          <button class="ctrl-btn" onclick="genAnim.prev()">‹ Prev</button>
-          <span class="step-indicator" id="gen-step-label">Step 1 of 3</span>
-          <button class="ctrl-btn primary" onclick="genAnim.next()">Next ›</button>
-          <button class="ctrl-btn reset" onclick="genAnim.reset()">↺ Reset</button>
-          <button class="ctrl-btn play" id="gen-play-btn" onclick="genAnim.togglePlay()">▶ Play</button>
-        </div>
-        <div class="step-dots" id="gen-dots"></div>
-
-        <div class="pipeline-canvas gen-canvas">
-          <!-- Prompt input -->
-          <div class="node" id="gen-prompt" data-step="1">
-            <div class="node-icon prompt-icon">
-              <div class="prompt-box">
-                <div class="pb-section context-section"><span>Context</span></div>
-                <div class="pb-section query-section"><span>Query</span></div>
-              </div>
-            </div>
-            <div class="node-label">Prompt<br><small>(query + context)</small></div>
-            <div class="node-tooltip">The complete augmented prompt<br>with system instructions, context<br>chunks, and user question.</div>
-          </div>
-
-          <div class="arrow-wrap" id="gen-arr1">
-            <div class="arrow-line"></div>
-            <div class="arrow-label">feed</div>
-            <div class="arrow-particle"></div>
-          </div>
-
-          <!-- LLM -->
-          <div class="node" id="gen-llm" data-step="2">
-            <div class="node-icon llm-icon">
-              <div class="llm-circle">
-                <span class="llm-text">LLM</span>
-                <div class="llm-orbit o1"></div>
-                <div class="llm-orbit o2"></div>
-                <div class="llm-orbit o3"></div>
-              </div>
-            </div>
-            <div class="node-label">Large Language Model</div>
-            <div class="node-tooltip">GPT-4, Claude, Gemini, Llama...<br>The LLM reads the full prompt<br>and generates a response.</div>
-          </div>
-
-          <div class="arrow-wrap" id="gen-arr2">
-            <div class="arrow-line"></div>
-            <div class="arrow-label">generate</div>
-            <div class="arrow-particle"></div>
-          </div>
-
-          <!-- Response -->
-          <div class="node" id="gen-response" data-step="3">
-            <div class="node-icon response-icon">
-              <div class="response-doc">
-                <div class="resp-icon-top">A≡</div>
-                <div class="resp-lines">
-                  <div class="rl"></div>
-                  <div class="rl short"></div>
-                  <div class="rl"></div>
-                  <div class="rl medium"></div>
-                </div>
-              </div>
-            </div>
-            <div class="node-label">Response</div>
-            <div class="node-tooltip">A coherent, grounded answer<br>based on your actual documents.<br>No hallucinations!</div>
-          </div>
-        </div>
-
-        <!-- Typewriter Response -->
-        <div class="step-explainer" id="gen-explainer">
-          <div class="se-step-num" id="gen-se-num">Step 1</div>
-          <h4 class="se-title" id="gen-se-title">Augmented Prompt Ready</h4>
-          <p class="se-desc" id="gen-se-desc">The complete prompt — containing the system message, retrieved context chunks, and user's question — is ready to be sent to the Large Language Model.</p>
-          <div class="se-key" id="gen-se-key">
-            <span class="se-key-label">Key insight:</span> The LLM doesn't need to memorize facts — it reads the context and reasons over it in real time.
-          </div>
-        </div>
-
-        <!-- Typewriter demo -->
-        <div class="typewriter-demo" id="typewriter-demo" style="display:none">
-          <div class="tw-header">
-            <span class="tw-badge">🤖 LLM Response (Streaming)</span>
-            <button class="tw-replay" onclick="replayTypewriter()">↺ Replay</button>
-          </div>
-          <div class="tw-content" id="tw-content"></div>
-        </div>
-      </div>
-
-      <div class="notes-section">
-        <h3 class="notes-title">📝 Generation — Detailed Notes</h3>
-        <div class="notes-grid">
-          <div class="note-card">
-            <div class="nc-icon">🤖</div>
-            <h4>1. The LLM</h4>
-            <p>Any capable LLM can be used — <strong>GPT-4, Claude, Gemini, Llama</strong>, or any open-source model. The LLM reads the entire prompt and generates a natural language response token by token.</p>
-            <div class="nc-code"><span class="code-label">Models:</span><code>GPT-4o · Claude 3 · Gemini · Llama 3</code></div>
-          </div>
-          <div class="note-card">
-            <div class="nc-icon">✅</div>
-            <h4>2. Grounded Responses</h4>
-            <p>Because the LLM is explicitly told to answer <em>only</em> from the provided context, responses are grounded in your actual data. If the answer isn't in the context, the LLM says "I don't know" instead of hallucinating.</p>
-          </div>
-          <div class="note-card">
-            <div class="nc-icon">📡</div>
-            <h4>3. Streaming</h4>
-            <p>Modern LLM APIs support <strong>streaming</strong> — tokens are sent to the UI as they're generated, creating the familiar "typing" effect. This improves perceived response time significantly.</p>
-            <div class="nc-code"><span class="code-label">API:</span><code>stream=True in OpenAI API call</code></div>
-          </div>
-          <div class="note-card">
-            <div class="nc-icon">📎</div>
-            <h4>4. Citations & Sources</h4>
-            <p>Advanced RAG systems include <strong>source citations</strong> in the response — telling users which document and page the answer came from. This builds trust and allows verification.</p>
-            <div class="nc-code"><span class="code-label">Pattern:</span><code>Answer + [Source: doc.pdf, p.12]</code></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+          <h2 id="hallucination">Hallucination Prevention</h2>
+          <p>RAG prevents hallucinations fundamentally by grounding the model, but LLMs can still hallucinate if the context is contradictory or confusing. Setting <code>temperature=0</code>, explicitly forbidding outside knowledge in the prompt, and using strict JSON schemas for outputs are standard prevention techniques.</p>
+        </section>
+    </main>
   </div>
-<footer>
-    <div class="footer-inner">
-      <div class="footer-logo">🤖 AI Engineering Visualized</div>
-      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
-      <div class="footer-links">
-        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
-      </div>
-      <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
-    </div>
-  </footer>
-
-  <script src="../script.js?v=8"></script>
+  <script src="../script.js?v=12"></script>
 </body>
 </html>

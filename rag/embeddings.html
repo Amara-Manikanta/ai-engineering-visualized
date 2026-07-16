@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Advanced RAG Architectures | AI Engineering Visualized</title>
+  <title>Embeddings | AI Engineering Visualized</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -33,37 +33,43 @@
         <a href="data-prep.html" class="guide-sidebar-link">2. Data Preparation</a>
         <a href="indexing.html" class="guide-sidebar-link">3. Indexing</a>
         <a href="chunking.html" class="guide-sidebar-link">4. Chunking</a>
-        <a href="embeddings.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="embeddings.html" class="guide-sidebar-link active">5. Embeddings</a>
         <a href="vector-dbs.html" class="guide-sidebar-link">6. Vector Databases</a>
         <a href="retrieval.html" class="guide-sidebar-link">7. Retrieval</a>
         <a href="generation.html" class="guide-sidebar-link">8. Generation</a>
         <div class="guide-sidebar-title" style="margin-top: 15px;">Advanced Concepts</div>
         <a href="evaluation.html" class="guide-sidebar-link">9. Evaluation</a>
         <a href="development.html" class="guide-sidebar-link">10. Development</a>
-        <a href="advanced-rag.html" class="guide-sidebar-link active">11. Advanced RAG</a>
+        <a href="advanced-rag.html" class="guide-sidebar-link">11. Advanced RAG</a>
         <a href="advanced-retrieval.html" class="guide-sidebar-link">12. Advanced Retrieval</a>
       </div>
     </aside>
 
     <main class="guide-content">
       <div class="guide-header">
-        <span class="guide-tag">Part 11</span>
-        <h1 class="guide-title">Advanced RAG Architectures</h1>
-        <p class="guide-intro">Beyond Naive RAG: Architectural patterns for complex reasoning.</p>
+        <span class="guide-tag">Part 5</span>
+        <h1 class="guide-title">Embeddings</h1>
+        <p class="guide-intro">The mathematical foundation of semantic search.</p>
       </div>
       <section class="guide-section">
-          <h2 id="architectures">Architectures</h2>
+          <h2 id="what-are">What are Embeddings?</h2>
+          <p>Embeddings are dense numerical vectors that represent the semantic meaning of text. Words with similar meanings are mapped to points close to each other in a high-dimensional mathematical space.</p>
+          
+          <h2 id="dense-vs-sparse">Dense vs Sparse Embeddings</h2>
           <ul>
-            <li><strong>Standard (Naive) RAG:</strong> The baseline Retrieve-Read-Generate loop.</li>
-            <li><strong>Conversational RAG:</strong> Adds memory to the pipeline. The LLM condenses the chat history and the new question into a standalone query before searching.</li>
-            <li><strong>Adaptive RAG:</strong> A router decides if a query needs RAG, a web search, or just a direct LLM response.</li>
-            <li><strong>Corrective RAG (CRAG):</strong> Evaluates retrieval. If bad, it falls back to a web search.</li>
-            <li><strong>Self-RAG:</strong> The model generates reflection tokens to critique its own retrieval and output, looping if necessary.</li>
-            <li><strong>Fusion RAG (RAG-Fusion):</strong> Generates multiple queries, retrieves for all, and uses Reciprocal Rank Fusion to re-order the results.</li>
-            <li><strong>GraphRAG:</strong> Uses Knowledge Graphs to retrieve entities and relationships, perfect for "connect the dots" questions.</li>
-            <li><strong>Agentic RAG:</strong> An autonomous agent uses RAG as a tool, deciding when and what to search for in a loop.</li>
-            <li><strong>Multimodal RAG:</strong> Embeds and retrieves images, audio, and text simultaneously using CLIP models.</li>
-            <li><strong>Hierarchical RAG:</strong> Summarizes documents. Searches the summaries first, then dives into the full text of the best matching summary.</li>
+            <li><strong>Dense Embeddings:</strong> (e.g. OpenAI, Cohere) Arrays of non-zero floating point numbers representing abstract meaning.</li>
+            <li><strong>Sparse Embeddings:</strong> (e.g. SPLADE, TF-IDF) Huge arrays where most numbers are zero, focusing on exact keyword frequencies.</li>
+          </ul>
+
+          <h2 id="models-dimensions">Models & Dimensions</h2>
+          <p>Different models output different dimensions. OpenAI's <code>text-embedding-3-large</code> supports up to 3072 dimensions, while smaller open-source models like <code>all-MiniLM-L6-v2</code> output 384 dimensions. Higher dimensions capture more nuance but are slower to search and cost more to store.</p>
+
+          <h2 id="similarity">Similarity Metrics</h2>
+          <p>To compare how similar two embeddings are, Vector DBs use mathematical formulas:</p>
+          <ul>
+            <li><strong>Cosine Similarity:</strong> Measures the angle between two vectors. (Most common for text).</li>
+            <li><strong>Dot Product:</strong> Measures angle and magnitude. (Preferred if embeddings are normalized).</li>
+            <li><strong>Euclidean Distance (L2):</strong> Measures the straight-line distance between the points.</li>
           </ul>
         </section>
     </main>

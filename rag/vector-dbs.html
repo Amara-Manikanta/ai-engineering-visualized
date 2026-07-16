@@ -3,198 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vector Databases - AI Engineering Visualized</title>
-  <link rel="stylesheet" href="../styles.css?v=8" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Vector Databases | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=12" />
 </head>
 <body>
-  <!-- GLOBAL HEADER -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
-      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item has-dd" data-group="ml">
-          <div class="mnav-group-wrap">
-            <a href="../ml/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🤖</span>Machine Learning</a>
-            <button class="mnav-arrow-btn" aria-label="Open Machine Learning menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div>
-            <div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a><a href="../python/index.html" class="mnav-dd-link">Python</a><a href="../ml/supervised.html" class="mnav-dd-link">Supervised</a><a href="../ml/unsupervised.html" class="mnav-dd-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mnav-dd-link">Deep Learning</a><a href="../ml/nlp.html" class="mnav-dd-link">NLP</a><a href="../ml/decision-trees.html" class="mnav-dd-link">Decision Trees</a><a href="../ml/knn.html" class="mnav-dd-link">KNN</a><a href="../ml/logistic-regression.html" class="mnav-dd-link">Logistic Regression</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="genai">
-          <div class="mnav-group-wrap">
-            <a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Generative AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div>
-            <div class="mnav-dd-links"><a href="../llms/index.html" class="mnav-dd-link">AI Models</a><a href="../llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="../prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mnav-dd-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mnav-dd-link">Fine-tuning</a><a href="../genai/quantization.html" class="mnav-dd-link">Quantization</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="rag">
-          <div class="mnav-group-wrap">
-            <a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a>
-            <button class="mnav-arrow-btn" aria-label="Open RAG menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div>
-            <div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Introduction</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector Databases</a><a href="../rag/retrieval.html" class="mnav-dd-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mnav-dd-link">Types of RAG</a><a href="../rag/evaluation.html" class="mnav-dd-link">Evaluation</a><a href="../rag/development.html" class="mnav-dd-link">Development</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="agents">
-          <div class="mnav-group-wrap">
-            <a href="../agents/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🕸️</span>Agentic AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Agentic AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div>
-            <div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="../mcp/index.html" class="mnav-dd-link">MCP</a><a href="../langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="models">
-          <div class="mnav-group-wrap">
-            <a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a>
-            <button class="mnav-arrow-btn" aria-label="Open Models menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div>
-            <div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a><a href="../models/gpt.html" class="mnav-dd-link">GPT</a><a href="../models/gemini.html" class="mnav-dd-link">Gemini</a><a href="../models/llama.html" class="mnav-dd-link">Llama</a><a href="../models/qwen.html" class="mnav-dd-link">Qwen</a><a href="../models/deepseek.html" class="mnav-dd-link">DeepSeek</a><a href="../models/mistral.html" class="mnav-dd-link">Mistral</a></div>
-          </div></div>
-        </li><li class="mnav-item"><a href="../projects/index.html" class="mnav-link">🚀 Projects</a></li><li class="mnav-item"><a href="../resources/index.html" class="mnav-link">📚 Resources</a></li></ul></nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav class="mega-nav" id="mega-nav">
+        <ul class="mnav-list">
+          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
+          <li class="mnav-item"><a href="../python/index.html" class="mnav-link">🐍 Python</a></li>
+          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link">🤖 Machine Learning</a></li>
+          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link">✨ Generative AI</a></li>
+          <li class="mnav-item"><a href="../rag/index.html" class="mnav-link" style="color:var(--text)">🔍 RAG</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="mobile-drawer" id="mobile-drawer"><ul class="mobile-nav-list"><li><a href="../index.html" class="mobile-nav-link">🏠 Home</a></li><li class="mobile-group">
-          <button class="mobile-group-btn">🤖 Machine Learning <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../ml/index.html" class="mobile-child-link">Introduction</a><a href="../python/index.html" class="mobile-child-link">Python</a><a href="../ml/supervised.html" class="mobile-child-link">Supervised</a><a href="../ml/unsupervised.html" class="mobile-child-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mobile-child-link">Deep Learning</a><a href="../ml/nlp.html" class="mobile-child-link">NLP</a><a href="../ml/decision-trees.html" class="mobile-child-link">Decision Trees</a><a href="../ml/knn.html" class="mobile-child-link">KNN</a><a href="../ml/logistic-regression.html" class="mobile-child-link">Logistic Regression</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">✨ Generative AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../llms/index.html" class="mobile-child-link">AI Models</a><a href="../llm-inference/index.html" class="mobile-child-link">LLM Inference</a><a href="../prompting/index.html" class="mobile-child-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mobile-child-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mobile-child-link">Fine-tuning</a><a href="../genai/quantization.html" class="mobile-child-link">Quantization</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🔍 RAG <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../rag/fundamentals.html" class="mobile-child-link">Introduction</a><a href="../rag/chunking.html" class="mobile-child-link">Chunking</a><a href="../rag/vector-dbs.html" class="mobile-child-link">Vector Databases</a><a href="../rag/retrieval.html" class="mobile-child-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mobile-child-link">Types of RAG</a><a href="../rag/evaluation.html" class="mobile-child-link">Evaluation</a><a href="../rag/development.html" class="mobile-child-link">Development</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🕸️ Agentic AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../agents/index.html" class="mobile-child-link">AI Agents</a><a href="../mcp/index.html" class="mobile-child-link">MCP</a><a href="../langgraph/index.html" class="mobile-child-link">LangGraph</a><a href="../agents/langchain.html" class="mobile-child-link">LangChain</a><a href="../agents/tool-calling.html" class="mobile-child-link">Tool Calling</a><a href="../agents/memory.html" class="mobile-child-link">Memory</a><a href="../agents/multi-agent.html" class="mobile-child-link">Multi-Agent</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🧩 Models <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
-        </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
 
-</div>
-
   <div class="guide-layout">
-    <!-- LEFT SIDEBAR -->
     <aside class="guide-sidebar">
       <div class="guide-sidebar-group">
         <div class="guide-sidebar-title">RAG Pipeline</div>
-        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
-        <a href="fundamentals.html" class="guide-sidebar-link">2. Fundamentals</a>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. Fundamentals</a>
+        <a href="data-prep.html" class="guide-sidebar-link">2. Data Preparation</a>
         <a href="indexing.html" class="guide-sidebar-link">3. Indexing</a>
         <a href="chunking.html" class="guide-sidebar-link">4. Chunking</a>
-        <a href="retrieval.html" class="guide-sidebar-link">5. Retrieval</a>
-        <a href="generation.html" class="guide-sidebar-link">6. Generation</a>
+        <a href="embeddings.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link active">6. Vector Databases</a>
+        <a href="retrieval.html" class="guide-sidebar-link">7. Retrieval</a>
+        <a href="generation.html" class="guide-sidebar-link">8. Generation</a>
         <div class="guide-sidebar-title" style="margin-top: 15px;">Advanced Concepts</div>
-        <a href="types-of-rag.html" class="guide-sidebar-link">7. Types of RAG</a>
-        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
-          <a href="naive-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Naive RAG</a>
-          <a href="advanced-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Advanced RAG</a>
-          <a href="hybrid-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Hybrid RAG</a>
-          <a href="agentic-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Agentic RAG</a>
-          <a href="graph-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Graph RAG</a>
-          <a href="multimodal-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Multi-modal RAG</a>
-          <a href="crag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Corrective RAG</a>
-          <a href="self-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Self-RAG</a>
-        </div>
-        <a href="vector-dbs.html" class="guide-sidebar-link active">8. Vector DBs</a>
         <a href="evaluation.html" class="guide-sidebar-link">9. Evaluation</a>
         <a href="development.html" class="guide-sidebar-link">10. Development</a>
+        <a href="advanced-rag.html" class="guide-sidebar-link">11. Advanced RAG</a>
+        <a href="advanced-retrieval.html" class="guide-sidebar-link">12. Advanced Retrieval</a>
       </div>
     </aside>
 
-    <!-- CONTENT -->
     <main class="guide-content">
       <div class="guide-header">
-        <span class="guide-tag">Part 2</span>
+        <span class="guide-tag">Part 6</span>
         <h1 class="guide-title">Vector Databases</h1>
-        <p class="guide-intro">Traditional databases search by keywords. Vector databases search by meaning.</p>
+        <p class="guide-intro">Specialized databases designed to store and query high-dimensional embeddings.</p>
       </div>
-
       <section class="guide-section">
-        <h2>13. What is a Vector Database?</h2>
-        
-        <div class="guide-card">
-          <p class="gc-desc">A vector database is a specialized database designed to store, manage, and search embedding vectors. Instead of matching exact strings like SQL, a vector database uses Approximate Nearest Neighbor (ANN) algorithms to find vectors that are mathematically closest to your query vector.</p>
-        </div>
+          <h2 id="what-is-vdb">What is a Vector Database?</h2>
+          <p>Traditional SQL databases are built for exact matches (<code>WHERE id = 5</code>). Vector DBs are built for approximate similarity search. They use specialized indexing algorithms (like HNSW) to find the "nearest neighbors" to a query vector in milliseconds.</p>
+          
+          <h2 id="popular-vdbs">Popular Vector Databases</h2>
+          <ul>
+            <li><strong>Pinecone / Weaviate / Milvus:</strong> Purpose-built, highly scalable distributed vector databases.</li>
+            <li><strong>Chroma / Qdrant:</strong> Excellent open-source options (Qdrant is written in Rust and highly performant).</li>
+            <li><strong>pgvector:</strong> A PostgreSQL extension that turns a traditional relational DB into a vector DB, simplifying architecture.</li>
+            <li><strong>Elasticsearch / OpenSearch:</strong> Traditional search engines that have added robust dense vector support alongside their BM25 capabilities.</li>
+          </ul>
 
-        <div class="guide-callout">
-          <div class="guide-callout-title">💡 Why use one?</div>
-          <p>At scale, computing cosine similarity between your query and a million document chunks is too slow. Vector databases use specialized indexes (like HNSW) to reduce search times from minutes to milliseconds.</p>
-        </div>
-      </section>
-
-      <section class="guide-section">
-        <h2>14. Popular Vector Databases</h2>
-        <div class="guide-grid">
-          <div class="guide-card">
-            <h3 class="gc-title">Pinecone</h3>
-            <p class="gc-desc">Fully managed, closed-source SaaS. extremely popular for its ease of use and serverless architecture.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Milvus</h3>
-            <p class="gc-desc">Open-source, highly scalable. Built for massive enterprise workloads handling billions of vectors.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Chroma</h3>
-            <p class="gc-desc">AI-native, open-source database optimized for developer experience. Great for rapid prototyping.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Qdrant</h3>
-            <p class="gc-desc">Written in Rust, extremely fast, open-source, and supports advanced payload filtering.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">FAISS</h3>
-            <p class="gc-desc">A library by Meta. Not a full database, but the underlying engine for rapid vector similarity search.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">pgvector</h3>
-            <p class="gc-desc">An extension for PostgreSQL. Allows you to keep your vectors right next to your relational data.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="guide-section">
-        <h2>15. Indexing Methods</h2>
-        <p>How do vector databases achieve millisecond search times over billions of vectors? By using specialized indexes.</p>
-        
-        <div class="guide-grid">
-          <div class="guide-card">
-            <div class="gc-icon">📏</div>
-            <h3 class="gc-title">Flat (Exact Search)</h3>
-            <p class="gc-desc">Compares the query to every single vector (brute force).<br><br><strong>Pros:</strong> 100% accurate (perfect recall).<br><strong>Cons:</strong> Extremely slow at scale.</p>
-          </div>
-          <div class="guide-card">
-            <div class="gc-icon">🕸️</div>
-            <h3 class="gc-title">HNSW (Hierarchical Navigable Small World)</h3>
-            <p class="gc-desc">Builds a multi-layered graph of vectors. Search drops down through layers to quickly zoom in on neighbors.<br><br><strong>Pros:</strong> Very fast, highly accurate.<br><strong>Cons:</strong> High memory consumption.</p>
-          </div>
-          <div class="guide-card">
-            <div class="gc-icon">🗂️</div>
-            <h3 class="gc-title">IVF (Inverted File Index)</h3>
-            <p class="gc-desc">Clusters vectors into groups (Voronoi cells). Search only checks the closest cluster.<br><br><strong>Pros:</strong> Speeds up search significantly.<br><strong>Cons:</strong> Can miss edge-case vectors.</p>
-          </div>
-          <div class="guide-card">
-            <div class="gc-icon">📉</div>
-            <h3 class="gc-title">PQ (Product Quantization)</h3>
-            <p class="gc-desc">Compresses vectors by splitting them into sub-vectors and replacing them with short codes.<br><br><strong>Pros:</strong> Massive memory reduction (up to 97%).<br><strong>Cons:</strong> Lossy compression degrades accuracy.</p>
-          </div>
-        </div>
-      </section>
-      
+          <h2 id="index-types">Vector Index Types</h2>
+          <p>To avoid scanning every single vector (Flat/Brute-force search), DBs use indexes:</p>
+          <ul>
+            <li><strong>HNSW (Hierarchical Navigable Small World):</strong> A multi-layered graph algorithm. Highly accurate and fast, but uses a lot of RAM.</li>
+            <li><strong>IVF (Inverted File Index):</strong> Clusters vectors into groups. Searches only the clusters closest to the query.</li>
+          </ul>
+        </section>
     </main>
   </div>
-
-  <footer>
-    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
-  </footer>
-
-  <script src="../script.js?v=8"></script>
+  <script src="../script.js?v=12"></script>
 </body>
 </html>

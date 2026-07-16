@@ -3,222 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RAG Fundamentals - AI Engineering Visualized</title>
-  <link rel="stylesheet" href="../styles.css?v=8" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>RAG Fundamentals | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css?v=12" />
 </head>
 <body>
-  <!-- GLOBAL HEADER -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
-      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item has-dd" data-group="ml">
-          <div class="mnav-group-wrap">
-            <a href="../ml/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🤖</span>Machine Learning</a>
-            <button class="mnav-arrow-btn" aria-label="Open Machine Learning menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div>
-            <div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a><a href="../python/index.html" class="mnav-dd-link">Python</a><a href="../ml/supervised.html" class="mnav-dd-link">Supervised</a><a href="../ml/unsupervised.html" class="mnav-dd-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mnav-dd-link">Deep Learning</a><a href="../ml/nlp.html" class="mnav-dd-link">NLP</a><a href="../ml/decision-trees.html" class="mnav-dd-link">Decision Trees</a><a href="../ml/knn.html" class="mnav-dd-link">KNN</a><a href="../ml/logistic-regression.html" class="mnav-dd-link">Logistic Regression</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="genai">
-          <div class="mnav-group-wrap">
-            <a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Generative AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div>
-            <div class="mnav-dd-links"><a href="../llms/index.html" class="mnav-dd-link">AI Models</a><a href="../llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="../prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mnav-dd-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mnav-dd-link">Fine-tuning</a><a href="../genai/quantization.html" class="mnav-dd-link">Quantization</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="rag">
-          <div class="mnav-group-wrap">
-            <a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a>
-            <button class="mnav-arrow-btn" aria-label="Open RAG menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div>
-            <div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Introduction</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector Databases</a><a href="../rag/retrieval.html" class="mnav-dd-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mnav-dd-link">Types of RAG</a><a href="../rag/evaluation.html" class="mnav-dd-link">Evaluation</a><a href="../rag/development.html" class="mnav-dd-link">Development</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="agents">
-          <div class="mnav-group-wrap">
-            <a href="../agents/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🕸️</span>Agentic AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Agentic AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div>
-            <div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="../mcp/index.html" class="mnav-dd-link">MCP</a><a href="../langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="models">
-          <div class="mnav-group-wrap">
-            <a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a>
-            <button class="mnav-arrow-btn" aria-label="Open Models menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div>
-            <div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a><a href="../models/gpt.html" class="mnav-dd-link">GPT</a><a href="../models/gemini.html" class="mnav-dd-link">Gemini</a><a href="../models/llama.html" class="mnav-dd-link">Llama</a><a href="../models/qwen.html" class="mnav-dd-link">Qwen</a><a href="../models/deepseek.html" class="mnav-dd-link">DeepSeek</a><a href="../models/mistral.html" class="mnav-dd-link">Mistral</a></div>
-          </div></div>
-        </li><li class="mnav-item"><a href="../projects/index.html" class="mnav-link">🚀 Projects</a></li><li class="mnav-item"><a href="../resources/index.html" class="mnav-link">📚 Resources</a></li></ul></nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav class="mega-nav" id="mega-nav">
+        <ul class="mnav-list">
+          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
+          <li class="mnav-item"><a href="../python/index.html" class="mnav-link">🐍 Python</a></li>
+          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link">🤖 Machine Learning</a></li>
+          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link">✨ Generative AI</a></li>
+          <li class="mnav-item"><a href="../rag/index.html" class="mnav-link" style="color:var(--text)">🔍 RAG</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="mobile-drawer" id="mobile-drawer"><ul class="mobile-nav-list"><li><a href="../index.html" class="mobile-nav-link">🏠 Home</a></li><li class="mobile-group">
-          <button class="mobile-group-btn">🤖 Machine Learning <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../ml/index.html" class="mobile-child-link">Introduction</a><a href="../python/index.html" class="mobile-child-link">Python</a><a href="../ml/supervised.html" class="mobile-child-link">Supervised</a><a href="../ml/unsupervised.html" class="mobile-child-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mobile-child-link">Deep Learning</a><a href="../ml/nlp.html" class="mobile-child-link">NLP</a><a href="../ml/decision-trees.html" class="mobile-child-link">Decision Trees</a><a href="../ml/knn.html" class="mobile-child-link">KNN</a><a href="../ml/logistic-regression.html" class="mobile-child-link">Logistic Regression</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">✨ Generative AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../llms/index.html" class="mobile-child-link">AI Models</a><a href="../llm-inference/index.html" class="mobile-child-link">LLM Inference</a><a href="../prompting/index.html" class="mobile-child-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mobile-child-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mobile-child-link">Fine-tuning</a><a href="../genai/quantization.html" class="mobile-child-link">Quantization</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🔍 RAG <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../rag/fundamentals.html" class="mobile-child-link">Introduction</a><a href="../rag/chunking.html" class="mobile-child-link">Chunking</a><a href="../rag/vector-dbs.html" class="mobile-child-link">Vector Databases</a><a href="../rag/retrieval.html" class="mobile-child-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mobile-child-link">Types of RAG</a><a href="../rag/evaluation.html" class="mobile-child-link">Evaluation</a><a href="../rag/development.html" class="mobile-child-link">Development</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🕸️ Agentic AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../agents/index.html" class="mobile-child-link">AI Agents</a><a href="../mcp/index.html" class="mobile-child-link">MCP</a><a href="../langgraph/index.html" class="mobile-child-link">LangGraph</a><a href="../agents/langchain.html" class="mobile-child-link">LangChain</a><a href="../agents/tool-calling.html" class="mobile-child-link">Tool Calling</a><a href="../agents/memory.html" class="mobile-child-link">Memory</a><a href="../agents/multi-agent.html" class="mobile-child-link">Multi-Agent</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🧩 Models <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
-        </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
 
-</div>
-
   <div class="guide-layout">
-    <!-- LEFT SIDEBAR -->
     <aside class="guide-sidebar">
       <div class="guide-sidebar-group">
         <div class="guide-sidebar-title">RAG Pipeline</div>
-        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
-        <a href="fundamentals.html" class="guide-sidebar-link active">2. Fundamentals</a>
+        <a href="fundamentals.html" class="guide-sidebar-link active">1. Fundamentals</a>
+        <a href="data-prep.html" class="guide-sidebar-link">2. Data Preparation</a>
         <a href="indexing.html" class="guide-sidebar-link">3. Indexing</a>
         <a href="chunking.html" class="guide-sidebar-link">4. Chunking</a>
-        <a href="retrieval.html" class="guide-sidebar-link">5. Retrieval</a>
-        <a href="generation.html" class="guide-sidebar-link">6. Generation</a>
+        <a href="embeddings.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">6. Vector Databases</a>
+        <a href="retrieval.html" class="guide-sidebar-link">7. Retrieval</a>
+        <a href="generation.html" class="guide-sidebar-link">8. Generation</a>
         <div class="guide-sidebar-title" style="margin-top: 15px;">Advanced Concepts</div>
-        <a href="types-of-rag.html" class="guide-sidebar-link">7. Types of RAG</a>
-        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
-          <a href="naive-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Naive RAG</a>
-          <a href="advanced-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Advanced RAG</a>
-          <a href="hybrid-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Hybrid RAG</a>
-          <a href="agentic-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Agentic RAG</a>
-          <a href="graph-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Graph RAG</a>
-          <a href="multimodal-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Multi-modal RAG</a>
-          <a href="crag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Corrective RAG</a>
-          <a href="self-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Self-RAG</a>
-        </div>
-        <a href="vector-dbs.html" class="guide-sidebar-link">8. Vector DBs</a>
         <a href="evaluation.html" class="guide-sidebar-link">9. Evaluation</a>
         <a href="development.html" class="guide-sidebar-link">10. Development</a>
+        <a href="advanced-rag.html" class="guide-sidebar-link">11. Advanced RAG</a>
+        <a href="advanced-retrieval.html" class="guide-sidebar-link">12. Advanced Retrieval</a>
       </div>
     </aside>
 
-    <!-- CONTENT -->
     <main class="guide-content">
       <div class="guide-header">
         <span class="guide-tag">Part 1</span>
         <h1 class="guide-title">RAG Fundamentals</h1>
-        <p class="guide-intro">Everything you need to know about Retrieval-Augmented Generation (RAG): what it is, why it was created, and its pros and cons.</p>
+        <p class="guide-intro">Core concepts behind Retrieval-Augmented Generation.</p>
       </div>
-
       <section class="guide-section">
-        <h2>1. What is RAG?</h2>
-        
-        <div class="guide-card">
-          <div class="gc-icon">🔍</div>
-          <h3 class="gc-title">Definition</h3>
-          <p class="gc-desc">Retrieval-Augmented Generation (RAG) is an AI framework that retrieves factual data from an external knowledge base and provides it to a Large Language Model (LLM) to ground its responses in accurate, up-to-date information.</p>
-        </div>
+          <h2 id="what-is-rag">What is RAG?</h2>
+          <p>Retrieval-Augmented Generation (RAG) is an architecture that provides Large Language Models (LLMs) with external, factual data retrieved from a custom knowledge base before they generate a response. This grounds the AI in reality rather than relying solely on its pre-trained weights.</p>
+          
+          <h2 id="why-rag">Why RAG?</h2>
+          <p>LLMs have two major flaws: they hallucinate facts and their knowledge is frozen in time. RAG solves both by forcing the model to cite retrieved documents, allowing for real-time updates without retraining.</p>
 
-        <h3>End-to-End Workflow & Architecture</h3>
-        <p>A standard RAG pipeline operates in two distinct phases: <strong>Indexing</strong> (data preparation) and <strong>Retrieval/Generation</strong> (answering the user).</p>
-        
-        <div class="guide-grid">
-          <div class="guide-card">
-            <h3 class="gc-title">Phase 1: Indexing</h3>
-            <ul class="gc-list">
-              <li>Parse raw documents (PDFs, URLs, DBs).</li>
-              <li>Split text into overlapping chunks.</li>
-              <li>Convert chunks to vector embeddings.</li>
-              <li>Store in a Vector Database (e.g. Milvus).</li>
-            </ul>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Phase 2: Runtime</h3>
-            <ul class="gc-list">
-              <li>User submits a query.</li>
-              <li>Query is converted to an embedding.</li>
-              <li>Vector DB returns top-K similar chunks.</li>
-              <li>LLM generates a response using the chunks.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+          <h2 id="architecture">RAG Architecture & Pipeline</h2>
+          <p>A standard RAG pipeline operates in two distinct phases:</p>
+          <ul>
+            <li><strong>Phase 1 (Indexing):</strong> Documents are loaded, chunked, converted into vector embeddings, and stored in a vector database.</li>
+            <li><strong>Phase 2 (Retrieval & Generation):</strong> A user's query is converted to a vector, the DB finds the most semantically similar chunks, and these chunks are injected into the LLM's prompt to answer the query.</li>
+          </ul>
 
-      <section class="guide-section">
-        <h2>2. Why RAG? (Problems with standalone LLMs)</h2>
-        <p>Standalone Large Language Models (LLMs) are incredibly powerful, but they suffer from several inherent flaws that make them risky for enterprise use.</p>
-        
-        <div class="guide-callout warning">
-          <div class="guide-callout-title">⚠️ The Hallucination Problem</div>
-          <p>LLMs are probabilistic word-guessers. When they don't know a fact, they will confidently invent one. RAG fixes this by forcing the LLM to read from a factual context window.</p>
-        </div>
+          <h2 id="advantages">Advantages of RAG</h2>
+          <p>RAG offers high accuracy, verifiable citations, the ability to restrict access via metadata filtering, and vastly lower costs compared to fine-tuning.</p>
 
-        <div class="guide-grid">
-          <div class="guide-card">
-            <h3 class="gc-title">Knowledge Cutoff</h3>
-            <p class="gc-desc">LLMs are frozen in time after their training run completes. RAG allows you to inject real-time data without retraining.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Private Enterprise Data</h3>
-            <p class="gc-desc">LLMs don't know your company's proprietary documents. Fine-tuning on private data is expensive and poses security risks.</p>
-          </div>
-        </div>
-      </section>
+          <h2 id="limitations">Limitations of RAG</h2>
+          <p>RAG struggles with tasks requiring a holistic understanding of a massive document (e.g. "summarize this entire book"), heavily relies on chunking strategies, and introduces latency during the retrieval step.</p>
 
-      <section class="guide-section">
-        <h2>3. Advantages of RAG</h2>
-        <div class="guide-grid">
-          <div class="guide-card">
-            <h3 class="gc-title">Reduced Hallucinations</h3>
-            <p class="gc-desc">Responses are grounded in retrieved context rather than latent memory.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Source Citations</h3>
-            <p class="gc-desc">Since the LLM uses retrieved chunks, you can easily trace and cite the exact source document and page number.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Cost-Effective</h3>
-            <p class="gc-desc">Vector indexing is pennies compared to the tens of thousands of dollars required for continuous fine-tuning.</p>
-          </div>
-          <div class="guide-card">
-            <h3 class="gc-title">Access Control</h3>
-            <p class="gc-desc">You can restrict vector retrieval based on user permissions, something impossible with baked-in fine-tuning.</p>
-          </div>
-        </div>
-      </section>
+          <h2 id="vs-finetuning">RAG vs Fine-tuning</h2>
+          <p>Fine-tuning is for changing <em>behavior, tone, or format</em>. RAG is for updating <em>knowledge and facts</em>. They are often used together.</p>
 
-      <section class="guide-section">
-        <h2>4. Limitations of RAG</h2>
-        <div class="guide-grid">
-          <div class="guide-card" style="border-left: 4px solid #f97316;">
-            <h3 class="gc-title">Retrieval Dependency</h3>
-            <p class="gc-desc">If the search engine fails to find the right chunk, the LLM will fail to answer the question. "Garbage in, Garbage out."</p>
-          </div>
-          <div class="guide-card" style="border-left: 4px solid #f97316;">
-            <h3 class="gc-title">Latency & Cost</h3>
-            <p class="gc-desc">Running an embedding model, querying a vector DB, and sending huge context prompts to an LLM adds significant latency and token costs.</p>
-          </div>
-          <div class="guide-card" style="border-left: 4px solid #f97316;">
-            <h3 class="gc-title">Context Window Limits</h3>
-            <p class="gc-desc">Even with large context windows (128k+ tokens), putting too many chunks in the prompt can lead to the "Lost in the Middle" phenomenon.</p>
-          </div>
-        </div>
-      </section>
-      
+          <h2 id="vs-longcontext">RAG vs Long Context Models</h2>
+          <p>While models now support 1M+ tokens, stuffing everything into context is expensive, slow, and suffers from "lost in the middle" degradation. RAG remains cheaper, faster, and more precise for factual retrieval.</p>
+          
+          <h2 id="use-cases">RAG Use Cases</h2>
+          <p>Customer support bots, internal corporate wikis, legal document analysis, medical diagnosis assistants, and coding co-pilots.</p>
+        </section>
     </main>
   </div>
-
-  <footer>
-    <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
-  </footer>
-
-  <script src="../script.js?v=8"></script>
+  <script src="../script.js?v=12"></script>
 </body>
 </html>

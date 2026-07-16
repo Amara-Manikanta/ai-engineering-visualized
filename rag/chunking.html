@@ -2,375 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chunking - RAG | AI Engineering Visualized</title>
-  <meta name="description" content="A detailed interactive animated explainer of Retrieval-Augmented Generation (RAG) covering Indexing, Retrieval, Augmentation, and Generation stages." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chunking Strategies | AI Engineering Visualized</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles.css?v=8" />
+  <link rel="stylesheet" href="../styles.css?v=12" />
 </head>
 <body>
-  <!-- GLOBAL HEADER -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
-      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item has-dd" data-group="ml">
-          <div class="mnav-group-wrap">
-            <a href="../ml/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🤖</span>Machine Learning</a>
-            <button class="mnav-arrow-btn" aria-label="Open Machine Learning menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div>
-            <div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a><a href="../python/index.html" class="mnav-dd-link">Python</a><a href="../ml/supervised.html" class="mnav-dd-link">Supervised</a><a href="../ml/unsupervised.html" class="mnav-dd-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mnav-dd-link">Deep Learning</a><a href="../ml/nlp.html" class="mnav-dd-link">NLP</a><a href="../ml/decision-trees.html" class="mnav-dd-link">Decision Trees</a><a href="../ml/knn.html" class="mnav-dd-link">KNN</a><a href="../ml/logistic-regression.html" class="mnav-dd-link">Logistic Regression</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="genai">
-          <div class="mnav-group-wrap">
-            <a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Generative AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div>
-            <div class="mnav-dd-links"><a href="../llms/index.html" class="mnav-dd-link">AI Models</a><a href="../llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="../prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mnav-dd-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mnav-dd-link">Fine-tuning</a><a href="../genai/quantization.html" class="mnav-dd-link">Quantization</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="rag">
-          <div class="mnav-group-wrap">
-            <a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a>
-            <button class="mnav-arrow-btn" aria-label="Open RAG menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div>
-            <div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Introduction</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector Databases</a><a href="../rag/retrieval.html" class="mnav-dd-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mnav-dd-link">Types of RAG</a><a href="../rag/evaluation.html" class="mnav-dd-link">Evaluation</a><a href="../rag/development.html" class="mnav-dd-link">Development</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="agents">
-          <div class="mnav-group-wrap">
-            <a href="../agents/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🕸️</span>Agentic AI</a>
-            <button class="mnav-arrow-btn" aria-label="Open Agentic AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div>
-            <div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="../mcp/index.html" class="mnav-dd-link">MCP</a><a href="../langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div>
-          </div></div>
-        </li><li class="mnav-item has-dd" data-group="models">
-          <div class="mnav-group-wrap">
-            <a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a>
-            <button class="mnav-arrow-btn" aria-label="Open Models menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
-          </div>
-          <div class="mnav-dropdown"><div class="mnav-dd-inner">
-            <div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div>
-            <div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a><a href="../models/gpt.html" class="mnav-dd-link">GPT</a><a href="../models/gemini.html" class="mnav-dd-link">Gemini</a><a href="../models/llama.html" class="mnav-dd-link">Llama</a><a href="../models/qwen.html" class="mnav-dd-link">Qwen</a><a href="../models/deepseek.html" class="mnav-dd-link">DeepSeek</a><a href="../models/mistral.html" class="mnav-dd-link">Mistral</a></div>
-          </div></div>
-        </li><li class="mnav-item"><a href="../projects/index.html" class="mnav-link">🚀 Projects</a></li><li class="mnav-item"><a href="../resources/index.html" class="mnav-link">📚 Resources</a></li></ul></nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <nav class="mega-nav" id="mega-nav">
+        <ul class="mnav-list">
+          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
+          <li class="mnav-item"><a href="../python/index.html" class="mnav-link">🐍 Python</a></li>
+          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link">🤖 Machine Learning</a></li>
+          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link">✨ Generative AI</a></li>
+          <li class="mnav-item"><a href="../rag/index.html" class="mnav-link" style="color:var(--text)">🔍 RAG</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="mobile-drawer" id="mobile-drawer"><ul class="mobile-nav-list"><li><a href="../index.html" class="mobile-nav-link">🏠 Home</a></li><li class="mobile-group">
-          <button class="mobile-group-btn">🤖 Machine Learning <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../ml/index.html" class="mobile-child-link">Introduction</a><a href="../python/index.html" class="mobile-child-link">Python</a><a href="../ml/supervised.html" class="mobile-child-link">Supervised</a><a href="../ml/unsupervised.html" class="mobile-child-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mobile-child-link">Deep Learning</a><a href="../ml/nlp.html" class="mobile-child-link">NLP</a><a href="../ml/decision-trees.html" class="mobile-child-link">Decision Trees</a><a href="../ml/knn.html" class="mobile-child-link">KNN</a><a href="../ml/logistic-regression.html" class="mobile-child-link">Logistic Regression</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">✨ Generative AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../llms/index.html" class="mobile-child-link">AI Models</a><a href="../llm-inference/index.html" class="mobile-child-link">LLM Inference</a><a href="../prompting/index.html" class="mobile-child-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mobile-child-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mobile-child-link">Fine-tuning</a><a href="../genai/quantization.html" class="mobile-child-link">Quantization</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🔍 RAG <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../rag/fundamentals.html" class="mobile-child-link">Introduction</a><a href="../rag/chunking.html" class="mobile-child-link">Chunking</a><a href="../rag/vector-dbs.html" class="mobile-child-link">Vector Databases</a><a href="../rag/retrieval.html" class="mobile-child-link">Retrieval</a><a href="../rag/types-of-rag.html" class="mobile-child-link">Types of RAG</a><a href="../rag/evaluation.html" class="mobile-child-link">Evaluation</a><a href="../rag/development.html" class="mobile-child-link">Development</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🕸️ Agentic AI <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../agents/index.html" class="mobile-child-link">AI Agents</a><a href="../mcp/index.html" class="mobile-child-link">MCP</a><a href="../langgraph/index.html" class="mobile-child-link">LangGraph</a><a href="../agents/langchain.html" class="mobile-child-link">LangChain</a><a href="../agents/tool-calling.html" class="mobile-child-link">Tool Calling</a><a href="../agents/memory.html" class="mobile-child-link">Memory</a><a href="../agents/multi-agent.html" class="mobile-child-link">Multi-Agent</a></div>
-        </li><li class="mobile-group">
-          <button class="mobile-group-btn">🧩 Models <span class="mobile-group-arrow">▾</span></button>
-          <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
-        </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
 
-<div class="guide-layout">
+  <div class="guide-layout">
     <aside class="guide-sidebar">
       <div class="guide-sidebar-group">
         <div class="guide-sidebar-title">RAG Pipeline</div>
-        <a href="index.html" class="guide-sidebar-link">1. Overview</a>
-        <a href="fundamentals.html" class="guide-sidebar-link">2. Fundamentals</a>
+        <a href="fundamentals.html" class="guide-sidebar-link">1. Fundamentals</a>
+        <a href="data-prep.html" class="guide-sidebar-link">2. Data Preparation</a>
         <a href="indexing.html" class="guide-sidebar-link">3. Indexing</a>
         <a href="chunking.html" class="guide-sidebar-link active">4. Chunking</a>
-        <a href="retrieval.html" class="guide-sidebar-link">5. Retrieval</a>
-        <a href="generation.html" class="guide-sidebar-link">6. Generation</a>
+        <a href="embeddings.html" class="guide-sidebar-link">5. Embeddings</a>
+        <a href="vector-dbs.html" class="guide-sidebar-link">6. Vector Databases</a>
+        <a href="retrieval.html" class="guide-sidebar-link">7. Retrieval</a>
+        <a href="generation.html" class="guide-sidebar-link">8. Generation</a>
         <div class="guide-sidebar-title" style="margin-top: 15px;">Advanced Concepts</div>
-        <a href="types-of-rag.html" class="guide-sidebar-link">7. Types of RAG</a>
-        <div class="sidebar-sub" style="padding-left: 20px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; margin-bottom: 12px;">
-          <a href="naive-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Naive RAG</a>
-          <a href="advanced-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Advanced RAG</a>
-          <a href="hybrid-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Hybrid RAG</a>
-          <a href="agentic-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Agentic RAG</a>
-          <a href="graph-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Graph RAG</a>
-          <a href="multimodal-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Multi-modal RAG</a>
-          <a href="crag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Corrective RAG</a>
-          <a href="self-rag.html" class="guide-sidebar-sublink" style="color: var(--text2); text-decoration: none;">- Self-RAG</a>
-        </div>
-        <a href="vector-dbs.html" class="guide-sidebar-link">8. Vector DBs</a>
         <a href="evaluation.html" class="guide-sidebar-link">9. Evaluation</a>
         <a href="development.html" class="guide-sidebar-link">10. Development</a>
+        <a href="advanced-rag.html" class="guide-sidebar-link">11. Advanced RAG</a>
+        <a href="advanced-retrieval.html" class="guide-sidebar-link">12. Advanced Retrieval</a>
       </div>
     </aside>
+
     <main class="guide-content">
-
-<section id="chunking" class="section chunk-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Deep Dive</div>
-        <h2 class="section-title">✂️ AI Chunking Techniques</h2>
-        <p class="section-desc">
-          <em>Different ways to split documents. Better chunks. Better answers.</em><br>
-          How you split text dramatically affects retrieval quality — here are the 6 essential strategies.
-        </p>
+      <div class="guide-header">
+        <span class="guide-tag">Part 4</span>
+        <h1 class="guide-title">Chunking Strategies</h1>
+        <p class="guide-intro">Breaking large documents into optimal semantic pieces.</p>
       </div>
+      <section class="guide-section">
+          <h2 id="what-is-chunking">What is Chunking?</h2>
+          <p>Embedding models have token limits (e.g. 8192 tokens). Therefore, a 100-page PDF must be split into smaller "chunks". The goal of chunking is to keep related context together without capturing irrelevant noise.</p>
+          
+          <h2 id="basic-chunking">Basic Chunking Methods</h2>
+          <ul>
+            <li><strong>Fixed-size:</strong> Splitting text blindly every N characters. (Fast, but breaks sentences).</li>
+            <li><strong>Recursive Character:</strong> Tries to split on paragraphs, then sentences, then words, only falling back to characters if necessary. (The industry standard baseline).</li>
+            <li><strong>Token Chunking:</strong> Splitting based on the exact token counts used by the LLM (using tiktoken).</li>
+          </ul>
 
-      <!-- 6-card grid -->
-      <div class="chunk-grid">
+          <h2 id="advanced-chunking">Advanced Chunking Methods</h2>
+          <ul>
+            <li><strong>Semantic Chunking:</strong> Uses embeddings during the chunking phase to group sentences that are mathematically similar, breaking the chunk when the topic shifts.</li>
+            <li><strong>Markdown / Code Chunking:</strong> Uses AST parsers or regex to split code by functions/classes, or markdown by headers (H1, H2), ensuring structural integrity.</li>
+            <li><strong>Hierarchical / Parent-Child:</strong> Documents are split into large Parent chunks, which are further split into small Child chunks. The small chunks are embedded for precise retrieval, but the LLM is fed the entire Parent chunk for maximum context.</li>
+          </ul>
 
-        <!-- 1. Fixed-Size -->
-        <div class="chunk-card" id="ck1">
-          <div class="ck-header ck-fixed">
-            <div class="ck-num">1</div>
-            <div class="ck-title">Fixed-Size Chunking</div>
-          </div>
-          <p class="ck-desc">Split by a fixed number of tokens or words (e.g., 500 words or 1000 tokens). The simplest, fastest strategy.</p>
-          <div class="ck-visual ckv-fixed">
-            <div class="ckv-doc">📄 Source Doc</div>
-            <div class="ckv-arrow">→</div>
-            <div class="ckv-blocks">
-              <div class="ckb fixed-b">Chunk 1</div>
-              <div class="ckb fixed-b">Chunk 2</div>
-              <div class="ckb fixed-b">Chunk 3</div>
-              <div class="ckb fixed-b">Chunk 4</div>
-              <div class="ckb fixed-b faded">…</div>
-            </div>
-          </div>
-          <div class="ck-pros">
-            <span class="ck-pro">✅ Simple &amp; fast</span>
-            <span class="ck-pro">✅ Easy to implement</span>
-            <span class="ck-con">⚠ Splits mid-sentence</span>
-          </div>
-          <div class="ck-when">Best for: Plain text, quick prototypes</div>
-        </div>
-
-        <!-- 2. Sliding Window -->
-        <div class="chunk-card" id="ck2">
-          <div class="ck-header ck-sliding">
-            <div class="ck-num">2</div>
-            <div class="ck-title">Sliding Window Chunking</div>
-          </div>
-          <p class="ck-desc">Create overlapping chunks so context is preserved at boundaries. Chunk 2 starts before Chunk 1 ends.</p>
-          <div class="ck-visual ckv-sliding">
-            <div class="ckv-overlap-blocks">
-              <div class="ck-overlap-row">
-                <div class="ckb slide-b s1">Chunk 1<span class="cb-range">(1–5)</span></div>
-              </div>
-              <div class="ck-overlap-row off1">
-                <div class="ckb slide-b s2">Chunk 2<span class="cb-range">(4–8)</span></div>
-              </div>
-              <div class="ck-overlap-row off2">
-                <div class="ckb slide-b s3">Chunk 3<span class="cb-range">(7–11)</span></div>
-              </div>
-              <div class="ck-overlap-row off3">
-                <div class="ckb slide-b s4">Chunk 4<span class="cb-range">(10–14)</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="ck-pros">
-            <span class="ck-pro">✅ Preserves boundary context</span>
-            <span class="ck-pro">✅ No info loss</span>
-            <span class="ck-con">⚠ More chunks to store</span>
-          </div>
-          <div class="ck-when">Best for: Dense documents, technical content</div>
-        </div>
-
-        <!-- 3. Semantic -->
-        <div class="chunk-card" id="ck3">
-          <div class="ck-header ck-semantic">
-            <div class="ck-num">3</div>
-            <div class="ck-title">Semantic Chunking</div>
-          </div>
-          <p class="ck-desc">Group content by meaning and topic similarity using embeddings. Chunks respect semantic boundaries, not fixed sizes.</p>
-          <div class="ck-visual ckv-semantic">
-            <div class="ckb sem-b s-topic1">Topic 1<br><small>Insurance Basics</small></div>
-            <div class="ckb sem-b s-topic2">Topic 2<br><small>Claim Process</small></div>
-            <div class="ckb sem-b s-topic3">Topic 3<br><small>Exclusions</small></div>
-          </div>
-          <div class="ck-pros">
-            <span class="ck-pro">✅ High relevance</span>
-            <span class="ck-pro">✅ Better understanding</span>
-            <span class="ck-con">⚠ Needs embedding model</span>
-          </div>
-          <div class="ck-when">Best for: Mixed-topic documents, FAQs</div>
-        </div>
-
-        <!-- 4. Hierarchical -->
-        <div class="chunk-card" id="ck4">
-          <div class="ck-header ck-hierarchical">
-            <div class="ck-num">4</div>
-            <div class="ck-title">Hierarchical Chunking</div>
-          </div>
-          <p class="ck-desc">Split by document structure — sections, subsections, and paragraphs. Maintains the logical relationships in the document.</p>
-          <div class="ck-visual ckv-hierarchical">
-            <div class="hier-tree">
-              <div class="ht-node ht-doc">Document</div>
-              <div class="ht-children">
-                <div class="ht-branch">
-                  <div class="ht-node ht-sec">Section 1</div>
-                  <div class="ht-children">
-                    <div class="ht-node ht-sub">Sub 1</div>
-                    <div class="ht-node ht-sub">Sub 2</div>
-                  </div>
-                </div>
-                <div class="ht-branch">
-                  <div class="ht-node ht-sec">Section 2</div>
-                  <div class="ht-children">
-                    <div class="ht-node ht-sub">Sub 1</div>
-                    <div class="ht-node ht-sub">Sub 2</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ck-pros">
-            <span class="ck-pro">✅ Maintains structure</span>
-            <span class="ck-pro">✅ Keeps relationships</span>
-            <span class="ck-con">⚠ Requires structured docs</span>
-          </div>
-          <div class="ck-when">Best for: Reports, books, legal docs</div>
-        </div>
-
-        <!-- 5. Recursive -->
-        <div class="chunk-card" id="ck5">
-          <div class="ck-header ck-recursive">
-            <div class="ck-num">5</div>
-            <div class="ck-title">Recursive Chunking</div>
-          </div>
-          <p class="ck-desc">Recursively split using a priority order: Headings → Paragraphs → Sentences → Words. Falls back to finer splits only when needed.</p>
-          <div class="ck-visual ckv-recursive">
-            <div class="rec-ladder">
-              <div class="rec-level rl1"><span>Headings</span><div class="rec-bar"></div></div>
-              <div class="rec-arrow">↓</div>
-              <div class="rec-level rl2"><span>Paragraphs</span><div class="rec-bar"></div></div>
-              <div class="rec-arrow">↓</div>
-              <div class="rec-level rl3"><span>Sentences</span><div class="rec-bar"></div></div>
-              <div class="rec-arrow">↓</div>
-              <div class="rec-level rl4"><span>Words</span><div class="rec-bar"></div></div>
-            </div>
-          </div>
-          <div class="ck-pros">
-            <span class="ck-pro">✅ Flexible &amp; adaptive</span>
-            <span class="ck-pro">✅ Natural boundaries</span>
-            <span class="ck-con">⚠ More complex logic</span>
-          </div>
-          <div class="ck-when">Best for: General-purpose RAG (most popular)</div>
-        </div>
-
-        <!-- 6. Document-Aware -->
-        <div class="chunk-card" id="ck6">
-          <div class="ck-header ck-docaware">
-            <div class="ck-num">6</div>
-            <div class="ck-title">Document-Aware Chunking</div>
-          </div>
-          <p class="ck-desc">Split based on document element types — headings, paragraphs, tables, lists, code blocks, and images are treated differently.</p>
-          <div class="ck-visual ckv-docaware">
-            <div class="da-elements">
-              <div class="da-el da-h"><span class="da-icon">H</span> Heading</div>
-              <div class="da-el da-p"><span class="da-icon">≡</span> Paragraph</div>
-              <div class="da-el da-t"><span class="da-icon">⊞</span> Table</div>
-              <div class="da-el da-l"><span class="da-icon">☰</span> List</div>
-              <div class="da-el da-c"><span class="da-icon">&lt;/&gt;</span> Code Block</div>
-              <div class="da-el da-i"><span class="da-icon">🖼</span> Figure</div>
-            </div>
-          </div>
-          <div class="ck-pros">
-            <span class="ck-pro">✅ Respects layout</span>
-            <span class="ck-pro">✅ Great for mixed docs</span>
-            <span class="ck-con">⚠ Needs doc parser</span>
-          </div>
-          <div class="ck-when">Best for: PDFs, slides, structured reports</div>
-        </div>
-
-      </div><!-- /chunk-grid -->
-
-      <!-- Comparison table -->
-      <div class="chunk-comparison">
-        <h3 class="notes-title">📊 Technique Comparison</h3>
-        <div class="ct-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Technique</th>
-                <th>Overlap</th>
-                <th>Semantic Awareness</th>
-                <th>Implementation</th>
-                <th>Best For</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>1️⃣ Fixed-Size</td><td>❌ None</td><td>❌ None</td><td>⭐ Very Easy</td><td>Quick prototypes</td></tr>
-              <tr><td>2️⃣ Sliding Window</td><td>✅ Yes</td><td>❌ None</td><td>⭐⭐ Easy</td><td>Dense text</td></tr>
-              <tr><td>3️⃣ Semantic</td><td>✅ Natural</td><td>✅✅ High</td><td>⭐⭐⭐ Medium</td><td>Topic-mixed docs</td></tr>
-              <tr><td>4️⃣ Hierarchical</td><td>✅ Structural</td><td>✅ Medium</td><td>⭐⭐⭐ Medium</td><td>Books, reports</td></tr>
-              <tr class="highlight-row"><td>5️⃣ Recursive</td><td>✅ Adaptive</td><td>✅ Medium</td><td>⭐⭐⭐ Medium</td><td>✅ General-purpose</td></tr>
-              <tr><td>6️⃣ Document-Aware</td><td>✅ Element-level</td><td>✅✅ High</td><td>⭐⭐⭐⭐ Complex</td><td>PDFs, slides</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- From Chunks to Insights pipeline -->
-      <div class="chunks-to-insights">
-        <h3 class="notes-title">🔁 From Chunks to Insights</h3>
-        <div class="cti-pipeline">
-          <div class="cti-node">
-            <div class="cti-icon">✂️</div>
-            <div class="cti-label">Chunks</div>
-          </div>
-          <div class="cti-arrow"><div class="cti-line"></div></div>
-          <div class="cti-node">
-            <div class="cti-icon">🔢</div>
-            <div class="cti-label">Embeddings</div>
-          </div>
-          <div class="cti-arrow"><div class="cti-line"></div></div>
-          <div class="cti-node">
-            <div class="cti-icon">💾</div>
-            <div class="cti-label">Vector DB</div>
-          </div>
-          <div class="cti-arrow"><div class="cti-line"></div></div>
-          <div class="cti-node">
-            <div class="cti-icon">🔍</div>
-            <div class="cti-label">Retrieval</div>
-          </div>
-          <div class="cti-arrow"><div class="cti-line"></div></div>
-          <div class="cti-node">
-            <div class="cti-icon">🧠</div>
-            <div class="cti-label">LLM</div>
-          </div>
-          <div class="cti-arrow"><div class="cti-line"></div></div>
-          <div class="cti-node cti-final">
-            <div class="cti-icon">💬</div>
-            <div class="cti-label">Accurate Response</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</main>
+          <h2 id="best-practices">Chunk Size & Overlap Best Practices</h2>
+          <p>Generally, a chunk size of 512-1024 tokens is optimal. You must include a <strong>Chunk Overlap</strong> (e.g. 10-20%) to ensure concepts aren't abruptly cut in half across the boundary of two chunks.</p>
+        </section>
+    </main>
   </div>
-<footer>
-    <div class="footer-inner">
-      <div class="footer-logo">🤖 AI Engineering Visualized</div>
-      <p class="footer-desc">An interactive animated guide to RAG, MCP, LangGraph, and modern AI model architectures.</p>
-      <div class="footer-links">
-        <a href="#" onclick="document.querySelector('[data-tab=tab-rag]').click()">RAG Pipeline</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-mcp]').click()">MCP Pipeline</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-langgraph]').click()">LangGraph</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-llms]').click()">AI Models</a>
-        <a href="#" onclick="document.querySelector('[data-tab=tab-prompting]').click()">Prompt Engineering</a>
-      </div>
-      <p class="footer-copy">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p>
-    </div>
-  </footer>
-
-  <script src="../script.js?v=8"></script>
+  <script src="../script.js?v=12"></script>
 </body>
 </html>
