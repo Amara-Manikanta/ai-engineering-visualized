@@ -191,6 +191,11 @@ class StepAnimator {
       this.playBtn.textContent = '⏸ Pause';
       this.playBtn.classList.add('playing');
     }
+    if (this.currentStep >= this.totalSteps - 1) {
+      this.goToStep(0);
+    } else {
+      this.next();
+    }
     this.playInterval = setInterval(() => {
       if (this.currentStep < this.totalSteps - 1) {
         this.next();
