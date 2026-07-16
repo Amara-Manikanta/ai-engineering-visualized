@@ -125,15 +125,70 @@
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
-      <nav class="mega-nav" id="mega-nav">
-        <!-- Minimal nav block for the script -->
-        <ul class="mnav-list">
-          <li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li>
-          <li class="mnav-item"><a href="../ml/index.html" class="mnav-link" style="color:var(--text)">🤖 Machine Learning</a></li>
-          <li class="mnav-item"><a href="../genai/index.html" class="mnav-link">✨ Generative AI</a></li>
-        </ul>
-      </nav>
+      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item"><a href="../python/index.html" class="mnav-link">🐍 Python</a></li><li class="mnav-item has-dd" data-group="ml">
+          <div class="mnav-group-wrap">
+            <a href="../ml/index.html" class="mnav-link mnav-label" style="color:var(--text)"><span class="mnav-icon">🤖</span>Machine Learning</a>
+            <button class="mnav-arrow-btn" aria-label="Open Machine Learning menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
+          </div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner">
+            <div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div>
+            <div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a><a href="../ml/supervised.html" class="mnav-dd-link">Supervised</a><a href="../ml/unsupervised.html" class="mnav-dd-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mnav-dd-link">Deep Learning</a><a href="../ml/nlp.html" class="mnav-dd-link">NLP</a><a href="../ml/decision-trees.html" class="mnav-dd-link">Decision Trees</a><a href="../ml/knn.html" class="mnav-dd-link">KNN</a><a href="../ml/logistic-regression.html" class="mnav-dd-link">Logistic Reg</a><a href="../ml/linear-regression.html" class="mnav-dd-link">Linear Reg</a><a href="../ml/multiple-regression.html" class="mnav-dd-link">Multi Reg</a></div>
+          </div></div>
+        </li><li class="mnav-item has-dd" data-group="genai">
+          <div class="mnav-group-wrap">
+            <a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a>
+            <button class="mnav-arrow-btn" aria-label="Open Generative AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
+          </div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner">
+            <div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div>
+            <div class="mnav-dd-links"><a href="llms/index.html" class="mnav-dd-link">AI Models</a><a href="llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="embeddings/index.html" class="mnav-dd-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mnav-dd-link">Fine-tuning</a><a href="../genai/quantization.html" class="mnav-dd-link">Quantization</a></div>
+          </div></div>
+        </li><li class="mnav-item has-dd" data-group="rag">
+          <div class="mnav-group-wrap">
+            <a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a>
+            <button class="mnav-arrow-btn" aria-label="Open RAG menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
+          </div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner">
+            <div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div>
+            <div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Fundamentals</a><a href="../rag/data-prep.html" class="mnav-dd-link">Data Prep</a><a href="../rag/indexing.html" class="mnav-dd-link">Indexing</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/embeddings.html" class="mnav-dd-link">Embeddings</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector DBs</a><a href="../rag/retrieval.html" class="mnav-dd-link">Retrieval</a><a href="../rag/generation.html" class="mnav-dd-link">Generation</a><a href="../rag/evaluation.html" class="mnav-dd-link">Evaluation</a><a href="../rag/development.html" class="mnav-dd-link">Development</a><a href="../rag/types-of-rag.html" class="mnav-dd-link">Types of RAG</a><a href="../rag/advanced-retrieval.html" class="mnav-dd-link">Adv Retrieval</a></div>
+          </div></div>
+        </li><li class="mnav-item has-dd" data-group="agents">
+          <div class="mnav-group-wrap">
+            <a href="../agents/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🕸️</span>Agentic AI</a>
+            <button class="mnav-arrow-btn" aria-label="Open Agentic AI menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
+          </div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner">
+            <div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div>
+            <div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="mcp/index.html" class="mnav-dd-link">MCP</a><a href="langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div>
+          </div></div>
+        </li><li class="mnav-item has-dd" data-group="models">
+          <div class="mnav-group-wrap">
+            <a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a>
+            <button class="mnav-arrow-btn" aria-label="Open Models menu" aria-expanded="false"><span class="mnav-arrow">▾</span></button>
+          </div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner">
+            <div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div>
+            <div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a><a href="../models/gpt.html" class="mnav-dd-link">GPT</a><a href="../models/gemini.html" class="mnav-dd-link">Gemini</a><a href="../models/llama.html" class="mnav-dd-link">Llama</a><a href="../models/qwen.html" class="mnav-dd-link">Qwen</a><a href="../models/deepseek.html" class="mnav-dd-link">DeepSeek</a><a href="../models/mistral.html" class="mnav-dd-link">Mistral</a></div>
+          </div></div>
+        </li><li class="mnav-item"><a href="../projects/index.html" class="mnav-link">🚀 Projects</a></li><li class="mnav-item"><a href="../resources/index.html" class="mnav-link">📚 Resources</a></li></ul></nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
+    <div class="mobile-drawer" id="mobile-drawer"><ul class="mobile-nav-list"><li><a href="../index.html" class="mobile-nav-link">🏠 Home</a></li><li class="mobile-group">
+          <button class="mobile-group-btn">🤖 Machine Learning <span class="mobile-group-arrow">▾</span></button>
+          <div class="mobile-group-children"><a href="../ml/index.html" class="mobile-child-link">Introduction</a><a href="../ml/supervised.html" class="mobile-child-link">Supervised</a><a href="../ml/unsupervised.html" class="mobile-child-link">Unsupervised</a><a href="../ml/deep-learning.html" class="mobile-child-link">Deep Learning</a><a href="../ml/nlp.html" class="mobile-child-link">NLP</a><a href="../ml/decision-trees.html" class="mobile-child-link">Decision Trees</a><a href="../ml/knn.html" class="mobile-child-link">KNN</a><a href="../ml/logistic-regression.html" class="mobile-child-link">Logistic Reg</a><a href="../ml/linear-regression.html" class="mobile-child-link">Linear Reg</a><a href="../ml/multiple-regression.html" class="mobile-child-link">Multi Reg</a></div>
+        </li><li class="mobile-group">
+          <button class="mobile-group-btn">✨ Generative AI <span class="mobile-group-arrow">▾</span></button>
+          <div class="mobile-group-children"><a href="llms/index.html" class="mobile-child-link">AI Models</a><a href="llm-inference/index.html" class="mobile-child-link">LLM Inference</a><a href="prompting/index.html" class="mobile-child-link">Prompt Engineering</a><a href="embeddings/index.html" class="mobile-child-link">Embeddings</a><a href="../genai/fine-tuning.html" class="mobile-child-link">Fine-tuning</a><a href="../genai/quantization.html" class="mobile-child-link">Quantization</a></div>
+        </li><li class="mobile-group">
+          <button class="mobile-group-btn">🔍 RAG <span class="mobile-group-arrow">▾</span></button>
+          <div class="mobile-group-children"><a href="../rag/fundamentals.html" class="mobile-child-link">Fundamentals</a><a href="../rag/data-prep.html" class="mobile-child-link">Data Prep</a><a href="../rag/indexing.html" class="mobile-child-link">Indexing</a><a href="../rag/chunking.html" class="mobile-child-link">Chunking</a><a href="../rag/embeddings.html" class="mobile-child-link">Embeddings</a><a href="../rag/vector-dbs.html" class="mobile-child-link">Vector DBs</a><a href="../rag/retrieval.html" class="mobile-child-link">Retrieval</a><a href="../rag/generation.html" class="mobile-child-link">Generation</a><a href="../rag/evaluation.html" class="mobile-child-link">Evaluation</a><a href="../rag/development.html" class="mobile-child-link">Development</a><a href="../rag/types-of-rag.html" class="mobile-child-link">Types of RAG</a><a href="../rag/advanced-retrieval.html" class="mobile-child-link">Adv Retrieval</a></div>
+        </li><li class="mobile-group">
+          <button class="mobile-group-btn">🕸️ Agentic AI <span class="mobile-group-arrow">▾</span></button>
+          <div class="mobile-group-children"><a href="../agents/index.html" class="mobile-child-link">AI Agents</a><a href="mcp/index.html" class="mobile-child-link">MCP</a><a href="langgraph/index.html" class="mobile-child-link">LangGraph</a><a href="../agents/langchain.html" class="mobile-child-link">LangChain</a><a href="../agents/tool-calling.html" class="mobile-child-link">Tool Calling</a><a href="../agents/memory.html" class="mobile-child-link">Memory</a><a href="../agents/multi-agent.html" class="mobile-child-link">Multi-Agent</a></div>
+        </li><li class="mobile-group">
+          <button class="mobile-group-btn">🧩 Models <span class="mobile-group-arrow">▾</span></button>
+          <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
+        </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
 
   <div class="guide-layout">
