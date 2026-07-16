@@ -110,24 +110,42 @@ class StepAnimator {
     if (index >= this.totalSteps) index = this.totalSteps - 1;
     this.currentStep = index;
 
-    // Update all nodes & arrows
-    this.steps.forEach((step, i) => {
-      // Nodes
-      step.nodes?.forEach(nodeId => {
-        const el = document.getElementById(nodeId);
-        if (!el) return;
-        el.classList.remove('active', 'done');
-        if (i < index) el.classList.add('done');
-        else if (i === index) el.classList.add('active');
-      });
-      // Arrows
-      step.arrows?.forEach(arrId => {
-        const el = document.getElementById(arrId);
-        if (!el) return;
-        el.classList.remove('active');
-        if (i <= index) el.classList.add('active');
-      });
+    // 1. Gather and reset all nodes and arrows across all steps
+    const allNodes = new Set();
+    const allArrows = new Set();
+    this.steps.forEach(s => {
+      s.nodes?.forEach(n => allNodes.add(n));
+      s.arrows?.forEach(a => allArrows.add(a));
     });
+
+    allNodes.forEach(nodeId => {
+      const el = document.getElementById(nodeId);
+      if (el) el.classList.remove('active', 'done');
+    });
+    allArrows.forEach(arrId => {
+      const el = document.getElementById(arrId);
+      if (el) el.classList.remove('active');
+    });
+
+    // 2. Highlight current step's elements
+    const currentStepDef = this.steps[index];
+    if (currentStepDef) {
+      if (currentStepDef.nodes && currentStepDef.nodes.length > 0) {
+        currentStepDef.nodes.forEach((nodeId, idx) => {
+          const el = document.getElementById(nodeId);
+          if (!el) return;
+          if (idx === currentStepDef.nodes.length - 1) {
+            el.classList.add('active');
+          } else {
+            el.classList.add('done');
+          }
+        });
+      }
+      currentStepDef.arrows?.forEach(arrId => {
+        const el = document.getElementById(arrId);
+        if (el) el.classList.add('active');
+      });
+    }
 
     // Update label
     if (this.labelEl) {
