@@ -8,6 +8,229 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css?v=12" />
+  <style>
+    /* Embeddings Layout */
+    .embeddings-layout {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .embeddings-toc {
+      width: 250px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 90px;
+      height: max-content;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 0.9em;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .toc-link {
+      display: block;
+      padding: 6px 0;
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: color 0.2s;
+    }
+    .toc-link:hover {
+      color: var(--primary);
+    }
+    .embeddings-content {
+      flex-grow: 1;
+      min-width: 0;
+    }
+    .emb-section {
+      margin-bottom: 50px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .emb-section:last-child {
+      border-bottom: none;
+    }
+    .emb-section h2 {
+      margin-top: 0;
+      scroll-margin-top: 80px;
+    }
+    
+    /* Diagrams */
+    .emb-canvas {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      position: relative;
+    }
+    .t2v-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .t2v-box {
+      padding: 12px;
+      background: var(--bg);
+      border: 2px solid;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .t2v-arrow {
+      font-size: 1.5em;
+      color: var(--text3);
+    }
+    
+    .hd-space {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .hd-point {
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: absolute;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .hd-point::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8em;
+      color: var(--text);
+      font-weight: 600;
+      background: var(--bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .emb-caption {
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--text3);
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+    
+    /* Math and Tables */
+    .math-card {
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .math-eq {
+      font-family: var(--mono);
+      font-size: 1.2em;
+      text-align: center;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    .math-bullets {
+      margin: 0;
+      font-size: 0.9em;
+    }
+    
+    .emb-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9em;
+    }
+    .emb-table th, .emb-table td {
+      padding: 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .emb-table th {
+      background: var(--surface);
+      font-weight: 600;
+    }
+    
+    /* Models Grid */
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .model-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .m-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .m-dim {
+      font-family: var(--mono);
+      font-size: 0.8em;
+      color: var(--text2);
+      margin-bottom: 10px;
+    }
+    .m-desc {
+      font-size: 0.85em;
+    }
+    
+    /* Code Panel & Pro/Con Cards reuse */
+    .code-panel {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 0.85em;
+      overflow-x: auto;
+      margin-bottom: 20px;
+      color: var(--text);
+      white-space: pre;
+    }
+    .pro-con-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .con-card {
+      background: rgba(239, 68, 68, 0.05);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      padding: 16px;
+      border-radius: 8px;
+    }
+    .con-card h4 { color: var(--red); margin-top: 0; margin-bottom: 8px; }
+    
+    @media (max-width: 900px) {
+      .embeddings-layout {
+        flex-direction: column;
+      }
+      .embeddings-toc {
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header" id="site-header">
@@ -115,27 +338,216 @@
         <h1 class="guide-title">Embeddings</h1>
         <p class="guide-intro">The mathematical foundation of semantic search.</p>
       </div>
-      <section class="guide-section">
-          <h2 id="what-are">What are Embeddings?</h2>
-          <p>Embeddings are dense numerical vectors that represent the semantic meaning of text. Words with similar meanings are mapped to points close to each other in a high-dimensional mathematical space.</p>
-          
-          <h2 id="dense-vs-sparse">Dense vs Sparse Embeddings</h2>
-          <ul>
-            <li><strong>Dense Embeddings:</strong> (e.g. OpenAI, Cohere) Arrays of non-zero floating point numbers representing abstract meaning.</li>
-            <li><strong>Sparse Embeddings:</strong> (e.g. SPLADE, TF-IDF) Huge arrays where most numbers are zero, focusing on exact keyword frequencies.</li>
-          </ul>
+      
+      <!-- Mini TOC and Layout -->
+      <div class="embeddings-layout">
+        <div class="embeddings-toc">
+          <div class="toc-title">Topics in this guide</div>
+          <a href="#what-are" class="toc-link">1. What are Embeddings?</a>
+          <a href="#why-need" class="toc-link">2. Why do we need them?</a>
+          <a href="#text-to-vector" class="toc-link">3. Text to Vector</a>
+          <a href="#high-dim" class="toc-link">4. High-dimensional Space</a>
+          <a href="#sim-search" class="toc-link">5. Similarity Search</a>
+          <a href="#cosine" class="toc-link">6. Cosine Similarity</a>
+          <a href="#dot-product" class="toc-link">7. Dot Product</a>
+          <a href="#dense-sparse" class="toc-link">8. Dense vs Sparse</a>
+          <a href="#models" class="toc-link">9. Embedding Models</a>
+          <a href="#python" class="toc-link">10. Creating in Python</a>
+          <a href="#visualizing" class="toc-link">11. Visualizing Embeddings</a>
+          <a href="#examples" class="toc-link">12. Real-world Examples</a>
+          <a href="#mistakes" class="toc-link">13. Common Mistakes</a>
+        </div>
 
-          <h2 id="models-dimensions">Models & Dimensions</h2>
-          <p>Different models output different dimensions. OpenAI's <code>text-embedding-3-large</code> supports up to 3072 dimensions, while smaller open-source models like <code>all-MiniLM-L6-v2</code> output 384 dimensions. Higher dimensions capture more nuance but are slower to search and cost more to store.</p>
+        <div class="embeddings-content">
+          <!-- 1. What are Embeddings? -->
+          <section id="what-are" class="emb-section">
+            <h2>1. What are Embeddings?</h2>
+            <p>Embeddings are <strong>dense numerical vectors</strong> (lists of floating-point numbers) that capture the semantic meaning of text, images, or audio. They act as a universal language for AI models, translating human concepts into math. In this space, words with similar meanings are mapped to points that are geometrically close to each other.</p>
+          </section>
 
-          <h2 id="similarity">Similarity Metrics</h2>
-          <p>To compare how similar two embeddings are, Vector DBs use mathematical formulas:</p>
-          <ul>
-            <li><strong>Cosine Similarity:</strong> Measures the angle between two vectors. (Most common for text).</li>
-            <li><strong>Dot Product:</strong> Measures angle and magnitude. (Preferred if embeddings are normalized).</li>
-            <li><strong>Euclidean Distance (L2):</strong> Measures the straight-line distance between the points.</li>
-          </ul>
-        </section>
+          <!-- 2. Why do we need them? -->
+          <section id="why-need" class="emb-section">
+            <h2>2. Why do we need Embeddings?</h2>
+            <p>Traditional keyword search (like BM25 or TF-IDF) relies on exact lexical matches. If a user searches for <em>"puppy"</em>, the search engine will completely miss documents containing only <em>"young dog"</em> because the raw characters do not match.</p>
+            <p>Embeddings solve the <strong>lexical gap</strong>. Because they encode <em>intent and meaning</em> rather than spelling, a query for "puppy" and a document about "young dog" will have nearly identical vector representations. This allows for true <strong>Semantic Search</strong>.</p>
+          </section>
+
+          <!-- 3. Text to Vector -->
+          <section id="text-to-vector" class="emb-section">
+            <h2>3. Text to Vector</h2>
+            <p>The journey from text to vector involves tokenization, followed by a forward pass through a neural network encoder (like BERT or GPT).</p>
+            <div class="emb-canvas">
+              <div class="t2v-flow">
+                <div class="t2v-box" style="border-color: var(--primary);">"The puppy played."</div>
+                <div class="t2v-arrow">➔</div>
+                <div class="t2v-box" style="border-color: var(--blue);">Tokens:<br>[464, 15309, 3624, 13]</div>
+                <div class="t2v-arrow">➔</div>
+                <div class="t2v-box" style="border-color: var(--green); font-family: var(--mono); font-size: 0.8em; max-width:250px;">
+                  [0.012, -0.834, 0.442,<br> 0.119, -0.003, ... ]<br><span style="color:var(--text3)">(384 dimensions)</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. High-dimensional Space -->
+          <section id="high-dim" class="emb-section">
+            <h2>4. High-dimensional Space</h2>
+            <p>While humans can only visualize 2D or 3D space, embedding models project concepts into hundreds or thousands of dimensions (e.g., 384, 768, 1536). Each dimension represents a highly abstract, latent feature (like "royalty", "gender", "positivity", or "plurality").</p>
+            <div class="emb-canvas" style="height:200px;">
+              <div class="hd-space">
+                <div class="hd-point" style="left:20%; top:30%;" data-label="King"></div>
+                <div class="hd-point" style="left:35%; top:20%;" data-label="Queen"></div>
+                
+                <div class="hd-point" style="left:70%; top:70%;" data-label="Car"></div>
+                <div class="hd-point" style="left:80%; top:60%;" data-label="Truck"></div>
+                
+                <svg width="100%" height="100%" style="position:absolute; top:0; left:0; pointer-events:none;">
+                  <line x1="20%" y1="30%" x2="35%" y2="20%" stroke="var(--primary)" stroke-dasharray="4" stroke-width="2"/>
+                  <line x1="70%" y1="70%" x2="80%" y2="60%" stroke="var(--green)" stroke-dasharray="4" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+            <p class="emb-caption">Notice how concepts group together based on semantic relationships.</p>
+          </section>
+
+          <!-- 5. Similarity Search -->
+          <section id="sim-search" class="emb-section">
+            <h2>5. Similarity Search</h2>
+            <p>Once your documents are converted to vectors and stored in a Vector Database (like Pinecone, Milvus, or Chroma), how do you search them? You embed the user's query into a vector using the exact same model, and ask the database to find the vectors that are closest to it mathematically. This process is known as <strong>K-Nearest Neighbors (KNN)</strong>.</p>
+          </section>
+
+          <!-- 6. Cosine Similarity -->
+          <section id="cosine" class="emb-section">
+            <h2>6. Cosine Similarity</h2>
+            <p>This is the most common metric used for text embeddings. It calculates the cosine of the angle $\theta$ between two vectors, completely ignoring their magnitude (length). </p>
+            <div class="math-card">
+              <div class="math-eq">Cosine Similarity = (A • B) / (||A|| × ||B||)</div>
+              <ul class="math-bullets">
+                <li><strong>1.0</strong>: Vectors point in the exact same direction (identical meaning).</li>
+                <li><strong>0.0</strong>: Vectors are orthogonal (unrelated).</li>
+                <li><strong>-1.0</strong>: Vectors point in opposite directions (opposite meaning).</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- 7. Dot Product -->
+          <section id="dot-product" class="emb-section">
+            <h2>7. Dot Product</h2>
+            <p>Calculates the sum of the products of the corresponding entries of the two sequences of numbers. Unlike Cosine Similarity, it accounts for both the <strong>angle</strong> and the <strong>magnitude</strong>.</p>
+            <p><em>Note:</em> If your vectors are <strong>normalized</strong> (scaled so their length = 1), the Dot Product is mathematically identical to Cosine Similarity, but it computes much faster on modern CPUs/GPUs.</p>
+          </section>
+
+          <!-- 8. Dense vs Sparse -->
+          <section id="dense-sparse" class="emb-section">
+            <h2>8. Dense vs Sparse Embeddings</h2>
+            <p>Hybrid search systems combine two different types of embeddings to get the best of both semantic and keyword search.</p>
+            <table class="emb-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Dense (OpenAI, Cohere)</th>
+                  <th>Sparse (SPLADE, BM25)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Array Focus</strong></td>
+                  <td>Semantic meaning (Intent)</td>
+                  <td>Exact keyword matching</td>
+                </tr>
+                <tr>
+                  <td><strong>Array Composition</strong></td>
+                  <td>Most values are non-zero floating points</td>
+                  <td>99% of values are zero</td>
+                </tr>
+                <tr>
+                  <td><strong>Dimensionality</strong></td>
+                  <td>Low (384 - 3072)</td>
+                  <td>Extremely High (Vocabulary size, e.g. 30,000+)</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- 9. Embedding Models -->
+          <section id="models" class="emb-section">
+            <h2>9. Embedding Models</h2>
+            <p>Choosing the right model dictates your database cost and retrieval quality.</p>
+            <div class="models-grid">
+              <div class="model-card">
+                <div class="m-title">OpenAI text-embedding-3-large</div>
+                <div class="m-dim">Dimensions: up to 3072</div>
+                <div class="m-desc">State of the art proprietary model. Very high quality but requires API calls and costs money.</div>
+              </div>
+              <div class="model-card">
+                <div class="m-title">all-MiniLM-L6-v2 (HuggingFace)</div>
+                <div class="m-dim">Dimensions: 384</div>
+                <div class="m-desc">Extremely fast, open-source model. Runs locally. Great for smaller projects and low-latency.</div>
+              </div>
+              <div class="model-card">
+                <div class="m-title">Cohere embed-english-v3.0</div>
+                <div class="m-dim">Dimensions: 1024</div>
+                <div class="m-desc">Excellent proprietary model specifically optimized for enterprise RAG pipelines and search.</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 10. Creating Embeddings in Python -->
+          <section id="python" class="emb-section">
+            <h2>10. Creating Embeddings in Python</h2>
+            
+            <h3 style="font-size:1em; margin-top:20px;">Using OpenAI (Cloud)</h3>
+            <div class="code-panel">from langchain_openai import OpenAIEmbeddings
+
+embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
+vector = embeddings_model.embed_query("Hello world")
+print(f"Dimensions: {len(vector)}") # Output: 1536</div>
+
+            <h3 style="font-size:1em; margin-top:20px;">Using HuggingFace (Local CPU/GPU)</h3>
+            <div class="code-panel">from langchain_community.embeddings import HuggingFaceEmbeddings
+
+# Downloads the model to your machine and runs locally
+embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+vector = embeddings_model.embed_query("Hello world")
+print(f"Dimensions: {len(vector)}") # Output: 384</div>
+          </section>
+
+          <!-- 11. Visualizing Embeddings -->
+          <section id="visualizing" class="emb-section">
+            <h2>11. Visualizing Embeddings</h2>
+            <p>Because humans cannot see in 1536 dimensions, data scientists use dimensionality reduction algorithms like <strong>t-SNE</strong> or <strong>UMAP</strong> to squash the vectors down into 2D or 3D space while preserving the local distances between points. This allows us to plot them on a standard graph to look for semantic clusters and outlier data points.</p>
+          </section>
+
+          <!-- 12. Real-world Examples -->
+          <section id="examples" class="emb-section">
+            <h2>12. Real-world Examples</h2>
+            <ul>
+              <li><strong>Semantic Search (RAG):</strong> Finding paragraphs in a company handbook that answer a user's question, even if they use entirely different vocabulary.</li>
+              <li><strong>Recommendation Systems:</strong> Embedding user profiles and movies into the same vector space. If a user vector is near a movie vector, the system recommends that movie.</li>
+              <li><strong>Anomaly Detection:</strong> Finding log entries or financial transactions whose vectors sit far outside the standard cluster norms.</li>
+            </ul>
+          </section>
+
+          <!-- 13. Common Mistakes -->
+          <section id="mistakes" class="emb-section">
+            <h2>13. Common Mistakes</h2>
+            <div class="pro-con-grid" style="grid-template-columns: 1fr;">
+              <div class="con-card" style="margin-bottom:10px;">
+                <h4>⚠️ Not Normalizing Before Dot Product</h4>
+                <p style="margin:0; font-size:0.9em; color:var(--text);">If your database uses Dot Product but your vectors are not normalized to a length of 1, longer texts will unfairly score higher simply because they have larger magnitude vectors. <em>Always normalize if using Dot Product for text similarity.</em></p>
+              </div>
+              <div class="con-card" style="margin-bottom:10px;">
+                <h4>⚠️ Dimension Mismatch</h4>
+                <p style="margin:0; font-size:0.9em; color:var(--text);">You cannot compare a 384-dimensional vector to a 1536-dimensional vector. Furthermore, you cannot compare two 1536-dimensional vectors created by different models! All data in a single vector index must be created by the <strong>exact same embedding model version</strong>.</p>
+              </div>
+              <div class="con-card">
+                <h4>⚠️ Asymmetric Search Ignorance</h4>
+                <p style="margin:0; font-size:0.9em; color:var(--text);">If your queries are short (e.g., "Python error") but your documents are long paragraphs, you have an asymmetric search problem. You must use embedding models trained specifically for asymmetric QA, not just general semantic similarity.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </main>
   </div>
   <script src="../script.js?v=12"></script>
