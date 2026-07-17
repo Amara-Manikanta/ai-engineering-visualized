@@ -301,6 +301,28 @@
         <p class="guide-intro">Breaking large documents into optimal semantic pieces.</p>
       </div>
 
+      <section class="guide-section" style="padding: 0 20px;">
+          <h2 id="what-is-chunking">What is Chunking?</h2>
+          <p>Embedding models have token limits (e.g. 8192 tokens). Therefore, a 100-page PDF must be split into smaller "chunks". The goal of chunking is to keep related context together without capturing irrelevant noise.</p>
+          
+          <h2 id="basic-chunking">Basic Chunking Methods</h2>
+          <ul>
+            <li><strong>Fixed-size:</strong> Splitting text blindly every N characters. (Fast, but breaks sentences).</li>
+            <li><strong>Recursive Character:</strong> Tries to split on paragraphs, then sentences, then words, only falling back to characters if necessary. (The industry standard baseline).</li>
+            <li><strong>Token Chunking:</strong> Splitting based on the exact token counts used by the LLM (using tiktoken).</li>
+          </ul>
+
+          <h2 id="advanced-chunking">Advanced Chunking Methods</h2>
+          <ul>
+            <li><strong>Semantic Chunking:</strong> Uses embeddings during the chunking phase to group sentences that are mathematically similar, breaking the chunk when the topic shifts.</li>
+            <li><strong>Markdown / Code Chunking:</strong> Uses AST parsers or regex to split code by functions/classes, or markdown by headers (H1, H2), ensuring structural integrity.</li>
+            <li><strong>Hierarchical / Parent-Child:</strong> Documents are split into large Parent chunks, which are further split into small Child chunks. The small chunks are embedded for precise retrieval, but the LLM is fed the entire Parent chunk for maximum context.</li>
+          </ul>
+
+          <h2 id="best-practices">Chunk Size & Overlap Best Practices</h2>
+          <p>Generally, a chunk size of 512-1024 tokens is optimal. You must include a <strong>Chunk Overlap</strong> (e.g. 10-20%) to ensure concepts aren't abruptly cut in half across the boundary of two chunks.</p>
+      </section>
+
       <div class="chunking-container">
         <!-- Tabs -->
         <div class="chunking-tabs">
