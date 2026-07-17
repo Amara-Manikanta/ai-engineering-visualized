@@ -8,6 +8,191 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css?v=12" />
+  <style>
+    /* Tab Styling */
+    .chunking-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .chunking-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .ctab-btn {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      color: var(--text2);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.85em;
+    }
+    .ctab-btn:hover {
+      background: var(--surface);
+      border-color: var(--primary);
+      color: var(--text);
+    }
+    .ctab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+    
+    .ctab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .ctab-content.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Animation Canvas Specifics */
+    .chunk-canvas {
+      height: 250px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Grid details for advantages/disadvantages */
+    .pro-con-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    @media (max-width: 600px) {
+      .pro-con-grid { grid-template-columns: 1fr; }
+    }
+    .pro-card, .con-card {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid;
+    }
+    .pro-card {
+      background: rgba(16, 185, 129, 0.05);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+    .con-card {
+      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    .pro-card h4 { color: var(--green); margin-top: 0; margin-bottom: 8px; }
+    .con-card h4 { color: var(--red); margin-top: 0; margin-bottom: 8px; }
+    .pro-card ul, .con-card ul { margin: 0; padding-left: 20px; font-size: 0.9em; }
+    
+    /* Python code panel */
+    .code-panel {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 0.85em;
+      overflow-x: auto;
+      margin-bottom: 20px;
+      color: var(--text);
+      white-space: pre;
+    }
+    
+    /* Fixed Size Animation details */
+    .fs-doc {
+      display: flex;
+      gap: 4px;
+      font-size: 1.1em;
+      font-weight: 700;
+      font-family: var(--mono);
+      color: var(--text2);
+    }
+    .fs-slice {
+      position: absolute;
+      top: 0; bottom: 0; width: 2px;
+      background: repeating-linear-gradient(0deg, var(--red), var(--red) 5px, transparent 5px, transparent 10px);
+      animation: sliceDrop 2s ease-in-out infinite;
+      opacity: 0;
+    }
+    @keyframes sliceDrop {
+      0%, 100% { opacity: 0; transform: translateY(-50px); }
+      30%, 70% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Sliding Window Overlap */
+    .sw-window {
+      position: absolute;
+      height: 60px;
+      border: 2px solid;
+      border-radius: 8px;
+      transition: all 0.5s;
+    }
+    
+    /* Semantic Clustering */
+    .sem-point {
+      width: 12px; height: 12px; border-radius: 50%;
+      position: absolute; transition: all 0.5s;
+    }
+    
+    /* Hierarchical Tree */
+    .tree-node {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8em;
+      font-weight: 600;
+      position: absolute;
+    }
+    
+    /* Recursive splits */
+    .rec-split-step {
+      font-size: 0.9em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* Doc-Aware components */
+    .doc-layout {
+      width: 80%; height: 80%;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+    .dl-block {
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75em;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header" id="site-header">
@@ -115,29 +300,360 @@
         <h1 class="guide-title">Chunking Strategies</h1>
         <p class="guide-intro">Breaking large documents into optimal semantic pieces.</p>
       </div>
-      <section class="guide-section">
-          <h2 id="what-is-chunking">What is Chunking?</h2>
-          <p>Embedding models have token limits (e.g. 8192 tokens). Therefore, a 100-page PDF must be split into smaller "chunks". The goal of chunking is to keep related context together without capturing irrelevant noise.</p>
+
+      <div class="chunking-container">
+        <!-- Tabs -->
+        <div class="chunking-tabs">
+          <button class="ctab-btn active" onclick="switchTab(1)">📁 Fixed-Size</button>
+          <button class="ctab-btn" onclick="switchTab(2)">↔️ Sliding Window</button>
+          <button class="ctab-btn" onclick="switchTab(3)">🧠 Semantic</button>
+          <button class="ctab-btn" onclick="switchTab(4)">🌲 Hierarchical</button>
+          <button class="ctab-btn" onclick="switchTab(5)">🔁 Recursive</button>
+          <button class="ctab-btn" onclick="switchTab(6)">📄 Doc-Aware</button>
+        </div>
+
+        <!-- Tab 1: Fixed-Size -->
+        <div class="ctab-content active" id="tab-1">
+          <h2>1. Fixed-Size Chunking</h2>
+          <p>Splits documents into equal segments of characters or tokens regardless of word limits, sentence endings, or paragraphs. Simple, fast, but highly disruptive to sentence structure.</p>
           
-          <h2 id="basic-chunking">Basic Chunking Methods</h2>
-          <ul>
-            <li><strong>Fixed-size:</strong> Splitting text blindly every N characters. (Fast, but breaks sentences).</li>
-            <li><strong>Recursive Character:</strong> Tries to split on paragraphs, then sentences, then words, only falling back to characters if necessary. (The industry standard baseline).</li>
-            <li><strong>Token Chunking:</strong> Splitting based on the exact token counts used by the LLM (using tiktoken).</li>
-          </ul>
+          <div class="chunk-canvas">
+            <div class="fs-doc">
+              <span>Artifi</span><span style="color:var(--red)">|</span>
+              <span>cialIn</span><span style="color:var(--red)">|</span>
+              <span>tellige</span><span style="color:var(--red)">|</span>
+              <span>nce</span>
+            </div>
+            <div class="fs-slice" style="left: 31%;"></div>
+            <div class="fs-slice" style="left: 54%;"></div>
+            <div class="fs-slice" style="left: 77%;"></div>
+          </div>
 
-          <h2 id="advanced-chunking">Advanced Chunking Methods</h2>
-          <ul>
-            <li><strong>Semantic Chunking:</strong> Uses embeddings during the chunking phase to group sentences that are mathematically similar, breaking the chunk when the topic shifts.</li>
-            <li><strong>Markdown / Code Chunking:</strong> Uses AST parsers or regex to split code by functions/classes, or markdown by headers (H1, H2), ensuring structural integrity.</li>
-            <li><strong>Hierarchical / Parent-Child:</strong> Documents are split into large Parent chunks, which are further split into small Child chunks. The small chunks are embedded for precise retrieval, but the LLM is fed the entire Parent chunk for maximum context.</li>
-          </ul>
+          <h3>Python Template</h3>
+          <div class="code-panel">from langchain_text_splitters import CharacterTextSplitter
 
-          <h2 id="best-practices">Chunk Size & Overlap Best Practices</h2>
-          <p>Generally, a chunk size of 512-1024 tokens is optimal. You must include a <strong>Chunk Overlap</strong> (e.g. 10-20%) to ensure concepts aren't abruptly cut in half across the boundary of two chunks.</p>
-        </section>
+splitter = CharacterTextSplitter(
+    separator="",
+    chunk_size=100,
+    chunk_overlap=0
+)
+chunks = splitter.split_text(text)</div>
+
+          <h3>Examples</h3>
+          <p><strong>Input:</strong> <code>"Artificial Intelligence is transforming our world rapidly."</code></p>
+          <p><strong>Output (chunk_size=12):</strong> <code>["Artificial I", "ntelligence ", "is transform", "ing our worl", "d rapidly."]</code></p>
+
+          <div class="pro-con-grid">
+            <div class="pro-card">
+              <h4>Advantages</h4>
+              <ul>
+                <li>Predictable output chunk sizing.</li>
+                <li>Extremely fast to compute.</li>
+                <li>Very simple to configure and write.</li>
+              </ul>
+            </div>
+            <div class="con-card">
+              <h4>Disadvantages</h4>
+              <ul>
+                <li>Splits words and sentences mid-word.</li>
+                <li>Severely degrades semantic meaning.</li>
+                <li>Causes information fragmentation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Sliding Window -->
+        <div class="ctab-content" id="tab-2">
+          <h2>2. Sliding Window Chunking</h2>
+          <p>Extends Fixed-Size chunking by adding a **Chunk Overlap**. Part of the text from the end of the previous chunk is carried over to the start of the next chunk. This protects data boundaries from losing their context.</p>
+          
+          <div class="chunk-canvas" id="sw-canvas">
+            <div style="width: 80%; display: flex; justify-content: space-between; font-family: var(--mono); font-size:0.95em;">
+              <span id="sw-t1">Chunk 1: [RAG holds search]</span>
+              <span id="sw-t2" style="color:var(--purple);">[search and model]</span>
+              <span id="sw-t3">[model answers query]</span>
+            </div>
+            <div class="sw-window" id="sw-win1" style="left: 8%; width: 50%; border-color: var(--green); top: 35%;"></div>
+            <div class="sw-window" id="sw-win2" style="left: 33%; width: 50%; border-color: var(--purple); top: 50%; opacity:0.3;"></div>
+          </div>
+
+          <h3>Python Template</h3>
+          <div class="code-panel">from langchain_text_splitters import CharacterTextSplitter
+
+# LangChain uses separator + size + overlap
+splitter = CharacterTextSplitter(
+    separator=" ",
+    chunk_size=100,
+    chunk_overlap=20
+)
+chunks = splitter.split_text(text)</div>
+
+          <h3>Examples</h3>
+          <p><strong>Input:</strong> <code>"AI engineering is hard. Visualized learning makes it simpler."</code></p>
+          <p><strong>Output (overlap enabled):</strong><br>
+          Chunk 1: <code>"AI engineering is hard."</code><br>
+          Chunk 2: <code>"is hard. Visualized learning"</code><br>
+          Chunk 3: <code>"Visualized learning makes it simpler."</code></p>
+
+          <div class="pro-con-grid">
+            <div class="pro-card">
+              <h4>Advantages</h4>
+              <ul>
+                <li>Preserves context that drops off at normal boundaries.</li>
+                <li>Configurable overlap percentage.</li>
+                <li>Very effective for sequential reading.</li>
+              </ul>
+            </div>
+            <div class="con-card">
+              <h4>Disadvantages</h4>
+              <ul>
+                <li>Produces redundant tokens.</li>
+                <li>Higher database load.</li>
+                <li>Increases input tokens fed to the LLM.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Semantic -->
+        <div class="ctab-content" id="tab-3">
+          <h2>3. Semantic Chunking</h2>
+          <p>Computes vector embeddings for adjacent sentences and determines their mathematical similarity (cosine distance). If similarity between sentence A and B drops below a threshold, it marks a topic transition and cuts the chunk.</p>
+          
+          <div class="chunk-canvas" style="background: var(--bg);">
+            <div class="sem-point" style="background: var(--blue); left: 20%; top: 30%;"></div>
+            <div class="sem-point" style="background: var(--blue); left: 25%; top: 40%;"></div>
+            <div class="sem-point" style="background: var(--blue); left: 18%; top: 55%;"></div>
+            
+            <div style="position: absolute; left: 45%; top: 20%; bottom: 20%; width: 2px; background: dashed var(--red);"></div>
+            
+            <div class="sem-point" style="background: var(--green); left: 70%; top: 40%;"></div>
+            <div class="sem-point" style="background: var(--green); left: 75%; top: 55%;"></div>
+            <div class="sem-point" style="background: var(--green); left: 68%; top: 30%;"></div>
+            
+            <div style="position:absolute; bottom: 20px; font-size: 0.8em; color: var(--text2)">Sentence embeddings clustered by topic similarity</div>
+          </div>
+
+          <h3>Python Template</h3>
+          <div class="code-panel">from langchain_experimental.text_splitter import SemanticChunker
+from langchain_openai import OpenAIEmbeddings
+
+# Splitter automatically measures distance threshold
+splitter = SemanticChunker(OpenAIEmbeddings())
+docs = splitter.create_documents([text])</div>
+
+          <h3>Examples</h3>
+          <p><strong>Input:</strong> <code>"Apples are high in fiber. Bananas offer potassium. Linear regression is an ML method."</code></p>
+          <p><strong>Output:</strong><br>
+          Chunk 1 (Nutrition): <code>["Apples are high in fiber. Bananas offer potassium."]</code><br>
+          Chunk 2 (Math/ML): <code>["Linear regression is an ML method."]</code></p>
+
+          <div class="pro-con-grid">
+            <div class="pro-card">
+              <h4>Advantages</h4>
+              <ul>
+                <li>Ensures all content inside a chunk is semantically unified.</li>
+                <li>Highly coherent for complex QA.</li>
+                <li>No arbitrary word slicing.</li>
+              </ul>
+            </div>
+            <div class="con-card">
+              <h4>Disadvantages</h4>
+              <ul>
+                <li>Very slow and computationally heavy.</li>
+                <li>Requires active API calls to generate sentence vectors.</li>
+                <li>Heavily dependent on the embedding model quality.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Hierarchical -->
+        <div class="ctab-content" id="tab-4">
+          <h2>4. Hierarchical Chunking (Parent-Child)</h2>
+          <p>Processes text into large **Parent Chunks** (for broad context) and splits them further into small **Child Chunks** (for search indexing). The child chunks are searched, but if a match is found, the larger Parent is loaded and sent to the LLM to give the generation full context.</p>
+          
+          <div class="chunk-canvas">
+            <div class="tree-node" style="left: 40%; top: 15%; border-color: var(--primary);">Parent Chunk (1000 Tokens)</div>
+            <div style="position:absolute; left:50%; top:28%; width:2px; height:35px; background:var(--border);"></div>
+            
+            <div class="tree-node" style="left: 15%; top: 50%; border-color: var(--green);">Child A (200 T)</div>
+            <div class="tree-node" style="left: 42%; top: 50%; border-color: var(--green);">Child B (200 T)</div>
+            <div class="tree-node" style="left: 68%; top: 50%; border-color: var(--green);">Child C (200 T)</div>
+            
+            <div style="position:absolute; left:25%; top:40%; width:20%; height:2px; background:var(--border);"></div>
+            <div style="position:absolute; left:55%; top:40%; width:20%; height:2px; background:var(--border);"></div>
+          </div>
+
+          <h3>Python Template</h3>
+          <div class="code-panel">from langchain.retrievers import ParentDocumentRetriever
+from langchain.storage import InMemoryStore
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+parent_splitter = RecursiveCharacterTextSplitter(chunk_size=2000)
+child_splitter = RecursiveCharacterTextSplitter(chunk_size=400)
+
+# Links parent store to child vectors
+retriever = ParentDocumentRetriever(
+    vectorstore=vectorstore,
+    docstore=InMemoryStore(),
+    child_splitter=child_splitter,
+    parent_splitter=parent_splitter,
+)</div>
+
+          <h3>Examples</h3>
+          <p><strong>System Workflow:</strong> Child chunk matching <code>"financial losses in Q2"</code> retrieves. But the retriever loads the **entire Parent document** containing all 4 quarterly tables to ensure the LLM has complete context.</p>
+
+          <div class="pro-con-grid">
+            <div class="pro-card">
+              <h4>Advantages</h4>
+              <ul>
+                <li>Small chunks give precise embedding lookup.</li>
+                <li>Large chunks provide the LLM with full context, avoiding hallucination.</li>
+                <li>Highly effective for reports and technical manuals.</li>
+              </ul>
+            </div>
+            <div class="con-card">
+              <h4>Disadvantages</h4>
+              <ul>
+                <li>More complex database architecture.</li>
+                <li>Needs synchronization between Vector DB and Document DB.</li>
+                <li>Higher memory footprint.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: Recursive -->
+        <div class="ctab-content" id="tab-5">
+          <h2>5. Recursive Chunking</h2>
+          <p>Attempts to split text using a hierarchical list of separators (e.g. paragraphs <code>\n\n</code>, then lines <code>\n</code>, then words <code>" "</code>, then characters <code>""</code>). It only falls back to smaller separators if a chunk remains larger than target size.</p>
+          
+          <div class="chunk-canvas" style="flex-direction: column; align-items: flex-start; padding-left: 20%; justify-content: center;">
+            <div class="rec-split-step">1. Try splitting by Paragraph (<code>\n\n</code>) ➔ <span style="color:var(--red); font-weight:700;">Too Big</span></div>
+            <div class="rec-split-step">2. Try splitting by Sentence (<code>. </code>) ➔ <span style="color:var(--green); font-weight:700;">Split Success</span></div>
+            <div class="rec-split-step">3. Try splitting by Word (<code>" "</code>) ➔ <span style="color:var(--text3);">Skip (Already under size)</span></div>
+          </div>
+
+          <h3>Python Template</h3>
+          <div class="code-panel">from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=50,
+    separators=["\n\n", "\n", ". ", " ", ""]
+)
+chunks = splitter.split_text(text)</div>
+
+          <h3>Examples</h3>
+          <p><strong>Input:</strong> A 1500-character document with 3 paragraphs of 500 characters each.</p>
+          <p><strong>Output (chunk_size=600):</strong> Splits cleanly at the <code>"\n\n"</code> boundaries, returning 3 perfect paragraphs as 3 chunks.</p>
+
+          <div class="pro-con-grid">
+            <div class="pro-card">
+              <h4>Advantages</h4>
+              <ul>
+                <li>The industry standard baseline splitter.</li>
+                <li>Keeps paragraphs and sentences intact.</li>
+                <li>Highly adaptive and predictable performance.</li>
+              </ul>
+            </div>
+            <div class="con-card">
+              <h4>Disadvantages</h4>
+              <ul>
+                <li>Still relies on heuristics (size/overlap margins).</li>
+                <li>Does not evaluate semantic meaning.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 6: Doc-Aware -->
+        <div class="ctab-content" id="tab-6">
+          <h2>6. Document-Aware Chunking</h2>
+          <p>Uses structural parses (like Markdown, HTML, or PDF-layout engines) to chunk text based on logical document boundaries. It ensures that elements like **Tables**, **Lists**, and **Code Blocks** are kept whole inside a single chunk.</p>
+          
+          <div class="chunk-canvas">
+            <div class="doc-layout">
+              <div class="dl-block" style="background:rgba(99,102,241,0.2); border:1px solid var(--primary); height: 25%;">H1 Header</div>
+              <div class="dl-block" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); height: 40%;">Code Block (Kept Intact)</div>
+              <div class="dl-block" style="background:rgba(251,191,36,0.2); border:1px solid var(--orange); height: 25%;">Table (Kept Intact)</div>
+            </div>
+          </div>
+
+          <h3>Python Template</h3>
+          <div class="code-panel">from langchain_text_splitters import MarkdownHeaderTextSplitter
+
+headers_to_split_on = [
+    ("#", "Header 1"),
+    ("##", "Header 2"),
+]
+splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
+chunks = splitter.split_text(markdown_text)</div>
+
+          <h3>Examples</h3>
+          <p><strong>Markdown Splitting:</strong> If the text contains <code>"# Architecture\nSome text...\n# API Docs"</code>, the splitter slices it at <code>"# API Docs"</code> and appends <code>{"Header 1": "Architecture"}</code> to the first chunk's metadata.</p>
+
+          <div class="pro-con-grid">
+            <div class="pro-card">
+              <h4>Advantages</h4>
+              <ul>
+                <li>Protects semantic blocks (never cuts tables or code in half).</li>
+                <li>Appends layout hierarchy paths directly to metadata.</li>
+                <li>Extremely rich context matching.</li>
+              </ul>
+            </div>
+            <div class="con-card">
+              <h4>Disadvantages</h4>
+              <ul>
+                <li>Requires structural files (Markdown, HTML, XML).</li>
+                <li>Parser logic is fragile on bad/messy source files.</li>
+                <li>Computational parser overhead.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </main>
   </div>
+
   <script src="../script.js?v=12"></script>
+  <script>
+    function switchTab(tabIndex) {
+      document.querySelectorAll('.ctab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.ctab-content').forEach(content => content.classList.remove('active'));
+      
+      const btns = document.querySelectorAll('.ctab-btn');
+      btns[tabIndex - 1].classList.add('active');
+      document.getElementById('tab-' + tabIndex).classList.add('active');
+      
+      if (tabIndex === 2) {
+        animateSlidingWindow();
+      }
+    }
+    
+    let swInterval;
+    function animateSlidingWindow() {
+      clearInterval(swInterval);
+      const w1 = document.getElementById('sw-win1');
+      const w2 = document.getElementById('sw-win2');
+      if(!w1 || !w2) return;
+      
+      let step = 0;
+      swInterval = setInterval(() => {
+        if(step === 0) {
+          w1.style.opacity = 1;
+          w2.style.opacity = 0.3;
+          step = 1;
+        } else {
+          w1.style.opacity = 0.3;
+          w2.style.opacity = 1;
+          step = 0;
+        }
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
