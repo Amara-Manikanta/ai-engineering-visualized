@@ -9,15 +9,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../styles.css?v=8"/>
   <style>
-    .coming-soon { display:flex; flex-direction:column; align-items:center; justify-content:center;
-      min-height:70vh; text-align:center; padding:40px 20px; gap:24px; }
-    .cs-badge { font-size:4rem; }
-    .cs-title { font-size:3rem; font-weight:800;
-      background:linear-gradient(135deg,#fff,#a5b4fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .cs-sub { font-size:1.2rem; color:var(--text2); max-width:500px; line-height:1.7; }
-    .cs-pill { display:inline-block; padding:6px 16px; border-radius:20px;
-      background:rgba(99,102,241,0.15); color:var(--idx); font-size:0.85rem; font-weight:700;
-      border:1px solid rgba(99,102,241,0.3); }
+    /* Guide Layout Overrides */
+    .guide-layout { display: flex; gap: 30px; margin-top: 20px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .guide-sidebar { width: 250px; flex-shrink: 0; position: sticky; top: 90px; height: max-content; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 15px; max-height: calc(100vh - 120px); overflow-y: auto; }
+    .guide-content { flex-grow: 1; min-width: 0; }
+    
+    .toc-title { font-weight: 700; margin-bottom: 15px; font-size: 0.9em; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+    .toc-link { display: block; padding: 6px 0; color: var(--text2); text-decoration: none; font-size: 0.85em; transition: color 0.2s; }
+    .toc-link:hover, .toc-link.active { color: var(--primary); }
+
+    .emb-section { margin-bottom: 50px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .emb-section:last-child { border-bottom: none; }
+    .emb-section h2 { margin-top: 0; scroll-margin-top: 80px; }
+    
+    /* Code Panel */
+    .code-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-family: var(--mono); font-size: 0.85em; overflow-x: auto; margin-bottom: 20px; color: var(--text); white-space: pre; }
+    
+    /* Tables */
+    .emb-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+    .emb-table th, .emb-table td { padding: 12px; border: 1px solid var(--border); text-align: left; }
+    .emb-table th { background: var(--surface); font-weight: 600; }
+
+    /* Diagrams & Animations */
+    .emb-canvas { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 200px;}
+    
+    /* Pipe Operator Animation */
+    .pipe-anim { display: flex; align-items: center; gap: 20px; }
+    .pipe-node { background: var(--bg); border: 2px solid; border-radius: 8px; padding: 15px; font-weight: 700; position: relative; z-index: 2;}
+    .pipe-connector { height: 4px; width: 60px; background: var(--border); position: relative; }
+    .pipe-data { width: 15px; height: 15px; background: var(--primary); border-radius: 50%; position: absolute; top: -5px; box-shadow: 0 0 10px var(--primary); animation: travelPipe 2s infinite linear; }
+    
+    @keyframes travelPipe {
+      0% { left: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+
+    /* Stream vs Batch Animation */
+    .s-vs-b { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+    .svb-col { border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
+    .svb-title { text-align: center; font-weight: 700; color: var(--primary); }
+    .svb-area { height: 100px; background: var(--surface2); border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center; overflow:hidden;}
+    
+    .stream-chunk { display: inline-block; width: 10px; height: 10px; background: var(--green); border-radius: 50%; margin: 2px; opacity: 0; }
+    .batch-block { width: 80%; height: 20px; background: var(--blue); border-radius: 4px; margin: 5px 0; opacity: 0; }
+    
+    @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes dropIn { 0% { transform: translateY(-20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+
+    .sc-1 { animation: popIn 0.2s forwards 0.5s; }
+    .sc-2 { animation: popIn 0.2s forwards 1.0s; }
+    .sc-3 { animation: popIn 0.2s forwards 1.5s; }
+    .sc-4 { animation: popIn 0.2s forwards 2.0s; }
+    .sc-5 { animation: popIn 0.2s forwards 2.5s; }
+    
+    .bb-1 { animation: dropIn 0.3s forwards 1.5s; }
+    .bb-2 { animation: dropIn 0.3s forwards 1.7s; }
+    .bb-3 { animation: dropIn 0.3s forwards 1.9s; }
+    
+    @media (max-width: 900px) {
+      .guide-layout { flex-direction: column; }
+      .guide-sidebar { width: 100%; position: static; margin-bottom: 20px; }
+      .pipe-anim { flex-direction: column; }
+      .pipe-connector { width: 4px; height: 40px; }
+      @keyframes travelPipe {
+        0% { top: 0; left: -5px; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { top: 100%; left: -5px; opacity: 0; }
+      }
+    }
   </style>
 </head>
 <body>
@@ -90,12 +152,210 @@
           <div class="mobile-group-children"><a href="../claude/index.html" class="mobile-child-link">Claude</a><a href="../models/gpt.html" class="mobile-child-link">GPT</a><a href="../models/gemini.html" class="mobile-child-link">Gemini</a><a href="../models/llama.html" class="mobile-child-link">Llama</a><a href="../models/qwen.html" class="mobile-child-link">Qwen</a><a href="../models/deepseek.html" class="mobile-child-link">DeepSeek</a><a href="../models/mistral.html" class="mobile-child-link">Mistral</a></div>
         </li><li><a href="../projects/index.html" class="mobile-nav-link">🚀 Projects</a></li><li><a href="../resources/index.html" class="mobile-nav-link">📚 Resources</a></li></ul></div>
   </header>
-  <div class="coming-soon">
-    <div class="cs-badge">🚧</div>
-    <div class="cs-pill">Agentic AI</div>
-    <div class="cs-title">LangChain</div>
-    <p class="cs-sub">This section is under construction. Comprehensive content and interactive visualizations are coming soon!</p>
-    <a href="../index.html" class="btn btn-primary" style="margin-top:16px;">← Back to Home</a>
+  <div class="guide-layout">
+    <!-- Sticky TOC -->
+    <aside class="guide-sidebar">
+      <div class="toc-title">LangChain Guide</div>
+      <a href="#what-is" class="toc-link">1. What is LangChain?</a>
+      <a href="#why-langchain" class="toc-link">2. Why LangChain?</a>
+      <a href="#architecture" class="toc-link">3. Architecture</a>
+      <a href="#installation" class="toc-link">4. Installation</a>
+      <a href="#structure" class="toc-link">5. Project Structure</a>
+      <a href="#lcel" class="toc-link">6. LCEL</a>
+      <a href="#runnable" class="toc-link">7. Runnable Interface</a>
+      <a href="#pipe" class="toc-link">8. Pipe Operator (|)</a>
+      <a href="#invoke-stream" class="toc-link">9. Invoke, Batch & Stream</a>
+      <a href="#langsmith" class="toc-link">10. LangSmith</a>
+      <a href="#best-practices" class="toc-link">11. Best Practices</a>
+      <a href="../index.html" class="btn btn-primary" style="margin-top:20px; width:100%; text-align:center;">← Back to Home</a>
+    </aside>
+
+    <main class="guide-content">
+      <div class="guide-header">
+        <h1 class="guide-title">LangChain</h1>
+        <p class="guide-intro">The framework for building context-aware reasoning applications.</p>
+      </div>
+
+      <!-- 1. What is LangChain? -->
+      <section id="what-is" class="emb-section">
+        <h2>1. What is LangChain?</h2>
+        <p>LangChain is a framework designed to simplify the creation of applications using large language models (LLMs). It provides a standard interface for connecting LLMs to external data sources (like databases or APIs) and enabling them to interact with their environment.</p>
+      </section>
+
+      <!-- 2. Why LangChain? -->
+      <section id="why-langchain" class="emb-section">
+        <h2>2. Why LangChain?</h2>
+        <p>Building a robust AI application requires more than just calling an API. LangChain solves several massive problems:</p>
+        <ul>
+          <li><strong>Composability:</strong> Easily chain together prompts, models, output parsers, and tools.</li>
+          <li><strong>Model Agnosticism:</strong> Switch from OpenAI to Ollama (or Anthropic, or Google) just by changing one line of code, without rewriting your prompts or parsers.</li>
+          <li><strong>Standardized Tooling:</strong> Pre-built document loaders, vector store integrations, and memory modules.</li>
+        </ul>
+      </section>
+
+      <!-- 3. Architecture -->
+      <section id="architecture" class="emb-section">
+        <h2>3. LangChain Architecture</h2>
+        <table class="emb-table">
+          <thead>
+            <tr><th>Package</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>langchain-core</code></td><td>Base abstractions (Runnables, Messages) and LCEL. Rarely changes.</td></tr>
+            <tr><td><code>langchain-community</code></td><td>Third-party integrations (mostly deprecated/moved to partner packages).</td></tr>
+            <tr><td><code>langchain-[partner]</code></td><td>Specific integrations maintained closely with partners (e.g., <code>langchain-ollama</code>, <code>langchain-openai</code>).</td></tr>
+            <tr><td><code>langgraph</code></td><td>Extension for building stateful, multi-actor applications with cyclic graphs (agents).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. Installation -->
+      <section id="installation" class="emb-section">
+        <h2>4. Installation</h2>
+        <p>For a local setup using Ollama, install the core package and the specific Ollama integration.</p>
+        <div class="code-panel">pip install langchain-core langchain-ollama</div>
+      </section>
+
+      <!-- 5. Project Structure -->
+      <section id="structure" class="emb-section">
+        <h2>5. Project Structure</h2>
+        <p>A clean architecture for a LangChain project:</p>
+        <div class="code-panel">my_ai_app/
+├── core/
+│   ├── llm.py         # Initializes the Ollama model
+│   └── prompts.py     # Stores reusable PromptTemplates
+├── chains/
+│   └── qa_chain.py    # LCEL compositions
+├── tools/
+│   └── search.py      # Custom tools for agents
+└── main.py            # Entry point</div>
+      </section>
+
+      <!-- 6. LCEL -->
+      <section id="lcel" class="emb-section">
+        <h2>6. LCEL (LangChain Expression Language)</h2>
+        <p>LCEL is a declarative way to compose chains together. It is designed from the ground up to support streaming, batching, and async execution out of the box.</p>
+        <div class="code-panel">from langchain_core.prompts import PromptTemplate
+from langchain_ollama.llms import OllamaLLM
+from langchain_core.output_parsers import StrOutputParser
+
+prompt = PromptTemplate.from_template("Tell me a joke about {topic}")
+model = OllamaLLM(model="llama3")
+parser = StrOutputParser()
+
+# This is LCEL in action
+chain = prompt | model | parser</div>
+      </section>
+
+      <!-- 7. Runnable Interface -->
+      <section id="runnable" class="emb-section">
+        <h2>7. Runnable Interface</h2>
+        <p>Every element in LCEL (Prompts, Models, Parsers) implements the <code>Runnable</code> protocol. This means they all share the exact same methods:</p>
+        <ul>
+          <li><code>invoke()</code>: Call the chain on a single input.</li>
+          <li><code>batch()</code>: Call the chain on a list of inputs.</li>
+          <li><code>stream()</code>: Stream back chunks of the response.</li>
+          <li><code>astream()</code> / <code>ainvoke()</code>: Async equivalents.</li>
+        </ul>
+      </section>
+
+      <!-- 8. Pipe Operator -->
+      <section id="pipe" class="emb-section">
+        <h2>8. Pipe Operator (|)</h2>
+        <p>The pipe operator (<code>|</code>) automatically passes the output of the left module directly into the input of the right module.</p>
+        <div class="emb-canvas">
+          <div class="pipe-anim">
+            <div class="pipe-node" style="border-color:var(--orange);">Dict<br><span style="font-size:0.7em; font-weight:400;">{"topic": "cats"}</span></div>
+            <div class="pipe-connector"><div class="pipe-data" style="background:var(--orange);"></div></div>
+            
+            <div class="pipe-node" style="border-color:var(--blue);">Prompt</div>
+            <div class="pipe-connector"><div class="pipe-data" style="background:var(--blue);"></div></div>
+            
+            <div class="pipe-node" style="border-color:var(--green);">LLM (Ollama)</div>
+            <div class="pipe-connector"><div class="pipe-data" style="background:var(--green);"></div></div>
+            
+            <div class="pipe-node" style="border-color:var(--purple);">StrParser</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. Invoke, Batch & Stream -->
+      <section id="invoke-stream" class="emb-section">
+        <h2>9. Invoke, Batch & Stream</h2>
+        
+        <div class="emb-canvas" style="min-height: auto;">
+          <div class="s-vs-b">
+            <div class="svb-col">
+              <div class="svb-title">.stream()</div>
+              <p style="font-size:0.8em; text-align:center; margin:0;">Yields data as it's generated</p>
+              <div class="svb-area">
+                <div class="stream-chunk sc-1"></div>
+                <div class="stream-chunk sc-2"></div>
+                <div class="stream-chunk sc-3"></div>
+                <div class="stream-chunk sc-4"></div>
+                <div class="stream-chunk sc-5"></div>
+              </div>
+            </div>
+            <div class="svb-col">
+              <div class="svb-title">.batch()</div>
+              <p style="font-size:0.8em; text-align:center; margin:0;">Runs multiple requests in parallel</p>
+              <div class="svb-area" style="flex-direction: column;">
+                <div class="batch-block bb-1"></div>
+                <div class="batch-block bb-2"></div>
+                <div class="batch-block bb-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-panel"># 1. Invoke (Wait for full response)
+response = chain.invoke({"topic": "bears"})
+print(response)
+
+# 2. Stream (Print as it generates)
+for chunk in chain.stream({"topic": "bears"}):
+    print(chunk, end="", flush=True)
+
+# 3. Batch (Process 3 parallel requests)
+responses = chain.batch([
+    {"topic": "bears"}, 
+    {"topic": "cats"}, 
+    {"topic": "dogs"}
+])</div>
+      </section>
+
+      <!-- 10. LangSmith -->
+      <section id="langsmith" class="emb-section">
+        <h2>10. LangSmith</h2>
+        <p>LangSmith is a unified DevOps platform for developing, collaborating, testing, and monitoring LLM applications. Because LCEL chains are composed of standardized Runnables, LangSmith can automatically trace exactly how long each step took, what the input to the prompt was, and what the raw output of the LLM was before parsing.</p>
+        <p>To enable it, you just set environment variables:</p>
+        <div class="code-panel">export LANGCHAIN_TRACING_V2="true"
+export LANGCHAIN_API_KEY="ls__..."</div>
+      </section>
+
+      <!-- 11. Best Practices -->
+      <section id="best-practices" class="emb-section">
+        <h2>11. Best Practices</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 15px; border-radius: 8px;">
+            <h4 style="color: var(--green); margin-top:0;">✅ DO</h4>
+            <ul style="padding-left:20px; font-size:0.9em; margin:0;">
+              <li>Use LCEL (<code>|</code>) instead of legacy classes like <code>LLMChain</code>.</li>
+              <li>Use <code>langchain-[partner]</code> packages (e.g. <code>langchain-ollama</code>) instead of <code>langchain-community</code>.</li>
+              <li>Always attach an <code>OutputParser</code> at the end of your chain to ensure consistent output formatting.</li>
+            </ul>
+          </div>
+          <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 15px; border-radius: 8px;">
+            <h4 style="color: var(--red); margin-top:0;">❌ DON'T</h4>
+            <ul style="padding-left:20px; font-size:0.9em; margin:0;">
+              <li>Use LangChain for simple, single API calls (just use the raw SDK).</li>
+              <li>Pass raw strings directly into LLMs without using a <code>PromptTemplate</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+    </main>
   </div>
   <footer><p class="footer-copy" style="text-align:center;padding:30px;color:var(--text3);font-size:0.85rem;">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p></footer>
   <script src="../script.js?v=8"></script>
