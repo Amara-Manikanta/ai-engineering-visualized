@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document Loaders | AI Engineering Visualized</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../styles.css?v=8"/>
+  <style>
+    /* Guide Layout Overrides */
+    .guide-layout { display: flex; gap: 30px; margin-top: 20px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .guide-sidebar { width: 250px; flex-shrink: 0; position: sticky; top: 90px; height: max-content; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 15px; max-height: calc(100vh - 120px); overflow-y: auto; }
+    .guide-content { flex-grow: 1; min-width: 0; }
+    
+    .toc-title { font-weight: 700; margin-bottom: 15px; font-size: 0.9em; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+    .toc-link { display: block; padding: 6px 0; color: var(--text2); text-decoration: none; font-size: 0.85em; transition: color 0.2s; }
+    .toc-link:hover, .toc-link.active { color: var(--primary); }
+
+    .emb-section { margin-bottom: 50px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .emb-section:last-child { border-bottom: none; }
+    .emb-section h2 { margin-top: 0; scroll-margin-top: 80px; }
+    
+    .code-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-family: var(--mono); font-size: 0.85em; overflow-x: auto; margin-bottom: 20px; color: var(--text); white-space: pre; }
+    .emb-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+    .emb-table th, .emb-table td { padding: 12px; border: 1px solid var(--border); text-align: left; }
+    .emb-table th { background: var(--surface); font-weight: 600; }
+    .emb-canvas { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 200px;}
+    
+    /* Document Pipeline Animation */
+    .doc-pipe-anim { display: flex; align-items: center; gap: 30px; }
+    .doc-node { background: var(--bg); border: 2px solid; border-radius: 8px; padding: 15px; font-weight: 700; text-align: center; position: relative; z-index: 2;}
+    .doc-connector { height: 4px; width: 80px; background: var(--border); position: relative; }
+    
+    .doc-raw { border-color: var(--orange); }
+    .doc-loader { border-color: var(--blue); }
+    .doc-obj { border-color: var(--green); }
+    
+    .file-icon { font-size: 2em; display: block; margin-bottom: 10px; }
+    
+    .moving-doc {
+      width: 20px; height: 26px; background: var(--text); border-radius: 3px; position: absolute; top: -11px;
+      animation: docFlow 3s infinite ease-in-out;
+    }
+    .moving-doc::before {
+      content: ""; position: absolute; top: 0; right: 0; width: 0; height: 0;
+      border-bottom: 8px solid var(--surface2); border-right: 8px solid var(--surface);
+    }
+    
+    @keyframes docFlow {
+      0% { left: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    
+    .method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 20px; }
+    .method-card { background: rgba(99,102,241,0.05); border: 1px solid rgba(99,102,241,0.2); padding: 15px; border-radius: 8px; text-align: center; }
+    .method-name { font-family: var(--mono); font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+
+    @media (max-width: 900px) {
+      .guide-layout { flex-direction: column; }
+      .guide-sidebar { width: 100%; position: static; margin-bottom: 20px; }
+      .doc-pipe-anim { flex-direction: column; gap: 10px;}
+      .doc-connector { width: 4px; height: 40px; }
+      @keyframes docFlow {
+        0% { top: 0; left: -8px; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { top: 100%; left: -8px; opacity: 0; }
+      }
+      .method-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="logo"><span class="logo-icon">🧠</span><span class="logo-text">AI Engineering <span class="highlight">Visualized</span></span></a>
+      <nav class="mega-nav" id="mega-nav"><ul class="mnav-list"><li class="mnav-item"><a href="../index.html" class="mnav-link">🏠 Home</a></li><li class="mnav-item"><a href="../python/index.html" class="mnav-link">🐍 Python</a></li><li class="mnav-item has-dd" data-group="ml">
+          <div class="mnav-group-wrap"><a href="../ml/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🤖</span>Machine Learning</a><button class="mnav-arrow-btn"><span class="mnav-arrow">▾</span></button></div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner"><div class="mnav-dd-head"><span class="mnav-icon">🤖</span>Machine Learning</div><div class="mnav-dd-links"><a href="../ml/index.html" class="mnav-dd-link">Introduction</a></div></div></div>
+        </li><li class="mnav-item has-dd" data-group="genai">
+          <div class="mnav-group-wrap"><a href="../genai/index.html" class="mnav-link mnav-label"><span class="mnav-icon">✨</span>Generative AI</a><button class="mnav-arrow-btn"><span class="mnav-arrow">▾</span></button></div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner"><div class="mnav-dd-head"><span class="mnav-icon">✨</span>Generative AI</div><div class="mnav-dd-links"><a href="../llms/index.html" class="mnav-dd-link">AI Models</a><a href="../llm-inference/index.html" class="mnav-dd-link">LLM Inference</a><a href="../prompting/index.html" class="mnav-dd-link">Prompt Engineering</a><a href="../embeddings/index.html" class="mnav-dd-link">Embeddings</a></div></div></div>
+        </li><li class="mnav-item has-dd" data-group="rag">
+          <div class="mnav-group-wrap"><a href="../rag/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🔍</span>RAG</a><button class="mnav-arrow-btn"><span class="mnav-arrow">▾</span></button></div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner"><div class="mnav-dd-head"><span class="mnav-icon">🔍</span>RAG</div><div class="mnav-dd-links"><a href="../rag/fundamentals.html" class="mnav-dd-link">Fundamentals</a><a href="../rag/data-prep.html" class="mnav-dd-link">Data Prep</a><a href="../rag/indexing.html" class="mnav-dd-link">Indexing</a><a href="../rag/chunking.html" class="mnav-dd-link">Chunking</a><a href="../rag/embeddings.html" class="mnav-dd-link">Embeddings</a><a href="../rag/vector-dbs.html" class="mnav-dd-link">Vector DBs</a></div></div></div>
+        </li><li class="mnav-item has-dd" data-group="agents">
+          <div class="mnav-group-wrap"><a href="../agents/index.html" class="mnav-link mnav-label" style="color:var(--text)"><span class="mnav-icon">🕸️</span>Agentic AI</a><button class="mnav-arrow-btn"><span class="mnav-arrow">▾</span></button></div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner"><div class="mnav-dd-head"><span class="mnav-icon">🕸️</span>Agentic AI</div><div class="mnav-dd-links"><a href="../agents/index.html" class="mnav-dd-link">AI Agents</a><a href="../mcp/index.html" class="mnav-dd-link">MCP</a><a href="../langgraph/index.html" class="mnav-dd-link">LangGraph</a><a href="../agents/langchain.html" class="mnav-dd-link">LangChain</a><a href="../agents/document-loaders.html" class="mnav-dd-link">Document Loaders</a><a href="../agents/tool-calling.html" class="mnav-dd-link">Tool Calling</a><a href="../agents/memory.html" class="mnav-dd-link">Memory</a><a href="../agents/multi-agent.html" class="mnav-dd-link">Multi-Agent</a></div></div></div>
+        </li><li class="mnav-item has-dd" data-group="models">
+          <div class="mnav-group-wrap"><a href="../models/index.html" class="mnav-link mnav-label"><span class="mnav-icon">🧩</span>Models</a><button class="mnav-arrow-btn"><span class="mnav-arrow">▾</span></button></div>
+          <div class="mnav-dropdown"><div class="mnav-dd-inner"><div class="mnav-dd-head"><span class="mnav-icon">🧩</span>Models</div><div class="mnav-dd-links"><a href="../claude/index.html" class="mnav-dd-link">Claude</a></div></div></div>
+        </li></ul></nav>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="guide-layout">
+    <!-- Sticky TOC -->
+    <aside class="guide-sidebar">
+      <div class="toc-title">Document Loaders</div>
+      <a href="#what-is" class="toc-link">1. What is a Loader?</a>
+      <a href="#why-loaders" class="toc-link">2. Why are they needed?</a>
+      <a href="#doc-object" class="toc-link">3. The Document Object</a>
+      <div style="padding-left: 15px;">
+        <a href="#page-content" class="toc-link" style="font-size: 0.8em;">3.1 page_content</a>
+        <a href="#metadata" class="toc-link" style="font-size: 0.8em;">3.2 metadata</a>
+      </div>
+      <a href="#pipeline" class="toc-link">4. Loading Pipeline</a>
+      <a href="#types" class="toc-link">5. Types of Loaders</a>
+      <a href="#methods" class="toc-link">6. load() vs lazy_load()</a>
+      <a href="#loader-vs-splitter" class="toc-link">7. Loader vs Splitter</a>
+      <a href="#example" class="toc-link">8. End-to-End Example</a>
+      <a href="#best-practices" class="toc-link">9. Best Practices</a>
+    </aside>
+
+    <main class="guide-content">
+      <div class="guide-header">
+        <h1 class="guide-title">Document Loaders</h1>
+        <p class="guide-intro">The foundational entry point for injecting proprietary data into the LangChain and RAG ecosystems.</p>
+      </div>
+
+      <!-- 1. What is a Document Loader? -->
+      <section id="what-is" class="emb-section">
+        <h2>1. What is a Document Loader?</h2>
+        <p>A Document Loader is a class in LangChain responsible for ingesting data from a source (a file, a database, a web page, an S3 bucket) and converting it into a standardized <code>Document</code> format that the rest of the LangChain ecosystem can understand.</p>
+      </section>
+
+      <!-- 2. Why are Document Loaders needed? -->
+      <section id="why-loaders" class="emb-section">
+        <h2>2. Why are Document Loaders needed?</h2>
+        <p>Language Models only understand plain text strings. However, your proprietary data lives in complex formats: PDFs, CSVs, Notion pages, Slack channels, and HTML. Document Loaders abstract away the complex parsing libraries (like `pypdf`, `beautifulsoup`, or `pandas`) required to extract text from these sources.</p>
+      </section>
+
+      <!-- 3. LangChain Document Object -->
+      <section id="doc-object" class="emb-section">
+        <h2>3. LangChain Document Object</h2>
+        <p>Every Document Loader, regardless of the source, returns one or more `Document` objects. This standardization is crucial for downstream tasks like Text Splitting and Embeddings.</p>
+        
+        <div class="code-panel">class Document:
+    page_content: str
+    metadata: dict</div>
+
+        <h4 id="page-content" style="color:var(--primary); margin-top:20px;">3.1 page_content</h4>
+        <p>This is the raw, extracted text content from the source file. It is stripped of non-text formatting (like PDF binary data) but retains the semantic structure (newlines, paragraphs).</p>
+
+        <h4 id="metadata" style="color:var(--primary); margin-top:20px;">3.2 metadata</h4>
+        <p>A dictionary containing crucial provenance information. This is used later during retrieval to filter results (e.g., "Only search documents where <code>year=2024</code>"). Typical metadata includes:</p>
+        <ul>
+          <li><code>source</code>: The filepath or URL.</li>
+          <li><code>page</code>: The page number (for PDFs).</li>
+          <li><code>author</code>: The document creator.</li>
+        </ul>
+      </section>
+
+      <!-- 4. Document Loading Pipeline -->
+      <section id="pipeline" class="emb-section">
+        <h2>4. Document Loading Pipeline</h2>
+        <p>Here is a visual representation of how raw files are ingested:</p>
+        <div class="emb-canvas">
+          <div class="doc-pipe-anim">
+            <div class="doc-node doc-raw">
+              <span class="file-icon">📄</span>
+              Raw PDF / Webpage
+            </div>
+            <div class="doc-connector"><div class="moving-doc"></div></div>
+            
+            <div class="doc-node doc-loader">
+              <span class="file-icon">⚙️</span>
+              PyPDFLoader
+            </div>
+            <div class="doc-connector"><div class="moving-doc"></div></div>
+            
+            <div class="doc-node doc-obj">
+              <span class="file-icon">📦</span>
+              Document Object<br>
+              <span style="font-size:0.7em; font-weight:400;">(page_content, metadata)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Types of Document Loaders -->
+      <section id="types" class="emb-section">
+        <h2>5. Types of Document Loaders</h2>
+        <p>LangChain provides hundreds of specialized loaders. Here are the most common:</p>
+        <table class="emb-table">
+          <thead>
+            <tr><th>Loader Class</th><th>Source</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>TextLoader</code></td><td><code>.txt</code></td><td>The simplest loader. Reads a raw text file into a single Document.</td></tr>
+            <tr><td><code>PyPDFLoader</code></td><td><code>.pdf</code></td><td>Uses <code>pypdf</code>. Returns one Document per page, making metadata tracking easy.</td></tr>
+            <tr><td><code>CSVLoader</code></td><td><code>.csv</code></td><td>Loads each row of a CSV as a distinct Document, ideal for tabular Q&A.</td></tr>
+            <tr><td><code>Docx2txtLoader</code></td><td><code>.docx</code></td><td>Extracts text from Microsoft Word documents.</td></tr>
+            <tr><td><code>WebBaseLoader</code></td><td><code>http://...</code></td><td>Uses <code>urllib</code> and <code>BeautifulSoup</code> to scrape and parse HTML text from a URL.</td></tr>
+            <tr><td><code>DirectoryLoader</code></td><td><code>folder/</code></td><td>Loads all files within a specific local directory, optionally filtering by glob patterns.</td></tr>
+            <tr><td><code>JSONLoader</code></td><td><code>.json</code></td><td>Uses <code>jq</code> syntax to extract specific nested fields from JSON files.</td></tr>
+            <tr><td><code>UnstructuredLoader</code></td><td>Any</td><td>Uses the <code>unstructured</code> package to automatically parse PDFs, images, and PPTs using OCR.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 6. Methods -->
+      <section id="methods" class="emb-section">
+        <h2>6. load() vs lazy_load() vs aload()</h2>
+        <p>Document Loaders expose different execution methods based on memory constraints:</p>
+        
+        <div class="method-grid">
+          <div class="method-card">
+            <div class="method-name">.load()</div>
+            <p style="font-size:0.85em; margin:0;">Loads all documents into memory at once. Returns a <code>List[Document]</code>. Dangerous for massive datasets.</p>
+          </div>
+          <div class="method-card">
+            <div class="method-name">.lazy_load()</div>
+            <p style="font-size:0.85em; margin:0;">Returns a Python Generator. Yields Documents one-by-one, preventing Out-Of-Memory errors.</p>
+          </div>
+          <div class="method-card">
+            <div class="method-name">.aload()</div>
+            <p style="font-size:0.85em; margin:0;">The asynchronous version of <code>.load()</code>, useful when loading from APIs or cloud sources.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Loader vs Splitter -->
+      <section id="loader-vs-splitter" class="emb-section">
+        <h2>7. Document Loader vs Text Splitter</h2>
+        <p>It's important not to confuse Loaders with Chunkers (Splitters).</p>
+        <ul>
+          <li><strong>Document Loaders</strong> pull the raw data into LangChain memory. A loader might return a single 100-page Document, or 100 1-page Documents.</li>
+          <li><strong>Text Splitters</strong> (like <code>RecursiveCharacterTextSplitter</code>) take those loaded Documents and slice them into mathematically sized chunks (e.g., 500 tokens) so they fit inside an LLM's context window.</li>
+        </ul>
+      </section>
+
+      <!-- 8. End-to-End Example -->
+      <section id="example" class="emb-section">
+        <h2>8. End-to-End Example</h2>
+        <p>Here is how you load a PDF, inspect its metadata, and pass it to a Text Splitter:</p>
+        <div class="code-panel">from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# 1. Initialize Loader
+loader = PyPDFLoader("annual_report.pdf")
+
+# 2. Load the Document objects
+docs = loader.load()
+
+print(f"Loaded {len(docs)} pages.")
+print(f"Metadata of page 1: {docs[0].metadata}")
+# Output: {'source': 'annual_report.pdf', 'page': 0}
+
+# 3. Split into manageable chunks
+splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+chunks = splitter.split_documents(docs)
+
+print(f"Split into {len(chunks)} chunks ready for embeddings.")</div>
+      </section>
+
+      <!-- 9. Best Practices -->
+      <section id="best-practices" class="emb-section">
+        <h2>9. Best Practices</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 15px; border-radius: 8px;">
+            <h4 style="color: var(--green); margin-top:0;">✅ DO</h4>
+            <ul style="padding-left:20px; font-size:0.9em; margin:0;">
+              <li>Use <code>lazy_load()</code> when processing thousands of files.</li>
+              <li>Inject custom tags into <code>metadata</code> immediately after loading to help with vector search filtering later.</li>
+              <li>Use <code>UnstructuredLoader</code> for messy enterprise PDFs that contain embedded tables and images.</li>
+            </ul>
+          </div>
+          <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 15px; border-radius: 8px;">
+            <h4 style="color: var(--red); margin-top:0;">❌ DON'T</h4>
+            <ul style="padding-left:20px; font-size:0.9em; margin:0;">
+              <li>Don't pass raw <code>Document</code> objects directly into an embedding model without running them through a <code>TextSplitter</code> first.</li>
+              <li>Don't use <code>WebBaseLoader</code> for client-side rendered Single Page Applications (React/Vue) as it won't render JavaScript. Use a headless browser loader instead.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+  <footer><p class="footer-copy" style="text-align:center;padding:30px;color:var(--text3);font-size:0.85rem;">Built with ❤️ by Amara Manikanta Dileep — AI Engineering Visualized © 2026</p></footer>
+  <script src="../script.js?v=8"></script>
+</body>
+</html>
