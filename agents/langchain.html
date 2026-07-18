@@ -162,12 +162,20 @@
       <a href="#installation" class="toc-link">4. Installation</a>
       <a href="#structure" class="toc-link">5. Project Structure</a>
       <a href="#lcel" class="toc-link">6. LCEL</a>
-      <a href="#runnable" class="toc-link">7. Runnable Interface</a>
-      <a href="#pipe" class="toc-link">8. Pipe Operator (|)</a>
-      <a href="#invoke-stream" class="toc-link">9. Invoke, Batch & Stream</a>
-      <a href="#langsmith" class="toc-link">10. LangSmith</a>
-      <a href="#best-practices" class="toc-link">11. Best Practices</a>
-      <a href="../index.html" class="btn btn-primary" style="margin-top:20px; width:100%; text-align:center;">← Back to Home</a>
+      <div style="padding-left: 15px;">
+        <a href="#lcel-what" class="toc-link" style="font-size: 0.8em;">6.1 What is LCEL?</a>
+        <a href="#lcel-why" class="toc-link" style="font-size: 0.8em;">6.2 Why LCEL?</a>
+        <a href="#pipe" class="toc-link" style="font-size: 0.8em;">6.3 Pipe Operator (|)</a>
+        <a href="#runnable" class="toc-link" style="font-size: 0.8em;">6.4 Runnable Interface</a>
+        <a href="#invoke" class="toc-link" style="font-size: 0.8em;">6.5 invoke()</a>
+        <a href="#batch" class="toc-link" style="font-size: 0.8em;">6.6 batch()</a>
+        <a href="#stream" class="toc-link" style="font-size: 0.8em;">6.7 stream()</a>
+        <a href="#runnable-sequence" class="toc-link" style="font-size: 0.8em;">6.8 RunnableSequence</a>
+        <a href="#runnable-parallel" class="toc-link" style="font-size: 0.8em;">6.9 RunnableParallel</a>
+        <a href="#runnable-branch" class="toc-link" style="font-size: 0.8em;">6.10 RunnableBranch</a>
+      </div>
+      <a href="#langsmith" class="toc-link">7. LangSmith</a>
+      <a href="#best-practices" class="toc-link">8. Best Practices</a>
     </aside>
 
     <main class="guide-content">
@@ -234,35 +242,20 @@
       <!-- 6. LCEL -->
       <section id="lcel" class="emb-section">
         <h2>6. LCEL (LangChain Expression Language)</h2>
-        <p>LCEL is a declarative way to compose chains together. It is designed from the ground up to support streaming, batching, and async execution out of the box.</p>
-        <div class="code-panel">from langchain_core.prompts import PromptTemplate
-from langchain_ollama.llms import OllamaLLM
-from langchain_core.output_parsers import StrOutputParser
+        <p>LangChain Expression Language (LCEL) is the foundational architecture of modern LangChain. It provides a standardized, declarative way to compose different components (Runnables) into chains.</p>
 
-prompt = PromptTemplate.from_template("Tell me a joke about {topic}")
-model = OllamaLLM(model="llama3")
-parser = StrOutputParser()
+        <h3 id="lcel-what" style="margin-top:30px;">6.1 What is LCEL?</h3>
+        <p>LCEL is not a new programming language; it is a declarative syntax built using Python's operator overloading (specifically the pipe operator <code>|</code>) that allows you to chain arbitrary LangChain objects together.</p>
 
-# This is LCEL in action
-chain = prompt | model | parser</div>
-      </section>
-
-      <!-- 7. Runnable Interface -->
-      <section id="runnable" class="emb-section">
-        <h2>7. Runnable Interface</h2>
-        <p>Every element in LCEL (Prompts, Models, Parsers) implements the <code>Runnable</code> protocol. This means they all share the exact same methods:</p>
+        <h3 id="lcel-why" style="margin-top:30px;">6.2 Why LCEL?</h3>
         <ul>
-          <li><code>invoke()</code>: Call the chain on a single input.</li>
-          <li><code>batch()</code>: Call the chain on a list of inputs.</li>
-          <li><code>stream()</code>: Stream back chunks of the response.</li>
-          <li><code>astream()</code> / <code>ainvoke()</code>: Async equivalents.</li>
+          <li><strong>First-class Streaming:</strong> Any chain built with LCEL can stream tokens automatically.</li>
+          <li><strong>Async Support:</strong> You don't have to write separate async code; LCEL handles <code>await chain.ainvoke()</code> natively.</li>
+          <li><strong>Parallel Execution:</strong> Steps that don't depend on each other can execute in parallel automatically.</li>
         </ul>
-      </section>
 
-      <!-- 8. Pipe Operator -->
-      <section id="pipe" class="emb-section">
-        <h2>8. Pipe Operator (|)</h2>
-        <p>The pipe operator (<code>|</code>) automatically passes the output of the left module directly into the input of the right module.</p>
+        <h3 id="pipe" style="margin-top:30px;">6.3 Pipe Operator (|)</h3>
+        <p>The pipe operator automatically passes the output of the left component directly into the input of the right component.</p>
         <div class="emb-canvas">
           <div class="pipe-anim">
             <div class="pipe-node" style="border-color:var(--orange);">Dict<br><span style="font-size:0.7em; font-weight:400;">{"topic": "cats"}</span></div>
@@ -277,13 +270,29 @@ chain = prompt | model | parser</div>
             <div class="pipe-node" style="border-color:var(--purple);">StrParser</div>
           </div>
         </div>
-      </section>
 
-      <!-- 9. Invoke, Batch & Stream -->
-      <section id="invoke-stream" class="emb-section">
-        <h2>9. Invoke, Batch & Stream</h2>
+        <h3 id="runnable" style="margin-top:30px;">6.4 Runnable Interface</h3>
+        <p>Every element in LCEL (Prompts, Models, Parsers, Chains) implements the <code>Runnable</code> protocol. This means they all share the exact same methods, guaranteeing that any block can connect to any other block.</p>
         
-        <div class="emb-canvas" style="min-height: auto;">
+        <h3 id="invoke" style="margin-top:30px;">6.5 invoke()</h3>
+        <p>Calls the chain on a single input and waits for the full response to complete.</p>
+        <div class="code-panel">response = chain.invoke({"topic": "bears"})
+print(response)</div>
+
+        <h3 id="batch" style="margin-top:30px;">6.6 batch()</h3>
+        <p>Calls the chain on a list of inputs simultaneously, running them in parallel.</p>
+        <div class="code-panel">responses = chain.batch([
+    {"topic": "bears"}, 
+    {"topic": "cats"}
+])</div>
+
+        <h3 id="stream" style="margin-top:30px;">6.7 stream()</h3>
+        <p>Yields chunks of the response as they are generated by the underlying model.</p>
+        <div class="code-panel">for chunk in chain.stream({"topic": "bears"}):
+    print(chunk, end="", flush=True)</div>
+
+        <!-- Animation for Stream vs Batch -->
+        <div class="emb-canvas" style="min-height: auto; margin-top:20px;">
           <div class="s-vs-b">
             <div class="svb-col">
               <div class="svb-title">.stream()</div>
@@ -298,7 +307,7 @@ chain = prompt | model | parser</div>
             </div>
             <div class="svb-col">
               <div class="svb-title">.batch()</div>
-              <p style="font-size:0.8em; text-align:center; margin:0;">Runs multiple requests in parallel</p>
+              <p style="font-size:0.8em; text-align:center; margin:0;">Runs requests in parallel</p>
               <div class="svb-area" style="flex-direction: column;">
                 <div class="batch-block bb-1"></div>
                 <div class="batch-block bb-2"></div>
@@ -308,34 +317,51 @@ chain = prompt | model | parser</div>
           </div>
         </div>
 
-        <div class="code-panel"># 1. Invoke (Wait for full response)
-response = chain.invoke({"topic": "bears"})
-print(response)
+        <h3 id="runnable-sequence" style="margin-top:30px;">6.8 RunnableSequence</h3>
+        <p>When you use the pipe operator (<code>|</code>), LangChain automatically creates a <code>RunnableSequence</code> under the hood. It ensures step A completes before step B starts.</p>
+        <div class="code-panel">from langchain_core.runnables import RunnableSequence
 
-# 2. Stream (Print as it generates)
-for chunk in chain.stream({"topic": "bears"}):
-    print(chunk, end="", flush=True)
+# These two are exactly equivalent:
+chain1 = prompt | model | parser
+chain2 = RunnableSequence(first=prompt, middle=[model], last=parser)</div>
 
-# 3. Batch (Process 3 parallel requests)
-responses = chain.batch([
-    {"topic": "bears"}, 
-    {"topic": "cats"}, 
-    {"topic": "dogs"}
-])</div>
+        <h3 id="runnable-parallel" style="margin-top:30px;">6.9 RunnableParallel</h3>
+        <p>Sometimes you need to format inputs from multiple sources (like a database and user input) at the exact same time before passing them to a prompt. <code>RunnableParallel</code> executes branches simultaneously.</p>
+        <div class="code-panel">from langchain_core.runnables import RunnableParallel
+
+# In LCEL, wrapping things in a dict automatically creates a RunnableParallel!
+setup_and_retrieval = RunnableParallel(
+    context=retriever,          # Branch 1: Fetch documents
+    question=RunnablePassthrough() # Branch 2: Pass user query through
+)
+
+chain = setup_and_retrieval | prompt | model | parser</div>
+
+        <h3 id="runnable-branch" style="margin-top:30px;">6.10 RunnableBranch</h3>
+        <p>Use <code>RunnableBranch</code> to dynamically route inputs to different chains based on a condition function.</p>
+        <div class="code-panel">from langchain_core.runnables import RunnableBranch
+
+branch = RunnableBranch(
+    (lambda x: "math" in x["topic"].lower(), math_chain),
+    (lambda x: "history" in x["topic"].lower(), history_chain),
+    general_chain # Default fallback
+)
+
+result = branch.invoke({"topic": "tell me about math"}) # Routes to math_chain</div>
       </section>
 
-      <!-- 10. LangSmith -->
+      <!-- 7. LangSmith -->
       <section id="langsmith" class="emb-section">
-        <h2>10. LangSmith</h2>
+        <h2>7. LangSmith</h2>
         <p>LangSmith is a unified DevOps platform for developing, collaborating, testing, and monitoring LLM applications. Because LCEL chains are composed of standardized Runnables, LangSmith can automatically trace exactly how long each step took, what the input to the prompt was, and what the raw output of the LLM was before parsing.</p>
         <p>To enable it, you just set environment variables:</p>
         <div class="code-panel">export LANGCHAIN_TRACING_V2="true"
 export LANGCHAIN_API_KEY="ls__..."</div>
       </section>
 
-      <!-- 11. Best Practices -->
+      <!-- 8. Best Practices -->
       <section id="best-practices" class="emb-section">
-        <h2>11. Best Practices</h2>
+        <h2>8. Best Practices</h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
           <div style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 15px; border-radius: 8px;">
             <h4 style="color: var(--green); margin-top:0;">✅ DO</h4>
