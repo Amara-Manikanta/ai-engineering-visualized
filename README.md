@@ -53,24 +53,6 @@ Explore comprehensive guides on the full RAG pipeline, Model Context Protocol (M
 4. Select the **main** branch and **/ (root)** folder
 5. Click **Save**. Your interactive guide is live!
 
-## 📂 Project Structure
-
-```
-ai-engineering-visualized/
-├── index.html              # Home Page (Global Navigation Hub)
-├── script.js               # Global Animation engine & interactive logic
-├── styles.css              # Global Design system and core UI classes
-├── agents/                 # AI Agents Deep Dive
-├── claude/                 # Claude Features & Workflows
-├── embeddings/             # Embeddings & Semantic Search (+ Calculator)
-├── langgraph/              # LangGraph Architecture & Patterns
-├── llm-inference/          # Inference optimization (KV Cache, etc.)
-├── llms/                   # Popular AI Models comparison
-├── mcp/                    # Model Context Protocol Pipeline
-├── prompting/              # Prompt Engineering Best Practices
-├── rag/                    # Complete RAG Pipeline (Indexing, Retrieval, Gen)
-└── README.md               # This file
-```
 
 ---
 
