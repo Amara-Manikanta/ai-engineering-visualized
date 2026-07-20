@@ -40,7 +40,7 @@ export default function Langchain() {
               className="bg-[#1a1a1a] border-2 border-orange-500/50 rounded-xl p-4 text-center z-10 w-32"
             >
               <div className="text-orange-400 font-bold mb-1">Dict</div>
-              <div className="text-xs text-gray-500 font-mono">{"{"topic": "cats"}"}</div>
+              <div className="text-xs text-gray-500 font-mono">{'{"topic": "cats"}'}</div>
             </motion.div>
 
             <div className="relative w-16 h-1 bg-white/10 hidden lg:block">
