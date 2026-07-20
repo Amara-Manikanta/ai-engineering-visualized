@@ -24,6 +24,11 @@ import ModelsLlama from "./pages/ModelsLlama";
 import ModelsMistral from "./pages/ModelsMistral";
 import ModelsQwen from "./pages/ModelsQwen";
 import ModelsDeepseek from "./pages/ModelsDeepseek";
+import LangGraphIndex from "./pages/LangGraphIndex";
+import LangGraphPatterns from "./pages/LangGraphPatterns";
+import McpIndex from "./pages/McpIndex";
+import PromptingIndex from "./pages/PromptingIndex";
+import EmbeddingsIndex from "./pages/EmbeddingsIndex";
 
 function App() {
   return (
@@ -54,6 +59,11 @@ function App() {
         <Route path="/models/mistral" element={<ModelsMistral />} />
         <Route path="/models/qwen" element={<ModelsQwen />} />
         <Route path="/models/deepseek" element={<ModelsDeepseek />} />
+        <Route path="/langgraph" element={<LangGraphIndex />} />
+        <Route path="/langgraph/patterns" element={<LangGraphPatterns />} />
+        <Route path="/mcp" element={<McpIndex />} />
+        <Route path="/prompting" element={<PromptingIndex />} />
+        <Route path="/embeddings" element={<EmbeddingsIndex />} />
       </Routes>
     </BrowserRouter>
   );
