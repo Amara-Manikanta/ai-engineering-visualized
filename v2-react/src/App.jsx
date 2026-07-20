@@ -29,12 +29,20 @@ import LangGraphPatterns from "./pages/LangGraphPatterns";
 import McpIndex from "./pages/McpIndex";
 import PromptingIndex from "./pages/PromptingIndex";
 import EmbeddingsIndex from "./pages/EmbeddingsIndex";
+import AgentsIndex from "./pages/AgentsIndex";
+import AgentsToolCalling from "./pages/AgentsToolCalling";
+import AgentsMemory from "./pages/AgentsMemory";
+import AgentsMultiAgent from "./pages/AgentsMultiAgent";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/agents" element={<AgentsIndex />} />
+        <Route path="/agents/tool-calling" element={<AgentsToolCalling />} />
+        <Route path="/agents/memory" element={<AgentsMemory />} />
+        <Route path="/agents/multi-agent" element={<AgentsMultiAgent />} />
         <Route path="/agents/document-loaders" element={<DocumentLoaders />} />
         <Route path="/agents/langchain" element={<Langchain />} />
         <Route path="/rag/fundamentals" element={<RagFundamentals />} />
