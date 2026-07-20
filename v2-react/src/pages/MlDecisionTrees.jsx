@@ -30,7 +30,12 @@ export default function MlDecisionTrees() {
       intro="A supervised machine learning algorithm used for both classification and regression tasks."
       toc={[]}
     >
-      <section className="guide-section mb-16">
+      <motion.section 
+        className="guide-section mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-2xl font-bold mb-4 text-gray-100">Interactive Decision Tree Animation</h2>
         <p className="text-gray-300 mb-6 leading-relaxed">
           A Decision Tree splits data based on the most significant features. At each node, the algorithm asks a yes/no question, branching based on the answer until a final decision (leaf node) is reached.
@@ -150,9 +155,15 @@ export default function MlDecisionTrees() {
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="guide-section mb-16">
+      <motion.section 
+        className="guide-section mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-2xl font-bold mb-6 text-gray-100">Structure of a Decision Tree</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-[#111] border border-gray-800 rounded-xl p-6">
@@ -172,47 +183,68 @@ export default function MlDecisionTrees() {
             <p className="text-gray-400 text-sm">Represent the final decision or prediction. No further splits occur at these nodes.</p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="guide-section">
+      <motion.section 
+        className="guide-section mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-2xl font-bold mb-4 text-gray-100">Metrics for Splitting</h2>
         <p className="text-gray-300 mb-6 leading-relaxed">
           When constructing decision trees, different metrics are used to determine the best way to split the dataset.
         </p>
         
         <div className="space-y-6">
-          <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6">
+          <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6" style={{ marginBottom: "20px" }}>
             <div className="font-bold text-indigo-300 mb-2">1. Gini Impurity (Classification)</div>
             <p className="text-gray-300 text-sm mb-3">Measures the likelihood of incorrectly classifying a randomly chosen element if it was randomly labeled according to the distribution of labels in the subset.</p>
-            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200">Gini = 1 - Σ(p_i²)</div>
-            <p className="mt-3 text-sm text-gray-400"><strong className="text-gray-300">Goal:</strong> Minimize Gini impurity. <strong className="text-gray-300">Range:</strong> 0 (pure) to 0.5 (impure).</p>
+            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200" style={{ fontFamily: "var(--mono)", background: "rgba(0,0,0,0.3)", padding: "10px", borderRadius: "8px", marginTop: "10px", fontSize: "0.9rem" }}>
+              {`Gini = 1 - Σ(p_i²)`}
+            </div>
+            <p className="mt-3 text-sm text-gray-400" style={{ marginTop: "10px", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              <strong className="text-gray-300">Goal:</strong> Minimize Gini impurity. <strong className="text-gray-300">Range:</strong> 0 (pure) to 0.5 (impure).
+            </p>
           </div>
 
-          <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6">
+          <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6" style={{ marginBottom: "20px" }}>
             <div className="font-bold text-indigo-300 mb-2">2. Entropy & Information Gain (Classification)</div>
             <p className="text-gray-300 text-sm mb-3">Entropy measures randomness or disorder. Information gain is the reduction in entropy after a split.</p>
-            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200">
-              Entropy = -Σ(p_i * log₂(p_i))<br/>
-              Information Gain = Entropy(parent) - Σ( (n_k/n) * Entropy(k) )
+            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200" style={{ fontFamily: "var(--mono)", background: "rgba(0,0,0,0.3)", padding: "10px", borderRadius: "8px", marginTop: "10px", fontSize: "0.9rem" }}>
+              {`Entropy = -Σ(p_i * log₂(p_i))`}
+              <br/>
+              {`Information Gain = Entropy(parent) - Σ( (n_k/n) * Entropy(k) )`}
             </div>
-            <p className="mt-3 text-sm text-gray-400"><strong className="text-gray-300">Goal:</strong> Maximize information gain. <strong className="text-gray-300">Range:</strong> 0 (pure) to log(n) (impure).</p>
+            <p className="mt-3 text-sm text-gray-400" style={{ marginTop: "10px", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              <strong className="text-gray-300">Goal:</strong> Maximize information gain. <strong className="text-gray-300">Range:</strong> 0 (pure) to log(n) (impure).
+            </p>
           </div>
           
-          <div className="bg-purple-900/10 border border-purple-500/20 rounded-xl p-6">
+          <div className="bg-purple-900/10 border border-purple-500/20 rounded-xl p-6" style={{ marginBottom: "20px" }}>
             <div className="font-bold text-purple-300 mb-2">3. Variance Reduction / MSE (Regression)</div>
             <p className="text-gray-300 text-sm mb-3">Used to minimize the variance of the target variable in each split.</p>
-            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200">Variance = (1/n) * Σ(y_i - μ)²</div>
-            <p className="mt-3 text-sm text-gray-400"><strong className="text-gray-300">Goal:</strong> Minimize the variance of target values within child nodes.</p>
+            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200" style={{ fontFamily: "var(--mono)", background: "rgba(0,0,0,0.3)", padding: "10px", borderRadius: "8px", marginTop: "10px", fontSize: "0.9rem" }}>
+              {`Variance = (1/n) * Σ(y_i - μ)²`}
+            </div>
+            <p className="mt-3 text-sm text-gray-400" style={{ marginTop: "10px", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              <strong className="text-gray-300">Goal:</strong> Minimize the variance of target values within child nodes.
+            </p>
           </div>
 
-          <div className="bg-purple-900/10 border border-purple-500/20 rounded-xl p-6">
+          <div className="bg-purple-900/10 border border-purple-500/20 rounded-xl p-6" style={{ marginBottom: "20px" }}>
             <div className="font-bold text-purple-300 mb-2">4. Mean Absolute Error / MAE (Regression)</div>
             <p className="text-gray-300 text-sm mb-3">Measures the average of the absolute differences between predicted values and actual values.</p>
-            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200">MAE = (1/n) * Σ|y_i - ŷ_i|</div>
-            <p className="mt-3 text-sm text-gray-400"><strong className="text-gray-300">Goal:</strong> Minimize the absolute difference.</p>
+            <div className="font-mono bg-black/40 p-3 rounded-lg text-sm text-gray-200" style={{ fontFamily: "var(--mono)", background: "rgba(0,0,0,0.3)", padding: "10px", borderRadius: "8px", marginTop: "10px", fontSize: "0.9rem" }}>
+              {`MAE = (1/n) * Σ|y_i - ŷ_i|`}
+            </div>
+            <p className="mt-3 text-sm text-gray-400" style={{ marginTop: "10px", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              <strong className="text-gray-300">Goal:</strong> Minimize the absolute difference.
+            </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
     </GuideLayout>
   );

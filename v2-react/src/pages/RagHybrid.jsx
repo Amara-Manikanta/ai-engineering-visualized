@@ -20,7 +20,7 @@ export default function RagHybrid() {
         clearInterval(interval);
         setIsPlaying(false);
       }
-    }, 2000);
+    }, 1800);
   };
 
   const handleReset = () => {
@@ -34,113 +34,51 @@ export default function RagHybrid() {
       intro="Combines semantic Vector search with exact keyword BM25 search to get the best of both worlds."
       toc={toc}
     >
-      <section className="guide-section px-5">
-        <div className="relative h-[450px] bg-[#111] border border-gray-800 rounded-2xl overflow-hidden mb-6 flex flex-col items-center justify-center">
-          
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: step >= 1 ? 1 : 0, x: step >= 1 ? 0 : -20 }}
-            className="absolute left-[5%] top-1/2 -translate-y-1/2 w-[100px] p-2.5 bg-[#222] border-2 border-indigo-500 text-center rounded-lg text-gray-200"
-          >
-            Query<br/><span className="text-xs">"UUID-54A error"</span>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: step >= 2 ? 1 : 0 }}
-            className="absolute left-[21%] top-[35%] -rotate-30 text-gray-400"
-          >➔</motion.div>
-          
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: step >= 2 ? 1 : 0 }}
-            className="absolute left-[21%] top-[65%] rotate-30 text-gray-400"
-          >➔</motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: step >= 2 ? 1 : 0, scale: step >= 2 ? 1 : 0.8 }}
-            className="absolute left-[25%] top-[20%] w-[120px] p-2.5 bg-blue-600 text-white text-center rounded-lg"
-          >
-            BM25<br/><span className="text-xs">Keyword Match</span>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: step >= 2 ? 1 : 0, scale: step >= 2 ? 1 : 0.8 }}
-            className="absolute left-[25%] top-[70%] w-[120px] p-2.5 bg-cyan-600 text-white text-center rounded-lg"
-          >
-            Vector DB<br/><span className="text-xs">Semantic Match</span>
-          </motion.div>
+      <div className="guide-header">
+        <span className="guide-tag">Architecture Type</span>
+        <h1 className="guide-title">Hybrid RAG</h1>
+        <p className="guide-intro">Combines semantic Vector search with exact keyword BM25 search to get the best of both worlds.</p>
+      </div>
+      
+      <section className="guide-section">
+        <div className="pipeline-canvas" style={{position: 'relative', height: '450px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px'}}>
+            
+            <motion.div id="h-q" style={{position: 'absolute', left: '5%', top: '50%', transform: 'translateY(-50%)', width: '100px', padding: '10px', background: 'var(--surface)', border: '2px solid var(--primary)', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 1 ? 1 : 0 }}>Query<br/><span style={{fontSize: '0.7em'}}>"UUID-54A error"</span></motion.div>
+            
+            <motion.div id="h-arr-up" style={{position: 'absolute', left: '21%', top: '35%', transform: 'rotate(-30deg)', transition: 'all 0.5s'}} animate={{ opacity: step >= 2 ? 1 : 0 }}>➔</motion.div>
+            <motion.div id="h-arr-dn" style={{position: 'absolute', left: '21%', top: '65%', transform: 'rotate(30deg)', transition: 'all 0.5s'}} animate={{ opacity: step >= 2 ? 1 : 0 }}>➔</motion.div>
+            
+            <motion.div id="h-bm25" style={{position: 'absolute', left: '25%', top: '20%', width: '120px', padding: '10px', background: 'var(--blue)', color: 'white', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 2 ? 1 : 0 }}>BM25<br/><span style={{fontSize: '0.7em'}}>Keyword Match</span></motion.div>
+            
+            <motion.div id="h-vdb" style={{position: 'absolute', left: '25%', top: '70%', width: '120px', padding: '10px', background: 'var(--cyan)', color: 'white', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 2 ? 1 : 0 }}>Vector DB<br/><span style={{fontSize: '0.7em'}}>Semantic Match</span></motion.div>
+            
+            <motion.div id="h-res1" style={{position: 'absolute', left: '48%', top: '20%', width: '80px', padding: '8px', border: '1px solid var(--blue)', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 3 ? 1 : 0 }}>Results A</motion.div>
+            <motion.div id="h-res2" style={{position: 'absolute', left: '48%', top: '70%', width: '80px', padding: '8px', border: '1px solid var(--cyan)', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 3 ? 1 : 0 }}>Results B</motion.div>
+            
+            <motion.div id="h-arr-f1" style={{position: 'absolute', left: '62%', top: '35%', transform: 'rotate(30deg)', transition: 'all 0.5s'}} animate={{ opacity: step >= 4 ? 1 : 0 }}>➔</motion.div>
+            <motion.div id="h-arr-f2" style={{position: 'absolute', left: '62%', top: '65%', transform: 'rotate(-30deg)', transition: 'all 0.5s'}} animate={{ opacity: step >= 4 ? 1 : 0 }}>➔</motion.div>
+            
+            <motion.div id="h-rrf" style={{position: 'absolute', left: '65%', top: '50%', transform: 'translateY(-50%)', width: '120px', padding: '10px', background: 'var(--purple)', color: 'white', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 4 ? 1 : 0 }}>RRF<br/><span style={{fontSize: '0.7em'}}>Reciprocal Rank Fusion</span></motion.div>
+            
+            <motion.div id="h-arr-final" style={{position: 'absolute', left: '84%', top: '50%', transform: 'translateY(-50%)', transition: 'all 0.5s'}} animate={{ opacity: step >= 5 ? 1 : 0 }}>➔</motion.div>
+            
+            <motion.div id="h-llm" style={{position: 'absolute', left: '88%', top: '50%', transform: 'translateY(-50%)', width: '60px', padding: '10px', background: 'var(--green)', color: 'white', textAlign: 'center', borderRadius: '8px', transition: 'all 0.5s'}} animate={{ opacity: step >= 5 ? 1 : 0 }}>LLM</motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: step >= 3 ? 1 : 0 }}
-            className="absolute left-[48%] top-[20%] w-[80px] p-2 border border-blue-500 text-center rounded-lg text-gray-200"
-          >Results A</motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: step >= 3 ? 1 : 0 }}
-            className="absolute left-[48%] top-[70%] w-[80px] p-2 border border-cyan-500 text-center rounded-lg text-gray-200"
-          >Results B</motion.div>
-
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: step >= 4 ? 1 : 0 }}
-            className="absolute left-[62%] top-[35%] rotate-30 text-gray-400"
-          >➔</motion.div>
-
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: step >= 4 ? 1 : 0 }}
-            className="absolute left-[62%] top-[65%] -rotate-30 text-gray-400"
-          >➔</motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: step >= 4 ? 1 : 0, scale: step >= 4 ? 1 : 0.8 }}
-            className="absolute left-[65%] top-1/2 -translate-y-1/2 w-[120px] p-2.5 bg-purple-600 text-white text-center rounded-lg"
-          >
-            RRF<br/><span className="text-xs">Reciprocal Rank Fusion</span>
-          </motion.div>
-
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: step >= 5 ? 1 : 0 }}
-            className="absolute left-[84%] top-1/2 -translate-y-1/2 text-gray-400"
-          >➔</motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: step >= 5 ? 1 : 0, x: step >= 5 ? 0 : 20 }}
-            className="absolute left-[88%] top-1/2 -translate-y-1/2 w-[60px] p-2.5 bg-emerald-600 text-white text-center rounded-lg"
-          >
-            LLM
-          </motion.div>
-
-          <div className="absolute bottom-5 left-5 right-5 text-center text-gray-400 text-sm h-10">
-            {step === 0 && "Click Play to see Hybrid Search in action."}
-            {step === 1 && "1. User asks a query containing a specific exact ID or code."}
-            {step === 2 && "2. The query is sent to BOTH a Keyword index (BM25) and a Semantic Vector index."}
-            {step === 3 && "3. BM25 finds the exact ID. Vector DB finds documents with similar meanings."}
-            {step === 4 && "4. Reciprocal Rank Fusion combines both lists into a single ranked list."}
-            {step >= 5 && "5. The perfectly balanced context is sent to the LLM."}
-          </div>
+            <div id="h-desc" style={{position: 'absolute', bottom: '20px', left: '20px', right: '20px', textAlign: 'center', color: 'var(--text2)', fontSize: '0.95em', height: '40px', transition: 'opacity 0.3s ease', opacity: 1}}>
+              {step === 0 && "Click Play to see Hybrid Search in action."}
+              {step === 1 && "1. User asks a query containing a specific exact ID or code."}
+              {step === 2 && "2. The query is sent to BOTH a Keyword index (BM25) and a Semantic Vector index."}
+              {step === 3 && "3. BM25 finds the exact ID. Vector DB finds documents with similar meanings."}
+              {step === 4 && "4. Reciprocal Rank Fusion combines both lists into a single ranked list."}
+              {step >= 5 && "5. The perfectly balanced context is sent to the LLM."}
+            </div>
         </div>
         
-        <div className="flex gap-3 justify-center mb-10">
-          <button 
-            onClick={handlePlay}
-            disabled={isPlaying}
-            className="px-6 py-2.5 rounded-full font-semibold bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50"
-          >
+        <div className="canvas-controls" style={{display: 'flex', gap: '12px', justifyContent: 'center'}}>
+          <button className="btn btn-primary" id="h-play" style={{padding: '10px 24px', borderRadius: '24px', border: 'none', cursor: 'pointer', fontWeight: 600, background: 'var(--primary)', color: 'white'}} onClick={handlePlay} disabled={isPlaying}>
             {step >= 5 ? '▶ Replay' : '▶ Play Animation'}
           </button>
-          <button 
-            onClick={handleReset}
-            className="px-6 py-2.5 rounded-full font-semibold bg-[#222] border border-gray-700 text-gray-300 hover:bg-[#333]"
-          >
+          <button className="btn btn-secondary" id="h-reset" style={{padding: '10px 24px', borderRadius: '24px', border: '1px solid var(--border)', cursor: 'pointer', fontWeight: 600, background: 'var(--surface)', color: 'var(--text)'}} onClick={handleReset}>
             ↺ Reset
           </button>
         </div>

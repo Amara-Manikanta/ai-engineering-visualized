@@ -50,102 +50,89 @@ const RagMultimodal = () => {
       intro="Retrieves images, video frames, and text simultaneously into a Vision-Language Model."
       toc={toc}
     >
-      <section className="mb-12">
-        <div className="relative h-[450px] bg-[#111] border border-[#333] rounded-2xl overflow-hidden mb-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: visibleNodes.includes('m-img') ? 1 : 0, scale: visibleNodes.includes('m-img') ? 1 : 0.8 }}
-            className="absolute left-[5%] top-[30%] p-3 border-2 border-dashed border-gray-500 text-center rounded-lg text-white"
-          >
-            🖼️<br/><span className="text-xs text-gray-400">Image Upload</span>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: visibleNodes.includes('m-txt') ? 1 : 0, scale: visibleNodes.includes('m-txt') ? 1 : 0.8 }}
-            className="absolute left-[5%] top-[60%] p-3 border-2 border-gray-500 text-center rounded-lg text-white"
-          >
-            📝<br/><span className="text-xs text-gray-400">Text Query</span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: visibleNodes.includes('m-arr1') ? 1 : 0, x: visibleNodes.includes('m-arr1') ? 0 : -10 }}
-            className="absolute left-[18%] top-[45%] rotate-[15deg] text-gray-400 text-xl font-bold"
-          >
-            ➔
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: visibleNodes.includes('m-arr2') ? 1 : 0, x: visibleNodes.includes('m-arr2') ? 0 : -10 }}
-            className="absolute left-[18%] top-[55%] -rotate-[15deg] text-gray-400 text-xl font-bold"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: '-50%', scale: 0.8 }}
-            animate={{ opacity: visibleNodes.includes('m-clip') ? 1 : 0, scale: visibleNodes.includes('m-clip') ? 1 : 0.8 }}
-            className="absolute left-[25%] top-1/2 w-[100px] p-3 bg-cyan-600 text-white text-center rounded-lg shadow-lg shadow-cyan-500/20"
-          >
-            CLIP Embedder<br/><span className="text-xs text-cyan-200">Shared Space</span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: '-50%', x: -10 }}
-            animate={{ opacity: visibleNodes.includes('m-arr3') ? 1 : 0, x: visibleNodes.includes('m-arr3') ? 0 : -10 }}
-            className="absolute left-[42%] top-1/2 text-gray-400 text-xl font-bold"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: '-50%', scale: 0.8 }}
-            animate={{ opacity: visibleNodes.includes('m-db') ? 1 : 0, scale: visibleNodes.includes('m-db') ? 1 : 0.8 }}
-            className="absolute left-[48%] top-1/2 w-[100px] p-3 bg-blue-600 text-white text-center rounded-lg shadow-lg shadow-blue-500/20"
-          >
-            Vector DB<br/><span className="text-xs text-blue-200">Find Images & Text</span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: '-50%', x: -10 }}
-            animate={{ opacity: visibleNodes.includes('m-arr4') ? 1 : 0, x: visibleNodes.includes('m-arr4') ? 0 : -10 }}
-            className="absolute left-[65%] top-1/2 text-gray-400 text-xl font-bold"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: '-50%', scale: 0.8 }}
-            animate={{ opacity: visibleNodes.includes('m-vlm') ? 1 : 0, scale: visibleNodes.includes('m-vlm') ? 1 : 0.8 }}
-            className="absolute left-[75%] top-1/2 w-[80px] p-3 bg-purple-600 text-white text-center rounded-lg font-bold shadow-lg shadow-purple-500/20"
-          >
-            VLM<br/><span className="text-xs text-purple-200">(GPT-4o)</span>
-          </motion.div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentDesc}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="absolute bottom-5 left-5 right-5 text-center text-gray-300 text-sm h-10 font-medium"
+      <section className="guide-section">
+        <div className="pipeline-canvas" style={{position: 'relative', height: '450px', background: 'var(--surface, #111)', border: '1px solid var(--border, #333)', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px'}}>
+            
+            <motion.div id="m-img" style={{position: 'absolute', left: '5%', top: '30%', padding: '10px', border: '2px dashed var(--text2, gray)', textAlign: 'center', borderRadius: '8px'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-img') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
             >
-              {currentDesc}
+              🖼️<br/><span style={{fontSize: '0.7em'}}>Image Upload</span>
             </motion.div>
-          </AnimatePresence>
-        </div>
+            <motion.div id="m-txt" style={{position: 'absolute', left: '5%', top: '60%', padding: '10px', border: '2px solid var(--text2, gray)', textAlign: 'center', borderRadius: '8px'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-txt') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              📝<br/><span style={{fontSize: '0.7em'}}>Text Query</span>
+            </motion.div>
+            
+            <motion.div id="m-arr1" style={{position: 'absolute', left: '18%', top: '45%', transform: 'rotate(15deg)'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-arr1') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >➔</motion.div>
+            <motion.div id="m-arr2" style={{position: 'absolute', left: '18%', top: '55%', transform: 'rotate(-15deg)'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-arr2') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >➔</motion.div>
+            
+            <motion.div id="m-clip" style={{position: 'absolute', left: '25%', top: '50%', transform: 'translateY(-50%)', width: '100px', padding: '10px', background: 'var(--cyan, #06b6d4)', color: 'white', textAlign: 'center', borderRadius: '8px'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-clip') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              CLIP Embedder<br/><span style={{fontSize: '0.7em'}}>Shared Space</span>
+            </motion.div>
+            
+            <motion.div id="m-arr3" style={{position: 'absolute', left: '42%', top: '50%', transform: 'translateY(-50%)'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-arr3') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >➔</motion.div>
+            
+            <motion.div id="m-db" style={{position: 'absolute', left: '48%', top: '50%', transform: 'translateY(-50%)', width: '100px', padding: '10px', background: 'var(--blue, #2563eb)', color: 'white', textAlign: 'center', borderRadius: '8px'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-db') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Vector DB<br/><span style={{fontSize: '0.7em'}}>Find Images & Text</span>
+            </motion.div>
+            
+            <motion.div id="m-arr4" style={{position: 'absolute', left: '65%', top: '50%', transform: 'translateY(-50%)'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-arr4') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >➔</motion.div>
+            
+            <motion.div id="m-vlm" style={{position: 'absolute', left: '75%', top: '50%', transform: 'translateY(-50%)', width: '80px', padding: '10px', background: 'var(--purple, #9333ea)', color: 'white', textAlign: 'center', borderRadius: '8px', fontWeight: 'bold'}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visibleNodes.includes('m-vlm') ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              VLM<br/><span style={{fontSize: '0.7em'}}>(GPT-4o)</span>
+            </motion.div>
 
-        <div className="flex gap-3 justify-center">
-          <button
-            onClick={handlePlay}
-            className="px-6 py-2 rounded-full font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
-          >
+            <AnimatePresence mode="wait">
+              <motion.div id="m-desc" style={{position: 'absolute', bottom: '20px', left: '20px', right: '20px', textAlign: 'center', color: 'var(--text2, #ccc)', fontSize: '0.95em', height: '40px'}}
+                key={currentDesc}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {currentDesc}
+              </motion.div>
+            </AnimatePresence>
+        </div>
+        
+        <div className="canvas-controls" style={{display: 'flex', gap: '12px', justifyContent: 'center'}}>
+          <button className="btn btn-primary" id="m-play" onClick={handlePlay} style={{padding: '10px 24px', borderRadius: '24px', border: 'none', cursor: 'pointer', fontWeight: 600, background: 'var(--primary, #3b82f6)', color: 'white'}}>
             {step >= steps.length ? '▶ Replay' : '▶ Play Animation'}
           </button>
-          <button
-            onClick={handleReset}
-            className="px-6 py-2 rounded-full font-semibold bg-[#222] border border-[#444] text-gray-300 hover:bg-[#333] transition-colors"
-          >
+          <button className="btn btn-secondary" id="m-reset" onClick={handleReset} style={{padding: '10px 24px', borderRadius: '24px', border: '1px solid var(--border, #333)', cursor: 'pointer', fontWeight: 600, background: 'var(--surface, #111)', color: 'var(--text, #fff)'}}>
             ↺ Reset
           </button>
         </div>

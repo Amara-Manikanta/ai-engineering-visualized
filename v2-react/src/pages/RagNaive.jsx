@@ -51,119 +51,175 @@ const RagNaive = () => {
       intro="The baseline Retrieve-Read-Generate loop. Simple, but prone to failure on complex queries."
       toc={toc}
     >
-      <section className="mb-12">
-        <div className="relative h-[450px] bg-[#111] border border-[#333] rounded-2xl overflow-hidden mb-6 flex items-center justify-center">
+      <section className="guide-section">
+        <div 
+          className="pipeline-canvas naive-canvas" 
+          style={{ position: 'relative', height: '450px', background: 'var(--surface, #111)', border: '1px solid var(--border, #333)', borderRadius: '16px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}
+        >
           
-          <motion.div
+          <motion.div 
+            className="n-node" 
+            id="n-query" 
             initial={{ opacity: 0, scale: 0.8, y: '-50%' }}
             animate={{ 
               opacity: visibleNodes.includes('n-query') ? 1 : 0, 
               scale: visibleNodes.includes('n-query') ? 1 : 0.8,
+              y: '-50%'
             }}
-            className="absolute left-[5%] top-1/2 w-[120px] text-center p-3 bg-blue-600 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/20"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '5%', top: '50%', width: '120px', textAlign: 'center', padding: '12px', background: 'var(--primary, #2563eb)', color: 'white', borderRadius: '8px', fontWeight: '600' }}
           >
             User Query
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-arrow" 
+            id="n-arrow1" 
             initial={{ opacity: 0, y: '-50%', x: -10 }}
-            animate={{ opacity: visibleNodes.includes('n-arrow1') ? 1 : 0, x: visibleNodes.includes('n-arrow1') ? 0 : -10 }}
-            className="absolute left-[23%] top-1/2 text-gray-400 font-bold text-xl"
+            animate={{ 
+              opacity: visibleNodes.includes('n-arrow1') ? 1 : 0, 
+              x: visibleNodes.includes('n-arrow1') ? 0 : -10,
+              y: '-50%'
+            }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '23%', top: '50%', color: 'var(--text, #d1d5db)', fontWeight: 'bold' }}
           >
             ➔
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-node" 
+            id="n-embed" 
             initial={{ opacity: 0, scale: 0.8, y: '-50%' }}
             animate={{ 
               opacity: visibleNodes.includes('n-embed') ? 1 : 0, 
               scale: visibleNodes.includes('n-embed') ? 1 : 0.8,
+              y: '-50%'
             }}
-            className="absolute left-[30%] top-1/2 w-[120px] text-center p-3 bg-purple-600 text-white rounded-lg font-semibold shadow-lg shadow-purple-500/20"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '30%', top: '50%', width: '120px', textAlign: 'center', padding: '12px', background: 'var(--purple, #9333ea)', color: 'white', borderRadius: '8px', fontWeight: '600' }}
           >
             Embed Model
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-arrow" 
+            id="n-arrow2" 
             initial={{ opacity: 0, y: '-50%', x: -10 }}
-            animate={{ opacity: visibleNodes.includes('n-arrow2') ? 1 : 0, x: visibleNodes.includes('n-arrow2') ? 0 : -10 }}
-            className="absolute left-[48%] top-1/2 text-gray-400 font-bold text-xl"
+            animate={{ 
+              opacity: visibleNodes.includes('n-arrow2') ? 1 : 0, 
+              x: visibleNodes.includes('n-arrow2') ? 0 : -10,
+              y: '-50%'
+            }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '48%', top: '50%', color: 'var(--text, #d1d5db)', fontWeight: 'bold' }}
           >
             ➔
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-node" 
+            id="n-vdb" 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
               opacity: visibleNodes.includes('n-vdb') ? 1 : 0, 
               scale: visibleNodes.includes('n-vdb') ? 1 : 0.8,
             }}
-            className="absolute left-[55%] top-[20%] w-[120px] text-center p-3 bg-cyan-600 text-white rounded-lg font-semibold shadow-lg shadow-cyan-500/20"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '55%', top: '20%', width: '120px', textAlign: 'center', padding: '12px', background: 'var(--cyan, #0891b2)', color: 'white', borderRadius: '8px', fontWeight: '600' }}
           >
-            Vector DB<br/><span className="text-xs font-normal">Top-K Search</span>
+            Vector DB<br/><span style={{ fontSize: '0.7em', fontWeight: '400' }}>Top-K Search</span>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: visibleNodes.includes('n-arrow3') ? 1 : 0, y: visibleNodes.includes('n-arrow3') ? 0 : -10 }}
-            className="absolute left-[62%] top-[38%] text-gray-400 font-bold text-xl rotate-90"
+          <motion.div 
+            className="n-arrow" 
+            id="n-arrow3" 
+            initial={{ opacity: 0, y: -10, rotate: 90 }}
+            animate={{ 
+              opacity: visibleNodes.includes('n-arrow3') ? 1 : 0, 
+              y: visibleNodes.includes('n-arrow3') ? 0 : -10,
+              rotate: 90 
+            }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '62%', top: '38%', color: 'var(--text, #d1d5db)', fontWeight: 'bold' }}
           >
             ➔
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-node" 
+            id="n-prompt" 
             initial={{ opacity: 0, scale: 0.8, y: '-50%' }}
             animate={{ 
               opacity: visibleNodes.includes('n-prompt') ? 1 : 0, 
               scale: visibleNodes.includes('n-prompt') ? 1 : 0.8,
+              y: '-50%'
             }}
-            className="absolute left-[55%] top-1/2 w-[120px] text-center p-3 bg-orange-600 text-white rounded-lg font-semibold shadow-lg shadow-orange-500/20"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '55%', top: '50%', width: '120px', textAlign: 'center', padding: '12px', background: 'var(--orange, #ea580c)', color: 'white', borderRadius: '8px', fontWeight: '600' }}
           >
-            Prompt Builder<br/><span className="text-xs font-normal">Context + Query</span>
+            Prompt Builder<br/><span style={{ fontSize: '0.7em', fontWeight: '400' }}>Context + Query</span>
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-arrow" 
+            id="n-arrow4" 
             initial={{ opacity: 0, y: '-50%', x: -10 }}
-            animate={{ opacity: visibleNodes.includes('n-arrow4') ? 1 : 0, x: visibleNodes.includes('n-arrow4') ? 0 : -10 }}
-            className="absolute left-[73%] top-1/2 text-gray-400 font-bold text-xl"
+            animate={{ 
+              opacity: visibleNodes.includes('n-arrow4') ? 1 : 0, 
+              x: visibleNodes.includes('n-arrow4') ? 0 : -10,
+              y: '-50%'
+            }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '73%', top: '50%', color: 'var(--text, #d1d5db)', fontWeight: 'bold' }}
           >
             ➔
           </motion.div>
           
-          <motion.div
+          <motion.div 
+            className="n-node" 
+            id="n-llm" 
             initial={{ opacity: 0, scale: 0.8, y: '-50%' }}
             animate={{ 
               opacity: visibleNodes.includes('n-llm') ? 1 : 0, 
               scale: visibleNodes.includes('n-llm') ? 1 : 0.8,
+              y: '-50%'
             }}
-            className="absolute left-[80%] top-1/2 w-[120px] text-center p-3 bg-green-600 text-white rounded-lg font-semibold shadow-lg shadow-green-500/20"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ position: 'absolute', left: '80%', top: '50%', width: '120px', textAlign: 'center', padding: '12px', background: 'var(--green, #16a34a)', color: 'white', borderRadius: '8px', fontWeight: '600' }}
           >
-            LLM<br/><span className="text-xs font-normal">Generation</span>
+            LLM<br/><span style={{ fontSize: '0.7em', fontWeight: '400' }}>Generation</span>
           </motion.div>
 
           <AnimatePresence mode="wait">
             <motion.div
+              id="n-desc"
               key={currentDesc}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute bottom-5 left-5 right-5 text-center text-gray-300 text-sm h-10 font-medium"
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px', textAlign: 'center', color: 'var(--text2, #9ca3af)', fontSize: '0.95em', height: '40px' }}
             >
               {currentDesc}
             </motion.div>
           </AnimatePresence>
         </div>
         
-        <div className="flex gap-3 justify-center">
-          <button
+        <div className="canvas-controls" style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+          <button 
+            className="btn btn-primary" 
+            id="n-play" 
             onClick={handlePlay}
-            className="px-6 py-2 rounded-full font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
+            style={{ padding: '10px 24px', borderRadius: '24px', border: 'none', cursor: 'pointer', fontWeight: '600', background: 'var(--primary, #2563eb)', color: 'white' }}
           >
             {step >= steps.length ? '▶ Replay' : '▶ Play Animation'}
           </button>
-          <button
+          <button 
+            className="btn btn-secondary" 
+            id="n-reset" 
             onClick={handleReset}
-            className="px-6 py-2 rounded-full font-semibold bg-[#222] border border-[#444] text-gray-300 hover:bg-[#333] transition-colors"
+            style={{ padding: '10px 24px', borderRadius: '24px', border: '1px solid var(--border, #333)', cursor: 'pointer', fontWeight: '600', background: 'var(--surface, #111)', color: 'var(--text, #d1d5db)' }}
           >
             ↺ Reset
           </button>

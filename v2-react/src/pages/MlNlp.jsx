@@ -132,7 +132,13 @@ export default function MlNlp() {
       intro="Interactive explorations of the algorithms that allow machines to understand, process, and generate human language."
       toc={toc}
     >
-      <section className="guide-section mb-16" id="lexical">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="guide-section mb-16" 
+        id="lexical"
+      >
         <h2 className="text-2xl font-bold mb-4 text-gray-100">Tokenization & TF-IDF</h2>
         <p className="text-gray-300 mb-6 leading-relaxed">
           Before a machine learning model can understand text, it must be broken down into chunks (tokens) and converted into numerical formats. This process removes noise like stopwords and standardizes words through stemming.
@@ -163,9 +169,15 @@ export default function MlNlp() {
             <button className="px-4 py-2 border border-gray-700 hover:bg-gray-800 text-gray-300 font-medium rounded-lg transition-colors" onClick={() => setLexStep(0)}>Reset</button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="guide-section mb-16" id="spam">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="guide-section mb-16" 
+        id="spam"
+      >
         <h2 className="text-2xl font-bold mb-4 text-gray-100">Spam Detection Pipeline</h2>
         <p className="text-gray-300 mb-6 leading-relaxed">
           Using a Naive Bayes Classifier on Bag-of-Words representations allows us to determine if a message is Ham (normal) or Spam based on term probabilities.
@@ -189,9 +201,15 @@ export default function MlNlp() {
             <button className="px-4 py-2 border border-gray-700 hover:bg-gray-800 text-gray-300 font-medium rounded-lg transition-colors" onClick={() => setSpamStep(0)}>Reset</button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="guide-section mb-16" id="syntactic">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="guide-section mb-16" 
+        id="syntactic"
+      >
         <h2 className="text-2xl font-bold mb-4 text-gray-100">Syntactic Processing (POS Tagging)</h2>
         <p className="text-gray-300 mb-6 leading-relaxed">
           Understanding grammatical structure is crucial. Hidden Markov Models (HMM) and the Viterbi Algorithm calculate the most probable sequence of tags for a given sentence.
@@ -219,9 +237,15 @@ export default function MlNlp() {
             <button className="px-4 py-2 border border-gray-700 hover:bg-gray-800 text-gray-300 font-medium rounded-lg transition-colors" onClick={() => setSynStep(0)}>Reset</button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="guide-section" id="spell">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="guide-section" 
+        id="spell"
+      >
         <h2 className="text-2xl font-bold mb-4 text-gray-100">Spell Corrector (Edit Distance)</h2>
         <p className="text-gray-300 mb-6 leading-relaxed">
           Calculating the Levenshtein Distance (minimum insertions, deletions, substitutions) allows models to generate candidate corrections, which are then scored by a Language Model.
@@ -249,7 +273,7 @@ export default function MlNlp() {
             <button className="px-4 py-2 border border-gray-700 hover:bg-gray-800 text-gray-300 font-medium rounded-lg transition-colors" onClick={() => setSpellStep(0)}>Reset</button>
           </div>
         </div>
-      </section>
+      </motion.section>
     </GuideLayout>
   );
 }
