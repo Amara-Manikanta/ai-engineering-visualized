@@ -16,6 +16,7 @@ import MlIndex from "./pages/MlIndex";
 import MlSupervised from "./pages/MlSupervised";
 import MlUnsupervised from "./pages/MlUnsupervised";
 import MlDeepLearning from "./pages/MlDeepLearning";
+import PythonIndex from "./pages/PythonIndex";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/ml/supervised" element={<MlSupervised />} />
         <Route path="/ml/unsupervised" element={<MlUnsupervised />} />
         <Route path="/ml/deep-learning" element={<MlDeepLearning />} />
+        <Route path="/python" element={<PythonIndex />} />
       </Routes>
     </BrowserRouter>
   );
