@@ -17,6 +17,13 @@ import MlSupervised from "./pages/MlSupervised";
 import MlUnsupervised from "./pages/MlUnsupervised";
 import MlDeepLearning from "./pages/MlDeepLearning";
 import PythonIndex from "./pages/PythonIndex";
+import ModelsIndex from "./pages/ModelsIndex";
+import ModelsGemini from "./pages/ModelsGemini";
+import ModelsGpt from "./pages/ModelsGpt";
+import ModelsLlama from "./pages/ModelsLlama";
+import ModelsMistral from "./pages/ModelsMistral";
+import ModelsQwen from "./pages/ModelsQwen";
+import ModelsDeepseek from "./pages/ModelsDeepseek";
 
 function App() {
   return (
@@ -40,6 +47,13 @@ function App() {
         <Route path="/ml/unsupervised" element={<MlUnsupervised />} />
         <Route path="/ml/deep-learning" element={<MlDeepLearning />} />
         <Route path="/python" element={<PythonIndex />} />
+        <Route path="/models" element={<ModelsIndex />} />
+        <Route path="/models/gemini" element={<ModelsGemini />} />
+        <Route path="/models/gpt" element={<ModelsGpt />} />
+        <Route path="/models/llama" element={<ModelsLlama />} />
+        <Route path="/models/mistral" element={<ModelsMistral />} />
+        <Route path="/models/qwen" element={<ModelsQwen />} />
+        <Route path="/models/deepseek" element={<ModelsDeepseek />} />
       </Routes>
     </BrowserRouter>
   );
