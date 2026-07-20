@@ -235,9 +235,11 @@
         </ul>
       </section>
 
-      <!-- 8. End-to-End Example -->
+      <!-- 8. Code Examples -->
       <section id="example" class="emb-section">
-        <h2>8. End-to-End Example</h2>
+        <h2>8. Code Examples</h2>
+        
+        <h4 style="color:var(--primary); margin-top:20px;">8.1 Using load()</h4>
         <p>Here is how you load a PDF, inspect its metadata, and pass it to a Text Splitter:</p>
         <div class="code-panel">from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -245,18 +247,41 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 # 1. Initialize Loader
 loader = PyPDFLoader("annual_report.pdf")
 
-# 2. Load the Document objects
+# 2. Load the Document objects (all at once)
 docs = loader.load()
 
 print(f"Loaded {len(docs)} pages.")
 print(f"Metadata of page 1: {docs[0].metadata}")
-# Output: {'source': 'annual_report.pdf', 'page': 0}
 
 # 3. Split into manageable chunks
 splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-chunks = splitter.split_documents(docs)
+chunks = splitter.split_documents(docs)</div>
 
-print(f"Split into {len(chunks)} chunks ready for embeddings.")</div>
+        <h4 style="color:var(--primary); margin-top:30px;">8.2 Using lazy_load()</h4>
+        <p>For large datasets, use a generator to process one document at a time and avoid out-of-memory errors:</p>
+        <div class="code-panel"># 1. Initialize Loader
+loader = PyPDFLoader("massive_report.pdf")
+
+# 2. Process documents lazily as a generator
+for doc in loader.lazy_load():
+    print(f"Processing page {doc.metadata['page']}...")
+    
+    # Split or insert into Vector DB one-by-one to save memory
+    # chunks = splitter.split_documents([doc])</div>
+
+        <h4 style="color:var(--primary); margin-top:30px;">8.3 Using aload()</h4>
+        <p>For asynchronous operations (like handling concurrent requests in a web server):</p>
+        <div class="code-panel">import asyncio
+from langchain_community.document_loaders import PyPDFLoader
+
+async def load_docs_async():
+    loader = PyPDFLoader("annual_report.pdf")
+    
+    # Await the async load method
+    docs = await loader.aload()
+    print(f"Async loaded {len(docs)} pages.")
+
+# asyncio.run(load_docs_async())</div>
       </section>
 
       <!-- 9. Best Practices -->
