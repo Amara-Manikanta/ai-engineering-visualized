@@ -12,6 +12,13 @@ const NAV_LINKS = [
       { name: "Introduction", path: "/ml" },
       { name: "Supervised", path: "/ml/supervised" },
       { name: "Unsupervised", path: "/ml/unsupervised" },
+      { name: "Deep Learning", path: "/ml/deep-learning" },
+      { name: "NLP", path: "/ml/nlp" },
+      { name: "Decision Trees", path: "/ml/decision-trees" },
+      { name: "KNN", path: "/ml/knn" },
+      { name: "Logistic Reg", path: "/ml/logistic-regression" },
+      { name: "Linear Reg", path: "/ml/linear-regression" },
+      { name: "Multi Reg", path: "/ml/multiple-regression" },
     ],
   },
   {
@@ -22,6 +29,8 @@ const NAV_LINKS = [
       { name: "LLM Inference", path: "/llm-inference" },
       { name: "Prompt Engineering", path: "/prompting" },
       { name: "Embeddings", path: "/embeddings" },
+      { name: "Fine-tuning", path: "/genai/fine-tuning" },
+      { name: "Quantization", path: "/genai/quantization" },
     ],
   },
   {
@@ -30,6 +39,16 @@ const NAV_LINKS = [
     subLinks: [
       { name: "Fundamentals", path: "/rag/fundamentals" },
       { name: "Data Prep", path: "/rag/data-prep" },
+      { name: "Indexing", path: "/rag/indexing" },
+      { name: "Chunking", path: "/rag/chunking" },
+      { name: "Embeddings", path: "/rag/embeddings" },
+      { name: "Vector DBs", path: "/rag/vector-dbs" },
+      { name: "Retrieval", path: "/rag/retrieval" },
+      { name: "Generation", path: "/rag/generation" },
+      { name: "Evaluation", path: "/rag/evaluation" },
+      { name: "Development", path: "/rag/development" },
+      { name: "Types of RAG", path: "/rag/types-of-rag" },
+      { name: "Adv Retrieval", path: "/rag/advanced-retrieval" },
     ],
   },
   {
@@ -41,8 +60,26 @@ const NAV_LINKS = [
       { name: "LangGraph", path: "/langgraph" },
       { name: "LangChain", path: "/agents/langchain" },
       { name: "Document Loaders", path: "/agents/document-loaders" },
+      { name: "Tool Calling", path: "/agents/tool-calling" },
+      { name: "Memory", path: "/agents/memory" },
+      { name: "Multi-Agent", path: "/agents/multi-agent" },
     ],
   },
+  {
+    name: "🧩 Models",
+    path: "/models",
+    subLinks: [
+      { name: "Claude", path: "/claude" },
+      { name: "GPT", path: "/models/gpt" },
+      { name: "Gemini", path: "/models/gemini" },
+      { name: "Llama", path: "/models/llama" },
+      { name: "Qwen", path: "/models/qwen" },
+      { name: "DeepSeek", path: "/models/deepseek" },
+      { name: "Mistral", path: "/models/mistral" },
+    ],
+  },
+  { name: "🚀 Projects", path: "/projects" },
+  { name: "📚 Resources", path: "/resources" },
 ];
 
 export default function GlobalHeader() {
