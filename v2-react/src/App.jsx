@@ -9,6 +9,13 @@ import LlmIndex from "./pages/LlmIndex";
 import LlmType from "./pages/LlmType";
 import LlmVlm from "./pages/LlmVlm";
 import LlmSlm from "./pages/LlmSlm";
+import GenAiIndex from "./pages/GenAiIndex";
+import GenAiFineTuning from "./pages/GenAiFineTuning";
+import GenAiQuantization from "./pages/GenAiQuantization";
+import MlIndex from "./pages/MlIndex";
+import MlSupervised from "./pages/MlSupervised";
+import MlUnsupervised from "./pages/MlUnsupervised";
+import MlDeepLearning from "./pages/MlDeepLearning";
 
 function App() {
   return (
@@ -24,6 +31,13 @@ function App() {
         <Route path="/llms/llm-type" element={<LlmType />} />
         <Route path="/llms/vlm-type" element={<LlmVlm />} />
         <Route path="/llms/slm-type" element={<LlmSlm />} />
+        <Route path="/genai" element={<GenAiIndex />} />
+        <Route path="/genai/fine-tuning" element={<GenAiFineTuning />} />
+        <Route path="/genai/quantization" element={<GenAiQuantization />} />
+        <Route path="/ml" element={<MlIndex />} />
+        <Route path="/ml/supervised" element={<MlSupervised />} />
+        <Route path="/ml/unsupervised" element={<MlUnsupervised />} />
+        <Route path="/ml/deep-learning" element={<MlDeepLearning />} />
       </Routes>
     </BrowserRouter>
   );
