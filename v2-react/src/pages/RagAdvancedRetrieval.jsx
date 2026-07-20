@@ -15,6 +15,9 @@ export default function RagAdvancedRetrieval() {
     >
       <div className="space-y-12">
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} id="techniques" className="scroll-mt-24">
+          <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-4">
+            Part 12
+          </div>
           <h2 className="text-2xl font-semibold text-white mb-4">Retrieval Optimization</h2>
           <p className="text-gray-300 leading-relaxed mb-4">
             If the retrieval step fails, the generation step fails. These techniques fix retrieval:

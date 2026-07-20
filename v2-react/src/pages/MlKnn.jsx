@@ -236,6 +236,59 @@ export default function MlKnn() {
           </div>
         </div>
       </section>
+
+      <section className="guide-section mb-16">
+        <h2 className="text-2xl font-bold mb-6 text-gray-100">Evaluation Metrics</h2>
+        
+        <div className="bg-[#111] border border-gray-800 rounded-xl p-6 mb-6">
+          <h3 className="text-lg font-bold text-gray-100 mb-4">Accuracy, Precision, Recall, and F1</h3>
+          <ul className="list-disc list-inside space-y-2 text-gray-400 text-sm">
+            <li><strong className="text-white">Accuracy:</strong> Proportion of correctly classified instances. Best for balanced datasets. <code className="text-indigo-300 bg-black/40 px-2 py-0.5 rounded">(Correct / Total)</code></li>
+            <li><strong className="text-white">Precision:</strong> Proportion of true positive instances out of all <em>predicted</em> positives. Important when false positives are costly. <code className="text-indigo-300 bg-black/40 px-2 py-0.5 rounded">(TP / (TP + FP))</code></li>
+            <li><strong className="text-white">Recall (Sensitivity):</strong> Proportion of true positive instances out of all <em>actual</em> positives. Important when false negatives are costly. <code className="text-indigo-300 bg-black/40 px-2 py-0.5 rounded">(TP / (TP + FN))</code></li>
+            <li><strong className="text-white">F1 Score:</strong> Harmonic mean of precision and recall. Best for imbalanced datasets.</li>
+          </ul>
+        </div>
+
+        <div className="bg-[#111] border border-gray-800 rounded-xl p-6 mb-6">
+          <h3 className="text-lg font-bold text-gray-100 mb-2">Confusion Matrix</h3>
+          <p className="text-gray-400 text-sm mb-4">A table describing the performance of a classification model.</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-center text-sm text-gray-400 border-collapse border border-gray-800">
+              <thead>
+                <tr className="bg-white/5 border-b border-gray-800">
+                  <th className="p-3 border-r border-gray-800 font-normal"></th>
+                  <th className="p-3 border-r border-gray-800 font-bold text-gray-200">Predicted Positive</th>
+                  <th className="p-3 font-bold text-gray-200">Predicted Negative</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-800">
+                  <td className="p-3 border-r border-gray-800 font-bold text-gray-200 bg-white/5">Actual Positive</td>
+                  <td className="p-3 border-r border-gray-800">True Positive (TP)</td>
+                  <td className="p-3">False Negative (FN)</td>
+                </tr>
+                <tr>
+                  <td className="p-3 border-r border-gray-800 font-bold text-gray-200 bg-white/5">Actual Negative</td>
+                  <td className="p-3 border-r border-gray-800">False Positive (FP)</td>
+                  <td className="p-3">True Negative (TN)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-white mb-2">ROC Curve & AUC</h3>
+            <p className="text-gray-400 text-sm">The ROC Curve plots True Positive Rate vs False Positive Rate at various thresholds. AUC (Area Under Curve) ranges from 0 to 1, with 1 indicating perfect performance.</p>
+          </div>
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-white mb-2">Cross-Validation</h3>
+            <p className="text-gray-400 text-sm">Technique to evaluate model performance by partitioning data into subsets (e.g., K-Fold). Essential for assessing generalizability to unseen data.</p>
+          </div>
+        </div>
+      </section>
     </GuideLayout>
   );
 }

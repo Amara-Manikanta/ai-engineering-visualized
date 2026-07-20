@@ -113,6 +113,67 @@ export default function RagGeneration() {
               </button>
             </div>
           </div>
+
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-white mb-6">🖋️ What the Final Prompt Looks Like</h3>
+            <div className="flex flex-col border border-gray-700 rounded-xl overflow-hidden bg-[#0d1117] text-sm">
+              <div className="flex flex-col md:flex-row border-b border-gray-700">
+                <div className="md:w-48 bg-purple-900/20 p-4 border-r border-gray-700 text-purple-300 font-semibold flex items-center">
+                  System Message
+                </div>
+                <div className="p-4 text-gray-300 flex-1 bg-black/20">
+                  You are a helpful assistant. Use ONLY the context provided below to answer the user's question. If the answer is not in the context, say "I don't know."
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row border-b border-gray-700">
+                <div className="md:w-48 bg-blue-900/20 p-4 border-r border-gray-700 text-blue-300 font-semibold flex items-center">
+                  Context (Retrieved Chunks)
+                </div>
+                <div className="p-4 text-gray-300 flex-1 space-y-3 bg-black/20">
+                  <p><strong>[Chunk 1]:</strong> "The return policy allows returns within 30 days of purchase with a valid receipt..."</p>
+                  <p><strong>[Chunk 2]:</strong> "Refunds are processed within 5–7 business days to the original payment method..."</p>
+                  <p><strong>[Chunk 3]:</strong> "Items must be in original condition with all tags attached for a full refund..."</p>
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row">
+                <div className="md:w-48 bg-emerald-900/20 p-4 border-r border-gray-700 text-emerald-300 font-semibold flex items-center">
+                  User Query
+                </div>
+                <div className="p-4 text-gray-300 flex-1 font-medium bg-black/20">
+                  "What is the return policy and how long do refunds take?"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-16">
+            <h3 className="text-xl font-bold text-white mb-6">📝 Augmentation — Detailed Notes</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-[#111] border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                <div className="text-2xl mb-3">📋</div>
+                <h4 className="text-lg font-bold text-white mb-2">1. Context Assembly</h4>
+                <p className="text-gray-400 text-sm">Retrieved chunks are concatenated and formatted into a <strong>context block</strong>. Good RAG implementations add chunk metadata (source, page number) for traceability and citation.</p>
+              </div>
+              <div className="bg-[#111] border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                <div className="text-2xl mb-3">📝</div>
+                <h4 className="text-lg font-bold text-white mb-2">2. Prompt Engineering</h4>
+                <p className="text-gray-400 text-sm">A carefully crafted system prompt instructs the LLM to answer <em>only</em> from the provided context. This prevents hallucinations and keeps answers grounded in your data.</p>
+              </div>
+              <div className="bg-[#111] border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                <div className="text-2xl mb-3">🔗</div>
+                <h4 className="text-lg font-bold text-white mb-2">3. Query + Context = Prompt</h4>
+                <p className="text-gray-400 text-sm">The final prompt combines: <strong>System instructions + Retrieved context + User question</strong>. This complete prompt is what gets sent to the LLM in the next stage.</p>
+              </div>
+              <div className="bg-[#111] border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors">
+                <div className="text-2xl mb-3">⚖️</div>
+                <h4 className="text-lg font-bold text-white mb-2">4. Context Window Limits</h4>
+                <p className="text-gray-400 text-sm mb-3">LLMs have a maximum context window (e.g., 128K tokens for GPT-4o). The number of retrieved chunks must fit within this limit along with the system prompt and user query.</p>
+                <div className="text-xs text-emerald-400 bg-emerald-900/20 px-3 py-2 rounded-lg inline-block border border-emerald-800/50">
+                  <span className="font-bold mr-2">Balance:</span><code>More chunks = more context but more cost</code>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} id="prompt-construction" className="scroll-mt-24">
