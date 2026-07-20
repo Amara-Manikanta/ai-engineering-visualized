@@ -28,9 +28,9 @@ export default function MlUnsupervised() {
             <motion.div whileHover={{ scale: 1.02 }} className="bg-[#111111] border border-white/10 p-6 rounded-xl hover:border-indigo-500/50 transition-colors">
               <h3 className="text-xl font-semibold mb-3 text-white">Clustering</h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">Groups similar objects together based on their features without any prior labels.</p>
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-gray-400" style={{ marginTop: '16px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
                 <strong className="text-gray-300">Algorithms:</strong>
-                <ul className="mt-2 ml-5 list-disc marker:text-indigo-500 space-y-1">
+                <ul className="mt-2 ml-5 list-disc marker:text-indigo-500 space-y-1" style={{ marginTop: '8px', marginLeft: '20px' }}>
                   <li>k-Means</li>
                   <li>Hierarchical Clustering</li>
                   <li>DBSCAN (Density-Based Spatial Clustering of Applications with Noise)</li>
@@ -41,9 +41,9 @@ export default function MlUnsupervised() {
             <motion.div whileHover={{ scale: 1.02 }} className="bg-[#111111] border border-white/10 p-6 rounded-xl hover:border-indigo-500/50 transition-colors">
               <h3 className="text-xl font-semibold mb-3 text-white">Dimensionality Reduction</h3>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">Reduces data complexity by decreasing the number of features while retaining the most important information.</p>
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-gray-400" style={{ marginTop: '16px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
                 <strong className="text-gray-300">Algorithms:</strong>
-                <ul className="mt-2 ml-5 list-disc marker:text-indigo-500 space-y-1">
+                <ul className="mt-2 ml-5 list-disc marker:text-indigo-500 space-y-1" style={{ marginTop: '8px', marginLeft: '20px' }}>
                   <li>PCA (Principal Component Analysis)</li>
                   <li>t-SNE (t-Distributed Stochastic Neighbor Embedding)</li>
                   <li>SVD (Singular Value Decomposition)</li>
@@ -55,7 +55,7 @@ export default function MlUnsupervised() {
 
         <motion.section variants={itemVariants} id="common-applications">
           <h2 className="text-2xl font-bold mb-6 text-gray-100">Common Applications</h2>
-          <ul className="space-y-4 text-gray-300">
+          <ul className="space-y-4 text-gray-300" style={{ fontSize: '1.05rem' }}>
             <li className="flex items-start">
               <span className="text-indigo-400 mr-3 mt-1">✦</span>
               <div>
@@ -91,3 +91,4 @@ export default function MlUnsupervised() {
     </GuideLayout>
   );
 }
+

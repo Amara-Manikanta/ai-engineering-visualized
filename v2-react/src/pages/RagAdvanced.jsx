@@ -10,12 +10,12 @@ export default function RagAdvanced() {
 
   const steps = [
     { show: [], desc: "Click Play to see Advanced RAG optimization." },
-    { show: ["q"], desc: "1. A vague user query arrives." },
-    { show: ["q", "arr1", "rewrite"], desc: "2. Pre-retrieval: An LLM rewrites the query to be highly specific." },
-    { show: ["q", "arr1", "rewrite", "arr2", "vdb"], desc: "3. The DB searches for the optimal query, pulling a large net of 100 documents." },
-    { show: ["q", "arr1", "rewrite", "arr2", "vdb", "arr3", "rerank"], desc: "4. Post-retrieval: A Cross-Encoder heavily scrutinizes and scores all 100 documents." },
-    { show: ["q", "arr1", "rewrite", "arr2", "vdb", "arr3", "rerank", "arr4", "top3"], desc: "5. Only the absolute Top 3 most relevant documents survive the filter." },
-    { show: ["q", "arr1", "rewrite", "arr2", "vdb", "arr3", "rerank", "arr4", "top3", "arr5", "llm"], desc: "6. The highly precise context is sent to the LLM for generation." }
+    { show: ["a-q"], desc: "1. A vague user query arrives." },
+    { show: ["a-q", "a-arr1", "a-rewrite"], desc: "2. Pre-retrieval: An LLM rewrites the query to be highly specific." },
+    { show: ["a-q", "a-arr1", "a-rewrite", "a-arr2", "a-vdb"], desc: "3. The DB searches for the optimal query, pulling a large net of 100 documents." },
+    { show: ["a-q", "a-arr1", "a-rewrite", "a-arr2", "a-vdb", "a-arr3", "a-rerank"], desc: "4. Post-retrieval: A Cross-Encoder heavily scrutinizes and scores all 100 documents." },
+    { show: ["a-q", "a-arr1", "a-rewrite", "a-arr2", "a-vdb", "a-arr3", "a-rerank", "a-arr4", "a-top3"], desc: "5. Only the absolute Top 3 most relevant documents survive the filter." },
+    { show: ["a-q", "a-arr1", "a-rewrite", "a-arr2", "a-vdb", "a-arr3", "a-rerank", "a-arr4", "a-top3", "a-arr5", "a-llm"], desc: "6. The highly precise context is sent to the LLM for generation." }
   ];
 
   useEffect(() => {
@@ -51,181 +51,163 @@ export default function RagAdvanced() {
 
   const isVisible = (id) => steps[step].show.includes(id);
 
-  const nodeVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: "-50%" },
-    visible: { opacity: 1, scale: 1, y: "-50%", transition: { type: "spring", stiffness: 60 } },
-  };
-  
-  const vdbVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 60 } },
-  };
-
-  const arrowVariants = {
-    hidden: { opacity: 0, x: -10, y: "-50%" },
-    visible: { opacity: 1, x: 0, y: "-50%", transition: { duration: 0.4 } },
-  };
-  
-  const arrowDownVariants = {
-    hidden: { opacity: 0, y: -10, rotate: 90 },
-    visible: { opacity: 1, y: 0, rotate: 90, transition: { duration: 0.4 } },
-  };
-
   return (
     <GuideLayout
       title="Advanced RAG"
       intro="Fixes Naive RAG by optimizing the query before search, and re-ranking the results after search."
       toc={toc}
     >
-      <section className="space-y-6">
-        <div className="relative h-[500px] bg-white/5 border border-white/10 rounded-2xl overflow-hidden mb-6 hidden md:block">
-          
-          <motion.div
-            variants={nodeVariants}
-            initial="hidden"
-            animate={isVisible("q") ? "visible" : "hidden"}
-            className="absolute left-[5%] top-1/2 w-[100px] p-2.5 bg-white/5 border-2 border-blue-500 text-center rounded-lg text-white font-medium"
-          >
-            Bad Query
-          </motion.div>
+      <motion.section className="guide-section">
+        <div 
+          className="pipeline-canvas adv-canvas" 
+          style={{ position: "relative", height: "500px", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "16px", overflow: "hidden", marginBottom: "24px" }}
+        >
+            
+            {/* Nodes */}
+            <motion.div 
+              id="a-q" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-q") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "5%", top: "50%", transform: "translateY(-50%)", width: "100px", padding: "10px", background: "var(--surface)", border: "2px solid var(--primary)", textAlign: "center", borderRadius: "8px" }}
+            >
+              Bad Query
+            </motion.div>
+            
+            <motion.div 
+              id="a-arr1" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-arr1") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "21%", top: "50%", transform: "translateY(-50%)" }}
+            >
+              ➔
+            </motion.div>
+            
+            <motion.div 
+              id="a-rewrite" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-rewrite") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "25%", top: "50%", transform: "translateY(-50%)", width: "120px", padding: "10px", background: "var(--purple)", color: "white", textAlign: "center", borderRadius: "8px" }}
+            >
+              LLM<br/><span style={{ fontSize: "0.7em" }}>Query Rewrite</span>
+            </motion.div>
+            
+            <motion.div 
+              id="a-arr2" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-arr2") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "44%", top: "50%", transform: "translateY(-50%)" }}
+            >
+              ➔
+            </motion.div>
+            
+            <motion.div 
+              id="a-vdb" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-vdb") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "48%", top: "20%", width: "120px", padding: "10px", background: "var(--cyan)", color: "white", textAlign: "center", borderRadius: "8px" }}
+            >
+              Vector DB<br/><span style={{ fontSize: "0.7em" }}>Retrieve Top 100</span>
+            </motion.div>
+            
+            <motion.div 
+              id="a-arr3" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-arr3") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "53%", top: "35%", transform: "rotate(90deg)" }}
+            >
+              ➔
+            </motion.div>
+            
+            <motion.div 
+              id="a-rerank" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-rerank") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "48%", top: "50%", transform: "translateY(-50%)", width: "120px", padding: "10px", background: "var(--orange)", color: "white", textAlign: "center", borderRadius: "8px" }}
+            >
+              Cross-Encoder<br/><span style={{ fontSize: "0.7em" }}>Re-ranker</span>
+            </motion.div>
+            
+            <motion.div 
+              id="a-arr4" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-arr4") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "67%", top: "50%", transform: "translateY(-50%)" }}
+            >
+              ➔
+            </motion.div>
+            
+            <motion.div 
+              id="a-top3" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-top3") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "71%", top: "50%", transform: "translateY(-50%)", width: "100px", padding: "10px", background: "var(--surface)", border: "2px dashed var(--orange)", textAlign: "center", borderRadius: "8px" }}
+            >
+              Top 3<br/><span style={{ fontSize: "0.7em" }}>Filtered</span>
+            </motion.div>
+            
+            <motion.div 
+              id="a-arr5" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-arr5") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "87%", top: "50%", transform: "translateY(-50%)" }}
+            >
+              ➔
+            </motion.div>
+            
+            <motion.div 
+              id="a-llm" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isVisible("a-llm") ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ position: "absolute", left: "91%", top: "50%", transform: "translateY(-50%)", width: "70px", padding: "10px", background: "var(--green)", color: "white", textAlign: "center", borderRadius: "8px" }}
+            >
+              LLM
+            </motion.div>
 
-          <motion.div
-            variants={arrowVariants}
-            initial="hidden"
-            animate={isVisible("arr1") ? "visible" : "hidden"}
-            className="absolute left-[21%] top-1/2 text-white/50 text-xl"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            variants={nodeVariants}
-            initial="hidden"
-            animate={isVisible("rewrite") ? "visible" : "hidden"}
-            className="absolute left-[25%] top-1/2 w-[120px] p-2.5 bg-purple-600 text-white text-center rounded-lg shadow-lg shadow-purple-500/20"
-          >
-            <div className="font-semibold">LLM</div>
-            <div className="text-xs text-purple-200 mt-1">Query Rewrite</div>
-          </motion.div>
-
-          <motion.div
-            variants={arrowVariants}
-            initial="hidden"
-            animate={isVisible("arr2") ? "visible" : "hidden"}
-            className="absolute left-[44%] top-1/2 text-white/50 text-xl"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            variants={vdbVariants}
-            initial="hidden"
-            animate={isVisible("vdb") ? "visible" : "hidden"}
-            className="absolute left-[48%] top-[20%] w-[120px] p-2.5 bg-cyan-600 text-white text-center rounded-lg shadow-lg shadow-cyan-500/20"
-          >
-            <div className="font-semibold">Vector DB</div>
-            <div className="text-xs text-cyan-200 mt-1">Retrieve Top 100</div>
-          </motion.div>
-
-          <motion.div
-            variants={arrowDownVariants}
-            initial="hidden"
-            animate={isVisible("arr3") ? "visible" : "hidden"}
-            className="absolute left-[53%] top-[37%] text-white/50 text-xl"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            variants={nodeVariants}
-            initial="hidden"
-            animate={isVisible("rerank") ? "visible" : "hidden"}
-            className="absolute left-[48%] top-1/2 w-[120px] p-2.5 bg-orange-600 text-white text-center rounded-lg shadow-lg shadow-orange-500/20"
-          >
-            <div className="font-semibold text-sm">Cross-Encoder</div>
-            <div className="text-xs text-orange-200 mt-1">Re-ranker</div>
-          </motion.div>
-
-          <motion.div
-            variants={arrowVariants}
-            initial="hidden"
-            animate={isVisible("arr4") ? "visible" : "hidden"}
-            className="absolute left-[67%] top-1/2 text-white/50 text-xl"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            variants={nodeVariants}
-            initial="hidden"
-            animate={isVisible("top3") ? "visible" : "hidden"}
-            className="absolute left-[71%] top-1/2 w-[100px] p-2.5 bg-white/5 border-2 border-dashed border-orange-500 text-center rounded-lg text-white"
-          >
-            <div className="font-semibold">Top 3</div>
-            <div className="text-xs text-gray-400 mt-1">Filtered</div>
-          </motion.div>
-
-          <motion.div
-            variants={arrowVariants}
-            initial="hidden"
-            animate={isVisible("arr5") ? "visible" : "hidden"}
-            className="absolute left-[87%] top-1/2 text-white/50 text-xl"
-          >
-            ➔
-          </motion.div>
-
-          <motion.div
-            variants={nodeVariants}
-            initial="hidden"
-            animate={isVisible("llm") ? "visible" : "hidden"}
-            className="absolute left-[91%] top-1/2 w-[70px] p-2.5 bg-green-600 text-white text-center rounded-lg font-semibold shadow-lg shadow-green-500/20"
-          >
-            LLM
-          </motion.div>
-
-          <div className="absolute bottom-6 left-6 right-6 text-center text-gray-400 text-sm h-10 flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={step}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
+                id="a-desc"
+                style={{ position: "absolute", bottom: "20px", left: "20px", right: "20px", textAlign: "center", color: "var(--text2)", fontSize: "0.95em", height: "40px" }}
               >
                 {steps[step].desc}
               </motion.div>
             </AnimatePresence>
-          </div>
         </div>
-
-        {/* Fallback for small screens */}
-        <div className="md:hidden text-gray-300 text-sm bg-white/5 p-4 rounded-xl border border-white/10">
-          <p className="mb-2 font-semibold text-white">Advanced RAG Workflow:</p>
-          <ol className="list-decimal pl-5 space-y-2">
-            <li>A vague user query arrives.</li>
-            <li><strong>Pre-retrieval:</strong> An LLM rewrites the query to be highly specific.</li>
-            <li>The DB searches for the optimal query, pulling a large net of 100 documents.</li>
-            <li><strong>Post-retrieval:</strong> A Cross-Encoder heavily scrutinizes and scores all 100 documents.</li>
-            <li>Only the absolute Top 3 most relevant documents survive the filter.</li>
-            <li>The highly precise context is sent to the LLM for generation.</li>
-          </ol>
-        </div>
-
-        <div className="flex gap-4 justify-center mt-4">
-          <button
+        
+        <div className="canvas-controls" style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+          <button 
+            className="btn btn-primary" 
+            id="a-play" 
             onClick={handlePlay}
-            className="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors"
+            style={{ padding: "10px 24px", borderRadius: "24px", border: "none", cursor: "pointer", fontWeight: "600", background: "var(--primary)", color: "white" }}
           >
             {playing ? "Playing..." : step >= steps.length - 1 ? "▶ Replay" : "▶ Play Animation"}
           </button>
-          <button
+          <button 
+            className="btn btn-secondary" 
+            id="a-reset" 
             onClick={handleReset}
-            className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold transition-colors border border-white/10"
+            style={{ padding: "10px 24px", borderRadius: "24px", border: "1px solid var(--border)", cursor: "pointer", fontWeight: "600", background: "var(--surface)", color: "var(--text)" }}
           >
             ↺ Reset
           </button>
         </div>
-      </section>
+      </motion.section>
     </GuideLayout>
   );
 }
