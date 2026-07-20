@@ -31,7 +31,7 @@ jobs:
           cache-dependency-path: './v2-react/package-lock.json'
       - name: Install dependencies
         working-directory: ./v2-react
-        run: npm ci
+        run: npm install
       - name: Build
         working-directory: ./v2-react
         run: npm run build
