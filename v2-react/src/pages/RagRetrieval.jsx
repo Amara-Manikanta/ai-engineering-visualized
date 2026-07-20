@@ -46,9 +46,15 @@ export default function RagRetrieval() {
         <section id="retrieval" className="scroll-mt-24">
           <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 md:p-8 mb-8">
             <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-4">
+              Part 7
+            </div>
+            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-4 ml-2">
               Stage 2: Retrieval
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">Interactive Retrieval Pipeline</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">🔍 Retrieval (R)</h2>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              At query time — the user's question is encoded into a vector and semantically matched against stored embeddings to retrieve the most relevant chunks.
+            </p>
             
             <div className="flex flex-col md:flex-row gap-8 items-center justify-between py-12">
               {steps.map((s, i) => (
@@ -86,17 +92,23 @@ export default function RagRetrieval() {
               ))}
             </div>
 
-            <div className="bg-gray-800/80 rounded-xl p-6 border border-gray-700 min-h-[140px] flex items-center justify-center">
+            <div className="bg-gray-800/80 rounded-xl p-6 border border-gray-700 min-h-[140px] flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={step}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="text-center max-w-2xl"
+                  className="max-w-2xl mx-auto"
                 >
-                  <h4 className="text-xl font-bold text-white mb-2">{steps[step-1].title}</h4>
-                  <p className="text-gray-400">{steps[step-1].desc}</p>
+                  <div className="text-sm text-blue-400 font-medium mb-1">Step {step}</div>
+                  <h4 className="text-xl font-bold text-white mb-2">{step === 1 ? 'User Asks a Question' : steps[step-1].title}</h4>
+                  <p className="text-gray-400 mb-4">{step === 1 ? 'A user types a natural language question. This is the query that will drive the entire retrieval process. The system needs to find the most relevant pieces of information from the knowledge base to answer this question.' : steps[step-1].desc}</p>
+                  {step === 1 && (
+                    <div className="bg-blue-900/30 p-3 rounded-lg text-sm text-blue-200">
+                      <span className="font-bold text-blue-300">Key insight:</span> RAG is query-driven — retrieval happens fresh for every user question, in real time.
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -107,15 +119,62 @@ export default function RagRetrieval() {
                 disabled={step === 1}
                 className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 disabled:opacity-50 text-white font-medium transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
-                Previous
+                ‹ Prev
               </button>
+              <span className="px-4 py-2 text-gray-400 font-medium flex items-center">
+                Step {step} of 4
+              </span>
               <button 
                 onClick={() => setStep(Math.min(steps.length, step + 1))}
                 disabled={step === steps.length}
                 className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
-                Next
+                Next ›
               </button>
+              <button 
+                onClick={() => setStep(1)}
+                className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-medium transition-colors cursor-pointer"
+              >
+                ↺ Reset
+              </button>
+            </div>
+          </div>
+          
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-white mb-6">📝 Retrieval — Detailed Notes</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gray-800/50 border border-gray-700 p-6 rounded-xl">
+                <div className="text-3xl mb-4">👤</div>
+                <h4 className="text-lg font-bold text-white mb-2">1. User Query</h4>
+                <p className="text-gray-300 text-sm mb-4">The user submits a question in plain language. Unlike keyword search, RAG understands the <em>intent</em> and <em>meaning</em> of the question — not just matching exact words.</p>
+                <div className="bg-gray-900 p-2 rounded text-xs text-gray-400 font-mono">
+                  <span className="text-gray-500 mr-2">Example:</span><code>"What are the symptoms of flu?"</code>
+                </div>
+              </div>
+              <div className="bg-gray-800/50 border border-gray-700 p-6 rounded-xl">
+                <div className="text-3xl mb-4">🔢</div>
+                <h4 className="text-lg font-bold text-white mb-2">2. Query Encoding</h4>
+                <p className="text-gray-300 text-sm mb-4">The query is run through the <strong>same embedding model</strong> used during indexing. This creates a query vector in the same vector space as the document chunks — enabling meaningful comparison.</p>
+                <div className="bg-gray-900 p-2 rounded text-xs text-gray-400 font-mono">
+                  <span className="text-red-400 mr-2">Critical:</span><code>Same model for indexing & retrieval!</code>
+                </div>
+              </div>
+              <div className="bg-gray-800/50 border border-gray-700 p-6 rounded-xl">
+                <div className="text-3xl mb-4">🎯</div>
+                <h4 className="text-lg font-bold text-white mb-2">3. Semantic Search</h4>
+                <p className="text-gray-300 text-sm mb-4">The query vector is compared to all stored chunk vectors using <strong>cosine similarity</strong> or dot product. This finds chunks that are semantically close even if different words are used. Much smarter than keyword matching.</p>
+                <div className="bg-gray-900 p-2 rounded text-xs text-gray-400 font-mono">
+                  <span className="text-blue-400 mr-2">Math:</span><code>similarity = cos(query_vec, chunk_vec)</code>
+                </div>
+              </div>
+              <div className="bg-gray-800/50 border border-gray-700 p-6 rounded-xl">
+                <div className="text-3xl mb-4">📦</div>
+                <h4 className="text-lg font-bold text-white mb-2">4. Top-K Relevant Chunks</h4>
+                <p className="text-gray-300 text-sm mb-4">Milvus returns the <strong>top-K</strong> most similar chunks (typically K=3 to 10). These chunks contain the most relevant information from your knowledge base to answer the user's question.</p>
+                <div className="bg-gray-900 p-2 rounded text-xs text-gray-400 font-mono">
+                  <span className="text-green-400 mr-2">Typical:</span><code>K=3 to 10 chunks returned</code>
+                </div>
+              </div>
             </div>
           </div>
         </section>
