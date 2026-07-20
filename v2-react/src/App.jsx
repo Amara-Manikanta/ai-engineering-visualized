@@ -5,6 +5,10 @@ import Langchain from "./pages/Langchain";
 import RagFundamentals from "./pages/RagFundamentals";
 import RagVectorDbs from "./pages/RagVectorDbs";
 import RagAdvanced from "./pages/RagAdvanced";
+import LlmIndex from "./pages/LlmIndex";
+import LlmType from "./pages/LlmType";
+import LlmVlm from "./pages/LlmVlm";
+import LlmSlm from "./pages/LlmSlm";
 
 function App() {
   return (
@@ -16,6 +20,10 @@ function App() {
         <Route path="/rag/fundamentals" element={<RagFundamentals />} />
         <Route path="/rag/vector-dbs" element={<RagVectorDbs />} />
         <Route path="/rag/advanced-rag" element={<RagAdvanced />} />
+        <Route path="/llms" element={<LlmIndex />} />
+        <Route path="/llms/llm-type" element={<LlmType />} />
+        <Route path="/llms/vlm-type" element={<LlmVlm />} />
+        <Route path="/llms/slm-type" element={<LlmSlm />} />
       </Routes>
     </BrowserRouter>
   );
