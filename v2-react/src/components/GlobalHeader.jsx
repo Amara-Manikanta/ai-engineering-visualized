@@ -105,78 +105,96 @@ export default function GlobalHeader() {
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10 text-white">
-      <div className="max-w-[1400px] mx-auto px-4 h-16 flex items-center justify-between">
-        
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity shrink-0">
-          <span className="text-2xl">🧠</span>
-          <span>AI Engineering <span className="text-indigo-400">Visualized</span></span>
-        </Link>
+    <>
+      {/* ====== HEADER BAR ====== */}
+      <header className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10 text-white">
+        <div className="max-w-[1400px] mx-auto px-4 h-16 flex items-center justify-between">
+          
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity shrink-0">
+            <span className="text-2xl">🧠</span>
+            <span>AI Engineering <span className="text-indigo-400">Visualized</span></span>
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6">
-          {NAV_LINKS.map((nav, i) => (
-            <div 
-              key={i} 
-              className="relative group"
-              onMouseEnter={() => setOpenDropdown(i)}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              {nav.subLinks ? (
-                <div className="flex items-center gap-1 cursor-pointer py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors">
-                  <Link to={nav.path}>{nav.name}</Link>
-                  <ChevronDown className="w-4 h-4 opacity-50" />
-                </div>
-              ) : (
-                <Link to={nav.path} className="block py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors">
-                  {nav.name}
-                </Link>
-              )}
-
-              {/* Mega Dropdown */}
-              {nav.subLinks && openDropdown === i && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl overflow-hidden py-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div className="px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-white/5 mb-2">
-                    {nav.name}
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-6">
+            {NAV_LINKS.map((nav, i) => (
+              <div 
+                key={i} 
+                className="relative group"
+                onMouseEnter={() => setOpenDropdown(i)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                {nav.subLinks ? (
+                  <div className="flex items-center gap-1 cursor-pointer py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                    <Link to={nav.path}>{nav.name}</Link>
+                    <ChevronDown className="w-4 h-4 opacity-50" />
                   </div>
-                  {nav.subLinks.map((sub, j) => (
-                    <Link 
-                      key={j} 
-                      to={sub.path}
-                      className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
-                    >
-                      {sub.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
+                ) : (
+                  <Link to={nav.path} className="block py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                    {nav.name}
+                  </Link>
+                )}
 
-        {/* Mobile Toggle */}
-        <button 
-          className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" 
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
+                {/* Desktop Dropdown */}
+                {nav.subLinks && openDropdown === i && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl overflow-hidden py-2">
+                    <div className="px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-white/5 mb-2">
+                      {nav.name}
+                    </div>
+                    {nav.subLinks.map((sub, j) => (
+                      <Link 
+                        key={j} 
+                        to={sub.path}
+                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
 
-      {/* ====== MOBILE MENU PANEL ====== */}
+          {/* Mobile Toggle */}
+          <button 
+            className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" 
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </header>
+
+      {/* ====== MOBILE MENU — RENDERED OUTSIDE <header> TO AVOID backdrop-filter STACKING BUG ====== */}
       {mobileOpen && (
-        <>
+        <div className="fixed inset-0 z-[100] lg:hidden">
           {/* Backdrop overlay */}
           <div 
-            className="fixed inset-0 top-16 bg-black/60 z-40 lg:hidden"
+            className="absolute inset-0 bg-black/60"
             onClick={() => setMobileOpen(false)}
           />
           
           {/* Slide-in panel */}
-          <nav className="fixed top-16 left-0 right-0 bottom-0 z-50 lg:hidden bg-[#0e0e0e] overflow-y-auto border-t border-white/10">
-            <div className="px-4 py-4 space-y-1">
+          <nav className="absolute top-0 left-0 right-0 bottom-0 bg-[#0e0e0e] overflow-y-auto flex flex-col">
+            {/* Mobile header inside panel */}
+            <div className="flex items-center justify-between px-4 h-16 border-b border-white/10 shrink-0">
+              <Link to="/" className="flex items-center gap-2 text-lg font-bold text-white">
+                <span className="text-2xl">🧠</span>
+                <span>AI Engineering <span className="text-indigo-400">Visualized</span></span>
+              </Link>
+              <button 
+                className="p-2 rounded-lg hover:bg-white/10 transition-colors text-white"
+                onClick={() => setMobileOpen(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Nav links */}
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
               {NAV_LINKS.map((nav, i) => (
                 <div key={i}>
                   {nav.subLinks ? (
@@ -225,13 +243,13 @@ export default function GlobalHeader() {
               ))}
             </div>
 
-            {/* Footer in mobile menu */}
-            <div className="px-8 py-6 mt-4 border-t border-white/5">
+            {/* Footer */}
+            <div className="px-8 py-6 border-t border-white/5 shrink-0">
               <p className="text-xs text-gray-600 text-center">AI Engineering Visualized © 2026</p>
             </div>
           </nav>
-        </>
+        </div>
       )}
-    </header>
+    </>
   );
 }
