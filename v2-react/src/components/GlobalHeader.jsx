@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
@@ -85,13 +85,31 @@ const NAV_LINKS = [
 export default function GlobalHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileExpanded, setMobileExpanded] = useState(null);
+  const location = useLocation();
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileExpanded(null);
+  }, [location.pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10 text-white">
       <div className="max-w-[1400px] mx-auto px-4 h-16 flex items-center justify-between">
         
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 text-xl font-bold hover:opacity-80 transition-opacity">
+        <Link to="/" className="flex items-center gap-2 text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity shrink-0">
           <span className="text-2xl">🧠</span>
           <span>AI Engineering <span className="text-indigo-400">Visualized</span></span>
         </Link>
@@ -138,10 +156,82 @@ export default function GlobalHeader() {
         </nav>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden p-2" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X /> : <Menu />}
+        <button 
+          className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" 
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
+
+      {/* ====== MOBILE MENU PANEL ====== */}
+      {mobileOpen && (
+        <>
+          {/* Backdrop overlay */}
+          <div 
+            className="fixed inset-0 top-16 bg-black/60 z-40 lg:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+          
+          {/* Slide-in panel */}
+          <nav className="fixed top-16 left-0 right-0 bottom-0 z-50 lg:hidden bg-[#0e0e0e] overflow-y-auto border-t border-white/10">
+            <div className="px-4 py-4 space-y-1">
+              {NAV_LINKS.map((nav, i) => (
+                <div key={i}>
+                  {nav.subLinks ? (
+                    <>
+                      {/* Accordion header */}
+                      <button
+                        onClick={() => setMobileExpanded(mobileExpanded === i ? null : i)}
+                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-gray-200 hover:bg-white/5 transition-colors"
+                      >
+                        <span>{nav.name}</span>
+                        <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${mobileExpanded === i ? "rotate-180" : ""}`} />
+                      </button>
+                      
+                      {/* Accordion body */}
+                      {mobileExpanded === i && (
+                        <div className="ml-4 pl-4 border-l border-indigo-500/30 space-y-0.5 pb-2">
+                          {nav.subLinks.map((sub, j) => (
+                            <Link
+                              key={j}
+                              to={sub.path}
+                              className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                                location.pathname === sub.path 
+                                  ? "text-indigo-400 bg-indigo-500/10 font-semibold" 
+                                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                              }`}
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      to={nav.path}
+                      className={`block px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                        location.pathname === nav.path
+                          ? "text-indigo-400 bg-indigo-500/10"
+                          : "text-gray-200 hover:bg-white/5"
+                      }`}
+                    >
+                      {nav.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Footer in mobile menu */}
+            <div className="px-8 py-6 mt-4 border-t border-white/5">
+              <p className="text-xs text-gray-600 text-center">AI Engineering Visualized © 2026</p>
+            </div>
+          </nav>
+        </>
+      )}
     </header>
   );
 }
