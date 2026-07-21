@@ -75,7 +75,8 @@ export default function RagChunking() {
     { label: "What is Chunking?", hash: "what-is-chunking" },
     { label: "Basic Chunking Methods", hash: "basic-chunking" },
     { label: "Advanced Chunking Methods", hash: "advanced-chunking" },
-    { label: "Best Practices", hash: "best-practices" }
+    { label: "Best Practices", hash: "best-practices" },
+    { label: "How Chunk Size Works", hash: "chunk-size-calc" }
   ];
 
   const tabs = [
@@ -119,6 +120,231 @@ export default function RagChunking() {
         </p>
       </section>
 
+      {/* ── How is Chunk Size Calculated & Implemented? ── */}
+      <section className="px-5 mt-12">
+        <h2 id="chunk-size-calc" className="text-2xl font-bold mb-4 text-gray-100">How is Chunk Size Calculated & Implemented?</h2>
+        <p className="mb-6 text-gray-300">
+          The most common confusion in chunking is understanding 
+          <strong className="text-white"> what "chunk_size" actually measures</strong>. 
+          It can refer to <em className="text-indigo-300">characters</em>, <em className="text-emerald-300">tokens</em>, or <em className="text-amber-300">words</em> — and choosing the wrong unit leads to chunks that are far too large or far too small.
+        </p>
+
+        {/* Characters vs Tokens Visual */}
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">Characters vs Tokens vs Words</h3>
+        <div className="bg-[#111] border border-gray-800 rounded-xl p-5 mb-6">
+          <p className="text-sm text-gray-400 mb-4">Consider the sentence: <code className="bg-gray-800 px-1.5 py-0.5 rounded text-pink-400">"Retrieval-Augmented Generation improves accuracy."</code></p>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3">
+              <span className="bg-indigo-600/30 border border-indigo-500/50 text-indigo-300 px-2.5 py-1 rounded text-xs font-bold whitespace-nowrap">Characters</span>
+              <div>
+                <p className="text-sm text-gray-300 mb-1">Count every single letter, space, and punctuation mark.</p>
+                <div className="flex flex-wrap gap-0.5 font-mono text-xs">
+                  {"Retrieval-Augmented Generation improves accuracy.".split('').map((c, i) => (
+                    <span key={i} className={`px-1 py-0.5 rounded ${c === ' ' ? 'bg-gray-700 text-gray-500' : c === '-' || c === '.' ? 'bg-rose-900/40 text-rose-400' : 'bg-indigo-900/30 text-indigo-300'}`}>
+                      {c === ' ' ? '␣' : c}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs text-indigo-400 mt-1 font-semibold">= 49 characters</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <span className="bg-emerald-600/30 border border-emerald-500/50 text-emerald-300 px-2.5 py-1 rounded text-xs font-bold whitespace-nowrap">Tokens</span>
+              <div>
+                <p className="text-sm text-gray-300 mb-1">Subword units from the LLM's tokenizer (BPE). Common words stay whole, rare words get split.</p>
+                <div className="flex flex-wrap gap-1 font-mono text-xs">
+                  {["Retr", "ieval", "-", "Aug", "mented", " Generation", " improves", " accuracy", "."].map((t, i) => (
+                    <span key={i} className="bg-emerald-900/30 border border-emerald-500/30 text-emerald-300 px-2 py-1 rounded">{t}</span>
+                  ))}
+                </div>
+                <p className="text-xs text-emerald-400 mt-1 font-semibold">= 9 tokens (GPT-4 / tiktoken cl100k_base)</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <span className="bg-amber-600/30 border border-amber-500/50 text-amber-300 px-2.5 py-1 rounded text-xs font-bold whitespace-nowrap">Words</span>
+              <div>
+                <p className="text-sm text-gray-300 mb-1">Split on whitespace. The simplest unit but least precise for LLM limits.</p>
+                <div className="flex flex-wrap gap-1 font-mono text-xs">
+                  {["Retrieval-Augmented", "Generation", "improves", "accuracy."].map((w, i) => (
+                    <span key={i} className="bg-amber-900/30 border border-amber-500/30 text-amber-300 px-2 py-1 rounded">{w}</span>
+                  ))}
+                </div>
+                <p className="text-xs text-amber-400 mt-1 font-semibold">= 4 words</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Insight */}
+        <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-lg p-4 mb-8">
+          <p className="text-sm text-indigo-300">
+            <strong className="text-indigo-200">💡 Key Insight:</strong> A <code className="bg-gray-800 px-1 rounded">chunk_size=500</code> in characters is roughly <strong>~100 tokens</strong> (very small!), while <code className="bg-gray-800 px-1 rounded">chunk_size=500</code> in tokens is roughly <strong>~2,000 characters</strong> (a full paragraph). Always check which unit your library uses!
+          </p>
+        </div>
+
+        {/* The Math Behind Chunk Overlap */}
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">The Math Behind Chunk Overlap</h3>
+        <p className="text-sm text-gray-300 mb-4">
+          Overlap ensures that sentences sitting on a chunk boundary aren't lost. Here's how to calculate the number of chunks and total tokens generated:
+        </p>
+
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-5 mb-6">
+          <div className="space-y-3 text-sm font-mono">
+            <p className="text-gray-400"><span className="text-purple-400">Given:</span></p>
+            <p className="text-gray-300 pl-4">Document length  = <span className="text-cyan-400">10,000</span> tokens</p>
+            <p className="text-gray-300 pl-4">chunk_size       = <span className="text-emerald-400">500</span> tokens</p>
+            <p className="text-gray-300 pl-4">chunk_overlap    = <span className="text-amber-400">50</span> tokens (10%)</p>
+            <p className="text-gray-400 mt-4"><span className="text-purple-400">Step size (stride):</span></p>
+            <p className="text-gray-300 pl-4">stride = chunk_size − overlap = <span className="text-emerald-400">500</span> − <span className="text-amber-400">50</span> = <span className="text-pink-400">450</span> tokens</p>
+            <p className="text-gray-400 mt-4"><span className="text-purple-400">Number of chunks:</span></p>
+            <p className="text-gray-300 pl-4">n_chunks = ⌈(doc_length − overlap) / stride⌉</p>
+            <p className="text-gray-300 pl-4">n_chunks = ⌈(10,000 − 50) / 450⌉ = ⌈22.11⌉ = <span className="text-pink-400">23 chunks</span></p>
+            <p className="text-gray-400 mt-4"><span className="text-purple-400">Total tokens stored:</span></p>
+            <p className="text-gray-300 pl-4">total = n_chunks × chunk_size = 23 × 500 = <span className="text-pink-400">11,500 tokens</span></p>
+            <p className="text-gray-300 pl-4 text-amber-400">→ 15% storage overhead from overlap</p>
+          </div>
+        </div>
+
+        {/* Decision Matrix */}
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">Chunk Size Decision Matrix</h3>
+        <p className="text-sm text-gray-300 mb-4">
+          Different use cases demand different chunk sizes. Use this matrix as a starting point:
+        </p>
+        <div className="overflow-x-auto mb-8">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-800/50">
+                <th className="px-4 py-3 text-left text-gray-300 border border-gray-700">Use Case</th>
+                <th className="px-4 py-3 text-left text-gray-300 border border-gray-700">Chunk Size</th>
+                <th className="px-4 py-3 text-left text-gray-300 border border-gray-700">Overlap</th>
+                <th className="px-4 py-3 text-left text-gray-300 border border-gray-700">Unit</th>
+                <th className="px-4 py-3 text-left text-gray-300 border border-gray-700">Why</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-400">
+              <tr><td className="px-4 py-2 border border-gray-800">Q&A over docs</td><td className="px-4 py-2 border border-gray-800 text-emerald-400">256–512</td><td className="px-4 py-2 border border-gray-800">50</td><td className="px-4 py-2 border border-gray-800">tokens</td><td className="px-4 py-2 border border-gray-800">Precise, focused retrieval</td></tr>
+              <tr className="bg-gray-900/30"><td className="px-4 py-2 border border-gray-800">Summarization</td><td className="px-4 py-2 border border-gray-800 text-emerald-400">1024–2048</td><td className="px-4 py-2 border border-gray-800">200</td><td className="px-4 py-2 border border-gray-800">tokens</td><td className="px-4 py-2 border border-gray-800">Needs broader context per chunk</td></tr>
+              <tr><td className="px-4 py-2 border border-gray-800">Code analysis</td><td className="px-4 py-2 border border-gray-800 text-emerald-400">Function/Class</td><td className="px-4 py-2 border border-gray-800">0</td><td className="px-4 py-2 border border-gray-800">AST</td><td className="px-4 py-2 border border-gray-800">Structural boundaries matter most</td></tr>
+              <tr className="bg-gray-900/30"><td className="px-4 py-2 border border-gray-800">Legal / contracts</td><td className="px-4 py-2 border border-gray-800 text-emerald-400">512–1024</td><td className="px-4 py-2 border border-gray-800">100</td><td className="px-4 py-2 border border-gray-800">tokens</td><td className="px-4 py-2 border border-gray-800">Clause-level precision needed</td></tr>
+              <tr><td className="px-4 py-2 border border-gray-800">Chat / conversation</td><td className="px-4 py-2 border border-gray-800 text-emerald-400">128–256</td><td className="px-4 py-2 border border-gray-800">25</td><td className="px-4 py-2 border border-gray-800">tokens</td><td className="px-4 py-2 border border-gray-800">Short, snappy retrieval for speed</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Step-by-step Implementation */}
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">Step-by-Step Implementation</h3>
+        <p className="text-sm text-gray-300 mb-4">
+          Here is the complete workflow to go from raw text to optimally sized chunks:
+        </p>
+        <div className="space-y-4 mb-8">
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">1</span>
+            <div>
+              <p className="text-gray-200 font-semibold">Choose your unit</p>
+              <p className="text-sm text-gray-400">Decide between characters, tokens, or words. For LLM pipelines, <strong className="text-gray-300">tokens are strongly recommended</strong> since they map directly to model limits.</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">2</span>
+            <div>
+              <p className="text-gray-200 font-semibold">Pick your chunk size</p>
+              <p className="text-sm text-gray-400">Start with 512 tokens. If retrieval quality is poor (answers miss context), increase to 1024. If answers contain too much irrelevant info, decrease to 256.</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">3</span>
+            <div>
+              <p className="text-gray-200 font-semibold">Set your overlap</p>
+              <p className="text-sm text-gray-400">Use 10–20% of chunk_size. For 512 tokens → overlap of 50–100 tokens. This is the "safety net" for boundary sentences.</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">4</span>
+            <div>
+              <p className="text-gray-200 font-semibold">Choose your splitting strategy</p>
+              <p className="text-sm text-gray-400">Use <code className="bg-gray-800 px-1 rounded text-pink-400">RecursiveCharacterTextSplitter</code> as the default. It tries paragraph → sentence → word → character splits in order.</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold">5</span>
+            <div>
+              <p className="text-gray-200 font-semibold">Measure with the right tokenizer</p>
+              <p className="text-sm text-gray-400">Always count using the <strong className="text-gray-300">same tokenizer</strong> as your embedding model. Use <code className="bg-gray-800 px-1 rounded text-pink-400">tiktoken</code> for OpenAI models, or <code className="bg-gray-800 px-1 rounded text-pink-400">AutoTokenizer</code> for HuggingFace models.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Code Examples */}
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">Code: Token-Based Chunking with tiktoken</h3>
+        <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto mb-6 text-gray-300 whitespace-pre">
+{`import tiktoken
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# Step 1: Load the tokenizer for your embedding model
+encoder = tiktoken.encoding_for_model("text-embedding-3-small")
+
+# Step 2: Create a length function that counts TOKENS, not characters
+def token_length(text):
+    return len(encoder.encode(text))
+
+# Step 3: Configure the splitter
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=512,          # in characters, but measured by token_length
+    chunk_overlap=50,        # 50-char overlap (~10 tokens)
+    length_function=token_length,  # ← THIS IS THE KEY!
+    separators=["\n\n", "\n", ". ", " ", ""]
+)
+
+# Step 4: Split your document
+chunks = splitter.split_text(document_text)
+
+# Verify: print each chunk's token count
+for i, chunk in enumerate(chunks):
+    print(f"Chunk {i}: {token_length(chunk)} tokens, {len(chunk)} chars")`}</div>
+
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">Code: HuggingFace Tokenizer-Based Chunking</h3>
+        <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto mb-8 text-gray-300 whitespace-pre">
+{`from transformers import AutoTokenizer
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# Use the SAME tokenizer as your embedding model
+tokenizer = AutoTokenizer.from_pretrained("BAAI/bge-small-en-v1.5")
+
+def hf_token_length(text):
+    return len(tokenizer.encode(text, add_special_tokens=False))
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=512,
+    chunk_overlap=50,
+    length_function=hf_token_length
+)
+
+chunks = splitter.split_text(document_text)`}</div>
+
+        {/* Common Pitfalls */}
+        <h3 className="text-lg font-semibold mb-3 text-gray-200">Common Pitfalls</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="bg-rose-900/10 border border-rose-500/20 p-4 rounded-lg">
+            <h4 className="text-rose-400 font-semibold mb-2 mt-0">❌ Mistake: Using default length_function</h4>
+            <p className="text-sm text-gray-400">LangChain's default <code className="bg-gray-800 px-1 rounded">len()</code> counts <em>characters</em>. So <code className="bg-gray-800 px-1 rounded">chunk_size=500</code> gives you only ~100 tokens — way too small for most use cases.</p>
+          </div>
+          <div className="bg-rose-900/10 border border-rose-500/20 p-4 rounded-lg">
+            <h4 className="text-rose-400 font-semibold mb-2 mt-0">❌ Mistake: Mismatched tokenizers</h4>
+            <p className="text-sm text-gray-400">If you count with GPT-4's tokenizer but embed with <code className="bg-gray-800 px-1 rounded">bge-small</code>, your "500 token" chunks may actually be 600+ tokens for the embedding model and get silently truncated.</p>
+          </div>
+          <div className="bg-rose-900/10 border border-rose-500/20 p-4 rounded-lg">
+            <h4 className="text-rose-400 font-semibold mb-2 mt-0">❌ Mistake: Zero overlap</h4>
+            <p className="text-sm text-gray-400">With 0 overlap, a sentence like "The contract expires on Dec 31. Penalties apply after that." gets split across two chunks, making neither chunk independently useful.</p>
+          </div>
+          <div className="bg-emerald-900/10 border border-emerald-500/20 p-4 rounded-lg">
+            <h4 className="text-emerald-400 font-semibold mb-2 mt-0">✅ Best Practice: Evaluate empirically</h4>
+            <p className="text-sm text-gray-400">There is no universally perfect chunk size. Run your RAG pipeline with 256, 512, and 1024 token chunks, measure retrieval precision@k, and pick the best performer for your data.</p>
+          </div>
+        </div>
+      </section>
+
       <div className="max-w-5xl mx-auto p-5">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
           {tabs.map((tab) => (
@@ -136,7 +362,7 @@ export default function RagChunking() {
           ))}
         </div>
 
-        <div className="relative min-h-[600px]">
+        <div>
           <AnimatePresence mode="wait">
             {activeTab === 1 && (
               <motion.div
@@ -145,7 +371,7 @@ export default function RagChunking() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">1. Fixed-Size Chunking</h2>
                 <p className="mb-6 text-gray-300">
@@ -210,7 +436,7 @@ chunks = splitter.split_text(text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">2. Sliding Window Chunking</h2>
                 <p className="mb-6 text-gray-300">
@@ -259,7 +485,7 @@ chunks = splitter.split_text(text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                  <h2 className="text-2xl font-bold mb-4 text-gray-100">3. Semantic Chunking</h2>
                  <p className="mb-6 text-gray-300">
@@ -321,7 +547,7 @@ docs = splitter.create_documents([text])`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">4. Hierarchical Chunking (Parent-Child)</h2>
                 <p className="mb-6 text-gray-300">
@@ -388,7 +614,7 @@ retriever = ParentDocumentRetriever(
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">5. Recursive Chunking</h2>
                 <p className="mb-6 text-gray-300">
@@ -452,7 +678,7 @@ chunks = splitter.split_text(text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">6. Document-Aware Chunking</h2>
                 <p className="mb-6 text-gray-300">
