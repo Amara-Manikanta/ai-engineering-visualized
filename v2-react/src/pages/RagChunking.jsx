@@ -75,8 +75,8 @@ export default function RagChunking() {
     { label: "What is Chunking?", hash: "what-is-chunking" },
     { label: "Basic Chunking Methods", hash: "basic-chunking" },
     { label: "Advanced Chunking Methods", hash: "advanced-chunking" },
-    { label: "Best Practices", hash: "best-practices" },
-    { label: "How Chunk Size Works", hash: "chunk-size-calc" }
+    { label: "How Chunk Size Works", hash: "chunk-size-calc" },
+    { label: "Best Practices", hash: "best-practices" }
   ];
 
   const tabs = [
@@ -114,10 +114,6 @@ export default function RagChunking() {
           <li><strong className="text-gray-100">Hierarchical / Parent-Child:</strong> Documents are split into large Parent chunks, which are further split into small Child chunks. The small chunks are embedded for precise retrieval, but the LLM is fed the entire Parent chunk for maximum context.</li>
         </ul>
 
-        <h2 id="best-practices" className="text-2xl font-bold mb-4 text-gray-100">Chunk Size & Overlap Best Practices</h2>
-        <p className="mb-8 text-gray-300">
-          Generally, a chunk size of 512-1024 tokens is optimal. You must include a <strong className="text-gray-100">Chunk Overlap</strong> (e.g. 10-20%) to ensure concepts aren't abruptly cut in half across the boundary of two chunks.
-        </p>
       </section>
 
       {/* ── How is Chunk Size Calculated & Implemented? ── */}
@@ -343,6 +339,13 @@ chunks = splitter.split_text(document_text)`}</div>
             <p className="text-sm text-gray-400">There is no universally perfect chunk size. Run your RAG pipeline with 256, 512, and 1024 token chunks, measure retrieval precision@k, and pick the best performer for your data.</p>
           </div>
         </div>
+      </section>
+
+      <section className="px-5 mt-12">
+        <h2 id="best-practices" className="text-2xl font-bold mb-4 text-gray-100">Chunk Size & Overlap Best Practices</h2>
+        <p className="mb-8 text-gray-300">
+          Generally, a chunk size of 512-1024 tokens is optimal. You must include a <strong className="text-gray-100">Chunk Overlap</strong> (e.g. 10-20%) to ensure concepts aren't abruptly cut in half across the boundary of two chunks.
+        </p>
       </section>
 
       <div className="max-w-5xl mx-auto p-5">
