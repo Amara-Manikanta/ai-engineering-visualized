@@ -1,6 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+
+/* Interactive Sliding Window animation */
+function SlidingWindowDemo() {
+  const words = ["RAG", "holds", "search", "and", "model", "answers", "query", "with", "context"];
+  const [activeChunk, setActiveChunk] = useState(0);
+  
+  // 3 chunks with overlap: [0-3], [2-5], [4-7]
+  const chunks = [
+    { start: 0, end: 3, label: "Chunk 1" },
+    { start: 2, end: 5, label: "Chunk 2" },
+    { start: 4, end: 7, label: "Chunk 3" },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveChunk(prev => (prev + 1) % 3);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const current = chunks[activeChunk];
+  const prev = activeChunk > 0 ? chunks[activeChunk - 1] : null;
+
+  return (
+    <div className="bg-[#111] border border-gray-800 rounded-xl p-5 mb-6">
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-sm font-semibold text-indigo-400">{current.label}</span>
+        <div className="flex gap-1.5">
+          {chunks.map((_, i) => (
+            <button 
+              key={i} 
+              onClick={() => setActiveChunk(i)}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${i === activeChunk ? 'bg-indigo-500' : 'bg-gray-700'}`}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {words.map((word, i) => {
+          const inCurrent = i >= current.start && i <= current.end;
+          const isOverlap = prev && i >= current.start && i <= prev.end;
+          
+          let bg = 'bg-gray-800/50 text-gray-600';
+          if (isOverlap) bg = 'bg-purple-600/40 border-purple-500/60 text-purple-300';
+          else if (inCurrent) bg = 'bg-indigo-600/30 border-indigo-500/50 text-indigo-300';
+
+          return (
+            <motion.span
+              key={`${i}-${activeChunk}`}
+              className={`px-3 py-2 rounded-lg text-sm font-mono border border-transparent transition-all duration-300 ${bg}`}
+              animate={{ scale: inCurrent ? 1 : 0.9, opacity: inCurrent ? 1 : 0.4 }}
+              transition={{ duration: 0.3 }}
+            >
+              {word}
+            </motion.span>
+          );
+        })}
+      </div>
+      <div className="flex gap-4 mt-4 text-xs">
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-indigo-600/40 border border-indigo-500/50 inline-block"></span> Current chunk</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-purple-600/40 border border-purple-500/60 inline-block"></span> Overlap (shared context)</span>
+        <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-gray-800/50 inline-block"></span> Not in window</span>
+      </div>
+    </div>
+  );
+}
 
 export default function RagChunking() {
   const [activeTab, setActiveTab] = useState(1);
@@ -86,32 +152,19 @@ export default function RagChunking() {
                   Splits documents into equal segments of characters or tokens regardless of word limits, sentence endings, or paragraphs. Simple, fast, but highly disruptive to sentence structure.
                 </p>
                 
-                <div className="h-64 bg-[#111] border border-gray-800 rounded-xl relative overflow-hidden mb-6 flex items-center justify-center">
-                  <div className="flex gap-1 text-lg font-bold font-mono text-gray-400">
-                    <span>Artifi</span><span className="text-red-500">|</span>
-                    <span>cialIn</span><span className="text-red-500">|</span>
-                    <span>tellige</span><span className="text-red-500">|</span>
-                    <span>nce</span>
+                <div className="h-64 bg-[#111] border border-gray-800 rounded-xl relative overflow-hidden mb-6 flex flex-col items-center justify-center gap-4 px-6">
+                  <p className="text-xs text-gray-500 mb-2">Text split every 12 characters — breaks words mid-way</p>
+                  <div className="flex flex-wrap gap-0 text-base sm:text-lg font-mono">
+                    <motion.span className="bg-indigo-600/30 border border-indigo-500/50 px-2 py-1 rounded-l-md text-indigo-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>Artificial I</motion.span>
+                    <motion.span className="bg-emerald-600/30 border border-emerald-500/50 px-2 py-1 text-emerald-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>ntelligence </motion.span>
+                    <motion.span className="bg-amber-600/30 border border-amber-500/50 px-2 py-1 text-amber-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }}>is transform</motion.span>
+                    <motion.span className="bg-rose-600/30 border border-rose-500/50 px-2 py-1 text-rose-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>ing our worl</motion.span>
+                    <motion.span className="bg-cyan-600/30 border border-cyan-500/50 px-2 py-1 rounded-r-md text-cyan-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>d rapidly.</motion.span>
                   </div>
-                  
-                  <motion.div 
-                    className="absolute top-0 bottom-0 w-0.5 bg-red-500 opacity-0"
-                    style={{ left: '31%', backgroundImage: 'repeating-linear-gradient(0deg, red, red 5px, transparent 5px, transparent 10px)' }}
-                    animate={{ y: [-50, 0, 0, -50], opacity: [0, 1, 1, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", times: [0, 0.3, 0.7, 1] }}
-                  />
-                  <motion.div 
-                    className="absolute top-0 bottom-0 w-0.5 bg-red-500 opacity-0"
-                    style={{ left: '54%', backgroundImage: 'repeating-linear-gradient(0deg, red, red 5px, transparent 5px, transparent 10px)' }}
-                    animate={{ y: [-50, 0, 0, -50], opacity: [0, 1, 1, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.2, times: [0, 0.3, 0.7, 1] }}
-                  />
-                  <motion.div 
-                    className="absolute top-0 bottom-0 w-0.5 bg-red-500 opacity-0"
-                    style={{ left: '77%', backgroundImage: 'repeating-linear-gradient(0deg, red, red 5px, transparent 5px, transparent 10px)' }}
-                    animate={{ y: [-50, 0, 0, -50], opacity: [0, 1, 1, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.4, times: [0, 0.3, 0.7, 1] }}
-                  />
+                  <div className="flex gap-2 mt-2">
+                    <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">⚠️ "Artificial" split into 2 chunks</span>
+                    <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">⚠️ "world" split into 2 chunks</span>
+                  </div>
                 </div>
 
                 <h3 className="text-lg font-semibold mb-2 text-gray-200">Python Template</h3>
@@ -161,28 +214,10 @@ chunks = splitter.split_text(text)`}</div>
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">2. Sliding Window Chunking</h2>
                 <p className="mb-6 text-gray-300">
-                  Extends Fixed-Size chunking by adding a **Chunk Overlap**. Part of the text from the end of the previous chunk is carried over to the start of the next chunk. This protects data boundaries from losing their context.
+                  Extends Fixed-Size chunking by adding a <strong className="text-white">Chunk Overlap</strong>. Part of the text from the end of the previous chunk is carried over to the start of the next chunk. This protects data boundaries from losing their context.
                 </p>
                 
-                <div className="h-64 bg-[#111] border border-gray-800 rounded-xl relative overflow-hidden mb-6 flex items-center justify-center">
-                  <div className="w-4/5 flex justify-between font-mono text-sm">
-                    <span className="text-gray-300">Chunk 1: [RAG holds search]</span>
-                    <span className="text-purple-400">[search and model]</span>
-                    <span className="text-gray-300">[model answers query]</span>
-                  </div>
-                  <motion.div 
-                    className="absolute h-[60px] border-2 border-emerald-500 rounded-lg"
-                    style={{ left: '8%', width: '50%', top: '35%' }}
-                    animate={{ opacity: [1, 0.3, 1] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <motion.div 
-                    className="absolute h-[60px] border-2 border-purple-500 rounded-lg"
-                    style={{ left: '33%', width: '50%', top: '50%' }}
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </div>
+                <SlidingWindowDemo />
 
                 <h3 className="text-lg font-semibold mb-2 text-gray-200">Python Template</h3>
                 <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto mb-6 text-gray-300 whitespace-pre">
