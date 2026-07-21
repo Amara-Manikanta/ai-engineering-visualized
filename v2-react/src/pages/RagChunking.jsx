@@ -362,7 +362,7 @@ chunks = splitter.split_text(document_text)`}</div>
           ))}
         </div>
 
-        <div className="relative min-h-[600px]">
+        <div>
           <AnimatePresence mode="wait">
             {activeTab === 1 && (
               <motion.div
@@ -371,7 +371,7 @@ chunks = splitter.split_text(document_text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">1. Fixed-Size Chunking</h2>
                 <p className="mb-6 text-gray-300">
@@ -436,7 +436,7 @@ chunks = splitter.split_text(text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">2. Sliding Window Chunking</h2>
                 <p className="mb-6 text-gray-300">
@@ -485,7 +485,7 @@ chunks = splitter.split_text(text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                  <h2 className="text-2xl font-bold mb-4 text-gray-100">3. Semantic Chunking</h2>
                  <p className="mb-6 text-gray-300">
@@ -547,7 +547,7 @@ docs = splitter.create_documents([text])`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">4. Hierarchical Chunking (Parent-Child)</h2>
                 <p className="mb-6 text-gray-300">
@@ -614,7 +614,7 @@ retriever = ParentDocumentRetriever(
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">5. Recursive Chunking</h2>
                 <p className="mb-6 text-gray-300">
@@ -678,7 +678,7 @@ chunks = splitter.split_text(text)`}</div>
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute w-full"
+                className="w-full"
               >
                 <h2 className="text-2xl font-bold mb-4 text-gray-100">6. Document-Aware Chunking</h2>
                 <p className="mb-6 text-gray-300">
