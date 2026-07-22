@@ -4,17 +4,19 @@ import GuideLayout from '../components/GuideLayout';
 const toc = [
   { label: '1. What are Embeddings?', hash: '#what-are' },
   { label: '2. Why do we need them?', hash: '#why-need' },
-  { label: '3. Text to Vector', hash: '#text-to-vector' },
-  { label: '4. High-dimensional Space', hash: '#high-dim' },
-  { label: '5. Similarity Search', hash: '#sim-search' },
-  { label: '6. Cosine Similarity', hash: '#cosine' },
-  { label: '7. Dot Product', hash: '#dot-product' },
-  { label: '8. Dense vs Sparse', hash: '#dense-sparse' },
-  { label: '9. Embedding Models', hash: '#models' },
-  { label: '10. Creating in Python', hash: '#python' },
-  { label: '11. Visualizing Embeddings', hash: '#visualizing' },
-  { label: '12. Real-world Examples', hash: '#examples' },
-  { label: '13. Common Mistakes', hash: '#mistakes' }
+  { label: '3. Simple Analogy', hash: '#simple-analogy' },
+  { label: '4. How Embeddings work in RAG', hash: '#how-work-rag' },
+  { label: '5. Text to Vector', hash: '#text-to-vector' },
+  { label: '6. High-dimensional Space', hash: '#high-dim' },
+  { label: '7. Similarity Search', hash: '#sim-search' },
+  { label: '8. Cosine Similarity', hash: '#cosine' },
+  { label: '9. Dot Product', hash: '#dot-product' },
+  { label: '10. Dense vs Sparse', hash: '#dense-sparse' },
+  { label: '11. Embedding Models', hash: '#models' },
+  { label: '12. Creating in Python', hash: '#python' },
+  { label: '13. Visualizing Embeddings', hash: '#visualizing' },
+  { label: '14. Real-world Examples', hash: '#examples' },
+  { label: '15. Common Mistakes', hash: '#mistakes' }
 ];
 
 const RagEmbeddings = () => {
@@ -66,8 +68,46 @@ const RagEmbeddings = () => {
         <p className="text-gray-300">Semantic search works this way: it searches dense vectors to find records that are closest in meaning and context to the query.</p>
       </section>
 
+      <section id="simple-analogy" className="mb-12 border-b border-[#333] pb-8">
+        <h2 className="text-2xl font-bold mb-4 text-white">3. Simple analogy</h2>
+        <p className="text-gray-300 mb-4">Think of embeddings like a <strong className="text-white">map of meaning</strong>.</p>
+        
+        <p className="text-gray-300 mb-2">On a normal map:</p>
+        <div className="bg-[#111] p-4 rounded-lg border border-gray-800 mb-6 font-mono text-sm space-y-2">
+          <div className="text-gray-300">Hyderabad and Bengaluru → <span className="text-emerald-400">relatively close</span></div>
+          <div className="text-gray-300">Hyderabad and New York → <span className="text-rose-400">far</span></div>
+        </div>
+
+        <p className="text-gray-300 mb-2">In embedding space:</p>
+        <div className="bg-[#111] p-4 rounded-lg border border-gray-800 mb-2 font-mono text-sm space-y-1">
+          <div className="text-indigo-300">"RAG"</div>
+          <div className="text-indigo-300">"retrieval augmented generation"</div>
+          <div className="text-indigo-300">"vector database"</div>
+        </div>
+        <p className="text-gray-300 mb-6">These concepts should be <span className="text-emerald-400 font-semibold">close</span>.</p>
+
+        <p className="text-gray-300 mb-2">But:</p>
+        <div className="bg-[#111] p-4 rounded-lg border border-gray-800 mb-2 font-mono text-sm space-y-1">
+          <div className="text-amber-300">"RAG"</div>
+          <div className="text-amber-300">"pizza recipe"</div>
+          <div className="text-amber-300">"cricket score"</div>
+        </div>
+        <p className="text-gray-300 mb-6">These should be <span className="text-rose-400 font-semibold">far apart</span>.</p>
+
+        <p className="text-gray-300">So embeddings create a <strong className="text-white">semantic map</strong> where related ideas live near each other.</p>
+      </section>
+
+      <section id="how-work-rag" className="mb-12 border-b border-[#333] pb-8">
+        <h2 className="text-2xl font-bold mb-4 text-white">4. How embeddings work in RAG</h2>
+        <p className="text-gray-300 mb-4">In RAG, embeddings are used mainly during two stages:</p>
+        <ol className="list-decimal pl-5 space-y-2 text-gray-300">
+          <li><strong>Indexing:</strong> Converting your knowledge base (documents, PDFs) into vectors and storing them in a Vector Database.</li>
+          <li><strong>Retrieval:</strong> Converting the user's query into a vector and finding the nearest document vectors to answer the question.</li>
+        </ol>
+      </section>
+
       <section id="text-to-vector" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">3. Text to Vector</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">5. Text to Vector</h2>
         <p className="text-gray-300 mb-4">The journey from text to vector involves tokenization, followed by a forward pass through a neural network encoder (like BERT or GPT).</p>
         <p className="text-gray-300 mb-6">A vector is just a list of floating numbers. Embedding models convert meaning into numbers so that computers can compare text by semantic meaning, not only exact keywords.</p>
         <div className="bg-[#111] border border-[#333] rounded-xl p-6 mb-6">
@@ -84,7 +124,7 @@ const RagEmbeddings = () => {
       </section>
 
       <section id="high-dim" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">4. High-dimensional Space</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">6. High-dimensional Space</h2>
         <p className="text-gray-300 mb-6">While humans can only visualize 2D or 3D space, embedding models project concepts into hundreds or thousands of dimensions (e.g., 384, 768, 1536). Each dimension represents a highly abstract, latent feature (like "royalty", "gender", "positivity", or "plurality").</p>
         
         <div className="bg-[#111] border border-[#333] rounded-xl p-6 mb-4 h-[200px] relative">
@@ -113,12 +153,12 @@ const RagEmbeddings = () => {
       </section>
 
       <section id="sim-search" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">5. Similarity Search</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">7. Similarity Search</h2>
         <p className="text-gray-300">Once your documents are converted to vectors and stored in a Vector Database (like Pinecone, Milvus, or Chroma), how do you search them? You embed the user's query into a vector using the exact same model, and ask the database to find the vectors that are closest to it mathematically. This process is known as <strong className="text-white">K-Nearest Neighbors (KNN)</strong>.</p>
       </section>
 
       <section id="cosine" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">6. Cosine Similarity</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">8. Cosine Similarity</h2>
         <p className="text-gray-300 mb-4">This is the most common metric used for text embeddings. It calculates the cosine of the angle θ between two vectors, completely ignoring their magnitude (length). </p>
         <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6 my-6">
           <div className="font-mono text-xl text-center mb-4 text-indigo-400">Cosine Similarity = (A • B) / (||A|| × ||B||)</div>
@@ -131,13 +171,13 @@ const RagEmbeddings = () => {
       </section>
 
       <section id="dot-product" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">7. Dot Product</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">9. Dot Product</h2>
         <p className="text-gray-300 mb-4">Calculates the sum of the products of the corresponding entries of the two sequences of numbers. Unlike Cosine Similarity, it accounts for both the <strong className="text-white">angle</strong> and the <strong className="text-white">magnitude</strong>.</p>
         <p className="text-gray-400 italic text-sm">Note: If your vectors are <strong>normalized</strong> (scaled so their length = 1), the Dot Product is mathematically identical to Cosine Similarity, but it computes much faster on modern CPUs/GPUs.</p>
       </section>
 
       <section id="dense-sparse" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">8. Dense vs Sparse Embeddings</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">10. Dense vs Sparse Embeddings</h2>
         <p className="text-gray-300 mb-6">Hybrid search systems combine two different types of embeddings to get the best of both semantic and keyword search.</p>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-sm text-gray-300">
@@ -170,7 +210,7 @@ const RagEmbeddings = () => {
       </section>
 
       <section id="models" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">9. Embedding Models</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">11. Popular Embedding Models</h2>
         <p className="text-gray-300 mb-6">Choosing the right model dictates your database cost and retrieval quality.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
@@ -192,7 +232,7 @@ const RagEmbeddings = () => {
       </section>
 
       <section id="python" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">10. Creating Embeddings in Python</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">12. Creating Embeddings in Python</h2>
         
         <h3 className="text-lg font-semibold mt-6 mb-3 text-white">Using OpenAI (Cloud)</h3>
         <pre className="bg-[#111] border border-[#333] rounded-xl p-4 font-mono text-sm overflow-x-auto text-gray-300 mb-6">
@@ -215,12 +255,12 @@ print(f"Dimensions: {len(vector)}") # Output: 384`}</code>
       </section>
 
       <section id="visualizing" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">11. Visualizing Embeddings</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">13. Visualizing Embeddings</h2>
         <p className="text-gray-300">Because humans cannot see in 1536 dimensions, data scientists use dimensionality reduction algorithms like <strong className="text-white">t-SNE</strong> or <strong className="text-white">UMAP</strong> to squash the vectors down into 2D or 3D space while preserving the local distances between points. This allows us to plot them on a standard graph to look for semantic clusters and outlier data points.</p>
       </section>
 
       <section id="examples" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">12. Real-world Examples</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">14. Real-world Examples</h2>
         <ul className="list-disc pl-6 text-gray-300 space-y-2">
           <li><strong className="text-white">Semantic Search (RAG):</strong> Finding paragraphs in a company handbook that answer a user's question, even if they use entirely different vocabulary.</li>
           <li><strong className="text-white">Recommendation Systems:</strong> Embedding user profiles and movies into the same vector space. If a user vector is near a movie vector, the system recommends that movie.</li>
@@ -229,7 +269,7 @@ print(f"Dimensions: {len(vector)}") # Output: 384`}</code>
       </section>
 
       <section id="mistakes" className="mb-12">
-        <h2 className="text-2xl font-bold mb-4 text-white">13. Common Mistakes</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">15. Common Mistakes</h2>
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-red-900/10 border border-red-500/20 p-4 rounded-xl">
             <h4 className="text-red-400 font-bold mb-2">⚠️ Not Normalizing Before Dot Product</h4>
