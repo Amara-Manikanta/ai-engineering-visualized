@@ -30,14 +30,46 @@ const RagEmbeddings = () => {
       </section>
 
       <section id="why-need" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">2. Why do we need Embeddings?</h2>
-        <p className="text-gray-300 mb-4">Traditional keyword search (like BM25 or TF-IDF) relies on exact lexical matches. If a user searches for <em>"puppy"</em>, the search engine will completely miss documents containing only <em>"young dog"</em> because the raw characters do not match.</p>
-        <p className="text-gray-300">Embeddings solve the <strong className="text-white">lexical gap</strong>. Because they encode <em>intent and meaning</em> rather than spelling, a query for "puppy" and a document about "young dog" will have nearly identical vector representations. This allows for true <strong className="text-white">Semantic Search</strong>.</p>
+        <h2 className="text-2xl font-bold mb-4 text-white">2. Why do we need embeddings?</h2>
+        <p className="text-gray-300 mb-4">Computers do not naturally understand this:</p>
+        
+        <div className="bg-[#111] p-3 rounded-lg border border-gray-800 mb-4 font-mono text-sm text-gray-300">
+          "What is RAG?"
+        </div>
+
+        <p className="text-gray-300 mb-4">A computer sees characters, not meaning.</p>
+        <p className="text-gray-300 mb-4">But after embedding, the text becomes something like:</p>
+
+        <div className="bg-[#111] p-3 rounded-lg border border-gray-800 mb-4 font-mono text-sm text-gray-300">
+          [0.12, -0.45, 0.88, 0.31, ...]
+        </div>
+
+        <p className="text-gray-300 mb-4">Now the computer can compare it with other vectors.</p>
+        <p className="text-gray-300 mb-4">For example:</p>
+
+        <div className="bg-[#111] p-4 rounded-lg border border-gray-800 mb-4 font-mono text-sm space-y-2">
+          <div className="text-indigo-400">Text A: "What is RAG?"</div>
+          <div className="text-emerald-400">Text B: "Explain Retrieval-Augmented Generation"</div>
+          <div className="text-rose-400">Text C: "How to cook biryani?"</div>
+        </div>
+
+        <p className="text-gray-300 mb-4">A good embedding model should place <strong className="text-indigo-400">A</strong> and <strong className="text-emerald-400">B</strong> close together because they mean almost the same thing.</p>
+        <p className="text-gray-300 mb-6">But <strong className="text-rose-400">C</strong> should be far away because it is about a different topic.</p>
+
+        <p className="text-gray-300 mb-4">That is the core idea:</p>
+        
+        <div className="bg-[#1a1a1a] p-4 rounded-lg border border-gray-700 mb-6 font-mono text-sm">
+          <div className="text-gray-300">Similar meaning → nearby vectors</div>
+          <div className="text-gray-300 mt-2">Different meaning → faraway vectors</div>
+        </div>
+
+        <p className="text-gray-300">Semantic search works this way: it searches dense vectors to find records that are closest in meaning and context to the query.</p>
       </section>
 
       <section id="text-to-vector" className="mb-12 border-b border-[#333] pb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">3. Text to Vector</h2>
-        <p className="text-gray-300 mb-6">The journey from text to vector involves tokenization, followed by a forward pass through a neural network encoder (like BERT or GPT).</p>
+        <p className="text-gray-300 mb-4">The journey from text to vector involves tokenization, followed by a forward pass through a neural network encoder (like BERT or GPT).</p>
+        <p className="text-gray-300 mb-6">A vector is just a list of floating numbers. Embedding models convert meaning into numbers so that computers can compare text by semantic meaning, not only exact keywords.</p>
         <div className="bg-[#111] border border-[#333] rounded-xl p-6 mb-6">
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <div className="p-3 bg-[#222] border-2 border-blue-500 rounded-lg text-center font-semibold text-white">"The puppy played."</div>
