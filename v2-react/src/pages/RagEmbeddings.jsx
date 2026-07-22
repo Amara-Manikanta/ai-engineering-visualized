@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Database, FileText, Search, ArrowRight, Zap, RefreshCw, Layers } from 'lucide-react';
 import GuideLayout from '../components/GuideLayout';
 
 const toc = [
@@ -18,6 +20,160 @@ const toc = [
   { label: '14. Real-world Examples', hash: '#examples' },
   { label: '15. Common Mistakes', hash: '#mistakes' }
 ];
+
+const AnalogyMap = () => {
+  const [isSemantic, setIsSemantic] = useState(false);
+
+  const nodes = {
+    geographic: [
+      { id: 'hyd', label: 'Hyderabad', color: 'bg-emerald-500', x: '30%', y: '50%' },
+      { id: 'blr', label: 'Bengaluru', color: 'bg-emerald-500', x: '35%', y: '65%' },
+      { id: 'ny', label: 'New York', color: 'bg-rose-500', x: '80%', y: '20%' },
+    ],
+    semantic: [
+      { id: 'rag', label: '"RAG"', color: 'bg-indigo-500', x: '25%', y: '40%' },
+      { id: 'rag2', label: '"retrieval augmented generation"', color: 'bg-indigo-500', x: '20%', y: '60%' },
+      { id: 'vdb', label: '"vector database"', color: 'bg-indigo-500', x: '35%', y: '50%' },
+      { id: 'pizza', label: '"pizza recipe"', color: 'bg-amber-500', x: '75%', y: '20%' },
+      { id: 'cricket', label: '"cricket score"', color: 'bg-amber-500', x: '80%', y: '80%' },
+    ]
+  };
+
+  const currentNodes = isSemantic ? nodes.semantic : nodes.geographic;
+
+  return (
+    <div className="bg-[#111] border border-gray-800 rounded-xl p-6 my-6">
+      <div className="flex gap-4 justify-center mb-6">
+        <button 
+          onClick={() => setIsSemantic(false)} 
+          className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${!isSemantic ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}
+        >
+          📍 Geographic Map
+        </button>
+        <button 
+          onClick={() => setIsSemantic(true)} 
+          className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${isSemantic ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}
+        >
+          🧠 Semantic Map
+        </button>
+      </div>
+
+      <div className="relative w-full h-[300px] border border-gray-700/50 bg-[#0a0a0a] rounded-lg overflow-hidden">
+        <AnimatePresence>
+          {currentNodes.map(node => (
+            <motion.div
+              key={node.id}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1, left: node.x, top: node.y }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.5, type: 'spring' }}
+              className={`absolute -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-lg ${node.color} whitespace-nowrap z-10`}
+            >
+              {node.label}
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
+        {/* Distance lines */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+          {!isSemantic && (
+            <>
+              <motion.line x1="30%" y1="50%" x2="35%" y2="65%" stroke="#10b981" strokeWidth="2" strokeDasharray="4" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2 }} />
+              <motion.line x1="30%" y1="50%" x2="80%" y2="20%" stroke="#f43f5e" strokeWidth="2" strokeDasharray="4" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2 }} />
+            </>
+          )}
+          {isSemantic && (
+            <>
+              <motion.line x1="25%" y1="40%" x2="20%" y2="60%" stroke="#6366f1" strokeWidth="2" strokeDasharray="4" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2 }} />
+              <motion.line x1="25%" y1="40%" x2="35%" y2="50%" stroke="#6366f1" strokeWidth="2" strokeDasharray="4" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2 }} />
+            </>
+          )}
+        </svg>
+      </div>
+    </div>
+  );
+};
+
+const RagEmbeddingFlow = () => {
+  const [stage, setStage] = useState('indexing'); // indexing, query
+
+  return (
+    <div className="bg-[#111] border border-gray-800 rounded-xl p-6 mt-8 mb-4">
+      <div className="flex gap-4 justify-center mb-8">
+        <button 
+          onClick={() => setStage('indexing')} 
+          className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors flex items-center gap-2 ${stage === 'indexing' ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}
+        >
+          <Database size={16} /> 1. Indexing Time
+        </button>
+        <button 
+          onClick={() => setStage('query')} 
+          className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors flex items-center gap-2 ${stage === 'query' ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}
+        >
+          <Search size={16} /> 2. Query Time
+        </button>
+      </div>
+
+      <div className="relative w-full h-[250px] flex items-center justify-between px-10">
+        <AnimatePresence mode="wait">
+          {stage === 'indexing' ? (
+            <motion.div key="idx-1" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-gray-800 border-2 border-gray-600 rounded-xl flex items-center justify-center text-gray-300 mb-2">
+                <FileText size={32} />
+              </div>
+              <span className="text-xs font-semibold text-gray-400">Raw Docs</span>
+            </motion.div>
+          ) : (
+            <motion.div key="qry-1" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-emerald-900/30 border-2 border-emerald-500/50 rounded-xl flex items-center justify-center text-emerald-400 mb-2">
+                <Search size={32} />
+              </div>
+              <span className="text-xs font-semibold text-emerald-400">User Query</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div className="flex-1 flex flex-col items-center justify-center relative">
+          <motion.div animate={{ x: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5 }} className="text-gray-500 absolute -translate-x-16">
+            <ArrowRight size={24} />
+          </motion.div>
+          <div className="w-24 h-24 bg-purple-900/30 border-2 border-purple-500/50 rounded-full flex flex-col items-center justify-center text-purple-400 z-10 bg-[#111]">
+            <Zap size={28} className="mb-1" />
+            <span className="text-[10px] font-bold text-center leading-tight">Embedding<br/>Model</span>
+          </div>
+          <motion.div animate={{ x: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }} className="text-gray-500 absolute translate-x-16">
+            <ArrowRight size={24} />
+          </motion.div>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {stage === 'indexing' ? (
+            <motion.div key="idx-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="flex flex-col items-center">
+              <div className="w-20 h-24 bg-indigo-900/30 border-2 border-indigo-500/50 rounded-xl flex flex-col items-center justify-center text-indigo-400 mb-2 relative overflow-hidden">
+                 <Database size={32} />
+                 <motion.div initial={{ y: 50 }} animate={{ y: 0 }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-1 w-full flex justify-center">
+                   <div className="w-12 h-1 bg-indigo-500/50 rounded-full"></div>
+                 </motion.div>
+              </div>
+              <span className="text-xs font-semibold text-indigo-400">Vector DB (Store)</span>
+            </motion.div>
+          ) : (
+            <motion.div key="qry-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="flex flex-col items-center">
+              <div className="w-20 h-24 bg-emerald-900/30 border-2 border-emerald-500/50 rounded-xl flex flex-col items-center justify-center text-emerald-400 mb-2 relative">
+                 <RefreshCw size={32} className="mb-2" />
+                 <div className="text-[10px] text-center font-bold">Top-K<br/>Matches</div>
+              </div>
+              <span className="text-xs font-semibold text-emerald-400">Vector DB (Search)</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <p className="text-center text-xs text-gray-500 mt-2">
+        {stage === 'indexing' ? 'Documents are processed and stored as vectors.' : 'The query is embedded to find the closest matching vectors.'}
+      </p>
+    </div>
+  );
+};
 
 const RagEmbeddings = () => {
   return (
@@ -95,6 +251,8 @@ const RagEmbeddings = () => {
         <p className="text-gray-300 mb-6">These should be <span className="text-rose-400 font-semibold">far apart</span>.</p>
 
         <p className="text-gray-300">So embeddings create a <strong className="text-white">semantic map</strong> where related ideas live near each other.</p>
+
+        <AnalogyMap />
       </section>
 
       <section id="how-work-rag" className="mb-12 border-b border-[#333] pb-8">
@@ -130,6 +288,8 @@ const RagEmbeddings = () => {
             </ul>
           </div>
         </div>
+
+        <RagEmbeddingFlow />
       </section>
 
       <section id="text-to-vector" className="mb-12 border-b border-[#333] pb-8">
