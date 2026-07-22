@@ -99,11 +99,37 @@ const RagEmbeddings = () => {
 
       <section id="how-work-rag" className="mb-12 border-b border-[#333] pb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">4. How embeddings work in RAG</h2>
-        <p className="text-gray-300 mb-4">In RAG, embeddings are used mainly during two stages:</p>
-        <ol className="list-decimal pl-5 space-y-2 text-gray-300">
-          <li><strong>Indexing:</strong> Converting your knowledge base (documents, PDFs) into vectors and storing them in a Vector Database.</li>
-          <li><strong>Retrieval:</strong> Converting the user's query into a vector and finding the nearest document vectors to answer the question.</li>
-        </ol>
+        <p className="text-gray-300 mb-6">In RAG, embeddings act as the bridge between your documents and the user's question. They are used mainly during two distinct stages:</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[#111] border border-indigo-500/30 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-indigo-400 mb-3 flex items-center gap-2">
+              <span>1. Indexing Time</span>
+              <span className="text-xs bg-indigo-900/50 border border-indigo-500/50 px-2 py-0.5 rounded-full text-indigo-300">Data Prep</span>
+            </h3>
+            <p className="text-gray-300 text-sm mb-3">Before a user ever asks a question, your raw data must be processed:</p>
+            <ul className="list-disc pl-5 space-y-2 text-sm text-gray-400">
+              <li>Documents (PDFs, text) are broken down into smaller chunks.</li>
+              <li>Each chunk is passed through an <strong className="text-gray-200">Embedding Model</strong>.</li>
+              <li>The model outputs a high-dimensional vector (e.g., an array of 768 numbers) for each chunk.</li>
+              <li>These vectors are saved into a <strong className="text-gray-200">Vector Database</strong> (like Pinecone, Milvus, or Chroma) alongside the original text.</li>
+            </ul>
+          </div>
+
+          <div className="bg-[#111] border border-emerald-500/30 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-3 flex items-center gap-2">
+              <span>2. Query Time</span>
+              <span className="text-xs bg-emerald-900/50 border border-emerald-500/50 px-2 py-0.5 rounded-full text-emerald-300">Retrieval</span>
+            </h3>
+            <p className="text-gray-300 text-sm mb-3">When a user interacts with your application:</p>
+            <ul className="list-disc pl-5 space-y-2 text-sm text-gray-400">
+              <li>The user types a natural language question.</li>
+              <li>The question is passed through the <strong className="text-emerald-200">exact same Embedding Model</strong> used during indexing.</li>
+              <li>The model outputs a <strong className="text-gray-200">query vector</strong>.</li>
+              <li>The Vector Database rapidly compares this query vector against all document vectors using a distance metric (like Cosine Similarity) to fetch the top closest matches.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section id="text-to-vector" className="mb-12 border-b border-[#333] pb-8">
