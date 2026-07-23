@@ -525,28 +525,6 @@ const RagEmbeddings = () => {
         </div>
       </section>
 
-      <section id="models" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">11. Popular Embedding Models</h2>
-        <p className="text-gray-300 mb-6">Choosing the right model dictates your database cost and retrieval quality.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
-            <div className="font-bold text-blue-500 mb-1">OpenAI text-embedding-3-large</div>
-            <div className="font-mono text-xs text-gray-400 mb-2">Dimensions: up to 3072</div>
-            <div className="text-sm text-gray-300">State of the art proprietary model. Very high quality but requires API calls and costs money.</div>
-          </div>
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
-            <div className="font-bold text-blue-500 mb-1">all-MiniLM-L6-v2 (HuggingFace)</div>
-            <div className="font-mono text-xs text-gray-400 mb-2">Dimensions: 384</div>
-            <div className="text-sm text-gray-300">Extremely fast, open-source model. Runs locally. Great for smaller projects and low-latency.</div>
-          </div>
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
-            <div className="font-bold text-blue-500 mb-1">Cohere embed-english-v3.0</div>
-            <div className="font-mono text-xs text-gray-400 mb-2">Dimensions: 1024</div>
-            <div className="text-sm text-gray-300">Excellent proprietary model specifically optimized for enterprise RAG pipelines and search.</div>
-          </div>
-        </div>
-      </section>
-
       <section id="python" className="mb-12 border-b border-[#333] pb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">11. Creating Embeddings in Python</h2>
         
