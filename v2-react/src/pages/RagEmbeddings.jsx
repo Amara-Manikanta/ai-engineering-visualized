@@ -38,39 +38,50 @@ const ToyVectorVisualizer = () => {
             <span className="text-gray-400">[0.05, 0.90, 0.12]</span>
           </div>
         </div>
-        <div className="flex-1 relative min-h-[250px] bg-[#0a0a0a] rounded-lg border border-gray-800 flex items-end justify-start p-4 overflow-hidden">
+        <div className="flex-1 relative min-h-[250px] bg-[#0a0a0a] rounded-lg border border-gray-800 flex flex-col p-4 overflow-hidden">
           {/* Origin */}
           <div className="absolute bottom-4 left-4 w-2 h-2 rounded-full bg-gray-500 z-20"></div>
           {/* Axes */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none z-10">
             {/* Y axis */}
-            <line x1="16" y1="20" x2="16" y2="calc(100% - 16px)" stroke="#333" strokeWidth="2" />
+            <line x1="5" y1="5" x2="5" y2="95" stroke="#333" strokeWidth="1" />
             {/* X axis */}
-            <line x1="16" y1="calc(100% - 16px)" x2="calc(100% - 20px)" y2="calc(100% - 16px)" stroke="#333" strokeWidth="2" />
+            <line x1="5" y1="95" x2="95" y2="95" stroke="#333" strokeWidth="1" />
             
             {/* Vectors */}
-            <motion.line x1="16" y1="calc(100% - 16px)" x2="90%" y2="calc(100% - 40px)" stroke="#818cf8" strokeWidth="3" markerEnd="url(#arrow-a)" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1, type: 'spring' }} />
-            <motion.line x1="16" y1="calc(100% - 16px)" x2="87%" y2="calc(100% - 45px)" stroke="#34d399" strokeWidth="3" markerEnd="url(#arrow-b)" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.8, duration: 1, type: 'spring' }} />
-            <motion.line x1="16" y1="calc(100% - 16px)" x2="15%" y2="10%" stroke="#fbbf24" strokeWidth="3" markerEnd="url(#arrow-c)" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.1, duration: 1, type: 'spring' }} />
+            <motion.line x1="5" y1="95" x2="90" y2="75" stroke="#818cf8" strokeWidth="1.5" markerEnd="url(#arrow-a)" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1, type: 'spring' }} />
+            <motion.line x1="5" y1="95" x2="85" y2="80" stroke="#34d399" strokeWidth="1.5" markerEnd="url(#arrow-b)" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.8, duration: 1, type: 'spring' }} />
+            <motion.line x1="5" y1="95" x2="15" y2="15" stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#arrow-c)" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.1, duration: 1, type: 'spring' }} />
             
             <defs>
-              <marker id="arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <marker id="arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
                 <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8" />
               </marker>
-              <marker id="arrow-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <marker id="arrow-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
                 <path d="M 0 0 L 10 5 L 0 10 z" fill="#34d399" />
               </marker>
-              <marker id="arrow-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <marker id="arrow-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
                 <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24" />
               </marker>
             </defs>
           </svg>
-          <motion.div className="absolute text-[10px] font-bold text-indigo-400 bg-[#111] px-1 rounded z-20" style={{ right: '5%', bottom: '25px' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }}>A: RAG</motion.div>
-          <motion.div className="absolute text-[10px] font-bold text-emerald-400 bg-[#111] px-1 rounded z-20" style={{ right: '8%', bottom: '50px' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.8 }}>B: Retrieval...</motion.div>
-          <motion.div className="absolute text-[10px] font-bold text-amber-400 bg-[#111] px-1 rounded z-20" style={{ left: '16%', top: '8%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 2.1 }}>C: biryani</motion.div>
+          <motion.div className="absolute text-[10px] font-bold text-indigo-400 bg-[#111] px-1 rounded z-20" style={{ right: '5%', bottom: '25%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }}>A: RAG</motion.div>
+          <motion.div className="absolute text-[10px] font-bold text-emerald-400 bg-[#111] px-1 rounded z-20" style={{ right: '15%', bottom: '10%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.8 }}>B: Retrieval...</motion.div>
+          <motion.div className="absolute text-[10px] font-bold text-amber-400 bg-[#111] px-1 rounded z-20" style={{ left: '16%', top: '12%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 2.1 }}>C: biryani</motion.div>
         </div>
       </div>
-      <p className="text-center text-sm text-gray-400 mt-6">This makes embeddings easy to understand: <strong className="text-emerald-400">A</strong> and <strong className="text-emerald-400">B</strong> point in almost the same direction, while <strong className="text-amber-400">C</strong> points in a completely different direction.</p>
+      <div className="mt-6 space-y-4 text-sm">
+        <div>
+          <p className="text-gray-300">A and B are close:</p>
+          <p className="text-gray-400 font-mono text-xs bg-[#1a1a1a] p-2 rounded inline-block mt-1">"What is RAG?"<br/>"Explain Retrieval-Augmented Generation"</p>
+          <p className="text-emerald-400 mt-1">They point in almost the same direction.</p>
+        </div>
+        <div>
+          <p className="text-gray-300">A and C are far:</p>
+          <p className="text-gray-400 font-mono text-xs bg-[#1a1a1a] p-2 rounded inline-block mt-1">"What is RAG?"<br/>"How to make biryani?"</p>
+          <p className="text-amber-400 mt-1">They point in different directions.</p>
+        </div>
+      </div>
     </div>
   );
 };
@@ -440,7 +451,7 @@ const RagEmbeddings = () => {
 
       <section id="toy-example" className="mb-12 border-b border-[#333] pb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">8. Toy example for visualization</h2>
-        <p className="text-gray-300 mb-6">For teaching, you can use small fake vectors. Real embeddings are much larger, but this helps learners understand.</p>
+        <p className="text-gray-300 mb-6">To visualize how this works, let's look at a simplified example using 3-dimensional vectors. Real embedding models use thousands of dimensions, but the underlying geometry works exactly the same way!</p>
         <ToyVectorVisualizer />
       </section>
 
@@ -511,28 +522,6 @@ const RagEmbeddings = () => {
               </tr>
             </tbody>
           </table>
-        </div>
-      </section>
-
-      <section id="models" className="mb-12 border-b border-[#333] pb-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">11. Popular Embedding Models</h2>
-        <p className="text-gray-300 mb-6">Choosing the right model dictates your database cost and retrieval quality.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
-            <div className="font-bold text-blue-500 mb-1">OpenAI text-embedding-3-large</div>
-            <div className="font-mono text-xs text-gray-400 mb-2">Dimensions: up to 3072</div>
-            <div className="text-sm text-gray-300">State of the art proprietary model. Very high quality but requires API calls and costs money.</div>
-          </div>
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
-            <div className="font-bold text-blue-500 mb-1">all-MiniLM-L6-v2 (HuggingFace)</div>
-            <div className="font-mono text-xs text-gray-400 mb-2">Dimensions: 384</div>
-            <div className="text-sm text-gray-300">Extremely fast, open-source model. Runs locally. Great for smaller projects and low-latency.</div>
-          </div>
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-4">
-            <div className="font-bold text-blue-500 mb-1">Cohere embed-english-v3.0</div>
-            <div className="font-mono text-xs text-gray-400 mb-2">Dimensions: 1024</div>
-            <div className="text-sm text-gray-300">Excellent proprietary model specifically optimized for enterprise RAG pipelines and search.</div>
-          </div>
         </div>
       </section>
 
