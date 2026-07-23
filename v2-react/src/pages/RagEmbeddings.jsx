@@ -451,7 +451,7 @@ const RagEmbeddings = () => {
 
       <section id="toy-example" className="mb-12 border-b border-[#333] pb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">8. Toy example for visualization</h2>
-        <p className="text-gray-300 mb-6">For teaching, you can use small fake vectors. Real embeddings are much larger, but this helps learners understand.</p>
+        <p className="text-gray-300 mb-6">To visualize how this works, let's look at a simplified example using 3-dimensional vectors. Real embedding models use thousands of dimensions, but the underlying geometry works exactly the same way!</p>
         <ToyVectorVisualizer />
       </section>
 
