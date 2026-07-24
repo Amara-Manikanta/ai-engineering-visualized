@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function ProjectsIndex() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-5 py-10 gap-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] text-white text-center px-5 py-10 gap-6">
       <motion.div 
         className="text-6xl"
         animate={{ rotate: [0, 10, -10, 0] }}
