@@ -1,11 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
+import { BookOpen, Database, Zap, Layers, FileText, Search, Activity, GitBranch, ArrowRight } from 'lucide-react';
 
 export default function RagIndex() {
   const toc = [
     { label: "Overview", hash: "overview" },
+    { label: "RAG Topics", hash: "topics" },
     { label: "Demo", hash: "demo" }
+  ];
+
+  const topics = [
+    { title: "Fundamentals", path: "/rag/fundamentals", icon: <BookOpen className="text-blue-400" />, desc: "The core concepts of Retrieval-Augmented Generation." },
+    { title: "Data Prep", path: "/rag/data-prep", icon: <FileText className="text-emerald-400" />, desc: "Extracting and cleaning data from documents." },
+    { title: "Chunking", path: "/rag/chunking", icon: <Layers className="text-indigo-400" />, desc: "Strategies for splitting text into optimal sizes." },
+    { title: "Embeddings", path: "/rag/embeddings", icon: <Activity className="text-purple-400" />, desc: "Converting text into dense mathematical vectors." },
+    { title: "Vector DBs", path: "/rag/vector-dbs", icon: <Database className="text-rose-400" />, desc: "Storing and querying embeddings at scale." },
+    { title: "Indexing", path: "/rag/indexing", icon: <GitBranch className="text-amber-400" />, desc: "Organizing vectors for fast approximate search." },
+    { title: "Retrieval", path: "/rag/retrieval", icon: <Search className="text-teal-400" />, desc: "Finding the most relevant context for a query." },
+    { title: "Generation", path: "/rag/generation", icon: <Zap className="text-yellow-400" />, desc: "Passing context to the LLM to generate answers." },
+    { title: "Evaluation", path: "/rag/evaluation", icon: <Activity className="text-pink-400" />, desc: "Measuring RAG accuracy with RAGAS and TruLens." },
+    { title: "Development", path: "/rag/development", icon: <Layers className="text-blue-500" />, desc: "Building RAG applications step-by-step." },
+  ];
+
+  const advancedTopics = [
+    { title: "Advanced RAG", path: "/rag/advanced-rag" },
+    { title: "Advanced Retrieval", path: "/rag/advanced-retrieval" },
+    { title: "Hybrid RAG", path: "/rag/hybrid-rag" },
+    { title: "Graph RAG", path: "/rag/graph-rag" },
+    { title: "Agentic RAG", path: "/rag/agentic-rag" },
+    { title: "CRAG", path: "/rag/crag" },
+    { title: "Multimodal RAG", path: "/rag/multimodal-rag" },
+    { title: "Types of RAG", path: "/rag/types-of-rag" },
+    { title: "Naive RAG", path: "/rag/naive-rag" },
+    { title: "Self RAG", path: "/rag/self-rag" },
   ];
 
   return (
@@ -124,6 +153,54 @@ export default function RagIndex() {
             {card.text}
           </motion.div>
         ))}
+      </section>
+
+      {/* Topics Section */}
+      <section id="topics" className="py-20 px-4 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Explore RAG Topics</h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            From the basics of vector embeddings to advanced agentic RAG architectures, everything you need to know.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {topics.map((topic, i) => (
+            <Link key={i} to={topic.path}>
+              <motion.div 
+                whileHover={{ y: -5, borderColor: "rgba(99, 102, 241, 0.5)" }}
+                className="bg-[#111] border border-gray-800 rounded-xl p-6 h-full flex flex-col transition-colors hover:bg-[#1a1a1a]"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-[#1a1a1a] rounded-lg border border-gray-800">
+                    {topic.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{topic.title}</h3>
+                </div>
+                <p className="text-gray-400 mb-6 flex-grow">{topic.desc}</p>
+                <div className="flex items-center text-indigo-400 font-medium text-sm mt-auto">
+                  Learn more <ArrowRight size={16} className="ml-1" />
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="bg-[#111] border border-gray-800 rounded-2xl p-8 md:p-12">
+          <h3 className="text-2xl font-bold text-white mb-8 border-b border-gray-800 pb-4">Advanced RAG Architectures</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {advancedTopics.map((topic, i) => (
+              <Link key={i} to={topic.path}>
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-[#1a1a1a] hover:bg-indigo-900/20 border border-gray-800 hover:border-indigo-500/30 rounded-lg p-4 text-center transition-colors h-full flex items-center justify-center"
+                >
+                  <span className="text-gray-300 font-medium text-sm">{topic.title}</span>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
     </GuideLayout>
   );
