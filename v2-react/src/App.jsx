@@ -83,6 +83,13 @@ import AzureSecurity from "./pages/AzureSecurity";
 import AzureBackup from "./pages/AzureBackup";
 import AzureArchitecture from "./pages/AzureArchitecture";
 
+import AwsIndex from "./pages/AwsIndex";
+import AwsBasics from "./pages/AwsBasics";
+import AwsInfrastructure from "./pages/AwsInfrastructure";
+import AwsIam from "./pages/AwsIam";
+import AwsEc2 from "./pages/AwsEc2";
+import AwsStorage from "./pages/AwsStorage";
+
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
@@ -176,6 +183,13 @@ function App() {
         <Route path="/azure/security" element={<AzureSecurity />} />
         <Route path="/azure/backup" element={<AzureBackup />} />
         <Route path="/azure/architecture" element={<AzureArchitecture />} />
+
+        <Route path="/aws" element={<AwsIndex />} />
+        <Route path="/aws/basics" element={<AwsBasics />} />
+        <Route path="/aws/infrastructure" element={<AwsInfrastructure />} />
+        <Route path="/aws/iam" element={<AwsIam />} />
+        <Route path="/aws/ec2" element={<AwsEc2 />} />
+        <Route path="/aws/storage" element={<AwsStorage />} />
 
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
