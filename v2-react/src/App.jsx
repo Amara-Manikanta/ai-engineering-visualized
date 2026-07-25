@@ -78,6 +78,10 @@ import AzureLoadBalancer from "./pages/AzureLoadBalancer";
 import AzureDns from "./pages/AzureDns";
 import AzureAppService from "./pages/AzureAppService";
 import AzureAks from "./pages/AzureAks";
+import AzureMonitoring from "./pages/AzureMonitoring";
+import AzureSecurity from "./pages/AzureSecurity";
+import AzureBackup from "./pages/AzureBackup";
+import AzureArchitecture from "./pages/AzureArchitecture";
 
 function App() {
   return (
@@ -168,6 +172,10 @@ function App() {
         <Route path="/azure/dns" element={<AzureDns />} />
         <Route path="/azure/app-service" element={<AzureAppService />} />
         <Route path="/azure/aks" element={<AzureAks />} />
+        <Route path="/azure/monitoring" element={<AzureMonitoring />} />
+        <Route path="/azure/security" element={<AzureSecurity />} />
+        <Route path="/azure/backup" element={<AzureBackup />} />
+        <Route path="/azure/architecture" element={<AzureArchitecture />} />
 
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />

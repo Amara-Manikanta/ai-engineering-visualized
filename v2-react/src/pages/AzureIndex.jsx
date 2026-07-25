@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
-import { Cloud, Globe, Shield, Server, Database, ArrowRight, Network, Route, Globe2, Layout, Container } from 'lucide-react';
+import { Cloud, Globe, Shield, Server, Database, ArrowRight, Network, Route, Globe2, Layout, Container, Activity, ShieldAlert, History, Component } from 'lucide-react';
 
 export default function AzureIndex() {
   const toc = [
@@ -70,6 +70,30 @@ export default function AzureIndex() {
       path: "/azure/aks", 
       icon: <Container className="text-blue-300" size={32} />, 
       desc: "Managed Kubernetes, Node Pools, Control Plane, Pods, HPA, and Azure CNI." 
+    },
+    { 
+      title: "Azure Monitoring", 
+      path: "/azure/monitoring", 
+      icon: <Activity className="text-green-400" size={32} />, 
+      desc: "Azure Monitor, Log Analytics, App Insights, Alerts, Metrics, and Dashboards." 
+    },
+    { 
+      title: "Azure Security", 
+      path: "/azure/security", 
+      icon: <ShieldAlert className="text-red-400" size={32} />, 
+      desc: "Defender, Sentinel, Key Vault, Policy, RBAC, WAF, and DDoS Protection." 
+    },
+    { 
+      title: "Backup & DR", 
+      path: "/azure/backup", 
+      icon: <History className="text-indigo-400" size={32} />, 
+      desc: "Azure Backup, Site Recovery, Vaults, Soft Delete, and Cross Region Restore." 
+    },
+    { 
+      title: "Azure Architecture", 
+      path: "/azure/architecture", 
+      icon: <Component className="text-purple-400" size={32} />, 
+      desc: "Full-stack cloud architectures, Region Pairs, DR, and Security Layers." 
     }
   ];
 
