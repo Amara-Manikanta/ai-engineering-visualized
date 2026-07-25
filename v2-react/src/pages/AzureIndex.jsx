@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
-import { Cloud, Globe, Shield, Server, Database, ArrowRight } from 'lucide-react';
+import { Cloud, Globe, Shield, Server, Database, ArrowRight, Network, Route, Globe2, Layout, Container } from 'lucide-react';
 
 export default function AzureIndex() {
   const toc = [
@@ -40,6 +40,36 @@ export default function AzureIndex() {
       path: "/azure/storage", 
       icon: <Database className="text-orange-400" size={32} />, 
       desc: "Durable object storage: Blob, File, Queue, Table, redundancy options, and lifecycle." 
+    },
+    { 
+      title: "Azure Networking", 
+      path: "/azure/networking", 
+      icon: <Network className="text-cyan-400" size={32} />, 
+      desc: "VNet, Subnets, NSGs, Route Tables, Endpoints, NAT, and Traffic Flow." 
+    },
+    { 
+      title: "Load Balancer", 
+      path: "/azure/load-balancer", 
+      icon: <Route className="text-pink-400" size={32} />, 
+      desc: "L4 Load Balancer, App Gateway, Front Door, Traffic Manager, WAF & Autoscaling." 
+    },
+    { 
+      title: "Azure DNS", 
+      path: "/azure/dns", 
+      icon: <Globe2 className="text-blue-500" size={32} />, 
+      desc: "Public/Private Zones, Record Types, DNS Resolver, and Traffic Flow." 
+    },
+    { 
+      title: "App Service", 
+      path: "/azure/app-service", 
+      icon: <Layout className="text-yellow-400" size={32} />, 
+      desc: "PaaS Web Apps, Deployment Slots, Scaling, SSL, and CI/CD integrations." 
+    },
+    { 
+      title: "Azure Kubernetes Service", 
+      path: "/azure/aks", 
+      icon: <Container className="text-blue-300" size={32} />, 
+      desc: "Managed Kubernetes, Node Pools, Control Plane, Pods, HPA, and Azure CNI." 
     }
   ];
 
