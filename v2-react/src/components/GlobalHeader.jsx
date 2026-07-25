@@ -79,9 +79,10 @@ const NAV_LINKS = [
     ],
   },
   {
-    name: "☁️ Azure",
+    name: "☁️ Cloud",
     path: "/azure",
     subLinks: [
+      { name: "🟦 AZURE", path: "/azure", isHeader: true },
       { name: "Azure Basics", path: "/azure/basics" },
       { name: "Global Infrastructure", path: "/azure/infrastructure" },
       { name: "Azure Identity", path: "/azure/identity" },
@@ -96,12 +97,8 @@ const NAV_LINKS = [
       { name: "Azure Security", path: "/azure/security" },
       { name: "Backup & DR", path: "/azure/backup" },
       { name: "Architecture", path: "/azure/architecture" },
-    ],
-  },
-  {
-    name: "☁️ AWS",
-    path: "/aws",
-    subLinks: [
+      
+      { name: "🟧 AWS", path: "/aws", isHeader: true },
       { name: "AWS Basics", path: "/aws/basics" },
       { name: "Global Infrastructure", path: "/aws/infrastructure" },
       { name: "IAM", path: "/aws/iam" },
@@ -170,20 +167,25 @@ export default function GlobalHeader() {
                   </Link>
                 )}
 
-                {/* Desktop Dropdown */}
                 {nav.subLinks && openDropdown === i && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl overflow-hidden py-2">
-                    <div className="px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-white/5 mb-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-52 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl overflow-y-auto max-h-[80vh] py-2 custom-scrollbar">
+                    <div className="px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-white/5 mb-2 sticky top-0 bg-[#1a1a1a] z-10">
                       {nav.name}
                     </div>
                     {nav.subLinks.map((sub, j) => (
-                      <Link 
-                        key={j} 
-                        to={sub.path}
-                        className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
-                      >
-                        {sub.name}
-                      </Link>
+                      sub.isHeader ? (
+                        <div key={j} className="px-4 py-2 mt-2 text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-white/5 bg-black/20">
+                          {sub.name}
+                        </div>
+                      ) : (
+                        <Link 
+                          key={j} 
+                          to={sub.path}
+                          className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                        >
+                          {sub.name}
+                        </Link>
+                      )
                     ))}
                   </div>
                 )}
@@ -246,17 +248,23 @@ export default function GlobalHeader() {
                       {mobileExpanded === i && (
                         <div className="ml-4 pl-4 border-l border-indigo-500/30 space-y-0.5 pb-2">
                           {nav.subLinks.map((sub, j) => (
-                            <Link
-                              key={j}
-                              to={sub.path}
-                              className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                                location.pathname === sub.path 
-                                  ? "text-indigo-400 bg-indigo-500/10 font-semibold" 
-                                  : "text-gray-400 hover:text-white hover:bg-white/5"
-                              }`}
-                            >
-                              {sub.name}
-                            </Link>
+                            sub.isHeader ? (
+                              <div key={j} className="px-3 py-2 mt-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-white/5">
+                                {sub.name}
+                              </div>
+                            ) : (
+                              <Link
+                                key={j}
+                                to={sub.path}
+                                className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                                  location.pathname === sub.path 
+                                    ? "text-indigo-400 bg-indigo-500/10 font-semibold" 
+                                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                                }`}
+                              >
+                                {sub.name}
+                              </Link>
+                            )
                           ))}
                         </div>
                       )}
