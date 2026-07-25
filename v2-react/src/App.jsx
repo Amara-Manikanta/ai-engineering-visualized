@@ -67,6 +67,12 @@ import ClaudeIndex from "./pages/ClaudeIndex";
 import LlmInference from "./pages/LlmInference";
 import ProjectsIndex from "./pages/ProjectsIndex";
 import ResourcesIndex from "./pages/ResourcesIndex";
+import AzureIndex from "./pages/AzureIndex";
+import AzureBasics from "./pages/AzureBasics";
+import AzureInfrastructure from "./pages/AzureInfrastructure";
+import AzureIdentity from "./pages/AzureIdentity";
+import AzureVms from "./pages/AzureVms";
+import AzureStorage from "./pages/AzureStorage";
 
 function App() {
   return (
@@ -145,6 +151,14 @@ function App() {
         
         <Route path="/claude" element={<ClaudeIndex />} />
         <Route path="/llm-inference" element={<LlmInference />} />
+        
+        <Route path="/azure" element={<AzureIndex />} />
+        <Route path="/azure/basics" element={<AzureBasics />} />
+        <Route path="/azure/infrastructure" element={<AzureInfrastructure />} />
+        <Route path="/azure/identity" element={<AzureIdentity />} />
+        <Route path="/azure/vms" element={<AzureVms />} />
+        <Route path="/azure/storage" element={<AzureStorage />} />
+
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
       </Routes>

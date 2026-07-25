@@ -78,6 +78,17 @@ const NAV_LINKS = [
       { name: "Mistral", path: "/models/mistral" },
     ],
   },
+  {
+    name: "☁️ Azure",
+    path: "/azure",
+    subLinks: [
+      { name: "Azure Basics", path: "/azure/basics" },
+      { name: "Global Infrastructure", path: "/azure/infrastructure" },
+      { name: "Azure Identity", path: "/azure/identity" },
+      { name: "Virtual Machines", path: "/azure/vms" },
+      { name: "Azure Storage", path: "/azure/storage" },
+    ],
+  },
   { name: "🚀 Projects", path: "/projects" },
   { name: "📚 Resources", path: "/resources" },
 ];
