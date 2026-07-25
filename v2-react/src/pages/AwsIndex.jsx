@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
-import { Cloud, Server, Database, Shield, Globe } from 'lucide-react';
+import { Cloud, Server, Database, Shield, Globe, Network, ArrowRightLeft, BookOpen } from 'lucide-react';
 
 export default function AwsIndex() {
   const toc = [
@@ -10,7 +10,10 @@ export default function AwsIndex() {
     { label: "2. Global Infrastructure", hash: "infrastructure" },
     { label: "3. IAM (Identity & Access)", hash: "iam" },
     { label: "4. EC2 (Virtual Servers)", hash: "ec2" },
-    { label: "5. Storage Services", hash: "storage" }
+    { label: "5. Storage Services", hash: "storage" },
+    { label: "6. Networking Basics", hash: "networking" },
+    { label: "7. Load Balancer & Auto Scaling", hash: "load-balancer" },
+    { label: "8. Route 53 & DNS", hash: "dns" }
   ];
 
   const topics = [
@@ -43,6 +46,24 @@ export default function AwsIndex() {
       path: "/aws/storage", 
       icon: <Database className="text-cyan-400" size={32} />, 
       desc: "S3, EBS, EFS, Glacier, and Storage Comparison." 
+    },
+    { 
+      title: "Networking Basics", 
+      path: "/aws/networking", 
+      icon: <Network className="text-pink-400" size={32} />, 
+      desc: "VPC, Subnets, Internet Gateway, Route Tables, and NAT Gateway." 
+    },
+    { 
+      title: "Load Balancer & Auto Scaling", 
+      path: "/aws/load-balancer", 
+      icon: <ArrowRightLeft className="text-indigo-400" size={32} />, 
+      desc: "ALB, NLB, Auto Scaling Groups, and Scaling Policies." 
+    },
+    { 
+      title: "Route 53 & DNS", 
+      path: "/aws/dns", 
+      icon: <BookOpen className="text-teal-400" size={32} />, 
+      desc: "DNS Basics, Hosted Zones, Record Types, and Routing Policies." 
     }
   ];
 
