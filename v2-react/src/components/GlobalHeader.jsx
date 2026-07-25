@@ -98,6 +98,17 @@ const NAV_LINKS = [
       { name: "Architecture", path: "/azure/architecture" },
     ],
   },
+  {
+    name: "☁️ AWS",
+    path: "/aws",
+    subLinks: [
+      { name: "AWS Basics", path: "/aws/basics" },
+      { name: "Global Infrastructure", path: "/aws/infrastructure" },
+      { name: "IAM", path: "/aws/iam" },
+      { name: "EC2", path: "/aws/ec2" },
+      { name: "Storage Services", path: "/aws/storage" },
+    ],
+  },
   { name: "🚀 Projects", path: "/projects" },
   { name: "📚 Resources", path: "/resources" },
 ];
