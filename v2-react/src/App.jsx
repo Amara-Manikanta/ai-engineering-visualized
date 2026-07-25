@@ -73,6 +73,11 @@ import AzureInfrastructure from "./pages/AzureInfrastructure";
 import AzureIdentity from "./pages/AzureIdentity";
 import AzureVms from "./pages/AzureVms";
 import AzureStorage from "./pages/AzureStorage";
+import AzureNetworking from "./pages/AzureNetworking";
+import AzureLoadBalancer from "./pages/AzureLoadBalancer";
+import AzureDns from "./pages/AzureDns";
+import AzureAppService from "./pages/AzureAppService";
+import AzureAks from "./pages/AzureAks";
 
 function App() {
   return (
@@ -158,6 +163,11 @@ function App() {
         <Route path="/azure/identity" element={<AzureIdentity />} />
         <Route path="/azure/vms" element={<AzureVms />} />
         <Route path="/azure/storage" element={<AzureStorage />} />
+        <Route path="/azure/networking" element={<AzureNetworking />} />
+        <Route path="/azure/load-balancer" element={<AzureLoadBalancer />} />
+        <Route path="/azure/dns" element={<AzureDns />} />
+        <Route path="/azure/app-service" element={<AzureAppService />} />
+        <Route path="/azure/aks" element={<AzureAks />} />
 
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
