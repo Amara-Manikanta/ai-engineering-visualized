@@ -79,10 +79,9 @@ const NAV_LINKS = [
     ],
   },
   {
-    name: "☁️ Cloud",
+    name: "☁️ Azure",
     path: "/azure",
     subLinks: [
-      { name: "🟦 AZURE", path: "/azure", isHeader: true },
       { name: "Azure Basics", path: "/azure/basics" },
       { name: "Global Infrastructure", path: "/azure/infrastructure" },
       { name: "Azure Identity", path: "/azure/identity" },
@@ -97,8 +96,12 @@ const NAV_LINKS = [
       { name: "Azure Security", path: "/azure/security" },
       { name: "Backup & DR", path: "/azure/backup" },
       { name: "Architecture", path: "/azure/architecture" },
-      
-      { name: "🟧 AWS", path: "/aws", isHeader: true },
+    ],
+  },
+  {
+    name: "☁️ AWS",
+    path: "/aws",
+    subLinks: [
       { name: "AWS Basics", path: "/aws/basics" },
       { name: "Global Infrastructure", path: "/aws/infrastructure" },
       { name: "IAM", path: "/aws/iam" },
