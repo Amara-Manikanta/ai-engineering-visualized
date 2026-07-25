@@ -1,10 +1,24 @@
 import { useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import GlobalHeader from "./GlobalHeader";
+import { AZURE_LINKS, AWS_LINKS } from "../config/navigation";
 
 export default function GuideLayout({ title, intro, toc, children }) {
   const [activeHash, setActiveHash] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+
+  let sidebarLinks = null;
+  let sectionTitle = "";
+
+  if (location.pathname.startsWith("/azure")) {
+    sidebarLinks = AZURE_LINKS;
+    sectionTitle = "Azure Pages";
+  } else if (location.pathname.startsWith("/aws")) {
+    sidebarLinks = AWS_LINKS;
+    sectionTitle = "AWS Pages";
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 font-sans">
@@ -27,9 +41,36 @@ export default function GuideLayout({ title, intro, toc, children }) {
           {/* Desktop header (always visible) */}
           <h3 className="hidden lg:block font-bold p-5 pb-0 text-sm text-white uppercase tracking-wider">{title}</h3>
 
-          {/* TOC links — always visible on desktop, toggle on mobile */}
-          <div className={`${sidebarOpen ? "block" : "hidden"} lg:block p-4 lg:p-5 lg:pt-4 overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-120px)]`}>
-            <div className="flex flex-col gap-1">
+          {/* Navigation & TOC — always visible on desktop, toggle on mobile */}
+          <div className={`${sidebarOpen ? "block" : "hidden"} lg:block overflow-y-auto max-h-[60vh] lg:max-h-[calc(100vh-120px)] custom-scrollbar`}>
+            
+            {/* Render Section Navigation if available */}
+            {sidebarLinks && (
+              <div className="p-4 lg:p-5 border-b border-white/10 mb-2">
+                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">{sectionTitle}</h4>
+                <div className="flex flex-col gap-1">
+                  {sidebarLinks.map((link, i) => (
+                    <Link
+                      key={i}
+                      to={link.path}
+                      onClick={() => setSidebarOpen(false)}
+                      className={`block py-1.5 text-[0.9em] transition-colors ${
+                        location.pathname === link.path
+                          ? "text-indigo-400 font-semibold border-l-2 border-indigo-400 pl-2 -ml-[10px]"
+                          : "text-gray-400 hover:text-white"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Render Local TOC */}
+            <div className="p-4 lg:p-5 lg:pt-2">
+              <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">On this page</h4>
+              <div className="flex flex-col gap-1">
               {toc.map((item, i) => {
                 const href = item.hash.startsWith("#") ? item.hash : `#${item.hash}`;
                 return (
@@ -50,6 +91,7 @@ export default function GuideLayout({ title, intro, toc, children }) {
                   </a>
                 );
               })}
+              </div>
             </div>
           </div>
         </aside>
