@@ -89,6 +89,9 @@ import AwsInfrastructure from "./pages/AwsInfrastructure";
 import AwsIam from "./pages/AwsIam";
 import AwsEc2 from "./pages/AwsEc2";
 import AwsStorage from "./pages/AwsStorage";
+import AwsNetworking from "./pages/AwsNetworking";
+import AwsLoadBalancer from "./pages/AwsLoadBalancer";
+import AwsDns from "./pages/AwsDns";
 
 function App() {
   return (
@@ -190,6 +193,9 @@ function App() {
         <Route path="/aws/iam" element={<AwsIam />} />
         <Route path="/aws/ec2" element={<AwsEc2 />} />
         <Route path="/aws/storage" element={<AwsStorage />} />
+        <Route path="/aws/networking" element={<AwsNetworking />} />
+        <Route path="/aws/load-balancer" element={<AwsLoadBalancer />} />
+        <Route path="/aws/dns" element={<AwsDns />} />
 
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
