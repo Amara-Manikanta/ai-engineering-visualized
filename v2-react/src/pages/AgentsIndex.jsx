@@ -63,203 +63,361 @@ const AgentsIndex = () => {
           <p className="text-gray-400 text-lg">From model calls to governed agentic systems.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Stage 1 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Stage 1: LLM Call */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl bg-white/5 border border-indigo-500/30 relative overflow-hidden flex flex-col justify-center"
+            className="p-6 rounded-2xl bg-white/5 border border-indigo-500/30 relative overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute top-0 left-0 bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3 py-1 rounded-br-lg">1. LLM Call</div>
-            <div className="flex items-center justify-center gap-4 mt-6 text-gray-300 font-medium">
-              <div className="bg-white/10 px-4 py-2 rounded-lg text-sm">💬 Input</div>
-              <div className="text-indigo-400">➔</div>
-              <div className="bg-indigo-500/20 border border-indigo-500/50 px-4 py-2 rounded-lg flex flex-col items-center">
-                <span>🧠 Model</span>
-                <span className="text-[10px] text-gray-400">Generates</span>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3 py-1 rounded-full border border-indigo-500/30">1. LLM Call</span>
+                <span className="text-xs text-gray-400 font-mono">Stateless • Single Pass</span>
               </div>
-              <div className="text-indigo-400">➔</div>
-              <div className="bg-white/10 px-4 py-2 rounded-lg text-sm">✅ Output</div>
+
+              {/* Diagram */}
+              <div className="bg-black/30 p-4 rounded-xl border border-white/5 flex items-center justify-center gap-3 my-4 text-gray-300 font-medium">
+                <div className="bg-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-1">💬 Input</div>
+                <div className="text-indigo-400">➔</div>
+                <div className="bg-indigo-500/20 border border-indigo-500/50 px-3 py-1.5 rounded-lg flex flex-col items-center">
+                  <span className="text-xs">🧠 Model</span>
+                  <span className="text-[9px] text-gray-400">Generates</span>
+                </div>
+                <div className="text-indigo-400">➔</div>
+                <div className="bg-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-1">✅ Output</div>
+              </div>
+            </div>
+
+            {/* Detailed Explanation */}
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <h4 className="text-sm font-bold text-indigo-300 mb-2 flex items-center gap-2">
+                <span>⚡</span> Simple Text Generation
+              </h4>
+              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                The baseline LLM pattern. Input text is passed to the neural network model, which predicts the next tokens and returns a response in a single, stateless turn.
+              </p>
+              <div className="space-y-1.5 text-[11px] text-gray-400">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-indigo-400 font-bold">•</span>
+                  <span><strong>Stateless:</strong> Every request is isolated; no persistence between calls.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-indigo-400 font-bold">•</span>
+                  <span><strong>Passive:</strong> Cannot take actions, call APIs, or query live external databases.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-indigo-400 font-bold">•</span>
+                  <span><strong>Use Cases:</strong> Translation, summarization, simple Q&A, formatting.</span>
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Stage 2 */}
+          {/* Stage 2: Agent Loop */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl bg-white/5 border border-purple-500/30 relative overflow-hidden flex flex-col items-center justify-center"
+            className="p-6 rounded-2xl bg-white/5 border border-purple-500/30 relative overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute top-0 left-0 bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-br-lg">2. Agent Loop</div>
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-6 text-gray-300 font-medium w-full">
-              <div className="bg-white/10 px-3 py-2 rounded-lg text-xs">🧠 Model</div>
-              <div className="text-purple-400">➔</div>
-              <div className="bg-white/10 px-3 py-2 rounded-lg text-xs">⚖️ Decide</div>
-              <div className="text-purple-400">➔</div>
-              <div className="bg-white/10 px-3 py-2 rounded-lg text-xs">🔧 Tool Call</div>
-              <div className="text-purple-400">➔</div>
-              <div className="bg-purple-500/20 border border-purple-500/50 px-3 py-2 rounded-lg text-xs">👁️ Observe</div>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">2. Agent Loop</span>
+                <span className="text-xs text-gray-400 font-mono">ReAct Loop • Tool Use</span>
+              </div>
+
+              {/* Diagram */}
+              <div className="bg-black/30 p-4 rounded-xl border border-white/5 flex flex-col items-center my-4">
+                <div className="flex flex-wrap items-center justify-center gap-1.5 text-gray-300 font-medium w-full">
+                  <div className="bg-white/10 px-2.5 py-1 rounded-lg text-xs">🧠 Model</div>
+                  <div className="text-purple-400 text-xs">➔</div>
+                  <div className="bg-white/10 px-2.5 py-1 rounded-lg text-xs">⚖️ Decide</div>
+                  <div className="text-purple-400 text-xs">➔</div>
+                  <div className="bg-white/10 px-2.5 py-1 rounded-lg text-xs">🔧 Tool Call</div>
+                  <div className="text-purple-400 text-xs">➔</div>
+                  <div className="bg-purple-500/20 border border-purple-500/50 px-2.5 py-1 rounded-lg text-xs text-purple-300">👁️ Observe</div>
+                </div>
+                <div className="flex gap-1.5 mt-3 text-[10px] text-gray-400">
+                  <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">🔍 Search</span>
+                  <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">☁️ API</span>
+                  <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">🛢️ DB</span>
+                  <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">&lt;/&gt; Code</span>
+                </div>
+              </div>
             </div>
-            <div className="flex gap-2 mt-4 text-xs text-gray-400">
-              <span className="px-2 py-1 rounded bg-black/40 border border-white/5">🔍 Search</span>
-              <span className="px-2 py-1 rounded bg-black/40 border border-white/5">☁️ API</span>
-              <span className="px-2 py-1 rounded bg-black/40 border border-white/5">🛢️ DB</span>
-              <span className="px-2 py-1 rounded bg-black/40 border border-white/5">&lt;/&gt; Code</span>
+
+            {/* Detailed Explanation */}
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <h4 className="text-sm font-bold text-purple-300 mb-2 flex items-center gap-2">
+                <span>🔄</span> Reason, Act, and Observe
+              </h4>
+              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                Adds a control loop around the model allowing it to autonomously decide when to invoke external tools, process the execution results, and continue reasoning until the task is complete.
+              </p>
+              <div className="space-y-1.5 text-[11px] text-gray-400">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-purple-400 font-bold">•</span>
+                  <span><strong>ReAct Pattern:</strong> Interleaves reasoning thoughts with actionable tool invocations.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-purple-400 font-bold">•</span>
+                  <span><strong>Observation Feedback:</strong> Tool outputs (JSON/errors) feed directly back into model prompt context.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-purple-400 font-bold">•</span>
+                  <span><strong>Capabilities:</strong> Searching the web, querying SQL, running Python scripts, making HTTP calls.</span>
+                </div>
+              </div>
             </div>
-            <div className="text-xs text-gray-400 mt-2 font-mono">Reason. Act. Observe.</div>
           </motion.div>
 
-          {/* Stage 3 */}
+          {/* Stage 3: Agent Framework */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl bg-white/5 border border-cyan-500/30 relative overflow-hidden flex flex-col items-center justify-center"
+            className="p-6 rounded-2xl bg-white/5 border border-cyan-500/30 relative overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute top-0 left-0 bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-br-lg">3. Agent Framework</div>
-            <div className="w-full flex flex-col items-center mt-6">
-               <div className="bg-white/10 px-4 py-2 rounded-lg text-sm text-gray-200 border border-white/10 mb-2">&lt;/&gt; Your Agent Code</div>
-               <div className="flex gap-8 border-t border-cyan-500/30 pt-2 w-full justify-center text-xs text-gray-300 relative">
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 border-t border-cyan-500/50 bg-[#161b22] rotate-45"></div>
-                  <div className="bg-white/5 px-2 py-1 rounded border border-white/10">Nodes</div>
-                  <div className="bg-cyan-500/20 px-2 py-1 rounded border border-cyan-500/30 text-cyan-400">🔧 Tools</div>
-                  <div className="bg-white/5 px-2 py-1 rounded border border-white/10">🛢️ State</div>
-               </div>
-               <div className="w-64 border border-gray-600 rounded-full mt-3 py-1 text-center text-xs text-gray-400 bg-black/40">Workflow / Graph</div>
-               <div className="text-[10px] text-gray-500 mt-2">LangGraph • ADK • Agents SDK</div>
-               <div className="text-xs font-mono text-cyan-400 mt-2">You define the workflow.</div>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full border border-cyan-500/30">3. Agent Framework</span>
+                <span className="text-xs text-gray-400 font-mono">Graph Workflows • State</span>
+              </div>
+
+              {/* Diagram */}
+              <div className="bg-black/30 p-4 rounded-xl border border-white/5 my-4">
+                <div className="w-full flex flex-col items-center">
+                  <div className="bg-white/10 px-3 py-1 rounded-lg text-xs text-gray-200 border border-white/10 mb-2 font-mono">&lt;/&gt; Your Agent Code</div>
+                  <div className="flex gap-4 border-t border-cyan-500/30 pt-2 w-full justify-center text-xs text-gray-300 relative">
+                    <div className="bg-white/5 px-2 py-0.5 rounded border border-white/10 text-[10px]">🔗 Nodes</div>
+                    <div className="bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30 text-cyan-300 text-[10px]">🔧 Tools</div>
+                    <div className="bg-white/5 px-2 py-0.5 rounded border border-white/10 text-[10px]">🛢️ State</div>
+                  </div>
+                  <div className="w-56 border border-gray-600 rounded-full mt-2 py-0.5 text-center text-[10px] text-gray-400 bg-black/40">Workflow / Directed Graph</div>
+                  <div className="text-[9px] text-gray-500 mt-1">LangGraph • AutoGen • CrewAI • Google ADK</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Detailed Explanation */}
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <h4 className="text-sm font-bold text-cyan-300 mb-2 flex items-center gap-2">
+                <span>🏗️</span> Structuring Orchestration with Graphs & State
+              </h4>
+              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                Replaces ad-hoc while-loops with production frameworks. Developers structure agent interactions into directed state graphs with explicit nodes, conditional edges, and shared state objects.
+              </p>
+              <div className="space-y-1.5 text-[11px] text-gray-400">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-cyan-400 font-bold">•</span>
+                  <span><strong>Deterministic Control:</strong> Mixes hardcoded branching rules with dynamic LLM decisions.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-cyan-400 font-bold">•</span>
+                  <span><strong>State Management:</strong> Maintains structured global state (memory, scratchpad, thread history).</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-cyan-400 font-bold">•</span>
+                  <span><strong>Resilience:</strong> Implements retry policies, fallback nodes, and human-in-the-loop checkpoints.</span>
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Stage 4 */}
+          {/* Stage 4: Agent Harness */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl bg-white/5 border border-red-500/30 relative overflow-hidden flex flex-col items-center justify-center"
+            className="p-6 rounded-2xl bg-white/5 border border-red-500/30 relative overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute top-0 left-0 bg-red-500/20 text-red-300 text-xs font-bold px-3 py-1 rounded-br-lg">4. Agent Harness</div>
-            <div className="flex items-center justify-center gap-2 mt-4 w-full">
-               <div className="flex flex-col items-center shrink-0">
-                 <div className="text-2xl">🎯</div>
-                 <span className="text-[10px] text-gray-300 font-bold">Goal</span>
-               </div>
-               <div className="text-red-400 mx-1">➔</div>
-               <div className="flex-1 max-w-[160px] bg-red-900/10 border border-red-500/30 rounded-lg p-2 flex flex-col relative">
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-red-500/20 px-2 rounded text-[8px] font-bold text-red-400 uppercase whitespace-nowrap">AGENT HARNESS</div>
-                  <ul className="text-[9px] text-gray-300 space-y-0.5 mt-2 ml-1">
-                    <li>📄 Instructions</li>
-                    <li>👤 Context</li>
-                    <li>🔄 Tool Loop</li>
-                    <li>🗂️ Memory</li>
-                    <li>📁 Filesystem</li>
-                    <li>⭐ Skills</li>
-                    <li>👥 Subagents</li>
-                    <li>🛑 Stop Conditions</li>
-                  </ul>
-               </div>
-               <div className="text-red-400 mx-1">➔</div>
-               <div className="bg-white/10 p-2 rounded-lg border border-white/10 text-center shrink-0">
-                  <div className="text-2xl">🧠</div>
-                  <span className="text-[10px] text-gray-300 font-bold">Model</span>
-               </div>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="bg-red-500/20 text-red-300 text-xs font-bold px-3 py-1 rounded-full border border-red-500/30">4. Agent Harness</span>
+                <span className="text-xs text-gray-400 font-mono">Model + Harness = Agent</span>
+              </div>
+
+              {/* Diagram */}
+              <div className="bg-black/30 p-4 rounded-xl border border-white/5 my-4">
+                <div className="flex items-center justify-center gap-2 w-full">
+                  <div className="flex flex-col items-center shrink-0">
+                    <div className="text-xl">🎯</div>
+                    <span className="text-[9px] text-gray-300 font-bold">Goal</span>
+                  </div>
+                  <div className="text-red-400 text-xs">➔</div>
+                  <div className="flex-1 max-w-[170px] bg-red-900/10 border border-red-500/30 rounded-lg p-2 flex flex-col relative">
+                    <div className="text-[9px] font-bold text-red-400 uppercase text-center mb-1">AGENT HARNESS</div>
+                    <div className="grid grid-cols-2 gap-x-1 text-[8px] text-gray-300">
+                      <span>📄 Instructions</span>
+                      <span>👤 Context</span>
+                      <span>🔄 Tool Loop</span>
+                      <span>🗂️ Memory</span>
+                      <span>📁 Filesystem</span>
+                      <span>⭐ Skills</span>
+                      <span>👥 Subagents</span>
+                      <span>🛑 Limits</span>
+                    </div>
+                  </div>
+                  <div className="text-red-400 text-xs">➔</div>
+                  <div className="bg-white/10 p-1.5 rounded-lg border border-white/10 text-center shrink-0">
+                    <div className="text-xl">🧠</div>
+                    <span className="text-[9px] text-gray-300 font-bold">Model</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="text-[10px] font-bold text-gray-300 mt-3 text-center leading-tight">
-               MODEL ≠ AGENT<br/>
-               <span className="text-red-400">MODEL + HARNESS ➔ AGENT</span>
+
+            {/* Detailed Explanation */}
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <h4 className="text-sm font-bold text-red-300 mb-2 flex items-center gap-2">
+                <span>🛡️</span> The Complete Execution Harness
+              </h4>
+              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                Establishes the fundamental distinction: <strong className="text-red-300">MODEL ≠ AGENT</strong>. The LLM provides intelligence, but the harness provides memory, environment context, skills, subagents, and boundaries.
+              </p>
+              <div className="space-y-1.5 text-[11px] text-gray-400">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-red-400 font-bold">•</span>
+                  <span><strong>Full Context Provision:</strong> Feeds instructions, skills, files, memory, and tools into every step.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-red-400 font-bold">•</span>
+                  <span><strong>Capabilities & Boundaries:</strong> Grants subagents and tools while enforcing strict stop conditions.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-red-400 font-bold">•</span>
+                  <span><strong>Production Standard:</strong> Foundation of modern agent platforms (e.g. Antigravity, Claude Code, Devin).</span>
+                </div>
+              </div>
             </div>
-            <div className="text-[10px] text-gray-400 font-mono mt-1 text-center">The layer that makes the model work like an agent.</div>
           </motion.div>
 
-          {/* Stage 5 */}
+          {/* Stage 5: Long-Running Agent */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl bg-white/5 border border-emerald-500/30 relative overflow-hidden flex flex-col items-center justify-center"
+            className="p-6 rounded-2xl bg-white/5 border border-emerald-500/30 relative overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute top-0 left-0 bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-br-lg">5. Long-Running Agent</div>
-            
-            <div className="flex flex-col items-center justify-center gap-1 mt-6 w-full relative h-28">
-               
-               <div className="flex gap-2 w-full justify-center absolute top-0">
-                 <div className="bg-white/10 p-1.5 rounded text-[9px] border border-white/10 text-center w-12">📋<br/>Task</div>
-                 <div className="text-emerald-400 mt-2 text-xs">➔</div>
-                 <div className="bg-emerald-900/20 p-1.5 rounded text-[9px] border border-emerald-500/30 text-center w-12 text-emerald-400">🛡️<br/>Harness</div>
-                 <div className="text-emerald-400 mt-2 text-xs">➔</div>
-                 <div className="bg-white/10 p-1.5 rounded text-[9px] border border-white/10 text-center w-12">📝<br/>Plan</div>
-                 <div className="text-emerald-400 mt-2 text-xs">➔</div>
-                 <div className="bg-white/10 p-1 rounded text-[9px] border border-white/10 text-center w-16 leading-tight">📁<br/>Use Browser/Terminal</div>
-               </div>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">5. Long-Running Agent</span>
+                <span className="text-xs text-gray-400 font-mono">Multi-Turn • Context Management</span>
+              </div>
 
-               <div className="flex gap-2 w-full justify-center absolute bottom-0">
-                 <div className="bg-white/10 p-1.5 rounded text-[9px] border border-white/10 text-center w-12 leading-tight">🗜️<br/>Compress<br/>Context</div>
-                 <div className="text-emerald-400 mt-3 rotate-180 text-xs">➔</div>
-                 <div className="bg-white/10 p-1.5 rounded text-[9px] border border-white/10 text-center w-12 leading-tight">📈<br/>Check<br/>Progress</div>
-                 <div className="text-emerald-400 mt-3 rotate-180 text-xs">➔</div>
-                 <div className="bg-emerald-900/20 p-1.5 rounded text-[9px] border border-emerald-500/30 text-center w-14 text-emerald-400 leading-tight">👥<br/>Spawn<br/>Subagent</div>
-               </div>
-               
-               {/* Loop connection lines */}
-               <div className="absolute right-4 md:right-8 top-[30px] w-4 h-10 border-r border-b border-emerald-500/50 rounded-br"></div>
-               <div className="absolute left-4 md:left-8 top-[30px] w-4 h-10 border-l border-t border-emerald-500/50 rounded-tl mt-1"></div>
+              {/* Diagram */}
+              <div className="bg-black/30 p-4 rounded-xl border border-white/5 my-4">
+                <div className="flex flex-col items-center justify-center gap-1 w-full relative h-24">
+                  <div className="flex gap-1.5 w-full justify-center absolute top-0">
+                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-11">📋 Task</div>
+                    <div className="text-emerald-400 mt-1 text-[10px]">➔</div>
+                    <div className="bg-emerald-900/20 p-1 rounded text-[8px] border border-emerald-500/30 text-center w-12 text-emerald-400">🛡️ Harness</div>
+                    <div className="text-emerald-400 mt-1 text-[10px]">➔</div>
+                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-11">📝 Plan</div>
+                    <div className="text-emerald-400 mt-1 text-[10px]">➔</div>
+                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-16">💻 Environment</div>
+                  </div>
+
+                  <div className="flex gap-1.5 w-full justify-center absolute bottom-0">
+                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-14 leading-tight">🗜️ Compress Context</div>
+                    <div className="text-emerald-400 mt-2 rotate-180 text-[10px]">➔</div>
+                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-12 leading-tight">📈 Check Progress</div>
+                    <div className="text-emerald-400 mt-2 rotate-180 text-[10px]">➔</div>
+                    <div className="bg-emerald-900/20 p-1 rounded text-[8px] border border-emerald-500/30 text-center w-14 text-emerald-400 leading-tight">👥 Spawn Subagents</div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 mt-4 text-[9px] text-gray-400 w-full justify-center">
-              <span className="px-1.5 py-0.5 rounded bg-black/40 border border-white/5">🌐 Browser</span>
-              <span className="px-1.5 py-0.5 rounded bg-black/40 border border-white/5">📁 Files</span>
-              <span className="px-1.5 py-0.5 rounded bg-black/40 border border-white/5">💻 Shell</span>
-              <span className="px-1.5 py-0.5 rounded border border-dashed border-emerald-500/50 text-emerald-400">📦 Sandbox</span>
+            {/* Detailed Explanation */}
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <h4 className="text-sm font-bold text-emerald-300 mb-2 flex items-center gap-2">
+                <span>⏱️</span> Extended Autonomous Multi-Step Execution
+              </h4>
+              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                Executes complex goals across dozens or hundreds of sequential steps without losing focus, filling token limits, or requiring constant user prompts.
+              </p>
+              <div className="space-y-1.5 text-[11px] text-gray-400">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-emerald-400 font-bold">•</span>
+                  <span><strong>Context Window Compaction:</strong> Summarizes older messages & truncates non-essential tool outputs.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-emerald-400 font-bold">•</span>
+                  <span><strong>Subagent Delegation:</strong> Offloads distinct sub-tasks (researching, code writing) to isolated child agents.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-emerald-400 font-bold">•</span>
+                  <span><strong>Isolated Sandboxes:</strong> Uses headless browsers, terminal sandboxes, and secure virtual environments.</span>
+                </div>
+              </div>
             </div>
-            <div className="text-[10px] text-gray-400 font-mono mt-3 text-center">Works across many steps, not one turn.</div>
           </motion.div>
 
-          {/* Stage 6 */}
+          {/* Stage 6: Governed Agentic System */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-6 rounded-2xl bg-white/5 border border-blue-500/30 relative overflow-hidden flex flex-col items-center justify-center"
+            className="p-6 rounded-2xl bg-white/5 border border-blue-500/30 relative overflow-hidden flex flex-col justify-between"
           >
-            <div className="absolute top-0 left-0 bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-br-lg">6. Governed Agentic System</div>
-            
-            <div className="flex items-center gap-2 mt-6 w-full justify-center">
-               <div className="bg-white/10 p-1.5 rounded-lg text-[9px] text-center border border-white/10 w-12">
-                 👤<br/>User /<br/>Event
-               </div>
-               <div className="text-blue-400 text-xs">➔</div>
-               <div className="bg-blue-900/20 p-1.5 rounded-lg text-[9px] text-center border border-blue-500/30 w-14 text-blue-400 font-bold">
-                 🔄<br/>Agent<br/>Runtime
-               </div>
-               <div className="text-blue-400 text-xs">➔</div>
-               <div className="bg-white/10 p-1.5 rounded-lg text-[9px] text-center border border-white/10 w-14">
-                 🛡️<br/>Agent<br/>Harness
-               </div>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full border border-blue-500/30">6. Governed Agentic System</span>
+                <span className="text-xs text-gray-400 font-mono">Control Plane • Enterprise Guardrails</span>
+              </div>
+
+              {/* Diagram */}
+              <div className="bg-black/30 p-4 rounded-xl border border-white/5 my-4">
+                <div className="flex items-center justify-center gap-2 w-full mb-3">
+                  <div className="bg-white/10 p-1 rounded text-[8px] text-center border border-white/10">👤 User / Event</div>
+                  <div className="text-blue-400 text-[10px]">➔</div>
+                  <div className="bg-blue-900/20 p-1 rounded text-[8px] text-center border border-blue-500/30 text-blue-300 font-bold">🔄 Agent Runtime</div>
+                  <div className="text-blue-400 text-[10px]">➔</div>
+                  <div className="bg-white/10 p-1 rounded text-[8px] text-center border border-white/10">🛡️ Agent Harness</div>
+                </div>
+
+                <div className="bg-blue-950/40 border border-blue-500/30 rounded-lg p-2">
+                  <div className="text-[9px] font-bold text-blue-300 text-center mb-1">CONTROL PLANE GOVERNANCE</div>
+                  <div className="grid grid-cols-4 gap-1 text-[8px] text-gray-300 text-center">
+                    <span>👤 Identity</span>
+                    <span>🛡️ Policy</span>
+                    <span>🔐 Permissions</span>
+                    <span>👍 Approvals</span>
+                    <span>🔍 Tracing</span>
+                    <span>📊 Evaluation</span>
+                    <span>📋 Audit</span>
+                    <span>💰 Cost Limits</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="flex justify-center gap-3 mt-4 w-full relative">
-               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-1/2 h-3 border-t border-l border-r border-blue-500/30 rounded-t"></div>
-               <div className="bg-white/10 p-1 rounded text-[9px] text-center border border-white/10 z-10 w-16">🔧 Tools/MCP</div>
-               <div className="bg-white/10 p-1 rounded text-[9px] text-center border border-white/10 z-10 w-16">👥 Agents/A2A</div>
-               <div className="bg-white/10 p-1 rounded text-[9px] text-center border border-white/10 z-10 w-16">💻 Computer Use</div>
+            {/* Detailed Explanation */}
+            <div className="border-t border-white/10 pt-4 mt-2">
+              <h4 className="text-sm font-bold text-blue-300 mb-2 flex items-center gap-2">
+                <span>🏛️</span> Enterprise-Grade Governance & Safety
+              </h4>
+              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                Combines high autonomy with enterprise control planes. Ensures agents are <strong className="text-blue-300">capable enough to act</strong>, yet <strong className="text-blue-300">controlled enough to trust</strong> in production environments.
+              </p>
+              <div className="space-y-1.5 text-[11px] text-gray-400">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-blue-400 font-bold">•</span>
+                  <span><strong>Control Plane:</strong> Enforces IAM permissions, financial budget caps, human approvals, and security policies.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-blue-400 font-bold">•</span>
+                  <span><strong>Observability & Audit:</strong> Provides complete step-by-step tracing, evaluation metrics, and immutable audit logs.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-blue-400 font-bold">•</span>
+                  <span><strong>Inter-Agent Protocols:</strong> Standardizes Agent-to-Agent (A2A) communication and Model Context Protocol (MCP).</span>
+                </div>
+              </div>
             </div>
-
-            <div className="w-full bg-blue-950/30 border border-blue-500/30 rounded-lg p-2 mt-4 flex flex-col text-center">
-               <div className="text-[10px] font-bold text-blue-400 mb-1">Control Plane</div>
-               <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-[8px] text-gray-300">
-                 <span className="flex items-center gap-1">👤 Identity</span>
-                 <span className="flex items-center gap-1">🛡️ Policy</span>
-                 <span className="flex items-center gap-1">🔐 Permissions</span>
-                 <span className="flex items-center gap-1">👍 Approvals</span>
-                 <span className="flex items-center gap-1">🔍 Tracing</span>
-                 <span className="flex items-center gap-1">📊 Evaluations</span>
-                 <span className="flex items-center gap-1">📋 Audit</span>
-                 <span className="flex items-center gap-1">💰 Cost Limits</span>
-               </div>
-            </div>
-            
-            <div className="text-[10px] text-gray-400 font-mono mt-3 text-center">Capable enough to act. Controlled enough to trust.</div>
           </motion.div>
         </div>
 
