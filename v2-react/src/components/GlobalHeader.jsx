@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { name: "🏠 Home", path: "/" },
   { 
     name: "🐍 Python", 
     path: "/python",
