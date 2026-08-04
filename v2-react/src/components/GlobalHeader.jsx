@@ -68,8 +68,7 @@ const NAV_LINKS = [
     subLinks: [
       { name: "AI Agents", path: "/agents" },
       { name: "MCP", path: "/mcp" },
-      { name: "LangGraph", path: "/langgraph" },
-      { name: "LangChain", path: "/agents/langchain" },
+      { name: "LangChain + LangGraph", path: "/agents/langchain" },
       { name: "Document Loaders", path: "/agents/document-loaders" },
       { name: "Tool Calling", path: "/agents/tool-calling" },
       { name: "Memory", path: "/agents/memory" },

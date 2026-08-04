@@ -35,8 +35,6 @@ import ModelsMistral from "./pages/ModelsMistral";
 import ModelsQwen from "./pages/ModelsQwen";
 import ModelsDeepseek from "./pages/ModelsDeepseek";
 import ModelsGrok from "./pages/ModelsGrok";
-import LangGraphIndex from "./pages/LangGraphIndex";
-import LangGraphPatterns from "./pages/LangGraphPatterns";
 import McpIndex from "./pages/McpIndex";
 import PromptingIndex from "./pages/PromptingIndex";
 import EmbeddingsIndex from "./pages/EmbeddingsIndex";
@@ -175,8 +173,6 @@ function App() {
         <Route path="/models/deepseek" element={<ModelsDeepseek />} />
         <Route path="/models/grok" element={<ModelsGrok />} />
 
-        <Route path="/langgraph" element={<LangGraphIndex />} />
-        <Route path="/langgraph/patterns" element={<LangGraphPatterns />} />
         
         <Route path="/mcp" element={<McpIndex />} />
         <Route path="/prompting" element={<PromptingIndex />} />
