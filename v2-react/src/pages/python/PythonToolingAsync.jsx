@@ -3,39 +3,39 @@ import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
-  Folder, Box, Globe, FileJson, Zap, TestTube, Settings, ArrowRight
+  Folder, Box, Globe, FileJson, Zap, TestTube, Settings, ArrowRight, ShieldCheck
 } from 'lucide-react';
 
 export default function PythonToolingAsync() {
   const toc = [
-    { label: "39. pathlib.Path Object Methods", hash: "#pathlib" },
-    { label: "40. File I/O & Context Managers", hash: "#file-io" },
-    { label: "41. Modules & Import System", hash: "#modules" },
-    { label: "42. Packages & __init__.py", hash: "#packages" },
-    { label: "43. Virtual Envs (venv, uv, poetry)", hash: "#virtualenvs" },
-    { label: "44. Working with APIs (httpx)", hash: "#apis" },
-    { label: "45. JSON Parsing & Serialization", hash: "#json" },
-    { label: "46. YAML Parsing & Config", hash: "#yaml" },
-    { label: "47. Async Basics (async / await)", hash: "#async-basics" },
-    { label: "48. asyncio.gather() Concurrency", hash: "#async-gather" },
-    { label: "49. Pytest Fixtures & Assertions", hash: "#pytest-fixtures" },
-    { label: "50. Pytest Parameterization & Mocks", hash: "#pytest-mocks" }
+    { label: "40. pathlib.Path Object Methods", hash: "#pathlib" },
+    { label: "41. File I/O & Context Managers", hash: "#file-io" },
+    { label: "42. Modules & Imports", hash: "#modules" },
+    { label: "43. Project Structure & Relative Imports", hash: "#project-structure" },
+    { label: "44. Virtual Envs, pip, .env & Requirements", hash: "#virtualenvs" },
+    { label: "45. Working with APIs (httpx)", hash: "#apis" },
+    { label: "46. JSON Parsing & Serialization", hash: "#json" },
+    { label: "47. YAML Parsing & Config", hash: "#yaml" },
+    { label: "48. Async Basics (async / await)", hash: "#async-basics" },
+    { label: "49. asyncio.gather() Concurrency", hash: "#async-gather" },
+    { label: "50. Pytest Fixtures & Assertions", hash: "#pytest-fixtures" },
+    { label: "51. Pytest Parameterization & Mocks", hash: "#pytest-mocks" }
   ];
 
   return (
     <GuideLayout
       title="Module 4: System, Tooling & Async Python"
-      intro="Granular technical reference for file paths, virtual environments, API integration, JSON/YAML parsing, AsyncIO concurrency, and Pytest."
+      intro="Comprehensive technical guide for modern file I/O, production AI project structures, virtual environments, API integration, JSON/YAML parsing, AsyncIO concurrency, and Pytest."
       toc={toc}
     >
-      {/* 39. PATHLIB */}
+      {/* 40. PATHLIB */}
       <section id="pathlib" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
             <Folder size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">39. Modern Filesystem Paths (`pathlib.Path`)</h2>
+            <h2 className="text-2xl font-black text-white">40. Modern Filesystem Paths (`pathlib.Path`)</h2>
             <p className="text-xs text-gray-400">Object-oriented path manipulation (`/` operator, `mkdir`, `exists`, `glob`)</p>
           </div>
         </div>
@@ -65,14 +65,14 @@ print("Path Exists:", file_path.exists())`}</pre>
         </div>
       </section>
 
-      {/* 40. FILE IO */}
+      {/* 41. FILE IO */}
       <section id="file-io" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
             <Folder size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">40. File I/O Modes & `with` Context Managers</h2>
+            <h2 className="text-2xl font-black text-white">41. File I/O Modes & `with` Context Managers</h2>
             <p className="text-xs text-gray-400">Reading, writing, appending, binary mode (`rb`, `wb`), automatic file closure</p>
           </div>
         </div>
@@ -102,14 +102,14 @@ print("Line Count:", len(lines))`}</pre>
         </div>
       </section>
 
-      {/* 41. MODULES */}
+      {/* 42. MODULES */}
       <section id="modules" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
             <Box size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">41. Modules & Import Mechanics</h2>
+            <h2 className="text-2xl font-black text-white">42. Modules & Import Mechanics</h2>
             <p className="text-xs text-gray-400">`import`, `from ... import`, aliasing `as`, `sys.path` lookup resolution</p>
           </div>
         </div>
@@ -137,71 +137,104 @@ print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</pre>
         </div>
       </section>
 
-      {/* 42. PACKAGES */}
-      <section id="packages" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+      {/* 43. PROJECT STRUCTURE */}
+      <section id="project-structure" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-            <Box size={24} />
+            <Folder size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">42. Packages, `__init__.py` & `__main__`</h2>
-            <p className="text-xs text-gray-400">Directory packages, `__all__` exports, and entrypoint execution guards</p>
+            <h2 className="text-2xl font-black text-white">43. AI App Project Structure & Relative Imports</h2>
+            <p className="text-xs text-gray-400">Moving from one-file scripts to real modular production projects (`__init__.py`)</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          A package is a directory containing multiple modules alongside an `__init__.py` file, which marks the folder as an importable package namespace. The `if __name__ == "__main__":` guard block ensures execution logic runs only when the script is invoked directly from the terminal, preventing main scripts from executing automatically when imported into external modules.
+          <strong>Moving from single-file scripts to production projects:</strong> Real AI applications are structured into modular packages. Directories containing <code>__init__.py</code> allow Python to recognize subfolders as packages. Developers use <strong>Absolute Imports</strong> (<code>from ai_app.rag.loader import LoadPdf</code>) or <strong>Relative Imports</strong> (<code>from .chunker import split_text</code>) to cleanly organize RAG components.
         </p>
 
-        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 42_main_guard.py</span>
-            <span>Python 3.11</span>
-          </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`def main():
-    print("Application entrypoint executed.")
-
-if __name__ == "__main__":
-    main()`}</pre>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Application entrypoint executed.</code>
-          </div>
+        {/* Directory Structure Diagram */}
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs mb-4">
+          <div className="text-emerald-400 font-bold mb-2">📁 Production AI Application Directory Layout</div>
+          <pre className="text-gray-300 whitespace-pre-wrap">{`ai_app/
+  ├── main.py             # Entrypoint script
+  ├── rag/
+  │   ├── __init__.py     # Package marker
+  │   ├── loader.py       # Document Loaders (PDF, Web, DB)
+  │   ├── chunker.py      # Text Splitters & Chunking
+  │   ├── retriever.py    # Vector Store & Search
+  │   └── generator.py    # LLM Prompt Generator
+  └── utils/
+      ├── __init__.py
+      └── config.py       # API Keys & Settings`}</pre>
         </div>
       </section>
 
-      {/* 43. VIRTUAL ENVS */}
+      {/* 44. VIRTUAL ENVS AND PIP */}
       <section id="virtualenvs" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
             <Layers size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">43. Virtual Environments (`venv`, `uv`, `poetry`)</h2>
-            <p className="text-xs text-gray-400">Isolated dependencies, reproducible environments, locking dependencies</p>
+            <h2 className="text-2xl font-black text-white">44. Virtual Environments (`venv`), `pip`, `.env` & Requirements</h2>
+            <p className="text-xs text-gray-400">Dependency isolation, `requirements.txt`, and API key protection with `python-dotenv`</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Virtual environments isolate project-specific dependencies to prevent package version conflicts across global Python installations. Standard tools like `venv` create isolated environment folders, while modern tools like `poetry` and ultra-fast Rust-based `uv` resolve dependency lockfiles and install binary packages in seconds.
+          Virtual environments create isolated Python environments for each project, avoiding package version conflicts across system Python installations. Developers install packages via <code>pip</code>, save snapshot locks to <code>requirements.txt</code>, and keep API secrets secure in <code>.env</code> files loaded using <code>python-dotenv</code>.
         </p>
 
-        <div className="bg-black/40 p-4 rounded-xl border border-white/5 font-mono text-xs space-y-2 text-amber-300">
-          <div># Create environment with stdlib venv</div>
-          <div className="text-gray-400">python -m venv .venv</div>
-          <div># Ultra-fast resolution & installation with uv</div>
-          <div className="text-gray-400">uv pip install httpx pydantic pytest</div>
+        {/* Visual Isolation Model */}
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-4 text-center text-xs"
+        >
+          <div className="font-bold text-amber-300 mb-3 uppercase tracking-wider">🔒 Environment Isolation Architecture</div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+            <div className="bg-amber-900/30 border border-amber-500/40 px-3 py-2 rounded-lg">AI Project</div>
+            <ArrowRight className="text-amber-400 hidden sm:block" size={16} />
+            <div className="bg-purple-900/30 border border-purple-500/40 px-3 py-2 rounded-lg">Virtual Environment (`.venv`)</div>
+            <ArrowRight className="text-purple-400 hidden sm:block" size={16} />
+            <div className="bg-cyan-900/30 border border-cyan-500/40 px-3 py-2 rounded-lg">Installed Packages (`pip`)</div>
+            <ArrowRight className="text-cyan-400 hidden sm:block" size={16} />
+            <div className="bg-emerald-900/30 border border-emerald-500/40 px-3 py-2 rounded-lg">Isolated AI App</div>
+          </div>
+        </motion.div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-amber-400"><Terminal size={12} /> Terminal Commands</span>
+            <span>Virtual Environment Setup</span>
+          </div>
+          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`# 1. Create Virtual Environment
+$ python -m venv .venv
+
+# 2. Activate Environment (macOS/Linux vs Windows)
+$ source .venv/bin/activate        # macOS/Linux
+> .venv\\Scripts\\activate          # Windows
+
+# 3. Install AI Dependencies & Secure Secrets
+$ pip install openai langchain python-dotenv
+$ pip freeze > requirements.txt`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>Successfully installed openai-1.12.0 langchain-0.1.0 python-dotenv-1.0.0</code>
+          </div>
         </div>
       </section>
 
-      {/* 44. APIS */}
+      {/* 45. APIS */}
       <section id="apis" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
             <Globe size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">44. Working with APIs (`requests` & `httpx`)</h2>
+            <h2 className="text-2xl font-black text-white">45. Working with APIs (`requests` & `httpx`)</h2>
             <p className="text-xs text-gray-400">HTTP `GET`/`POST` requests, custom headers, bearer tokens, JSON responses</p>
           </div>
         </div>
@@ -230,14 +263,14 @@ print("Status Code:", res.status_code)`}</pre>
         </div>
       </section>
 
-      {/* 45. JSON */}
+      {/* 46. JSON */}
       <section id="json" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
             <FileJson size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">45. JSON Parsing & Serialization</h2>
+            <h2 className="text-2xl font-black text-white">46. JSON Parsing & Serialization</h2>
             <p className="text-xs text-gray-400">Converting string to dict (`loads`) and dict to string (`dumps`)</p>
           </div>
         </div>
@@ -264,14 +297,14 @@ print("Parsed Name:", data["name"])`}</pre>
         </div>
       </section>
 
-      {/* 46. YAML */}
+      {/* 47. YAML */}
       <section id="yaml" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
             <FileJson size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">46. YAML Parsing & Configuration</h2>
+            <h2 className="text-2xl font-black text-white">47. YAML Parsing & Configuration</h2>
             <p className="text-xs text-gray-400">Loading structured YAML configuration files safely with `pyyaml`</p>
           </div>
         </div>
@@ -303,14 +336,14 @@ print("Image:", cfg["services"]["app"]["image"])`}</pre>
         </div>
       </section>
 
-      {/* 47. ASYNC BASICS */}
+      {/* 48. ASYNC BASICS */}
       <section id="async-basics" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
             <Zap size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">47. Async Python Basics (`async` / `await`)</h2>
+            <h2 className="text-2xl font-black text-white">48. Async Python Basics (`async` / `await`)</h2>
             <p className="text-xs text-gray-400">Event loops, coroutine functions, non-blocking asynchronous execution</p>
           </div>
         </div>
@@ -342,14 +375,14 @@ asyncio.run(main())`}</pre>
         </div>
       </section>
 
-      {/* 48. ASYNC GATHER */}
+      {/* 49. ASYNC GATHER */}
       <section id="async-gather" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
             <Zap size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">48. `asyncio.gather()` Parallel Concurrency</h2>
+            <h2 className="text-2xl font-black text-white">49. `asyncio.gather()` Parallel Concurrency</h2>
             <p className="text-xs text-gray-400">Executing multiple coroutines concurrently without multi-threading overhead</p>
           </div>
         </div>
@@ -382,14 +415,14 @@ asyncio.run(main())`}</pre>
         </div>
       </section>
 
-      {/* 49. PYTEST FIXTURES */}
+      {/* 50. PYTEST FIXTURES */}
       <section id="pytest-fixtures" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <TestTube size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">49. Pytest Fixtures & Assertions</h2>
+            <h2 className="text-2xl font-black text-white">50. Pytest Fixtures & Assertions</h2>
             <p className="text-xs text-gray-400">Reusable test setups with `@pytest.fixture` and plain `assert` statements</p>
           </div>
         </div>
@@ -419,14 +452,14 @@ def test_vector_dim(sample_vector):
         </div>
       </section>
 
-      {/* 50. PYTEST PARAMETRIZE & MOCKS */}
+      {/* 51. PYTEST PARAMETRIZE & MOCKS */}
       <section id="pytest-mocks" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
             <TestTube size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">50. Pytest Parameterization & Mocks</h2>
+            <h2 className="text-2xl font-black text-white">51. Pytest Parameterization & Mocks</h2>
             <p className="text-xs text-gray-400">Data-driven testing (`@pytest.mark.parametrize`) and API mocking (`unittest.mock`)</p>
           </div>
         </div>
