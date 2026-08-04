@@ -69,21 +69,57 @@ export default function ModelsDeepseek() {
         </div>
       </section>
 
-      <section id="training" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
-        <div className="space-y-4">
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (GRPO & RL)</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              DeepSeek-R1 pioneered a breakthrough in AI training by demonstrating that models can develop advanced reasoning capabilities almost entirely through <strong>Large-Scale Reinforcement Learning (RL)</strong>, without relying heavily on massive Supervised Fine-Tuning (SFT) datasets. They use a novel algorithm called <strong>GRPO (Group Relative Policy Optimization)</strong>, which eliminates the need for a separate critic model (saving immense compute). The model is rewarded for producing accurate answers and proper formatting (using internal <code>&lt;thought&gt;</code> tags) across thousands of math and coding problems.
-            </p>
+      <section id="training" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">How DeepSeek Is Trained</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          DeepSeek's V-series follows the familiar pretrain → SFT → RLHF/DPO recipe, running on an ultra-sparse
+          Mixture-of-Experts architecture that activates only a fraction of its ~671B total parameters per token — a
+          big part of how it trains and serves so cheaply. The <strong className="text-white">R-series (R1)</strong> is where it
+          breaks from the standard playbook entirely, and it's the most influential open training recipe of the last
+          two years: it showed reasoning ability can emerge from reinforcement learning
+          <em className="text-gray-200"> without</em> a supervised fine-tuning step first.
+        </p>
+
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 mb-6">
+          <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 text-center">R1's Training Path</h3>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap justify-center text-xs font-mono">
+              <span className="px-3 py-2 bg-black/40 border border-gray-700 rounded-lg text-gray-300">Base Model</span>
+              <span className="text-rose-400">✕ skip SFT</span>
+              <span className="text-gray-500">→ large-scale RL (GRPO) →</span>
+            </div>
+            <div className="px-4 py-2 bg-cyan-900/20 border border-cyan-500/40 rounded-lg text-cyan-300 text-xs font-mono">
+              Reward = "Is the final answer verifiably correct?" (math, code) + format checks
+            </div>
+            <div className="text-gray-500">↓</div>
+            <div className="px-4 py-2 bg-amber-900/20 border border-amber-500/40 rounded-lg text-amber-300 text-sm font-bold">
+              DeepSeek-R1-Zero — strong reasoning, but messy/mixed-language output
+            </div>
+            <div className="text-gray-500">↓ add a small "cold-start" SFT dataset + further RL rounds ↓</div>
+            <div className="px-4 py-2 bg-emerald-900/20 border border-emerald-500/40 rounded-lg text-emerald-300 text-sm font-bold">
+              DeepSeek-R1 — strong reasoning, readable, aligned
+            </div>
+            <div className="text-gray-500">↓ distill reasoning traces into smaller dense models (Llama/Qwen architectures) ↓</div>
+            <div className="px-4 py-2 bg-purple-900/20 border border-purple-500/40 rounded-lg text-purple-300 text-sm font-bold">
+              Distilled 7B–70B models — most of R1's reasoning gains, tiny fraction of the size
+            </div>
           </div>
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              <strong>Extreme Cost-Efficiency and Open Reasoning:</strong> DeepSeek shocked the industry by training a frontier-level model for just a few million dollars. Their ultra-sparse Mixture-of-Experts architecture activates only ~37B parameters out of 671B per token. Furthermore, unlike OpenAI's o1, DeepSeek open-sourced both the R1 weights and smaller distilled models (running on Llama and Qwen architectures), democratizing access to high-end chain-of-thought reasoning.
-            </p>
-          </div>
+        </div>
+
+        <div className="bg-cyan-900/10 border border-cyan-500/20 rounded-xl p-6">
+          <h3 className="text-cyan-400 font-semibold mb-3">🔑 The Key Differentiator: RL Before SFT, With a Verifiable Reward</h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Every other pipeline on this site trains a reward model from human preference rankings — an inherently
+            fuzzy, subjective signal. R1-Zero instead uses <strong className="text-gray-100">automatically verifiable rewards</strong>: for
+            a math problem, did the model's final answer match the known correct one? For code, did it pass the tests?
+            No human rater or learned reward model is needed for this signal — it's checked programmatically. Trained
+            purely with GRPO (Group Relative Policy Optimization, a lighter-weight alternative to PPO that compares a
+            group of sampled responses against each other instead of needing a separate value network — saving
+            substantial compute), the model spontaneously learned to generate long chains of reasoning before
+            answering, without ever being shown a single human-written example of "how to think." DeepSeek then
+            open-sourced both the full R1 weights and the smaller distilled models, unlike closed reasoning models such
+            as OpenAI's o-series.
+          </p>
         </div>
       </section>
 

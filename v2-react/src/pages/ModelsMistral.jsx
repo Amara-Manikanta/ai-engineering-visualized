@@ -69,21 +69,45 @@ export default function ModelsMistral() {
         </div>
       </section>
 
-      <section id="training" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
-        <div className="space-y-4">
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Lean Training & Data Quality)</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Mistral AI is famous for its "lean training" philosophy. Rather than simply brute-forcing model size, they focus obsessively on <strong>curating ultra-high-quality training datasets</strong>. This allows them to train much smaller models (like the original 7B) that outperform models 5x their size. They also heavily utilize custom architectural tricks during training, such as Sliding Window Attention, to allow the model to handle larger context windows without memory exploding.
-            </p>
+      <section id="training" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">How Mistral Is Trained</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          Mistral pairs a "lean training" philosophy — obsessively curated, high-quality data plus architectural
+          tricks like Sliding Window Attention, letting smaller models like the original 7B outperform models several
+          times their size — with <strong className="text-white">Direct Preference Optimization (DPO)</strong> for alignment, the
+          same lightweight method Qwen's later releases adopted and one Mistral's own team helped popularize as an
+          efficient alternative to full RLHF.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+          <div className="bg-rose-900/10 border border-rose-500/20 rounded-xl p-5">
+            <h3 className="text-rose-400 font-semibold mb-3 text-sm">🐢 Classic RLHF (3 moving parts)</h3>
+            <div className="space-y-2 text-xs font-mono">
+              <div className="px-3 py-2 bg-black/30 border border-gray-700 rounded text-gray-300">1. Train a reward model on human rankings</div>
+              <div className="px-3 py-2 bg-black/30 border border-gray-700 rounded text-gray-300">2. Run PPO — an RL loop with its own tuning headaches</div>
+              <div className="px-3 py-2 bg-black/30 border border-gray-700 rounded text-gray-300">3. Balance reward vs KL penalty to avoid reward hacking</div>
+            </div>
           </div>
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              <strong>Quality-to-Parameter Ratio and EU Sovereignty:</strong> Mistral's primary differentiator is efficiency. Their open-weight Mixtral models popularized the Mixture-of-Experts (MoE) architecture for the open-source community, proving you can get GPT-3.5/GPT-4 level performance running locally on consumer hardware. Additionally, as a French company, Mistral is the European champion of AI, offering strong data privacy guarantees and EU-hosted endpoints (La Plateforme) that appeal heavily to GDPR-sensitive enterprises.
-            </p>
+          <div className="bg-emerald-900/10 border border-emerald-500/20 rounded-xl p-5">
+            <h3 className="text-emerald-400 font-semibold mb-3 text-sm">⚡ DPO (1 moving part)</h3>
+            <div className="space-y-2 text-xs font-mono">
+              <div className="px-3 py-2 bg-black/30 border border-emerald-500/30 rounded text-emerald-200">1. Take (chosen, rejected) response pairs</div>
+              <div className="px-3 py-2 bg-black/30 border border-emerald-500/30 rounded text-emerald-200">2. Directly optimize one loss that raises chosen, lowers rejected</div>
+              <div className="px-3 py-2 bg-black/30 border border-emerald-500/30 rounded text-emerald-200">3. Done — no reward model, no RL loop</div>
+            </div>
           </div>
+        </div>
+
+        <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6">
+          <h3 className="text-indigo-400 font-semibold mb-3">🔑 The Key Differentiator: Preference Alignment Without the RL Machinery</h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            DPO is mathematically derived to optimize the <em className="text-gray-200">same underlying objective</em> that
+            RLHF's reward-model-plus-PPO pipeline optimizes — it just reformulates it as a single supervised loss on
+            preference pairs, computed directly against the policy. That removes an entire unstable, hyperparameter-sensitive
+            RL loop and the cost of training and hosting a separate reward model, which is a big part of how Mistral
+            keeps its Mixtral (MoE) and dense models lean and fast to iterate on — while, as a French company, also
+            offering EU-hosted endpoints that appeal to GDPR-sensitive enterprises.
+          </p>
         </div>
       </section>
 

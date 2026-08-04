@@ -27,6 +27,7 @@ import MlSupervised from "./pages/MlSupervised";
 import MlUnsupervised from "./pages/MlUnsupervised";
 import MlDeepLearning from "./pages/MlDeepLearning";
 import ModelsIndex from "./pages/ModelsIndex";
+import ModelsClaude from "./pages/ModelsClaude";
 import ModelsGemini from "./pages/ModelsGemini";
 import ModelsGpt from "./pages/ModelsGpt";
 import ModelsLlama from "./pages/ModelsLlama";
@@ -165,6 +166,7 @@ function App() {
         <Route path="/ml/transformers" element={<MlTransformers />} />
 
         <Route path="/models" element={<ModelsIndex />} />
+        <Route path="/models/claude" element={<ModelsClaude />} />
         <Route path="/models/gemini" element={<ModelsGemini />} />
         <Route path="/models/gpt" element={<ModelsGpt />} />
         <Route path="/models/llama" element={<ModelsLlama />} />
