@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
+import AdvancedFlowchart from "../components/AdvancedFlowchart";
+import * as charts from "../data/flowcharts";
 
 export default function RagFundamentals() {
   const toc = [
@@ -64,10 +66,12 @@ export default function RagFundamentals() {
           <p className="text-gray-300 leading-relaxed mb-4">
             A standard RAG pipeline operates in two distinct phases:
           </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+          <ul className="list-disc pl-6 space-y-2 text-gray-300 mb-6">
             <li><strong className="text-white">Phase 1 (Indexing):</strong> Documents are loaded, chunked, converted into vector embeddings, and stored in a vector database.</li>
             <li><strong className="text-white">Phase 2 (Retrieval & Generation):</strong> A user's query is converted to a vector, the DB finds the most semantically similar chunks, and these chunks are injected into the LLM's prompt to answer the query.</li>
           </ul>
+          <p className="text-sm text-gray-400 mb-3">The diagram below shows Phase 2 end to end — the same query → embed → search → generate flow every RAG variant on this site builds on:</p>
+          <AdvancedFlowchart nodes={charts.naiveRag.nodes} edges={charts.naiveRag.edges} currentStep={10} />
         </motion.section>
 
         <motion.section variants={itemVariants}>

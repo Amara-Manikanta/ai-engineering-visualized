@@ -1,7 +1,7 @@
 import GlobalHeader from "../components/GlobalHeader";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Code, Brain, Sparkles, Database, Cpu, Bot, ArrowRight } from "lucide-react";
+import { Code, Brain, Sparkles, Database, Cpu, Bot, ArrowRight, Plug, MessageSquare, Wand2, Layers, Gauge, Cloud, Rocket, BookOpen } from "lucide-react";
 
 export default function Home() {
   const containerVariants = {
@@ -26,6 +26,17 @@ export default function Home() {
     { title: "RAG Architecture", desc: "Retrieval-Augmented Gen", path: "/rag/fundamentals", icon: <Database size={24} className="text-amber-400" />, color: "from-amber-500/20 to-amber-600/5" },
     { title: "LLMs Deep Dive", desc: "Large Language Models", path: "/llms", icon: <Cpu size={24} className="text-rose-400" />, color: "from-rose-500/20 to-rose-600/5" },
     { title: "Agentic AI", desc: "Autonomous AI Agents", path: "/agents", icon: <Bot size={24} className="text-cyan-400" />, color: "from-cyan-500/20 to-cyan-600/5" }
+  ];
+
+  const moreLinks = [
+    { title: "MCP", path: "/mcp", icon: <Plug size={16} /> },
+    { title: "Claude", path: "/claude", icon: <MessageSquare size={16} /> },
+    { title: "Prompt Engineering", path: "/prompting", icon: <Wand2 size={16} /> },
+    { title: "Embeddings", path: "/embeddings", icon: <Layers size={16} /> },
+    { title: "LLM Inference", path: "/llm-inference", icon: <Gauge size={16} /> },
+    { title: "Cloud (Azure & AWS)", path: "/azure", icon: <Cloud size={16} /> },
+    { title: "Projects", path: "/projects", icon: <Rocket size={16} /> },
+    { title: "Resources", path: "/resources", icon: <BookOpen size={16} /> },
   ];
 
   return (
@@ -81,6 +92,23 @@ export default function Home() {
                 </Link>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* Explore More — secondary sections not on the main grid */}
+          <motion.div variants={itemVariants} className="mt-14 pt-10 border-t border-white/10">
+            <p className="text-center text-sm font-semibold text-gray-500 uppercase tracking-wider mb-5">Explore More</p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {moreLinks.map((link, idx) => (
+                <Link
+                  key={idx}
+                  to={link.path}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-sm text-gray-300 hover:text-white transition-colors"
+                >
+                  {link.icon}
+                  {link.title}
+                </Link>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </main>
