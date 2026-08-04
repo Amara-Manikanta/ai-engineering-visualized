@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
-import { Shield, Users, UsersRound, Settings, Key, ShieldCheck, Smartphone, CheckCircle, Crown, Lock, Globe, Server, ArrowRight, Lightbulb, Star } from 'lucide-react';
+import { Shield, Users, UsersRound, Settings, Key, ShieldCheck, Smartphone, CheckCircle, Crown, Lock, Globe, Server, ArrowRight, Lightbulb, Star, Database } from 'lucide-react';
 
 export default function AzureIdentity() {
   const toc = [
