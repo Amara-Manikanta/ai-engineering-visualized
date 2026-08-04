@@ -9,6 +9,9 @@ export default function MlNlp() {
   const [spamStep, setSpamStep] = useState(0);
   const [synStep, setSynStep] = useState(0);
   const [spellStep, setSpellStep] = useState(0);
+  const [inputText, setInputText] = useState(
+    "Artificial Intelligence and Machine Learning are transforming modern technology. AI agents utilize Large Language Models (LLMs) to perform reasoning, while Retrieval-Augmented Generation (RAG) connects LLMs to external vector databases for grounded context. Python is the dominant language for building neural networks, training models, and deploying production AI systems."
+  );
 
   const playLexical = async () => {
     setLexStep(0);
@@ -82,7 +85,8 @@ export default function MlNlp() {
     { label: "Tokenization & TF-IDF", hash: "lexical" },
     { label: "Spam Detection", hash: "spam" },
     { label: "Syntactic Processing", hash: "syntactic" },
-    { label: "Spell Corrector", hash: "spell" }
+    { label: "Spell Corrector", hash: "spell" },
+    { label: "Word Cloud & Frequency", hash: "wordcloud" }
   ];
 
   const Node = ({ children, visible, highlight, danger, faded, className="" }) => (
@@ -271,6 +275,152 @@ export default function MlNlp() {
           <div className="flex gap-3 mt-10">
             <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg transition-colors" onClick={playSpell}>Play Animation</button>
             <button className="px-4 py-2 border border-gray-700 hover:bg-gray-800 text-gray-300 font-medium rounded-lg transition-colors" onClick={() => setSpellStep(0)}>Reset</button>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="guide-section" 
+        id="wordcloud"
+      >
+        <h2 className="text-2xl font-bold mb-4 text-gray-100">Word Cloud & Frequency Analysis</h2>
+        <p className="text-gray-300 mb-6 leading-relaxed">
+          Word clouds visualize the frequency of terms in a document by making the physical size of each word proportional to its occurrence rate. Before plotting, common "stopwords" (such as <em>the</em>, <em>is</em>, <em>and</em>) are filtered out, and symbols are stripped to keep only meaningful vocabulary.
+        </p>
+
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+          {/* Interactive Generator */}
+          <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 flex flex-col gap-5">
+            <h3 className="text-lg font-bold text-white">Interactive Word Cloud</h3>
+            
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Input Text</label>
+              <textarea 
+                className="w-full h-32 bg-[#141414] border border-gray-800 rounded-lg p-3 text-sm text-gray-300 focus:outline-none focus:border-indigo-500 resize-none font-sans"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder="Type or paste some text here..."
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 items-center">
+              <span className="text-xs text-gray-500 font-semibold uppercase tracking-wider mr-2">Presets:</span>
+              <button 
+                className="px-3 py-1 bg-white/5 border border-white/10 hover:bg-white/10 rounded-full text-xs text-gray-300 transition-colors"
+                onClick={() => setInputText("Artificial Intelligence and Machine Learning are transforming modern technology. AI agents utilize Large Language Models (LLMs) to perform reasoning, while Retrieval-Augmented Generation (RAG) connects LLMs to external vector databases for grounded context. Python is the dominant language for building neural networks, training models, and deploying production AI systems.")}
+              >
+                AI & RAG
+              </button>
+              <button 
+                className="px-3 py-1 bg-white/5 border border-white/10 hover:bg-white/10 rounded-full text-xs text-gray-300 transition-colors"
+                onClick={() => setInputText("React is a popular JavaScript library for building user interfaces. Components render dynamic UI layouts, managing state and props reactively. Tailwind CSS provides utility-first styling, and Vite offers fast dev builds and optimized production bundlers. Framer Motion enables smooth micro-animations and physics-based transitions.")}
+              >
+                Frontend Tech
+              </button>
+              <button 
+                className="px-3 py-1 bg-white/5 border border-white/10 hover:bg-white/10 rounded-full text-xs text-gray-300 transition-colors"
+                onClick={() => setInputText("Data science involves parsing structured tables and matrices. NumPy optimizes vectorized mathematics, performing calculations on multi-dimensional array structures. Pandas simplifies data manipulation with robust DataFrames, cleaning datasets for predictive machine learning models in Scikit-Learn.")}
+              >
+                Data Science
+              </button>
+            </div>
+
+            {/* Generated Word Cloud Render */}
+            <div className="bg-[#141414] border border-gray-950 rounded-lg p-6 min-h-[220px] flex flex-wrap items-center justify-center gap-x-4 gap-y-2 overflow-hidden select-none">
+              {(() => {
+                const defaultStopwords = new Set([
+                  "the", "a", "an", "is", "are", "was", "were", "and", "or", "but", "to", "in", 
+                  "on", "at", "for", "with", "of", "by", "that", "this", "these", "those", "i", 
+                  "you", "he", "she", "it", "they", "we", "us", "them", "my", "your", "his", 
+                  "her", "its", "our", "their", "be", "been", "have", "has", "had", "do", "does", 
+                  "did", "will", "would", "can", "could", "should", "as", "from", "about", "into"
+                ]);
+
+                const cleanText = inputText.toLowerCase().replace(/[^\w\s-]/g, "");
+                const words = cleanText.split(/\s+/).filter(w => w.length > 2 && !defaultStopwords.has(w));
+                const counts = {};
+                words.forEach(w => {
+                  counts[w] = (counts[w] || 0) + 1;
+                });
+                
+                const sortedWords = Object.entries(counts)
+                  .sort((a, b) => b[1] - a[1])
+                  .slice(0, 25);
+
+                const maxCount = sortedWords.length > 0 ? sortedWords[0][1] : 1;
+                
+                const cloudWords = sortedWords.map(([word, count]) => {
+                  const ratio = count / maxCount;
+                  const fontSize = 0.95 + ratio * 1.55;
+                  const colors = [
+                    "text-indigo-400", "text-purple-400", "text-pink-400", 
+                    "text-emerald-400", "text-sky-400", "text-amber-400",
+                    "text-rose-400", "text-cyan-400"
+                  ];
+                  const hash = word.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                  const color = colors[hash % colors.length];
+                  return { word, count, fontSize, color };
+                });
+
+                const displayWords = [...cloudWords].sort((a, b) => a.word.localeCompare(b.word));
+
+                if (displayWords.length === 0) {
+                  return <span className="text-xs text-gray-500 italic">No significant words found. Try typing more text.</span>;
+                }
+
+                return displayWords.map(({ word, count, fontSize, color }, idx) => (
+                  <motion.span
+                    key={word}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 300, delay: idx * 0.01 }}
+                    className={`${color} hover:text-white transition-colors cursor-pointer select-none font-bold`}
+                    style={{ fontSize: `${fontSize}rem` }}
+                    title={`Count: ${count}`}
+                  >
+                    {word}
+                  </motion.span>
+                ));
+              })()}
+            </div>
+          </div>
+
+          {/* Python Example Code */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold text-white">Python Implementation</h3>
+              <span className="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded font-mono font-medium">wordcloud</span>
+            </div>
+            
+            <pre className="bg-[#111] border border-gray-800 rounded-xl p-6 font-mono text-sm overflow-x-auto text-gray-300 h-full max-h-[460px] custom-scrollbar">
+              <code>
+                <span className="text-gray-500"># Install dependencies: pip install wordcloud matplotlib</span>{"\n"}
+                <span className="text-pink-400">import</span> matplotlib.pyplot <span className="text-pink-400">as</span> plt{"\n"}
+                <span className="text-pink-400">from</span> wordcloud <span className="text-pink-400">import</span> WordCloud, STOPWORDS{"\n\n"}
+                <span className="text-gray-500"># 1. Define text content</span>{"\n"}
+                text = <span className="text-emerald-400">"""AI engineering is transforming software development. AI agents use tool-calling and RAG to retrieve information, process context, and output structured reasoning."""</span>{"\n\n"}
+                <span className="text-gray-500"># 2. Add custom stop words to filter out</span>{"\n"}
+                stopwords = set(STOPWORDS){"\n"}
+                stopwords.update([<span className="text-emerald-400">"use"</span>, <span className="text-emerald-400">"process"</span>]){"\n\n"}
+                <span className="text-gray-500"># 3. Initialize and generate the Word Cloud</span>{"\n"}
+                wordcloud = WordCloud({"\n"}
+                {"    "}width=<span className="text-amber-400">800</span>,{"\n"}
+                {"    "}height=<span className="text-amber-400">400</span>,{"\n"}
+                {"    "}background_color=<span className="text-emerald-400">'black'</span>,{"\n"}
+                {"    "}stopwords=stopwords,{"\n"}
+                {"    "}colormap=<span className="text-emerald-400">'cool'</span>,{"\n"}
+                {"    "}min_font_size=<span className="text-amber-400">10</span>{"\n"}
+                ).generate(text){"\n\n"}
+                <span className="text-gray-500"># 4. Display the rendering plot using Matplotlib</span>{"\n"}
+                plt.figure(figsize=(<span className="text-amber-400">10, 5</span>)){"\n"}
+                plt.imshow(wordcloud, interpolation=<span className="text-emerald-400">'bilinear'</span>){"\n"}
+                plt.axis(<span className="text-emerald-400">"off"</span>){"\n"}
+                plt.show()
+              </code>
+            </pre>
           </div>
         </div>
       </motion.section>
