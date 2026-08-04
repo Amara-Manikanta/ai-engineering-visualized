@@ -57,36 +57,4 @@ Comprehensive multi-sentence guides and visual diagrams covering:
 
 ---
 
-## 🚀 Local Development (React Version)
-
-To run the modern React application locally:
-
-```bash
-# 1. Navigate to the React app directory
-cd v2-react
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the Vite local development server
-npm run dev
-
-# 4. Build the static production bundle
-npm run build
-```
-
-The production build output will compile into the static assets folder ready for fast hosting.
-
----
-
-## 🛠️ Deployment to GitHub Pages
-
-The repository uses automated deployment to GitHub Pages:
-1. In your GitHub repository, go to **Settings** > **Pages**.
-2. Under **Build and deployment**, set **Source** to "Deploy from a branch".
-3. Choose the **main** branch and set the folder path to `/` (root), then click **Save**.
-4. The deployment pipeline will host the compiled static assets.
-
----
-
 Built with ❤️ by Amara Manikanta Dileep — © 2026 AI Engineering Visualized
