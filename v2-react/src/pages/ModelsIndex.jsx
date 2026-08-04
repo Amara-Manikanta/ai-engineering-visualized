@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
+import ModelBenchmarks from '../components/ModelBenchmarks';
 
 const MODELS = [
   {
@@ -136,14 +137,7 @@ export default function ModelsIndex() {
             </tbody>
           </table>
         </div>
-        
-        <div className="mt-8 border border-white/10 bg-[#111111] p-4 rounded-xl">
-          <h3 className="text-lg font-bold text-white mb-2">Performance Benchmarks</h3>
-          <img src="/model-comparison.png" alt="Model Comparison Chart showing Intelligence, Speed, and Cost per Task" className="w-full rounded-lg mb-3" />
-          <p className="text-xs text-gray-400 text-right">
-            Source & Latest Updates: <a href="https://artificialanalysis.ai" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">artificialanalysis.ai</a>
-          </p>
-        </div>
+        <ModelBenchmarks />
       </section>
 
       <section id="open-vs-closed" className="mb-16 scroll-mt-24">

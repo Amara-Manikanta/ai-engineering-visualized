@@ -89,7 +89,7 @@ const NAV_LINKS = [
       { name: "DeepSeek", path: "/models/deepseek" },
       { name: "Mistral", path: "/models/mistral" },
       { name: "Grok", path: "/models/grok" },
-      { name: "Claude Code Features", path: "/claude" },
+      { name: "Claude Code Features", path: "/models/claude#claude-code" },
     ],
   },
   {

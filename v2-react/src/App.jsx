@@ -70,7 +70,7 @@ import MlTransformers from "./pages/MlTransformers";
 import LlmMoe from "./pages/LlmMoe";
 import LlmLcm from "./pages/LlmLcm";
 import LlmLam from "./pages/LlmLam";
-import ClaudeIndex from "./pages/ClaudeIndex";
+
 import LlmInference from "./pages/LlmInference";
 import ProjectsIndex from "./pages/ProjectsIndex";
 import ResourcesIndex from "./pages/ResourcesIndex";
@@ -182,7 +182,7 @@ function App() {
         <Route path="/prompting" element={<PromptingIndex />} />
         <Route path="/embeddings" element={<EmbeddingsIndex />} />
         
-        <Route path="/claude" element={<ClaudeIndex />} />
+
         <Route path="/llm-inference" element={<LlmInference />} />
         
         <Route path="/azure" element={<AzureIndex />} />
