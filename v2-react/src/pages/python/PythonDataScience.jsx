@@ -8,199 +8,366 @@ import {
 
 export default function PythonDataScience() {
   const toc = [
-    { label: "21. Python for Data Science", hash: "#ds-overview" },
-    { label: "22. NumPy & Matrix Math", hash: "#numpy" },
-    { label: "23. Pandas & DataFrames", hash: "#pandas" },
-    { label: "24. Matplotlib & Seaborn", hash: "#visualization" },
-    { label: "25. Scikit-Learn & ML Pipelines", hash: "#scikit-learn" }
+    { label: "51. Data Science Ecosystem", hash: "#ds-ecosystem" },
+    { label: "52. NumPy ndarray & Reshaping", hash: "#numpy-arrays" },
+    { label: "53. Vectorization & Broadcasting", hash: "#broadcasting" },
+    { label: "54. Cosine Similarity & Norms", hash: "#cosine-sim" },
+    { label: "55. Pandas Series & DataFrames", hash: "#pandas-dataframes" },
+    { label: "56. Pandas Data Cleaning", hash: "#pandas-cleaning" },
+    { label: "57. Pandas groupby & Merging", hash: "#pandas-groupby" },
+    { label: "58. Matplotlib Figures & Plots", hash: "#matplotlib" },
+    { label: "59. Seaborn Heatmaps & Stats", hash: "#seaborn" },
+    { label: "60. Scikit-Learn Preprocessing", hash: "#sklearn-preprocessing" },
+    { label: "61. Scikit-Learn Model Workflow", hash: "#sklearn-workflow" }
   ];
 
   return (
     <GuideLayout
       title="Module 5: Python for Data Science & ML"
-      intro="Master NumPy array vectorization, Pandas DataFrame manipulation, Matplotlib/Seaborn data visualization, and Scikit-Learn Machine Learning pipelines."
+      intro="Granular step-by-step technical guide for NumPy array math, Pandas DataFrames, Matplotlib & Seaborn visualizations, and Scikit-Learn ML workflows."
       toc={toc}
     >
-      {/* 21. DATA SCIENCE OVERVIEW */}
-      <section id="ds-overview" className="mb-16 scroll-mt-24">
+      {/* 51. DS ECOSYSTEM */}
+      <section id="ds-ecosystem" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
             <Sigma size={24} />
           </div>
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">21. Python for Data Science Overview</h2>
-            <p className="text-sm text-gray-400">The scientific computing stack: NumPy, Pandas, SciPy, Matplotlib, Scikit-Learn</p>
+            <h2 className="text-2xl font-black text-white">51. Python Data Science Stack Overview</h2>
+            <p className="text-xs text-gray-400">The core stack: NumPy, Pandas, SciPy, Matplotlib, Seaborn, Scikit-Learn</p>
           </div>
         </div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6"
-        >
-          <h3 className="text-lg font-bold text-blue-300 mb-2">The AI & ML Data Pipeline</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-center my-4 text-xs">
-            <div className="bg-blue-900/20 border border-blue-500/30 p-3 rounded-xl">
-              <span className="font-bold text-blue-300 block mb-1">1. Ingestion</span>
-              <span className="text-[10px] text-gray-400">Pandas, Requests, SQL</span>
-            </div>
-            <div className="bg-cyan-900/20 border border-cyan-500/30 p-3 rounded-xl">
-              <span className="font-bold text-cyan-300 block mb-1">2. Processing</span>
-              <span className="text-[10px] text-gray-400">NumPy, Vectorization</span>
-            </div>
-            <div className="bg-purple-900/20 border border-purple-500/30 p-3 rounded-xl">
-              <span className="font-bold text-purple-300 block mb-1">3. Visualization</span>
-              <span className="text-[10px] text-gray-400">Matplotlib, Seaborn</span>
-            </div>
-            <div className="bg-emerald-900/20 border border-emerald-500/30 p-3 rounded-xl">
-              <span className="font-bold text-emerald-300 block mb-1">4. Modeling</span>
-              <span className="text-[10px] text-gray-400">Scikit-Learn, PyTorch</span>
-            </div>
-          </div>
-        </motion.div>
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Python dominates AI and Data Science because C-compiled backend libraries (NumPy, PyTorch) interface seamlessly with Python's high-level syntax, delivering C-like execution speeds with Python simplicity.
+        </p>
       </section>
 
-      {/* 22. NUMPY */}
-      <section id="numpy" className="mb-16 scroll-mt-24">
+      {/* 52. NUMPY ARRAYS */}
+      <section id="numpy-arrays" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+          <div className="p-2 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
             <Box size={24} />
           </div>
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">22. NumPy & Matrix Math</h2>
-            <p className="text-sm text-gray-400">N-dimensional `ndarray`, vectorization, broadcasting, dot products (`@`)</p>
+            <h2 className="text-2xl font-black text-white">52. NumPy `ndarray` Creation & Reshaping</h2>
+            <p className="text-xs text-gray-400">Contiguous C-memory arrays, dimensions (`ndim`), shapes (`shape`), and `.reshape()`</p>
           </div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> numpy_matrix.py</span>
+            <span className="flex items-center gap-1 text-indigo-400"><FileCode size={12} /> 52_numpy_shape.py</span>
+            <span>Python 3.11</span>
+          </div>
+          <pre className="text-indigo-300 mb-3 whitespace-pre-wrap">{`import numpy as np
+
+arr = np.arange(12)  # 1D array of 0 to 11
+matrix = arr.reshape(3, 4)  # Reshape to 3 rows, 4 columns
+
+print("Matrix Shape:", matrix.shape)
+print("Dimensions:", matrix.ndim)`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>Matrix Shape: (3, 4)<br/>Dimensions: 2</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 53. BROADCASTING */}
+      <section id="broadcasting" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
+            <Box size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">53. Vectorization & Broadcasting Rules</h2>
+            <p className="text-xs text-gray-400">Performing fast element-wise arithmetic without slow Python for-loops</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 53_broadcasting.py</span>
+            <span>Python 3.11</span>
+          </div>
+          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`import numpy as np
+
+matrix = np.array([[10, 20], [30, 40]])
+scalar = 5
+
+# Broadcasting scalar across all elements in C
+result = matrix * scalar
+print(result)`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>{`[[ 50 100]\n [150 200]]`}</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 54. COSINE SIMILARITY */}
+      <section id="cosine-sim" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+            <Sigma size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">54. Cosine Similarity & Vector Norms</h2>
+            <p className="text-xs text-gray-400">Computing vector dot products (`np.dot`, `@`) and Euclidean L2 norms (`linalg.norm`)</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 54_cosine.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import numpy as np
 
-# Vectorized Cosine Similarity
-query_vec = np.array([0.2, 0.8, 0.5])
-doc_vec   = np.array([0.1, 0.9, 0.4])
+vec_a = np.array([1.0, 2.0, 3.0])
+vec_b = np.array([2.0, 3.0, 4.0])
 
-dot_product = np.dot(query_vec, doc_vec)
-norm = np.linalg.norm(query_vec) * np.linalg.norm(doc_vec)
-similarity = dot_product / norm
+dot = vec_a @ vec_b
+norm_a = np.linalg.norm(vec_a)
+norm_b = np.linalg.norm(vec_b)
 
-print(f"Cosine Similarity: {similarity:.4f}")`}</pre>
-          <div className="bg-black/60 p-2 rounded border border-gray-800 text-[11px] text-gray-300">
+sim = dot / (norm_a * norm_b)
+print(f"Cosine Similarity: {sim:.4f}")`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Cosine Similarity: 0.9859</code>
+            <code>Cosine Similarity: 0.9926</code>
           </div>
         </div>
       </section>
 
-      {/* 23. PANDAS */}
-      <section id="pandas" className="mb-16 scroll-mt-24">
+      {/* 55. PANDAS DATAFRAMES */}
+      <section id="pandas-dataframes" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
+          <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <Database size={24} />
           </div>
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">23. Pandas & DataFrames</h2>
-            <p className="text-sm text-gray-400">Data cleaning, `groupby`, filtering, joining, indexing</p>
+            <h2 className="text-2xl font-black text-white">55. Pandas Series & DataFrames</h2>
+            <p className="text-xs text-gray-400">Creation, index alignment, row/column selection with `.loc` and `.iloc`</p>
           </div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> pandas_demo.py</span>
+            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 55_pandas.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
+          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
 
 df = pd.DataFrame({
-    "model": ["GPT-4o", "Claude 3.5", "Gemini 1.5", "GPT-4o"],
-    "latency_ms": [250, 210, 180, 240],
-    "accuracy": [0.92, 0.94, 0.89, 0.93]
-})
+    "name": ["Alice", "Bob", "Charlie"],
+    "score": [88, 92, 95]
+}, index=["id_1", "id_2", "id_3"])
 
-summary = df.groupby("model")["latency_ms"].mean().reset_index()
-print(summary)`}</pre>
-          <div className="bg-black/60 p-2 rounded border border-gray-800 text-[11px] text-gray-300">
+# Selection by label (.loc) vs integer position (.iloc)
+print(df.loc["id_2", "score"])`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>{`        model  latency_ms\n0  Claude 3.5       210.0\n1  GPT-4o           245.0\n2  Gemini 1.5       180.0`}</code>
+            <code>92</code>
           </div>
         </div>
       </section>
 
-      {/* 24. MATPLOTLIB & SEABORN */}
-      <section id="visualization" className="mb-16 scroll-mt-24">
+      {/* 56. PANDAS CLEANING */}
+      <section id="pandas-cleaning" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
+            <Database size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">56. Pandas Data Cleaning</h2>
+            <p className="text-xs text-gray-400">Handling nulls (`isna`, `dropna`, `fillna`), deduplication (`drop_duplicates`)</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 56_cleaning.py</span>
+            <span>Python 3.11</span>
+          </div>
+          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({"score": [90, np.nan, 80]})
+clean_df = df.fillna(df["score"].mean())
+
+print(clean_df)`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>{`   score\n0   90.0\n1   85.0\n2   80.0`}</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 57. PANDAS GROUPBY */}
+      <section id="pandas-groupby" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
+            <Database size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">57. Pandas `groupby()` & Merging</h2>
+            <p className="text-xs text-gray-400">Aggregating grouped data (`mean`, `sum`, `count`) and joining tables (`pd.merge`)</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 57_groupby.py</span>
+            <span>Python 3.11</span>
+          </div>
+          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
+
+df = pd.DataFrame({
+    "cat": ["A", "B", "A", "B"],
+    "val": [10, 20, 30, 40]
+})
+
+res = df.groupby("cat")["val"].sum()
+print(res)`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>{`cat\nA    40\nB    60\nName: val, dtype: int64`}</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 58. MATPLOTLIB */}
+      <section id="matplotlib" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
             <LineChart size={24} />
           </div>
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">24. Matplotlib & Seaborn</h2>
-            <p className="text-sm text-gray-400">Scatter plots, line charts, heatmaps, subplots, visualization styling</p>
+            <h2 className="text-2xl font-black text-white">58. Matplotlib Figures & Plots</h2>
+            <p className="text-xs text-gray-400">Creating figures, line plots, scatter plots, labels, legends, and saving images</p>
           </div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> matplotlib_plot.py</span>
+            <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 58_matplotlib.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`import matplotlib.pyplot as plt
+          <pre className="text-rose-300 mb-3 whitespace-pre-wrap">{`import matplotlib.pyplot as plt
 
-x = [1, 2, 3, 4, 5]
-y = [2, 4, 9, 16, 25]
-
-plt.plot(x, y, marker='o', color='indigo')
-plt.title("Model Training Loss Curve")
+plt.figure(figsize=(6, 3))
+plt.plot([1, 2, 3], [10, 20, 30], label="Accuracy")
 plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.savefig("loss_curve.png")
-print("Saved loss_curve.png successfully.")`}</pre>
-          <div className="bg-black/60 p-2 rounded border border-gray-800 text-[11px] text-gray-300">
+plt.ylabel("Score")
+plt.legend()
+plt.savefig("chart.png")
+print("Chart generated.")`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Saved loss_curve.png successfully.</code>
+            <code>Chart generated.</code>
           </div>
         </div>
       </section>
 
-      {/* 25. SCIKIT-LEARN */}
-      <section id="scikit-learn" className="mb-16 scroll-mt-24">
+      {/* 59. SEABORN */}
+      <section id="seaborn" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
+            <BarChart2 size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">59. Seaborn Statistical Visualizations</h2>
+            <p className="text-xs text-gray-400">High-level statistical graphics, heatmaps (`sns.heatmap`), matrix correlation plots</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 59_seaborn.py</span>
+            <span>Python 3.11</span>
+          </div>
+          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+
+matrix = np.random.rand(4, 4)
+sns.heatmap(matrix, annot=True, cmap="viridis")
+plt.savefig("heatmap.png")
+print("Heatmap saved.")`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>Heatmap saved.</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 60. SCIKIT PREPROCESSING */}
+      <section id="sklearn-preprocessing" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
+            <Cpu size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">60. Scikit-Learn Preprocessing</h2>
+            <p className="text-xs text-gray-400">Scaling features (`StandardScaler`), encoding categorical data (`OneHotEncoder`)</p>
+          </div>
+        </div>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 60_scaler.py</span>
+            <span>Python 3.11</span>
+          </div>
+          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+data = np.array([[1.0, 100.0], [2.0, 200.0]])
+scaler = StandardScaler()
+scaled = scaler.fit_transform(data)
+
+print("Scaled Mean:", scaled.mean(axis=0))`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>Scaled Mean: [0. 0.]</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 61. SCIKIT WORKFLOW */}
+      <section id="sklearn-workflow" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <Cpu size={24} />
           </div>
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">25. Scikit-Learn & ML Pipelines</h2>
-            <p className="text-sm text-gray-400">Preprocessing, `train_test_split`, `fit`/`predict`, evaluation metrics</p>
+            <h2 className="text-2xl font-black text-white">61. Scikit-Learn Model Workflow</h2>
+            <p className="text-xs text-gray-400">Splitting (`train_test_split`), model fitting (`fit`), predicting (`predict`), and evaluation</p>
           </div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> sklearn_pipeline.py</span>
+            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 61_workflow.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`from sklearn.linear_model import LogisticRegression
+          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import numpy as np
 
-# Synthetic Embeddings & Labels
-X = np.random.rand(100, 10)
-y = np.random.randint(0, 2, 100)
+X, y = make_classification(n_samples=100, n_features=4, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = LogisticRegression()
+model.fit(X_train, y_train)
 
-clf = LogisticRegression()
-clf.fit(X_train, y_train)
-
-preds = clf.predict(X_test)
-print(f"Accuracy: {accuracy_score(y_test, preds):.2f}")`}</pre>
-          <div className="bg-black/60 p-2 rounded border border-gray-800 text-[11px] text-gray-300">
+acc = model.score(X_test, y_test)
+print(f"Test Accuracy: {acc * 100:.0f}%")`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Accuracy: 0.55</code>
+            <code>Test Accuracy: 100%</code>
           </div>
         </div>
       </section>
