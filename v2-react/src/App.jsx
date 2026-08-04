@@ -13,6 +13,11 @@ import GenAiIndex from "./pages/GenAiIndex";
 import GenAiFineTuning from "./pages/GenAiFineTuning";
 import GenAiQuantization from "./pages/GenAiQuantization";
 import PythonIndex from "./pages/PythonIndex";
+import PythonFoundations from "./pages/python/PythonFoundations";
+import PythonDataStructures from "./pages/python/PythonDataStructures";
+import PythonAdvanced from "./pages/python/PythonAdvanced";
+import PythonToolingAsync from "./pages/python/PythonToolingAsync";
+import PythonDataScience from "./pages/python/PythonDataScience";
 import AgentsIndex from "./pages/AgentsIndex";
 import AgentsToolCalling from "./pages/AgentsToolCalling";
 import AgentsMemory from "./pages/AgentsMemory";
@@ -140,6 +145,11 @@ function App() {
         <Route path="/genai/quantization" element={<GenAiQuantization />} />
         
         <Route path="/python" element={<PythonIndex />} />
+        <Route path="/python/foundations" element={<PythonFoundations />} />
+        <Route path="/python/data-structures" element={<PythonDataStructures />} />
+        <Route path="/python/advanced" element={<PythonAdvanced />} />
+        <Route path="/python/tooling-async" element={<PythonToolingAsync />} />
+        <Route path="/python/data-science" element={<PythonDataScience />} />
         
         <Route path="/ml" element={<MlIndex />} />
         <Route path="/ml/supervised" element={<MlSupervised />} />

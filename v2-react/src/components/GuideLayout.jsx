@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import GlobalHeader from "./GlobalHeader";
 import { AZURE_LINKS, AWS_LINKS } from "../config/navigation";
+import { PYTHON_LINKS } from "../config/pythonNavigation";
 
 export default function GuideLayout({ title, intro, toc, children }) {
   const [activeHash, setActiveHash] = useState("");
@@ -18,6 +19,9 @@ export default function GuideLayout({ title, intro, toc, children }) {
   } else if (location.pathname.startsWith("/aws")) {
     sidebarLinks = AWS_LINKS;
     sectionTitle = "AWS Pages";
+  } else if (location.pathname.startsWith("/python")) {
+    sidebarLinks = PYTHON_LINKS;
+    sectionTitle = "Python Modules";
   }
 
   return (
