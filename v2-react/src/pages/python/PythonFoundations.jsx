@@ -27,7 +27,7 @@ export default function PythonFoundations() {
   return (
     <GuideLayout
       title="Module 1: Python Foundations"
-      intro="Granular, step-by-step technical guide covering every fundamental concept in Python with dedicated syntax, code examples, and outputs."
+      intro="Comprehensive technical reference explaining every fundamental Python concept with multi-sentence breakdowns, syntax blocks, executable code, and verified terminal outputs."
       toc={toc}
     >
       {/* 1. WHAT IS PYTHON */}
@@ -43,7 +43,7 @@ export default function PythonFoundations() {
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Python is an interpreted, high-level, dynamically typed language created by Guido van Rossum in 1991. It emphasizes code readability, developer productivity, and extensive standard library support ("batteries included").
+          Python is an interpreted, high-level, dynamically typed programming language created by Guido van Rossum in 1991. It emphasizes developer velocity and clean code readability through minimalist syntax and an extensive standard library often referred to as "batteries included". In modern AI engineering, Python acts as the universal glue language that seamlessly interfaces developer APIs with high-performance C/C++ engines and CUDA GPU accelerators.
         </p>
 
         <div className="bg-black/40 p-4 rounded-xl border border-white/5 mb-4 text-xs">
@@ -80,7 +80,7 @@ print("Python Version:", sys.version.split()[0])`}</pre>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Python is not purely interpreted; CPython first compiles `.py` files into intermediate platform-independent bytecode (`.pyc` stored in `__pycache__`). The Python Virtual Machine (PVM) then executes the bytecode instructions.
+          Python source code (`.py`) is not executed directly by CPU hardware; it is first compiled by CPython into platform-independent intermediate bytecode (`.pyc`). This compiled bytecode is cached in the `__pycache__` directory to accelerate startup times on subsequent script runs. The Python Virtual Machine (PVM) then reads this bytecode instruction by instruction, executing the corresponding C library calls that allocate memory and perform computation.
         </p>
 
         <div className="bg-black/40 p-4 rounded-xl border border-white/5 mb-4 text-xs">
@@ -120,7 +120,7 @@ dis.dis(add)`}</pre>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Unlike C-style languages that use `{}` braces, Python uses whitespace indentation to define code blocks. Mixing tabs and spaces results in an `IndentationError` or `TabError`. PEP 8 mandates 4 spaces per indentation level.
+          Unlike languages like C++, Java, or JavaScript that use curly braces `{}` to define code blocks, Python enforces block structure using uniform whitespace indentation. According to official PEP 8 guidelines, developers must use exactly 4 spaces per indentation level rather than mixing tabs and spaces. Mixing tabs and spaces results in an explicit `IndentationError` or `TabError` at compile time, guaranteeing uniform readability across codebases.
         </p>
 
         <div className="bg-black/40 p-4 rounded-xl border border-white/5 mb-4 text-xs">
@@ -162,7 +162,7 @@ check_value(150)`}</pre>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Variables in Python are dynamic references pointing to objects allocated in heap memory. Assigning `b = a` copies the reference (memory address), not the actual data value.
+          Variables in Python do not act as fixed memory containers storing raw values; rather, they serve as dynamic pointer labels that reference underlying objects in heap memory. When assigning `y = x`, both `y` and `x` point to the exact same object in memory until one of the variables is reassigned. You can inspect an object's unique memory address at runtime using Python's built-in `id()` function.
         </p>
 
         <div className="bg-black/40 p-4 rounded-xl border border-white/5 mb-4 text-xs">
@@ -201,7 +201,7 @@ print("Are references identical?", id(x) == id(y))`}</pre>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Python objects are either **immutable** (value cannot be altered in-place: `int`, `float`, `str`, `tuple`, `bytes`) or **mutable** (can be changed in-place: `list`, `dict`, `set`).
+          Every value in Python is an instance of an object class. Data types are strictly divided into **immutable** types (`int`, `float`, `str`, `tuple`, `bytes`) whose values cannot be modified after instantiation, and **mutable** types (`list`, `dict`, `set`) that allow elements to be modified in-place. Attempting to mutate an immutable object creates an entirely new object at a different memory address.
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
@@ -236,6 +236,10 @@ print(type(a), type(b), type(c), type(d), type(e), type(f))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Python provides comprehensive mathematical operators, including standard arithmetic and advanced operations like floor division (`//`) and exponentiation (`**`). Floor division always rounds down the quotient to the nearest integer, whereas modulo (`%`) returns the remainder. Bitwise operators (`&`, `|`, `^`, `~`, `&lt;&lt;`, `&gt;&gt;`) operate directly on individual bits of integers, enabling high-performance binary flags and bitmask calculations.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 06_operators.py</span>
@@ -266,6 +270,10 @@ print("Bitwise AND (a & b):", a & b)`}</pre>
             <p className="text-xs text-gray-400"><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>and</code>, <code>or</code>, <code>not</code> (Short-circuit evaluation)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Comparison operators evaluate relative values and return boolean results (`True` or `False`). Logical operators (`and`, `or`, `not`) perform short-circuit evaluation. This means in an expression like `A and B`, if `A` evaluates to `False`, Python immediately skips evaluating `B`, which prevents unexpected errors like division by zero or null pointer dereferences.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -298,7 +306,7 @@ print("Has Honors:", has_honors)`}</pre>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          `==` checks if two objects have **equal values**, while `is` checks if two variables point to the **exact same memory address**. Use `is` when checking against `None`.
+          The equality operator `==` compares the actual data values contained within two objects, whereas the identity operator `is` checks whether both variables point to the exact same memory address. Utilizing `is` for value comparisons can cause unexpected bugs due to CPython's internal integer caching mechanism. The `in` operator provides convenient membership testing across strings, lists, sets, and dictionary keys.
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
@@ -332,6 +340,10 @@ print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Introduced in Python 3.8, the walrus operator `:=` assigns values to variables directly inside an expression. This feature eliminates code duplication when checking string lengths in conditional headers, reading input streams in `while` loops, or capturing regex match groups. By assigning and testing values simultaneously, runtime performance improves without sacrificing code clarity.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 09_walrus.py</span>
@@ -360,6 +372,10 @@ if (n := len(query.split())) > 2:
             <p className="text-xs text-gray-400">Branching logic and single-line ternary expressions `A if C else B`</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Conditional branching allows programs to make decisions at runtime by executing specific code blocks based on expression truthiness. The `elif` statement chains multiple exclusive conditions sequentially, stopping at the first `True` condition. Python also supports single-line ternary operators (`value_if_true if condition else value_if_false`) for concise conditional variable assignment.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -399,6 +415,10 @@ print(f"Msg: {msg}, Label: {status_label}")`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Python `for` loops iterate over sequence items (lists, tuples, strings, generators) using the internal iterator protocol. Uniquely, Python features a `for...else` construct where the `else` block executes only if the loop finishes iterating naturally without hitting a `break` statement. This pattern provides an elegant way to handle search fallbacks without maintaining manual boolean flag variables.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 11_for_else.py</span>
@@ -430,6 +450,10 @@ else:
             <p className="text-xs text-gray-400">Indefinite iteration control and loop modifier statements</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          A `while` loop continues executing as long as its condition remains `True`, making it ideal for polling services, stream processing, or event loops. The `break` statement immediately terminates the loop, `continue` skips the remainder of the current iteration, and `pass` serves as a syntactical no-op placeholder for unimplemented branches.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -464,6 +488,10 @@ while attempts < 5:
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `enumerate()` built-in function wraps an iterable sequence to yield `(index, item)` tuples during iteration, eliminating manual counter management. The `zip()` function aggregates elements from multiple iterables into paired tuples, stopping automatically when the shortest input sequence is exhausted. Combining `enumerate(zip(...))` offers clean, Pythonic parallel iteration over synchronized collections.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 13_enumerate_zip.py</span>
@@ -493,6 +521,10 @@ for idx, (m, s) in enumerate(zip(models, scores), start=1):
             <p className="text-xs text-gray-400">Pattern matching on data structures and values (Python 3.10+)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Introduced in Python 3.10, structural pattern matching (`match-case`) enables powerful matching over values, sequence shapes, and dictionary keys. Unlike basic `switch` statements in C/Java, `match-case` deconstructs data structures and binds inner variables automatically. This makes it invaluable for parsing complex API payloads, abstract syntax trees, and state machine transitions.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">

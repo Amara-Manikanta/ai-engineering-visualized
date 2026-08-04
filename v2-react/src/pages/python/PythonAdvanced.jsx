@@ -25,7 +25,7 @@ export default function PythonAdvanced() {
   return (
     <GuideLayout
       title="Module 3: OOP & Advanced Python"
-      intro="Granular breakdown of exception handling, Object-Oriented patterns, Pydantic type validation, memory-efficient generators, and custom decorators."
+      intro="Detailed technical reference for exception handling, Object-Oriented design, Pydantic type validation, lazy generators, and custom decorators."
       toc={toc}
     >
       {/* 27. TRY EXCEPT ELSE FINALLY */}
@@ -39,6 +39,10 @@ export default function PythonAdvanced() {
             <p className="text-xs text-gray-400">Graceful error recovery: `else` runs on success; `finally` runs unconditionally</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Exception handling intercepts runtime errors to prevent program crashes. Code that might fail is placed in the `try` block, while `except` blocks catch specific exception types. The `else` block executes only when no exceptions occur, and the `finally` block runs unconditionally regardless of success or failure, making it ideal for freeing system resources like closing database connections or file handles.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -72,6 +76,10 @@ finally:
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Domain-specific exception classes inherit directly from Python's base `Exception` class, enabling clear error categorization across application layers. Exception chaining syntax (`raise CustomError(...) from original_err`) preserves the original cause and stack trace of low-level errors. This technique allows high-level callers to catch clean domain exceptions while maintaining full diagnostic traces for debugging.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 28_custom_exception.py</span>
@@ -103,6 +111,10 @@ except KeyError as err:
             <p className="text-xs text-gray-400">Encapsulation, instance attributes, and method definitions</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Object-Oriented Programming (OOP) bundles data attributes and behavior methods into reusable classes. The `__init__` constructor method initializes instance attributes when an object is instantiated, binding instance variables to `self`. Encapsulating state and behavior within classes promotes modular system design and maintainable software architecture.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -138,6 +150,10 @@ print(bot.execute("Refactor API"))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Inheritance allows child classes to derive methods and attributes from parent classes, encouraging code reusability and polymorphism. The built-in `super()` function delegates calls to parent class methods, ensuring correct initialization order and resolving Python's Method Resolution Order (MRO) algorithm in complex inheritance hierarchies.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_inheritance.py</span>
@@ -172,6 +188,10 @@ print(f"Tool: {st.name}, Key: {st.api_key[:4]}***")`}</pre>
             <p className="text-xs text-gray-400">Factory constructors (`cls`) vs utility functions bound to class namespace</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Standard instance methods receive `self` as their first parameter to access instance state. Methods decorated with `@classmethod` receive the class object (`cls`) as their first parameter, making them ideal for alternative factory constructors (`from_dict`, `from_json`). `@staticmethod` receives neither `self` nor `cls`, serving as an isolated utility function grouped logically inside the class namespace.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -212,6 +232,10 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Special "dunder" (double underscore) methods allow custom user-defined classes to integrate seamlessly with native Python syntax. Overriding `__str__` or `__repr__` customizes string representations, `__len__` dictates `len(obj)` output, `__getitem__` allows bracket indexing (`obj[key]`), and `__call__` enables instances to be invoked like functions (`obj(arg)`).
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 32_dunder.py</span>
@@ -245,6 +269,10 @@ print(step("User Query"))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Type hints annotate function signatures and variable declarations with explicit type specifications. The `typing` module offers generic containers (`List[T]`, `Dict[K, V]`, `Union[A, B]`, `Optional[T]`). Although Python remains dynamically typed at runtime, type annotations improve IDE autocompletion and enable static analysis tools like `mypy` to detect bugs prior to deployment.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 33_type_hints.py</span>
@@ -276,6 +304,10 @@ print(process_payload(["doc1", "doc2", "doc3"], max_items=2))`}</pre>
             <p className="text-xs text-gray-400">Runtime type enforcement, `BaseModel`, `Field`, and JSON schema generation</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Pydantic enforces runtime data validation powered by standard Python type annotations. By defining data models with `BaseModel` and field constraints using `Field()`, Pydantic parses, coerces, and validates untrusted API payloads automatically. If data violates defined schema contracts, Pydantic raises clear, structured validation errors.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -310,6 +342,10 @@ print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          An **iterable** is any object implementing `__iter__()` that produces an iterator. An **iterator** is a stateful stream object implementing `__next__()` that yields elements one at a time, raising `StopIteration` when depleted. Calling `iter(obj)` fetches the iterator, while `next(it)` retrieves subsequent items during iteration.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 35_iterators.py</span>
@@ -338,6 +374,10 @@ print(next(it))`}</pre>
             <p className="text-xs text-gray-400">Lazy evaluation, state preservation, generator expressions `(x for x in list)`</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Generators are specialized functions that suspend execution state and return values lazily using the `yield` keyword. Unlike standard functions that construct complete result lists in RAM before returning, generators produce items one by one on-demand. This memory-efficient architecture allows applications to process multi-gigabyte text datasets or infinite token streams without incurring Out-Of-Memory (OOM) failures.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -368,6 +408,10 @@ for vec in stream_embeddings(3):
             <p className="text-xs text-gray-400">Extending function behavior and preserving metadata with `functools.wraps`</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Decorators are higher-order functions that accept a function as input and return an augmented wrapper function, extending behavior without altering underlying code. Using `@functools.wraps(func)` on inner wrapper functions copies original function names and docstrings, maintaining accurate debugging metadata across error stack traces.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -406,6 +450,10 @@ query_index()`}</pre>
             <p className="text-xs text-gray-400">Memoizing expensive calculations and defining getter/setter properties</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `@functools.lru_cache` decorator memoizes function outputs based on input arguments, skipping expensive recalculations or database queries when called repeatedly with identical parameters. The `@property` decorator transforms class methods into read-only attributes, enabling clean attribute access syntax while keeping internal data validation intact.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
