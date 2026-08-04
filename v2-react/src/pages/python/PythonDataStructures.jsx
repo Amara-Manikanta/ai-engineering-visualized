@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
-  Box, Database, Sliders, Type, Repeat, Hash, Search, ArrowRight
+  Box, Database, Sliders, Type, Repeat, Hash, Search, ArrowRight, MessageSquare
 } from 'lucide-react';
 
 export default function PythonDataStructures() {
@@ -14,18 +14,19 @@ export default function PythonDataStructures() {
     { label: "18. Lambda & Higher-Order Functions", hash: "#lambda-functions" },
     { label: "19. Lists & List Methods", hash: "#lists" },
     { label: "20. Tuples & Tuple Unpacking", hash: "#tuples" },
-    { label: "21. Dictionaries & Dict Methods", hash: "#dictionaries" },
-    { label: "22. Sets & Set Operations", hash: "#sets" },
-    { label: "23. collections Module", hash: "#collections-module" },
-    { label: "24. Strings & Slicing", hash: "#strings-slicing" },
-    { label: "25. Regular Expressions (re)", hash: "#regex" },
-    { label: "26. List & Dict Comprehensions", hash: "#comprehensions" }
+    { label: "21. Dictionaries & LLM Message Objects", hash: "#dictionaries" },
+    { label: "22. Nested Data Structures & LLM Payloads", hash: "#nested-structures" },
+    { label: "23. Sets & Set Operations", hash: "#sets" },
+    { label: "24. collections Module", hash: "#collections-module" },
+    { label: "25. Strings & Prompt Engineering", hash: "#strings-slicing" },
+    { label: "26. Regular Expressions (re)", hash: "#regex" },
+    { label: "27. List & Dict Comprehensions", hash: "#comprehensions" }
   ];
 
   return (
     <GuideLayout
       title="Module 2: Data Structures & Core Logic"
-      intro="Detailed technical guide for functions, scope resolution, built-in containers (lists, tuples, dicts, sets), string manipulation, regex, and comprehensions."
+      intro="Detailed technical guide for functions, scope resolution, built-in containers (lists, tuples, dicts, sets), LLM payload dictionaries, string operations for prompt engineering, regex, and comprehensions."
       toc={toc}
     >
       {/* 15. FUNCTIONS & DEFAULT PARAMS */}
@@ -244,7 +245,7 @@ print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</pre>
             <Database size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">21. Dictionaries & Dict Methods</h2>
+            <h2 className="text-2xl font-black text-white">21. Dictionaries & LLM Message Objects</h2>
             <p className="text-xs text-gray-400">Hash maps, $O(1)$ lookups, `get()`, `setdefault()`, `update()`, views</p>
           </div>
         </div>
@@ -273,14 +274,51 @@ print("Temperature:", temp)`}</pre>
         </div>
       </section>
 
-      {/* 22. SETS */}
+      {/* 22. NESTED STRUCTURES & LLM PAYLOADS */}
+      <section id="nested-structures" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+            <MessageSquare size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">22. Nested Data Structures & LLM Message Objects</h2>
+            <p className="text-xs text-gray-400">Why for AI engineering dictionaries are essential (`role`, `content`, `metadata`, `tool_calls`)</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          <strong>Why is this critical for AI Engineering?</strong> Because Large Language Model (LLM) APIs like OpenAI, Anthropic, and LangChain communicate exclusively using structured message dictionaries. Key fields like <code>role</code> (system, user, assistant), <code>content</code> (prompt or response text), <code>metadata</code>, and <code>tool_calls</code> rely heavily on nested dictionary and list manipulation.
+        </p>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-indigo-400"><FileCode size={12} /> 22_llm_message.py</span>
+            <span>LLM API Payload Example</span>
+          </div>
+          <pre className="text-indigo-300 mb-3 whitespace-pre-wrap">{`message = {
+    "role": "user",
+    "content": "Explain RAG",
+    "metadata": {"source": "web"},
+    "tool_calls": []
+}
+
+print(f"Role: {message['role']}")
+print(f"Prompt: {message['content']}")`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>Role: user<br/>Prompt: Explain RAG</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 23. SETS */}
       <section id="sets" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
             <Hash size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">22. Sets & Set Operations</h2>
+            <h2 className="text-2xl font-black text-white">23. Sets & Set Operations</h2>
             <p className="text-xs text-gray-400">Unordered collections of unique elements (`union`, `intersection`, `difference`)</p>
           </div>
         </div>
@@ -291,7 +329,7 @@ print("Temperature:", temp)`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 22_sets.py</span>
+            <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 23_sets.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`set_a = {"python", "rag", "ai"}
@@ -306,14 +344,14 @@ print("Difference (A - B):", set_a - set_b)`}</pre>
         </div>
       </section>
 
-      {/* 23. COLLECTIONS MODULE */}
+      {/* 24. COLLECTIONS MODULE */}
       <section id="collections-module" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
             <Box size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">23. `collections` Module (`Counter`, `defaultdict`, `deque`, `namedtuple`)</h2>
+            <h2 className="text-2xl font-black text-white">24. `collections` Module (`Counter`, `defaultdict`, `deque`, `namedtuple`)</h2>
             <p className="text-xs text-gray-400">High-performance specialized container datatypes</p>
           </div>
         </div>
@@ -324,7 +362,7 @@ print("Difference (A - B):", set_a - set_b)`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 23_collections.py</span>
+            <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 24_collections.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`from collections import defaultdict, deque
@@ -346,51 +384,53 @@ print(list(queue))`}</pre>
         </div>
       </section>
 
-      {/* 24. STRINGS & SLICING */}
+      {/* 25. STRINGS & PROMPT ENGINEERING */}
       <section id="strings-slicing" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
             <Type size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">24. Strings & Slicing `[start:stop:step]`</h2>
-            <p className="text-xs text-gray-400">String immutability, `f-strings`, slicing, `split()`, `join()`, `strip()`</p>
+            <h2 className="text-2xl font-black text-white">25. Strings & Prompt Engineering Techniques</h2>
+            <p className="text-xs text-gray-400">Indexing, Slicing, `f-strings`, `split`, `join`, `replace`, `strip`, multiline strings (`"""`)</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Strings in Python are immutable sequences of Unicode characters. Slicing syntax `[start:stop:step]` enables extracting substrings or reversing string data (`[::-1]`). String methods like `.strip()`, `.split()`, and `delimiter.join(list)` enable rapid text cleaning. Modern Python utilizes `f-strings` (`f"text {variable}"`) for fast string formatting computed directly during bytecode evaluation.
+          <strong>Very important for Prompt Engineering!</strong> String manipulation is the core driver of LLM prompt formatting. Key operations include string indexing (`text[0]`), slicing (`text[0:10]`), `f-strings` for dynamic prompt injection, `.split()` and `.join()` for chunking, `.replace()` and `.strip()` for whitespace cleaning, and triple-quoted multiline strings (`"""..."""`) for System Prompts.
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 24_strings.py</span>
+            <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 25_prompt_strings.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`text = "Artificial Intelligence"
+          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`user_query = "   What is RAG?   "
+clean_query = user_query.strip()
 
-# Slicing: [start:stop:step]
-print("Reversed:", text[::-1])
-print("First 10 chars:", text[:10])
+# Multiline System Prompt Template with f-string interpolation
+system_prompt = f"""
+System: You are an AI Assistant.
+User Query: {clean_query}
+Instruction: Provide a concise response.
+"""
 
-# Join list of words back into string
-words = ["Vector", "Search"]
-print("Joined:", " -> ".join(words))`}</pre>
+print(system_prompt.strip())`}</pre>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Reversed: ecnegilletnI laicifitrA<br/>First 10 chars: Artificial<br/>Joined: Vector -&gt; Search</code>
+            <code>System: You are an AI Assistant.<br/>User Query: What is RAG?<br/>Instruction: Provide a concise response.</code>
           </div>
         </div>
       </section>
 
-      {/* 25. REGEX */}
+      {/* 26. REGEX */}
       <section id="regex" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
             <Search size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">25. Regular Expressions (`re` Module)</h2>
+            <h2 className="text-2xl font-black text-white">26. Regular Expressions (`re` Module)</h2>
             <p className="text-xs text-gray-400">Pattern matching, extraction with `re.findall`, replacement with `re.sub`</p>
           </div>
         </div>
@@ -401,7 +441,7 @@ print("Joined:", " -> ".join(words))`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 25_regex.py</span>
+            <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 26_regex.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import re
@@ -417,14 +457,14 @@ print("Extracted Date:", date)`}</pre>
         </div>
       </section>
 
-      {/* 26. COMPREHENSIONS */}
+      {/* 27. COMPREHENSIONS */}
       <section id="comprehensions" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <Repeat size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">26. List, Dict & Set Comprehensions</h2>
+            <h2 className="text-2xl font-black text-white">27. List, Dict & Set Comprehensions</h2>
             <p className="text-xs text-gray-400">Processing sequences with conditional filtering `[x for x in list if condition]`</p>
           </div>
         </div>
@@ -435,7 +475,7 @@ print("Extracted Date:", date)`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 26_comprehensions.py</span>
+            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 27_comprehensions.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`scores = {"doc1": 0.82, "doc2": 0.95, "doc3": 0.40}
