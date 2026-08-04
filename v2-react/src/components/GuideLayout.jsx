@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import GlobalHeader from "./GlobalHeader";
+import Footer from "./Footer";
 import { AZURE_LINKS, AWS_LINKS } from "../config/navigation";
 import { PYTHON_LINKS } from "../config/pythonNavigation";
 
@@ -25,10 +26,10 @@ export default function GuideLayout({ title, intro, toc, children }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-300 font-sans">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a] text-gray-300 font-sans">
       <GlobalHeader />
       
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 mt-6 max-w-[1200px] mx-auto px-4 sm:px-5 pb-20">
+      <div className="flex-1 flex flex-col lg:flex-row gap-6 lg:gap-8 mt-6 max-w-[1200px] mx-auto px-4 sm:px-5 pb-20 w-full">
         
         {/* Sidebar TOC — collapsible on mobile, sticky on desktop */}
         <aside className="lg:w-[250px] shrink-0 lg:sticky lg:top-[90px] h-fit bg-[#141414] border border-white/10 rounded-xl overflow-hidden">
@@ -113,6 +114,7 @@ export default function GuideLayout({ title, intro, toc, children }) {
         </main>
 
       </div>
+      <Footer />
     </div>
   );
 }

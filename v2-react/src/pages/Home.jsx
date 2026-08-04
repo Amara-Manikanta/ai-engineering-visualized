@@ -1,4 +1,5 @@
 import GlobalHeader from "../components/GlobalHeader";
+import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Code, Brain, Sparkles, Database, Cpu, Bot, ArrowRight, Plug, MessageSquare, Wand2, Layers, Gauge, Cloud, Rocket, BookOpen } from "lucide-react";
@@ -112,6 +113,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </main>
+      <Footer />
     </div>
   );
 }
