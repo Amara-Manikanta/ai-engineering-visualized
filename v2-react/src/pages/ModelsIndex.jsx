@@ -5,7 +5,7 @@ import GuideLayout from '../components/GuideLayout';
 
 const MODELS = [
   {
-    id: 'claude', name: 'Claude', maker: 'Anthropic', path: '/claude', icon: '🧠',
+    id: 'claude', name: 'Claude', maker: 'Anthropic', path: '/models/claude', icon: '🧠',
     color: 'from-orange-500/20 to-orange-600/5', border: 'border-orange-500/30', text: 'text-orange-400',
     access: 'Closed', context: '200K–1M', strength: 'Agentic coding & long-context reasoning',
   },

@@ -69,21 +69,48 @@ export default function ModelsQwen() {
         </div>
       </section>
 
-      <section id="training" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
-        <div className="space-y-4">
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Massive Multilingual Pre-training)</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Alibaba trains the Qwen family on one of the most massive and diverse corpuses available, with an intense focus on <strong>multilingual data and highly specialized domains like mathematics and code</strong>. They use advanced synthetic data pipelines to refine reasoning capabilities before standard fine-tuning. This rigorous data filtering is why Qwen models regularly top the charts on difficult reasoning and coding benchmarks, often outperforming Llama 3 models of similar sizes.
+      <section id="training" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">How Qwen Is Trained</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          Qwen follows pretrain → SFT → preference alignment like the rest of the field, but a few choices give it a
+          distinct personality: an unusually multilingual and math/code-heavy pretraining corpus, and a lighter-weight
+          alignment method for its later releases.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+          <div className="bg-rose-900/10 border border-rose-500/20 rounded-xl p-5">
+            <h3 className="text-rose-400 font-semibold mb-3">🌏 Multilingual + Math/Code-Heavy Pretraining</h3>
+            <p className="text-sm text-gray-300 leading-relaxed mb-3">
+              Where many labs pretrain mostly on English text, Qwen's corpus is built with heavy Chinese representation
+              alongside English and dozens of other languages from the start, plus an intense focus on mathematics and
+              code data, refined with synthetic-data pipelines before fine-tuning. That's why a comparatively small
+              Qwen model — especially the <strong className="text-gray-100">Qwen2.5-Coder</strong> variants — can outperform much
+              larger, English-centric models on cross-lingual, math, and coding benchmarks.
+            </p>
+            <div className="flex flex-wrap gap-1.5 text-xs font-mono">
+              {['🇨🇳 Chinese', '🇺🇸 English', '🌐 +100 languages', '💻 Code', '➗ Math'].map((m) => (
+                <span key={m} className="px-2 py-1 bg-black/30 border border-rose-500/30 rounded text-rose-200">{m}</span>
+              ))}
+            </div>
+          </div>
+          <div className="bg-purple-900/10 border border-purple-500/20 rounded-xl p-5">
+            <h3 className="text-purple-400 font-semibold mb-3">⚡ Direct Preference Optimization (DPO)</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Rather than training a separate reward model and running an unstable PPO reinforcement-learning loop,
+              later Qwen releases align the SFT model directly on (chosen, rejected) response pairs via DPO — a single
+              supervised-style loss that pushes the model toward preferred responses and away from rejected ones,
+              skipping the reward-model-plus-RL machinery entirely.
             </p>
           </div>
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              <strong>Open-Weight Dominance and Coding Specialization:</strong> Qwen's standout differentiator is its sheer dominance in the open-weight leaderboard, specifically with <strong>Qwen2.5-Coder</strong> and its math-focused variants. While many Western models struggle with non-English languages, Qwen offers exceptional native multilingual support out of the box, making it the premier open-source choice for global, multi-language enterprise deployments.
-            </p>
-          </div>
+        </div>
+
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
+          <span className="px-3 py-1.5 bg-black/40 border border-gray-700 rounded-full text-gray-300">SFT Model</span>
+          <span className="text-gray-500">→</span>
+          <span className="px-3 py-1.5 bg-purple-900/20 border border-purple-500/40 rounded-full text-purple-300">(chosen, rejected) pairs</span>
+          <span className="text-gray-500">→ DPO loss →</span>
+          <span className="px-3 py-1.5 bg-emerald-900/20 border border-emerald-500/40 rounded-full text-emerald-300">Aligned Qwen Model</span>
+          <span className="text-gray-600 italic ml-2">(no separate reward model, no PPO loop)</span>
         </div>
       </section>
 

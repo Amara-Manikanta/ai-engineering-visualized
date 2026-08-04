@@ -69,21 +69,52 @@ export default function ModelsLlama() {
         </div>
       </section>
 
-      <section id="training" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
-        <div className="space-y-4">
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Massive Pre-training & Synthetic Data)</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Meta trains the Llama family on massive corpuses (Llama 3 was pre-trained on over 15 Trillion tokens). For alignment, they use <strong>DPO (Direct Preference Optimization)</strong> and PPO. A key part of their strategy is heavy use of <strong>Synthetic Data Generation</strong>: they use their massive 405B flagship model to generate exceptionally high-quality reasoning and coding outputs, which they then use to train and distill intelligence down into the smaller 8B and 70B models, making them punch far above their weight.
-            </p>
+      <section id="training" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">How Llama Is Trained</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          Meta has published Llama's training recipe in detail (the Llama 2 and 3 papers), making it the most openly
+          documented alignment pipeline of any frontier-adjacent model. It follows pretrain → SFT → RLHF, but runs the
+          RLHF stage as a <strong className="text-white">repeated, iterative loop</strong> rather than a single pass.
+        </p>
+
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono mb-4">
+            <span className="px-3 py-1.5 bg-black/40 border border-gray-700 rounded-full text-gray-300">SFT Model</span>
+            <span className="text-gray-500">→ generate responses →</span>
           </div>
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              <strong>The Open Foundation Bedrock:</strong> Llama is the de facto standard of the open-source AI community. Meta's open-weights strategy enables offline, air-gapped inference and custom LoRA (Low-Rank Adaptation) fine-tuning for enterprises that cannot send their proprietary data to OpenAI. If a new AI startup builds an agentic tool or fine-tunes a model, 9 times out of 10, they start with Llama as the base architecture.
-            </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+            <div className="px-4 py-3 bg-indigo-900/20 border border-indigo-500/40 rounded-lg text-center">
+              <div className="text-sm font-bold text-indigo-300">Helpfulness<br/>Reward Model</div>
+            </div>
+            <div className="px-4 py-3 bg-rose-900/20 border border-rose-500/40 rounded-lg text-center">
+              <div className="text-sm font-bold text-rose-300">Safety<br/>Reward Model</div>
+            </div>
           </div>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
+            <span className="text-gray-500">→ rejection sampling + PPO →</span>
+            <span className="px-3 py-1.5 bg-emerald-900/20 border border-emerald-500/40 rounded-full text-emerald-300">Improved Model</span>
+          </div>
+          <motion.div
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 2.5, repeat: Infinity }}
+            className="text-center text-amber-400 text-xs font-bold mt-4"
+          >
+            ↻ repeat for multiple rounds — each round's model generates fresh comparisons for the next round's reward models
+          </motion.div>
+        </div>
+
+        <div className="bg-indigo-900/10 border border-indigo-500/20 rounded-xl p-6">
+          <h3 className="text-indigo-400 font-semibold mb-3">🔑 The Key Differentiator: Two Reward Models, Many Rounds</h3>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            Instead of a single reward model scoring "good vs bad," Llama trains <strong className="text-gray-100">separate reward
+            models for helpfulness and safety</strong>, so the two objectives (be useful vs don't cause harm) don't get
+            blended into one number and silently traded off against each other. Both a rejection-sampling step (generate
+            many candidates, keep the best-scoring one) and PPO are used across <strong className="text-gray-100">several successive
+            rounds</strong> — the model keeps improving, and each improved version generates new comparison data to train an
+            even better reward model for the next round. Meta also layers in large-scale <strong className="text-gray-100">synthetic
+            data generation</strong>, using its largest model to produce high-quality reasoning and coding examples that get
+            distilled down into the smaller 8B/70B checkpoints.
+          </p>
         </div>
       </section>
 

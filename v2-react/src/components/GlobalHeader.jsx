@@ -81,7 +81,7 @@ const NAV_LINKS = [
     name: "🧩 Models",
     path: "/models",
     subLinks: [
-      { name: "Claude", path: "/claude" },
+      { name: "Claude", path: "/models/claude" },
       { name: "GPT", path: "/models/gpt" },
       { name: "Gemini", path: "/models/gemini" },
       { name: "Llama", path: "/models/llama" },
@@ -89,6 +89,7 @@ const NAV_LINKS = [
       { name: "DeepSeek", path: "/models/deepseek" },
       { name: "Mistral", path: "/models/mistral" },
       { name: "Grok", path: "/models/grok" },
+      { name: "Claude Code Features", path: "/claude" },
     ],
   },
   {

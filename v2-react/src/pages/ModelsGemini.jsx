@@ -70,21 +70,48 @@ export default function ModelsGemini() {
         </div>
       </section>
 
-      <section id="training" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
-        <div className="space-y-4">
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Native Multimodality)</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Unlike early multimodal models that stitched together separate vision and text models post-training, Gemini was designed from the ground up to be <strong>natively multimodal</strong>. During pre-training, Gemini is jointly trained across text, images, audio, and video simultaneously. This allows it to understand deeply interleaved modalities—like reading a math problem from a photo and listening to a student's audio recording at the same time—without relying on lossy speech-to-text or image-to-text converters.
-            </p>
+      <section id="training" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">How Gemini Is Trained</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          Gemini follows the same broad shape as every frontier chat model — pretrain, then align with human-guided
+          fine-tuning and reinforcement learning. What sets it apart is <strong className="text-white">when</strong> the multimodal
+          data enters the pipeline.
+        </p>
+
+        <div className="flex flex-col md:flex-row items-stretch gap-3 mb-8">
+          {[
+            { icon: '🎞️', title: 'Joint Multimodal Pretraining', sub: 'Text + image + audio + video, together', color: 'border-blue-500/40 bg-blue-900/10 text-blue-300' },
+            { icon: '🎯', title: 'Instruction Tuning', sub: 'Human demonstrations → chat-ready model', color: 'border-emerald-500/40 bg-emerald-900/10 text-emerald-300' },
+            { icon: '🏆', title: 'RLHF + Tool-Use Tuning', sub: 'Preference optimization + agentic behaviors', color: 'border-amber-500/40 bg-amber-900/10 text-amber-300' },
+          ].map((s, i, arr) => (
+            <React.Fragment key={i}>
+              <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }} className={`flex-1 rounded-xl border p-5 ${s.color.split(' ')[0]} ${s.color.split(' ')[1]}`}>
+                <div className="text-2xl mb-2">{s.icon}</div>
+                <h3 className="font-bold text-gray-100 text-sm">{s.title}</h3>
+                <p className="text-xs text-gray-400 mt-1">{s.sub}</p>
+              </motion.div>
+              {i < arr.length - 1 && <div className="hidden md:flex items-center justify-center text-gray-600 text-xl px-1">→</div>}
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div className="bg-blue-900/10 border border-blue-500/20 rounded-xl p-6">
+          <h3 className="text-blue-400 font-semibold mb-3">🔑 The Key Differentiator: Native, Not Bolted-On</h3>
+          <p className="text-sm text-gray-300 leading-relaxed mb-4">
+            Most earlier multimodal models started as a text-only language model, then had a vision encoder attached
+            afterward to translate images into something the text model could read. Gemini instead trains on
+            interleaved text, image, audio, and video data <em className="text-gray-200">from the very first pretraining step</em> —
+            all modalities share one model and one training objective from the start, rather than vision being a
+            plugin bolted onto a language-only foundation.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
+            {['📝 Text', '🖼️ Images', '🔊 Audio', '🎬 Video'].map((m) => (
+              <span key={m} className="px-3 py-1.5 bg-black/30 border border-blue-500/30 rounded-full text-blue-200">{m}</span>
+            ))}
+            <span className="text-blue-400">→ one joint pretraining objective →</span>
+            <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/50 rounded-full text-blue-200 font-bold">Gemini base model</span>
           </div>
-          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
-            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              <strong>Massive Context and Native Video/Audio:</strong> Gemini's primary differentiator is its <strong>2M+ token context window</strong> (enabled by Ring Attention variations). You can drop an entire 1-hour video or a 1,500-page PDF into Gemini 1.5 Pro and it will parse the raw visual and audio frames directly. It dominates use cases requiring "needle-in-a-haystack" retrieval across massive, unstructured document and media libraries.
-            </p>
-          </div>
+          <p className="text-xs text-gray-500 mt-4 italic">This is why Gemini can reason natively over an hour of video or a live audio stream, instead of first converting it to a text description and losing detail in the process.</p>
         </div>
       </section>
 
