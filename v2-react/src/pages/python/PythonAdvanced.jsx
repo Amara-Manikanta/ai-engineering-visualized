@@ -3,29 +3,30 @@ import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
-  ShieldAlert, Cpu, Sparkles, RefreshCw, Zap, FileText, Settings, ArrowRight
+  ShieldAlert, Cpu, Sparkles, RefreshCw, Zap, FileText, Settings, ArrowRight, Box
 } from 'lucide-react';
 
 export default function PythonAdvanced() {
   const toc = [
-    { label: "27. try-except-else-finally", hash: "#try-except" },
+    { label: "27. Production AI Error Handling", hash: "#try-except" },
     { label: "28. Custom Exceptions & Chaining", hash: "#custom-exceptions" },
     { label: "29. Classes & __init__ Constructor", hash: "#classes-init" },
-    { label: "30. Inheritance & super()", hash: "#inheritance" },
-    { label: "31. @classmethod vs @staticmethod", hash: "#class-static-methods" },
-    { label: "32. Dunder Magic Methods", hash: "#dunder-methods" },
-    { label: "33. Type Hints & typing Module", hash: "#type-hints" },
-    { label: "34. Pydantic Data Validation", hash: "#pydantic-validation" },
-    { label: "35. Iterables & Iterators", hash: "#iterators" },
-    { label: "36. Generators & yield", hash: "#generators" },
-    { label: "37. Function Decorators (@wraps)", hash: "#decorators" },
-    { label: "38. Caching & @property", hash: "#caching-property" }
+    { label: "30. Inheritance vs Composition", hash: "#inheritance-composition" },
+    { label: "31. Python Dataclasses (@dataclass)", hash: "#dataclasses" },
+    { label: "32. @classmethod vs @staticmethod", hash: "#class-static-methods" },
+    { label: "33. Dunder Magic Methods", hash: "#dunder-methods" },
+    { label: "34. Type Hints & typing Module", hash: "#type-hints" },
+    { label: "35. Pydantic Data Validation", hash: "#pydantic-validation" },
+    { label: "36. Iterables & Iterators", hash: "#iterators" },
+    { label: "37. Generators & yield", hash: "#generators" },
+    { label: "38. Function Decorators (@wraps)", hash: "#decorators" },
+    { label: "39. Caching & @property", hash: "#caching-property" }
   ];
 
   return (
     <GuideLayout
       title="Module 3: OOP & Advanced Python"
-      intro="Detailed technical reference for exception handling, Object-Oriented design, Pydantic type validation, lazy generators, and custom decorators."
+      intro="Comprehensive technical guide for production AI error handling, OOP inheritance & composition, dataclasses, Pydantic type validation, lazy generators, and custom decorators."
       toc={toc}
     >
       {/* 27. TRY EXCEPT ELSE FINALLY */}
@@ -35,31 +36,33 @@ export default function PythonAdvanced() {
             <ShieldAlert size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">27. `try-except-else-finally` Exception Blocks</h2>
-            <p className="text-xs text-gray-400">Graceful error recovery: `else` runs on success; `finally` runs unconditionally</p>
+            <h2 className="text-2xl font-black text-white">27. Production AI Error Handling (`try-except-finally`)</h2>
+            <p className="text-xs text-gray-400">Handling API rate limits, vector DB timeouts, and file parsing failures</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Exception handling intercepts runtime errors to prevent program crashes. Code that might fail is placed in the `try` block, while `except` blocks catch specific exception types. The `else` block executes only when no exceptions occur, and the `finally` block runs unconditionally regardless of success or failure, making it ideal for freeing system resources like closing database connections or file handles.
+          <strong>Why is this critical for Production AI Applications?</strong> In real-world AI systems, network calls to LLM APIs (OpenAI, Anthropic), vector database queries (Pinecone, Qdrant), PDF document parsing, and network socket calls can fail due to rate limits, timeouts, or invalid keys. Robust error handling intercepts runtime exceptions cleanly, allowing applications to log errors, trigger fallback models, or retry failed calls gracefully.
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-red-400"><FileCode size={12} /> 27_try_except.py</span>
-            <span>Python 3.11</span>
+            <span className="flex items-center gap-1 text-red-400"><FileCode size={12} /> 27_production_ai_error.py</span>
+            <span>Production AI Pattern</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`try:
-    val = int("42")
-except ValueError as err:
-    print("Conversion failed:", err)
-else:
-    print("Conversion successful:", val)
+          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`def call_llm(prompt: str):
+    # Simulated API Call
+    raise TimeoutError("OpenAI API rate limit exceeded (429)")
+
+try:
+    response = call_llm("Explain RAG")
+except Exception as e:
+    print("LLM call failed:", e)
 finally:
-    print("Cleanup step executed.")`}</pre>
+    print("Log telemetry & cleanup active API sessions.")`}</pre>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Conversion successful: 42<br/>Cleanup step executed.</code>
+            <code>LLM call failed: OpenAI API rate limit exceeded (429)<br/>Log telemetry & cleanup active API sessions.</code>
           </div>
         </div>
       </section>
@@ -138,53 +141,96 @@ print(bot.execute("Refactor API"))`}</pre>
         </div>
       </section>
 
-      {/* 30. INHERITANCE */}
-      <section id="inheritance" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+      {/* 30. INHERITANCE VS COMPOSITION */}
+      <section id="inheritance-composition" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <Layers size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">30. Inheritance & `super()`</h2>
-            <p className="text-xs text-gray-400">Subclassing, method overriding, and parent initializer calls</p>
+            <h2 className="text-2xl font-black text-white">30. OOP Inheritance vs Composition for RAG Pipelines</h2>
+            <p className="text-xs text-gray-400">Subclassing (`is-a`) vs modular composition (`has-a`) in RAG architecture</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Inheritance allows child classes to derive methods and attributes from parent classes, encouraging code reusability and polymorphism. The built-in `super()` function delegates calls to parent class methods, ensuring correct initialization order and resolving Python's Method Resolution Order (MRO) algorithm in complex inheritance hierarchies.
+          In complex AI systems, **Composition ("has-a")** is preferred over heavy Inheritance ("is-a"). A RAG pipeline class composes separate, decoupled component instances—such as a <code>Retriever</code>, a <code>Chunker</code>, and a <code>Generator</code>—allowing you to swap vector databases or LLM providers seamlessly without breaking parent class logic.
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_inheritance.py</span>
-            <span>Python 3.11</span>
+            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_rag_composition.py</span>
+            <span>RAG Composition Pattern</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`class BaseTool:
-    def __init__(self, name: str):
-        self.name = name
+          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`class VectorRetriever:
+    def retrieve(self, query: str):
+        return ["RAG document chunk"]
 
-class SearchTool(BaseTool):
-    def __init__(self, name: str, api_key: str):
-        super().__init__(name)
-        self.api_key = api_key
+class RAGPipeline:
+    def __init__(self, retriever: VectorRetriever):
+        self.retriever = retriever  # Composition: RAGPipeline has a retriever
 
-st = SearchTool("GoogleSearch", "secret_123")
-print(f"Tool: {st.name}, Key: {st.api_key[:4]}***")`}</pre>
+    def query(self, text: str):
+        docs = self.retriever.retrieve(text)
+        return f"Answer generated from {len(docs)} doc(s)."
+
+pipeline = RAGPipeline(VectorRetriever())
+print(pipeline.query("Explain RAG"))`}</pre>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Tool: GoogleSearch, Key: secr***</code>
+            <code>Answer generated from 1 doc(s).</code>
           </div>
         </div>
       </section>
 
-      {/* 31. CLASSMETHOD VS STATICKMETHOD */}
+      {/* 31. DATACLASSES */}
+      <section id="dataclasses" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
+            <Box size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">31. Python Dataclasses (`@dataclass`)</h2>
+            <p className="text-xs text-gray-400">Auto-generating `__init__`, `__repr__`, and `__eq__` for clean data containers (Python 3.7+)</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Introduced in Python 3.7, the `@dataclass` decorator automatically generates boilerplate dunder methods like `__init__()`, `__repr__()`, and `__eq__()` based on type annotations. Dataclasses eliminate repetitive initializer code, making them the ideal choice for structured data models like document chunks, embedding vectors, and LLM response objects.
+        </p>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 31_dataclass_rag.py</span>
+            <span>Python 3.7+</span>
+          </div>
+          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`from dataclasses import dataclass, field
+from typing import List
+
+@dataclass
+class DocumentChunk:
+    doc_id: str
+    content: str
+    embedding: List[float] = field(default_factory=list)
+    score: float = 0.0
+
+chunk = DocumentChunk(doc_id="chunk_01", content="RAG Architecture", score=0.95)
+print(chunk)`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+            <code>DocumentChunk(doc_id='chunk_01', content='RAG Architecture', embedding=[], score=0.95)</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 32. CLASSMETHOD VS STATICKMETHOD */}
       <section id="class-static-methods" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
             <Settings size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">31. `@classmethod` vs `@staticmethod`</h2>
+            <h2 className="text-2xl font-black text-white">32. `@classmethod` vs `@staticmethod`</h2>
             <p className="text-xs text-gray-400">Factory constructors (`cls`) vs utility functions bound to class namespace</p>
           </div>
         </div>
@@ -195,7 +241,7 @@ print(f"Tool: {st.name}, Key: {st.api_key[:4]}***")`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 31_class_static.py</span>
+            <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 32_class_static.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`class ModelConfig:
@@ -220,14 +266,14 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</pre>
         </div>
       </section>
 
-      {/* 32. DUNDER METHODS */}
+      {/* 33. DUNDER METHODS */}
       <section id="dunder-methods" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
             <Sparkles size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">32. Dunder Magic Methods</h2>
+            <h2 className="text-2xl font-black text-white">33. Dunder Magic Methods</h2>
             <p className="text-xs text-gray-400">`__str__`, `__repr__`, `__len__`, `__getitem__`, `__call__`, `__or__`</p>
           </div>
         </div>
@@ -238,7 +284,7 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 32_dunder.py</span>
+            <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 33_dunder.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-rose-300 mb-3 whitespace-pre-wrap">{`class PipelineStep:
@@ -257,14 +303,14 @@ print(step("User Query"))`}</pre>
         </div>
       </section>
 
-      {/* 33. TYPE HINTS */}
+      {/* 34. TYPE HINTS */}
       <section id="type-hints" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
             <FileText size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">33. Type Hints & `typing` Module</h2>
+            <h2 className="text-2xl font-black text-white">34. Type Hints & `typing` Module</h2>
             <p className="text-xs text-gray-400">Static annotations, `Union`, `Optional`, `Callable`, `List`, `Dict`</p>
           </div>
         </div>
@@ -275,7 +321,7 @@ print(step("User Query"))`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 33_type_hints.py</span>
+            <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 34_type_hints.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`from typing import Union, Optional, List
@@ -293,14 +339,14 @@ print(process_payload(["doc1", "doc2", "doc3"], max_items=2))`}</pre>
         </div>
       </section>
 
-      {/* 34. PYDANTIC */}
+      {/* 35. PYDANTIC */}
       <section id="pydantic-validation" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
             <CheckCircle2 size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">34. Pydantic Data Validation</h2>
+            <h2 className="text-2xl font-black text-white">35. Pydantic Data Validation</h2>
             <p className="text-xs text-gray-400">Runtime type enforcement, `BaseModel`, `Field`, and JSON schema generation</p>
           </div>
         </div>
@@ -311,7 +357,7 @@ print(process_payload(["doc1", "doc2", "doc3"], max_items=2))`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 34_pydantic.py</span>
+            <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 35_pydantic.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`from pydantic import BaseModel, Field
@@ -330,14 +376,14 @@ print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</pre>
         </div>
       </section>
 
-      {/* 35. ITERATORS */}
+      {/* 36. ITERATORS */}
       <section id="iterators" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <RefreshCw size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">35. Iterables & Iterators</h2>
+            <h2 className="text-2xl font-black text-white">36. Iterables & Iterators</h2>
             <p className="text-xs text-gray-400">`__iter__` and `__next__` methods, `iter()`, `next()`, `StopIteration`</p>
           </div>
         </div>
@@ -348,7 +394,7 @@ print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 35_iterators.py</span>
+            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 36_iterators.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`data = ["chunk1", "chunk2"]
@@ -363,14 +409,14 @@ print(next(it))`}</pre>
         </div>
       </section>
 
-      {/* 36. GENERATORS */}
+      {/* 37. GENERATORS */}
       <section id="generators" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
             <Zap size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">36. Generators & `yield`</h2>
+            <h2 className="text-2xl font-black text-white">37. Generators & `yield`</h2>
             <p className="text-xs text-gray-400">Lazy evaluation, state preservation, generator expressions `(x for x in list)`</p>
           </div>
         </div>
@@ -381,7 +427,7 @@ print(next(it))`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 36_generators.py</span>
+            <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 37_generators.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`def stream_embeddings(n: int):
@@ -397,14 +443,14 @@ for vec in stream_embeddings(3):
         </div>
       </section>
 
-      {/* 37. DECORATORS */}
+      {/* 38. DECORATORS */}
       <section id="decorators" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
             <Sparkles size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">37. Function Decorators & `@wraps`</h2>
+            <h2 className="text-2xl font-black text-white">38. Function Decorators & `@wraps`</h2>
             <p className="text-xs text-gray-400">Extending function behavior and preserving metadata with `functools.wraps`</p>
           </div>
         </div>
@@ -415,7 +461,7 @@ for vec in stream_embeddings(3):
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 37_decorators.py</span>
+            <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 38_decorators.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`from functools import wraps
@@ -439,14 +485,14 @@ query_index()`}</pre>
         </div>
       </section>
 
-      {/* 38. CACHING AND PROPERTY */}
+      {/* 39. CACHING AND PROPERTY */}
       <section id="caching-property" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
             <Zap size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">38. Caching (`@lru_cache`) & `@property`</h2>
+            <h2 className="text-2xl font-black text-white">39. Caching (`@lru_cache`) & `@property`</h2>
             <p className="text-xs text-gray-400">Memoizing expensive calculations and defining getter/setter properties</p>
           </div>
         </div>
@@ -457,7 +503,7 @@ query_index()`}</pre>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 38_cache_property.py</span>
+            <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 39_cache_property.py</span>
             <span>Python 3.11</span>
           </div>
           <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`from functools import lru_cache
