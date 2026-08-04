@@ -1,204 +1,562 @@
-import React from "react";
-import { motion } from "framer-motion";
-import GuideLayout from "../components/GuideLayout";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { motion } from 'framer-motion';
+import GuideLayout from '../components/GuideLayout';
+import { 
+  Cpu, Layers, Zap, Eye, Code2, Database, Music, 
+  Wrench, Compass, DollarSign, Award, HardDrive, Globe, 
+  ShieldAlert, Table, AlertTriangle, FileCode, Terminal, CheckCircle2, ArrowRight, Sparkles
+} from 'lucide-react';
 
 export default function LlmIndex() {
-  const models = [
-    {
-      id: "llm",
-      tag: "LLM",
-      name: "Large Language Model",
-      desc: <>The foundation of modern AI. Trained on massive text datasets to predict the next token. Powers ChatGPT, Claude, Gemini, and Llama.</>,
-      examples: ["GPT-4", "Claude", "Gemini", "Llama"],
-      color: "from-indigo-500/20 to-indigo-900/20 border-indigo-500/30",
-      tagColor: "bg-indigo-500/20 text-indigo-300",
-      flow: ["📝 Input", "🔤 Tokenization", "🔢 Embedding", "⚙️ Transformer", "💬 Output"],
-      link: "/llms/llm-type" // Adjust link as per router later
-    },
-    {
-      id: "lcm",
-      tag: "LCM",
-      name: "Large Concept Model",
-      desc: <>Meta's concept-level model. Operates on <strong>semantic concepts</strong> rather than tokens. Uses SONAR embeddings and a diffusion process — language-agnostic reasoning.</>,
-      examples: ["Meta LCM", "SONAR"],
-      color: "from-cyan-500/20 to-cyan-900/20 border-cyan-500/30",
-      tagColor: "bg-cyan-500/20 text-cyan-300",
-      flow: ["📝 Input", "✂️ Sentence Segmentation", "🔭 SONAR Embedding", "🌊 Diffusion", "💬 Output"],
-      link: "/llms/lcm-type"
-    },
-    {
-      id: "lam",
-      tag: "LAM",
-      name: "Large Action Model",
-      desc: <>Designed to <strong>take actions</strong> in the world — browse the web, click buttons, run code. Built for agentic tasks, not just conversation. Powers computer-use AI.</>,
-      examples: ["Rabbit R1", "Claude Computer Use"],
-      color: "from-orange-500/20 to-orange-900/20 border-orange-500/30",
-      tagColor: "bg-orange-500/20 text-orange-300",
-      flow: ["📝 Input Processing", "👁️ Perception System", "🎯 Intent Recognition", "📋 Task Breakdown", "📅 Action Planning", "⚡ Feedback Integration"],
-      link: "/llms/lam-type"
-    },
-    {
-      id: "moe",
-      tag: "MoE",
-      name: "Mixture of Experts",
-      desc: <>Uses a <strong>router</strong> to activate only a few specialist sub-networks per token. Massive model capacity with lower compute cost. Used in GPT-4, Mixtral, and Gemini.</>,
-      examples: ["GPT-4", "Mixtral 8x7B", "Gemini"],
-      color: "from-purple-500/20 to-purple-900/20 border-purple-500/30",
-      tagColor: "bg-purple-500/20 text-purple-300",
-      flow: ["📝 Input", "🔀 Router Mechanism", "🧑‍💼 Experts", "🔝 Top-K Selection", "⚖️ Weighted Combination", "💬 Output"],
-      link: "/llms/moe-type"
-    },
-    {
-      id: "vlm",
-      tag: "VLM",
-      name: "Vision Language Model",
-      desc: <>Understands both <strong>images and text</strong> together. Can answer questions about images, generate captions, perform visual reasoning, and analyze charts.</>,
-      examples: ["GPT-4o", "LLaVA", "Gemini Pro Vision"],
-      color: "from-green-500/20 to-green-900/20 border-green-500/30",
-      tagColor: "bg-green-500/20 text-green-300",
-      flow: ["🖼️ Image & 📝 Text", "👁️ Vision & 🔤 Text Encoders", "🔗 Projection Interface", "🧠 Multimodal Processor", "💬 Output"],
-      link: "/llms/vlm-type"
-    },
-    {
-      id: "slm",
-      tag: "SLM",
-      name: "Small Language Model",
-      desc: <>Compact, efficient LLMs that run <strong>on-device</strong> — phones, laptops, edge hardware. Sacrifices some capability for privacy, speed, and offline operation.</>,
-      examples: ["Phi-3", "Gemma 2B", "Llama 3.2 1B"],
-      color: "from-yellow-500/20 to-yellow-900/20 border-yellow-500/30",
-      tagColor: "bg-yellow-500/20 text-yellow-300",
-      flow: ["📝 Input Processing", "📦 Compact Tokenization", "⚡ Efficient Transformer", "📉 Quantization", "📱 Edge Deployment", "💬 Output"],
-      link: "/llms/slm-type"
-    },
-    {
-      id: "mlm",
-      tag: "MLM",
-      name: "Masked Language Model",
-      desc: <>Trained by masking words and predicting them using <strong>both left and right context</strong>. Not for generation — for understanding. Powers NER, classification, and embeddings.</>,
-      examples: ["BERT", "RoBERTa", "DeBERTa"],
-      color: "from-pink-500/20 to-pink-900/20 border-pink-500/30",
-      tagColor: "bg-pink-500/20 text-pink-300",
-      flow: ["📝 Text Input", "🎭 Token Masking", "🔢 Embedding Layer", "⬅️ Context ➡️", "🔄 Bidirectional Attention", "🎯 Feature Representation"]
-    },
-    {
-      id: "sam",
-      tag: "SAM",
-      name: "Segment Anything Model",
-      desc: <>Meta's foundation model for <strong>image segmentation</strong>. Given any prompt (point, box, or text), it can precisely segment any object in any image — zero-shot.</>,
-      examples: ["SAM 2", "Meta AI"],
-      color: "from-red-500/20 to-red-900/20 border-red-500/30",
-      tagColor: "bg-red-500/20 text-red-300",
-      flow: ["💬 Prompt & 🖼️ Image", "🔤 Prompt & 👁️ Image Encoders", "🔗 Image Embedding", "🎭 Mask Decoder", "✂️ Segmentation Output"]
-    }
+  const toc = [
+    { label: "1. What are AI Models?", hash: "#what-are-ai-models" },
+    { label: "2. Foundation vs Fine-Tuned Models", hash: "#foundation-vs-finetuned" },
+    { label: "3. Model Families (OpenAI, Claude, Gemini, Llama, Qwen, DeepSeek, Mistral)", hash: "#model-families" },
+    { label: "4. Closed Models vs Open-Weight Models", hash: "#closed-vs-open" },
+    { label: "5. Dense Models vs MoE Models", hash: "#dense-vs-moe" },
+    { label: "6. Reasoning Models (o1, DeepSeek-R1)", hash: "#reasoning-models" },
+    { label: "7. Multimodal Models (Vision & Audio)", hash: "#multimodal-models" },
+    { label: "8. Coding Models", hash: "#coding-models" },
+    { label: "9. Embedding Models", hash: "#embedding-models" },
+    { label: "10. Audio, Image, Video & Speech Models", hash: "#media-models" },
+    { label: "11. Tool-Use & Agent Models", hash: "#tool-use-agents" },
+    { label: "12. Model Selection Guide", hash: "#selection-guide" },
+    { label: "13. Cost, Latency & Context Window", hash: "#cost-latency-context" },
+    { label: "14. Benchmarks & Evaluation (MMLU, ELO)", hash: "#benchmarks-eval" },
+    { label: "15. Running Models Locally (Ollama, vLLM)", hash: "#running-locally" },
+    { label: "16. Model APIs & Aggregators", hash: "#model-apis" },
+    { label: "17. Safety, Moderation & Guardrails", hash: "#safety-guardrails" },
+    { label: "18. Model Comparison Table", hash: "#comparison-table" },
+    { label: "19. Common Mistakes to Avoid", hash: "#common-mistakes" }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  };
 
   return (
     <GuideLayout
-      title="🧠 8 Specialized AI Model Architectures"
-      intro="Not all AI models are the same. Each architecture is purpose-built for a specific task — from text generation to image segmentation to action planning."
-      toc={[]}
+      title="AI & LLM Models Master Guide"
+      intro="Comprehensive technical reference for AI models — covering architecture families, open vs closed weights, MoE vs dense, reasoning models, local execution, cost optimization, and selection benchmarks."
+      toc={toc}
     >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"
-      >
-        {models.map((model) => (
-          <motion.div
-            key={model.id}
-            variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
-            className={`flex flex-col bg-gradient-to-br ${model.color} border rounded-xl p-6 shadow-lg backdrop-blur-sm`}
-          >
-            {model.link ? (
-              <Link to={model.link} className="flex-1 flex flex-col no-underline text-gray-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className={`px-2 py-1 rounded text-xs font-bold ${model.tagColor}`}>
-                    {model.tag}
-                  </span>
-                  <h3 className="text-xl font-semibold m-0 text-white">{model.name}</h3>
-                </div>
-                
-                <div className="flex flex-col gap-2 mb-6 bg-black/30 rounded-lg p-4 flex-1">
-                  {model.flow.map((step, idx) => (
-                    <React.Fragment key={idx}>
-                      <div className="text-sm font-medium text-center text-gray-200">
-                        {step}
-                      </div>
-                      {idx < model.flow.length - 1 && (
-                        <div className="text-center text-gray-500 text-xs">↓</div>
-                      )}
-                    </React.Fragment>
-                  ))}
-                </div>
+      {/* 1. WHAT ARE AI MODELS */}
+      <section id="what-are-ai-models" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
+            <Cpu size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">1. What are AI Models?</h2>
+            <p className="text-xs text-gray-400">Mathematical neural networks trained to compress patterns and predict probability distributions</p>
+          </div>
+        </div>
 
-                <p className="text-sm text-gray-400 mb-4">{model.desc}</p>
-                
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {model.examples.map((ex, idx) => (
-                    <span key={idx} className="bg-black/40 px-2 py-1 rounded text-xs text-gray-300">
-                      {ex}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            ) : (
-              <div className="flex-1 flex flex-col text-gray-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className={`px-2 py-1 rounded text-xs font-bold ${model.tagColor}`}>
-                    {model.tag}
-                  </span>
-                  <h3 className="text-xl font-semibold m-0 text-white">{model.name}</h3>
-                </div>
-                
-                <div className="flex flex-col gap-2 mb-6 bg-black/30 rounded-lg p-4 flex-1">
-                  {model.flow.map((step, idx) => (
-                    <React.Fragment key={idx}>
-                      <div className="text-sm font-medium text-center text-gray-200">
-                        {step}
-                      </div>
-                      {idx < model.flow.length - 1 && (
-                        <div className="text-center text-gray-500 text-xs">↓</div>
-                      )}
-                    </React.Fragment>
-                  ))}
-                </div>
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          An AI model is a complex mathematical function composed of millions to hundreds of billions of tunable numerical weights and biases arranged in neural network layers. During pre-training on massive multi-terabyte datasets, the model learns to compress human knowledge by predicting missing tokens, image pixels, or audio waveforms. When presented with a user prompt, the model calculates a conditional probability distribution over its vocabulary to generate coherent, contextually accurate output text or multimodal content.
+        </p>
 
-                <p className="text-sm text-gray-400 mb-4">{model.desc}</p>
-                
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {model.examples.map((ex, idx) => (
-                    <span key={idx} className="bg-black/40 px-2 py-1 rounded text-xs text-gray-300">
-                      {ex}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </motion.div>
-        ))}
-      </motion.div>
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> next_token_prediction.py</span>
+            <span>Mathematical Concept</span>
+          </div>
+          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`# Probability P(next_token | context)
+context = "Retrieval Augmented Generation reduces"
+# Model computes logits across 100,000 token vocabulary:
+# P("hallucinations" | context) = 0.84
+# P("speed" | context)          = 0.09
+# P("cost" | context)           = 0.04`}</pre>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
+            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Sample Output:</div>
+            <code>Generated Next Token: "hallucinations" (Probability: 84%)</code>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. FOUNDATION VS FINE-TUNED */}
+      <section id="foundation-vs-finetuned" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+            <Layers size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">2. Foundation Models vs Fine-Tuned Models</h2>
+            <p className="text-xs text-gray-400">Raw base pre-trained checkpoints vs task-aligned post-trained checkpoints (SFT, RLHF, DPO)</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          **Foundation Models (Base Checkpoints)** are trained on raw internet text to perform general text completion, but they often ramble or repeat text instead of answering questions directly. **Fine-Tuned Models (Instruct/Chat Checkpoints)** undergo Post-Training using Supervised Fine-Tuning (SFT), Reinforcement Learning from Human Feedback (RLHF), or Direct Preference Optimization (DPO) to transform raw completion models into helpful, safe, instruction-following conversational assistants.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 text-xs">
+          <div className="bg-black/40 p-4 rounded-xl border border-white/5">
+            <span className="font-bold text-indigo-300 block mb-1">🏗️ Base Foundation Model</span>
+            <span className="text-[11px] text-gray-400 block mb-2">Raw next-token prediction without instruction alignment.</span>
+            <code className="text-gray-300 bg-black/60 p-2 rounded block font-mono text-[10px]">
+              Prompt: "Write a poem about Python"<br/>
+              Output: "Write a poem about C++. Write a poem about Java..."
+            </code>
+          </div>
+          <div className="bg-black/40 p-4 rounded-xl border border-white/5">
+            <span className="font-bold text-emerald-300 block mb-1">⚡ Post-Tuned Instruct Model</span>
+            <span className="text-[11px] text-gray-400 block mb-2">Aligned with SFT, DPO, and RLHF for direct task execution.</span>
+            <code className="text-gray-300 bg-black/60 p-2 rounded block font-mono text-[10px]">
+              Prompt: "Write a poem about Python"<br/>
+              Output: "Indented blocks and readable code, Python leads the AI road..."
+            </code>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. MODEL FAMILIES */}
+      <section id="model-families" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
+            <Globe size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">3. Major Model Families</h2>
+            <p className="text-xs text-gray-400">OpenAI, Anthropic, Google, Meta, Alibaba, DeepSeek, and Mistral ecosystems</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The global AI landscape is driven by seven dominant model families, each with distinct architectural philosophies, context window capabilities, pricing structures, and licensing models:
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-green-400 block">GPT (OpenAI)</span>
+            <span className="text-[10px] text-gray-400">Industry standard proprietary models: GPT-4o, GPT-4o-mini, o1, o3-mini. Excellent API ecosystem & tool calling.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-orange-400 block">Claude (Anthropic)</span>
+            <span className="text-[10px] text-gray-400">Premier coding & reasoning models: Claude 3.5 Sonnet, 3.5 Haiku, 3 Opus. Superior code syntax & computer use.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-blue-400 block">Gemini (Google)</span>
+            <span className="text-[10px] text-gray-400">Massive 2M+ token context windows: Gemini 1.5 Pro, 1.5 Flash, 2.0 Flash. Native multimodal video & audio parsing.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-cyan-400 block">Llama (Meta)</span>
+            <span className="text-[10px] text-gray-400">Open-weight foundation series: Llama 3.3 70B, Llama 3.1 405B, 3.2 Vision. Powers open-source self-hosting.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-purple-400 block">Qwen (Alibaba)</span>
+            <span className="text-[10px] text-gray-400">High-performance open weights: Qwen2.5 72B, Qwen2.5-Coder. Tops open coding & multilingual benchmarks.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-emerald-400 block">DeepSeek</span>
+            <span className="text-[10px] text-gray-400">Ultra-efficient MoE & reasoning models: DeepSeek-V3 (671B), DeepSeek-R1. Open weights with low training costs.</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. CLOSED VS OPEN WEIGHTS */}
+      <section id="closed-vs-open" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+            <HardDrive size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">4. Closed Models vs Open-Weight Models</h2>
+            <p className="text-xs text-gray-400">Hosted API endpoints vs self-hostable downloadable weights (GGUF, Safetensors)</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          **Closed Proprietary Models** (GPT-4o, Claude 3.5 Sonnet) are hosted on managed cloud infrastructure accessed via REST APIs. They offer state-of-the-art accuracy without infrastructure management, but carry data privacy concerns and pay-per-token pricing. **Open-Weight Models** (Llama 3.3, DeepSeek-R1, Qwen2.5) allow downloading full numerical weight matrices (`.safetensors`), enabling 100% offline self-hosting, custom fine-tuning, and zero vendor lock-in.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 text-xs">
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-cyan-300 block mb-1">☁️ Closed Models (APIs)</span>
+            <ul className="list-disc list-inside text-[11px] text-gray-400 space-y-1">
+              <td>Zero GPU hardware required</td>
+              <td>State-of-the-art reasoning benchmarks</td>
+              <td>Pay-per-token API consumption cost</td>
+              <td>Vendor data privacy policies apply</td>
+            </ul>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-emerald-300 block mb-1">💻 Open-Weight Models (Self-Hosted)</span>
+            <ul className="list-disc list-inside text-[11px] text-gray-400 space-y-1">
+              <td>100% data privacy & air-gapped security</td>
+              <td>Custom LoRA / QLoRA fine-tuning flexibility</td>
+              <td>Fixed hardware cost regardless of token volume</td>
+              <td>Requires local GPU RAM (VRAM) or CPU inference</td>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. DENSE VS MOE */}
+      <section id="dense-vs-moe" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <Cpu size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">5. Dense Models vs Mixture of Experts (MoE)</h2>
+            <p className="text-xs text-gray-400">100% parameter activation per token vs sparse router activation</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          In **Dense Models** (e.g., Llama 3 70B), every single parameter in the neural network is activated for every generated token. In **Mixture of Experts (MoE)** models (e.g., Mixtral 8x7B, DeepSeek-V3), a gating router network dynamically selects only a subset of expert sub-networks (e.g., 2 out of 8 experts, or 37B active out of 671B total parameters) for each token. This yields massive model intelligence while executing at high inference speeds with dramatically reduced compute requirements.
+        </p>
+      </section>
+
+      {/* 6. REASONING MODELS */}
+      <section id="reasoning-models" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
+            <Sparkles size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">6. Reasoning Models (Chain-of-Thought)</h2>
+            <p className="text-xs text-gray-400">Test-time compute scaling: OpenAI o1, o3-mini, and DeepSeek-R1</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Reasoning models spend extra "thinking time" (test-time compute) generating invisible internal Chain-of-Thought (CoT) tokens before producing their final response. Trained using Large-Scale Reinforcement Learning (RL), models like OpenAI **o1**, **o3-mini**, and **DeepSeek-R1** self-correct errors, verify mathematical proofs, and evaluate edge cases prior to outputting answers.
+        </p>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> reasoning_execution.py</span>
+            <span>Reasoning Pattern</span>
+          </div>
+          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`# Internal Chain-of-Thought (Invisible Thinking Phase)
+<thought>
+1. Identify mathematical constraints in prompt.
+2. Evaluate potential edge cases (division by zero, negative integers).
+3. Validate proof steps before emitting final answer.
+</thought>
+
+# Final Output Response
+Result: 42 (Verified step-by-step)`}</pre>
+        </div>
+      </section>
+
+      {/* 7. MULTIMODAL MODELS */}
+      <section id="multimodal-models" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
+            <Eye size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">7. Multimodal Models (Vision & Text)</h2>
+            <p className="text-xs text-gray-400">Native processing of text, images, diagrams, documents, and UI screenshots</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Vision Language Models (VLMs) like **GPT-4o**, **Gemini 1.5 Pro**, and **Claude 3.5 Sonnet** process visual inputs directly alongside text. Instead of relying on separate OCR tools, native multimodal models project image patches into the same embedding space as text tokens, allowing them to read complex financial charts, transcribe handwritten notes, parse UI screenshots, and analyze architectural diagrams.
+        </p>
+      </section>
+
+      {/* 8. CODING MODELS */}
+      <section id="coding-models" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <Code2 size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">8. Specialized Coding Models</h2>
+            <p className="text-xs text-gray-400">DeepSeek-Coder, Qwen2.5-Coder, Claude 3.5 Sonnet for code completion and refactoring</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Coding models are specifically fine-tuned on billions of source code repositories, commit histories, and technical documentation. Models like **Claude 3.5 Sonnet**, **DeepSeek-Coder-V2**, and **Qwen2.5-Coder-32B** excel at multi-file codebase refactoring, Fill-In-the-Middle (FIM) code completion, unit test generation, and bug fixing across dozens of programming languages.
+        </p>
+      </section>
+
+      {/* 9. EMBEDDING MODELS */}
+      <section id="embedding-models" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
+            <Database size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">9. Embedding Models</h2>
+            <p className="text-xs text-gray-400">Converting text into dense numerical vectors for semantic vector search (`text-embedding-3`, `BGE-m3`)</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Embedding models convert arbitrary text strings into fixed-length dense numerical vectors (e.g., 1536 floats). Unlike generative models that output text tokens, embedding models output high-dimensional spatial coordinates. Related semantic concepts map closer together in vector space, underpinning semantic search retrieval in RAG architectures.
+        </p>
+      </section>
+
+      {/* 10. MEDIA MODELS */}
+      <section id="media-models" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30">
+            <Music size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">10. Audio, Image, Video & Speech Models</h2>
+            <p className="text-xs text-gray-400">Whisper (ASR), FLUX / Midjourney (Image), Sora / Runway (Video), ElevenLabs (TTS)</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Generative AI extends beyond text to specialized media domains: **Speech-to-Text (ASR)** models like Whisper transcribe audio; **Text-to-Image** models like FLUX.1 and Stable Diffusion generate photorealistic imagery; **Video Generation** models like Sora and Kling construct video sequences; and **Text-to-Speech (TTS)** engines like ElevenLabs clone voice audio with human nuance.
+        </p>
+      </section>
+
+      {/* 11. TOOL USE AND AGENTS */}
+      <section id="tool-use-agents" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <Wrench size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">11. Tool-Use & Agent Models</h2>
+            <p className="text-xs text-gray-400">Structured JSON function calling, ReAct execution loops, and external API invocation</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Agentic models are trained to output structured JSON tool calls instead of plain conversational text when facing complex queries. When given tool definitions (e.g., `web_search`, `execute_sql`), the model pauses generation and emits a structured function call payload, allowing execution engines to run external tools and pass results back into the model's context loop.
+        </p>
+      </section>
+
+      {/* 12. SELECTION GUIDE */}
+      <section id="selection-guide" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
+            <Compass size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">12. Model Selection Guide</h2>
+            <p className="text-xs text-gray-400">Decision matrix balancing latency, accuracy, cost, context window, and data privacy</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Choosing the right model requires matching architectural trade-offs to your specific production requirements. Use this decision matrix:
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="text-amber-300 font-bold block mb-1">🎯 Complex Reasoning / Math</span>
+            <span className="text-gray-400 text-[10px]">Choose: OpenAI o1 / o3-mini or DeepSeek-R1</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="text-amber-300 font-bold block mb-1">💻 Heavy Coding & Refactoring</span>
+            <span className="text-gray-400 text-[10px]">Choose: Claude 3.5 Sonnet or Qwen2.5-Coder-32B</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="text-amber-300 font-bold block mb-1">⚡ Fast / Low-Cost High-Volume</span>
+            <span className="text-gray-400 text-[10px]">Choose: GPT-4o-mini, Gemini 1.5 Flash, or Llama 3.2 3B</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="text-amber-300 font-bold block mb-1">🔒 Air-Gapped Data Privacy</span>
+            <span className="text-gray-400 text-[10px]">Choose: Llama 3.3 70B, Qwen2.5 72B (Self-Hosted)</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 13. COST LATENCY CONTEXT */}
+      <section id="cost-latency-context" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
+            <DollarSign size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">13. Cost, Latency & Context Window</h2>
+            <p className="text-xs text-gray-400">Token pricing, Time-To-First-Token (TTFT), Tokens-Per-Second (TPS), 128k to 2M context sizes</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Production model performance depends on three core metrics: **Context Window** (how much text the model can process, e.g., 128k to 2M tokens), **Latency** (measured as TTFT for initial response and TPS for streaming speed), and **Cost** (input vs output token pricing per 1M tokens). Prompt caching can reduce input token costs by up to 80-90% on long repetitive contexts.
+        </p>
+      </section>
+
+      {/* 14. BENCHMARKS */}
+      <section id="benchmarks-eval" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <Award size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">14. Benchmarks & Evaluation</h2>
+            <p className="text-xs text-gray-400">MMLU, HumanEval, GSM8K, MATH, and LMSYS Chatbot Arena ELO ratings</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          AI capabilities are measured against standardized benchmarks: **MMLU** (general knowledge), **HumanEval** (Python coding accuracy), **GSM8K & MATH** (mathematical problem solving), and **LMSYS Chatbot Arena ELO** (crowdsourced blind A/B preference testing).
+        </p>
+      </section>
+
+      {/* 15. RUNNING LOCALLY */}
+      <section id="running-locally" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+            <HardDrive size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">15. Running Models Locally</h2>
+            <p className="text-xs text-gray-400">Ollama, vLLM, LM Studio, llama.cpp, and GGUF quantization</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Self-hosting models locally eliminates third-party API costs and guarantees 100% data privacy. Tools like **Ollama** and **LM Studio** provide effortless single-command execution on Mac/PC, while high-throughput serving engines like **vLLM** utilize PagedAttention for production server deployments.
+        </p>
+
+        <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
+          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+            <span className="flex items-center gap-1 text-cyan-400"><Terminal size={12} /> Local Terminal Commands</span>
+            <span>Ollama CLI</span>
+          </div>
+          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`# Run Llama 3.3 locally in 1 command
+$ ollama run llama3.3:70b
+
+# Run DeepSeek-R1 reasoning model locally
+$ ollama run deepseek-r1:14b`}</pre>
+        </div>
+      </section>
+
+      {/* 16. MODEL APIS */}
+      <section id="model-apis" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <Globe size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">16. Model APIs & Aggregators</h2>
+            <p className="text-xs text-gray-400">OpenAI SDK, Anthropic SDK, OpenRouter, LiteLLM unified interfaces</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Developers interface with model APIs via official provider SDKs or unified router proxy tools like **LiteLLM** and **OpenRouter**, which allow switching between 100+ underlying models using a single standardized OpenAI-compatible API signature.
+        </p>
+      </section>
+
+      {/* 17. SAFETY & GUARDRAILS */}
+      <section id="safety-guardrails" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30">
+            <ShieldAlert size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">17. Safety, Moderation & Guardrail Models</h2>
+            <p className="text-xs text-gray-400">Llama-Guard, NeMo Guardrails, OpenAI Moderation API, and prompt injection defense</p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Production AI systems employ auxiliary guardrail models (like Meta's **Llama-Guard 3**) to inspect user prompts and model responses for jailbreak attempts, prompt injections, toxic content, and sensitive PII leaks before passing data to main application logic.
+        </p>
+      </section>
+
+      {/* 18. COMPARISON TABLE */}
+      <section id="comparison-table" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-purple-500/20 text-purple-400 border border-purple-500/30">
+            <Table size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">18. Model Comparison Matrix</h2>
+            <p className="text-xs text-gray-400">Comparing top flagship and open-weight models across key engineering parameters</p>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto rounded-xl border border-white/10">
+          <table className="w-full text-left text-xs font-mono">
+            <thead className="bg-black/60 text-purple-300 border-b border-white/10">
+              <tr>
+                <th className="p-3">Model</th>
+                <th className="p-3">Provider</th>
+                <th className="p-3">Open Weights?</th>
+                <th className="p-3">Context Window</th>
+                <th className="p-3">Cost / 1M (In/Out)</th>
+                <th className="p-3">Primary Best Use</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5 text-gray-300">
+              <tr className="hover:bg-white/5">
+                <td className="p-3 font-bold text-white">Claude 3.5 Sonnet</td>
+                <td className="p-3">Anthropic</td>
+                <td className="p-3 text-red-400">No (Closed)</td>
+                <td className="p-3">200k</td>
+                <td className="p-3">$3.00 / $15.00</td>
+                <td className="p-3 text-emerald-400">Coding & Agentic Work</td>
+              </tr>
+              <tr className="hover:bg-white/5">
+                <td className="p-3 font-bold text-white">GPT-4o</td>
+                <td className="p-3">OpenAI</td>
+                <td className="p-3 text-red-400">No (Closed)</td>
+                <td className="p-3">128k</td>
+                <td className="p-3">$2.50 / $10.00</td>
+                <td className="p-3 text-emerald-400">General Intelligence & Vision</td>
+              </tr>
+              <tr className="hover:bg-white/5">
+                <td className="p-3 font-bold text-white">Gemini 1.5 Pro</td>
+                <td className="p-3">Google</td>
+                <td className="p-3 text-red-400">No (Closed)</td>
+                <td className="p-3 text-cyan-300 font-bold">2,000k (2M)</td>
+                <td className="p-3">$1.25 / $5.00</td>
+                <td className="p-3 text-emerald-400">Massive Document / Video RAG</td>
+              </tr>
+              <tr className="hover:bg-white/5">
+                <td className="p-3 font-bold text-white">DeepSeek-R1</td>
+                <td className="p-3">DeepSeek</td>
+                <td className="p-3 text-emerald-400 font-bold">Yes (MIT)</td>
+                <td className="p-3">128k</td>
+                <td className="p-3">$0.55 / $2.19</td>
+                <td className="p-3 text-emerald-400">Reasoning & Math</td>
+              </tr>
+              <tr className="hover:bg-white/5">
+                <td className="p-3 font-bold text-white">Llama 3.3 70B</td>
+                <td className="p-3">Meta</td>
+                <td className="p-3 text-emerald-400 font-bold">Yes (Llama 3)</td>
+                <td className="p-3">128k</td>
+                <td className="p-3">$0.40 / $0.40</td>
+                <td className="p-3 text-emerald-400">Self-Hosted Enterprise RAG</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 19. COMMON MISTAKES */}
+      <section id="common-mistakes" className="mb-16 scroll-mt-24 pb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30">
+            <AlertTriangle size={24} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-white">19. Common Mistakes to Avoid</h2>
+            <p className="text-xs text-gray-400">Avoid these frequent production pitfalls when selecting and deploying models</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div className="bg-black/40 p-4 rounded-xl border border-white/5">
+            <span className="font-bold text-red-400 block mb-1">❌ 1. Defaulting to Oversized Flagship Models</span>
+            <span className="text-gray-300 text-[11px]">Using expensive models like GPT-4o for simple classification or summarization tasks inflates latency and costs. Use smaller models like GPT-4o-mini or Llama 3.2 3B instead.</span>
+          </div>
+          <div className="bg-black/40 p-4 rounded-xl border border-white/5">
+            <span className="font-bold text-red-400 block mb-1">❌ 2. Ignoring Prompt Context Caching</span>
+            <span className="text-gray-300 text-[11px]">Resending massive static system prompts or document context without enabling API prompt caching wastes 80%+ of token costs unnecessarily.</span>
+          </div>
+          <div className="bg-black/40 p-4 rounded-xl border border-white/5">
+            <span className="font-bold text-red-400 block mb-1">❌ 3. Hardcoding Provider-Specific Prompts</span>
+            <span className="text-gray-300 text-[11px]">Tuning prompts tightly to one provider's specific quirk creates severe vendor lock-in. Use standardized system prompts and abstraction layers like LiteLLM.</span>
+          </div>
+          <div className="bg-black/40 p-4 rounded-xl border border-white/5">
+            <span className="font-bold text-red-400 block mb-1">❌ 4. Neglecting Rate Limits & Retries</span>
+            <span className="text-gray-300 text-[11px]">Failing to wrap API calls in exponential backoff retry handlers (like `tenacity`) leads to application crashes when hitting 429 rate limits.</span>
+          </div>
+        </div>
+      </section>
     </GuideLayout>
   );
 }
