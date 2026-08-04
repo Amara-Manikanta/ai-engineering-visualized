@@ -25,7 +25,7 @@ export default function PythonDataStructures() {
   return (
     <GuideLayout
       title="Module 2: Data Structures & Core Logic"
-      intro="Step-by-step deep dive into functions, scope, built-in data structures, string operations, regex, and Pythonic comprehensions."
+      intro="Detailed technical guide for functions, scope resolution, built-in containers (lists, tuples, dicts, sets), string manipulation, regex, and comprehensions."
       toc={toc}
     >
       {/* 15. FUNCTIONS & DEFAULT PARAMS */}
@@ -39,6 +39,10 @@ export default function PythonDataStructures() {
             <p className="text-xs text-gray-400">Defining functions, positional/keyword arguments, mutable default parameter traps</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Functions in Python encapsulate reusable blocks of executable logic. Arguments can be passed positionally or explicitly by keyword name. A notorious Python anti-pattern is using mutable default arguments like `store=[]`, which are evaluated only once when the function is defined; all subsequent calls share the exact same object reference. To avoid state leakage, always default mutable arguments to `None` and initialize them inside the function body.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -72,6 +76,10 @@ print(add_embedding([0.1, 0.2]))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `*args` parameter collects extra positional arguments into an immutable tuple, whereas `**kwargs` captures unexpected keyword arguments into a standard dictionary. This allows functions to accept arbitrary, dynamic call signatures. Using `*args` and `**kwargs` is crucial when designing wrapper decorators, subclass initializers, or middleware API handlers that forward arguments transparently.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 16_args_kwargs.py</span>
@@ -101,6 +109,10 @@ configure_agent("RAGBot", "search", "calculator", temp=0.2, top_p=0.9)`}</pre>
             <p className="text-xs text-gray-400">Local, Enclosing, Global, Built-in scopes and `global`/`nonlocal` keywords</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Python resolves variable names using the strict LEGB lookup sequence: **L**ocal (inside current function), **E**nclosing (outer nested functions), **G**lobal (module level), and **B**uilt-in (predefined keywords like `len`). Variables created inside functions are local by default. To modify a global variable inside a function, declare `global var_name`; to modify a variable in an outer enclosing function, declare `nonlocal var_name`.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -137,6 +149,10 @@ print("Nested result:", outer())`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Lambda expressions create small, anonymous, single-expression functions inline without requiring a full `def` block. They are frequently passed to higher-order functions like `map()` and `filter()`, or used as key extractors in `list.sort()` and `sorted()` calls. Lambda functions return expression results automatically without an explicit `return` statement.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 18_lambda.py</span>
@@ -165,6 +181,10 @@ print("Top Document Score:", docs[0]["score"])`}</pre>
             <p className="text-xs text-gray-400">Mutable dynamic arrays (`append`, `extend`, `pop`, `insert`, `sort`)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Lists are ordered, mutable sequences backed by dynamic arrays of object references in memory. Appending items with `.append()` runs in amortized $O(1)$ constant time, while `.extend()` concatenates another sequence into the list in-place. The `.pop()` method removes and returns an item from any index ($O(1)$ from the end, $O(n)$ from the start), and `.sort()` executes Python's highly optimized Timsort algorithm.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -197,6 +217,10 @@ print("Popped Token:", last_token)`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Tuples are ordered, immutable sequences defined using parentheses `()`. Because their contents cannot be modified post-creation, Python allocates them in compact, fixed memory structures that execute faster and use less overhead than lists. Tuple unpacking allows assigning multiple elements to distinct variables in a single expression, including extended unpacking like `first, *middle, last = sequence`.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 20_tuples.py</span>
@@ -224,6 +248,10 @@ print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</pre>
             <p className="text-xs text-gray-400">Hash maps, $O(1)$ lookups, `get()`, `setdefault()`, `update()`, views</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Dictionaries are key-value hash maps providing $O(1)$ average-time complexity for lookups, insertions, and deletions. Keys must be immutable and hashable (strings, numbers, tuples). Methods like `.get(key, default)` safely retrieve values without throwing `KeyError` exceptions, while `.setdefault()` inserts default values when keys are missing.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -257,6 +285,10 @@ print("Temperature:", temp)`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Sets are unordered collections of unique, hashable elements backed by hash tables. They feature fast $O(1)$ membership testing (`x in my_set`) and built-in mathematical set operations. Common operators include union (`|`), intersection (`&`), difference (`-`), and symmetric difference (`^`). Sets are ideal for deduplicating data streams.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 22_sets.py</span>
@@ -285,6 +317,10 @@ print("Difference (A - B):", set_a - set_b)`}</pre>
             <p className="text-xs text-gray-400">High-performance specialized container datatypes</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The built-in `collections` module provides specialized data structures beyond basic primitives. `Counter` counts element frequencies, `defaultdict` supplies factory functions to handle missing keys automatically, `deque` offers double-ended queues with $O(1)$ appends and pops from both ends, and `namedtuple` creates lightweight tuple classes with accessible field names.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -322,6 +358,10 @@ print(list(queue))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Strings in Python are immutable sequences of Unicode characters. Slicing syntax `[start:stop:step]` enables extracting substrings or reversing string data (`[::-1]`). String methods like `.strip()`, `.split()`, and `delimiter.join(list)` enable rapid text cleaning. Modern Python utilizes `f-strings` (`f"text {variable}"`) for fast string formatting computed directly during bytecode evaluation.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 24_strings.py</span>
@@ -355,6 +395,10 @@ print("Joined:", " -> ".join(words))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `re` module provides regular expression operations for pattern searching, token extraction, and string transformation. `re.search()` scans strings for the first matching pattern, `re.findall()` returns all non-overlapping matches as a list, and `re.sub()` substitutes matching patterns with replacement strings. Raw string literals (`r"pattern"`) should always be used to avoid escaping backslashes.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 25_regex.py</span>
@@ -384,6 +428,10 @@ print("Extracted Date:", date)`}</pre>
             <p className="text-xs text-gray-400">Processing sequences with conditional filtering `[x for x in list if condition]`</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Comprehensions provide a concise, readable syntax for creating new lists, dictionaries, or sets by transforming iterables. Syntax like `[expression for item in iterable if condition]` replaces verbose `for` loop boilerplate. Because comprehensions execute directly at C-level bytecode inside CPython, they build collections significantly faster than manual list appends.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">

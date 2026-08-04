@@ -24,7 +24,7 @@ export default function PythonDataScience() {
   return (
     <GuideLayout
       title="Module 5: Python for Data Science & ML"
-      intro="Granular step-by-step technical guide for NumPy array math, Pandas DataFrames, Matplotlib & Seaborn visualizations, and Scikit-Learn ML workflows."
+      intro="Granular technical reference for NumPy array math, Pandas DataFrames, Matplotlib & Seaborn visualizations, and Scikit-Learn ML workflows."
       toc={toc}
     >
       {/* 51. DS ECOSYSTEM */}
@@ -40,7 +40,7 @@ export default function PythonDataScience() {
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Python dominates AI and Data Science because C-compiled backend libraries (NumPy, PyTorch) interface seamlessly with Python's high-level syntax, delivering C-like execution speeds with Python simplicity.
+          The Python scientific computing stack forms the core foundation for modern AI and Machine Learning engineering. Libraries like NumPy, Pandas, SciPy, Matplotlib, Seaborn, and Scikit-Learn combine Python's simple, expressive syntax with underlying C, C++, and Fortran compiled backends to deliver fast execution speeds on large numerical datasets.
         </p>
       </section>
 
@@ -55,6 +55,10 @@ export default function PythonDataScience() {
             <p className="text-xs text-gray-400">Contiguous C-memory arrays, dimensions (`ndim`), shapes (`shape`), and `.reshape()`</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          NumPy's fundamental data structure is `ndarray`, a multi-dimensional array stored in contiguous C-level memory buffers. Array attributes like `.shape` (dimensions tuple) and `.ndim` (number of axes) define array structure, while `.reshape()` alters dimensions without making expensive data copies in memory.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -87,6 +91,10 @@ print("Dimensions:", matrix.ndim)`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Vectorization replaces slow Python loops with hardware SIMD (Single Instruction Multiple Data) parallel instructions. Broadcasting allows NumPy to perform arithmetic operations on arrays of differing shapes by automatically stretching smaller dimensions across larger ones, provided trailing dimensions match or equal 1.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 53_broadcasting.py</span>
@@ -118,6 +126,10 @@ print(result)`}</pre>
             <p className="text-xs text-gray-400">Computing vector dot products (`np.dot`, `@`) and Euclidean L2 norms (`linalg.norm`)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Cosine similarity measures the orientation angle between two embedding vectors regardless of their magnitude. It is computed by dividing the vector dot product (`vec_a @ vec_b`) by the product of their L2 Euclidean norms (`np.linalg.norm()`). This calculation forms the core metric for semantic search retrieval in vector databases.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -154,6 +166,10 @@ print(f"Cosine Similarity: {sim:.4f}")`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Pandas offers two primary data structures: `Series` (1D labeled arrays) and `DataFrame` (2D tabular datasets with row/column index alignment). The `.loc[]` property retrieves data by explicit label names, whereas `.iloc[]` accesses rows and columns by zero-based integer index positions.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 55_pandas.py</span>
@@ -187,6 +203,10 @@ print(df.loc["id_2", "score"])`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Real-world data requires extensive cleaning prior to model ingestion. Methods like `.isna()` identify null values, `.fillna()` imputes missing data with statistical metrics (mean/median), `.dropna()` drops incomplete records, and `.drop_duplicates()` eliminates redundant rows.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 56_cleaning.py</span>
@@ -217,6 +237,10 @@ print(clean_df)`}</pre>
             <p className="text-xs text-gray-400">Aggregating grouped data (`mean`, `sum`, `count`) and joining tables (`pd.merge`)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `.groupby()` method implements the split-apply-combine pattern, partitioning datasets into groups, applying aggregation metrics (`sum`, `mean`, `count`), and combining results. `pd.merge()` merges separate DataFrames based on matching key columns using database-style inner, outer, left, or right joins.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -251,6 +275,10 @@ print(res)`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Matplotlib is Python's foundational plotting library. Using `plt.figure()` and `plt.subplots()`, developers construct line charts, scatter plots, and histograms, configuring custom titles, axis labels, and color palettes before saving high-resolution figures via `plt.savefig()`.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 58_matplotlib.py</span>
@@ -284,6 +312,10 @@ print("Chart generated.")`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Built on top of Matplotlib, Seaborn provides a high-level interface for rendering attractive statistical graphics. Functions like `sns.heatmap()` visualize correlation matrices and attention maps, while `sns.histplot()` displays statistical distributions with minimal code boilerplate.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 59_seaborn.py</span>
@@ -316,6 +348,10 @@ print("Heatmap saved.")`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Machine learning algorithms perform best when numerical features are scaled to similar ranges. `StandardScaler` standardizes features to zero mean and unit variance ($Z$-score scaling), while `OneHotEncoder` converts categorical text labels into binary indicator vectors suitable for linear models and neural networks.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 60_scaler.py</span>
@@ -347,6 +383,10 @@ print("Scaled Mean:", scaled.mean(axis=0))`}</pre>
             <p className="text-xs text-gray-400">Splitting (`train_test_split`), model fitting (`fit`), predicting (`predict`), and evaluation</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Scikit-Learn standardizes machine learning model development across estimators. The canonical workflow begins with `train_test_split()`, followed by model initialization (`model = LogisticRegression()`), training (`model.fit(X_train, y_train)`), inference (`model.predict(X_test)`), and accuracy metric evaluation.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">

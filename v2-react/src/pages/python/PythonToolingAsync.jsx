@@ -25,7 +25,7 @@ export default function PythonToolingAsync() {
   return (
     <GuideLayout
       title="Module 4: System, Tooling & Async Python"
-      intro="Granular breakdown of modern file I/O, virtual environments, API integration, JSON/YAML parsing, AsyncIO concurrency, and Pytest."
+      intro="Granular technical reference for file paths, virtual environments, API integration, JSON/YAML parsing, AsyncIO concurrency, and Pytest."
       toc={toc}
     >
       {/* 39. PATHLIB */}
@@ -39,6 +39,10 @@ export default function PythonToolingAsync() {
             <p className="text-xs text-gray-400">Object-oriented path manipulation (`/` operator, `mkdir`, `exists`, `glob`)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `pathlib` module provides an object-oriented interface for manipulating filesystem paths across operating systems. Overloaded `/` operators combine path segments cleanly regardless of OS-specific slash conventions. Methods like `.mkdir()`, `.exists()`, `.read_text()`, `.write_text()`, and `.glob()` handle file operations intuitively without legacy `os.path` string manipulation.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -73,6 +77,10 @@ print("Path Exists:", file_path.exists())`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          File operations use `open(filename, mode)` to manage stream pointers across read (`'r'`), write (`'w'`), append (`'a'`), and binary (`'b'`) modes. Wrapping file operations inside `with open(...) as f:` context managers guarantees automatic resource cleanup and file handle closure even if runtime exceptions occur during reading or writing.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 40_file_io.py</span>
@@ -106,6 +114,10 @@ print("Line Count:", len(lines))`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          A Python module is a single `.py` file containing functions, classes, and executable statements. The `import` statement resolves modules using paths listed in `sys.path`, compiling them to bytecode on first load. Alias imports (`import math as m`) keep call syntax concise, while selective imports (`from module import symbol`) import specific definitions into the local namespace.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 41_imports.py</span>
@@ -137,6 +149,10 @@ print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          A package is a directory containing multiple modules alongside an `__init__.py` file, which marks the folder as an importable package namespace. The `if __name__ == "__main__":` guard block ensures execution logic runs only when the script is invoked directly from the terminal, preventing main scripts from executing automatically when imported into external modules.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 42_main_guard.py</span>
@@ -166,6 +182,10 @@ if __name__ == "__main__":
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Virtual environments isolate project-specific dependencies to prevent package version conflicts across global Python installations. Standard tools like `venv` create isolated environment folders, while modern tools like `poetry` and ultra-fast Rust-based `uv` resolve dependency lockfiles and install binary packages in seconds.
+        </p>
+
         <div className="bg-black/40 p-4 rounded-xl border border-white/5 font-mono text-xs space-y-2 text-amber-300">
           <div># Create environment with stdlib venv</div>
           <div className="text-gray-400">python -m venv .venv</div>
@@ -185,6 +205,10 @@ if __name__ == "__main__":
             <p className="text-xs text-gray-400">HTTP `GET`/`POST` requests, custom headers, bearer tokens, JSON responses</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          HTTP client libraries enable applications to interact with web APIs and microservices. The `requests` library provides intuitive synchronous `GET`/`POST` methods, header injection, payload encoding, and status code handling, while `httpx` adds full asynchronous `async`/`await` support for high-concurrency integrations.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -218,6 +242,10 @@ print("Status Code:", res.status_code)`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          JSON (JavaScript Object Notation) is the standard data interchange format for REST APIs and configuration files. Python's built-in `json` module provides `json.loads()` to deserialize JSON strings into native dictionaries or lists, and `json.dumps()` to serialize Python objects into formatted JSON strings.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 45_json.py</span>
@@ -247,6 +275,10 @@ print("Parsed Name:", data["name"])`}</pre>
             <p className="text-xs text-gray-400">Loading structured YAML configuration files safely with `pyyaml`</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          YAML is a human-readable data serialization language widely used for system configurations, Docker Compose definitions, and LLM framework settings. Using `pyyaml`'s `yaml.safe_load()` parses structured YAML text into nested Python dictionaries while preventing arbitrary code execution vulnerabilities associated with unsafe YAML loaders.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -283,6 +315,10 @@ print("Image:", cfg["services"]["app"]["image"])`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Asynchronous programming enables single-threaded concurrent execution of I/O-bound tasks without multi-threading overhead. Declaring functions with `async def` creates coroutines, and `await` suspends execution back to the event loop while waiting for non-blocking network or file operations to resolve.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 47_async_basics.py</span>
@@ -317,6 +353,10 @@ asyncio.run(main())`}</pre>
             <p className="text-xs text-gray-400">Executing multiple coroutines concurrently without multi-threading overhead</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `asyncio.gather(*coroutines)` function executes multiple coroutines concurrently on a single event loop. Instead of sequentially waiting for independent API calls one by one, `gather()` dispatches them simultaneously, collecting all results into a single list once every coroutine finishes.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
@@ -354,6 +394,10 @@ asyncio.run(main())`}</pre>
           </div>
         </div>
 
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          Pytest is Python's premier testing framework, replacing verbose `unittest` boilerplate with clean Python `assert` expressions. The `@pytest.fixture` decorator defines reusable setup/teardown logic, injecting dependencies directly into test functions as named arguments.
+        </p>
+
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> test_fixtures.py</span>
@@ -386,6 +430,10 @@ def test_vector_dim(sample_vector):
             <p className="text-xs text-gray-400">Data-driven testing (`@pytest.mark.parametrize`) and API mocking (`unittest.mock`)</p>
           </div>
         </div>
+
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          The `@pytest.mark.parametrize` decorator runs a single test function repeatedly across multiple sets of input parameters and expected outcomes. When testing external APIs, `unittest.mock.MagicMock` replaces network dependencies with controlled mock objects, ensuring unit test suites execute fast and deterministically.
+        </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
