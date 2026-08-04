@@ -2,10 +2,58 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
 
+const ATTENTION_WORDS = ["The", "cat", "sat", "on", "the", "mat"];
+const ATTENTION_WEIGHTS = [
+  [0.10, 0.50, 0.10, 0.05, 0.15, 0.10],
+  [0.15, 0.10, 0.45, 0.05, 0.05, 0.20],
+  [0.05, 0.35, 0.10, 0.30, 0.05, 0.15],
+  [0.05, 0.05, 0.20, 0.10, 0.20, 0.40],
+  [0.05, 0.05, 0.05, 0.15, 0.10, 0.60],
+  [0.05, 0.10, 0.10, 0.20, 0.45, 0.10],
+];
+const BAR_COLORS = ["bg-indigo-500", "bg-pink-500", "bg-emerald-500", "bg-amber-500", "bg-cyan-500", "bg-purple-500"];
+
+const PIPELINE_STEPS = [
+  {
+    icon: "📝", title: "Input Text", color: "indigo",
+    detail: "We start with a raw sentence: \"I love AI\". The model has no idea yet what these words mean — it only sees characters."
+  },
+  {
+    icon: "✂️", title: "Tokenize → Token IDs", color: "pink",
+    detail: "The text is split into tokens and mapped to integer IDs from the model's vocabulary: [\"I\", \"love\", \"AI\"] → [40, 3021, 15680]. These IDs are just lookup indexes — no meaning yet."
+  },
+  {
+    icon: "🧮", title: "Token Embeddings", color: "emerald",
+    detail: "Each token ID looks up a row in a learned embedding table, turning it into a dense vector. Similar words end up with similar vectors — this is where meaning first enters the pipeline."
+  },
+  {
+    icon: "🌊", title: "+ Positional Encoding", color: "amber",
+    detail: "Attention has no built-in sense of word order, so a position-dependent sine/cosine pattern is added to each embedding — telling the model \"I\" is 1st, \"love\" is 2nd, \"AI\" is 3rd."
+  },
+  {
+    icon: "👁️", title: "Self-Attention (Q, K, V)", color: "cyan",
+    detail: "Each token produces a Query, Key, and Value vector. Every token compares its Query against every other token's Key to compute attention scores, then blends in Values weighted by those scores — so \"AI\" absorbs relevant context from \"love\" and \"I\"."
+  },
+  {
+    icon: "➕", title: "Add & Normalize", color: "purple",
+    detail: "The attention output is added back to the original embedding (a residual connection, so information never gets fully overwritten) and the result is normalized to keep values stable across many layers."
+  },
+  {
+    icon: "🔀", title: "Feed-Forward Network", color: "rose",
+    detail: "Each token's vector independently passes through a small 2-layer MLP (expand → non-linearity → compress), followed by another Add & Normalize. This whole block — attention + FFN — then repeats N times (96 layers in a GPT-4-scale model)."
+  },
+  {
+    icon: "🎯", title: "Linear + Softmax → Next Token", color: "green",
+    detail: "After the final layer, a linear projection maps each token's vector to a score for every word in the vocabulary. Softmax turns those scores into probabilities, and the model samples (or picks the top one) as the next token — then feeds it back in and repeats."
+  },
+];
+
 export default function MlTransformers() {
   const [archStep, setArchStep] = useState(1);
   const [tokText, setTokText] = useState("The Transformer model is a deep learning architecture.");
   const [tokens, setTokens] = useState([]);
+  const [selectedWord, setSelectedWord] = useState(1);
+  const [pipelineStep, setPipelineStep] = useState(1);
 
   const handleTokenize = () => {
     // Dummy subword tokenization simulation
@@ -28,8 +76,19 @@ export default function MlTransformers() {
   return (
     <GuideLayout
       title="Transformers & Gen AI"
-      intro="Interactive visual explainer of Generative AI, Transformer architecture, Tokenization, Embeddings and Attention mechanism — inspired by transformer-explainer."
-      toc={[]}
+      intro="Interactive visual explainer of Generative AI, Transformer architecture, Tokenization, Embeddings, Positional Encoding, Attention, and the full pipeline — inspired by transformer-explainer."
+      toc={[
+        { label: "What is Generative AI?", hash: "genai" },
+        { label: "AI History Timeline", hash: "ai-history" },
+        { label: "Types of AI", hash: "ai-types" },
+        { label: "Language Models", hash: "language-models" },
+        { label: "Transformer Architecture", hash: "transformer" },
+        { label: "Tokenization", hash: "tokenization" },
+        { label: "Embeddings", hash: "embeddings" },
+        { label: "Positional Encoding", hash: "positional-encoding" },
+        { label: "Attention Mechanism", hash: "attention" },
+        { label: "Full Pipeline Walkthrough", hash: "pipeline-walkthrough" },
+      ]}
     >
       {/* HERO SECTION */}
       <section className="text-center py-20 bg-gradient-to-b from-[#0a0a0a] to-[#111] rounded-2xl mb-16 border border-gray-800 relative overflow-hidden">
@@ -490,6 +549,83 @@ export default function MlTransformers() {
         </div>
       </motion.section>
 
+      {/* SECTION 6.5 · POSITIONAL ENCODING */}
+      <motion.section id="positional-encoding" className="guide-section mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <div className="mb-8">
+          <span className="inline-block px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs font-bold mb-2">06.5</span>
+          <h2 className="text-3xl font-bold text-gray-100 mb-4">Positional Encoding</h2>
+          <p className="text-gray-400 text-lg">Self-attention compares every token to every other token <em>at the same time</em> — it has no built-in sense of order. Positional encoding is how the model learns "this word comes first, that one comes third."</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <p className="text-gray-300 mb-4 leading-relaxed">
+              Shuffle the words in a sentence and pure attention would compute the exact same output — it treats the input as a <em>set</em>, not a <em>sequence</em>. But "dog bites man" and "man bites dog" mean very different things.
+            </p>
+            <p className="text-gray-300 mb-4 leading-relaxed">
+              The fix: for every position in the sequence, generate a fixed pattern of sine and cosine waves at different frequencies, and <strong>add it directly to the token embedding</strong>. Each position ends up with a unique "fingerprint" the model can learn to recognize.
+            </p>
+            <div className="bg-black/50 border border-gray-800 rounded-lg p-5 mb-4 text-center font-mono text-gray-200 text-sm space-y-1">
+              <div>PE(pos, 2i) &nbsp;=&nbsp; sin( pos / 10000<sup>2i/d</sup> )</div>
+              <div>PE(pos, 2i+1) =&nbsp; cos( pos / 10000<sup>2i/d</sup> )</div>
+            </div>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Low dimensions oscillate fast (fine-grained position), high dimensions oscillate slowly (coarse position) — together they let the model infer both exact position and relative distance between tokens.
+            </p>
+          </div>
+
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-6">
+            <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 text-center">Positional Encoding Waves (per embedding dimension)</h4>
+            <svg viewBox="0 0 400 220" className="w-full h-auto">
+              <line x1="0" y1="110" x2="400" y2="110" stroke="#374151" strokeWidth="1" />
+              {[
+                { freq: 0.15, amp: 40, color: "#818cf8", label: "dim 0" },
+                { freq: 0.06, amp: 40, color: "#f472b6", label: "dim 8" },
+                { freq: 0.02, amp: 40, color: "#34d399", label: "dim 24" },
+              ].map((wave, wi) => {
+                const points = Array.from({ length: 81 }, (_, i) => {
+                  const x = i * 5;
+                  const y = 110 - Math.sin(i * wave.freq) * wave.amp;
+                  return `${x},${y}`;
+                }).join(" ");
+                return (
+                  <motion.polyline
+                    key={wi}
+                    points={points}
+                    fill="none"
+                    stroke={wave.color}
+                    strokeWidth="2.5"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: wi * 0.3, ease: "easeInOut" }}
+                  />
+                );
+              })}
+              {[0, 8, 24].map((pos, i) => (
+                <motion.circle
+                  key={pos}
+                  cx={pos * 5 % 400}
+                  cy={110}
+                  r="4"
+                  fill="#fbbf24"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 1.2 + i * 0.15 }}
+                />
+              ))}
+            </svg>
+            <div className="flex justify-center gap-4 mt-3 text-xs">
+              <span className="flex items-center gap-1.5 text-indigo-300"><span className="w-3 h-0.5 bg-indigo-400 inline-block"></span> dim 0 (fast)</span>
+              <span className="flex items-center gap-1.5 text-pink-300"><span className="w-3 h-0.5 bg-pink-400 inline-block"></span> dim 8 (medium)</span>
+              <span className="flex items-center gap-1.5 text-emerald-300"><span className="w-3 h-0.5 bg-emerald-400 inline-block"></span> dim 24 (slow)</span>
+            </div>
+            <p className="text-gray-500 text-xs text-center mt-4 italic">Each token position reads a different point along every wave — together those readings form its unique positional fingerprint.</p>
+          </div>
+        </div>
+      </motion.section>
+
       {/* SECTION 7 · ATTENTION */}
       <motion.section id="attention" className="guide-section mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
         <div className="mb-8">
@@ -503,23 +639,44 @@ export default function MlTransformers() {
             <h4 className="text-xl font-bold text-gray-200 mb-2">Attention Heatmap</h4>
             <p className="text-gray-400 text-sm mb-6">Click a word in the sentence to see where it pays attention.</p>
             
-            <div className="flex gap-2 mb-8 bg-black/40 p-4 rounded-lg border border-gray-800 w-full justify-center">
-              {['The', 'cat', 'sat', 'on', 'the', 'mat'].map((w, i) => (
-                <button key={i} className="px-4 py-2 bg-[#222] hover:bg-indigo-900/50 text-gray-300 rounded font-mono transition-colors border border-gray-700 hover:border-indigo-500">
+            <div className="flex gap-2 mb-8 bg-black/40 p-4 rounded-lg border border-gray-800 w-full justify-center flex-wrap">
+              {ATTENTION_WORDS.map((w, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedWord(i)}
+                  className={`px-4 py-2 rounded font-mono transition-colors border ${
+                    selectedWord === i
+                      ? 'bg-indigo-600 border-indigo-500 text-white shadow-[0_0_12px_rgba(99,102,241,0.5)]'
+                      : 'bg-[#222] hover:bg-indigo-900/50 text-gray-300 border-gray-700 hover:border-indigo-500'
+                  }`}
+                >
                   {w}
                 </button>
               ))}
             </div>
 
-            <div className="w-full max-w-[420px] aspect-square bg-gradient-to-br from-indigo-900/20 to-pink-900/20 border border-gray-800 rounded-lg flex items-center justify-center p-8 relative">
-              <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 opacity-20 pointer-events-none p-8 gap-1">
-                {Array(36).fill(0).map((_,i) => <div key={i} className="bg-indigo-500 rounded-sm" style={{ opacity: Math.random() }}></div>)}
+            <div className="w-full max-w-[420px] bg-gradient-to-br from-indigo-900/10 to-pink-900/10 border border-gray-800 rounded-lg p-6">
+              <p className="text-sm text-gray-400 mb-4 text-center">
+                Attention from "<span className="text-indigo-300 font-bold">{ATTENTION_WORDS[selectedWord]}</span>" to every other token:
+              </p>
+              <div className="space-y-2.5">
+                {ATTENTION_WORDS.map((w, i) => (
+                  <div key={`${selectedWord}-${i}`} className="flex items-center gap-3">
+                    <span className="w-10 text-xs font-mono text-gray-400 shrink-0">{w}</span>
+                    <div className="flex-1 h-5 bg-gray-800 rounded overflow-hidden">
+                      <motion.div
+                        className={`h-full ${BAR_COLORS[i]} rounded flex items-center justify-end pr-1.5`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${ATTENTION_WEIGHTS[selectedWord][i] * 100}%` }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                      >
+                        <span className="text-[10px] font-bold text-white/90">{Math.round(ATTENTION_WEIGHTS[selectedWord][i] * 100)}%</span>
+                      </motion.div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl mb-3 opacity-50">👆</div>
-                <div className="text-gray-400 font-medium">Interactive Demo</div>
-                <div className="text-gray-500 text-sm mt-2">Click a word above to see its attention pattern.</div>
-              </div>
+              <p className="text-gray-500 text-xs text-center mt-4 italic">Weights always sum to 100% — this is what softmax(QKᵀ/√d) actually produces per token.</p>
             </div>
           </div>
 
@@ -620,6 +777,189 @@ export default function MlTransformers() {
           
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl pointer-events-none translate-y-1/2 -translate-x-1/2"></div>
+        </div>
+      </motion.section>
+
+      {/* SECTION 8 · FULL PIPELINE WALKTHROUGH */}
+      <motion.section id="pipeline-walkthrough" className="guide-section mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <div className="mb-8">
+          <span className="inline-block px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs font-bold mb-2">08</span>
+          <h2 className="text-3xl font-bold text-gray-100 mb-4">The Full Pipeline, Step by Step</h2>
+          <p className="text-gray-400 text-lg">Every piece above — tokens, embeddings, positional encoding, attention — combines into one repeating block. Walk through it with a real toy sentence: <span className="text-white font-mono">"I love AI"</span>.</p>
+        </div>
+
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 md:p-8">
+          {/* Progress rail */}
+          <div className="flex items-center justify-between mb-8 overflow-x-auto pb-2 gap-1">
+            {PIPELINE_STEPS.map((s, i) => (
+              <React.Fragment key={i}>
+                <button
+                  onClick={() => setPipelineStep(i + 1)}
+                  className="flex flex-col items-center gap-2 shrink-0"
+                >
+                  <motion.div
+                    animate={{
+                      scale: pipelineStep === i + 1 ? 1.15 : 1,
+                      opacity: pipelineStep >= i + 1 ? 1 : 0.35,
+                    }}
+                    className={`w-11 h-11 rounded-full flex items-center justify-center text-lg border-2 transition-colors ${
+                      pipelineStep === i + 1
+                        ? 'border-indigo-400 bg-indigo-500/20 shadow-[0_0_14px_rgba(99,102,241,0.5)]'
+                        : pipelineStep > i + 1
+                        ? 'border-emerald-500/60 bg-emerald-900/20'
+                        : 'border-gray-700 bg-gray-900'
+                    }`}
+                  >
+                    {pipelineStep > i + 1 ? '✓' : s.icon}
+                  </motion.div>
+                  <span className="text-[10px] text-gray-500 font-mono hidden md:block">{i + 1}</span>
+                </button>
+                {i < PIPELINE_STEPS.length - 1 && (
+                  <div className="flex-1 h-0.5 bg-gray-800 min-w-[12px] relative overflow-hidden">
+                    <motion.div
+                      className="absolute inset-0 bg-indigo-500"
+                      initial={{ width: '0%' }}
+                      animate={{ width: pipelineStep > i + 1 ? '100%' : '0%' }}
+                      transition={{ duration: 0.4 }}
+                    />
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4 mb-6 justify-center">
+            <button
+              onClick={() => setPipelineStep((s) => Math.max(1, s - 1))}
+              disabled={pipelineStep === 1}
+              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium text-sm"
+            >
+              ← Previous
+            </button>
+            <span className="text-sm text-gray-400 font-mono">Step {pipelineStep} / {PIPELINE_STEPS.length}</span>
+            <button
+              onClick={() => setPipelineStep((s) => Math.min(PIPELINE_STEPS.length, s + 1))}
+              disabled={pipelineStep === PIPELINE_STEPS.length}
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium text-sm"
+            >
+              Next →
+            </button>
+          </div>
+
+          {/* Detail panel */}
+          <motion.div
+            key={pipelineStep}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">{PIPELINE_STEPS[pipelineStep - 1].icon}</span>
+              <h3 className="text-xl font-bold text-gray-100">{PIPELINE_STEPS[pipelineStep - 1].title}</h3>
+            </div>
+            <p className="text-gray-300 leading-relaxed mb-6">{PIPELINE_STEPS[pipelineStep - 1].detail}</p>
+
+            {/* Per-step mini visual */}
+            {pipelineStep === 1 && (
+              <div className="flex justify-center gap-3">
+                {["I", "love", "AI"].map((w) => (
+                  <span key={w} className="px-4 py-2 bg-black/40 border border-gray-700 rounded-lg font-mono text-gray-200">{w}</span>
+                ))}
+              </div>
+            )}
+            {pipelineStep === 2 && (
+              <div className="flex justify-center gap-6 flex-wrap">
+                {[["I", 40], ["love", 3021], ["AI", 15680]].map(([w, id]) => (
+                  <div key={w} className="flex flex-col items-center gap-1">
+                    <span className="px-3 py-1.5 bg-indigo-900/30 border border-indigo-500/40 rounded font-mono text-indigo-200 text-sm">{w}</span>
+                    <span className="text-gray-500 text-xs">↓</span>
+                    <span className="px-3 py-1.5 bg-black/50 border border-gray-700 rounded font-mono text-emerald-400 text-sm">{id}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {pipelineStep === 3 && (
+              <div className="flex justify-center gap-4 flex-wrap font-mono text-xs">
+                {[["I", "0.12, -0.08, 0.55, 0.03"], ["love", "0.71, 0.44, -0.02, 0.19"], ["AI", "-0.30, 0.61, 0.28, -0.15"]].map(([w, v]) => (
+                  <div key={w} className="bg-black/50 border border-gray-700 rounded-lg p-3 text-center">
+                    <div className="text-gray-200 font-bold mb-1">{w}</div>
+                    <div className="text-emerald-400">[{v}]</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {pipelineStep === 4 && (
+              <div className="flex justify-center gap-4 flex-wrap font-mono text-xs items-center">
+                {[["I", "0.12, -0.08, 0.55, 0.03"], ["love", "0.71, 0.44, -0.02, 0.19"], ["AI", "-0.30, 0.61, 0.28, -0.15"]].map(([w, v], i) => (
+                  <React.Fragment key={w}>
+                    <div className="bg-black/50 border border-gray-700 rounded-lg p-3 text-center">
+                      <div className="text-gray-200 font-bold mb-1">{w}</div>
+                      <div className="text-emerald-400">[{v}]</div>
+                      <div className="text-amber-400 text-[10px] mt-1">+ pos({i})</div>
+                    </div>
+                    {i < 2 && <span className="text-gray-600">→</span>}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
+            {pipelineStep === 5 && (
+              <div className="flex justify-center gap-3 flex-wrap">
+                {["Q", "K", "V"].map((label, i) => (
+                  <div key={label} className={`px-5 py-4 rounded-lg border text-center ${['border-blue-500/40 bg-blue-900/20', 'border-emerald-500/40 bg-emerald-900/20', 'border-purple-500/40 bg-purple-900/20'][i]}`}>
+                    <div className={`font-bold text-lg ${['text-blue-400', 'text-emerald-400', 'text-purple-400'][i]}`}>{label}</div>
+                    <div className="text-[10px] text-gray-400 mt-1">{['queries', 'keys', 'values'][i]}</div>
+                  </div>
+                ))}
+                <div className="flex items-center px-2 text-gray-500">→ softmax(QKᵀ/√d)·V →</div>
+                <div className="px-5 py-4 rounded-lg border border-indigo-500/40 bg-indigo-900/20 text-center">
+                  <div className="font-bold text-lg text-indigo-300">Context</div>
+                  <div className="text-[10px] text-gray-400 mt-1">blended vector</div>
+                </div>
+              </div>
+            )}
+            {pipelineStep === 6 && (
+              <div className="flex justify-center items-center gap-3 font-mono text-sm">
+                <span className="px-3 py-2 bg-black/50 border border-gray-700 rounded text-gray-300">original embedding</span>
+                <span className="text-gray-500">+</span>
+                <span className="px-3 py-2 bg-indigo-900/30 border border-indigo-500/40 rounded text-indigo-300">attention output</span>
+                <span className="text-gray-500">→ normalize →</span>
+                <span className="px-3 py-2 bg-emerald-900/30 border border-emerald-500/40 rounded text-emerald-300">stable vector</span>
+              </div>
+            )}
+            {pipelineStep === 7 && (
+              <div className="flex justify-center items-center gap-3 font-mono text-sm flex-wrap">
+                <span className="px-3 py-2 bg-black/50 border border-gray-700 rounded text-gray-300">vector</span>
+                <span className="text-gray-500">→</span>
+                <span className="px-3 py-2 bg-rose-900/30 border border-rose-500/40 rounded text-rose-300">Linear (expand 4×)</span>
+                <span className="text-gray-500">→</span>
+                <span className="px-3 py-2 bg-amber-900/30 border border-amber-500/40 rounded text-amber-300">GELU</span>
+                <span className="text-gray-500">→</span>
+                <span className="px-3 py-2 bg-rose-900/30 border border-rose-500/40 rounded text-rose-300">Linear (compress)</span>
+                <span className="text-gray-500">→ Add & Norm →</span>
+                <span className="px-3 py-2 bg-emerald-900/30 border border-emerald-500/40 rounded text-emerald-300">next layer</span>
+              </div>
+            )}
+            {pipelineStep === 8 && (
+              <div className="flex flex-col items-center gap-3">
+                <div className="flex gap-2 items-center font-mono text-xs">
+                  <span className="px-3 py-2 bg-black/50 border border-gray-700 rounded text-gray-300">final vector</span>
+                  <span className="text-gray-500">→ Linear → Softmax →</span>
+                </div>
+                <div className="w-full max-w-sm space-y-1.5">
+                  {[["is", 62], ["helps", 18], ["learns", 12], ["rocks", 8]].map(([w, p]) => (
+                    <div key={w} className="flex items-center gap-2">
+                      <span className="w-14 text-xs font-mono text-gray-400">{w}</span>
+                      <div className="flex-1 h-4 bg-gray-800 rounded overflow-hidden">
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${p}%` }} transition={{ duration: 0.5 }} className="h-full bg-green-500" />
+                      </div>
+                      <span className="text-xs font-mono text-gray-500 w-8">{p}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </motion.div>
         </div>
       </motion.section>
 
