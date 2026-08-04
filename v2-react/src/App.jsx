@@ -133,7 +133,6 @@ function App() {
         <Route path="/rag/embeddings" element={<RagEmbeddings />} />
 
         <Route path="/llms" element={<LlmIndex />} />
-        <Route path="/models" element={<LlmIndex />} />
         <Route path="/llms/llm-type" element={<LlmType />} />
         <Route path="/llms/vlm-type" element={<LlmVlm />} />
         <Route path="/llms/slm-type" element={<LlmSlm />} />
