@@ -13,6 +13,7 @@ export default function ModelsQwen() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -65,6 +66,24 @@ export default function ModelsQwen() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Massive Multilingual Pre-training)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Alibaba trains the Qwen family on one of the most massive and diverse corpuses available, with an intense focus on <strong>multilingual data and highly specialized domains like mathematics and code</strong>. They use advanced synthetic data pipelines to refine reasoning capabilities before standard fine-tuning. This rigorous data filtering is why Qwen models regularly top the charts on difficult reasoning and coding benchmarks, often outperforming Llama 3 models of similar sizes.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>Open-Weight Dominance and Coding Specialization:</strong> Qwen's standout differentiator is its sheer dominance in the open-weight leaderboard, specifically with <strong>Qwen2.5-Coder</strong> and its math-focused variants. While many Western models struggle with non-English languages, Qwen offers exceptional native multilingual support out of the box, making it the premier open-source choice for global, multi-language enterprise deployments.
+            </p>
+          </div>
         </div>
       </section>
 

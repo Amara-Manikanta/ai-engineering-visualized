@@ -13,6 +13,7 @@ export default function ModelsGrok() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -64,6 +65,24 @@ export default function ModelsGrok() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Colossus & Live X Data)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Grok is pre-trained on xAI's custom tech stack, utilizing massive GPU clusters (such as "Colossus," which features 100,000+ Nvidia H100 GPUs). Beyond standard web scraping, Grok's primary training advantage is its heavy fine-tuning on real-time data streams directly from X (formerly Twitter). This continuous training loop allows it to rapidly incorporate breaking news, cultural shifts, and live social sentiment into its weights much faster than traditional model training cycles.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>Real-Time Social Knowledge and "Fun Mode":</strong> Grok's definitive differentiator is its native integration with the X firehose, allowing it to instantly search and synthesize live tweets. Additionally, xAI has deliberately aligned Grok to be "anti-woke" or less heavily filtered than competitors, featuring a specific "Fun Mode" that allows the model to respond with sarcasm, edgy humor, and a distinctly rebellious personality.
+            </p>
+          </div>
         </div>
       </section>
 

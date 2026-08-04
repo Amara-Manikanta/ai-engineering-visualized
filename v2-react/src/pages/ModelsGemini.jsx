@@ -13,6 +13,7 @@ export default function ModelsGemini() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -66,6 +67,24 @@ export default function ModelsGemini() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Native Multimodality)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Unlike early multimodal models that stitched together separate vision and text models post-training, Gemini was designed from the ground up to be <strong>natively multimodal</strong>. During pre-training, Gemini is jointly trained across text, images, audio, and video simultaneously. This allows it to understand deeply interleaved modalities—like reading a math problem from a photo and listening to a student's audio recording at the same time—without relying on lossy speech-to-text or image-to-text converters.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>Massive Context and Native Video/Audio:</strong> Gemini's primary differentiator is its <strong>2M+ token context window</strong> (enabled by Ring Attention variations). You can drop an entire 1-hour video or a 1,500-page PDF into Gemini 1.5 Pro and it will parse the raw visual and audio frames directly. It dominates use cases requiring "needle-in-a-haystack" retrieval across massive, unstructured document and media libraries.
+            </p>
+          </div>
         </div>
       </section>
 

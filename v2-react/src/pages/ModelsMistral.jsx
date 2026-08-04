@@ -13,6 +13,7 @@ export default function ModelsMistral() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -65,6 +66,24 @@ export default function ModelsMistral() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Lean Training & Data Quality)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Mistral AI is famous for its "lean training" philosophy. Rather than simply brute-forcing model size, they focus obsessively on <strong>curating ultra-high-quality training datasets</strong>. This allows them to train much smaller models (like the original 7B) that outperform models 5x their size. They also heavily utilize custom architectural tricks during training, such as Sliding Window Attention, to allow the model to handle larger context windows without memory exploding.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>Quality-to-Parameter Ratio and EU Sovereignty:</strong> Mistral's primary differentiator is efficiency. Their open-weight Mixtral models popularized the Mixture-of-Experts (MoE) architecture for the open-source community, proving you can get GPT-3.5/GPT-4 level performance running locally on consumer hardware. Additionally, as a French company, Mistral is the European champion of AI, offering strong data privacy guarantees and EU-hosted endpoints (La Plateforme) that appeal heavily to GDPR-sensitive enterprises.
+            </p>
+          </div>
         </div>
       </section>
 

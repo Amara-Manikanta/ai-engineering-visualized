@@ -13,6 +13,7 @@ export default function ModelsDeepseek() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -65,6 +66,24 @@ export default function ModelsDeepseek() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (GRPO & RL)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              DeepSeek-R1 pioneered a breakthrough in AI training by demonstrating that models can develop advanced reasoning capabilities almost entirely through <strong>Large-Scale Reinforcement Learning (RL)</strong>, without relying heavily on massive Supervised Fine-Tuning (SFT) datasets. They use a novel algorithm called <strong>GRPO (Group Relative Policy Optimization)</strong>, which eliminates the need for a separate critic model (saving immense compute). The model is rewarded for producing accurate answers and proper formatting (using internal <code>&lt;thought&gt;</code> tags) across thousands of math and coding problems.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>Extreme Cost-Efficiency and Open Reasoning:</strong> DeepSeek shocked the industry by training a frontier-level model for just a few million dollars. Their ultra-sparse Mixture-of-Experts architecture activates only ~37B parameters out of 671B per token. Furthermore, unlike OpenAI's o1, DeepSeek open-sourced both the R1 weights and smaller distilled models (running on Llama and Qwen architectures), democratizing access to high-end chain-of-thought reasoning.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -13,6 +13,7 @@ export default function ModelsGpt() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -66,6 +67,24 @@ export default function ModelsGpt() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (RLHF & Test-Time Compute)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              OpenAI pioneered the widespread use of <strong>RLHF (Reinforcement Learning from Human Feedback)</strong> using PPO (Proximal Policy Optimization) to align base models with human intent, which led to the massive success of ChatGPT. For the newer <code>o1</code> and <code>o3</code> reasoning models, OpenAI uses massive Reinforcement Learning to teach the model how to "think" via internal Chain-of-Thought before it outputs a single token, dynamically allocating more "test-time compute" to harder problems.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>The Enterprise Standard and System 2 Reasoning:</strong> OpenAI's API ecosystem is the gold standard that every other provider mimics. Currently, their primary differentiator is leading the industry transition from fast "System 1" generation (GPT-4o) to deliberate "System 2" reasoning (o1/o3), paired with the most mature ecosystem for tool calling, structured outputs, and real-time voice APIs.
+            </p>
+          </div>
         </div>
       </section>
 

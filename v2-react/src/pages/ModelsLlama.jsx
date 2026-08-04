@@ -13,6 +13,7 @@ export default function ModelsLlama() {
     { label: 'Overview', hash: 'overview' },
     { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
   ];
@@ -65,6 +66,24 @@ export default function ModelsLlama() {
               <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section id="training" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-6">Training Methodology & Unique Differentiator</h2>
+        <div className="space-y-4">
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-emerald-400 mb-2">How It's Trained (Massive Pre-training & Synthetic Data)</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Meta trains the Llama family on massive corpuses (Llama 3 was pre-trained on over 15 Trillion tokens). For alignment, they use <strong>DPO (Direct Preference Optimization)</strong> and PPO. A key part of their strategy is heavy use of <strong>Synthetic Data Generation</strong>: they use their massive 405B flagship model to generate exceptionally high-quality reasoning and coding outputs, which they then use to train and distill intelligence down into the smaller 8B and 70B models, making them punch far above their weight.
+            </p>
+          </div>
+          <div className="bg-[#111111] border border-white/10 rounded-xl p-5">
+            <h3 className="text-lg font-bold text-cyan-400 mb-2">What Makes It Unique</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">
+              <strong>The Open Foundation Bedrock:</strong> Llama is the de facto standard of the open-source AI community. Meta's open-weights strategy enables offline, air-gapped inference and custom LoRA (Low-Rank Adaptation) fine-tuning for enterprises that cannot send their proprietary data to OpenAI. If a new AI startup builds an agentic tool or fine-tunes a model, 9 times out of 10, they start with Llama as the base architecture.
+            </p>
+          </div>
         </div>
       </section>
 
