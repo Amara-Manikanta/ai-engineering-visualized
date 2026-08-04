@@ -11,11 +11,11 @@ export default function PythonAdvanced() {
     { label: "27. Production AI Error Handling", hash: "#try-except" },
     { label: "28. Custom Exceptions & Chaining", hash: "#custom-exceptions" },
     { label: "29. Classes & __init__ Constructor", hash: "#classes-init" },
-    { label: "30. Inheritance vs Composition", hash: "#inheritance-composition" },
+    { label: "30. OOP & RAG Abstractions", hash: "#inheritance-composition" },
     { label: "31. Python Dataclasses (@dataclass)", hash: "#dataclasses" },
     { label: "32. @classmethod vs @staticmethod", hash: "#class-static-methods" },
     { label: "33. Dunder Magic Methods", hash: "#dunder-methods" },
-    { label: "34. Type Hints & typing Module", hash: "#type-hints" },
+    { label: "34. Type Hints & FastAPI Integration", hash: "#type-hints" },
     { label: "35. Pydantic Data Validation", hash: "#pydantic-validation" },
     { label: "36. Iterables & Iterators", hash: "#iterators" },
     { label: "37. Generators & yield", hash: "#generators" },
@@ -26,7 +26,7 @@ export default function PythonAdvanced() {
   return (
     <GuideLayout
       title="Module 3: OOP & Advanced Python"
-      intro="Comprehensive technical guide for production AI error handling, OOP inheritance & composition, dataclasses, Pydantic type validation, lazy generators, and custom decorators."
+      intro="Comprehensive technical guide for production AI error handling, OOP RAG abstractions, dataclasses, modern type hints for FastAPI, Pydantic type validation, lazy generators, and custom decorators."
       toc={toc}
     >
       {/* 27. TRY EXCEPT ELSE FINALLY */}
@@ -141,44 +141,53 @@ print(bot.execute("Refactor API"))`}</pre>
         </div>
       </section>
 
-      {/* 30. INHERITANCE VS COMPOSITION */}
+      {/* 30. OOP FOR RAG ABSTRACTIONS */}
       <section id="inheritance-composition" className="mb-16 scroll-mt-24 border-b border-white/10 pb-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <Layers size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">30. OOP Inheritance vs Composition for RAG Pipelines</h2>
-            <p className="text-xs text-gray-400">Subclassing (`is-a`) vs modular composition (`has-a`) in RAG architecture</p>
+            <h2 className="text-2xl font-black text-white">30. OOP & Core AI / RAG Abstractions</h2>
+            <p className="text-xs text-gray-400">Modeling Retriever, Generator, Agent, Tool, Memory, VectorStore, and DocumentLoader</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          In complex AI systems, **Composition ("has-a")** is preferred over heavy Inheritance ("is-a"). A RAG pipeline class composes separate, decoupled component instances—such as a <code>Retriever</code>, a <code>Chunker</code>, and a <code>Generator</code>—allowing you to swap vector databases or LLM providers seamlessly without breaking parent class logic.
+          <strong>Why OOP is essential for AI Frameworks:</strong> Modern AI tools (LangChain, LlamaIndex) use OOP classes to model every core framework abstraction. OOP allows developers to define clean contracts for the 7 core AI abstractions:
         </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4 text-xs font-mono">
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-emerald-300 text-center font-bold">1. Retriever</div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-emerald-300 text-center font-bold">2. Generator</div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-emerald-300 text-center font-bold">3. Agent</div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-emerald-300 text-center font-bold">4. Tool</div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-purple-300 text-center font-bold">5. Memory</div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-purple-300 text-center font-bold">6. VectorStore</div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-purple-300 text-center font-bold">7. DocumentLoader</div>
+        </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_rag_composition.py</span>
-            <span>RAG Composition Pattern</span>
+            <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_rag_retriever.py</span>
+            <span>SimpleRetriever Class Example</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`class VectorRetriever:
+          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`class SimpleRetriever:
+    def __init__(self, vector_db):
+        self.vector_db = vector_db
+
     def retrieve(self, query: str):
-        return ["RAG document chunk"]
+        return self.vector_db.search(query)
 
-class RAGPipeline:
-    def __init__(self, retriever: VectorRetriever):
-        self.retriever = retriever  # Composition: RAGPipeline has a retriever
+# Mock Vector DB search interface
+class MockVectorDB:
+    def search(self, q): return ["Matched Doc Chunk"]
 
-    def query(self, text: str):
-        docs = self.retriever.retrieve(text)
-        return f"Answer generated from {len(docs)} doc(s)."
-
-pipeline = RAGPipeline(VectorRetriever())
-print(pipeline.query("Explain RAG"))`}</pre>
+retriever = SimpleRetriever(MockVectorDB())
+print("Retrieved Docs:", retriever.retrieve("What is RAG?"))`}</pre>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Answer generated from 1 doc(s).</code>
+            <code>Retrieved Docs: ['Matched Doc Chunk']</code>
           </div>
         </div>
       </section>
@@ -310,31 +319,38 @@ print(step("User Query"))`}</pre>
             <FileText size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white">34. Type Hints & `typing` Module</h2>
-            <p className="text-xs text-gray-400">Static annotations, `Union`, `Optional`, `Callable`, `List`, `Dict`</p>
+            <h2 className="text-2xl font-black text-white">34. Type Hints & FastAPI Integration</h2>
+            <p className="text-xs text-gray-400">`str`, `int`, `float`, `bool`, `list[str]`, `dict[str, str]`, `Optional`, `Union`, `TypedDict`, `Pydantic models`</p>
           </div>
         </div>
 
         <p className="text-xs text-gray-300 leading-relaxed mb-4">
-          Type hints annotate function signatures and variable declarations with explicit type specifications. The `typing` module offers generic containers (`List[T]`, `Dict[K, V]`, `Union[A, B]`, `Optional[T]`). Although Python remains dynamically typed at runtime, type annotations improve IDE autocompletion and enable static analysis tools like `mypy` to detect bugs prior to deployment.
+          <strong>Why type hints are essential for modern AI Engineering:</strong> AI tools, APIs, and microservice frameworks (such as <strong>FastAPI</strong>, LangChain, and LlamaIndex) rely on structured type annotations for request/response serialization, input validation, and IDE autocompletion. FastAPI itself is built directly on top of standard Python type hints.
         </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-4 text-xs font-mono">
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">str</span><span className="text-[10px] text-gray-400">Text</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">int / float</span><span className="text-[10px] text-gray-400">Numbers</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">list[float]</span><span className="text-[10px] text-gray-400">Embeddings</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">dict[str, str]</span><span className="text-[10px] text-gray-400">Payloads</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">Optional[T]</span><span className="text-[10px] text-gray-400">Nullable</span></div>
+        </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
           <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
-            <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 34_type_hints.py</span>
-            <span>Python 3.11</span>
+            <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 34_type_hints_ai.py</span>
+            <span>FastAPI & AI Pattern</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`from typing import Union, Optional, List
+          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`from typing import List, Dict, Optional, Union
 
-def process_payload(data: List[str], max_items: Optional[int] = None) -> Union[int, str]:
-    if max_items:
-        data = data[:max_items]
-    return f"Processed {len(data)} items"
+def embed_text(text: str) -> List[float]:
+    # Returns embedding vector float list
+    return [0.12, 0.45, 0.98]
 
-print(process_payload(["doc1", "doc2", "doc3"], max_items=2))`}</pre>
+print("Embedding Vector:", embed_text("What is RAG?"))`}</pre>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
-            <code>Processed 2 items</code>
+            <code>Embedding Vector: [0.12, 0.45, 0.98]</code>
           </div>
         </div>
       </section>
