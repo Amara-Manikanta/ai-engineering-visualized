@@ -24,6 +24,7 @@ const NAV_LINKS = [
       { name: "Supervised", path: "/ml/supervised" },
       { name: "Unsupervised", path: "/ml/unsupervised" },
       { name: "Deep Learning", path: "/ml/deep-learning" },
+      { name: "Transformers", path: "/ml/transformers" },
       { name: "NLP", path: "/ml/nlp" },
       { name: "Decision Trees", path: "/ml/decision-trees" },
       { name: "KNN", path: "/ml/knn" },
