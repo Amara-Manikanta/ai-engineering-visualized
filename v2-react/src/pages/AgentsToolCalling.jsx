@@ -1,41 +1,139 @@
 import React from 'react';
 import GuideLayout from "../components/GuideLayout";
 import { motion } from "framer-motion";
+import AdvancedFlowchart from "../components/AdvancedFlowchart";
 
-const AgentsToolCalling = () => {
+const toolLoopChart = {
+  nodes: [
+    { id: 'q', label: 'User Query', x: 20, y: 140, width: 100, height: 40, type: 'default', bg: '#1F2937', borderColor: '#4B5563', color: '#F3F4F6' },
+    { id: 'llm', label: 'LLM', x: 170, y: 140, width: 80, height: 50, type: 'default', bg: '#4C1D95', borderColor: '#8B5CF6', color: '#E9D5FF' },
+    { id: 'diamond', label: 'Needs\nTool?', x: 300, y: 130, width: 90, height: 70, type: 'diamond' },
+    { id: 'tool', label: 'Execute Tool\n(schema + args)', x: 470, y: 40, width: 140, height: 55, type: 'agent' },
+    { id: 'answer', label: 'Final Answer', x: 480, y: 230, width: 110, height: 40, type: 'circle' },
+  ],
+  edges: [
+    { source: 'q', target: 'llm', animated: true, type: 'straight' },
+    { source: 'llm', target: 'diamond', animated: true, type: 'straight' },
+    { source: 'diamond', target: 'tool', animated: true, type: 'curved', color: '#F59E0B' },
+    { source: 'diamond', target: 'answer', animated: true, type: 'curved', color: '#10B981' },
+    { source: 'tool', target: 'llm', animated: true, type: 'custom', path: 'M 540 95 C 540 -20, 210 -20, 210 138', color: '#38BDF8', dashed: true },
+  ],
+};
+
+const toc = [
+  { label: "What is Tool Calling?", hash: "overview" },
+  { label: "The Tool-Call Loop", hash: "loop" },
+  { label: "Anatomy of a Tool Schema", hash: "schema" },
+  { label: "Parallel vs Sequential Calls", hash: "parallel" },
+  { label: "Best Practices", hash: "best-practices" },
+];
+
+export default function AgentsToolCalling() {
   return (
     <GuideLayout
       title="Tool Calling"
-      intro="This section is under construction. Comprehensive content and interactive visualizations are coming soon!"
-      toc={[]}
+      intro="How an LLM reaches outside its own weights — calling functions, APIs, and code to act on the real world."
+      toc={toc}
     >
-      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, type: "spring" }}
-          className="text-6xl mb-6"
-        >
-          🚧
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/15 text-indigo-400 text-sm font-bold border border-indigo-500/30 mb-4">
-            Agentic AI
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-br from-white to-indigo-300 bg-clip-text text-transparent mb-6">
-            Tool Calling
-          </h1>
-          <p className="text-lg text-gray-400 max-w-lg mx-auto">
-            This section is under construction. Comprehensive content and interactive visualizations are coming soon!
-          </p>
-        </motion.div>
-      </div>
+      <section id="overview" className="mb-14 scroll-mt-24">
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          On its own, an LLM can only predict text. <strong className="text-white">Tool calling</strong> (also called
+          "function calling") gives it a structured way to say "run this function with these arguments" instead of
+          just describing what it would do. The model never executes anything itself — your application reads the
+          model's structured request, runs the real function, and feeds the result back in.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { icon: '📐', title: 'Structured Output', desc: 'The model emits a JSON object matching a schema you define — not free text.' },
+            { icon: '🔌', title: 'Your Code Executes', desc: 'The application runtime calls the real function; the model only requests it.' },
+            { icon: '🔁', title: 'Result Feeds Back', desc: "The tool's output is appended to context so the model can reason further." },
+          ].map((f, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="text-3xl mb-2">{f.icon}</div>
+              <h3 className="font-bold text-gray-200 mb-1">{f.title}</h3>
+              <p className="text-sm text-gray-400">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section id="loop" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">The Tool-Call Loop</h2>
+        <p className="text-gray-300 mb-4 max-w-3xl">
+          Every agent framework — ReAct, LangGraph, Claude's own agent loop — implements some version of this cycle.
+          The model decides whether it needs a tool; if so, the tool runs and its result is looped back in as new
+          context, and the cycle repeats until the model is confident enough to answer directly.
+        </p>
+        <AdvancedFlowchart nodes={toolLoopChart.nodes} edges={toolLoopChart.edges} currentStep={10} />
+      </section>
+
+      <section id="schema" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">Anatomy of a Tool Schema</h2>
+        <p className="text-gray-300 mb-4 max-w-3xl">
+          Every tool is described with a name, a plain-language description (the model reads this to decide
+          <em className="text-gray-200"> when</em> to call it), and a JSON Schema for its parameters.
+        </p>
+        <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm overflow-x-auto mb-6 text-gray-300 whitespace-pre">
+{`{
+  "name": "get_weather",
+  "description": "Get the current weather for a given city.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "city": { "type": "string", "description": "City name, e.g. 'Paris'" },
+      "unit": { "type": "string", "enum": ["celsius", "fahrenheit"] }
+    },
+    "required": ["city"]
+  }
+}`}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-emerald-900/10 border border-emerald-500/20 p-4 rounded-lg">
+            <h4 className="text-emerald-400 font-semibold mb-2 mt-0">✅ Good description</h4>
+            <p className="text-sm text-gray-400">"Search the internal knowledge base for policy documents. Use this before answering any HR-related question."</p>
+          </div>
+          <div className="bg-rose-900/10 border border-rose-500/20 p-4 rounded-lg">
+            <h4 className="text-rose-400 font-semibold mb-2 mt-0">❌ Vague description</h4>
+            <p className="text-sm text-gray-400">"Search stuff." — the model can't reliably decide when this applies.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="parallel" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">Parallel vs Sequential Calls</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-indigo-400 font-semibold mb-2">Sequential</h3>
+            <p className="text-sm text-gray-300 mb-3">Each tool call depends on the previous one's result — e.g. look up a user ID, then fetch that user's orders.</p>
+            <div className="flex items-center gap-2 text-xs font-mono text-gray-400">
+              <span className="bg-white/10 px-2 py-1 rounded">get_user_id</span>
+              <span>→</span>
+              <span className="bg-white/10 px-2 py-1 rounded">get_orders(id)</span>
+              <span>→</span>
+              <span className="bg-white/10 px-2 py-1 rounded">answer</span>
+            </div>
+          </div>
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-emerald-400 font-semibold mb-2">Parallel</h3>
+            <p className="text-sm text-gray-300 mb-3">Independent calls fired together — e.g. checking weather in 3 cities. Modern APIs let a model return multiple tool calls in a single turn.</p>
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-gray-400">
+              <span className="bg-white/10 px-2 py-1 rounded">weather(NYC)</span>
+              <span className="bg-white/10 px-2 py-1 rounded">weather(LA)</span>
+              <span className="bg-white/10 px-2 py-1 rounded">weather(SF)</span>
+              <span>→ merge → answer</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="best-practices" className="mb-4 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">Best Practices</h2>
+        <ul className="list-disc pl-6 text-gray-300 space-y-2">
+          <li><strong className="text-white">Keep tool sets small and focused.</strong> Models get worse at picking the right tool past ~20 active tools — group into on-demand sets when possible.</li>
+          <li><strong className="text-white">Return structured, truncated results.</strong> A 50,000-row SQL dump will blow the context window; summarize or paginate.</li>
+          <li><strong className="text-white">Fail loudly with useful errors.</strong> A tool error message like "invalid date format, expected YYYY-MM-DD" lets the model self-correct on the next turn.</li>
+          <li><strong className="text-white">Validate arguments before executing.</strong> Never trust model-generated arguments blindly for destructive or financial actions — add a confirmation or permission layer.</li>
+        </ul>
+      </section>
     </GuideLayout>
   );
-};
-
-export default AgentsToolCalling;
+}
