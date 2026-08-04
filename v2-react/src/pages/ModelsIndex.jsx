@@ -39,6 +39,11 @@ const MODELS = [
     color: 'from-amber-500/20 to-amber-600/5', border: 'border-amber-500/30', text: 'text-amber-400',
     access: 'Open + Closed', context: '128K', strength: 'Lean, fast, cost-efficient European models',
   },
+  {
+    id: 'grok', name: 'Grok', maker: 'xAI', path: '/models/grok', icon: '✖️',
+    color: 'from-slate-500/20 to-slate-600/5', border: 'border-slate-500/30', text: 'text-slate-300',
+    access: 'Closed / Open (Early)', context: '128K', strength: 'Real-time social knowledge & uncensored personality',
+  },
 ];
 
 const staggerContainer = {

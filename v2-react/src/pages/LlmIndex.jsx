@@ -11,7 +11,7 @@ export default function LlmIndex() {
   const toc = [
     { label: "1. What are AI Models?", hash: "#what-are-ai-models" },
     { label: "2. Foundation vs Fine-Tuned Models", hash: "#foundation-vs-finetuned" },
-    { label: "3. Model Families (OpenAI, Claude, Gemini, Llama, Qwen, DeepSeek, Mistral)", hash: "#model-families" },
+    { label: "3. Model Families (OpenAI, Claude, Gemini, Llama, Qwen, DeepSeek, Mistral, Grok)", hash: "#model-families" },
     { label: "4. Closed Models vs Open-Weight Models", hash: "#closed-vs-open" },
     { label: "5. Dense Models vs MoE Models", hash: "#dense-vs-moe" },
     { label: "6. Reasoning Models (o1, DeepSeek-R1)", hash: "#reasoning-models" },
@@ -114,7 +114,7 @@ context = "Retrieval Augmented Generation reduces"
           </div>
           <div>
             <h2 className="text-2xl font-black text-white">3. Major Model Families</h2>
-            <p className="text-xs text-gray-400">OpenAI, Anthropic, Google, Meta, Alibaba, DeepSeek, and Mistral ecosystems</p>
+            <p className="text-xs text-gray-400">OpenAI, Anthropic, Google, Meta, Alibaba, DeepSeek, Mistral, and xAI ecosystems</p>
           </div>
         </div>
 
@@ -146,6 +146,14 @@ context = "Retrieval Augmented Generation reduces"
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-400 block">DeepSeek</span>
             <span className="text-[10px] text-gray-400">Ultra-efficient MoE & reasoning models: DeepSeek-V3 (671B), DeepSeek-R1. Open weights with low training costs.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-amber-400 block">Mistral</span>
+            <span className="text-[10px] text-gray-400">High efficiency & European data sovereignty: Mistral Large, Mixtral 8x22B. Flexible open-weight and API models.</span>
+          </div>
+          <div className="bg-black/40 p-3 rounded-xl border border-white/5">
+            <span className="font-bold text-slate-300 block">Grok (xAI)</span>
+            <span className="text-[10px] text-gray-400">Real-time social data & uncensored personality: Grok-2, Grok-3. Native X (Twitter) integration.</span>
           </div>
         </div>
       </section>
@@ -520,6 +528,14 @@ $ ollama run deepseek-r1:14b`}</pre>
                 <td className="p-3">128k</td>
                 <td className="p-3">$0.40 / $0.40</td>
                 <td className="p-3 text-emerald-400">Self-Hosted Enterprise RAG</td>
+              </tr>
+              <tr className="hover:bg-white/5">
+                <td className="p-3 font-bold text-white">Grok-2</td>
+                <td className="p-3">xAI</td>
+                <td className="p-3 text-red-400">No (Closed)</td>
+                <td className="p-3">128k</td>
+                <td className="p-3">$2.00 / $10.00</td>
+                <td className="p-3 text-emerald-400">Real-time Social Knowledge</td>
               </tr>
             </tbody>
           </table>

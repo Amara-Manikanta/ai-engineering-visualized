@@ -88,6 +88,7 @@ const NAV_LINKS = [
       { name: "Qwen", path: "/models/qwen" },
       { name: "DeepSeek", path: "/models/deepseek" },
       { name: "Mistral", path: "/models/mistral" },
+      { name: "Grok", path: "/models/grok" },
     ],
   },
   {
