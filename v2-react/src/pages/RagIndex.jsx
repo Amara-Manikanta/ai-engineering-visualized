@@ -1,207 +1,399 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
-import { BookOpen, Database, Zap, Layers, FileText, Search, Activity, GitBranch, ArrowRight } from 'lucide-react';
+import {
+  BookOpen, Database, Zap, Layers, FileText, Search,
+  Activity, GitBranch, ArrowRight, Sparkles, ClipboardCheck, Rocket,
+} from 'lucide-react';
+
+/* ---------------------------------------------------------------------------
+   The four RAG stages — the spine the whole page is organized around.
+--------------------------------------------------------------------------- */
+
+const STAGES = [
+  {
+    id: 'index',
+    n: 1,
+    name: 'Index',
+    sub: 'Runs once, ahead of time',
+    blurb:
+      'Everything that happens before a user ever asks a question: load the documents, split them into chunks, turn each chunk into a vector, and store it somewhere searchable. Get this wrong and nothing downstream can recover.',
+    accent: 'purple',
+    icon: <Database size={18} />,
+    topics: [
+      { title: 'Fundamentals', path: '/rag/fundamentals', icon: <BookOpen size={18} />, desc: 'Why RAG exists, and the four stages end to end.' },
+      { title: 'Data Prep', path: '/rag/data-prep', icon: <FileText size={18} />, desc: 'Load, parse, clean, enrich, normalize. The quality ceiling.' },
+      { title: 'Chunking', path: '/rag/chunking', icon: <Layers size={18} />, desc: 'Splitting text so each piece is one coherent idea.' },
+      { title: 'Embeddings', path: '/rag/embeddings', icon: <Activity size={18} />, desc: 'Turning text into vectors that encode meaning.' },
+      { title: 'Vector DBs', path: '/rag/vector-dbs', icon: <Database size={18} />, desc: 'Where the vectors live, and how to query them.' },
+      { title: 'Indexing', path: '/rag/indexing', icon: <GitBranch size={18} />, desc: 'HNSW, IVF, and the speed/recall tradeoff.' },
+    ],
+  },
+  {
+    id: 'retrieve',
+    n: 2,
+    name: 'Retrieve',
+    sub: 'Runs on every query',
+    blurb:
+      'Find the chunks that actually answer the question. This is where most RAG systems fail — and where most of the engineering leverage is, because the LLM can only reason over what you hand it.',
+    accent: 'blue',
+    icon: <Search size={18} />,
+    topics: [
+      { title: 'Retrieval', path: '/rag/retrieval', icon: <Search size={18} />, desc: 'Similarity search, top-k, and MMR for diversity.' },
+      { title: 'Advanced Retrieval', path: '/rag/advanced-retrieval', icon: <Sparkles size={18} />, desc: 'Hybrid search, re-ranking, HyDE, decomposition.', badge: 'Deep dive' },
+    ],
+  },
+  {
+    id: 'generate',
+    n: 3,
+    name: 'Generate',
+    sub: 'Turn context into an answer',
+    blurb:
+      'Assemble the retrieved chunks into a prompt and let the model write a grounded, citable answer — while refusing to invent anything the context does not support.',
+    accent: 'amber',
+    icon: <Zap size={18} />,
+    topics: [
+      { title: 'Generation', path: '/rag/generation', icon: <Zap size={18} />, desc: 'Prompt construction, grounding, and citations.' },
+    ],
+  },
+  {
+    id: 'ship',
+    n: 4,
+    name: 'Measure & Ship',
+    sub: 'Make it real',
+    blurb:
+      'The difference between a demo and a product. Prove the system works with numbers rather than anecdotes, then deploy it in a way that stays fast, cheap, and secure.',
+    accent: 'emerald',
+    icon: <Rocket size={18} />,
+    topics: [
+      { title: 'Evaluation', path: '/rag/evaluation', icon: <ClipboardCheck size={18} />, desc: 'Precision, recall, NDCG, RAGAS, and the 7 failure points.', badge: 'Interactive' },
+      { title: 'Development', path: '/rag/development', icon: <Rocket size={18} />, desc: 'Frameworks, pipeline code, and the production checklist.' },
+    ],
+  },
+];
+
+const ACCENT = {
+  purple: {
+    text: 'text-purple-400',
+    border: 'border-purple-500/40',
+    bg: 'bg-purple-500/10',
+    ring: 'ring-purple-500/50',
+    dot: 'bg-purple-500',
+    hover: 'hover:border-purple-500/50',
+  },
+  blue: {
+    text: 'text-blue-400',
+    border: 'border-blue-500/40',
+    bg: 'bg-blue-500/10',
+    ring: 'ring-blue-500/50',
+    dot: 'bg-blue-500',
+    hover: 'hover:border-blue-500/50',
+  },
+  amber: {
+    text: 'text-amber-400',
+    border: 'border-amber-500/40',
+    bg: 'bg-amber-500/10',
+    ring: 'ring-amber-500/50',
+    dot: 'bg-amber-500',
+    hover: 'hover:border-amber-500/50',
+  },
+  emerald: {
+    text: 'text-emerald-400',
+    border: 'border-emerald-500/40',
+    bg: 'bg-emerald-500/10',
+    ring: 'ring-emerald-500/50',
+    dot: 'bg-emerald-500',
+    hover: 'hover:border-emerald-500/50',
+  },
+};
+
+/* ---------------------------------------------------------------------------
+   Hero: the pipeline itself, with a packet animating through it
+--------------------------------------------------------------------------- */
+
+function PipelineHero({ active, setActive }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-black/40 p-6 relative overflow-hidden">
+      {/* subtle grid backdrop */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808010_1px,transparent_1px),linear-gradient(to_bottom,#80808010_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
+      <div className="relative">
+        <div className="flex items-stretch gap-2 overflow-x-auto pb-1">
+          {STAGES.map((s, i) => {
+            const a = ACCENT[s.accent];
+            const isActive = active.id === s.id;
+            return (
+              <React.Fragment key={s.id}>
+                <motion.button
+                  onClick={() => setActive(s)}
+                  whileHover={{ y: -3 }}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.09 }}
+                  className={`flex-1 min-w-[140px] rounded-xl border p-4 text-left transition-all ${
+                    isActive ? `${a.bg} ${a.border} ring-2 ${a.ring}` : 'bg-white/5 border-white/10 hover:border-white/30'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
+                        isActive ? `${a.dot} text-black` : 'bg-white/10 text-gray-400'
+                      }`}
+                    >
+                      {s.n}
+                    </span>
+                    <span className={isActive ? a.text : 'text-gray-500'}>{s.icon}</span>
+                  </div>
+                  <div className={`font-bold text-sm mb-0.5 ${isActive ? 'text-white' : 'text-gray-300'}`}>
+                    {s.name}
+                  </div>
+                  <div className="text-[10px] text-gray-500 leading-snug">{s.sub}</div>
+                  <div className="text-[10px] text-gray-600 mt-2">
+                    {s.topics.length} {s.topics.length === 1 ? 'guide' : 'guides'}
+                  </div>
+                </motion.button>
+
+                {i < STAGES.length - 1 && (
+                  <div className="flex items-center shrink-0 px-0.5">
+                    <div className="relative w-6 h-0.5 bg-white/10 rounded-full overflow-hidden">
+                      <motion.div
+                        className="absolute inset-y-0 w-2 bg-white/60 rounded-full"
+                        animate={{ left: ['-20%', '110%'] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: 'linear', delay: i * 0.6 }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className={`mt-4 rounded-xl border p-4 ${ACCENT[active.accent].bg} ${ACCENT[active.accent].border}`}
+          >
+            <p className="text-sm text-gray-300 leading-relaxed m-0">{active.blurb}</p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Advanced architectures
+--------------------------------------------------------------------------- */
+
+const ARCHITECTURES = [
+  { title: 'Types of RAG', path: '/rag/types-of-rag', desc: 'The full taxonomy — start here to see how the variants relate.', icon: '🗺️', featured: true },
+  { title: 'Naive RAG', path: '/rag/naive-rag', desc: 'The baseline: embed, search, stuff into a prompt.', icon: '🌱' },
+  { title: 'Advanced RAG', path: '/rag/advanced-rag', desc: 'Pre- and post-retrieval optimization around the same core loop.', icon: '⚡' },
+  { title: 'Hybrid RAG', path: '/rag/hybrid-rag', desc: 'Dense vectors plus sparse keywords, fused with RRF.', icon: '🔀' },
+  { title: 'Graph RAG', path: '/rag/graph-rag', desc: 'Build a knowledge graph and retrieve subgraphs, not chunks.', icon: '🕸️' },
+  { title: 'Agentic RAG', path: '/rag/agentic-rag', desc: 'An agent decides what to search, evaluates, and loops.', icon: '🤖' },
+  { title: 'Corrective RAG', path: '/rag/crag', desc: 'Grade retrieved docs, fall back to web search when they are weak.', icon: '🩹' },
+  { title: 'Self-RAG', path: '/rag/self-rag', desc: 'The model decides when to retrieve and critiques its own output.', icon: '🪞' },
+  { title: 'Multimodal RAG', path: '/rag/multimodal-rag', desc: 'Retrieve across images, tables, and audio — not just text.', icon: '🖼️' },
+];
+
+/* ------------------------------------------------------------------------ */
 
 export default function RagIndex() {
+  const [activeStage, setActiveStage] = useState(STAGES[0]);
+
   const toc = [
-    { label: "Overview", hash: "overview" },
-    { label: "RAG Topics", hash: "topics" },
-    { label: "Demo", hash: "demo" }
-  ];
-
-  const topics = [
-    { title: "Fundamentals", path: "/rag/fundamentals", icon: <BookOpen className="text-blue-400" />, desc: "The core concepts of Retrieval-Augmented Generation." },
-    { title: "Data Prep", path: "/rag/data-prep", icon: <FileText className="text-emerald-400" />, desc: "Extracting and cleaning data from documents." },
-    { title: "Chunking", path: "/rag/chunking", icon: <Layers className="text-indigo-400" />, desc: "Strategies for splitting text into optimal sizes." },
-    { title: "Embeddings", path: "/rag/embeddings", icon: <Activity className="text-purple-400" />, desc: "Converting text into dense mathematical vectors." },
-    { title: "Vector DBs", path: "/rag/vector-dbs", icon: <Database className="text-rose-400" />, desc: "Storing and querying embeddings at scale." },
-    { title: "Indexing", path: "/rag/indexing", icon: <GitBranch className="text-amber-400" />, desc: "Organizing vectors for fast approximate search." },
-    { title: "Retrieval", path: "/rag/retrieval", icon: <Search className="text-teal-400" />, desc: "Finding the most relevant context for a query." },
-    { title: "Generation", path: "/rag/generation", icon: <Zap className="text-yellow-400" />, desc: "Passing context to the LLM to generate answers." },
-    { title: "Evaluation", path: "/rag/evaluation", icon: <Activity className="text-pink-400" />, desc: "Measuring RAG accuracy with RAGAS and TruLens." },
-    { title: "Development", path: "/rag/development", icon: <Layers className="text-blue-500" />, desc: "Building RAG applications step-by-step." },
-  ];
-
-  const advancedTopics = [
-    { title: "Advanced RAG", path: "/rag/advanced-rag" },
-    { title: "Advanced Retrieval", path: "/rag/advanced-retrieval" },
-    { title: "Hybrid RAG", path: "/rag/hybrid-rag" },
-    { title: "Graph RAG", path: "/rag/graph-rag" },
-    { title: "Agentic RAG", path: "/rag/agentic-rag" },
-    { title: "CRAG", path: "/rag/crag" },
-    { title: "Multimodal RAG", path: "/rag/multimodal-rag" },
-    { title: "Types of RAG", path: "/rag/types-of-rag" },
-    { title: "Naive RAG", path: "/rag/naive-rag" },
-    { title: "Self RAG", path: "/rag/self-rag" },
+    { label: 'The Four Stages', hash: 'stages' },
+    { label: 'Learning Path', hash: 'path' },
+    { label: 'Advanced Architectures', hash: 'architectures' },
   ];
 
   return (
     <GuideLayout
       title="RAG from Scratch"
-      intro="Indexing → Retrieval → Augmented → Generation"
+      intro="Index → Retrieve → Generate → Measure. A complete, visual walkthrough of Retrieval-Augmented Generation."
       toc={toc}
     >
-      <section id="hero" className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden bg-[#0a0a0a] text-gray-300">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-          <motion.div 
-            animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px]"
-          />
-          <motion.div 
-            animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.1, 1] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]"
-          />
-        </div>
-        
-        <div className="relative z-10 text-center max-w-4xl px-4 py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 mb-6 rounded-full border border-gray-700 bg-gray-800/50 backdrop-blur text-sm font-medium"
-          >
-            <span className="inline-block w-2 h-2 rounded-full bg-blue-400 mr-2 animate-pulse"></span>
-            Interactive Learning Guide
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white"
-          >
-            RAG <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">from Scratch</span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto"
-          >
-            A deep-dive, step-by-step animated explainer of <strong className="text-gray-200">Retrieval-Augmented Generation</strong> —
-            the architecture that lets LLMs answer questions with your own data, accurately and with context.
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-          >
-            <a href="#overview" className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors w-full sm:w-auto">
-              Start Learning ↓
-            </a>
-            <a href="#demo" className="px-8 py-3 rounded-lg border border-gray-600 hover:bg-gray-800 text-white font-medium transition-colors w-full sm:w-auto">
-              Live Demo →
-            </a>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="grid grid-cols-3 gap-4 md:gap-8 border-t border-gray-800 pt-8"
-          >
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-1">4</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">Core Stages</div>
-            </div>
-            <div className="text-center border-l border-r border-gray-800">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-1">12+</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">Concepts</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-1">100%</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">Animated</div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Floating Cards */}
-        {[
-          { text: "📄 PDF", delay: 0, top: "20%", left: "10%" },
-          { text: "🔍 Query", delay: 1, top: "30%", right: "15%" },
-          { text: "🧠 LLM", delay: 0.5, bottom: "25%", left: "15%" },
-          { text: "💬 Response", delay: 1.5, bottom: "20%", right: "10%" },
-          { text: "📊 Vectors", delay: 2, top: "15%", right: "30%" }
-        ].map((card, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: [0.5, 1, 0.5],
-              y: [-10, 10, -10],
-            }}
-            transition={{
-              opacity: { duration: 3, repeat: Infinity, delay: card.delay },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: card.delay }
-            }}
-            style={{
-              position: 'absolute',
-              top: card.top,
-              left: card.left,
-              right: card.right,
-              bottom: card.bottom
-            }}
-            className="hidden lg:flex px-4 py-2 rounded-lg bg-gray-800/80 backdrop-blur border border-gray-700 text-sm font-medium text-gray-300 shadow-xl"
-          >
-            {card.text}
-          </motion.div>
-        ))}
-      </section>
-
-      {/* Topics Section */}
-      <section id="topics" className="py-20 px-4 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Explore RAG Topics</h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            From the basics of vector embeddings to advanced agentic RAG architectures, everything you need to know.
+      <div className="space-y-16">
+        {/* ---------------------------------------------------------------- */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          id="stages"
+          className="scroll-mt-24"
+        >
+          <p className="text-gray-300 leading-relaxed mb-6 max-w-3xl">
+            An LLM only knows what it was trained on. RAG fixes that by looking things up in <em>your</em> data at
+            question time and handing the model the relevant passages before it answers — which is what makes answers
+            current, private, and citable.
           </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {topics.map((topic, i) => (
-            <Link key={i} to={topic.path}>
-              <motion.div 
-                whileHover={{ y: -5, borderColor: "rgba(99, 102, 241, 0.5)" }}
-                className="bg-[#111] border border-gray-800 rounded-xl p-6 h-full flex flex-col transition-colors hover:bg-[#1a1a1a]"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-[#1a1a1a] rounded-lg border border-gray-800">
-                    {topic.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{topic.title}</h3>
-                </div>
-                <p className="text-gray-400 mb-6 flex-grow">{topic.desc}</p>
-                <div className="flex items-center text-indigo-400 font-medium text-sm mt-auto">
-                  Learn more <ArrowRight size={16} className="ml-1" />
-                </div>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
+          <PipelineHero active={activeStage} setActive={setActiveStage} />
 
-        <div className="bg-[#111] border border-gray-800 rounded-2xl p-8 md:p-12">
-          <h3 className="text-2xl font-bold text-white mb-8 border-b border-gray-800 pb-4">Advanced RAG Architectures</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {advancedTopics.map((topic, i) => (
-              <Link key={i} to={topic.path}>
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-[#1a1a1a] hover:bg-indigo-900/20 border border-gray-800 hover:border-indigo-500/30 rounded-lg p-4 text-center transition-colors h-full flex items-center justify-center"
-                >
-                  <span className="text-gray-300 font-medium text-sm">{topic.title}</span>
-                </motion.div>
-              </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+            {[
+              { k: 'Grounded', v: 'Answers cite real documents instead of model memory.' },
+              { k: 'Current', v: 'Update the index, not the model weights.' },
+              { k: 'Private', v: 'Your data stays in your vector store.' },
+            ].map((c) => (
+              <div key={c.k} className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <div className="text-sm font-semibold text-white mb-1">{c.k}</div>
+                <div className="text-xs text-gray-400 leading-relaxed">{c.v}</div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </motion.section>
+
+        {/* ---------------------------------------------------------------- */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          id="path"
+          className="scroll-mt-24"
+        >
+          <h2 className="text-2xl font-semibold text-white mb-2">Learning Path</h2>
+          <p className="text-gray-400 leading-relaxed mb-8 max-w-3xl">
+            Eleven guides, ordered the way the pipeline actually runs. If you are new to RAG, read straight down.
+          </p>
+
+          <div className="space-y-10">
+            {STAGES.map((stage) => {
+              const a = ACCENT[stage.accent];
+              return (
+                <div key={stage.id} className="relative">
+                  {/* Stage header */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      className={`w-8 h-8 rounded-full ${a.dot} text-black flex items-center justify-center font-bold text-sm shrink-0`}
+                    >
+                      {stage.n}
+                    </span>
+                    <div>
+                      <h3 className={`font-bold text-lg leading-tight ${a.text}`}>{stage.name}</h3>
+                      <div className="text-[11px] text-gray-500">{stage.sub}</div>
+                    </div>
+                    <div className={`flex-1 h-px ${a.bg}`} />
+                  </div>
+
+                  {/* Topic cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:pl-11">
+                    {stage.topics.map((t, i) => (
+                      <motion.div
+                        key={t.path}
+                        initial={{ opacity: 0, y: 14 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.05 }}
+                        whileHover={{ y: -4 }}
+                      >
+                        <Link
+                          to={t.path}
+                          className={`group block h-full p-5 rounded-xl border border-white/10 bg-white/5 ${a.hover} hover:bg-white/[0.07] transition-colors`}
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-3">
+                            <span className={`p-2 rounded-lg bg-black/40 border border-white/10 ${a.text}`}>
+                              {t.icon}
+                            </span>
+                            {t.badge && (
+                              <span
+                                className={`text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${a.border} ${a.bg} ${a.text}`}
+                              >
+                                {t.badge}
+                              </span>
+                            )}
+                          </div>
+                          <h4 className="font-bold text-white mb-1.5">{t.title}</h4>
+                          <p className="text-xs text-gray-400 leading-relaxed mb-4">{t.desc}</p>
+                          <div className={`flex items-center text-xs font-medium mt-auto ${a.text}`}>
+                            Read
+                            <ArrowRight
+                              size={13}
+                              className="ml-1 group-hover:translate-x-1 transition-transform"
+                            />
+                          </div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </motion.section>
+
+        {/* ---------------------------------------------------------------- */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          id="architectures"
+          className="scroll-mt-24"
+        >
+          <h2 className="text-2xl font-semibold text-white mb-2">Advanced Architectures</h2>
+          <p className="text-gray-400 leading-relaxed mb-6 max-w-3xl">
+            Once the basic pipeline works, these are the named variants you will run into. Each one changes the shape
+            of the retrieval loop rather than just tuning it.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {ARCHITECTURES.map((arch, i) => (
+              <motion.div
+                key={arch.path}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04 }}
+                whileHover={{ y: -4 }}
+              >
+                <Link
+                  to={arch.path}
+                  className={`group block h-full p-5 rounded-xl border transition-colors ${
+                    arch.featured
+                      ? 'border-indigo-500/40 bg-indigo-500/10 hover:border-indigo-500/60'
+                      : 'border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/[0.07]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <span className="text-xl">{arch.icon}</span>
+                    <h4 className="font-bold text-white text-sm">{arch.title}</h4>
+                    {arch.featured && (
+                      <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border border-indigo-500/40 text-indigo-300 ml-auto">
+                        Start
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-gray-400 leading-relaxed m-0">{arch.desc}</p>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-8 p-5 rounded-xl border border-white/10 bg-white/5">
+            <p className="text-sm text-gray-400 leading-relaxed m-0">
+              <strong className="text-white">Not sure where to start?</strong> Read{' '}
+              <Link to="/rag/fundamentals" className="text-blue-400 hover:underline">
+                Fundamentals
+              </Link>{' '}
+              for the whole picture, then{' '}
+              <Link to="/rag/chunking" className="text-blue-400 hover:underline">
+                Chunking
+              </Link>{' '}
+              and{' '}
+              <Link to="/rag/advanced-retrieval" className="text-blue-400 hover:underline">
+                Advanced Retrieval
+              </Link>{' '}
+              — those two account for most of the quality difference between a demo and something people trust.
+            </p>
+          </div>
+        </motion.section>
+      </div>
     </GuideLayout>
   );
 }
