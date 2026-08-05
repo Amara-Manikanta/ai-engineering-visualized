@@ -39,7 +39,7 @@ const NAV_LINKS = [
       { name: "AI Models", path: "/llms" },
       { name: "LLM Inference", path: "/llm-inference" },
       { name: "Prompt Engineering", path: "/prompting" },
-      { name: "Embeddings", path: "/embeddings" },
+      { name: "Embeddings", path: "/rag/embeddings" },
       { name: "Fine-tuning", path: "/genai/fine-tuning" },
       { name: "Quantization", path: "/genai/quantization" },
     ],
