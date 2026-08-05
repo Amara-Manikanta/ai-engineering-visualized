@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
+import CodeBlock from "../components/CodeBlock";
 
 const DATA = [
   { x: 1, y: 2.1 }, { x: 2, y: 3.9 }, { x: 3, y: 4.8 }, { x: 4, y: 6.2 },
@@ -141,16 +142,54 @@ export default function MlLinear() {
           real models, you instead nudge <code className="text-indigo-300">m</code> and <code className="text-indigo-300">b</code> a
           little in the direction that reduces MSE, repeatedly, until it stops improving:
         </p>
-        <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm text-gray-200 whitespace-pre">
-{`for epoch in range(num_epochs):
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+          <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-5">
+            <div className="text-sm font-semibold text-white mb-1">Rolling downhill on the cost curve</div>
+            <div className="text-[11px] text-gray-500 mb-3">Each step moves against the gradient toward lower MSE.</div>
+            <svg viewBox="0 0 200 130" className="w-full">
+              {/* parabola (cost vs a parameter) */}
+              <path d="M 20 20 Q 100 170 180 20" fill="none" stroke="#374151" strokeWidth="2" />
+              {/* descending steps */}
+              {[
+                { x: 34, y: 44 }, { x: 52, y: 74 }, { x: 72, y: 96 }, { x: 92, y: 106 }, { x: 100, y: 108 },
+              ].map((p, i, arr) => (
+                <g key={i}>
+                  {i < arr.length - 1 && (
+                    <line x1={p.x} y1={p.y} x2={arr[i + 1].x} y2={arr[i + 1].y} stroke="#f43f5e" strokeWidth="1" strokeDasharray="2,2" opacity="0.5" />
+                  )}
+                  <motion.circle
+                    cx={p.x}
+                    cy={p.y}
+                    r={i === arr.length - 1 ? 5 : 3.5}
+                    fill={i === arr.length - 1 ? '#34d399' : '#818cf8'}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.25 }}
+                  />
+                </g>
+              ))}
+              <text x="100" y="126" textAnchor="middle" fill="#6b7280" fontSize="8">parameter value →</text>
+              <text x="12" y="16" fill="#6b7280" fontSize="8">cost</text>
+            </svg>
+            <div className="text-[11px] text-gray-500 mt-1 leading-relaxed">
+              The <span className="text-emerald-400">green</span> point is the minimum — the best-fit line. The{' '}
+              <strong className="text-gray-300">learning rate</strong> sets the step size: too small crawls, too large
+              overshoots and diverges.
+            </div>
+          </div>
+
+          <CodeBlock language="python" maxHeight="320px" code={`for epoch in range(num_epochs):
     y_pred = m * X + b
     error = y_pred - y
 
-    dm = (2/n) * sum(X * error)      # gradient wrt slope
-    db = (2/n) * sum(error)          # gradient wrt intercept
+    # gradients: which way is downhill?
+    dm = (2/n) * sum(X * error)   # wrt slope
+    db = (2/n) * sum(error)       # wrt intercept
 
+    # take a step against the gradient
     m -= learning_rate * dm
-    b -= learning_rate * db`}
+    b -= learning_rate * db`} />
         </div>
       </section>
 
@@ -171,6 +210,21 @@ export default function MlLinear() {
             <p className="text-sm text-gray-300 mb-2">Measures how much of the variance in y is explained by the model, from 0 (no better than predicting the mean) to 1 (perfect fit).</p>
             <code className="text-indigo-300 text-sm bg-black/40 px-2 py-1 rounded block">R² = 1 − (SS_residual / SS_total)</code>
           </div>
+        </div>
+
+        <div className="mt-5 p-4 rounded-xl border border-white/10 bg-white/5">
+          <p className="text-sm text-gray-400 leading-relaxed m-0">
+            <strong className="text-white">When one line isn't enough:</strong> if the relationship curves, add
+            polynomial terms; if several inputs drive the output, move to{' '}
+            <a href="/ai-engineering-visualized/ml/multiple-regression" className="text-blue-400 hover:underline">
+              Multiple Regression
+            </a>
+            . If you are predicting a category rather than a number, the sibling model is{' '}
+            <a href="/ai-engineering-visualized/ml/logistic-regression" className="text-blue-400 hover:underline">
+              Logistic Regression
+            </a>
+            .
+          </p>
         </div>
       </section>
     </GuideLayout>

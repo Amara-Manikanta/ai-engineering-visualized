@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
 import { 
-  Code2, Database, Globe, LineChart, Cpu, Sigma, Search, Box, 
+  Code2, Database, Globe, LineChart, Cpu, Sigma, Box,
   Terminal, Zap, Layers, ArrowRight, BookOpen, Variable, GitBranch,
   Sliders, Type, Repeat, ShieldAlert, Sparkles, RefreshCw, FileText,
   Folder, FileJson, TestTube, BarChart2
@@ -56,6 +56,17 @@ const moduleCards = [
     icon: <Sigma className="text-emerald-400" size={28} />
   }
 ];
+
+// Short monograms so each node reads as a real library chip instead of an empty circle.
+const LIB_MONOGRAM = {
+  Kafka: 'Kf', Ray: 'Ry', Hadoop: 'Hd', Dask: 'Dk', Koalas: 'Ko',
+  'Beautiful Soup': 'BS', Scrapy: 'Sc', Octoparse: 'Oc', Selenium: 'Se',
+  Pygal: 'Pg', Altair: 'Al', Bokeh: 'Bk', Seaborn: 'Sb', Matplotlib: 'Mp', Geoplotlib: 'Gp', Folium: 'Fo',
+  Vaex: 'Vx', NumPy: 'np', Pandas: 'pd', Datatable: 'Dt', Polars: 'Pl', CuPy: 'Cp',
+  Tensorflow: 'Tf', Pytorch: 'Pt', Keras: 'Ke', Theano: 'Th', XGBoost: 'XG', 'Scikit-learn': 'Sk', JAX: 'JX',
+  PyStan: 'PS', Lifelines: 'Ll', SciPy: 'Sp', PyMC3: 'MC', Pingouin: 'Pi', Statsmodels: 'Sm',
+};
+const monogram = (name) => LIB_MONOGRAM[name] || name.slice(0, 2);
 
 const PythonLibrariesCheatSheet = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -194,8 +205,8 @@ const PythonLibrariesCheatSheet = () => {
                     animate={{ opacity, scale: isHovered ? 1.2 : 1 }}
                     transition={{ delay: rIdx * 0.1 + i * 0.02, type: 'spring' }}
                   >
-                    <div className={`w-7 h-7 rounded-full border flex items-center justify-center shadow-lg transition-colors bg-[#1a1a1a] ${isActive ? ring.color : 'border-gray-700 text-gray-400'}`}>
-                       <Search size={12} className={isActive ? 'opacity-100' : 'opacity-0'} />
+                    <div className={`w-9 h-9 rounded-full border flex items-center justify-center shadow-lg transition-colors font-mono font-bold text-[11px] leading-none ${isActive ? ring.color : 'border-gray-700 text-gray-300 bg-[#1a1a1a]'}`}>
+                       {monogram(node)}
                     </div>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded transition-all ${isActive ? 'bg-[#222] text-white border border-[#444]' : 'text-gray-400 drop-shadow-md'}`}>
                       {node}

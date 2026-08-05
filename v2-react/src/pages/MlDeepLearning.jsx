@@ -1,14 +1,50 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import CodeBlock from '../components/CodeBlock';
 
 const toc = [
   { label: "From Neuron to Network", hash: "overview" },
+  { label: "What One Neuron Computes", hash: "neuron" },
   { label: "Anatomy of a Neural Network", hash: "anatomy" },
   { label: "Activation Functions", hash: "activations" },
   { label: "Forward Pass → Loss → Backprop", hash: "training-loop" },
   { label: "Common Architectures", hash: "architectures" },
 ];
+
+function SingleNeuron() {
+  const inputs = [
+    { label: 'x₁', w: 'w₁', y: 40 },
+    { label: 'x₂', w: 'w₂', y: 90 },
+    { label: 'x₃', w: 'w₃', y: 140 },
+  ];
+  return (
+    <svg viewBox="0 0 460 180" className="w-full max-w-xl mx-auto">
+      {/* input nodes + weighted edges into the sum */}
+      {inputs.map((inp, i) => (
+        <g key={i}>
+          <line x1="60" y1={inp.y} x2="210" y2="90" stroke="#4b5563" strokeWidth="1.2" />
+          <circle cx="45" cy={inp.y} r="15" fill="#0891b2" fillOpacity="0.25" stroke="#38bdf8" strokeWidth="1.2" />
+          <text x="45" y={inp.y + 4} textAnchor="middle" fill="#e2e8f0" fontSize="12" fontFamily="monospace">{inp.label}</text>
+          <text x="130" y={(inp.y + 90) / 2 - 4} textAnchor="middle" fill="#818cf8" fontSize="9" fontFamily="monospace">{inp.w}</text>
+        </g>
+      ))}
+      {/* sum + bias node */}
+      <circle cx="230" cy="90" r="28" fill="#4c1d95" fillOpacity="0.3" stroke="#a78bfa" strokeWidth="1.5" />
+      <text x="230" y="86" textAnchor="middle" fill="#e9d5ff" fontSize="14">Σ</text>
+      <text x="230" y="102" textAnchor="middle" fill="#c4b5fd" fontSize="8" fontFamily="monospace">+ b</text>
+      {/* activation */}
+      <line x1="258" y1="90" x2="315" y2="90" stroke="#4b5563" strokeWidth="1.2" />
+      <rect x="315" y="68" width="60" height="44" rx="8" fill="#065f46" fillOpacity="0.3" stroke="#34d399" strokeWidth="1.2" />
+      <text x="345" y="86" textAnchor="middle" fill="#a7f3d0" fontSize="10">activation</text>
+      <text x="345" y="100" textAnchor="middle" fill="#6ee7b7" fontSize="8" fontFamily="monospace">f( )</text>
+      {/* output */}
+      <line x1="375" y1="90" x2="420" y2="90" stroke="#4b5563" strokeWidth="1.2" />
+      <circle cx="435" cy="90" r="15" fill="#065f46" fillOpacity="0.3" stroke="#34d399" strokeWidth="1.2" />
+      <text x="435" y="94" textAnchor="middle" fill="#a7f3d0" fontSize="11" fontFamily="monospace">ŷ</text>
+    </svg>
+  );
+}
 
 const LAYERS = [3, 5, 5, 2];
 
@@ -74,6 +110,25 @@ export default function MlDeepLearning() {
         </p>
       </section>
 
+      <section id="neuron" className="mb-14 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">What One Neuron Computes</h2>
+        <p className="text-gray-300 mb-6 max-w-3xl">
+          Before the network, the neuron. Every node does the same three things: multiply each input by a learned
+          weight, add them up with a bias, and pass the result through an activation function. That is the entire
+          operation — a whole neural network is just millions of these, wired together.
+        </p>
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6">
+          <SingleNeuron />
+          <div className="mt-4 bg-[#0f0f11] border border-gray-800 rounded-lg p-3 font-mono text-sm text-gray-200 text-center">
+            ŷ = f( w₁x₁ + w₂x₂ + w₃x₃ + b )
+          </div>
+          <p className="text-[11px] text-gray-500 mt-3 text-center max-w-lg mx-auto leading-relaxed">
+            Notice the inside is exactly linear/logistic regression. The activation <code className="text-emerald-300">f</code>{' '}
+            is what adds non-linearity — and stacking these is what lets networks model curves no single line can.
+          </p>
+        </div>
+      </section>
+
       <section id="anatomy" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Anatomy of a Neural Network</h2>
         <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6">
@@ -137,15 +192,13 @@ export default function MlDeepLearning() {
           Backpropagation is just the chain rule applied layer by layer: it computes how much each weight contributed
           to the final error, then nudges every weight slightly in the direction that reduces that error.
         </p>
-        <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm text-gray-200 whitespace-pre">
-{`for epoch in range(epochs):
+        <CodeBlock language="python" maxHeight="300px" code={`for epoch in range(epochs):
     y_pred = model.forward(X)          # forward pass
     loss = loss_fn(y_pred, y_true)     # e.g. cross-entropy, MSE
 
     loss.backward()                    # compute gradients via chain rule
     optimizer.step()                   # w -= learning_rate * gradient
-    optimizer.zero_grad()`}
-        </div>
+    optimizer.zero_grad()              # reset for the next batch`} />
       </section>
 
       <section id="architectures" className="mb-4 scroll-mt-24">
@@ -165,6 +218,16 @@ export default function MlDeepLearning() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="mt-6 p-4 rounded-xl border border-white/10 bg-white/5">
+          <p className="text-sm text-gray-400 leading-relaxed m-0">
+            The Transformer is the architecture behind every modern LLM. For a full visual walkthrough of attention,
+            positional encoding, and the end-to-end stack, see the{' '}
+            <a href="/ai-engineering-visualized/ml/transformers" className="text-blue-400 hover:underline">
+              Transformers deep-dive
+            </a>
+            .
+          </p>
         </div>
       </section>
     </GuideLayout>

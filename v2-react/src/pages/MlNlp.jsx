@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
+import CodeBlock from "../components/CodeBlock";
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -395,7 +396,7 @@ export default function MlNlp() {
               <span className="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded font-mono font-medium">wordcloud</span>
             </div>
             
-            <pre className="bg-[#111] border border-gray-800 rounded-xl p-6 font-mono text-sm overflow-x-auto text-gray-300 h-full max-h-[460px] custom-scrollbar">
+            <CodeBlock language="python" maxHeight="460px">
               <code>
                 <span className="text-gray-500"># Install dependencies: pip install wordcloud matplotlib</span>{"\n"}
                 <span className="text-pink-400">import</span> matplotlib.pyplot <span className="text-pink-400">as</span> plt{"\n"}
@@ -420,7 +421,7 @@ export default function MlNlp() {
                 plt.axis(<span className="text-emerald-400">"off"</span>){"\n"}
                 plt.show()
               </code>
-            </pre>
+            </CodeBlock>
           </div>
         </div>
       </motion.section>

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
+import CodeBlock from "../components/CodeBlock";
 
 const toc = [
   { label: "From One Feature to Many", hash: "overview" },
@@ -66,6 +67,33 @@ export default function MlMultiple() {
             <div className="text-gray-500">= {b0.toLocaleString()} + {(bSqft * sqft).toLocaleString()} + {(bBed * bedrooms).toLocaleString()} + {(bAge * age).toLocaleString()}</div>
           </div>
 
+          {/* Contribution bars — each feature's push on the prediction */}
+          <div className="mb-4">
+            <div className="text-xs uppercase tracking-wide text-gray-500 mb-2">Each feature's contribution</div>
+            <div className="space-y-2">
+              {[
+                { label: 'Base (b₀)', val: b0, color: 'bg-gray-500' },
+                { label: 'Square feet', val: bSqft * sqft, color: 'bg-indigo-500' },
+                { label: 'Bedrooms', val: bBed * bedrooms, color: 'bg-blue-500' },
+                { label: 'Age', val: bAge * age, color: 'bg-rose-500' },
+              ].map((c) => {
+                const maxAbs = Math.max(b0, bSqft * sqft, bBed * bedrooms, Math.abs(bAge * age), 1);
+                const pct = Math.min(100, (Math.abs(c.val) / maxAbs) * 100);
+                return (
+                  <div key={c.label} className="flex items-center gap-3">
+                    <span className="text-xs text-gray-400 w-24 shrink-0">{c.label}</span>
+                    <div className="flex-1 h-4 rounded bg-white/5 overflow-hidden">
+                      <motion.div className={`h-full ${c.color}`} animate={{ width: `${pct}%` }} transition={{ type: 'spring', stiffness: 120, damping: 20 }} />
+                    </div>
+                    <span className={`text-xs font-mono w-24 text-right shrink-0 ${c.val < 0 ? 'text-rose-400' : 'text-gray-300'}`}>
+                      {c.val < 0 ? '−' : '+'}${Math.abs(c.val).toLocaleString()}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           <motion.div key={prediction} initial={{ scale: 0.95, opacity: 0.6 }} animate={{ scale: 1, opacity: 1 }} className="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4 text-center">
             <span className="text-sm text-gray-400 block mb-1">Predicted Price</span>
             <span className="text-3xl font-black text-emerald-300">${Math.max(0, prediction).toLocaleString()}</span>
@@ -116,13 +144,45 @@ export default function MlMultiple() {
       </section>
 
       <section id="scaling" className="mb-4 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Feature Scaling</h2>
-        <p className="text-gray-300 max-w-3xl">
+        <h2 className="text-2xl font-bold text-white mb-4">Feature Scaling & Regularization</h2>
+        <p className="text-gray-300 max-w-3xl mb-4">
           Features on very different scales (square feet in the thousands vs. bedroom count 1–6) make gradient
           descent converge slowly and skew regularization penalties. Standardizing features
           (<code className="text-indigo-300">z = (x − mean) / std</code>) before training is standard practice for
           any multi-feature linear model.
         </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="p-4 rounded-xl border border-blue-500/25 bg-blue-500/10">
+            <div className="text-sm font-semibold text-blue-300 mb-1">Ridge (L2)</div>
+            <p className="text-xs text-gray-300 leading-relaxed m-0">
+              Adds a penalty on the sum of squared coefficients. Shrinks them toward zero (but never exactly zero),
+              which tames multicollinearity and stabilizes the model.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-purple-500/25 bg-purple-500/10">
+            <div className="text-sm font-semibold text-purple-300 mb-1">Lasso (L1)</div>
+            <p className="text-xs text-gray-300 leading-relaxed m-0">
+              Penalizes the sum of absolute coefficients. Can drive some to exactly zero — performing automatic
+              feature selection by dropping useless inputs entirely.
+            </p>
+          </div>
+        </div>
+
+        <CodeBlock language="python" maxHeight="320px" code={`from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+
+# Scaling belongs INSIDE the pipeline so test data is scaled
+# using only the training statistics (no leakage).
+model = make_pipeline(
+    StandardScaler(),
+    Ridge(alpha=1.0),        # or LinearRegression() / Lasso(alpha=0.1)
+)
+model.fit(X_train, y_train)
+
+print("R² on test:", model.score(X_test, y_test))
+print("coefficients:", model[-1].coef_)`} />
       </section>
     </GuideLayout>
   );

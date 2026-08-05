@@ -14,9 +14,33 @@ import { motion } from 'framer-motion';
  */
 export default function AdvancedFlowchart({ nodes, edges, currentStep = 0 }) {
   
-  // Calculate SVG bounding box based on nodes
+  // --- Canvas sizing -------------------------------------------------------
+  // Fit the canvas to actual content instead of a fixed 400px floor, which
+  // left a large empty band under single-row diagrams. When a diagram has no
+  // custom loop-back paths we also vertically centre it via offsetY; when it
+  // does, we keep the original coordinate origin so those absolute paths stay
+  // aligned with their nodes.
+  const PAD = 24;
+  const hasCustomPath = edges.some(e => e.path);
+
+  const minY = Math.min(...nodes.map(n => n.y || 0));
+  const nodeBottom = Math.max(...nodes.map(n => (n.y || 0) + (n.height || 50)));
+  // Lowest point of any custom edge path, so downward loop-backs aren't clipped.
+  const pathBottom = Math.max(
+    0,
+    ...edges
+      .filter(e => e.path)
+      .flatMap(e => (e.path.match(/-?\d+(?:\.\d+)?/g) || [])
+        .map(Number)
+        .filter((_, i) => i % 2 === 1)) // y-values are every 2nd number in an SVG path
+  );
+  const contentBottom = Math.max(nodeBottom, pathBottom);
+
+  const offsetY = hasCustomPath ? 0 : PAD - minY;
   const maxX = Math.max(...nodes.map(n => (n.x || 0) + (n.width || 100)), 600);
-  const maxY = Math.max(...nodes.map(n => (n.y || 0) + (n.height || 50)), 400);
+  const canvasH = hasCustomPath
+    ? contentBottom + PAD
+    : (contentBottom - minY) + PAD * 2;
 
   // Helper to find node coordinates
   const getNodeCenter = (id) => {
@@ -24,7 +48,7 @@ export default function AdvancedFlowchart({ nodes, edges, currentStep = 0 }) {
     if (!node) return { x: 0, y: 0 };
     return {
       x: (node.x || 0) + (node.width || 100) / 2,
-      y: (node.y || 0) + (node.height || 50) / 2
+      y: (node.y || 0) + offsetY + (node.height || 50) / 2
     };
   };
 
@@ -44,11 +68,11 @@ export default function AdvancedFlowchart({ nodes, edges, currentStep = 0 }) {
   };
 
   return (
-    <div className="relative w-full overflow-x-auto bg-[#111] border border-gray-800 rounded-xl my-6 custom-scrollbar" style={{ minHeight: `${maxY + 40}px` }}>
-      <div className="relative" style={{ width: `${maxX + 40}px`, height: `${maxY + 40}px` }}>
-        
+    <div className="relative w-full overflow-x-auto bg-[#111] border border-gray-800 rounded-xl my-6 custom-scrollbar" style={{ minHeight: `${canvasH}px` }}>
+      <div className="relative" style={{ width: `${maxX + 40}px`, height: `${canvasH}px` }}>
+
         {/* SVG Layer for Edges */}
-        <svg className="absolute inset-0 pointer-events-none" width={maxX + 40} height={maxY + 40} style={{ zIndex: 0 }}>
+        <svg className="absolute inset-0 pointer-events-none" width={maxX + 40} height={canvasH} style={{ zIndex: 0 }}>
           <defs>
             <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#6B7280" />
@@ -125,7 +149,7 @@ export default function AdvancedFlowchart({ nodes, edges, currentStep = 0 }) {
               className={nodeClass}
               style={{
                 left: node.x,
-                top: node.y,
+                top: (node.y || 0) + offsetY,
                 width: w,
                 height: h,
                 zIndex: 10,
