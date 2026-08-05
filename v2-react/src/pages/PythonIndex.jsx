@@ -54,6 +54,15 @@ const moduleCards = [
     badge: "Module 5",
     badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
     icon: <Sigma className="text-emerald-400" size={28} />
+  },
+  {
+    id: 6,
+    title: "6. Regular Expressions",
+    path: "/python/regex",
+    desc: "Pattern syntax, greedy vs lazy, capture groups, the `re` module, a live tester, and a practical cookbook.",
+    badge: "Module 6",
+    badgeColor: "bg-rose-500/20 text-rose-300 border-rose-500/30",
+    icon: <Type className="text-rose-400" size={28} />
   }
 ];
 

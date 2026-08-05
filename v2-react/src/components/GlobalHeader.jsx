@@ -13,6 +13,7 @@ const NAV_LINKS = [
       { name: "3. OOP & Advanced Python", path: "/python/advanced" },
       { name: "4. System, Tooling & Async", path: "/python/tooling-async" },
       { name: "5. Data Science & ML", path: "/python/data-science" },
+      { name: "6. Regular Expressions", path: "/python/regex" },
     ],
   },
   {
