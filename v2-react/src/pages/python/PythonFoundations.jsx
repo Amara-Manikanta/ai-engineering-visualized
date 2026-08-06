@@ -1,7 +1,168 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
 import { CodeSnippet } from '../../components/CodeBlock';
+
+/* ---------------------------------------------------------------------------
+   Interactive memory-reference diagram.
+
+   The single hardest idea for Python beginners: `b = a` copies the *pointer*,
+   never the object. Whether that matters depends entirely on whether the
+   object is mutable — so the two cases are shown side by side, step by step.
+   Visibility is driven by state (not animation) so it renders correctly even
+   when animation frames are throttled.
+--------------------------------------------------------------------------- */
+
+const MEMORY_SCENARIOS = {
+  immutable: {
+    label: 'Immutable (int)',
+    tone: 'emerald',
+    steps: [
+      { code: 'a = 5', vars: [{ n: 'a', obj: 0 }], objs: [{ v: '5', t: 'int' }], note: 'Python creates an int object and points the label `a` at it.' },
+      { code: 'b = a', vars: [{ n: 'a', obj: 0 }, { n: 'b', obj: 0 }], objs: [{ v: '5', t: 'int' }], note: 'No copy is made — `b` is a second label on the SAME object.' },
+      { code: 'b = b + 1', vars: [{ n: 'a', obj: 0 }, { n: 'b', obj: 1 }], objs: [{ v: '5', t: 'int' }, { v: '6', t: 'int' }], note: 'ints cannot change. Python builds a NEW object and rebinds `b`. `a` is untouched.' },
+    ],
+    outcome: 'a == 5  ·  b == 6',
+    outcomeGood: true,
+  },
+  mutable: {
+    label: 'Mutable (list)',
+    tone: 'rose',
+    steps: [
+      { code: 'a = [1, 2]', vars: [{ n: 'a', obj: 0 }], objs: [{ v: '[1, 2]', t: 'list' }], note: 'A list object is created and `a` points at it.' },
+      { code: 'b = a', vars: [{ n: 'a', obj: 0 }, { n: 'b', obj: 0 }], objs: [{ v: '[1, 2]', t: 'list' }], note: 'Same as before — two labels, one object. Still no copy.' },
+      { code: 'b.append(3)', vars: [{ n: 'a', obj: 0 }, { n: 'b', obj: 0 }], objs: [{ v: '[1, 2, 3]', t: 'list' }], note: 'append() MUTATES the object in place. Both labels see the change — this surprises everyone once.' },
+    ],
+    outcome: 'a == [1, 2, 3]  ·  b == [1, 2, 3]',
+    outcomeGood: false,
+  },
+};
+
+function MemoryModelVisual() {
+  const [kind, setKind] = useState('immutable');
+  const [step, setStep] = useState(0);
+  const scenario = MEMORY_SCENARIOS[kind];
+  const cur = scenario.steps[step];
+
+  const VAR_X = 30, OBJ_X = 210, BOX_W = 78, OBJ_W = 116, H = 34;
+  const rowY = (i) => 26 + i * 56;
+
+  return (
+    <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-5 mb-4">
+      {/* scenario toggle */}
+      <div className="flex gap-2 mb-4">
+        {Object.entries(MEMORY_SCENARIOS).map(([k, s]) => (
+          <button
+            key={k}
+            onClick={() => { setKind(k); setStep(0); }}
+            className={`px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${
+              kind === k
+                ? s.tone === 'emerald'
+                  ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-200'
+                  : 'bg-rose-500/20 border-rose-500/50 text-rose-200'
+                : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/30'
+            }`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+
+      {/* code lines */}
+      <div className="font-mono text-xs mb-4 space-y-1">
+        {scenario.steps.map((s, i) => (
+          <div
+            key={i}
+            className={`px-2.5 py-1.5 rounded border transition-colors ${
+              i === step
+                ? 'bg-indigo-500/15 border-indigo-500/40 text-indigo-200'
+                : i < step
+                ? 'bg-white/[0.03] border-transparent text-gray-600'
+                : 'bg-transparent border-transparent text-gray-700'
+            }`}
+          >
+            <span className="text-gray-600 mr-2 select-none">{i + 1}</span>
+            {s.code}
+          </div>
+        ))}
+      </div>
+
+      {/* diagram */}
+      <svg viewBox="0 0 360 150" className="w-full max-w-md mx-auto block mb-3">
+        <text x={VAR_X} y="12" fill="#6b7280" fontSize="8" fontFamily="monospace">NAMES</text>
+        <text x={OBJ_X} y="12" fill="#6b7280" fontSize="8" fontFamily="monospace">OBJECTS IN MEMORY</text>
+
+        {/* objects */}
+        {cur.objs.map((o, i) => (
+          <g key={`o${i}`}>
+            <rect
+              x={OBJ_X} y={rowY(i)} width={OBJ_W} height={H} rx="6"
+              fill={scenario.tone === 'emerald' ? 'rgba(16,185,129,0.12)' : 'rgba(244,63,94,0.12)'}
+              stroke={scenario.tone === 'emerald' ? '#34d399' : '#fb7185'}
+              strokeWidth="1.2"
+            />
+            <text x={OBJ_X + OBJ_W / 2} y={rowY(i) + 15} textAnchor="middle" fill="#e5e7eb" fontSize="11" fontFamily="monospace">{o.v}</text>
+            <text x={OBJ_X + OBJ_W / 2} y={rowY(i) + 26} textAnchor="middle" fill="#6b7280" fontSize="7" fontFamily="monospace">{o.t}</text>
+          </g>
+        ))}
+
+        {/* variables + arrows */}
+        {cur.vars.map((v, i) => {
+          const y = rowY(i) + H / 2;
+          const ty = rowY(v.obj) + H / 2;
+          return (
+            <g key={`v${v.n}`}>
+              <rect x={VAR_X} y={rowY(i)} width={BOX_W} height={H} rx="6" fill="#1f2937" stroke="#4b5563" strokeWidth="1.2" />
+              <text x={VAR_X + BOX_W / 2} y={rowY(i) + 21} textAnchor="middle" fill="#f3f4f6" fontSize="13" fontFamily="monospace">{v.n}</text>
+              <line
+                x1={VAR_X + BOX_W + 4} y1={y} x2={OBJ_X - 6} y2={ty}
+                stroke={scenario.tone === 'emerald' ? '#34d399' : '#fb7185'}
+                strokeWidth="1.5" markerEnd="url(#memArrow)"
+              />
+            </g>
+          );
+        })}
+
+        <defs>
+          <marker id="memArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill={scenario.tone === 'emerald' ? '#34d399' : '#fb7185'} />
+          </marker>
+        </defs>
+      </svg>
+
+      <p className="text-[11px] text-gray-400 leading-relaxed text-center min-h-[32px] mb-3">{cur.note}</p>
+
+      {/* controls */}
+      <div className="flex items-center justify-center gap-3">
+        <button
+          onClick={() => setStep((s) => Math.max(0, s - 1))}
+          disabled={step === 0}
+          className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-gray-300 disabled:opacity-30 hover:border-white/30 transition-colors"
+        >
+          ‹ Prev
+        </button>
+        <span className="text-[11px] text-gray-500 font-mono">Step {step + 1} / {scenario.steps.length}</span>
+        <button
+          onClick={() => setStep((s) => Math.min(scenario.steps.length - 1, s + 1))}
+          disabled={step === scenario.steps.length - 1}
+          className="px-3 py-1.5 rounded-lg bg-indigo-600 border border-indigo-500 text-xs text-white disabled:opacity-30 hover:bg-indigo-500 transition-colors"
+        >
+          Next ›
+        </button>
+      </div>
+
+      {step === scenario.steps.length - 1 && (
+        <div className={`mt-3 p-2.5 rounded-lg border text-center font-mono text-xs ${
+          scenario.outcomeGood
+            ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-200'
+            : 'bg-rose-500/10 border-rose-500/30 text-rose-200'
+        }`}>
+          {scenario.outcome}
+        </div>
+      )}
+    </div>
+  );
+}
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Cpu, Layers, 
   ArrowRight, ShieldCheck, Zap, Variable, GitBranch, Equal, Hash, HelpCircle, Monitor, Play
@@ -221,7 +382,7 @@ check_value(150)`}</CodeSnippet>
           </div>
           <div>
             <h2 className="text-2xl font-black text-white">5. Variables & Memory References</h2>
-            <p className="text-xs text-gray-400">Visual idea: Variable name ➔ points to ➔ value in heap memory</p>
+            <p className="text-xs text-gray-400">Names are labels pointing at objects — step through both cases below</p>
           </div>
         </div>
 
@@ -229,13 +390,18 @@ check_value(150)`}</CodeSnippet>
           Variables in Python do not act as fixed memory containers storing raw values; rather, they serve as dynamic pointer labels that reference underlying objects in heap memory. When assigning <code>age = 25</code>, Python creates an integer object <code>25</code> in heap memory and points the label <code>age</code> to that address. Assigning <code>y = x</code> copies the memory pointer, not the underlying object data.
         </p>
 
-        {/* Visual Box */}
-        <div className="bg-cyan-950/30 border border-cyan-500/30 p-4 rounded-xl mb-4 text-xs font-mono">
-          <div className="text-cyan-300 font-bold mb-2">📌 Visual Memory Reference Model</div>
-          <div className="text-gray-300">
-            <code>[Variable Name: name] ➔ (points to address 0x7f8a) ➔ [String Object: "Manikanta"]</code><br/>
-            <code>[Variable Name: age]  ➔ (points to address 0x7f9b) ➔ [Integer Object: 25]</code>
-          </div>
+        {/* Interactive memory model */}
+        <MemoryModelVisual />
+
+        <div className="bg-amber-950/20 border border-amber-500/30 p-4 rounded-xl mb-4">
+          <div className="text-amber-300 font-bold text-xs mb-1.5">Why this matters in practice</div>
+          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+            This is the root cause of Python's most notorious bug — the{' '}
+            <strong className="text-gray-100">mutable default argument</strong>. Writing{' '}
+            <code className="text-amber-200">def f(items=[])</code> creates that list <em>once</em>, when the function
+            is defined, and every call shares it. Use{' '}
+            <code className="text-emerald-300">def f(items=None)</code> and build the list inside the body instead.
+          </p>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
