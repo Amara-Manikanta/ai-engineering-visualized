@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
+import { CodeSnippet } from '../../components/CodeBlock';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
   Folder, Box, Globe, FileJson, Zap, TestTube, Settings, ArrowRight, ShieldCheck
@@ -49,7 +50,7 @@ export default function PythonToolingAsync() {
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 39_pathlib.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`from pathlib import Path
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`from pathlib import Path
 
 base_dir = Path("./storage")
 file_path = base_dir / "data.json"
@@ -57,7 +58,7 @@ file_path = base_dir / "data.json"
 base_dir.mkdir(exist_ok=True)
 file_path.write_text('{"status": "ready"}')
 
-print("Path Exists:", file_path.exists())`}</pre>
+print("Path Exists:", file_path.exists())`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Path Exists: True</code>
@@ -86,7 +87,7 @@ print("Path Exists:", file_path.exists())`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 40_file_io.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`# Context manager ensures file is closed automatically
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`# Context manager ensures file is closed automatically
 with open("log.txt", "w", encoding="utf-8") as f:
     f.write("Line 1\\n")
     f.write("Line 2\\n")
@@ -94,7 +95,7 @@ with open("log.txt", "w", encoding="utf-8") as f:
 with open("log.txt", "r") as f:
     lines = f.readlines()
 
-print("Line Count:", len(lines))`}</pre>
+print("Line Count:", len(lines))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Line Count: 2</code>
@@ -123,13 +124,13 @@ print("Line Count:", len(lines))`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 41_imports.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import math as m
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import math as m
 from datetime import datetime
 
 now = datetime.now()
 val = m.sqrt(16)
 
-print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</pre>
+print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Sqrt: 4.0, Date: 2026-08-04</code>
@@ -156,7 +157,7 @@ print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</pre>
         {/* Directory Structure Diagram */}
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs mb-4">
           <div className="text-emerald-400 font-bold mb-2">📁 Production AI Application Directory Layout</div>
-          <pre className="text-gray-300 whitespace-pre-wrap">{`ai_app/
+          <CodeSnippet className="text-gray-300 whitespace-pre-wrap">{`ai_app/
   ├── main.py             # Entrypoint script
   ├── rag/
   │   ├── __init__.py     # Package marker
@@ -166,7 +167,7 @@ print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</pre>
   │   └── generator.py    # LLM Prompt Generator
   └── utils/
       ├── __init__.py
-      └── config.py       # API Keys & Settings`}</pre>
+      └── config.py       # API Keys & Settings`}</CodeSnippet>
         </div>
       </section>
 
@@ -210,7 +211,7 @@ print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</pre>
             <span className="flex items-center gap-1 text-amber-400"><Terminal size={12} /> Terminal Commands</span>
             <span>Virtual Environment Setup</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`# 1. Create Virtual Environment
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`# 1. Create Virtual Environment
 $ python -m venv .venv
 
 # 2. Activate Environment (macOS/Linux vs Windows)
@@ -219,7 +220,7 @@ $ source .venv/bin/activate        # macOS/Linux
 
 # 3. Install AI Dependencies & Secure Secrets
 $ pip install openai langchain python-dotenv
-$ pip freeze > requirements.txt`}</pre>
+$ pip freeze > requirements.txt`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Successfully installed openai-1.12.0 langchain-0.1.0 python-dotenv-1.0.0</code>
@@ -248,14 +249,14 @@ $ pip freeze > requirements.txt`}</pre>
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 44_api_requests.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`import requests
+          <CodeSnippet className="text-teal-300 mb-3 whitespace-pre-wrap">{`import requests
 
 url = "https://httpbin.org/post"
 headers = {"Authorization": "Bearer token_abc123"}
 payload = {"prompt": "Explain RAG"}
 
 res = requests.post(url, json=payload, headers=headers, timeout=5)
-print("Status Code:", res.status_code)`}</pre>
+print("Status Code:", res.status_code)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Status Code: 200</code>
@@ -284,12 +285,12 @@ print("Status Code:", res.status_code)`}</pre>
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 45_json.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`import json
+          <CodeSnippet className="text-pink-300 mb-3 whitespace-pre-wrap">{`import json
 
 json_text = '{"name": "GPT-4o", "tokens": 128000}'
 data = json.loads(json_text)
 
-print("Parsed Name:", data["name"])`}</pre>
+print("Parsed Name:", data["name"])`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Parsed Name: GPT-4o</code>
@@ -318,7 +319,7 @@ print("Parsed Name:", data["name"])`}</pre>
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 46_yaml.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`import yaml
+          <CodeSnippet className="text-blue-300 mb-3 whitespace-pre-wrap">{`import yaml
 
 yaml_text = """
 version: '3.8'
@@ -328,7 +329,7 @@ services:
 """
 
 cfg = yaml.safe_load(yaml_text)
-print("Image:", cfg["services"]["app"]["image"])`}</pre>
+print("Image:", cfg["services"]["app"]["image"])`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Image: python:3.11</code>
@@ -357,7 +358,7 @@ print("Image:", cfg["services"]["app"]["image"])`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 47_async_basics.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`import asyncio
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`import asyncio
 
 async def fetch_token():
     await asyncio.sleep(0.05)
@@ -367,7 +368,7 @@ async def main():
     token = await fetch_token()
     print("Received:", token)
 
-asyncio.run(main())`}</pre>
+asyncio.run(main())`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Received: token_sec_99</code>
@@ -396,7 +397,7 @@ asyncio.run(main())`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 48_async_gather.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import asyncio
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import asyncio
 
 async def call_llm(prompt_id):
     await asyncio.sleep(0.1)
@@ -407,7 +408,7 @@ async def main():
     results = await asyncio.gather(*prompts)
     print("Parallel Batch:", results)
 
-asyncio.run(main())`}</pre>
+asyncio.run(main())`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Parallel Batch: ['Response 0', 'Response 1', 'Response 2']</code>
@@ -436,7 +437,7 @@ asyncio.run(main())`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> test_fixtures.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import pytest
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import pytest
 
 @pytest.fixture
 def sample_vector():
@@ -444,7 +445,7 @@ def sample_vector():
 
 def test_vector_dim(sample_vector):
     assert len(sample_vector) == 3
-    assert sample_vector[0] == 0.1`}</pre>
+    assert sample_vector[0] == 0.1`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>test_fixtures.py . [100%] PASSED</code>
@@ -473,7 +474,7 @@ def test_vector_dim(sample_vector):
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> test_parametrize.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`import pytest
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`import pytest
 from unittest.mock import MagicMock
 
 @pytest.mark.parametrize("val, expected", [(2, 4), (3, 9), (4, 16)])
@@ -483,7 +484,7 @@ def test_squares(val, expected):
 def test_mock_api():
     mock_client = MagicMock()
     mock_client.generate.return_value = "Mocked Response"
-    assert mock_client.generate("prompt") == "Mocked Response"`}</pre>
+    assert mock_client.generate("prompt") == "Mocked Response"`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>test_parametrize.py .... [100%] PASSED</code>

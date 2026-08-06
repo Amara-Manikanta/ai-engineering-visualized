@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
+import { CodeSnippet } from '../../components/CodeBlock';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
   ShieldAlert, Cpu, Sparkles, RefreshCw, Zap, FileText, Settings, ArrowRight, Box
@@ -50,7 +51,7 @@ export default function PythonAdvanced() {
             <span className="flex items-center gap-1 text-red-400"><FileCode size={12} /> 27_production_ai_error.py</span>
             <span>Production AI Pattern</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`def call_llm(prompt: str):
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`def call_llm(prompt: str):
     # Simulated API Call
     raise TimeoutError("OpenAI API rate limit exceeded (429)")
 
@@ -59,7 +60,7 @@ try:
 except Exception as e:
     print("LLM call failed:", e)
 finally:
-    print("Log telemetry & cleanup active API sessions.")`}</pre>
+    print("Log telemetry & cleanup active API sessions.")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>LLM call failed: OpenAI API rate limit exceeded (429)<br/>Log telemetry & cleanup active API sessions.</code>
@@ -88,14 +89,14 @@ finally:
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 28_custom_exception.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`class APIQuotaError(Exception):
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`class APIQuotaError(Exception):
     """Raised when LLM API rate limit is exceeded."""
     pass
 
 try:
     raise KeyError("Missing API Key")
 except KeyError as err:
-    raise APIQuotaError("Authentication failed") from err`}</pre>
+    raise APIQuotaError("Authentication failed") from err`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>APIQuotaError: Authentication failed (The above exception was the direct cause)</code>
@@ -124,7 +125,7 @@ except KeyError as err:
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 29_class_init.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`class Agent:
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`class Agent:
     def __init__(self, name: str, role: str):
         self.name = name
         self.role = role
@@ -133,7 +134,7 @@ except KeyError as err:
         return f"{self.name} ({self.role}) is executing: {task}"
 
 bot = Agent("Devin", "Code Engineer")
-print(bot.execute("Refactor API"))`}</pre>
+print(bot.execute("Refactor API"))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Devin (Code Engineer) is executing: Refactor API</code>
@@ -172,7 +173,7 @@ print(bot.execute("Refactor API"))`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_rag_retriever.py</span>
             <span>SimpleRetriever Class Example</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`class SimpleRetriever:
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`class SimpleRetriever:
     def __init__(self, vector_db):
         self.vector_db = vector_db
 
@@ -184,7 +185,7 @@ class MockVectorDB:
     def search(self, q): return ["Matched Doc Chunk"]
 
 retriever = SimpleRetriever(MockVectorDB())
-print("Retrieved Docs:", retriever.retrieve("What is RAG?"))`}</pre>
+print("Retrieved Docs:", retriever.retrieve("What is RAG?"))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Retrieved Docs: ['Matched Doc Chunk']</code>
@@ -213,7 +214,7 @@ print("Retrieved Docs:", retriever.retrieve("What is RAG?"))`}</pre>
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 31_dataclass_rag.py</span>
             <span>Python 3.7+</span>
           </div>
-          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`from dataclasses import dataclass, field
+          <CodeSnippet className="text-pink-300 mb-3 whitespace-pre-wrap">{`from dataclasses import dataclass, field
 from typing import List
 
 @dataclass
@@ -224,7 +225,7 @@ class DocumentChunk:
     score: float = 0.0
 
 chunk = DocumentChunk(doc_id="chunk_01", content="RAG Architecture", score=0.95)
-print(chunk)`}</pre>
+print(chunk)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>DocumentChunk(doc_id='chunk_01', content='RAG Architecture', embedding=[], score=0.95)</code>
@@ -253,7 +254,7 @@ print(chunk)`}</pre>
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 32_class_static.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`class ModelConfig:
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`class ModelConfig:
     def __init__(self, model_id: str):
         self.model_id = model_id
 
@@ -267,7 +268,7 @@ print(chunk)`}</pre>
 
 cfg = ModelConfig.from_dict({"model_id": "gpt-4o"})
 print("Model ID:", cfg.model_id)
-print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</pre>
+print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Model ID: gpt-4o<br/>Valid: True</code>
@@ -296,7 +297,7 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</pre>
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 33_dunder.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-rose-300 mb-3 whitespace-pre-wrap">{`class PipelineStep:
+          <CodeSnippet className="text-rose-300 mb-3 whitespace-pre-wrap">{`class PipelineStep:
     def __init__(self, name):
         self.name = name
 
@@ -304,7 +305,7 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</pre>
         return f"[{self.name}] ➔ {input_text}"
 
 step = PipelineStep("Embedder")
-print(step("User Query"))`}</pre>
+print(step("User Query"))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>[Embedder] ➔ User Query</code>
@@ -341,13 +342,13 @@ print(step("User Query"))`}</pre>
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 34_type_hints_ai.py</span>
             <span>FastAPI & AI Pattern</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`from typing import List, Dict, Optional, Union
+          <CodeSnippet className="text-teal-300 mb-3 whitespace-pre-wrap">{`from typing import List, Dict, Optional, Union
 
 def embed_text(text: str) -> List[float]:
     # Returns embedding vector float list
     return [0.12, 0.45, 0.98]
 
-print("Embedding Vector:", embed_text("What is RAG?"))`}</pre>
+print("Embedding Vector:", embed_text("What is RAG?"))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Embedding Vector: [0.12, 0.45, 0.98]</code>
@@ -376,7 +377,7 @@ print("Embedding Vector:", embed_text("What is RAG?"))`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 35_pydantic.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`from pydantic import BaseModel, Field
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`from pydantic import BaseModel, Field
 
 class SearchQuery(BaseModel):
     query: str = Field(min_length=2)
@@ -384,7 +385,7 @@ class SearchQuery(BaseModel):
 
 raw_input = {"query": "RAG architecture", "top_k": 10}
 parsed = SearchQuery.model_validate(raw_input)
-print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</pre>
+print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Validated Query: 'RAG architecture' with top_k=10</code>
@@ -413,11 +414,11 @@ print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 36_iterators.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`data = ["chunk1", "chunk2"]
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`data = ["chunk1", "chunk2"]
 it = iter(data)
 
 print(next(it))
-print(next(it))`}</pre>
+print(next(it))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>chunk1<br/>chunk2</code>
@@ -446,12 +447,12 @@ print(next(it))`}</pre>
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 37_generators.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`def stream_embeddings(n: int):
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`def stream_embeddings(n: int):
     for i in range(n):
         yield f"vec_{i}"
 
 for vec in stream_embeddings(3):
-    print("Streamed:", vec)`}</pre>
+    print("Streamed:", vec)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Streamed: vec_0<br/>Streamed: vec_1<br/>Streamed: vec_2</code>
@@ -480,7 +481,7 @@ for vec in stream_embeddings(3):
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 38_decorators.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`from functools import wraps
+          <CodeSnippet className="text-pink-300 mb-3 whitespace-pre-wrap">{`from functools import wraps
 
 def log_call(func):
     @wraps(func)
@@ -493,7 +494,7 @@ def log_call(func):
 def query_index():
     return "Results"
 
-query_index()`}</pre>
+query_index()`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Calling: query_index</code>
@@ -522,7 +523,7 @@ query_index()`}</pre>
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 39_cache_property.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`from functools import lru_cache
+          <CodeSnippet className="text-blue-300 mb-3 whitespace-pre-wrap">{`from functools import lru_cache
 
 @lru_cache(maxsize=32)
 def get_embedding(text: str):
@@ -531,7 +532,7 @@ def get_embedding(text: str):
 
 # First call computes; second call uses cached result
 get_embedding("hello")
-get_embedding("hello")`}</pre>
+get_embedding("hello")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Computing embedding...</code>

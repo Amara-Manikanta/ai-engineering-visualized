@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
+import { CodeSnippet } from '../../components/CodeBlock';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
   LineChart, Cpu, Database, BarChart2, Sparkles, Sigma, Box
@@ -65,13 +66,13 @@ export default function PythonDataScience() {
             <span className="flex items-center gap-1 text-indigo-400"><FileCode size={12} /> 52_numpy_shape.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-indigo-300 mb-3 whitespace-pre-wrap">{`import numpy as np
+          <CodeSnippet className="text-indigo-300 mb-3 whitespace-pre-wrap">{`import numpy as np
 
 arr = np.arange(12)  # 1D array of 0 to 11
 matrix = arr.reshape(3, 4)  # Reshape to 3 rows, 4 columns
 
 print("Matrix Shape:", matrix.shape)
-print("Dimensions:", matrix.ndim)`}</pre>
+print("Dimensions:", matrix.ndim)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Matrix Shape: (3, 4)<br/>Dimensions: 2</code>
@@ -100,14 +101,14 @@ print("Dimensions:", matrix.ndim)`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 53_broadcasting.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`import numpy as np
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`import numpy as np
 
 matrix = np.array([[10, 20], [30, 40]])
 scalar = 5
 
 # Broadcasting scalar across all elements in C
 result = matrix * scalar
-print(result)`}</pre>
+print(result)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{`[[ 50 100]\n [150 200]]`}</code>
@@ -136,7 +137,7 @@ print(result)`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 54_cosine.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import numpy as np
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import numpy as np
 
 vec_a = np.array([1.0, 2.0, 3.0])
 vec_b = np.array([2.0, 3.0, 4.0])
@@ -146,7 +147,7 @@ norm_a = np.linalg.norm(vec_a)
 norm_b = np.linalg.norm(vec_b)
 
 sim = dot / (norm_a * norm_b)
-print(f"Cosine Similarity: {sim:.4f}")`}</pre>
+print(f"Cosine Similarity: {sim:.4f}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Cosine Similarity: 0.9926</code>
@@ -175,7 +176,7 @@ print(f"Cosine Similarity: {sim:.4f}")`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 55_pandas.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
 
 df = pd.DataFrame({
     "name": ["Alice", "Bob", "Charlie"],
@@ -183,7 +184,7 @@ df = pd.DataFrame({
 }, index=["id_1", "id_2", "id_3"])
 
 # Selection by label (.loc) vs integer position (.iloc)
-print(df.loc["id_2", "score"])`}</pre>
+print(df.loc["id_2", "score"])`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>92</code>
@@ -212,13 +213,13 @@ print(df.loc["id_2", "score"])`}</pre>
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 56_cleaning.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
 import numpy as np
 
 df = pd.DataFrame({"score": [90, np.nan, 80]})
 clean_df = df.fillna(df["score"].mean())
 
-print(clean_df)`}</pre>
+print(clean_df)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{`   score\n0   90.0\n1   85.0\n2   80.0`}</code>
@@ -247,7 +248,7 @@ print(clean_df)`}</pre>
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 57_groupby.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
+          <CodeSnippet className="text-teal-300 mb-3 whitespace-pre-wrap">{`import pandas as pd
 
 df = pd.DataFrame({
     "cat": ["A", "B", "A", "B"],
@@ -255,7 +256,7 @@ df = pd.DataFrame({
 })
 
 res = df.groupby("cat")["val"].sum()
-print(res)`}</pre>
+print(res)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{`cat\nA    40\nB    60\nName: val, dtype: int64`}</code>
@@ -284,7 +285,7 @@ print(res)`}</pre>
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 58_matplotlib.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-rose-300 mb-3 whitespace-pre-wrap">{`import matplotlib.pyplot as plt
+          <CodeSnippet className="text-rose-300 mb-3 whitespace-pre-wrap">{`import matplotlib.pyplot as plt
 
 plt.figure(figsize=(6, 3))
 plt.plot([1, 2, 3], [10, 20, 30], label="Accuracy")
@@ -292,7 +293,7 @@ plt.xlabel("Epochs")
 plt.ylabel("Score")
 plt.legend()
 plt.savefig("chart.png")
-print("Chart generated.")`}</pre>
+print("Chart generated.")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Chart generated.</code>
@@ -321,14 +322,14 @@ print("Chart generated.")`}</pre>
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 59_seaborn.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`import seaborn as sns
+          <CodeSnippet className="text-pink-300 mb-3 whitespace-pre-wrap">{`import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 
 matrix = np.random.rand(4, 4)
 sns.heatmap(matrix, annot=True, cmap="viridis")
 plt.savefig("heatmap.png")
-print("Heatmap saved.")`}</pre>
+print("Heatmap saved.")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Heatmap saved.</code>
@@ -357,14 +358,14 @@ print("Heatmap saved.")`}</pre>
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 60_scaler.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`from sklearn.preprocessing import StandardScaler
+          <CodeSnippet className="text-blue-300 mb-3 whitespace-pre-wrap">{`from sklearn.preprocessing import StandardScaler
 import numpy as np
 
 data = np.array([[1.0, 100.0], [2.0, 200.0]])
 scaler = StandardScaler()
 scaled = scaler.fit_transform(data)
 
-print("Scaled Mean:", scaled.mean(axis=0))`}</pre>
+print("Scaled Mean:", scaled.mean(axis=0))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Scaled Mean: [0. 0.]</code>
@@ -393,7 +394,7 @@ print("Scaled Mean:", scaled.mean(axis=0))`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 61_workflow.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`from sklearn.datasets import make_classification
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
@@ -404,7 +405,7 @@ model = LogisticRegression()
 model.fit(X_train, y_train)
 
 acc = model.score(X_test, y_test)
-print(f"Test Accuracy: {acc * 100:.0f}%")`}</pre>
+print(f"Test Accuracy: {acc * 100:.0f}%")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Test Accuracy: 100%</code>

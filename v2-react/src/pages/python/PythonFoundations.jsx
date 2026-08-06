@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
+import { CodeSnippet } from '../../components/CodeBlock';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Cpu, Layers, 
   ArrowRight, ShieldCheck, Zap, Variable, GitBranch, Equal, Hash, HelpCircle, Monitor, Play
@@ -67,12 +68,12 @@ export default function PythonFoundations() {
             <span className="flex items-center gap-1 text-emerald-400"><Terminal size={12} /> Terminal Commands</span>
             <span>CLI Usage</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`# Check Python Installation Version
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`# Check Python Installation Version
 $ python --version
 Python 3.11.5
 
 # Run a Python Script File via Terminal
-$ python script.py`}</pre>
+$ python script.py`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Environment Ready! Python 3.11 activated.</code>
@@ -159,10 +160,10 @@ $ python script.py`}</pre>
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 01_hello_world.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import sys
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`import sys
 
 print("Hello, Python!")
-print("Python Version:", sys.version.split()[0])`}</pre>
+print("Python Version:", sys.version.split()[0])`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Hello, Python!<br/>Python Version: 3.11.5</code>
@@ -196,7 +197,7 @@ print("Python Version:", sys.version.split()[0])`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 03_indentation.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`def check_value(val):
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`def check_value(val):
     if val > 0:
         print("Positive")
         if val > 100:
@@ -204,7 +205,7 @@ print("Python Version:", sys.version.split()[0])`}</pre>
     else:
         print("Non-positive")
 
-check_value(150)`}</pre>
+check_value(150)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Positive<br/>Large Positive</code>
@@ -242,12 +243,12 @@ check_value(150)`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 04_variables.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`name = "Manikanta"
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`name = "Manikanta"
 age = 25
 is_learning_ai = True
 
 print(f"Name: {name}, Age: {age}, Learning AI: {is_learning_ai}")
-print("Memory address of name:", id(name))`}</pre>
+print("Memory address of name:", id(name))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Name: Manikanta, Age: 25, Learning AI: True<br/>Memory address of name: 140705892100416</code>
@@ -288,13 +289,13 @@ print("Memory address of name:", id(name))`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 05_datatypes.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`a = 42
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`a = 42
 b = 3.14159
 c = "AI"
 d = True
 e = None
 
-print(type(a), type(b), type(c), type(d), type(e))`}</pre>
+print(type(a), type(b), type(c), type(d), type(e))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'bool'&gt; &lt;class 'NoneType'&gt;</code>
@@ -323,13 +324,13 @@ print(type(a), type(b), type(c), type(d), type(e))`}</pre>
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 06_operators.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`a, b = 17, 5
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`a, b = 17, 5
 
 print("Float Division (a / b):", a / b)
 print("Floor Division (a // b):", a // b)
 print("Modulo (a % b):", a % b)
 print("Power (a ** b):", a ** b)
-print("Bitwise AND (a & b):", a & b)`}</pre>
+print("Bitwise AND (a & b):", a & b)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Float Division (a / b): 3.4<br/>Floor Division (a // b): 3<br/>Modulo (a % b): 2<br/>Power (a ** b): 1419857<br/>Bitwise AND (a & b): 1</code>
@@ -358,10 +359,10 @@ print("Bitwise AND (a & b):", a & b)`}</pre>
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 07_logical_ops.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`score = 85
+          <CodeSnippet className="text-teal-300 mb-3 whitespace-pre-wrap">{`score = 85
 
 if score >= 80 and score <= 100:
-    print("Good score")`}</pre>
+    print("Good score")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Good score</code>
@@ -390,13 +391,13 @@ if score >= 80 and score <= 100:
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 08_identity.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-rose-300 mb-3 whitespace-pre-wrap">{`list_a = [1, 2, 3]
+          <CodeSnippet className="text-rose-300 mb-3 whitespace-pre-wrap">{`list_a = [1, 2, 3]
 list_b = [1, 2, 3]
 
 print("list_a == list_b (Value):", list_a == list_b)
 print("list_a is list_b (Address):", list_a is list_b)
 
-print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</pre>
+print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>list_a == list_b (Value): True<br/>list_a is list_b (Address): False<br/>'vector' in 'vector_search': True</code>
@@ -425,11 +426,11 @@ print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</pre>
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 09_walrus.py</span>
             <span>Python 3.8+</span>
           </div>
-          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`query = "Retrieval Augmented Generation"
+          <CodeSnippet className="text-pink-300 mb-3 whitespace-pre-wrap">{`query = "Retrieval Augmented Generation"
 
 # Evaluate length and assign to var 'n' inside the if expression
 if (n := len(query.split())) > 2:
-    print(f"Query has {n} words.")`}</pre>
+    print(f"Query has {n} words.")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Query has 3 words.</code>
@@ -458,7 +459,7 @@ if (n := len(query.split())) > 2:
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 10_conditionals.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`status_code = 200
+          <CodeSnippet className="text-blue-300 mb-3 whitespace-pre-wrap">{`status_code = 200
 
 # Standard branching
 if status_code == 200:
@@ -471,7 +472,7 @@ else:
 # Single-line Ternary Expression
 status_label = "Success" if status_code == 200 else "Failure"
 
-print(f"Msg: {msg}, Label: {status_label}")`}</pre>
+print(f"Msg: {msg}, Label: {status_label}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Msg: OK, Label: Success</code>
@@ -500,14 +501,14 @@ print(f"Msg: {msg}, Label: {status_label}")`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 11_for_else.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`items = ["chunk_1", "chunk_2", "target_chunk"]
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`items = ["chunk_1", "chunk_2", "target_chunk"]
 
 for item in items:
     if item == "target_chunk":
         print("Found target!")
         break
 else:
-    print("Loop completed without break.")`}</pre>
+    print("Loop completed without break.")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Found target!</code>
@@ -536,7 +537,7 @@ else:
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 12_while_loop.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`attempts = 0
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`attempts = 0
 
 while attempts < 5:
     attempts += 1
@@ -544,7 +545,7 @@ while attempts < 5:
         continue  # Skip iteration 2
     if attempts == 4:
         break     # Exit loop at 4
-    print("Attempt:", attempts)`}</pre>
+    print("Attempt:", attempts)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Attempt: 1<br/>Attempt: 3</code>
@@ -573,12 +574,12 @@ while attempts < 5:
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 13_enumerate_zip.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`models = ["GPT-4o", "Claude 3.5"]
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`models = ["GPT-4o", "Claude 3.5"]
 scores = [0.95, 0.98]
 
 # Parallel iteration with zip and index tracking with enumerate
 for idx, (m, s) in enumerate(zip(models, scores), start=1):
-    print(f"#{idx} {m}: {s}")`}</pre>
+    print(f"#{idx} {m}: {s}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>#1 GPT-4o: 0.95<br/>#2 Claude 3.5: 0.98</code>
@@ -607,7 +608,7 @@ for idx, (m, s) in enumerate(zip(models, scores), start=1):
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 14_match_case.py</span>
             <span>Python 3.10+</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`response = {"status": 200, "data": {"text": "Success"}}
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`response = {"status": 200, "data": {"text": "Success"}}
 
 match response:
     case {"status": 200, "data": {"text": txt}}:
@@ -615,7 +616,7 @@ match response:
     case {"status": err_code}:
         print(f"Error Code: {err_code}")
     case _:
-        print("Unknown payload")`}</pre>
+        print("Unknown payload")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Received Text: Success</code>

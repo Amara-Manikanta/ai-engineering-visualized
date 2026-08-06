@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../../components/GuideLayout';
+import { CodeSnippet } from '../../components/CodeBlock';
 import { 
   Code2, Terminal, CheckCircle2, FileCode, Layers, 
   Box, Database, Sliders, Type, Repeat, Hash, Search, ArrowRight, MessageSquare
@@ -50,14 +51,14 @@ export default function PythonDataStructures() {
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 15_functions.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`# Avoid mutable default arguments (use None instead)
+          <CodeSnippet className="text-blue-300 mb-3 whitespace-pre-wrap">{`# Avoid mutable default arguments (use None instead)
 def add_embedding(vec: list, store: list = None) -> list:
     if store is None:
         store = []
     store.append(vec)
     return store
 
-print(add_embedding([0.1, 0.2]))`}</pre>
+print(add_embedding([0.1, 0.2]))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>[[0.1, 0.2]]</code>
@@ -86,12 +87,12 @@ print(add_embedding([0.1, 0.2]))`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 16_args_kwargs.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`def configure_agent(agent_name, *tools, **hyperparams):
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`def configure_agent(agent_name, *tools, **hyperparams):
     print(f"Agent: {agent_name}")
     print(f"Tools ({len(tools)}): {tools}")
     print(f"Hyperparams: {hyperparams}")
 
-configure_agent("RAGBot", "search", "calculator", temp=0.2, top_p=0.9)`}</pre>
+configure_agent("RAGBot", "search", "calculator", temp=0.2, top_p=0.9)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Agent: RAGBot<br/>Tools (2): ('search', 'calculator')<br/>Hyperparams: {"{'temp': 0.2, 'top_p': 0.9}"}</code>
@@ -120,7 +121,7 @@ configure_agent("RAGBot", "search", "calculator", temp=0.2, top_p=0.9)`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 17_legb_scope.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`global_count = 0
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`global_count = 0
 
 def outer():
     enclosing_val = 10
@@ -130,7 +131,7 @@ def outer():
         return enclosing_val
     return inner()
 
-print("Nested result:", outer())`}</pre>
+print("Nested result:", outer())`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Nested result: 15</code>
@@ -159,11 +160,11 @@ print("Nested result:", outer())`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 18_lambda.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`docs = [{"score": 0.85}, {"score": 0.99}, {"score": 0.92}]
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`docs = [{"score": 0.85}, {"score": 0.99}, {"score": 0.92}]
 
 # Sort list of dicts by score descending using lambda
 docs.sort(key=lambda d: d["score"], reverse=True)
-print("Top Document Score:", docs[0]["score"])`}</pre>
+print("Top Document Score:", docs[0]["score"])`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Top Document Score: 0.99</code>
@@ -192,13 +193,13 @@ print("Top Document Score:", docs[0]["score"])`}</pre>
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 19_lists.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-amber-300 mb-3 whitespace-pre-wrap">{`tokens = ["AI", "Model"]
+          <CodeSnippet className="text-amber-300 mb-3 whitespace-pre-wrap">{`tokens = ["AI", "Model"]
 tokens.append("Agent")
 tokens.extend(["RAG", "LLM"])
 last_token = tokens.pop()
 
 print("Tokens:", tokens)
-print("Popped Token:", last_token)`}</pre>
+print("Popped Token:", last_token)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Tokens: ['AI', 'Model', 'Agent', 'RAG']<br/>Popped Token: LLM</code>
@@ -227,10 +228,10 @@ print("Popped Token:", last_token)`}</pre>
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 20_tuples.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-teal-300 mb-3 whitespace-pre-wrap">{`dimensions = (1, 512, 1536)
+          <CodeSnippet className="text-teal-300 mb-3 whitespace-pre-wrap">{`dimensions = (1, 512, 1536)
 batch, *middle, embed_dim = dimensions
 
-print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</pre>
+print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Batch: 1, Embed Dim: 1536</code>
@@ -259,14 +260,14 @@ print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</pre>
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 21_dicts.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-rose-300 mb-3 whitespace-pre-wrap">{`config = {"model": "gpt-4o"}
+          <CodeSnippet className="text-rose-300 mb-3 whitespace-pre-wrap">{`config = {"model": "gpt-4o"}
 
 # Safe retrieval with fallback default
 temp = config.get("temperature", 0.7)
 config.setdefault("top_p", 1.0)
 
 print(config)
-print("Temperature:", temp)`}</pre>
+print("Temperature:", temp)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{'{\n  "model": "gpt-4o",\n  "top_p": 1.0\n}'}<br/>Temperature: 0.7</code>
@@ -295,7 +296,7 @@ print("Temperature:", temp)`}</pre>
             <span className="flex items-center gap-1 text-indigo-400"><FileCode size={12} /> 22_llm_message.py</span>
             <span>LLM API Payload Example</span>
           </div>
-          <pre className="text-indigo-300 mb-3 whitespace-pre-wrap">{`message = {
+          <CodeSnippet className="text-indigo-300 mb-3 whitespace-pre-wrap">{`message = {
     "role": "user",
     "content": "Explain RAG",
     "metadata": {"source": "web"},
@@ -303,7 +304,7 @@ print("Temperature:", temp)`}</pre>
 }
 
 print(f"Role: {message['role']}")
-print(f"Prompt: {message['content']}")`}</pre>
+print(f"Prompt: {message['content']}")`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Role: user<br/>Prompt: Explain RAG</code>
@@ -332,11 +333,11 @@ print(f"Prompt: {message['content']}")`}</pre>
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 23_sets.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-pink-300 mb-3 whitespace-pre-wrap">{`set_a = {"python", "rag", "ai"}
+          <CodeSnippet className="text-pink-300 mb-3 whitespace-pre-wrap">{`set_a = {"python", "rag", "ai"}
 set_b = {"ai", "ml", "dl"}
 
 print("Intersection:", set_a & set_b)
-print("Difference (A - B):", set_a - set_b)`}</pre>
+print("Difference (A - B):", set_a - set_b)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Intersection: {'{\n  "ai"\n}'}<br/>Difference (A - B): {'{\n  "python", "rag"\n}'}</code>
@@ -365,7 +366,7 @@ print("Difference (A - B):", set_a - set_b)`}</pre>
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 24_collections.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-blue-300 mb-3 whitespace-pre-wrap">{`from collections import defaultdict, deque
+          <CodeSnippet className="text-blue-300 mb-3 whitespace-pre-wrap">{`from collections import defaultdict, deque
 
 # defaultdict avoids KeyErrors automatically
 graph = defaultdict(list)
@@ -376,7 +377,7 @@ queue = deque(["task_1", "task_2"])
 queue.appendleft("priority_task")
 
 print(dict(graph))
-print(list(queue))`}</pre>
+print(list(queue))`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{'{\n  "node_a": ["node_b"]\n}'}<br/>['priority_task', 'task_1', 'task_2']</code>
@@ -405,7 +406,7 @@ print(list(queue))`}</pre>
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 25_prompt_strings.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-purple-300 mb-3 whitespace-pre-wrap">{`user_query = "   What is RAG?   "
+          <CodeSnippet className="text-purple-300 mb-3 whitespace-pre-wrap">{`user_query = "   What is RAG?   "
 clean_query = user_query.strip()
 
 # Multiline System Prompt Template with f-string interpolation
@@ -415,7 +416,7 @@ User Query: {clean_query}
 Instruction: Provide a concise response.
 """
 
-print(system_prompt.strip())`}</pre>
+print(system_prompt.strip())`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>System: You are an AI Assistant.<br/>User Query: What is RAG?<br/>Instruction: Provide a concise response.</code>
@@ -444,12 +445,12 @@ print(system_prompt.strip())`}</pre>
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 26_regex.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import re
+          <CodeSnippet className="text-cyan-300 mb-3 whitespace-pre-wrap">{`import re
 
 log = "ERROR 2026-08-04: Connection timeout in module X"
 date = re.search(r'\\d{4}-\\d{2}-\\d{2}', log).group()
 
-print("Extracted Date:", date)`}</pre>
+print("Extracted Date:", date)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Extracted Date: 2026-08-04</code>
@@ -478,12 +479,12 @@ print("Extracted Date:", date)`}</pre>
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 27_comprehensions.py</span>
             <span>Python 3.11</span>
           </div>
-          <pre className="text-emerald-300 mb-3 whitespace-pre-wrap">{`scores = {"doc1": 0.82, "doc2": 0.95, "doc3": 0.40}
+          <CodeSnippet className="text-emerald-300 mb-3 whitespace-pre-wrap">{`scores = {"doc1": 0.82, "doc2": 0.95, "doc3": 0.40}
 
 # Filter dict elements above threshold 0.8
 top_docs = {k: v for k, v in scores.items() if v >= 0.8}
 
-print("Top Docs Dict:", top_docs)`}</pre>
+print("Top Docs Dict:", top_docs)`}</CodeSnippet>
           <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
             <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Top Docs Dict: {'{\n  "doc1": 0.82,\n  "doc2": 0.95\n}'}</code>
