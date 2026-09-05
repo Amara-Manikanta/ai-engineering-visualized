@@ -14,6 +14,7 @@ const LlmSlm = lazy(() => import("./pages/LlmSlm"));
 const GenAiIndex = lazy(() => import("./pages/GenAiIndex"));
 const GenAiFineTuning = lazy(() => import("./pages/GenAiFineTuning"));
 const GenAiQuantization = lazy(() => import("./pages/GenAiQuantization"));
+const GenAiAgi = lazy(() => import("./pages/GenAiAgi"));
 const PythonIndex = lazy(() => import("./pages/PythonIndex"));
 const PythonFoundations = lazy(() => import("./pages/python/PythonFoundations"));
 const PythonDataStructures = lazy(() => import("./pages/python/PythonDataStructures"));
@@ -159,6 +160,7 @@ function App() {
         <Route path="/genai" element={<GenAiIndex />} />
         <Route path="/genai/fine-tuning" element={<GenAiFineTuning />} />
         <Route path="/genai/quantization" element={<GenAiQuantization />} />
+        <Route path="/genai/agi" element={<GenAiAgi />} />
         
         <Route path="/python" element={<PythonIndex />} />
         <Route path="/python/foundations" element={<PythonFoundations />} />

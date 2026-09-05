@@ -43,6 +43,7 @@ const NAV_LINKS = [
       { name: "Embeddings", path: "/rag/embeddings" },
       { name: "Fine-tuning", path: "/genai/fine-tuning" },
       { name: "Quantization", path: "/genai/quantization" },
+      { name: "AGI & GPT-6 Astra", path: "/genai/agi" },
     ],
   },
   {
