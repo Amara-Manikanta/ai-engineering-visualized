@@ -1,108 +1,123 @@
+import { lazy, Suspense } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
+import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-import DocumentLoaders from "./pages/DocumentLoaders";
-import Langchain from "./pages/Langchain";
-import RagFundamentals from "./pages/RagFundamentals";
-import RagVectorDbs from "./pages/RagVectorDbs";
-import RagAdvanced from "./pages/RagAdvanced";
-import LlmIndex from "./pages/LlmIndex";
-import LlmType from "./pages/LlmType";
-import LlmVlm from "./pages/LlmVlm";
-import LlmSlm from "./pages/LlmSlm";
-import GenAiIndex from "./pages/GenAiIndex";
-import GenAiFineTuning from "./pages/GenAiFineTuning";
-import GenAiQuantization from "./pages/GenAiQuantization";
-import PythonIndex from "./pages/PythonIndex";
-import PythonFoundations from "./pages/python/PythonFoundations";
-import PythonDataStructures from "./pages/python/PythonDataStructures";
-import PythonAdvanced from "./pages/python/PythonAdvanced";
-import PythonToolingAsync from "./pages/python/PythonToolingAsync";
-import PythonDataScience from "./pages/python/PythonDataScience";
-import AgentsIndex from "./pages/AgentsIndex";
-import AgentsToolCalling from "./pages/AgentsToolCalling";
-import AgentsMemory from "./pages/AgentsMemory";
-import AgentsMultiAgent from "./pages/AgentsMultiAgent";
-import MlIndex from "./pages/MlIndex";
-import MlSupervised from "./pages/MlSupervised";
-import MlUnsupervised from "./pages/MlUnsupervised";
-import MlDeepLearning from "./pages/MlDeepLearning";
-import ModelsIndex from "./pages/ModelsIndex";
-import ModelsClaude from "./pages/ModelsClaude";
-import ModelsGemini from "./pages/ModelsGemini";
-import ModelsGpt from "./pages/ModelsGpt";
-import ModelsLlama from "./pages/ModelsLlama";
-import ModelsMistral from "./pages/ModelsMistral";
-import ModelsQwen from "./pages/ModelsQwen";
-import ModelsDeepseek from "./pages/ModelsDeepseek";
-import ModelsGrok from "./pages/ModelsGrok";
-import LangGraphIndex from "./pages/LangGraphIndex";
-import LangGraphPatterns from "./pages/LangGraphPatterns";
-import McpIndex from "./pages/McpIndex";
-import PromptingIndex from "./pages/PromptingIndex";
-import EmbeddingsIndex from "./pages/EmbeddingsIndex";
+const DocumentLoaders = lazy(() => import("./pages/DocumentLoaders"));
+const Langchain = lazy(() => import("./pages/Langchain"));
+const RagFundamentals = lazy(() => import("./pages/RagFundamentals"));
+const RagVectorDbs = lazy(() => import("./pages/RagVectorDbs"));
+const RagAdvanced = lazy(() => import("./pages/RagAdvanced"));
+const LlmIndex = lazy(() => import("./pages/LlmIndex"));
+const LlmType = lazy(() => import("./pages/LlmType"));
+const LlmVlm = lazy(() => import("./pages/LlmVlm"));
+const LlmSlm = lazy(() => import("./pages/LlmSlm"));
+const GenAiIndex = lazy(() => import("./pages/GenAiIndex"));
+const GenAiFineTuning = lazy(() => import("./pages/GenAiFineTuning"));
+const GenAiQuantization = lazy(() => import("./pages/GenAiQuantization"));
+const GenAiAgi = lazy(() => import("./pages/GenAiAgi"));
+const PythonIndex = lazy(() => import("./pages/PythonIndex"));
+const PythonFoundations = lazy(() => import("./pages/python/PythonFoundations"));
+const PythonDataStructures = lazy(() => import("./pages/python/PythonDataStructures"));
+const PythonAdvanced = lazy(() => import("./pages/python/PythonAdvanced"));
+const PythonToolingAsync = lazy(() => import("./pages/python/PythonToolingAsync"));
+const PythonDataScience = lazy(() => import("./pages/python/PythonDataScience"));
+const PythonRegex = lazy(() => import("./pages/python/PythonRegex"));
+const AgentsIndex = lazy(() => import("./pages/AgentsIndex"));
+const AgentsToolCalling = lazy(() => import("./pages/AgentsToolCalling"));
+const AgentsMemory = lazy(() => import("./pages/AgentsMemory"));
+const AgentsMultiAgent = lazy(() => import("./pages/AgentsMultiAgent"));
+const MlIndex = lazy(() => import("./pages/MlIndex"));
+const MlSupervised = lazy(() => import("./pages/MlSupervised"));
+const MlUnsupervised = lazy(() => import("./pages/MlUnsupervised"));
+const MlDeepLearning = lazy(() => import("./pages/MlDeepLearning"));
+const ModelsIndex = lazy(() => import("./pages/ModelsIndex"));
+const ModelsClaude = lazy(() => import("./pages/ModelsClaude"));
+const ModelsGemini = lazy(() => import("./pages/ModelsGemini"));
+const ModelsGpt = lazy(() => import("./pages/ModelsGpt"));
+const ModelsLlama = lazy(() => import("./pages/ModelsLlama"));
+const ModelsMistral = lazy(() => import("./pages/ModelsMistral"));
+const ModelsQwen = lazy(() => import("./pages/ModelsQwen"));
+const ModelsDeepseek = lazy(() => import("./pages/ModelsDeepseek"));
+const ModelsGrok = lazy(() => import("./pages/ModelsGrok"));
+const McpIndex = lazy(() => import("./pages/McpIndex"));
+const PromptingIndex = lazy(() => import("./pages/PromptingIndex"));
+const EmbeddingsIndex = lazy(() => import("./pages/EmbeddingsIndex"));
 
 // Part 4 Missing Imports
-import RagIndex from "./pages/RagIndex";
-import RagRetrieval from "./pages/RagRetrieval";
-import RagEvaluation from "./pages/RagEvaluation";
-import RagDataPrep from "./pages/RagDataPrep";
-import RagAdvancedRetrieval from "./pages/RagAdvancedRetrieval";
-import RagGeneration from "./pages/RagGeneration";
-import RagChunking from "./pages/RagChunking";
-import RagHybrid from "./pages/RagHybrid";
-import RagGraph from "./pages/RagGraph";
-import RagAgentic from "./pages/RagAgentic";
-import RagIndexing from "./pages/RagIndexing";
-import RagCrag from "./pages/RagCrag";
-import RagDevelopment from "./pages/RagDevelopment";
-import RagMultimodal from "./pages/RagMultimodal";
-import RagTypes from "./pages/RagTypes";
-import RagNaive from "./pages/RagNaive";
-import RagSelf from "./pages/RagSelf";
-import RagEmbeddings from "./pages/RagEmbeddings";
-import MlNlp from "./pages/MlNlp";
-import MlLogistic from "./pages/MlLogistic";
-import MlDecisionTrees from "./pages/MlDecisionTrees";
-import MlLinear from "./pages/MlLinear";
-import MlKnn from "./pages/MlKnn";
-import MlMultiple from "./pages/MlMultiple";
-import MlTransformers from "./pages/MlTransformers";
-import LlmMoe from "./pages/LlmMoe";
-import LlmLcm from "./pages/LlmLcm";
-import LlmLam from "./pages/LlmLam";
+const RagIndex = lazy(() => import("./pages/RagIndex"));
+const RagRetrieval = lazy(() => import("./pages/RagRetrieval"));
+const RagEvaluation = lazy(() => import("./pages/RagEvaluation"));
+const RagDataPrep = lazy(() => import("./pages/RagDataPrep"));
+const RagAdvancedRetrieval = lazy(() => import("./pages/RagAdvancedRetrieval"));
+const RagGeneration = lazy(() => import("./pages/RagGeneration"));
+const RagChunking = lazy(() => import("./pages/RagChunking"));
+const RagHybrid = lazy(() => import("./pages/RagHybrid"));
+const RagGraph = lazy(() => import("./pages/RagGraph"));
+const RagAgentic = lazy(() => import("./pages/RagAgentic"));
+const RagIndexing = lazy(() => import("./pages/RagIndexing"));
+const RagCrag = lazy(() => import("./pages/RagCrag"));
+const RagDevelopment = lazy(() => import("./pages/RagDevelopment"));
+const RagMultimodal = lazy(() => import("./pages/RagMultimodal"));
+const RagTypes = lazy(() => import("./pages/RagTypes"));
+const RagNaive = lazy(() => import("./pages/RagNaive"));
+const RagSelf = lazy(() => import("./pages/RagSelf"));
+const RagEmbeddings = lazy(() => import("./pages/RagEmbeddings"));
+const MlNlp = lazy(() => import("./pages/MlNlp"));
+const MlLogistic = lazy(() => import("./pages/MlLogistic"));
+const MlDecisionTrees = lazy(() => import("./pages/MlDecisionTrees"));
+const MlLinear = lazy(() => import("./pages/MlLinear"));
+const MlKnn = lazy(() => import("./pages/MlKnn"));
+const MlMultiple = lazy(() => import("./pages/MlMultiple"));
+const MlTransformers = lazy(() => import("./pages/MlTransformers"));
+const LlmMoe = lazy(() => import("./pages/LlmMoe"));
+const LlmLcm = lazy(() => import("./pages/LlmLcm"));
+const LlmLam = lazy(() => import("./pages/LlmLam"));
 
-import LlmInference from "./pages/LlmInference";
-import ProjectsIndex from "./pages/ProjectsIndex";
-import ResourcesIndex from "./pages/ResourcesIndex";
-import AzureIndex from "./pages/AzureIndex";
-import AzureBasics from "./pages/AzureBasics";
-import AzureInfrastructure from "./pages/AzureInfrastructure";
-import AzureIdentity from "./pages/AzureIdentity";
-import AzureVms from "./pages/AzureVms";
-import AzureStorage from "./pages/AzureStorage";
-import AzureNetworking from "./pages/AzureNetworking";
-import AzureLoadBalancer from "./pages/AzureLoadBalancer";
-import AzureDns from "./pages/AzureDns";
-import AzureAppService from "./pages/AzureAppService";
-import AzureAks from "./pages/AzureAks";
-import AzureMonitoring from "./pages/AzureMonitoring";
-import AzureSecurity from "./pages/AzureSecurity";
-import AzureBackup from "./pages/AzureBackup";
-import AzureArchitecture from "./pages/AzureArchitecture";
+const LlmInference = lazy(() => import("./pages/LlmInference"));
+const ProjectsIndex = lazy(() => import("./pages/ProjectsIndex"));
+const ResourcesIndex = lazy(() => import("./pages/ResourcesIndex"));
+const AzureIndex = lazy(() => import("./pages/AzureIndex"));
+const AzureBasics = lazy(() => import("./pages/AzureBasics"));
+const AzureInfrastructure = lazy(() => import("./pages/AzureInfrastructure"));
+const AzureIdentity = lazy(() => import("./pages/AzureIdentity"));
+const AzureVms = lazy(() => import("./pages/AzureVms"));
+const AzureStorage = lazy(() => import("./pages/AzureStorage"));
+const AzureNetworking = lazy(() => import("./pages/AzureNetworking"));
+const AzureLoadBalancer = lazy(() => import("./pages/AzureLoadBalancer"));
+const AzureDns = lazy(() => import("./pages/AzureDns"));
+const AzureAppService = lazy(() => import("./pages/AzureAppService"));
+const AzureAks = lazy(() => import("./pages/AzureAks"));
+const AzureMonitoring = lazy(() => import("./pages/AzureMonitoring"));
+const AzureSecurity = lazy(() => import("./pages/AzureSecurity"));
+const AzureBackup = lazy(() => import("./pages/AzureBackup"));
+const AzureArchitecture = lazy(() => import("./pages/AzureArchitecture"));
 
-import AwsIndex from "./pages/AwsIndex";
-import AwsBasics from "./pages/AwsBasics";
-import AwsInfrastructure from "./pages/AwsInfrastructure";
-import AwsIam from "./pages/AwsIam";
-import AwsEc2 from "./pages/AwsEc2";
-import AwsStorage from "./pages/AwsStorage";
-import AwsNetworking from "./pages/AwsNetworking";
-import AwsLoadBalancer from "./pages/AwsLoadBalancer";
-import AwsDns from "./pages/AwsDns";
+const AwsIndex = lazy(() => import("./pages/AwsIndex"));
+const AwsBasics = lazy(() => import("./pages/AwsBasics"));
+const AwsInfrastructure = lazy(() => import("./pages/AwsInfrastructure"));
+const AwsIam = lazy(() => import("./pages/AwsIam"));
+const AwsEc2 = lazy(() => import("./pages/AwsEc2"));
+const AwsStorage = lazy(() => import("./pages/AwsStorage"));
+const AwsNetworking = lazy(() => import("./pages/AwsNetworking"));
+const AwsLoadBalancer = lazy(() => import("./pages/AwsLoadBalancer"));
+const AwsDns = lazy(() => import("./pages/AwsDns"));
+
+// Shown only while a route's chunk is still downloading.
+function RouteFallback() {
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+      <div className="flex items-center gap-3 text-gray-500 text-sm">
+        <span className="w-4 h-4 rounded-full border-2 border-gray-700 border-t-indigo-500 animate-spin" />
+        Loading…
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
     <HashRouter>
+      <Suspense fallback={<RouteFallback />}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/agents" element={<AgentsIndex />} />
@@ -145,6 +160,7 @@ function App() {
         <Route path="/genai" element={<GenAiIndex />} />
         <Route path="/genai/fine-tuning" element={<GenAiFineTuning />} />
         <Route path="/genai/quantization" element={<GenAiQuantization />} />
+        <Route path="/genai/agi" element={<GenAiAgi />} />
         
         <Route path="/python" element={<PythonIndex />} />
         <Route path="/python/foundations" element={<PythonFoundations />} />
@@ -152,6 +168,7 @@ function App() {
         <Route path="/python/advanced" element={<PythonAdvanced />} />
         <Route path="/python/tooling-async" element={<PythonToolingAsync />} />
         <Route path="/python/data-science" element={<PythonDataScience />} />
+        <Route path="/python/regex" element={<PythonRegex />} />
         
         <Route path="/ml" element={<MlIndex />} />
         <Route path="/ml/supervised" element={<MlSupervised />} />
@@ -175,8 +192,6 @@ function App() {
         <Route path="/models/deepseek" element={<ModelsDeepseek />} />
         <Route path="/models/grok" element={<ModelsGrok />} />
 
-        <Route path="/langgraph" element={<LangGraphIndex />} />
-        <Route path="/langgraph/patterns" element={<LangGraphPatterns />} />
         
         <Route path="/mcp" element={<McpIndex />} />
         <Route path="/prompting" element={<PromptingIndex />} />
@@ -213,7 +228,11 @@ function App() {
 
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
+
+        {/* Catch-all: unknown URLs get a helpful page, not a blank screen */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
     </HashRouter>
   );
 }

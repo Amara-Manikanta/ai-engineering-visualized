@@ -13,6 +13,7 @@ const NAV_LINKS = [
       { name: "3. OOP & Advanced Python", path: "/python/advanced" },
       { name: "4. System, Tooling & Async", path: "/python/tooling-async" },
       { name: "5. Data Science & ML", path: "/python/data-science" },
+      { name: "6. Regular Expressions", path: "/python/regex" },
     ],
   },
   {
@@ -39,9 +40,10 @@ const NAV_LINKS = [
       { name: "AI Models", path: "/llms" },
       { name: "LLM Inference", path: "/llm-inference" },
       { name: "Prompt Engineering", path: "/prompting" },
-      { name: "Embeddings", path: "/embeddings" },
+      { name: "Embeddings", path: "/rag/embeddings" },
       { name: "Fine-tuning", path: "/genai/fine-tuning" },
       { name: "Quantization", path: "/genai/quantization" },
+      { name: "AGI & GPT-6 Astra", path: "/genai/agi" },
     ],
   },
   {
@@ -68,8 +70,7 @@ const NAV_LINKS = [
     subLinks: [
       { name: "AI Agents", path: "/agents" },
       { name: "MCP", path: "/mcp" },
-      { name: "LangGraph", path: "/langgraph" },
-      { name: "LangChain", path: "/agents/langchain" },
+      { name: "LangChain + LangGraph", path: "/agents/langchain" },
       { name: "Document Loaders", path: "/agents/document-loaders" },
       { name: "Tool Calling", path: "/agents/tool-calling" },
       { name: "Memory", path: "/agents/memory" },
