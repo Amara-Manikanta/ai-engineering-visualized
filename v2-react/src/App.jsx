@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import DocumentLoaders from "./pages/DocumentLoaders";
 import Langchain from "./pages/Langchain";
@@ -102,7 +102,7 @@ import AwsDns from "./pages/AwsDns";
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/agents" element={<AgentsIndex />} />
@@ -214,7 +214,7 @@ function App() {
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
