@@ -47,6 +47,7 @@
       "electron/**/*"
     ],
     "mac": {
+      "icon": "electron/icon.icns",
       "category": "public.app-category.education",
       "target": [
         "dmg",

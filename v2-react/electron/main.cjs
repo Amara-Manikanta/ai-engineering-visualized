@@ -10,6 +10,7 @@ function createWindow() {
     minWidth: 960,
     minHeight: 650,
     title: 'Mani Notes',
+    icon: path.join(__dirname, 'icon.png'),
     titleBarStyle: 'hiddenInset',
     trafficLightPosition: { x: 16, y: 16 },
     backgroundColor: '#0a0a0a',
