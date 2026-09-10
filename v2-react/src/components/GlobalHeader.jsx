@@ -134,7 +134,7 @@ export default function GlobalHeader() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity shrink-0">
             <span className="text-2xl">🧠</span>
-            <span>AI Engineering <span className="text-indigo-400">Visualized</span></span>
+            <span>Mani <span className="text-indigo-400">Notes</span></span>
           </Link>
 
           {/* Desktop Nav */}
