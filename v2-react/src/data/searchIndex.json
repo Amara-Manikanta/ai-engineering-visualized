@@ -993,6 +993,12 @@
     ]
   },
   {
+    "path": "/glossary",
+    "title": "AI Glossary",
+    "intro": "",
+    "sections": []
+  },
+  {
     "path": "/llm-inference",
     "title": "How LLMs Actually Generate Text",
     "intro": "Most people treat LLMs as a black box. This guide breaks open the entire inference pipeline — from the moment you press Enter to the token that appears on your screen.",

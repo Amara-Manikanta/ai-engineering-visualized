@@ -107,6 +107,7 @@ const NAV_LINKS = [
   { name: "🛡️ Safety", path: "/safety" },
   { name: "🏗️ System Design", path: "/system-design" },
   { name: "🚀 Projects", path: "/projects" },
+  { name: "📖 Glossary", path: "/glossary" },
   { name: "📚 Resources", path: "/resources" },
 ];
 
