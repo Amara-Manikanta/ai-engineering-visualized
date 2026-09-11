@@ -101,6 +101,7 @@ const NAV_LINKS = [
       { name: "AWS", path: "/aws" }
     ],
   },
+  { name: "🎯 Playgrounds", path: "/playgrounds" },
   { name: "🚀 Projects", path: "/projects" },
   { name: "📚 Resources", path: "/resources" },
 ];

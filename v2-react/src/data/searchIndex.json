@@ -1848,6 +1848,12 @@
     ]
   },
   {
+    "path": "/playgrounds",
+    "title": "Interactive Playgrounds",
+    "intro": "Hands-on tools for the concepts that are hard to grasp from prose — tokenization, sampling, attention, cost and embeddings. Everything here computes live.",
+    "sections": []
+  },
+  {
     "path": "/projects",
     "title": "Projects Index",
     "intro": "",

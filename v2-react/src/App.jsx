@@ -74,6 +74,7 @@ const LlmLcm = lazy(() => import("./pages/LlmLcm"));
 const LlmLam = lazy(() => import("./pages/LlmLam"));
 
 const LlmInference = lazy(() => import("./pages/LlmInference"));
+const PlaygroundsIndex = lazy(() => import("./pages/PlaygroundsIndex"));
 const ProjectsIndex = lazy(() => import("./pages/ProjectsIndex"));
 const ResourcesIndex = lazy(() => import("./pages/ResourcesIndex"));
 const AzureIndex = lazy(() => import("./pages/AzureIndex"));
@@ -226,6 +227,7 @@ function App() {
         <Route path="/aws/load-balancer" element={<AwsLoadBalancer />} />
         <Route path="/aws/dns" element={<AwsDns />} />
 
+        <Route path="/playgrounds" element={<PlaygroundsIndex />} />
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
 
