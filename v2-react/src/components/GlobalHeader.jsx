@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
+import CommandPalette from "./CommandPalette";
 
 const NAV_LINKS = [
   { 
@@ -183,6 +184,11 @@ export default function GlobalHeader() {
               </div>
             ))}
           </nav>
+
+          {/* Global search — Cmd+K */}
+          <div className="ml-auto lg:ml-4 mr-2">
+            <CommandPalette />
+          </div>
 
           {/* Mobile Toggle */}
           <button 
