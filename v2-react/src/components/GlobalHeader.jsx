@@ -18,7 +18,7 @@ const NAV_LINKS = [
     ],
   },
   {
-    name: "🤖 Machine Learning",
+    name: "🤖 ML",
     path: "/ml",
     subLinks: [
       { name: "Introduction", path: "/ml" },
@@ -35,7 +35,7 @@ const NAV_LINKS = [
     ],
   },
   {
-    name: "✨ Generative AI",
+    name: "✨ GenAI",
     path: "/genai",
     subLinks: [
       { name: "AI Models", path: "/llms" },
@@ -45,6 +45,7 @@ const NAV_LINKS = [
       { name: "Fine-tuning", path: "/genai/fine-tuning" },
       { name: "Quantization", path: "/genai/quantization" },
       { name: "AGI & GPT-6 Astra", path: "/genai/agi" },
+      { name: "Safety & Alignment", path: "/safety" },
     ],
   },
   {
@@ -66,7 +67,7 @@ const NAV_LINKS = [
     ],
   },
   {
-    name: "🕸️ Agentic AI",
+    name: "🕸️ Agents",
     path: "/agents",
     subLinks: [
       { name: "AI Agents", path: "/agents" },
@@ -104,14 +105,25 @@ const NAV_LINKS = [
       { name: "AWS", path: "/aws" }
     ],
   },
-  { name: "🎯 Playgrounds", path: "/playgrounds" },
-  { name: "🎬 Animations", path: "/animations" },
-  { name: "🗺️ Roadmaps", path: "/roadmaps" },
-  { name: "🛡️ Safety", path: "/safety" },
-  { name: "🏗️ System Design", path: "/system-design" },
-  { name: "🚀 Projects", path: "/projects" },
-  { name: "📖 Glossary", path: "/glossary" },
-  { name: "📚 Resources", path: "/resources" },
+  {
+    name: "🎓 Learn",
+    path: "/roadmaps",
+    subLinks: [
+      { name: "Learning Paths", path: "/roadmaps" },
+      { name: "Playgrounds", path: "/playgrounds" },
+      { name: "Animations", path: "/animations" },
+      { name: "Glossary", path: "/glossary" },
+    ],
+  },
+  {
+    name: "🏗️ Build",
+    path: "/system-design",
+    subLinks: [
+      { name: "System Design", path: "/system-design" },
+      { name: "Projects", path: "/projects" },
+      { name: "Resources", path: "/resources" },
+    ],
+  },
 ];
 
 export default function GlobalHeader() {
@@ -149,7 +161,7 @@ export default function GlobalHeader() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="hidden xl:flex items-center gap-5">
             {NAV_LINKS.map((nav, i) => (
               <div 
                 key={i} 
@@ -158,12 +170,12 @@ export default function GlobalHeader() {
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 {nav.subLinks ? (
-                  <div className="flex items-center gap-1 cursor-pointer py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                  <div className="flex items-center gap-1 cursor-pointer py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors whitespace-nowrap">
                     <Link to={nav.path}>{nav.name}</Link>
                     <ChevronDown className="w-4 h-4 opacity-50" />
                   </div>
                 ) : (
-                  <Link to={nav.path} className="block py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                  <Link to={nav.path} className="block py-4 text-sm font-medium text-gray-300 hover:text-white transition-colors whitespace-nowrap">
                     {nav.name}
                   </Link>
                 )}
@@ -201,7 +213,7 @@ export default function GlobalHeader() {
 
           {/* Mobile Toggle */}
           <button 
-            className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" 
+            className="xl:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" 
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -212,7 +224,7 @@ export default function GlobalHeader() {
 
       {/* ====== MOBILE MENU — RENDERED OUTSIDE <header> TO AVOID backdrop-filter STACKING BUG ====== */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
+        <div className="fixed inset-0 z-[100] xl:hidden">
           {/* Backdrop overlay */}
           <div 
             className="absolute inset-0 bg-black/60"
