@@ -2736,5 +2736,11 @@
     "title": "Resources Index",
     "intro": "",
     "sections": []
+  },
+  {
+    "path": "/roadmaps",
+    "title": "Learning Paths",
+    "intro": "Four ordered routes through the material, depending on what you're trying to become. Tick steps off as you go — progress is saved in your browser.",
+    "sections": []
   }
 ]

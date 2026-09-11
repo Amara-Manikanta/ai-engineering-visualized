@@ -103,6 +103,7 @@ const NAV_LINKS = [
   },
   { name: "🎯 Playgrounds", path: "/playgrounds" },
   { name: "🎬 Animations", path: "/animations" },
+  { name: "🗺️ Roadmaps", path: "/roadmaps" },
   { name: "🚀 Projects", path: "/projects" },
   { name: "📚 Resources", path: "/resources" },
 ];
