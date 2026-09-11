@@ -304,6 +304,12 @@
     ]
   },
   {
+    "path": "/animations",
+    "title": "Step-by-Step Animations",
+    "intro": "The processes that are hard to picture from prose — training loops, tool calls, context budgets and decoding tricks — walked through one step at a time.",
+    "sections": []
+  },
+  {
     "path": "/aws",
     "title": "AWS Cheat Sheets",
     "intro": "Your visual guide to Amazon Web Services. Explore our interactive cheat sheets covering core AWS concepts, infrastructure, and services.",
