@@ -77,6 +77,8 @@ const LlmInference = lazy(() => import("./pages/LlmInference"));
 const PlaygroundsIndex = lazy(() => import("./pages/PlaygroundsIndex"));
 const AnimationsIndex = lazy(() => import("./pages/AnimationsIndex"));
 const RoadmapsIndex = lazy(() => import("./pages/RoadmapsIndex"));
+const SafetyIndex = lazy(() => import("./pages/SafetyIndex"));
+const SystemDesignIndex = lazy(() => import("./pages/SystemDesignIndex"));
 const ProjectsIndex = lazy(() => import("./pages/ProjectsIndex"));
 const ResourcesIndex = lazy(() => import("./pages/ResourcesIndex"));
 const AzureIndex = lazy(() => import("./pages/AzureIndex"));
@@ -232,6 +234,8 @@ function App() {
         <Route path="/playgrounds" element={<PlaygroundsIndex />} />
         <Route path="/animations" element={<AnimationsIndex />} />
         <Route path="/roadmaps" element={<RoadmapsIndex />} />
+        <Route path="/safety" element={<SafetyIndex />} />
+        <Route path="/system-design" element={<SystemDesignIndex />} />
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
 

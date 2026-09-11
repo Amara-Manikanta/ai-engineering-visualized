@@ -2742,5 +2742,38 @@
     "title": "Learning Paths",
     "intro": "Four ordered routes through the material, depending on what you're trying to become. Tick steps off as you go — progress is saved in your browser.",
     "sections": []
+  },
+  {
+    "path": "/safety",
+    "title": "AI Safety & Alignment",
+    "intro": "How a model trained only to predict text becomes something you can deploy — and the attacks, failure modes and defences you inherit when you do.",
+    "sections": [
+      {
+        "label": "Why Alignment Exists",
+        "hash": "why"
+      },
+      {
+        "label": "Alignment Methods",
+        "hash": "methods"
+      },
+      {
+        "label": "Red Teaming & Attacks",
+        "hash": "attacks"
+      },
+      {
+        "label": "Hallucination & Grounding",
+        "hash": "hallucination"
+      },
+      {
+        "label": "Defence in Depth",
+        "hash": "defence"
+      }
+    ]
+  },
+  {
+    "path": "/system-design",
+    "title": "AI System Design Patterns",
+    "intro": "Reference architectures for the five systems people actually build — with the design decisions and the mistake each one invites.",
+    "sections": []
   }
 ]
