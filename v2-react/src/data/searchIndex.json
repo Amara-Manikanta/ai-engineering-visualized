@@ -1643,6 +1643,37 @@
     ]
   },
   {
+    "path": "/models/command-r",
+    "title": "Command R+ (Cohere)",
+    "intro": "A model family designed around retrieval rather than adapted to it — grounded generation and inline citations are first-class, not prompt tricks.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Built for RAG",
+        "hash": "rag"
+      },
+      {
+        "label": "How Command Is Trained",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
     "path": "/models/deepseek",
     "title": "DeepSeek (DeepSeek AI)",
     "intro": "Proved that frontier-level reasoning could be trained far more cheaply than assumed, via aggressive Mixture-of-Experts efficiency and reinforcement-learning-based reasoning.",
@@ -1692,6 +1723,37 @@
       },
       {
         "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/gemma",
+    "title": "Gemma (Google)",
+    "intro": "Google's open-weight family, built from the same research lineage as Gemini but released for you to download, inspect and run yourself.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "How Gemma Is Trained",
         "hash": "training"
       },
       {
@@ -1817,6 +1879,37 @@
       {
         "label": "Training & Uniqueness",
         "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/phi",
+    "title": "Phi-4 (Microsoft)",
+    "intro": "The strongest argument that training data quality can substitute for scale — a small model that reasons well above its parameter count.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "The Small-Model Case",
+        "hash": "small"
+      },
+      {
+        "label": "How Phi Is Trained",
+        "hash": "training"
+      },
+      {
+        "label": "Data Quality vs Scale",
+        "hash": "quality"
       },
       {
         "label": "Strengths & Weaknesses",

@@ -39,6 +39,9 @@ const ModelsMistral = lazy(() => import("./pages/ModelsMistral"));
 const ModelsQwen = lazy(() => import("./pages/ModelsQwen"));
 const ModelsDeepseek = lazy(() => import("./pages/ModelsDeepseek"));
 const ModelsGrok = lazy(() => import("./pages/ModelsGrok"));
+const ModelsGemma = lazy(() => import("./pages/ModelsGemma"));
+const ModelsCommandR = lazy(() => import("./pages/ModelsCommandR"));
+const ModelsPhi = lazy(() => import("./pages/ModelsPhi"));
 const McpIndex = lazy(() => import("./pages/McpIndex"));
 const PromptingIndex = lazy(() => import("./pages/PromptingIndex"));
 const EmbeddingsIndex = lazy(() => import("./pages/EmbeddingsIndex"));
@@ -197,6 +200,9 @@ function App() {
         <Route path="/models/qwen" element={<ModelsQwen />} />
         <Route path="/models/deepseek" element={<ModelsDeepseek />} />
         <Route path="/models/grok" element={<ModelsGrok />} />
+        <Route path="/models/gemma" element={<ModelsGemma />} />
+        <Route path="/models/command-r" element={<ModelsCommandR />} />
+        <Route path="/models/phi" element={<ModelsPhi />} />
 
         
         <Route path="/mcp" element={<McpIndex />} />

@@ -45,6 +45,21 @@ const MODELS = [
     color: 'from-slate-500/20 to-slate-600/5', border: 'border-slate-500/30', text: 'text-slate-300',
     access: 'Closed / Open (Early)', context: '128K', strength: 'Real-time social knowledge & uncensored personality',
   },
+  {
+    id: 'gemma', name: 'Gemma', maker: 'Google', path: '/models/gemma', icon: '💎',
+    color: 'from-sky-500/20 to-sky-600/5', border: 'border-sky-500/30', text: 'text-sky-400',
+    access: 'Open weights', context: '128K', strength: 'Small models with high quality-per-parameter',
+  },
+  {
+    id: 'command-r', name: 'Command R+', maker: 'Cohere', path: '/models/command-r', icon: '🧭',
+    color: 'from-teal-500/20 to-teal-600/5', border: 'border-teal-500/30', text: 'text-teal-400',
+    access: 'Enterprise / Open', context: '128K', strength: 'RAG-native with structured citations',
+  },
+  {
+    id: 'phi', name: 'Phi-4', maker: 'Microsoft', path: '/models/phi', icon: '🔷',
+    color: 'from-blue-500/20 to-blue-600/5', border: 'border-blue-500/30', text: 'text-blue-400',
+    access: 'Open weights', context: '16K', strength: 'Reasoning far above its parameter count',
+  },
 ];
 
 const staggerContainer = {
@@ -81,7 +96,7 @@ export default function ModelsIndex() {
       </section>
 
       <section id="model-cards" className="mb-16 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-6">The 7 Model Families</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">The 11 Model Families</h2>
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={staggerContainer}
