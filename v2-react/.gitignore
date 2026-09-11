@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# electron-builder output (binaries, ~288MB)
+release/
+dist_electron/
