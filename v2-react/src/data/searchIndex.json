@@ -991,6 +991,41 @@
     ]
   },
   {
+    "path": "/efficiency",
+    "title": "Efficient Inference",
+    "intro": "How a 70B model ends up running on a laptop. Every technique here trades one resource for another — the skill is knowing which trade you are making.",
+    "sections": [
+      {
+        "label": "Three Budgets",
+        "hash": "budgets"
+      },
+      {
+        "label": "Memory Calculator",
+        "hash": "calc"
+      },
+      {
+        "label": "The Techniques",
+        "hash": "techniques"
+      },
+      {
+        "label": "What Composes",
+        "hash": "compose"
+      },
+      {
+        "label": "A Note on the Eleventh",
+        "hash": "scaffolding"
+      },
+      {
+        "label": "Picking a Stack",
+        "hash": "stacks"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ]
+  },
+  {
     "path": "/embeddings",
     "title": "Embeddings Deep Dive",
     "intro": "Understand Vector Embeddings, similarity metrics, and compare top embedding models.",

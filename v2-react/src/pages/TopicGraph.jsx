@@ -57,6 +57,7 @@ const NODES = [
   { id: "quant", label: "Quantization", group: "GenAI", path: "/genai/quantization", size: 9 },
   { id: "inference", label: "LLM Inference", group: "GenAI", path: "/llm-inference", size: 10 },
   { id: "safety", label: "Safety", group: "GenAI", path: "/safety", size: 10 },
+  { id: "efficiency", label: "Efficiency", group: "GenAI", path: "/efficiency", size: 12 },
 
   // RAG
   { id: "rag", label: "RAG", group: "RAG", path: "/rag", size: 15 },
@@ -120,6 +121,10 @@ const EDGES = [
   ["llms", "distill"],
   ["llms", "quant"],
   ["llms", "inference"],
+  ["inference", "efficiency"],
+  ["quant", "efficiency"],
+  ["mamba", "efficiency"],
+  ["distill", "efficiency"],
   ["quant", "peft"],
   ["llms", "safety"],
   ["llms", "models"],

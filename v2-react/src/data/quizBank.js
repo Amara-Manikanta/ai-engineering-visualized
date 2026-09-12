@@ -488,5 +488,60 @@ export const QUIZZES = [
   },
 ];
 
+QUIZZES.push({
+  id: "efficiency",
+  topic: "Efficiency",
+  label: "Efficient Inference",
+  path: "/efficiency",
+  icon: "⚡",
+  tone: "amber",
+  questions: [
+    {
+      q: "You quantize a 70B model to 4-bit, then still run out of memory at 128k context. What did you miss?",
+      options: [
+        "Quantization does not apply to all layers",
+        "The KV cache grows with context and can exceed the weights",
+        "4-bit needs more memory than fp16 at long context",
+        "The tokenizer holds the extra memory",
+      ],
+      answer: 1,
+      why: "Weights are fixed once you pick a precision; the cache grows linearly with every token. At long context it routinely dwarfs the weights. This is the single most common capacity-planning mistake, and the fix is a KV-side technique, not a weight-side one.",
+    },
+    {
+      q: "Mixtral holds 46.7B parameters but activates about 12.9B per token. How much memory do you need?",
+      options: [
+        "Enough for 12.9B — only active experts load",
+        "Enough for all 46.7B — every expert must be resident",
+        "Enough for 12.9B plus the router",
+        "It depends on the batch size",
+      ],
+      answer: 1,
+      why: "Sparsity is not compression. The router can send the next token to any expert, so all of them stay in memory. Mixture of experts buys compute and latency, never RAM — planning capacity from the active count comes up short by roughly four times here.",
+    },
+    {
+      q: "Which pair does NOT stack usefully?",
+      options: [
+        "4-bit weights + KV quantization",
+        "Prompt caching + speculative decoding",
+        "A linear architecture + KV-cache compression",
+        "Quantization + mixture of experts",
+      ],
+      answer: 2,
+      why: "Mamba and RWKV carry a fixed-size state and have no KV cache at all, so there is nothing for a cache-compression technique to act on. Savings across different budgets multiply; savings aimed at the same budget usually overlap.",
+    },
+    {
+      q: "Why does prompt caching break when you put a timestamp at the top of your system prompt?",
+      options: [
+        "Timestamps are not tokenizable",
+        "It matches on an exact prefix, so a change early invalidates everything after it",
+        "The cache only stores the last 1000 tokens",
+        "It disables the attention mask",
+      ],
+      answer: 1,
+      why: "Cached entries are the KV values for a specific token prefix. Change a character near the start and every subsequent position differs, so the whole cache is void. Put stable text first and volatile text last.",
+    },
+  ],
+});
+
 export const findQuiz = (id) => QUIZZES.find((q) => q.id === id);
 export const questionsFor = (id) => findQuiz(id)?.questions ?? [];

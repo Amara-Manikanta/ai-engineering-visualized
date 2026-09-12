@@ -197,6 +197,23 @@ export default function GenAiIndex() {
               </Link>
             </motion.div>
 
+            {/* Efficient Inference */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/50 transition-colors group overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <Link to="/efficiency">
+                <div className="text-4xl mb-4">⚡</div>
+                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-400 transition-colors">Efficient Inference</h3>
+                <p className="text-gray-400 mb-6 text-sm">How a 70B model ends up on a laptop. Budget the memory yourself and see which techniques actually stack.</p>
+                <div className="text-amber-400 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                  Explore <span className="ml-1">→</span>
+                </div>
+              </Link>
+            </motion.div>
+
           </div>
         </motion.section>
       </motion.div>

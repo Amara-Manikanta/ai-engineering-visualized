@@ -96,6 +96,7 @@ const LlmLam = lazy(() => import("./pages/LlmLam"));
 
 const LlmInference = lazy(() => import("./pages/LlmInference"));
 const InteractiveIndex = lazy(() => import("./pages/InteractiveIndex"));
+const EfficiencyIndex = lazy(() => import("./pages/EfficiencyIndex"));
 const RoadmapsIndex = lazy(() => import("./pages/RoadmapsIndex"));
 const SafetyIndex = lazy(() => import("./pages/SafetyIndex"));
 const SystemDesignIndex = lazy(() => import("./pages/SystemDesignIndex"));
@@ -271,6 +272,7 @@ function App() {
         <Route path="/aws/load-balancer" element={<AwsLoadBalancer />} />
         <Route path="/aws/dns" element={<AwsDns />} />
 
+        <Route path="/efficiency" element={<EfficiencyIndex />} />
         <Route path="/interactive" element={<InteractiveIndex />} />
         <Route path="/playgrounds" element={<InteractiveIndex />} />
         <Route path="/animations" element={<InteractiveIndex />} />

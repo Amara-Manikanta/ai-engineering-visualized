@@ -60,6 +60,7 @@ const NAV_LINKS = [
       { name: "LAM — Action", path: "/llms/lam-type" },
       { name: "Core", isHeader: true },
       { name: "LLM Inference", path: "/llm-inference" },
+      { name: "Efficient Inference", path: "/efficiency" },
       { name: "Prompt Engineering", path: "/prompting" },
       { name: "Tokenization", path: "/genai/tokenization" },
       { name: "Embeddings", path: "/rag/embeddings" },
