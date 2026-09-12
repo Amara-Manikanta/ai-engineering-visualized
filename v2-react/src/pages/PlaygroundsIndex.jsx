@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
 
 /* ===========================================================================
@@ -599,21 +599,17 @@ export default function PlaygroundsIndex() {
           </button>
         ))}
       </div>
-
-      <AnimatePresence mode="wait">
         <motion.section
           key={active}
           id={active}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.22 }}
           className="scroll-mt-24"
         >
           <h2 className="text-2xl font-bold text-white mb-4">{tool.title}</h2>
           <Comp />
         </motion.section>
-      </AnimatePresence>
     </GuideLayout>
   );
 }

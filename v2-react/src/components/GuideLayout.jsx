@@ -6,7 +6,13 @@ import Footer from "./Footer";
 import { AZURE_LINKS, AWS_LINKS } from "../config/navigation";
 import { PYTHON_LINKS } from "../config/pythonNavigation";
 
-export default function GuideLayout({ title, intro, toc, children }) {
+/**
+ * onTocClick — optional. Called with the clicked toc item's hash before the
+ * scroll is attempted. Pages that only render one section at a time (a tabbed
+ * view) use it to bring the target section into the DOM first; without it a
+ * toc entry for a hidden section silently does nothing.
+ */
+export default function GuideLayout({ title, intro, toc, children, onTocClick }) {
   const [activeHash, setActiveHash] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
@@ -87,8 +93,13 @@ export default function GuideLayout({ title, intro, toc, children }) {
                       setActiveHash(item.hash);
                       setSidebarOpen(false); // Close sidebar on mobile after clicking
                       const id = href.replace("#", "");
-                      const el = document.getElementById(id);
-                      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                      onTocClick?.(id);
+                      // A tabbed page may have just mounted the section, so look
+                      // for it again on the next frame rather than immediately.
+                      requestAnimationFrame(() => {
+                        const el = document.getElementById(id);
+                        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                      });
                     }}
                     className={`block py-2 lg:py-1.5 text-[0.85em] transition-colors ${item.indent ? "ml-4 text-xs" : ""} ${activeHash === item.hash ? "text-indigo-400 font-semibold" : "text-gray-400 hover:text-indigo-400"}`}
                   >

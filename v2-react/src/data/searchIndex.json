@@ -1358,6 +1358,10 @@
       {
         "label": "19. Common Mistakes to Avoid",
         "hash": "common-mistakes"
+      },
+      {
+        "label": "20. Model Types in Depth",
+        "hash": "model-types"
       }
     ]
   },

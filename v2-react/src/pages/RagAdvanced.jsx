@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
+import VariantNotes from "../components/VariantNotes";
+import { VARIANT_TOC, ADVANCED } from "../data/ragVariants";
 
 export default function RagAdvanced() {
-  const toc = [];
+  const toc = VARIANT_TOC;
 
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -57,7 +59,7 @@ export default function RagAdvanced() {
       intro="Fixes Naive RAG by optimizing the query before search, and re-ranking the results after search."
       toc={toc}
     >
-      <motion.section className="guide-section">
+      <motion.section id="anim" className="guide-section">
         <div 
           className="pipeline-canvas adv-canvas" 
           style={{ position: "relative", height: "500px", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "16px", overflow: "hidden", marginBottom: "24px" }}
@@ -208,6 +210,7 @@ export default function RagAdvanced() {
           </button>
         </div>
       </motion.section>
+      <VariantNotes {...ADVANCED} />
     </GuideLayout>
   );
 }

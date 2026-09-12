@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import GuideLayout from '../components/GuideLayout';
+import VariantNotes from '../components/VariantNotes';
+import { VARIANT_TOC, MULTIMODAL } from '../data/ragVariants';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const toc = [];
+const toc = VARIANT_TOC;
 
 const RagMultimodal = () => {
   const [step, setStep] = useState(0);
@@ -50,7 +52,7 @@ const RagMultimodal = () => {
       intro="Retrieves images, video frames, and text simultaneously into a Vision-Language Model."
       toc={toc}
     >
-      <section className="guide-section">
+      <section id="anim" className="guide-section">
         <div className="pipeline-canvas" style={{position: 'relative', height: '450px', background: 'var(--surface, #111)', border: '1px solid var(--border, #333)', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px'}}>
             
             <motion.div id="m-img" style={{position: 'absolute', left: '5%', top: '30%', padding: '10px', border: '2px dashed var(--text2, gray)', textAlign: 'center', borderRadius: '8px'}}
@@ -137,6 +139,7 @@ const RagMultimodal = () => {
           </button>
         </div>
       </section>
+      <VariantNotes {...MULTIMODAL} />
     </GuideLayout>
   );
 };

@@ -565,12 +565,10 @@ const AgentsIndex = () => {
           })}
         </div>
 
-        <AnimatePresence mode="wait">
           <motion.div
             key={strategy.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22 }}
             className={`rounded-2xl border p-6 ${strategy.tone}`}
           >
@@ -606,7 +604,6 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed m-0">{strategy.use}</p>
             </div>
           </motion.div>
-        </AnimatePresence>
 
         <div className="mt-5 p-4 rounded-xl border border-white/10 bg-white/5">
           <p className="text-sm text-gray-400 leading-relaxed m-0">

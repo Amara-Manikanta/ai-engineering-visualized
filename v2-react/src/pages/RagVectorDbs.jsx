@@ -70,7 +70,6 @@ const SearchCompare = () => {
           >{v.label}</button>
         ))}
       </div>
-      <AnimatePresence mode="wait">
         <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
           <div className={`${col.bg} border ${col.border} rounded-lg p-4 font-mono text-xs mb-4 ${col.text}`}>{c.query}</div>
           <p className="text-gray-300 text-sm mb-4">{c.description}</p>
@@ -80,7 +79,6 @@ const SearchCompare = () => {
             ))}
           </ul>
         </motion.div>
-      </AnimatePresence>
     </div>
   );
 };
@@ -192,14 +190,12 @@ const SimilarityMetrics = () => {
           >{v.name}</button>
         ))}
       </div>
-      <AnimatePresence mode="wait">
         <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
           <div className={`${col.bg} border ${col.border} rounded-lg p-4 font-mono text-lg text-center mb-4 ${col.text} font-bold`}>{m.formula}</div>
           <p className="text-gray-300 text-sm mb-2">{m.desc}</p>
           <p className="text-gray-400 text-xs mb-2 font-mono">{m.range}</p>
           <p className="text-sm font-semibold text-emerald-400">{m.useCase}</p>
         </motion.div>
-      </AnimatePresence>
     </div>
   );
 };

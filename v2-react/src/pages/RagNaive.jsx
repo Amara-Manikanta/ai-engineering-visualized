@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import GuideLayout from '../components/GuideLayout';
+import VariantNotes from '../components/VariantNotes';
+import { VARIANT_TOC, NAIVE } from '../data/ragVariants';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const toc = [];
+const toc = VARIANT_TOC;
 
 const RagNaive = () => {
   const [step, setStep] = useState(0);
@@ -51,7 +53,7 @@ const RagNaive = () => {
       intro="The baseline Retrieve-Read-Generate loop. Simple, but prone to failure on complex queries."
       toc={toc}
     >
-      <section className="guide-section">
+      <section id="anim" className="guide-section">
         <div 
           className="pipeline-canvas naive-canvas" 
           style={{ position: 'relative', height: '450px', background: 'var(--surface, #111)', border: '1px solid var(--border, #333)', borderRadius: '16px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}
@@ -225,6 +227,7 @@ const RagNaive = () => {
           </button>
         </div>
       </section>
+      <VariantNotes {...NAIVE} />
     </GuideLayout>
   );
 };

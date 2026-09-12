@@ -172,18 +172,15 @@ function PipelineHero({ active, setActive }) {
           })}
         </div>
 
-        <AnimatePresence mode="wait">
           <motion.div
             key={active.id}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.2 }}
             className={`mt-4 rounded-xl border p-4 ${ACCENT[active.accent].bg} ${ACCENT[active.accent].border}`}
           >
             <p className="text-sm text-gray-300 leading-relaxed m-0">{active.blurb}</p>
           </motion.div>
-        </AnimatePresence>
       </div>
     </div>
   );

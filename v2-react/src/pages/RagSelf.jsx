@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import GuideLayout from '../components/GuideLayout';
+import VariantNotes from '../components/VariantNotes';
+import { VARIANT_TOC, SELF } from '../data/ragVariants';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const toc = [];
+const toc = VARIANT_TOC;
 
 const RagSelf = () => {
   const [step, setStep] = useState(0);
@@ -64,7 +66,7 @@ const RagSelf = () => {
       intro="The model uses special reflection tokens to critique its own retrieval and generation."
       toc={toc}
     >
-      <section className="guide-section">
+      <section id="anim" className="guide-section">
         <div 
           className="pipeline-canvas" 
           style={{ 
@@ -266,6 +268,7 @@ const RagSelf = () => {
           </button>
         </div>
       </section>
+      <VariantNotes {...SELF} />
     </GuideLayout>
   );
 };

@@ -366,13 +366,11 @@ chunks = splitter.split_text(document_text)`}</div>
         </div>
 
         <div>
-          <AnimatePresence mode="wait">
             {activeTab === 1 && (
               <motion.div
                 key="tab1"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
@@ -437,7 +435,6 @@ chunks = splitter.split_text(text)`}</div>
                 key="tab2"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
@@ -486,7 +483,6 @@ chunks = splitter.split_text(text)`}</div>
                 key="tab3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
@@ -548,7 +544,6 @@ docs = splitter.create_documents([text])`}</div>
                 key="tab4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
@@ -615,7 +610,6 @@ retriever = ParentDocumentRetriever(
                 key="tab5"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
@@ -679,7 +673,6 @@ chunks = splitter.split_text(text)`}</div>
                 key="tab6"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
@@ -730,7 +723,6 @@ chunks = splitter.split_text(markdown_text)`}</div>
                 </div>
               </motion.div>
             )}
-          </AnimatePresence>
         </div>
       </div>
     </GuideLayout>

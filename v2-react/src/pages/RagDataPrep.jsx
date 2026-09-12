@@ -101,12 +101,10 @@ function PipelineVisual({ active, setActive }) {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
         <motion.div
           key={active.id}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.22 }}
           className={`mt-5 rounded-xl border p-5 ${active.tone}`}
         >
@@ -119,7 +117,6 @@ function PipelineVisual({ active, setActive }) {
             <div className="text-xs text-gray-300 leading-relaxed">{active.watch}</div>
           </div>
         </motion.div>
-      </AnimatePresence>
     </div>
   );
 }
@@ -181,7 +178,6 @@ function CleaningDemo() {
       </div>
 
       <div className="rounded-xl border border-white/10 bg-[#141414] p-4 min-h-[240px] font-mono text-xs">
-        <AnimatePresence mode="wait">
           {!cleaned ? (
             <motion.div key="dirty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-1.5">
               {DIRTY_LINES.map((l, i) => {
@@ -225,7 +221,6 @@ function CleaningDemo() {
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
       </div>
 
       <div className="grid grid-cols-3 gap-3 mt-4">

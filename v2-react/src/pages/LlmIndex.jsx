@@ -27,7 +27,17 @@ export default function LlmIndex() {
     { label: "16. Model APIs & Aggregators", hash: "#model-apis" },
     { label: "17. Safety, Moderation & Guardrails", hash: "#safety-guardrails" },
     { label: "18. Model Comparison Table", hash: "#comparison-table" },
-    { label: "19. Common Mistakes to Avoid", hash: "#common-mistakes" }
+    { label: "19. Common Mistakes to Avoid", hash: "#common-mistakes" },
+    { label: "20. Model Types in Depth", hash: "#model-types" }
+  ];
+
+  const MODEL_TYPES = [
+    { n: "LLM", full: "Large Language Model", p: "#/llms/llm-type", icon: "💬", d: "The general-purpose text model everything else is defined against.", box: "border-indigo-500/30 bg-indigo-500/[0.08]", label: "text-indigo-400" },
+    { n: "VLM", full: "Vision Language Model", p: "#/llms/vlm-type", icon: "👁️", d: "Reads images alongside text, in one shared representation.", box: "border-blue-500/30 bg-blue-500/[0.08]", label: "text-blue-400" },
+    { n: "SLM", full: "Small Language Model", p: "#/llms/slm-type", icon: "🐣", d: "Small enough to run on your own hardware, and surprisingly capable.", box: "border-emerald-500/30 bg-emerald-500/[0.08]", label: "text-emerald-400" },
+    { n: "MoE", full: "Mixture of Experts", p: "#/llms/moe-type", icon: "🧩", d: "Huge parameter count, only a fraction of it active per token.", box: "border-amber-500/30 bg-amber-500/[0.08]", label: "text-amber-400" },
+    { n: "LCM", full: "Large Concept Model", p: "#/llms/lcm-type", icon: "🪐", d: "Predicts whole concepts rather than the next token.", box: "border-purple-500/30 bg-purple-500/[0.08]", label: "text-purple-400" },
+    { n: "LAM", full: "Large Action Model", p: "#/llms/lam-type", icon: "🎬", d: "Trained to take actions in software, not just describe them.", box: "border-rose-500/30 bg-rose-500/[0.08]", label: "text-rose-400" },
   ];
 
   return (
@@ -178,19 +188,19 @@ context = "Retrieval Augmented Generation reduces"
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-cyan-300 block mb-1">☁️ Closed Models (APIs)</span>
             <ul className="list-disc list-inside text-[11px] text-gray-400 space-y-1">
-              <td>Zero GPU hardware required</td>
-              <td>State-of-the-art reasoning benchmarks</td>
-              <td>Pay-per-token API consumption cost</td>
-              <td>Vendor data privacy policies apply</td>
+              <li>Zero GPU hardware required</li>
+              <li>State-of-the-art reasoning benchmarks</li>
+              <li>Pay-per-token API consumption cost</li>
+              <li>Vendor data privacy policies apply</li>
             </ul>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-300 block mb-1">💻 Open-Weight Models (Self-Hosted)</span>
             <ul className="list-disc list-inside text-[11px] text-gray-400 space-y-1">
-              <td>100% data privacy & air-gapped security</td>
-              <td>Custom LoRA / QLoRA fine-tuning flexibility</td>
-              <td>Fixed hardware cost regardless of token volume</td>
-              <td>Requires local GPU RAM (VRAM) or CPU inference</td>
+              <li>100% data privacy & air-gapped security</li>
+              <li>Custom LoRA / QLoRA fine-tuning flexibility</li>
+              <li>Fixed hardware cost regardless of token volume</li>
+              <li>Requires local GPU RAM (VRAM) or CPU inference</li>
             </ul>
           </div>
         </div>
@@ -571,6 +581,29 @@ $ ollama run deepseek-r1:14b`}</pre>
             <span className="font-bold text-red-400 block mb-1">❌ 4. Neglecting Rate Limits & Retries</span>
             <span className="text-gray-300 text-[11px]">Failing to wrap API calls in exponential backoff retry handlers (like `tenacity`) leads to application crashes when hitting 429 rate limits.</span>
           </div>
+        </div>
+      </section>
+
+      {/* 20. MODEL TYPES IN DEPTH */}
+      <section id="model-types" className="mb-8 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-3">20. Model Types in Depth</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          The sections above treat these as categories. Each one also has its own page, covering the architecture and
+          the tradeoff it exists to make.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {MODEL_TYPES.map((t) => (
+            <a
+              key={t.n}
+              href={t.p}
+              className={`block p-5 rounded-xl border transition-colors no-underline hover:brightness-125 ${t.box}`}
+            >
+              <div className="text-2xl mb-2">{t.icon}</div>
+              <div className={`font-bold ${t.label}`}>{t.n}</div>
+              <div className="text-[11px] uppercase tracking-wide text-gray-500 mb-2">{t.full}</div>
+              <p className="text-xs text-gray-300 leading-relaxed m-0">{t.d}</p>
+            </a>
+          ))}
         </div>
       </section>
     </GuideLayout>

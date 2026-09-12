@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
 
 /* ===========================================================================
@@ -165,6 +165,11 @@ export default function SystemDesignIndex() {
       title="AI System Design Patterns"
       intro="Reference architectures for the five systems people actually build — with the design decisions and the mistake each one invites."
       toc={toc}
+      // Only the active system is mounted, so a toc click must switch tabs
+      // before GuideLayout looks for the section to scroll to.
+      onTocClick={(id) => {
+        if (SYSTEMS.some((s) => s.id === id)) setActive(id);
+      }}
     >
       <div className="flex flex-wrap gap-2 mb-6">
         {SYSTEMS.map((s) => (
@@ -182,13 +187,11 @@ export default function SystemDesignIndex() {
         ))}
       </div>
 
-      <AnimatePresence mode="wait">
         <motion.section
           key={sys.id}
           id={sys.id}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.22 }}
           className="scroll-mt-24"
         >
@@ -224,7 +227,6 @@ export default function SystemDesignIndex() {
             <p className="text-xs text-gray-300 leading-relaxed m-0">{sys.pitfall}</p>
           </div>
         </motion.section>
-      </AnimatePresence>
 
       <div className="mt-10 p-5 rounded-xl border border-white/10 bg-white/5">
         <p className="text-sm text-gray-400 leading-relaxed m-0">

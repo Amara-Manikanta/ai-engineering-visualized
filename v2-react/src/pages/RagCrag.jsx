@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import VariantNotes from '../components/VariantNotes';
+import { VARIANT_TOC, CRAG } from '../data/ragVariants';
 
 export default function RagCrag() {
-  const toc = [];
+  const toc = VARIANT_TOC;
   const [step, setStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -34,7 +36,7 @@ export default function RagCrag() {
       toc={toc}
     >
       <div className="space-y-12">
-        <section>
+        <section id="anim" >
           {/* Detailed visual pipeline canvas exactly as it was in the HTML */}
           <div className="relative h-[450px] bg-[#141414] border border-gray-800 rounded-2xl overflow-hidden mb-6">
             
@@ -147,6 +149,7 @@ export default function RagCrag() {
           </div>
         </section>
       </div>
+      <VariantNotes {...CRAG} />
     </GuideLayout>
   );
 }

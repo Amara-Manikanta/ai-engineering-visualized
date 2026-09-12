@@ -567,12 +567,10 @@ export default function RagAdvancedRetrieval() {
           </div>
 
           {/* Detail panel */}
-          <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
               className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
             >
@@ -630,7 +628,6 @@ export default function RagAdvancedRetrieval() {
                 </div>
               </div>
             </motion.div>
-          </AnimatePresence>
         </motion.section>
 
         {/* ---------------------------------------------------------------- */}

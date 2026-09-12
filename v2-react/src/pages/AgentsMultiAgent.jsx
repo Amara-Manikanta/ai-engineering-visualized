@@ -304,7 +304,6 @@ export default function AgentsMultiAgent() {
             </button>
           ))}
         </div>
-        <AnimatePresence mode="wait">
           <motion.div key={active} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
             <h3 className="text-xl font-bold text-gray-100 mb-2">{current.name}</h3>
             <p className="text-gray-300 mb-4">{current.desc}</p>
@@ -330,7 +329,6 @@ export default function AgentsMultiAgent() {
               </div>
             </div>
           </motion.div>
-        </AnimatePresence>
       </section>
 
       {/* ---------------------------------------------------------------- */}
