@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
+import CommandPalette from "./CommandPalette";
 
 const NAV_LINKS = [
   { 
@@ -100,6 +101,11 @@ const NAV_LINKS = [
       { name: "AWS", path: "/aws" }
     ],
   },
+  { name: "🎯 Playgrounds", path: "/playgrounds" },
+  { name: "🎬 Animations", path: "/animations" },
+  { name: "🗺️ Roadmaps", path: "/roadmaps" },
+  { name: "🛡️ Safety", path: "/safety" },
+  { name: "🏗️ System Design", path: "/system-design" },
   { name: "🚀 Projects", path: "/projects" },
   { name: "📚 Resources", path: "/resources" },
 ];
@@ -183,6 +189,11 @@ export default function GlobalHeader() {
               </div>
             ))}
           </nav>
+
+          {/* Global search — Cmd+K */}
+          <div className="ml-auto lg:ml-4 mr-2">
+            <CommandPalette />
+          </div>
 
           {/* Mobile Toggle */}
           <button 

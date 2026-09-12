@@ -1,0 +1,2779 @@
+[
+  {
+    "path": "/",
+    "title": "Home",
+    "intro": "",
+    "sections": []
+  },
+  {
+    "path": "/agents",
+    "title": "AI Agent Architecture",
+    "intro": "Agents are AI systems that can perceive, reason, act, and observe in a loop — using tools, memory, and sub-agents to complete complex tasks autonomously.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Evolution of Agents",
+        "hash": "evolution"
+      },
+      {
+        "label": "Core Agent Loop",
+        "hash": "core-loop"
+      },
+      {
+        "label": "Reasoning Strategies",
+        "hash": "reasoning"
+      },
+      {
+        "label": "Skills",
+        "hash": "skills"
+      },
+      {
+        "label": "Subagents",
+        "hash": "subagents"
+      },
+      {
+        "label": "Hooks",
+        "hash": "hooks"
+      },
+      {
+        "label": "Extension Stack",
+        "hash": "stack"
+      },
+      {
+        "label": "Guardrails",
+        "hash": "guardrails"
+      },
+      {
+        "label": "Evaluating Agents",
+        "hash": "evaluation"
+      },
+      {
+        "label": "Real-World Example",
+        "hash": "realworld"
+      }
+    ]
+  },
+  {
+    "path": "/agents/document-loaders",
+    "title": "Document Loaders",
+    "intro": "The foundational entry point for injecting proprietary data into the LangChain and RAG ecosystems.",
+    "sections": [
+      {
+        "label": "1. What is a Loader?",
+        "hash": "what-is"
+      },
+      {
+        "label": "2. Why are they needed?",
+        "hash": "why-loaders"
+      },
+      {
+        "label": "3. The Document Object",
+        "hash": "doc-object"
+      },
+      {
+        "label": "3.1 page_content",
+        "hash": "page-content"
+      },
+      {
+        "label": "3.2 metadata",
+        "hash": "metadata"
+      },
+      {
+        "label": "4. Loading Pipeline",
+        "hash": "pipeline"
+      },
+      {
+        "label": "5. Types of Loaders",
+        "hash": "types"
+      },
+      {
+        "label": "6. load() vs lazy_load()",
+        "hash": "methods"
+      },
+      {
+        "label": "7. Loader vs Splitter",
+        "hash": "loader-vs-splitter"
+      },
+      {
+        "label": "8. End-to-End Example",
+        "hash": "example"
+      },
+      {
+        "label": "9. Best Practices",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/agents/langchain",
+    "title": "LangChain",
+    "intro": "The framework for building context-aware reasoning applications.",
+    "sections": [
+      {
+        "label": "1. What is LangChain?",
+        "hash": "what-is"
+      },
+      {
+        "label": "2. Why LangChain?",
+        "hash": "why-langchain"
+      },
+      {
+        "label": "3. Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "4. Installation",
+        "hash": "installation"
+      },
+      {
+        "label": "5. Project Structure",
+        "hash": "structure"
+      },
+      {
+        "label": "6. LCEL",
+        "hash": "lcel"
+      },
+      {
+        "label": "6.1 What is LCEL?",
+        "hash": "lcel-what"
+      },
+      {
+        "label": "6.2 Why LCEL?",
+        "hash": "lcel-why"
+      },
+      {
+        "label": "6.3 Pipe Operator (|)",
+        "hash": "pipe"
+      },
+      {
+        "label": "6.4 Runnable Interface",
+        "hash": "runnable"
+      },
+      {
+        "label": "6.5 invoke()",
+        "hash": "invoke"
+      },
+      {
+        "label": "6.6 batch()",
+        "hash": "batch"
+      },
+      {
+        "label": "6.7 stream()",
+        "hash": "stream"
+      },
+      {
+        "label": "6.8 RunnableSequence",
+        "hash": "runnable-sequence"
+      },
+      {
+        "label": "6.9 RunnableParallel",
+        "hash": "runnable-parallel"
+      },
+      {
+        "label": "6.10 RunnableBranch",
+        "hash": "runnable-branch"
+      },
+      {
+        "label": "7. LangSmith",
+        "hash": "langsmith"
+      },
+      {
+        "label": "8. Best Practices",
+        "hash": "best-practices"
+      },
+      {
+        "label": "9. LangGraph",
+        "hash": "langgraph"
+      },
+      {
+        "label": "9.1 Key Concepts",
+        "hash": "langgraph-concepts"
+      },
+      {
+        "label": "9.2 Interactive Demo",
+        "hash": "langgraph-demo"
+      },
+      {
+        "label": "9.3 Code Example",
+        "hash": "langgraph-code"
+      },
+      {
+        "label": "9.4 Agent Patterns",
+        "hash": "langgraph-patterns"
+      }
+    ]
+  },
+  {
+    "path": "/agents/memory",
+    "title": "Memory & State",
+    "intro": "Context windows are finite. Real agents need a strategy for what to remember, what to forget, and where to put the rest.",
+    "sections": [
+      {
+        "label": "Why Agents Need Memory",
+        "hash": "overview"
+      },
+      {
+        "label": "The Memory Hierarchy",
+        "hash": "hierarchy"
+      },
+      {
+        "label": "Context Window Management",
+        "hash": "context-window"
+      },
+      {
+        "label": "Long-Term Memory Patterns",
+        "hash": "long-term"
+      },
+      {
+        "label": "Comparison Table",
+        "hash": "comparison"
+      }
+    ]
+  },
+  {
+    "path": "/agents/multi-agent",
+    "title": "Multi-Agent Systems",
+    "intro": "When one agent isn't enough: splitting work across specialized agents that coordinate to solve a bigger problem — and the orchestration cost you pay for it.",
+    "sections": [
+      {
+        "label": "Why Multiple Agents?",
+        "hash": "overview"
+      },
+      {
+        "label": "Do You Actually Need It?",
+        "hash": "need-it"
+      },
+      {
+        "label": "Coordination Patterns",
+        "hash": "patterns"
+      },
+      {
+        "label": "Context Engineering",
+        "hash": "context"
+      },
+      {
+        "label": "Communication Protocols",
+        "hash": "comms"
+      },
+      {
+        "label": "Building One (code)",
+        "hash": "code"
+      },
+      {
+        "label": "The Cost Multiplier",
+        "hash": "cost"
+      },
+      {
+        "label": "Failure Modes",
+        "hash": "failure-modes"
+      },
+      {
+        "label": "Production Checklist",
+        "hash": "checklist"
+      }
+    ]
+  },
+  {
+    "path": "/agents/tool-calling",
+    "title": "Tool Calling",
+    "intro": "How an LLM reaches outside its own weights — calling functions, APIs, and code to act on the real world.",
+    "sections": [
+      {
+        "label": "What is Tool Calling?",
+        "hash": "overview"
+      },
+      {
+        "label": "The Tool-Call Loop",
+        "hash": "loop"
+      },
+      {
+        "label": "Anatomy of a Tool Schema",
+        "hash": "schema"
+      },
+      {
+        "label": "Parallel vs Sequential Calls",
+        "hash": "parallel"
+      },
+      {
+        "label": "Best Practices",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/animations",
+    "title": "Step-by-Step Animations",
+    "intro": "The processes that are hard to picture from prose — training loops, tool calls, context budgets and decoding tricks — walked through one step at a time.",
+    "sections": []
+  },
+  {
+    "path": "/aws",
+    "title": "AWS Cheat Sheets",
+    "intro": "Your visual guide to Amazon Web Services. Explore our interactive cheat sheets covering core AWS concepts, infrastructure, and services.",
+    "sections": [
+      {
+        "label": "1. AWS Basics",
+        "hash": "basics"
+      },
+      {
+        "label": "2. Global Infrastructure",
+        "hash": "infrastructure"
+      },
+      {
+        "label": "3. IAM (Identity & Access)",
+        "hash": "iam"
+      },
+      {
+        "label": "4. EC2 (Virtual Servers)",
+        "hash": "ec2"
+      },
+      {
+        "label": "5. Storage Services",
+        "hash": "storage"
+      },
+      {
+        "label": "6. Networking Basics",
+        "hash": "networking"
+      },
+      {
+        "label": "7. Load Balancer & Auto Scaling",
+        "hash": "load-balancer"
+      },
+      {
+        "label": "8. Route 53 & DNS",
+        "hash": "dns"
+      }
+    ]
+  },
+  {
+    "path": "/aws/basics",
+    "title": "AWS Basics",
+    "intro": "Amazon Web Services is the world's most popular cloud platform. Build, deploy and scale applications on the cloud.",
+    "sections": [
+      {
+        "label": "1. What is Cloud & AWS?",
+        "hash": "what-is-aws"
+      },
+      {
+        "label": "2. Why AWS & Benefits",
+        "hash": "why-aws"
+      },
+      {
+        "label": "3. Global Infrastructure",
+        "hash": "infrastructure"
+      },
+      {
+        "label": "4. Top AWS Services",
+        "hash": "top-services"
+      }
+    ]
+  },
+  {
+    "path": "/aws/dns",
+    "title": "Route 53 & DNS",
+    "intro": "Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web service.",
+    "sections": [
+      {
+        "label": "1. DNS & Route 53 Basics",
+        "hash": "basics"
+      },
+      {
+        "label": "2. Health Checks & Routing",
+        "hash": "routing"
+      },
+      {
+        "label": "3. Domain Resolution Flow",
+        "hash": "flow"
+      }
+    ]
+  },
+  {
+    "path": "/aws/ec2",
+    "title": "EC2 (Virtual Servers)",
+    "intro": "Amazon EC2 provides secure, resizable compute capacity in the cloud. You get virtual servers in minutes.",
+    "sections": [
+      {
+        "label": "1. Core Components",
+        "hash": "components"
+      },
+      {
+        "label": "2. EC2 Launch Flow",
+        "hash": "launch-flow"
+      },
+      {
+        "label": "3. Example & Connect",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/aws/iam",
+    "title": "IAM (Identity & Access Management)",
+    "intro": "IAM helps you securely manage access to AWS services and resources for your users and applications.",
+    "sections": [
+      {
+        "label": "1. Core IAM Components",
+        "hash": "components"
+      },
+      {
+        "label": "2. Security Principles",
+        "hash": "security"
+      },
+      {
+        "label": "3. How IAM Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "4. Example Policy",
+        "hash": "policy"
+      }
+    ]
+  },
+  {
+    "path": "/aws/infrastructure",
+    "title": "AWS Global Infrastructure",
+    "intro": "AWS offers a secure, reliable & global network of data centers to run your applications anywhere in the world.",
+    "sections": [
+      {
+        "label": "1. Regions",
+        "hash": "regions"
+      },
+      {
+        "label": "2. Availability Zones (AZ)",
+        "hash": "azs"
+      },
+      {
+        "label": "3. Edge & Local Zones",
+        "hash": "edge-local"
+      },
+      {
+        "label": "4. Summary & Example",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/aws/load-balancer",
+    "title": "Load Balancer & Auto Scaling",
+    "intro": "Distribute traffic, handle load & scale your applications automatically for high availability.",
+    "sections": [
+      {
+        "label": "1. Load Balancer Types",
+        "hash": "lb-types"
+      },
+      {
+        "label": "2. Auto Scaling",
+        "hash": "auto-scaling"
+      },
+      {
+        "label": "3. High Availability Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "4. ALB vs NLB Comparison",
+        "hash": "comparison"
+      }
+    ]
+  },
+  {
+    "path": "/aws/networking",
+    "title": "Networking Basics (VPC)",
+    "intro": "AWS Networking helps your resources communicate securely with the internet and each other.",
+    "sections": [
+      {
+        "label": "1. Core Networking Components",
+        "hash": "core-components"
+      },
+      {
+        "label": "2. Typical VPC Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "3. Best Practices & Remember",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/aws/storage",
+    "title": "Storage Services",
+    "intro": "AWS provides secure, durable and scalable storage solutions for every type of data.",
+    "sections": [
+      {
+        "label": "1. Core Storage Services",
+        "hash": "core-services"
+      },
+      {
+        "label": "2. Storage Comparison",
+        "hash": "comparison"
+      },
+      {
+        "label": "3. When to Use Which?",
+        "hash": "when-to-use"
+      }
+    ]
+  },
+  {
+    "path": "/azure",
+    "title": "Microsoft Azure",
+    "intro": "A visual guide to building, deploying, and managing applications on Microsoft's cloud platform.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "hero"
+      },
+      {
+        "label": "Azure Topics",
+        "hash": "topics"
+      }
+    ]
+  },
+  {
+    "path": "/azure/aks",
+    "title": "Azure Kubernetes Service (AKS)",
+    "intro": "AKS is a fully managed Kubernetes service on Azure that makes it easy to deploy, manage and scale containerized applications.",
+    "sections": [
+      {
+        "label": "1. Core AKS Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "2. Workloads & Networking",
+        "hash": "workloads"
+      },
+      {
+        "label": "3. Scaling & CNI",
+        "hash": "scaling"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/app-service",
+    "title": "Azure App Service",
+    "intro": "Azure App Service is a fully managed platform for building, deploying and scaling web, mobile and API applications in the cloud.",
+    "sections": [
+      {
+        "label": "1. Core Features",
+        "hash": "core-features"
+      },
+      {
+        "label": "2. Configuration & Monitoring",
+        "hash": "config-monitoring"
+      },
+      {
+        "label": "3. Deployment Options",
+        "hash": "deployment"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/architecture",
+    "title": "Azure Architecture",
+    "intro": "Highly available, secure and scalable Azure production architecture with monitoring, security, backup and disaster recovery.",
+    "sections": [
+      {
+        "label": "1. Core Production Architecture",
+        "hash": "core-architecture"
+      },
+      {
+        "label": "2. Operations & Security",
+        "hash": "ops-security"
+      },
+      {
+        "label": "3. Region Pair & DR",
+        "hash": "dr"
+      }
+    ]
+  },
+  {
+    "path": "/azure/backup",
+    "title": "Azure Backup & Disaster Recovery",
+    "intro": "Protect your data, applications and infrastructure with Azure native backup and disaster recovery services.",
+    "sections": [
+      {
+        "label": "1. Backup & Recovery Concepts",
+        "hash": "concepts"
+      },
+      {
+        "label": "2. Backup Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "3. Site Recovery DR Workflow",
+        "hash": "dr-workflow"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/basics",
+    "title": "Microsoft Azure Basics",
+    "intro": "A comprehensive introduction to Microsoft's global cloud computing platform.",
+    "sections": [
+      {
+        "label": "1. What is Azure?",
+        "hash": "what-is-azure"
+      },
+      {
+        "label": "2. Cloud Computing",
+        "hash": "cloud-computing"
+      },
+      {
+        "label": "3. Azure Benefits",
+        "hash": "benefits"
+      },
+      {
+        "label": "4. Global Infrastructure",
+        "hash": "infrastructure"
+      },
+      {
+        "label": "5. Popular Services",
+        "hash": "services"
+      },
+      {
+        "label": "6. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/dns",
+    "title": "Azure DNS",
+    "intro": "Azure DNS is a scalable, reliable and cost-effective DNS hosting service that provides name resolution using Microsoft's global network.",
+    "sections": [
+      {
+        "label": "1. Core DNS Concepts",
+        "hash": "core-dns"
+      },
+      {
+        "label": "2. Record Types & Features",
+        "hash": "records-features"
+      },
+      {
+        "label": "3. End-to-End Traffic Flow",
+        "hash": "traffic-flow"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/identity",
+    "title": "Azure Identity",
+    "intro": "Secure access and identity for users, apps and services across Azure and beyond.",
+    "sections": [
+      {
+        "label": "1. Core Identity Concepts",
+        "hash": "core-identity"
+      },
+      {
+        "label": "2. Access & Security",
+        "hash": "access-security"
+      },
+      {
+        "label": "3. How It Works (Flow)",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/infrastructure",
+    "title": "Azure Global Infrastructure",
+    "intro": "Azure provides a global network of data centers to build highly available, scalable and resilient applications.",
+    "sections": [
+      {
+        "label": "1. Regions",
+        "hash": "regions"
+      },
+      {
+        "label": "2. Availability Zones",
+        "hash": "availability-zones"
+      },
+      {
+        "label": "3. Region Pair",
+        "hash": "region-pair"
+      },
+      {
+        "label": "4. Edge Zones",
+        "hash": "edge-zones"
+      },
+      {
+        "label": "5. Availability Sets",
+        "hash": "availability-sets"
+      },
+      {
+        "label": "6. Real-world Example",
+        "hash": "real-world"
+      },
+      {
+        "label": "7. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/load-balancer",
+    "title": "Azure Load Balancing",
+    "intro": "Azure Load Balancer services help distribute traffic, improve performance and ensure high availability of applications.",
+    "sections": [
+      {
+        "label": "1. Core Load Balancing",
+        "hash": "core-lb"
+      },
+      {
+        "label": "2. Security & Scaling",
+        "hash": "security-scaling"
+      },
+      {
+        "label": "3. Traffic Routing Flow",
+        "hash": "routing-flow"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/monitoring",
+    "title": "Azure Monitoring",
+    "intro": "Azure Monitoring provides a comprehensive set of services to collect, analyze and act on telemetry data from your Azure resources and applications.",
+    "sections": [
+      {
+        "label": "1. Core Services",
+        "hash": "core-services"
+      },
+      {
+        "label": "2. Telemetry & Tools",
+        "hash": "telemetry"
+      },
+      {
+        "label": "3. Architecture Flow",
+        "hash": "architecture"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/networking",
+    "title": "Azure Networking",
+    "intro": "Azure Networking enables secure, scalable and highly available communication between resources, users and the internet.",
+    "sections": [
+      {
+        "label": "1. Core Networking",
+        "hash": "core-networking"
+      },
+      {
+        "label": "2. Routing & Security",
+        "hash": "routing-security"
+      },
+      {
+        "label": "3. Connectivity",
+        "hash": "connectivity"
+      },
+      {
+        "label": "4. Traffic Flow",
+        "hash": "traffic-flow"
+      },
+      {
+        "label": "5. Best Practices",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/azure/security",
+    "title": "Azure Security",
+    "intro": "Azure provides a comprehensive set of security services to protect your cloud resources, applications, and data across identities, infrastructure and workloads.",
+    "sections": [
+      {
+        "label": "1. Core Security Services",
+        "hash": "core-security"
+      },
+      {
+        "label": "2. Network Security",
+        "hash": "network-security"
+      },
+      {
+        "label": "3. Security Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "4. Threat Protection",
+        "hash": "threat-protection"
+      }
+    ]
+  },
+  {
+    "path": "/azure/storage",
+    "title": "Azure Storage",
+    "intro": "Durable, highly available, scalable and secure data storage for modern cloud applications.",
+    "sections": [
+      {
+        "label": "1. Storage Services",
+        "hash": "storage-services"
+      },
+      {
+        "label": "2. Access Tiers",
+        "hash": "access-tiers"
+      },
+      {
+        "label": "3. Redundancy Models",
+        "hash": "redundancy"
+      },
+      {
+        "label": "4. Lifecycle Management",
+        "hash": "lifecycle"
+      },
+      {
+        "label": "5. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/azure/vms",
+    "title": "Azure Virtual Machines",
+    "intro": "Azure Virtual Machines provide scalable, on-demand computing resources in the cloud.",
+    "sections": [
+      {
+        "label": "1. VM Concepts",
+        "hash": "vm-concepts"
+      },
+      {
+        "label": "2. Deployment Flow",
+        "hash": "deployment-flow"
+      },
+      {
+        "label": "3. Architecture & Networking",
+        "hash": "architecture"
+      },
+      {
+        "label": "4. Summary & Best Practices",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/embeddings",
+    "title": "Embeddings Deep Dive",
+    "intro": "Understand Vector Embeddings, similarity metrics, and compare top embedding models.",
+    "sections": [
+      {
+        "label": "Vector Embeddings",
+        "hash": "what"
+      },
+      {
+        "label": "Measuring Similarity",
+        "hash": "math"
+      },
+      {
+        "label": "Interactive Demo",
+        "hash": "interactive"
+      },
+      {
+        "label": "Top Models",
+        "hash": "models"
+      }
+    ]
+  },
+  {
+    "path": "/genai",
+    "title": "Generative AI",
+    "intro": "Deep dive into AI Models, Inference, Prompt Engineering, Embeddings, Fine-tuning, and Quantization.",
+    "sections": [
+      {
+        "label": "Core Concepts",
+        "hash": "concepts"
+      }
+    ]
+  },
+  {
+    "path": "/genai/agi",
+    "title": "AGI & the GPT-6 Astra Claim",
+    "intro": "In September 2026 OpenAI shipped GPT-6 Astra and said we had entered the AGI era. Unpacking that claim is a better lesson in evaluating AI than the claim itself.",
+    "sections": [
+      {
+        "label": "What Was Claimed",
+        "hash": "claim"
+      },
+      {
+        "label": "The Harness Gap",
+        "hash": "harness"
+      },
+      {
+        "label": "The Rest of the Scoreboard",
+        "hash": "scoreboard"
+      },
+      {
+        "label": "The Monitoring Problem",
+        "hash": "monitoring"
+      },
+      {
+        "label": "Reading an AGI Claim",
+        "hash": "checklist"
+      }
+    ]
+  },
+  {
+    "path": "/genai/fine-tuning",
+    "title": "Fine-tuning LLMs",
+    "intro": "Adapting a pre-trained model's behavior, tone, or format to a specific task — without retraining it from scratch.",
+    "sections": [
+      {
+        "label": "What is Fine-tuning?",
+        "hash": "overview"
+      },
+      {
+        "label": "Full Fine-tuning vs PEFT",
+        "hash": "full-vs-peft"
+      },
+      {
+        "label": "How LoRA Works",
+        "hash": "lora"
+      },
+      {
+        "label": "QLoRA",
+        "hash": "qlora"
+      },
+      {
+        "label": "When to Fine-tune vs RAG",
+        "hash": "when"
+      }
+    ]
+  },
+  {
+    "path": "/genai/quantization",
+    "title": "Quantization",
+    "intro": "Shrinking a model's weights to lower-precision numbers so it uses less memory and runs faster — usually with only a small quality cost.",
+    "sections": [
+      {
+        "label": "What is Quantization?",
+        "hash": "overview"
+      },
+      {
+        "label": "Precision Formats",
+        "hash": "precision"
+      },
+      {
+        "label": "Post-Training vs QAT",
+        "hash": "ptq-vs-qat"
+      },
+      {
+        "label": "GGUF & Quant Levels",
+        "hash": "gguf"
+      },
+      {
+        "label": "Quality vs Size Tradeoff",
+        "hash": "tradeoff"
+      }
+    ]
+  },
+  {
+    "path": "/llm-inference",
+    "title": "How LLMs Actually Generate Text",
+    "intro": "Most people treat LLMs as a black box. This guide breaks open the entire inference pipeline — from the moment you press Enter to the token that appears on your screen.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "input"
+      },
+      {
+        "label": "Step 2: Tokenizer",
+        "hash": "tokenizer"
+      },
+      {
+        "label": "Step 3: Embedding Layer",
+        "hash": "embedding"
+      },
+      {
+        "label": "Step 4: Transformer Block",
+        "hash": "transformer"
+      },
+      {
+        "label": "Steps 5 & 6: Sampling",
+        "hash": "sampling"
+      },
+      {
+        "label": "Step 7: Speculative Decoding",
+        "hash": "speculative"
+      },
+      {
+        "label": "Steps 8 & 9: Streaming Output",
+        "hash": "streaming"
+      }
+    ]
+  },
+  {
+    "path": "/llms",
+    "title": "AI & LLM Models Master Guide",
+    "intro": "Comprehensive technical reference for AI models — covering architecture families, open vs closed weights, MoE vs dense, reasoning models, local execution, cost optimization, and selection benchmarks.",
+    "sections": [
+      {
+        "label": "1. What are AI Models?",
+        "hash": "what-are-ai-models"
+      },
+      {
+        "label": "2. Foundation vs Fine-Tuned Models",
+        "hash": "foundation-vs-finetuned"
+      },
+      {
+        "label": "3. Model Families (OpenAI, Claude, Gemini, Llama, Qwen, DeepSeek, Mistral, Grok)",
+        "hash": "model-families"
+      },
+      {
+        "label": "4. Closed Models vs Open-Weight Models",
+        "hash": "closed-vs-open"
+      },
+      {
+        "label": "5. Dense Models vs MoE Models",
+        "hash": "dense-vs-moe"
+      },
+      {
+        "label": "6. Reasoning Models (o1, DeepSeek-R1)",
+        "hash": "reasoning-models"
+      },
+      {
+        "label": "7. Multimodal Models (Vision & Audio)",
+        "hash": "multimodal-models"
+      },
+      {
+        "label": "8. Coding Models",
+        "hash": "coding-models"
+      },
+      {
+        "label": "9. Embedding Models",
+        "hash": "embedding-models"
+      },
+      {
+        "label": "10. Audio, Image, Video & Speech Models",
+        "hash": "media-models"
+      },
+      {
+        "label": "11. Tool-Use & Agent Models",
+        "hash": "tool-use-agents"
+      },
+      {
+        "label": "12. Model Selection Guide",
+        "hash": "selection-guide"
+      },
+      {
+        "label": "13. Cost, Latency & Context Window",
+        "hash": "cost-latency-context"
+      },
+      {
+        "label": "14. Benchmarks & Evaluation (MMLU, ELO)",
+        "hash": "benchmarks-eval"
+      },
+      {
+        "label": "15. Running Models Locally (Ollama, vLLM)",
+        "hash": "running-locally"
+      },
+      {
+        "label": "16. Model APIs & Aggregators",
+        "hash": "model-apis"
+      },
+      {
+        "label": "17. Safety, Moderation & Guardrails",
+        "hash": "safety-guardrails"
+      },
+      {
+        "label": "18. Model Comparison Table",
+        "hash": "comparison-table"
+      },
+      {
+        "label": "19. Common Mistakes to Avoid",
+        "hash": "common-mistakes"
+      }
+    ]
+  },
+  {
+    "path": "/llms/lam-type",
+    "title": "Large Action Model (LAM)",
+    "intro": "Models built specifically to take actions across software interfaces.",
+    "sections": [
+      {
+        "label": "How it Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "Example",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/llms/lcm-type",
+    "title": "Large Concept Model (LCM)",
+    "intro": "Models that operate on abstract concepts rather than individual tokens.",
+    "sections": [
+      {
+        "label": "How it Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "Example",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/llms/llm-type",
+    "title": "Large Language Model (LLM)",
+    "intro": "Massive neural networks trained to understand and generate human-like text.",
+    "sections": [
+      {
+        "label": "How it Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "Example",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/llms/moe-type",
+    "title": "Mixture of Experts (MoE)",
+    "intro": "A sparse architecture that routes tokens to specific expert sub-networks.",
+    "sections": [
+      {
+        "label": "How it Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "Example",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/llms/slm-type",
+    "title": "Small Language Model (SLM)",
+    "intro": "Highly optimized models designed to run locally on consumer hardware.",
+    "sections": [
+      {
+        "label": "How it Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "Example",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/llms/vlm-type",
+    "title": "Vision Language Model (VLM)",
+    "intro": "Multimodal models that inherently understand both text and images.",
+    "sections": [
+      {
+        "label": "How it Works",
+        "hash": "how-it-works"
+      },
+      {
+        "label": "Example",
+        "hash": "example"
+      }
+    ]
+  },
+  {
+    "path": "/mcp",
+    "title": "Model Context Protocol (MCP)",
+    "intro": "An open standard that lets any AI model plug into any external tool, file, or API — the same way USB-C standardized device connectors.",
+    "sections": [
+      {
+        "label": "What is MCP?",
+        "hash": "mcp"
+      },
+      {
+        "label": "Why MCP? The N×M Problem",
+        "hash": "why-mcp"
+      },
+      {
+        "label": "Core Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Core Primitives",
+        "hash": "primitives"
+      },
+      {
+        "label": "Transport Layers",
+        "hash": "transports"
+      },
+      {
+        "label": "Handshake & Message Format",
+        "hash": "handshake"
+      },
+      {
+        "label": "Security & Permissions",
+        "hash": "security"
+      },
+      {
+        "label": "Authorization (OAuth)",
+        "hash": "authorization"
+      },
+      {
+        "label": "Building a Minimal Server",
+        "hash": "building"
+      },
+      {
+        "label": "MCP vs Function Calling",
+        "hash": "vs-function-calling"
+      },
+      {
+        "label": "Ecosystem",
+        "hash": "ecosystem"
+      },
+      {
+        "label": "Best Practices",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/ml",
+    "title": "Introduction to Machine Learning",
+    "intro": "The foundation of modern AI. Start here for the landscape, then dive into each algorithm — every topic has its own interactive guide.",
+    "sections": [
+      {
+        "label": "Topics in This Section",
+        "hash": "topics"
+      },
+      {
+        "label": "Key Python Libraries",
+        "hash": "key-python-libraries"
+      },
+      {
+        "label": "Supervised vs Unsupervised",
+        "hash": "supervised-vs-unsupervised-learning"
+      },
+      {
+        "label": "The ML Workflow",
+        "hash": "typical-ml-workflow"
+      },
+      {
+        "label": "Common Challenges",
+        "hash": "common-challenges"
+      }
+    ]
+  },
+  {
+    "path": "/ml/decision-trees",
+    "title": "Decision Trees",
+    "intro": "A supervised machine learning algorithm used for both classification and regression tasks.",
+    "sections": []
+  },
+  {
+    "path": "/ml/deep-learning",
+    "title": "Deep Learning",
+    "intro": "Stacking layers of simple weighted sums and non-linear functions to approximate arbitrarily complex patterns — the foundation under every modern LLM.",
+    "sections": [
+      {
+        "label": "From Neuron to Network",
+        "hash": "overview"
+      },
+      {
+        "label": "What One Neuron Computes",
+        "hash": "neuron"
+      },
+      {
+        "label": "Anatomy of a Neural Network",
+        "hash": "anatomy"
+      },
+      {
+        "label": "Activation Functions",
+        "hash": "activations"
+      },
+      {
+        "label": "Forward Pass → Loss → Backprop",
+        "hash": "training-loop"
+      },
+      {
+        "label": "Common Architectures",
+        "hash": "architectures"
+      }
+    ]
+  },
+  {
+    "path": "/ml/knn",
+    "title": "K-Nearest Neighbors (KNN)",
+    "intro": "An instance-based learning algorithm that memorizes training data and makes predictions by comparing new data points to stored instances.",
+    "sections": []
+  },
+  {
+    "path": "/ml/linear-regression",
+    "title": "Linear Regression",
+    "intro": "The simplest supervised learning model: fit a straight line that best predicts a continuous value from one input feature.",
+    "sections": [
+      {
+        "label": "What is Linear Regression?",
+        "hash": "overview"
+      },
+      {
+        "label": "Fit the Line Yourself",
+        "hash": "interactive"
+      },
+      {
+        "label": "The Cost Function",
+        "hash": "cost"
+      },
+      {
+        "label": "Gradient Descent",
+        "hash": "gradient-descent"
+      },
+      {
+        "label": "Assumptions & R²",
+        "hash": "assumptions"
+      }
+    ]
+  },
+  {
+    "path": "/ml/logistic-regression",
+    "title": "Logistic Regression",
+    "intro": "A supervised algorithm for classification — it predicts the probability that an example belongs to a class, then thresholds it into a decision.",
+    "sections": [
+      {
+        "label": "Overview & Use Cases",
+        "hash": "overview"
+      },
+      {
+        "label": "Why Not Linear Regression?",
+        "hash": "why-not-linear"
+      },
+      {
+        "label": "The Sigmoid (interactive)",
+        "hash": "sigmoid"
+      },
+      {
+        "label": "Training & Loss",
+        "hash": "training"
+      },
+      {
+        "label": "Interpreting Coefficients",
+        "hash": "interpretation"
+      },
+      {
+        "label": "Pros & Cons",
+        "hash": "pros-cons"
+      }
+    ]
+  },
+  {
+    "path": "/ml/multiple-regression",
+    "title": "Multiple Regression",
+    "intro": "Predicting a value from several input features at once — the workhorse model behind pricing, forecasting, and scoring systems.",
+    "sections": [
+      {
+        "label": "From One Feature to Many",
+        "hash": "overview"
+      },
+      {
+        "label": "Live Prediction Calculator",
+        "hash": "interactive"
+      },
+      {
+        "label": "The Normal Equation",
+        "hash": "normal-equation"
+      },
+      {
+        "label": "Multicollinearity",
+        "hash": "multicollinearity"
+      },
+      {
+        "label": "Feature Scaling",
+        "hash": "scaling"
+      }
+    ]
+  },
+  {
+    "path": "/ml/nlp",
+    "title": "Natural Language Processing",
+    "intro": "Interactive explorations of the algorithms that allow machines to understand, process, and generate human language.",
+    "sections": [
+      {
+        "label": "The NLP Pipeline",
+        "hash": "pipeline"
+      },
+      {
+        "label": "Text Preprocessing",
+        "hash": "preprocessing"
+      },
+      {
+        "label": "Tokenization & TF-IDF",
+        "hash": "lexical"
+      },
+      {
+        "label": "N-grams",
+        "hash": "ngrams"
+      },
+      {
+        "label": "Text Vectorization",
+        "hash": "vectorization"
+      },
+      {
+        "label": "Spam Detection",
+        "hash": "spam"
+      },
+      {
+        "label": "Syntactic Processing",
+        "hash": "syntactic"
+      },
+      {
+        "label": "Named Entity Recognition",
+        "hash": "ner"
+      },
+      {
+        "label": "Sentiment Analysis",
+        "hash": "sentiment"
+      },
+      {
+        "label": "Topic Modeling",
+        "hash": "topics"
+      },
+      {
+        "label": "Spell Corrector",
+        "hash": "spell"
+      },
+      {
+        "label": "Word Cloud & Frequency",
+        "hash": "wordcloud"
+      },
+      {
+        "label": "Classical → Transformers",
+        "hash": "modern"
+      }
+    ]
+  },
+  {
+    "path": "/ml/supervised",
+    "title": "Supervised Learning",
+    "intro": "Models trained on labelled data — every example comes with the right answer, and the model learns the mapping from input to output.",
+    "sections": [
+      {
+        "label": "How It Works",
+        "hash": "how"
+      },
+      {
+        "label": "Regression vs Classification",
+        "hash": "reg-vs-class"
+      },
+      {
+        "label": "Classification Types",
+        "hash": "classification-details"
+      },
+      {
+        "label": "Algorithm Cheat Sheet",
+        "hash": "algorithms"
+      },
+      {
+        "label": "Overfitting & Underfitting",
+        "hash": "fit"
+      },
+      {
+        "label": "Evaluation & Cross-Validation",
+        "hash": "evaluation"
+      }
+    ]
+  },
+  {
+    "path": "/ml/transformers",
+    "title": "Transformers & Gen AI",
+    "intro": "Interactive visual explainer of Generative AI, Transformer architecture, Tokenization, Embeddings, Positional Encoding, Attention, and the full pipeline — inspired by transformer-explainer.",
+    "sections": [
+      {
+        "label": "What is Generative AI?",
+        "hash": "genai"
+      },
+      {
+        "label": "AI History Timeline",
+        "hash": "ai-history"
+      },
+      {
+        "label": "Types of AI",
+        "hash": "ai-types"
+      },
+      {
+        "label": "Language Models",
+        "hash": "language-models"
+      },
+      {
+        "label": "Transformer Architecture",
+        "hash": "transformer"
+      },
+      {
+        "label": "Tokenization",
+        "hash": "tokenization"
+      },
+      {
+        "label": "Embeddings",
+        "hash": "embeddings"
+      },
+      {
+        "label": "Positional Encoding",
+        "hash": "positional-encoding"
+      },
+      {
+        "label": "Attention Mechanism",
+        "hash": "attention"
+      },
+      {
+        "label": "Full Pipeline Walkthrough",
+        "hash": "pipeline-walkthrough"
+      }
+    ]
+  },
+  {
+    "path": "/ml/unsupervised",
+    "title": "Unsupervised Learning",
+    "intro": "Models trained on unlabeled data, designed to infer natural structure and hidden patterns without being told the answers.",
+    "sections": [
+      {
+        "label": "Clustering",
+        "hash": "clustering"
+      },
+      {
+        "label": "Dimensionality Reduction",
+        "hash": "dim-reduction"
+      },
+      {
+        "label": "Algorithm Cheat Sheet",
+        "hash": "algorithms"
+      },
+      {
+        "label": "Common Applications",
+        "hash": "common-applications"
+      },
+      {
+        "label": "Supervised vs Unsupervised",
+        "hash": "vs-supervised"
+      }
+    ]
+  },
+  {
+    "path": "/models",
+    "title": "AI Models",
+    "intro": "A field guide to the frontier LLM families — who makes them, how they differ architecturally, and when to reach for each one.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Cards",
+        "hash": "model-cards"
+      },
+      {
+        "label": "Comparison Table",
+        "hash": "comparison"
+      },
+      {
+        "label": "Open vs Closed Weights",
+        "hash": "open-vs-closed"
+      },
+      {
+        "label": "Choosing a Model",
+        "hash": "choosing"
+      }
+    ]
+  },
+  {
+    "path": "/models/claude",
+    "title": "Claude (Anthropic)",
+    "intro": "The model line built around Constitutional AI — training a model to critique and revise its own outputs against a written set of principles.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "How Claude Is Trained",
+        "hash": "training"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      },
+      {
+        "label": "Claude Code (Agent CLI)",
+        "hash": "claude-code"
+      }
+    ]
+  },
+  {
+    "path": "/models/deepseek",
+    "title": "DeepSeek (DeepSeek AI)",
+    "intro": "Proved that frontier-level reasoning could be trained far more cheaply than assumed, via aggressive Mixture-of-Experts efficiency and reinforcement-learning-based reasoning.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/gemini",
+    "title": "Gemini (Google DeepMind)",
+    "intro": "Built natively multimodal from the ground up, with the largest production context windows of any frontier model.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/gpt",
+    "title": "GPT (OpenAI)",
+    "intro": "The model family that popularized the chat-assistant interface and the modern function-calling / tool-use pattern.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/grok",
+    "title": "Grok (xAI)",
+    "intro": "Developed by xAI, Grok is an AI model natively integrated into the X (formerly Twitter) platform, designed with real-time knowledge and a uniquely unfiltered personality.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/llama",
+    "title": "Llama (Meta)",
+    "intro": "The open-weights model that kickstarted the self-hosted LLM ecosystem — download it, fine-tune it, and run it on your own hardware.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/mistral",
+    "title": "Mistral (Mistral AI)",
+    "intro": "A lean, efficiency-obsessed European lab shipping some of the best quality-per-parameter models available, both open and hosted.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/models/qwen",
+    "title": "Qwen (Alibaba)",
+    "intro": "One of the largest and most actively updated open-weight families, with unusually strong multilingual and small-model coding performance.",
+    "sections": [
+      {
+        "label": "Overview",
+        "hash": "overview"
+      },
+      {
+        "label": "Model Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Training & Uniqueness",
+        "hash": "training"
+      },
+      {
+        "label": "Strengths & Weaknesses",
+        "hash": "strengths"
+      },
+      {
+        "label": "Ideal Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/playgrounds",
+    "title": "Interactive Playgrounds",
+    "intro": "Hands-on tools for the concepts that are hard to grasp from prose — tokenization, sampling, attention, cost and embeddings. Everything here computes live.",
+    "sections": []
+  },
+  {
+    "path": "/projects",
+    "title": "Projects Index",
+    "intro": "",
+    "sections": []
+  },
+  {
+    "path": "/prompting",
+    "title": "Prompt Engineering",
+    "intro": "The Art of Talking to AI.",
+    "sections": [
+      {
+        "label": "Prompt Engineering",
+        "hash": "prompt-engineering"
+      },
+      {
+        "label": "Techniques",
+        "hash": "techniques"
+      },
+      {
+        "label": "Best Practices",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/python",
+    "title": "Python Master Guide for AI Engineering",
+    "intro": "Master 25 Python topics across 5 comprehensive modules — from language foundations to Data Science (NumPy, Pandas, Scikit-Learn).",
+    "sections": [
+      {
+        "label": "Curriculum Modules",
+        "hash": "modules"
+      },
+      {
+        "label": "Libraries Landscape",
+        "hash": "libraries"
+      }
+    ]
+  },
+  {
+    "path": "/python/advanced",
+    "title": "Module 3: OOP & Advanced Python",
+    "intro": "Comprehensive technical guide for production AI error handling, OOP RAG abstractions, dataclasses, modern type hints for FastAPI, Pydantic type validation, lazy generators, and custom decorators.",
+    "sections": [
+      {
+        "label": "29. Production AI Error Handling",
+        "hash": "try-except"
+      },
+      {
+        "label": "30. Custom Exceptions & Chaining",
+        "hash": "custom-exceptions"
+      },
+      {
+        "label": "31. Classes & __init__ Constructor",
+        "hash": "classes-init"
+      },
+      {
+        "label": "32. OOP & RAG Abstractions",
+        "hash": "inheritance-composition"
+      },
+      {
+        "label": "33. Python Dataclasses (@dataclass)",
+        "hash": "dataclasses"
+      },
+      {
+        "label": "34. @classmethod vs @staticmethod",
+        "hash": "class-static-methods"
+      },
+      {
+        "label": "35. Dunder Magic Methods",
+        "hash": "dunder-methods"
+      },
+      {
+        "label": "36. Type Hints & FastAPI Integration",
+        "hash": "type-hints"
+      },
+      {
+        "label": "37. Pydantic Data Validation",
+        "hash": "pydantic-validation"
+      },
+      {
+        "label": "38. Iterables & Iterators",
+        "hash": "iterators"
+      },
+      {
+        "label": "39. Generators & yield",
+        "hash": "generators"
+      },
+      {
+        "label": "40. Function Decorators (@wraps)",
+        "hash": "decorators"
+      },
+      {
+        "label": "41. Caching & @property",
+        "hash": "caching-property"
+      },
+      {
+        "label": "42. Custom Context Managers",
+        "hash": "context-managers"
+      },
+      {
+        "label": "43. Profiling & Measuring Speed",
+        "hash": "profiling"
+      }
+    ]
+  },
+  {
+    "path": "/python/data-science",
+    "title": "Module 5: Python for Data Science & ML",
+    "intro": "Granular technical reference for NumPy array math, Pandas DataFrames, Matplotlib & Seaborn visualizations, and Scikit-Learn ML workflows.",
+    "sections": [
+      {
+        "label": "59. Data Science Ecosystem",
+        "hash": "ds-ecosystem"
+      },
+      {
+        "label": "60. NumPy ndarray & Reshaping",
+        "hash": "numpy-arrays"
+      },
+      {
+        "label": "61. Vectorization & Broadcasting",
+        "hash": "broadcasting"
+      },
+      {
+        "label": "62. Cosine Similarity & Norms",
+        "hash": "cosine-sim"
+      },
+      {
+        "label": "63. Pandas Series & DataFrames",
+        "hash": "pandas-dataframes"
+      },
+      {
+        "label": "64. Pandas Data Cleaning",
+        "hash": "pandas-cleaning"
+      },
+      {
+        "label": "65. Pandas groupby & Merging",
+        "hash": "pandas-groupby"
+      },
+      {
+        "label": "66. Matplotlib Figures & Plots",
+        "hash": "matplotlib"
+      },
+      {
+        "label": "67. Seaborn Heatmaps & Stats",
+        "hash": "seaborn"
+      },
+      {
+        "label": "68. Scikit-Learn Preprocessing",
+        "hash": "sklearn-preprocessing"
+      },
+      {
+        "label": "69. Scikit-Learn Model Workflow",
+        "hash": "sklearn-workflow"
+      }
+    ]
+  },
+  {
+    "path": "/python/data-structures",
+    "title": "Module 2: Data Structures & Core Logic",
+    "intro": "Detailed technical guide for functions, scope resolution, built-in containers (lists, tuples, dicts, sets), LLM payload dictionaries, string operations for prompt engineering, regex, and comprehensions.",
+    "sections": [
+      {
+        "label": "16. Functions & Default Parameters",
+        "hash": "functions-params"
+      },
+      {
+        "label": "17. args & kwargs Arguments",
+        "hash": "args-kwargs"
+      },
+      {
+        "label": "18. LEGB Scope Resolution",
+        "hash": "legb-scope"
+      },
+      {
+        "label": "19. Lambda & Higher-Order Functions",
+        "hash": "lambda-functions"
+      },
+      {
+        "label": "20. Lists & List Methods",
+        "hash": "lists"
+      },
+      {
+        "label": "21. Tuples & Tuple Unpacking",
+        "hash": "tuples"
+      },
+      {
+        "label": "22. Dictionaries & LLM Message Objects",
+        "hash": "dictionaries"
+      },
+      {
+        "label": "23. Nested Data Structures & LLM Payloads",
+        "hash": "nested-structures"
+      },
+      {
+        "label": "24. Sets & Set Operations",
+        "hash": "sets"
+      },
+      {
+        "label": "25. collections Module",
+        "hash": "collections-module"
+      },
+      {
+        "label": "26. Strings & Prompt Engineering",
+        "hash": "strings-slicing"
+      },
+      {
+        "label": "27. Regular Expressions (re)",
+        "hash": "regex"
+      },
+      {
+        "label": "28. List & Dict Comprehensions",
+        "hash": "comprehensions"
+      }
+    ]
+  },
+  {
+    "path": "/python/foundations",
+    "title": "Module 1: Python Foundations & Setup",
+    "intro": "Complete beginner-to-advanced technical guide covering Python environment setup, interpreter mechanics, variables, memory pointers, data types, operators, and control flow.",
+    "sections": [
+      {
+        "label": "1. Python Setup & IDEs",
+        "hash": "python-setup"
+      },
+      {
+        "label": "2. Execution Pipeline (Visual)",
+        "hash": "execution-pipeline"
+      },
+      {
+        "label": "3. What is Python & Features",
+        "hash": "what-is-python"
+      },
+      {
+        "label": "4. Indentation & Block Scoping",
+        "hash": "indentation"
+      },
+      {
+        "label": "5. Variables & Memory References",
+        "hash": "variables"
+      },
+      {
+        "label": "6. Data Types & Immutability",
+        "hash": "data-types"
+      },
+      {
+        "label": "7. Arithmetic & Bitwise Operators",
+        "hash": "arithmetic-ops"
+      },
+      {
+        "label": "8. Comparison & Logical Operators",
+        "hash": "logical-ops"
+      },
+      {
+        "label": "9. Identity (is) & Membership (in)",
+        "hash": "identity-vs-equality"
+      },
+      {
+        "label": "10. Walrus Operator (:=)",
+        "hash": "walrus-operator"
+      },
+      {
+        "label": "11. if-elif-else & Ternary Operator",
+        "hash": "if-else"
+      },
+      {
+        "label": "12. for Loops & for...else",
+        "hash": "for-loops"
+      },
+      {
+        "label": "13. while Loops, break, continue & pass",
+        "hash": "while-loops"
+      },
+      {
+        "label": "14. enumerate() & zip() Functions",
+        "hash": "enumerate-zip"
+      },
+      {
+        "label": "15. Structural Pattern Matching (match-case)",
+        "hash": "match-case"
+      }
+    ]
+  },
+  {
+    "path": "/python/regex",
+    "title": "Regular Expressions",
+    "intro": "A tiny language for describing text patterns — the fastest way to find, validate, extract, and clean strings in Python.",
+    "sections": [
+      {
+        "label": "Interactive Tester",
+        "hash": "tester"
+      },
+      {
+        "label": "Syntax Reference",
+        "hash": "syntax"
+      },
+      {
+        "label": "Greedy vs Lazy",
+        "hash": "greedy"
+      },
+      {
+        "label": "Groups & Capturing",
+        "hash": "groups"
+      },
+      {
+        "label": "The Python re Module",
+        "hash": "re-module"
+      },
+      {
+        "label": "Pattern Cookbook",
+        "hash": "cookbook"
+      },
+      {
+        "label": "Performance & Pitfalls",
+        "hash": "pitfalls"
+      }
+    ]
+  },
+  {
+    "path": "/python/tooling-async",
+    "title": "Module 4: System, Tooling & Async Python",
+    "intro": "Comprehensive technical guide for modern file I/O, production AI project structures, virtual environments, API integration, JSON/YAML parsing, AsyncIO concurrency, and Pytest.",
+    "sections": [
+      {
+        "label": "44. pathlib.Path Object Methods",
+        "hash": "pathlib"
+      },
+      {
+        "label": "45. File I/O & Context Managers",
+        "hash": "file-io"
+      },
+      {
+        "label": "46. Modules & Imports",
+        "hash": "modules"
+      },
+      {
+        "label": "47. Project Structure & Relative Imports",
+        "hash": "project-structure"
+      },
+      {
+        "label": "48. Virtual Envs, pip, .env & Requirements",
+        "hash": "virtualenvs"
+      },
+      {
+        "label": "49. Working with APIs (httpx)",
+        "hash": "apis"
+      },
+      {
+        "label": "50. JSON Parsing & Serialization",
+        "hash": "json"
+      },
+      {
+        "label": "51. YAML Parsing & Config",
+        "hash": "yaml"
+      },
+      {
+        "label": "52. Async Basics (async / await)",
+        "hash": "async-basics"
+      },
+      {
+        "label": "53. asyncio.gather() Concurrency",
+        "hash": "async-gather"
+      },
+      {
+        "label": "54. Concurrency Models & the GIL",
+        "hash": "concurrency-models"
+      },
+      {
+        "label": "55. Semaphores & Rate Limiting",
+        "hash": "rate-limiting"
+      },
+      {
+        "label": "56. Logging for Production",
+        "hash": "logging"
+      },
+      {
+        "label": "57. Pytest Fixtures & Assertions",
+        "hash": "pytest-fixtures"
+      },
+      {
+        "label": "58. Pytest Parameterization & Mocks",
+        "hash": "pytest-mocks"
+      }
+    ]
+  },
+  {
+    "path": "/rag",
+    "title": "RAG from Scratch",
+    "intro": "Index → Retrieve → Generate → Measure. A complete, visual walkthrough of Retrieval-Augmented Generation.",
+    "sections": [
+      {
+        "label": "The Four Stages",
+        "hash": "stages"
+      },
+      {
+        "label": "Learning Path",
+        "hash": "path"
+      },
+      {
+        "label": "Advanced Architectures",
+        "hash": "architectures"
+      }
+    ]
+  },
+  {
+    "path": "/rag/advanced-rag",
+    "title": "Advanced RAG",
+    "intro": "Fixes Naive RAG by optimizing the query before search, and re-ranking the results after search.",
+    "sections": []
+  },
+  {
+    "path": "/rag/advanced-retrieval",
+    "title": "Vector top-5",
+    "intro": "Optimizing the search step for maximum precision — the seven techniques that separate a demo from a production RAG system.",
+    "sections": [
+      {
+        "label": "Why Retrieval Is the Bottleneck",
+        "hash": "bottleneck"
+      },
+      {
+        "label": "Where Each Technique Fits",
+        "hash": "stage-map"
+      },
+      {
+        "label": "The 7 Techniques",
+        "hash": "techniques"
+      },
+      {
+        "label": "Choosing a Stack",
+        "hash": "stack"
+      }
+    ]
+  },
+  {
+    "path": "/rag/agentic-rag",
+    "title": "Agentic RAG",
+    "intro": "An autonomous LLM agent uses Vector Search as a Tool, deciding when and how to search iteratively.",
+    "sections": []
+  },
+  {
+    "path": "/rag/chunking",
+    "title": "Chunking Strategies",
+    "intro": "Breaking large documents into optimal semantic pieces.",
+    "sections": [
+      {
+        "label": "What is Chunking?",
+        "hash": "what-is-chunking"
+      },
+      {
+        "label": "Basic Chunking Methods",
+        "hash": "basic-chunking"
+      },
+      {
+        "label": "Advanced Chunking Methods",
+        "hash": "advanced-chunking"
+      },
+      {
+        "label": "How Chunk Size Works",
+        "hash": "chunk-size-calc"
+      },
+      {
+        "label": "Best Practices",
+        "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/rag/crag",
+    "title": "Corrective RAG (CRAG)",
+    "intro": "Evaluates its own retrieval. If the DB lacks the answer, it triggers a web search fallback.",
+    "sections": []
+  },
+  {
+    "path": "/rag/data-prep",
+    "title": "Data Preparation",
+    "intro": "Getting unstructured data ready for the vector database — the least glamorous stage, and the one that sets the ceiling for everything downstream.",
+    "sections": [
+      {
+        "label": "Why This Stage Decides Everything",
+        "hash": "why"
+      },
+      {
+        "label": "The Ingestion Pipeline",
+        "hash": "pipeline"
+      },
+      {
+        "label": "Document Loaders",
+        "hash": "document-loaders"
+      },
+      {
+        "label": "Parsing & OCR",
+        "hash": "parsing-ocr"
+      },
+      {
+        "label": "Data Cleaning (interactive)",
+        "hash": "data-cleaning"
+      },
+      {
+        "label": "Metadata Extraction",
+        "hash": "metadata"
+      },
+      {
+        "label": "File Formats & Parsers",
+        "hash": "formats"
+      }
+    ]
+  },
+  {
+    "path": "/rag/development",
+    "title": "Development & Frameworks",
+    "intro": "Building and deploying RAG in the real world — what to build it with, what the code actually looks like, and what breaks in production.",
+    "sections": [
+      {
+        "label": "Choosing a Framework",
+        "hash": "frameworks"
+      },
+      {
+        "label": "Building the Pipeline",
+        "hash": "building"
+      },
+      {
+        "label": "Index Time vs Query Time",
+        "hash": "two-paths"
+      },
+      {
+        "label": "Production Checklist",
+        "hash": "production"
+      }
+    ]
+  },
+  {
+    "path": "/rag/embeddings",
+    "title": "Embeddings",
+    "intro": "The mathematical foundation of semantic search.",
+    "sections": [
+      {
+        "label": "1. What are Embeddings?",
+        "hash": "what-are"
+      },
+      {
+        "label": "2. Why do we need them?",
+        "hash": "why-need"
+      },
+      {
+        "label": "3. Simple Analogy",
+        "hash": "simple-analogy"
+      },
+      {
+        "label": "4. How Embeddings work in RAG",
+        "hash": "how-work-rag"
+      },
+      {
+        "label": "5. Text to Vector",
+        "hash": "text-to-vector"
+      },
+      {
+        "label": "6. What is an embedding model?",
+        "hash": "embedding-model"
+      },
+      {
+        "label": "7. What is embedding dimension?",
+        "hash": "embedding-dimension"
+      },
+      {
+        "label": "8. Toy example for visualization",
+        "hash": "toy-example"
+      },
+      {
+        "label": "9. Similarity Search Metrics",
+        "hash": "sim-search-metrics"
+      },
+      {
+        "label": "10. Dense vs Sparse Embeddings",
+        "hash": "dense-sparse"
+      },
+      {
+        "label": "11. Creating in Python",
+        "hash": "python"
+      },
+      {
+        "label": "12. Visualizing Embeddings",
+        "hash": "visualizing"
+      },
+      {
+        "label": "13. Real-world Examples",
+        "hash": "examples"
+      },
+      {
+        "label": "14. Common Mistakes",
+        "hash": "mistakes"
+      }
+    ]
+  },
+  {
+    "path": "/rag/evaluation",
+    "title": "Evaluation",
+    "intro": "Measuring the success of your RAG pipeline — the metrics, what each one actually catches, and how to tell which half of the system is broken.",
+    "sections": [
+      {
+        "label": "Why Evaluate",
+        "hash": "why"
+      },
+      {
+        "label": "Retrieval Metrics (interactive)",
+        "hash": "retrieval-metrics"
+      },
+      {
+        "label": "Generation Metrics — RAGAS",
+        "hash": "ragas"
+      },
+      {
+        "label": "Human vs LLM-as-a-Judge",
+        "hash": "human-vs-auto"
+      },
+      {
+        "label": "The 7 Failure Points",
+        "hash": "failure-modes"
+      },
+      {
+        "label": "Building an Eval Set",
+        "hash": "eval-set"
+      }
+    ]
+  },
+  {
+    "path": "/rag/fundamentals",
+    "title": "RAG Fundamentals",
+    "intro": "Core concepts behind Retrieval-Augmented Generation.",
+    "sections": [
+      {
+        "label": "What is RAG?",
+        "hash": "what-is-rag"
+      },
+      {
+        "label": "Why RAG?",
+        "hash": "why-rag"
+      },
+      {
+        "label": "Architecture",
+        "hash": "architecture"
+      },
+      {
+        "label": "Advantages",
+        "hash": "advantages"
+      },
+      {
+        "label": "Limitations",
+        "hash": "limitations"
+      },
+      {
+        "label": "vs Fine-tuning",
+        "hash": "vs-finetuning"
+      },
+      {
+        "label": "vs Long Context",
+        "hash": "vs-longcontext"
+      },
+      {
+        "label": "Use Cases",
+        "hash": "use-cases"
+      }
+    ]
+  },
+  {
+    "path": "/rag/generation",
+    "title": "Generation",
+    "intro": "Synthesizing the retrieved context into a final answer.",
+    "sections": [
+      {
+        "label": "Augmented Stage",
+        "hash": "augmented"
+      },
+      {
+        "label": "Prompt Construction",
+        "hash": "prompt-construction"
+      },
+      {
+        "label": "System Prompt",
+        "hash": "system-prompt"
+      },
+      {
+        "label": "Citations",
+        "hash": "citations"
+      },
+      {
+        "label": "Hallucination Prevention",
+        "hash": "hallucination"
+      }
+    ]
+  },
+  {
+    "path": "/rag/graph-rag",
+    "title": "Graph RAG",
+    "intro": "Retrieves connected entities (nodes and edges) from a Knowledge Graph rather than disjointed chunks.",
+    "sections": []
+  },
+  {
+    "path": "/rag/hybrid-rag",
+    "title": "Hybrid RAG",
+    "intro": "Combines semantic Vector search with exact keyword BM25 search to get the best of both worlds.",
+    "sections": []
+  },
+  {
+    "path": "/rag/indexing",
+    "title": "Indexing",
+    "intro": "Transforming prepared text into searchable vectors.",
+    "sections": [
+      {
+        "label": "What is Indexing?",
+        "hash": "what-is-indexing"
+      },
+      {
+        "label": "Embedding Generation",
+        "hash": "embedding-gen"
+      },
+      {
+        "label": "Vector Indexing",
+        "hash": "vector-indexing"
+      },
+      {
+        "label": "Incremental Indexing",
+        "hash": "incremental"
+      }
+    ]
+  },
+  {
+    "path": "/rag/multimodal-rag",
+    "title": "Multi-modal RAG",
+    "intro": "Retrieves images, video frames, and text simultaneously into a Vision-Language Model.",
+    "sections": []
+  },
+  {
+    "path": "/rag/naive-rag",
+    "title": "Naive RAG",
+    "intro": "The baseline Retrieve-Read-Generate loop. Simple, but prone to failure on complex queries.",
+    "sections": []
+  },
+  {
+    "path": "/rag/retrieval",
+    "title": "Retrieval & Reranking",
+    "intro": "Finding the most relevant context for the LLM.",
+    "sections": [
+      {
+        "label": "Retrieval Stage",
+        "hash": "retrieval"
+      },
+      {
+        "label": "Query Embedding & Similarity Search",
+        "hash": "similarity-search"
+      },
+      {
+        "label": "Metadata Filtering",
+        "hash": "filtering"
+      },
+      {
+        "label": "Query Optimization",
+        "hash": "query-optimization"
+      },
+      {
+        "label": "Re-ranking",
+        "hash": "reranking"
+      }
+    ]
+  },
+  {
+    "path": "/rag/self-rag",
+    "title": "Self-RAG",
+    "intro": "The model uses special reflection tokens to critique its own retrieval and generation.",
+    "sections": []
+  },
+  {
+    "path": "/rag/types-of-rag",
+    "title": "Types of RAG",
+    "intro": "The 10 most important RAG architectures — how each one works, when to reach for it, and what it costs you.",
+    "sections": []
+  },
+  {
+    "path": "/rag/vector-dbs",
+    "title": "Vector Databases",
+    "intro": "Specialized databases designed to store, index, and query high-dimensional embeddings at speed.",
+    "sections": [
+      {
+        "label": "1. What is a Vector Database?",
+        "hash": "what-is-vdb"
+      },
+      {
+        "label": "2. Why RAG needs a Vector DB",
+        "hash": "why-rag-vdb"
+      },
+      {
+        "label": "3. Vector DB vs SQL vs Keyword Search",
+        "hash": "vdb-vs-sql"
+      },
+      {
+        "label": "4. What gets stored?",
+        "hash": "what-stored"
+      },
+      {
+        "label": "5. Collections, indexes, records, metadata",
+        "hash": "collections"
+      },
+      {
+        "label": "6. Indexing-time flow",
+        "hash": "indexing-flow"
+      },
+      {
+        "label": "7. Query-time flow",
+        "hash": "query-flow"
+      },
+      {
+        "label": "8. Similarity search",
+        "hash": "sim-search"
+      },
+      {
+        "label": "9. Similarity metrics",
+        "hash": "sim-metrics"
+      },
+      {
+        "label": "10. Exact vs Approximate search",
+        "hash": "exact-vs-approx"
+      },
+      {
+        "label": "11. ANN search",
+        "hash": "ann-search"
+      },
+      {
+        "label": "12. Vector index types",
+        "hash": "index-types"
+      },
+      {
+        "label": "13. Metadata filtering",
+        "hash": "metadata-filtering"
+      },
+      {
+        "label": "14. Hybrid search",
+        "hash": "hybrid-search"
+      },
+      {
+        "label": "15. Re-ranking",
+        "hash": "reranking"
+      },
+      {
+        "label": "16. Namespaces & multi-tenancy",
+        "hash": "namespaces"
+      },
+      {
+        "label": "17. Popular Vector DBs",
+        "hash": "popular-vdbs"
+      },
+      {
+        "label": "18. How to choose a Vector DB",
+        "hash": "how-to-choose"
+      },
+      {
+        "label": "19. Python example with Chroma",
+        "hash": "python-chroma"
+      },
+      {
+        "label": "20. Production considerations",
+        "hash": "production"
+      },
+      {
+        "label": "21. Common mistakes",
+        "hash": "mistakes"
+      },
+      {
+        "label": "22. Summary",
+        "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/resources",
+    "title": "Resources Index",
+    "intro": "",
+    "sections": []
+  },
+  {
+    "path": "/roadmaps",
+    "title": "Learning Paths",
+    "intro": "Four ordered routes through the material, depending on what you're trying to become. Tick steps off as you go — progress is saved in your browser.",
+    "sections": []
+  },
+  {
+    "path": "/safety",
+    "title": "AI Safety & Alignment",
+    "intro": "How a model trained only to predict text becomes something you can deploy — and the attacks, failure modes and defences you inherit when you do.",
+    "sections": [
+      {
+        "label": "Why Alignment Exists",
+        "hash": "why"
+      },
+      {
+        "label": "Alignment Methods",
+        "hash": "methods"
+      },
+      {
+        "label": "Red Teaming & Attacks",
+        "hash": "attacks"
+      },
+      {
+        "label": "Hallucination & Grounding",
+        "hash": "hallucination"
+      },
+      {
+        "label": "Defence in Depth",
+        "hash": "defence"
+      }
+    ]
+  },
+  {
+    "path": "/system-design",
+    "title": "AI System Design Patterns",
+    "intro": "Reference architectures for the five systems people actually build — with the design decisions and the mistake each one invites.",
+    "sections": []
+  }
+]
