@@ -563,7 +563,7 @@ function EmbeddingTool() {
 
 /* ========================================================================= */
 
-const TOOLS = [
+export const TOOLS = [
   { id: "tokenizer", label: "🔤 Tokenizer", title: "Tokenizer Playground", Comp: TokenizerTool },
   { id: "sampling", label: "🌡️ Temperature", title: "Temperature & Sampling", Comp: SamplingTool },
   { id: "attention", label: "🔥 Attention", title: "Attention Heatmap", Comp: AttentionTool },

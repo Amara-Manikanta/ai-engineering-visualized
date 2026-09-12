@@ -38,6 +38,8 @@ const TOPICS = [
     { t: 'GANs', d: 'Two networks in competition.', path: '/ml/gans', icon: '🎭' },
     { t: 'NLP', d: 'Language: tokens to meaning.', path: '/ml/nlp', icon: '💬' },
     { t: 'Transformers', d: 'The architecture behind LLMs.', path: '/ml/transformers', icon: '⚡' },
+    { t: 'Mamba & SSMs', d: 'Recurrence that trains in parallel.', path: '/ml/mamba', icon: '🐍' },
+    { t: 'RWKV', d: 'Attention with the query removed.', path: '/ml/rwkv', icon: '🔄' },
   ]},
 ];
 

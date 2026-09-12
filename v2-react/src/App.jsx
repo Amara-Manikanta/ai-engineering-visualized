@@ -78,6 +78,8 @@ const MlXgboost = lazy(() => import("./pages/MlXgboost"));
 const MlCnn = lazy(() => import("./pages/MlCnn"));
 const MlRnn = lazy(() => import("./pages/MlRnn"));
 const MlGans = lazy(() => import("./pages/MlGans"));
+const MlMamba = lazy(() => import("./pages/MlMamba"));
+const MlRwkv = lazy(() => import("./pages/MlRwkv"));
 const GenAiPeft = lazy(() => import("./pages/GenAiPeft"));
 const GenAiDistillation = lazy(() => import("./pages/GenAiDistillation"));
 const GenAiTokenization = lazy(() => import("./pages/GenAiTokenization"));
@@ -93,8 +95,7 @@ const LlmLcm = lazy(() => import("./pages/LlmLcm"));
 const LlmLam = lazy(() => import("./pages/LlmLam"));
 
 const LlmInference = lazy(() => import("./pages/LlmInference"));
-const PlaygroundsIndex = lazy(() => import("./pages/PlaygroundsIndex"));
-const AnimationsIndex = lazy(() => import("./pages/AnimationsIndex"));
+const InteractiveIndex = lazy(() => import("./pages/InteractiveIndex"));
 const RoadmapsIndex = lazy(() => import("./pages/RoadmapsIndex"));
 const SafetyIndex = lazy(() => import("./pages/SafetyIndex"));
 const SystemDesignIndex = lazy(() => import("./pages/SystemDesignIndex"));
@@ -220,6 +221,8 @@ function App() {
         <Route path="/ml/cnn" element={<MlCnn />} />
         <Route path="/ml/rnn" element={<MlRnn />} />
         <Route path="/ml/gans" element={<MlGans />} />
+        <Route path="/ml/mamba" element={<MlMamba />} />
+        <Route path="/ml/rwkv" element={<MlRwkv />} />
 
         <Route path="/models" element={<ModelsIndex />} />
         <Route path="/models/claude" element={<ModelsClaude />} />
@@ -268,8 +271,9 @@ function App() {
         <Route path="/aws/load-balancer" element={<AwsLoadBalancer />} />
         <Route path="/aws/dns" element={<AwsDns />} />
 
-        <Route path="/playgrounds" element={<PlaygroundsIndex />} />
-        <Route path="/animations" element={<AnimationsIndex />} />
+        <Route path="/interactive" element={<InteractiveIndex />} />
+        <Route path="/playgrounds" element={<InteractiveIndex />} />
+        <Route path="/animations" element={<InteractiveIndex />} />
         <Route path="/roadmaps" element={<RoadmapsIndex />} />
         <Route path="/safety" element={<SafetyIndex />} />
         <Route path="/system-design" element={<SystemDesignIndex />} />

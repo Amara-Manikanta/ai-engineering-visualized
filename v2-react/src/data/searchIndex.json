@@ -418,8 +418,8 @@
   },
   {
     "path": "/animations",
-    "title": "Step-by-Step Animations",
-    "intro": "The processes that are hard to picture from prose — training loops, tool calls, context budgets and decoding tricks — walked through one step at a time.",
+    "title": "Interactive",
+    "intro": "Every hands-on tool and step-through animation on the site, in one place. Poke at the thing rather than reading about it.",
     "sections": []
   },
   {
@@ -1244,6 +1244,12 @@
     ]
   },
   {
+    "path": "/interactive",
+    "title": "Interactive",
+    "intro": "Every hands-on tool and step-through animation on the site, in one place. Poke at the thing rather than reading about it.",
+    "sections": []
+  },
+  {
     "path": "/llm-inference",
     "title": "How LLMs Actually Generate Text",
     "intro": "Most people treat LLMs as a black box. This guide breaks open the entire inference pipeline — from the moment you press Enter to the token that appears on your screen.",
@@ -1713,6 +1719,49 @@
     ]
   },
   {
+    "path": "/ml/mamba",
+    "title": "Mamba & State Space Models",
+    "intro": "A recurrent architecture that trains in parallel like a transformer and runs in constant memory like an RNN. The first credible structural challenge to attention.",
+    "sections": [
+      {
+        "label": "What Problem It Solves",
+        "hash": "problem"
+      },
+      {
+        "label": "State Space Models",
+        "hash": "ssm"
+      },
+      {
+        "label": "Run the Recurrence",
+        "hash": "run"
+      },
+      {
+        "label": "Discretisation",
+        "hash": "discrete"
+      },
+      {
+        "label": "Selectivity",
+        "hash": "selective"
+      },
+      {
+        "label": "The Parallel Scan",
+        "hash": "scan"
+      },
+      {
+        "label": "Complexity",
+        "hash": "complexity"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Where It Stands",
+        "hash": "status"
+      }
+    ]
+  },
+  {
     "path": "/ml/multiple-regression",
     "title": "Multiple Regression",
     "intro": "Predicting a value from several input features at once — the workhorse model behind pricing, forecasting, and scoring systems.",
@@ -1873,6 +1922,45 @@
       {
         "label": "Superseded, Not Obsolete",
         "hash": "now"
+      }
+    ]
+  },
+  {
+    "path": "/ml/rwkv",
+    "title": "RWKV",
+    "intro": "An architecture that trains like a transformer and runs like an RNN — by removing the one thing in attention that makes recurrence impossible.",
+    "sections": [
+      {
+        "label": "The Idea",
+        "hash": "idea"
+      },
+      {
+        "label": "What R, W, K, V Mean",
+        "hash": "letters"
+      },
+      {
+        "label": "The WKV Operator",
+        "hash": "wkv"
+      },
+      {
+        "label": "Two Modes, One Model",
+        "hash": "dual"
+      },
+      {
+        "label": "Decay Across Channels",
+        "hash": "channels"
+      },
+      {
+        "label": "Time and Channel Mixing",
+        "hash": "mixing"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Versus Mamba",
+        "hash": "versus"
       }
     ]
   },
@@ -2433,8 +2521,8 @@
   },
   {
     "path": "/playgrounds",
-    "title": "Interactive Playgrounds",
-    "intro": "Hands-on tools for the concepts that are hard to grasp from prose — tokenization, sampling, attention, cost and embeddings. Everything here computes live.",
+    "title": "Interactive",
+    "intro": "Every hands-on tool and step-through animation on the site, in one place. Poke at the thing rather than reading about it.",
     "sections": []
   },
   {

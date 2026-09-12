@@ -20,7 +20,7 @@ const TONES = {
   cyan:    "border-cyan-500/60 bg-cyan-500/20 text-cyan-100",
 };
 
-const ANIMATIONS = [
+export const ANIMATIONS = [
   /* ---------------------------------------------------------------- RLHF */
   {
     id: "rlhf",
@@ -156,7 +156,7 @@ const ANIMATIONS = [
 
 /* ------------------------------------------------------------------------ */
 
-function StepPlayer({ anim }) {
+export function StepPlayer({ anim }) {
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const last = anim.steps.length - 1;
@@ -177,7 +177,10 @@ function StepPlayer({ anim }) {
     return () => clearTimeout(t);
   }, [playing, step, last]);
 
-  const activeIds = anim.steps[step].active;
+  // `step` resets in an effect, which runs after this render — so on the first
+  // render with a new `anim` it can still hold the previous, possibly larger,
+  // index. Clamp rather than indexing past the end.
+  const activeIds = anim.steps[Math.min(step, last)]?.active ?? [];
 
   return (
     <div>

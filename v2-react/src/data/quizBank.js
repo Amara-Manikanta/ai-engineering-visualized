@@ -378,6 +378,114 @@ export const QUIZZES = [
       },
     ],
   },
+  {
+    id: "arch-mamba",
+    topic: "Mamba",
+    label: "Mamba & State Space Models",
+    path: "/ml/mamba",
+    icon: "🐍",
+    tone: "emerald",
+    questions: [
+      {
+        q: "A linear recurrence looks inherently sequential. How does Mamba train in parallel anyway?",
+        options: [
+          "It approximates the recurrence with attention during training",
+          "The step composition is associative, so it computes as a tree of depth log n",
+          "It trains on short sequences only",
+          "It caches the state from the previous epoch",
+        ],
+        answer: 1,
+        why: "Two consecutive steps compose into one equivalent step, and that composition is associative. Associativity is exactly what a parallel scan needs — the same reason a running total of a million numbers does not take a million sequential steps.",
+      },
+      {
+        q: "What does a small Δ mean for a given token?",
+        options: [
+          "The token is processed faster",
+          "Ā approaches 1, so the state passes through almost unchanged and the token is largely ignored",
+          "The token is dropped from the sequence",
+          "The state is reset",
+        ],
+        answer: 1,
+        why: "Ā = exp(ΔA) with A negative, so small Δ pushes Ā toward 1 — the state is preserved and barely anything new is written. Read Δ as 'how much time this token represents'. Small Δ is the model holding still.",
+      },
+      {
+        q: "Making Δ, B and C input-dependent gave Mamba selectivity. What did it cost?",
+        options: [
+          "Nothing — it is strictly better",
+          "The model could no longer run recurrently at inference",
+          "The sequence stopped being a convolution, so the FFT shortcut was lost",
+          "Training became non-differentiable",
+        ],
+        answer: 2,
+        why: "With fixed matrices the whole sequence is a convolution computable by FFT. Once parameters vary per token that shortcut disappears, which is why Mamba needed a hardware-aware parallel scan. That trade is what the paper is really about.",
+      },
+      {
+        q: "Where do transformers still clearly beat Mamba?",
+        options: [
+          "Throughput on long sequences",
+          "Memory use during generation",
+          "Exact recall of a specific token from far back in the context",
+          "Training parallelism",
+        ],
+        answer: 2,
+        why: "A fixed-size state is a lossy summary of everything seen. Attention keeps every key and value, so verbatim retrieval is free. This is precisely why production systems interleave a few attention layers among mostly Mamba layers.",
+      },
+    ],
+  },
+  {
+    id: "arch-rwkv",
+    topic: "RWKV",
+    label: "RWKV",
+    path: "/ml/rwkv",
+    icon: "🔄",
+    tone: "blue",
+    questions: [
+      {
+        q: "What does RWKV remove from attention to make recurrence possible?",
+        options: [
+          "The value vectors",
+          "The query — a past token's weight no longer depends on the current token",
+          "The softmax normalisation",
+          "The feed-forward network",
+        ],
+        answer: 1,
+        why: "The query is what couples every pair of positions and forces you to keep all past keys. Without it, a past token's contribution depends only on its own key and its distance, which factorises into an exponential decay that a running accumulator can maintain.",
+      },
+      {
+        q: "How does RWKV encode position?",
+        options: [
+          "Rotary position embeddings",
+          "Learned absolute position vectors",
+          "Exponential decay with distance, at a learned rate per channel",
+          "It does not encode position",
+        ],
+        answer: 2,
+        why: "The term exp(−(t−1−i)·w) is the whole positional mechanism. Because w is learned per channel, one layer holds many timescales at once — some channels track the last two tokens, others carry information for hundreds.",
+      },
+      {
+        q: "What is u, the bonus term, for?",
+        options: [
+          "It normalises the output",
+          "It stops the current token from being decayed as if it were one step in the past",
+          "It controls the learning rate",
+          "It gates the channel-mixing layer",
+        ],
+        answer: 1,
+        why: "Without u the present token would be treated as already one step old and faded accordingly, which measurably hurts. Note that u applies only while the token is current — it is not carried into the state.",
+      },
+      {
+        q: "A naive implementation of the recurrent form produces NaNs within a few hundred tokens. Why?",
+        options: [
+          "The state grows without bound",
+          "exp(k) overflows; implementations must track a running maximum and work relative to it",
+          "The decay becomes negative",
+          "Gradients vanish",
+        ],
+        answer: 1,
+        why: "Those exponentials overflow fast in fp16. Real implementations keep a running max exponent and store everything relative to it, the same trick as a numerically stable softmax. It is an implementation detail that decides whether the architecture works at all.",
+      },
+    ],
+  },
 ];
 
 export const findQuiz = (id) => QUIZZES.find((q) => q.id === id);

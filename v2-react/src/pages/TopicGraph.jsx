@@ -44,6 +44,8 @@ const NODES = [
   { id: "gans", label: "GANs", group: "Deep Learning", path: "/ml/gans", size: 9 },
   { id: "transformers", label: "Transformers", group: "Deep Learning", path: "/ml/transformers", size: 16 },
   { id: "nlp", label: "NLP", group: "Deep Learning", path: "/ml/nlp", size: 10 },
+  { id: "mamba", label: "Mamba / SSM", group: "Deep Learning", path: "/ml/mamba", size: 11 },
+  { id: "rwkv", label: "RWKV", group: "Deep Learning", path: "/ml/rwkv", size: 10 },
 
   // GenAI
   { id: "llms", label: "LLMs", group: "GenAI", path: "/llms", size: 15 },
@@ -103,6 +105,12 @@ const EDGES = [
   ["rnn", "transformers"],
   ["dl", "transformers"],
   ["nlp", "transformers"],
+  ["rnn", "mamba"],
+  ["rnn", "rwkv"],
+  ["transformers", "mamba"],
+  ["transformers", "rwkv"],
+  ["mamba", "rwkv"],
+  ["mamba", "llms"],
   ["transformers", "llms"],
   ["tokenization", "llms"],
   ["nlp", "tokenization"],

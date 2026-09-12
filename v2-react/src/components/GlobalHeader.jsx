@@ -42,6 +42,8 @@ const NAV_LINKS = [
       { name: "GANs", path: "/ml/gans" },
       { name: "NLP", path: "/ml/nlp" },
       { name: "Transformers", path: "/ml/transformers" },
+      { name: "Mamba / SSM", path: "/ml/mamba" },
+      { name: "RWKV", path: "/ml/rwkv" },
     ],
   },
   {
@@ -142,8 +144,7 @@ const NAV_LINKS = [
       { name: "Learning Paths", path: "/roadmaps" },
       { name: "Topic Map", path: "/graph" },
       { name: "Knowledge Checks", path: "/quizzes" },
-      { name: "Playgrounds", path: "/playgrounds" },
-      { name: "Animations", path: "/animations" },
+      { name: "Interactive", path: "/interactive" },
       { name: "Glossary", path: "/glossary" },
     ],
   },
