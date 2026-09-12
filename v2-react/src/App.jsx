@@ -72,6 +72,12 @@ const MlLinear = lazy(() => import("./pages/MlLinear"));
 const MlKnn = lazy(() => import("./pages/MlKnn"));
 const MlMultiple = lazy(() => import("./pages/MlMultiple"));
 const MlTransformers = lazy(() => import("./pages/MlTransformers"));
+const MlRandomForests = lazy(() => import("./pages/MlRandomForests"));
+const MlSvm = lazy(() => import("./pages/MlSvm"));
+const MlXgboost = lazy(() => import("./pages/MlXgboost"));
+const MlCnn = lazy(() => import("./pages/MlCnn"));
+const MlRnn = lazy(() => import("./pages/MlRnn"));
+const MlGans = lazy(() => import("./pages/MlGans"));
 const LlmMoe = lazy(() => import("./pages/LlmMoe"));
 const LlmLcm = lazy(() => import("./pages/LlmLcm"));
 const LlmLam = lazy(() => import("./pages/LlmLam"));
@@ -190,6 +196,12 @@ function App() {
         <Route path="/ml/knn" element={<MlKnn />} />
         <Route path="/ml/multiple-regression" element={<MlMultiple />} />
         <Route path="/ml/transformers" element={<MlTransformers />} />
+        <Route path="/ml/random-forests" element={<MlRandomForests />} />
+        <Route path="/ml/svm" element={<MlSvm />} />
+        <Route path="/ml/xgboost" element={<MlXgboost />} />
+        <Route path="/ml/cnn" element={<MlCnn />} />
+        <Route path="/ml/rnn" element={<MlRnn />} />
+        <Route path="/ml/gans" element={<MlGans />} />
 
         <Route path="/models" element={<ModelsIndex />} />
         <Route path="/models/claude" element={<ModelsClaude />} />

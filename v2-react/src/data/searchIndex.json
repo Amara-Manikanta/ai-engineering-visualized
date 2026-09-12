@@ -1289,6 +1289,45 @@
     ]
   },
   {
+    "path": "/ml/cnn",
+    "title": "Convolutional Neural Networks",
+    "intro": "A small window of weights slid across an image, reused at every position. That one constraint is what made computer vision work.",
+    "sections": [
+      {
+        "label": "Why Not a Dense Layer",
+        "hash": "why"
+      },
+      {
+        "label": "The Convolution",
+        "hash": "conv"
+      },
+      {
+        "label": "Three Big Ideas",
+        "hash": "ideas"
+      },
+      {
+        "label": "Pooling",
+        "hash": "pooling"
+      },
+      {
+        "label": "Output Shapes",
+        "hash": "shapes"
+      },
+      {
+        "label": "A Full Architecture",
+        "hash": "arch"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Where CNNs Stand Now",
+        "hash": "now"
+      }
+    ]
+  },
+  {
     "path": "/ml/decision-trees",
     "title": "Decision Trees",
     "intro": "A supervised machine learning algorithm used for both classification and regression tasks.",
@@ -1322,6 +1361,41 @@
       {
         "label": "Common Architectures",
         "hash": "architectures"
+      }
+    ]
+  },
+  {
+    "path": "/ml/gans",
+    "title": "Generative Adversarial Networks",
+    "intro": "Two networks trained against each other: one invents data, the other calls the fakes. Neither has a target to copy — the signal comes entirely from the opponent.",
+    "sections": [
+      {
+        "label": "The Adversarial Idea",
+        "hash": "idea"
+      },
+      {
+        "label": "The Training Loop",
+        "hash": "loop"
+      },
+      {
+        "label": "Run One",
+        "hash": "lab"
+      },
+      {
+        "label": "Why They Are Hard",
+        "hash": "hard"
+      },
+      {
+        "label": "The Variants",
+        "hash": "variants"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "GANs vs Diffusion",
+        "hash": "diffusion"
       }
     ]
   },
@@ -1476,6 +1550,84 @@
     ]
   },
   {
+    "path": "/ml/random-forests",
+    "title": "Random Forests",
+    "intro": "Hundreds of deliberately imperfect trees, each shown a different slice of the data, voting together. The strongest baseline in classical machine learning.",
+    "sections": [
+      {
+        "label": "One tree is not enough",
+        "hash": "problem"
+      },
+      {
+        "label": "Why ensembles work",
+        "hash": "why"
+      },
+      {
+        "label": "Bagging & out-of-bag",
+        "hash": "bagging"
+      },
+      {
+        "label": "The random subspace",
+        "hash": "subspace"
+      },
+      {
+        "label": "Feature importance",
+        "hash": "importance"
+      },
+      {
+        "label": "Hyperparameters that matter",
+        "hash": "hyper"
+      },
+      {
+        "label": "Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to reach for it",
+        "hash": "when"
+      }
+    ]
+  },
+  {
+    "path": "/ml/rnn",
+    "title": "RNNs & LSTMs",
+    "intro": "How networks handled sequences before attention — and the specific arithmetic failure that made attention necessary.",
+    "sections": [
+      {
+        "label": "Sequences Need Memory",
+        "hash": "why"
+      },
+      {
+        "label": "Unrolling",
+        "hash": "unroll"
+      },
+      {
+        "label": "The Vanishing Gradient",
+        "hash": "vanishing"
+      },
+      {
+        "label": "How LSTM Fixes It",
+        "hash": "lstm"
+      },
+      {
+        "label": "The Three Gates",
+        "hash": "gates"
+      },
+      {
+        "label": "GRU",
+        "hash": "gru"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Superseded, Not Obsolete",
+        "hash": "now"
+      }
+    ]
+  },
+  {
     "path": "/ml/supervised",
     "title": "Supervised Learning",
     "intro": "Models trained on labelled data — every example comes with the right answer, and the model learns the mapping from input to output.",
@@ -1503,6 +1655,45 @@
       {
         "label": "Evaluation & Cross-Validation",
         "hash": "evaluation"
+      }
+    ]
+  },
+  {
+    "path": "/ml/svm",
+    "title": "Support Vector Machines",
+    "intro": "Of all the lines that separate two classes, pick the one furthest from both. That single idea — plus a trick for curved boundaries — is the whole algorithm.",
+    "sections": [
+      {
+        "label": "The Problem",
+        "hash": "problem"
+      },
+      {
+        "label": "Maximise the Margin",
+        "hash": "margin"
+      },
+      {
+        "label": "Support Vectors",
+        "hash": "supports"
+      },
+      {
+        "label": "Soft Margin & C",
+        "hash": "soft"
+      },
+      {
+        "label": "The Kernel Trick",
+        "hash": "kernel"
+      },
+      {
+        "label": "Choosing a Kernel",
+        "hash": "kernels"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to Reach for It",
+        "hash": "when"
       }
     ]
   },
@@ -1577,6 +1768,45 @@
       {
         "label": "Supervised vs Unsupervised",
         "hash": "vs-supervised"
+      }
+    ]
+  },
+  {
+    "path": "/ml/xgboost",
+    "title": "Gradient Boosting & XGBoost",
+    "intro": "Fit a weak model, look at what it got wrong, fit another model to those errors, repeat. Still the strongest default for tabular data.",
+    "sections": [
+      {
+        "label": "Boosting vs Bagging",
+        "hash": "vs"
+      },
+      {
+        "label": "The Algorithm",
+        "hash": "algorithm"
+      },
+      {
+        "label": "See It Run",
+        "hash": "lab"
+      },
+      {
+        "label": "What XGBoost Adds",
+        "hash": "xgboost"
+      },
+      {
+        "label": "Key Hyperparameters",
+        "hash": "hyper"
+      },
+      {
+        "label": "XGBoost / LightGBM / CatBoost",
+        "hash": "family"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to Reach for It",
+        "hash": "when"
       }
     ]
   },

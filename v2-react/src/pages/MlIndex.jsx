@@ -25,9 +25,17 @@ const TOPICS = [
     { t: 'Logistic Regression', d: 'Predict a probability, then a class.', path: '/ml/logistic-regression', icon: '🔀' },
     { t: 'Decision Trees', d: 'If/else splits you can read.', path: '/ml/decision-trees', icon: '🌳' },
     { t: 'k-Nearest Neighbours', d: 'Classify by closest examples.', path: '/ml/knn', icon: '📍' },
+    { t: 'Support Vector Machines', d: 'The widest gap between classes.', path: '/ml/svm', icon: '📐' },
+  ]},
+  { group: 'Ensembles', tone: 'text-amber-400', border: 'hover:border-amber-500/50', items: [
+    { t: 'Random Forests', d: 'Many trees, votes beat one tree.', path: '/ml/random-forests', icon: '🌲' },
+    { t: 'Gradient Boosting & XGBoost', d: 'Each tree fixes the last one.', path: '/ml/xgboost', icon: '🚀' },
   ]},
   { group: 'Deep Learning', tone: 'text-purple-400', border: 'hover:border-purple-500/50', items: [
     { t: 'Deep Learning', d: 'Neurons, layers, backprop.', path: '/ml/deep-learning', icon: '🧠' },
+    { t: 'CNNs', d: 'Sliding kernels for vision.', path: '/ml/cnn', icon: '🖼️' },
+    { t: 'RNNs & LSTMs', d: 'Memory across a sequence.', path: '/ml/rnn', icon: '🔁' },
+    { t: 'GANs', d: 'Two networks in competition.', path: '/ml/gans', icon: '🎭' },
     { t: 'NLP', d: 'Language: tokens to meaning.', path: '/ml/nlp', icon: '💬' },
     { t: 'Transformers', d: 'The architecture behind LLMs.', path: '/ml/transformers', icon: '⚡' },
   ]},
