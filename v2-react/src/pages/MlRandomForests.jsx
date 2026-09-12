@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
+import KnowledgeCheck from "../components/KnowledgeCheck";
+import { questionsFor } from "../data/quizBank";
 import CodeBlock from "../components/CodeBlock";
 
 /* --------------------------------------------------------------------------
@@ -544,6 +546,7 @@ for i in perm.importances_mean.argsort()[::-1][:10]:
           </p>
         </div>
       </section>
+      <KnowledgeCheck questions={questionsFor("ml-ensembles")} />
     </GuideLayout>
   );
 }

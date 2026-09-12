@@ -223,7 +223,7 @@ export default function MlDeepLearning() {
           <p className="text-sm text-gray-400 leading-relaxed m-0">
             The Transformer is the architecture behind every modern LLM. For a full visual walkthrough of attention,
             positional encoding, and the end-to-end stack, see the{' '}
-            <a href="/ai-engineering-visualized/ml/transformers" className="text-blue-400 hover:underline">
+            <a href="#/ml/transformers" className="text-blue-400 hover:underline">
               Transformers deep-dive
             </a>
             .

@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import GuideLayout from "../components/GuideLayout";
+import KnowledgeCheck from "../components/KnowledgeCheck";
+import { questionsFor } from "../data/quizBank";
 import CodeBlock from "../components/CodeBlock";
 
 /* --------------------------------------------------------------------------
@@ -485,6 +487,7 @@ class SmallCNN(nn.Module):
           </div>
         </div>
       </section>
+      <KnowledgeCheck questions={questionsFor("dl-cnn")} />
     </GuideLayout>
   );
 }

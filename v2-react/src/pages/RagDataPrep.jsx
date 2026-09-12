@@ -586,7 +586,7 @@ docs[0].metadata       # -> {'source': './docs/policy.pdf', 'page': 3}`}
             <p className="text-sm text-gray-400 leading-relaxed m-0">
               Once your documents are loaded, parsed, cleaned, enriched, and normalized, they are ready to be split.
               Continue to{' '}
-              <a href="/ai-engineering-visualized/rag/chunking" className="text-blue-400 hover:underline">
+              <a href="#/rag/chunking" className="text-blue-400 hover:underline">
                 Chunking
               </a>{' '}
               to decide how.

@@ -460,11 +460,11 @@ export default function RagDevelopment() {
             <p className="text-sm text-gray-400 leading-relaxed m-0">
               <strong className="text-white">Before you ship:</strong> make sure you can answer "how do we know this
               got better?" with a number rather than an anecdote. Build the eval set first — see{' '}
-              <a href="/ai-engineering-visualized/rag/evaluation" className="text-blue-400 hover:underline">
+              <a href="#/rag/evaluation" className="text-blue-400 hover:underline">
                 Evaluation
               </a>
               . Everything on the{' '}
-              <a href="/ai-engineering-visualized/rag/advanced-retrieval" className="text-blue-400 hover:underline">
+              <a href="#/rag/advanced-retrieval" className="text-blue-400 hover:underline">
                 Advanced Retrieval
               </a>{' '}
               page adds latency and cost, so you need a way to tell whether it bought you anything.

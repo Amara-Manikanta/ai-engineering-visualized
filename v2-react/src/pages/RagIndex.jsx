@@ -42,6 +42,7 @@ const STAGES = [
     topics: [
       { title: 'Retrieval', path: '/rag/retrieval', icon: <Search size={18} />, desc: 'Similarity search, top-k, and MMR for diversity.' },
       { title: 'Advanced Retrieval', path: '/rag/advanced-retrieval', icon: <Sparkles size={18} />, desc: 'Hybrid search, re-ranking, HyDE, decomposition.', badge: 'Deep dive' },
+      { title: 'Contextual Compression', path: '/rag/compression', icon: <Layers size={18} />, desc: 'Strip the padding out of retrieved chunks before generation.' },
     ],
   },
   {
@@ -69,6 +70,7 @@ const STAGES = [
     topics: [
       { title: 'Evaluation', path: '/rag/evaluation', icon: <ClipboardCheck size={18} />, desc: 'Precision, recall, NDCG, RAGAS, and the 7 failure points.', badge: 'Interactive' },
       { title: 'Development', path: '/rag/development', icon: <Rocket size={18} />, desc: 'Frameworks, pipeline code, and the production checklist.' },
+      { title: 'RAG vs Fine-tuning', path: '/rag/vs-fine-tuning', icon: <GitBranch size={18} />, desc: 'Which problem you actually have — walk the decision tree.' },
     ],
   },
 ];

@@ -13,7 +13,8 @@ const toc = [
   { label: "Extension Stack", hash: "stack" },
   { label: "Guardrails", hash: "guardrails" },
   { label: "Evaluating Agents", hash: "evaluation" },
-  { label: "Real-World Example", hash: "realworld" }
+  { label: "Real-World Example", hash: "realworld" },
+  { label: "Where to Next", hash: "next" }
 ];
 
 const STRATEGIES = [
@@ -859,7 +860,7 @@ const AgentsIndex = () => {
             <strong className="text-white">Log the full trajectory, not just the answer.</strong> When an agent fails,
             the sequence of thoughts, tool calls, and observations is the only thing that explains why — and it is the
             raw material for your next eval case. The same discipline applies as in{' '}
-            <a href="/ai-engineering-visualized/rag/evaluation" className="text-blue-400 hover:underline">RAG evaluation</a>:
+            <a href="#/rag/evaluation" className="text-blue-400 hover:underline">RAG evaluation</a>:
             build a small labelled set of real tasks and run it on every change.
           </p>
         </div>
@@ -894,6 +895,34 @@ const AgentsIndex = () => {
               </div>
               <div className="font-medium text-gray-200">{step}</div>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section id="next" className="mb-20 scroll-mt-24">
+        <div className="mb-8">
+          <div className="text-indigo-400 font-bold text-sm tracking-widest uppercase mb-2">Go deeper</div>
+          <h2 className="text-3xl font-bold mb-4">🧭 Where to Next</h2>
+          <p className="text-gray-400 text-lg">The parts of agent engineering that need their own page.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { t: 'Frameworks Compared', d: 'CrewAI, AutoGen and LangGraph writing the same task three ways.', p: '#/agents/frameworks', i: '⚖️' },
+            { t: 'Debugging Agents', d: 'Why 95% per step becomes 60% over ten, and the observability that fixes it.', p: '#/agents/debugging', i: '🔧' },
+            { t: 'A2A Protocol', d: 'Delegating work to an agent you did not write and do not control.', p: '#/agents/a2a', i: '🤝' },
+            { t: 'Multi-Agent Systems', d: 'The coordination patterns underneath every framework.', p: '#/agents/multi-agent', i: '🕸️' },
+            { t: 'MCP', d: 'The protocol connecting an agent downward to its tools.', p: '#/mcp', i: '🔌' },
+            { t: 'Knowledge Check', d: 'Four questions on agent reliability and protocols.', p: '#/quizzes', i: '✅' },
+          ].map((c) => (
+            <a
+              key={c.t}
+              href={c.p}
+              className="block p-5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-500/50 hover:bg-white/[0.07] transition-colors no-underline"
+            >
+              <div className="text-2xl mb-2">{c.i}</div>
+              <div className="font-semibold text-white text-sm mb-1">{c.t}</div>
+              <p className="text-xs text-gray-400 leading-relaxed m-0">{c.d}</p>
+            </a>
           ))}
         </div>
       </section>

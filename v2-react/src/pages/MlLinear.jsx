@@ -216,11 +216,11 @@ export default function MlLinear() {
           <p className="text-sm text-gray-400 leading-relaxed m-0">
             <strong className="text-white">When one line isn't enough:</strong> if the relationship curves, add
             polynomial terms; if several inputs drive the output, move to{' '}
-            <a href="/ai-engineering-visualized/ml/multiple-regression" className="text-blue-400 hover:underline">
+            <a href="#/ml/multiple-regression" className="text-blue-400 hover:underline">
               Multiple Regression
             </a>
             . If you are predicting a category rather than a number, the sibling model is{' '}
-            <a href="/ai-engineering-visualized/ml/logistic-regression" className="text-blue-400 hover:underline">
+            <a href="#/ml/logistic-regression" className="text-blue-400 hover:underline">
               Logistic Regression
             </a>
             .

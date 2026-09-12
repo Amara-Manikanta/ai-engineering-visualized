@@ -146,6 +146,57 @@ export default function GenAiIndex() {
               </Link>
             </motion.div>
 
+            {/* PEFT & LoRA */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-colors group overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <Link to="/genai/peft">
+                <div className="text-4xl mb-4">🎛️</div>
+                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-indigo-400 transition-colors">PEFT & LoRA</h3>
+                <p className="text-gray-400 mb-6 text-sm">Fine-tune a 70B model by training 0.1% of it. Work out the parameter and memory savings yourself.</p>
+                <div className="text-indigo-400 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                  Explore <span className="ml-1">→</span>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Distillation */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-teal-500/50 transition-colors group overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <Link to="/genai/distillation">
+                <div className="text-4xl mb-4">🧪</div>
+                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-teal-400 transition-colors">Distillation</h3>
+                <p className="text-gray-400 mb-6 text-sm">Train a small model to imitate a large one, and see what temperature exposes in the teacher's answer.</p>
+                <div className="text-teal-400 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                  Explore <span className="ml-1">→</span>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Tokenization */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-colors group overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <Link to="/genai/tokenization">
+                <div className="text-4xl mb-4">🔤</div>
+                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-purple-400 transition-colors">Tokenization</h3>
+                <p className="text-gray-400 mb-6 text-sm">Train a BPE tokenizer merge by merge, and see why models miscount letters.</p>
+                <div className="text-purple-400 text-sm font-semibold flex items-center group-hover:translate-x-1 transition-transform">
+                  Explore <span className="ml-1">→</span>
+                </div>
+              </Link>
+            </motion.div>
+
           </div>
         </motion.section>
       </motion.div>

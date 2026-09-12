@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import GuideLayout from "../components/GuideLayout";
+import KnowledgeCheck from "../components/KnowledgeCheck";
+import { questionsFor } from "../data/quizBank";
 import CodeBlock from "../components/CodeBlock";
 
 /* --------------------------------------------------------------------------
@@ -527,6 +529,7 @@ scores = grid.decision_function(X_test)`}
           </p>
         </div>
       </section>
+      <KnowledgeCheck questions={questionsFor("ml-svm")} />
     </GuideLayout>
   );
 }

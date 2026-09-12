@@ -603,7 +603,7 @@ export default function RagEvaluation() {
           <h2 className="text-2xl font-semibold text-white mb-4">Building an Eval Set</h2>
           <p className="text-gray-300 leading-relaxed mb-6">
             Every technique on the{' '}
-            <a href="/ai-engineering-visualized/rag/advanced-retrieval" className="text-blue-400 hover:underline">
+            <a href="#/rag/advanced-retrieval" className="text-blue-400 hover:underline">
               Advanced Retrieval
             </a>{' '}
             page is a hypothesis. An eval set is how you test one. Start smaller than feels rigorous — 50 good

@@ -229,7 +229,7 @@ export default function RagTypes() {
           demands it: multi-source questions, relationship reasoning, weak-retrieval hallucination, or wasted retrievals
           respectively. Every step up the ladder buys a capability and costs you latency, money, and things that can
           break — so let your{' '}
-          <a href="/ai-engineering-visualized/rag/evaluation" className="text-blue-400 hover:underline">
+          <a href="#/rag/evaluation" className="text-blue-400 hover:underline">
             evaluation numbers
           </a>{' '}
           justify each one.

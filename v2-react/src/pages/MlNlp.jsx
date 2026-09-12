@@ -541,9 +541,9 @@ print(vec.get_feature_names_out())
             <strong className="text-white">The key limitation of the first two:</strong> they are
             <em> lexical</em> — matching depends on the exact word appearing. A search for "car" will never match a
             document that only says "automobile". That single gap is the whole reason embeddings and{' '}
-            <a href="/ai-engineering-visualized/rag/fundamentals" className="text-blue-400 hover:underline">RAG</a>{' '}
+            <a href="#/rag/fundamentals" className="text-blue-400 hover:underline">RAG</a>{' '}
             exist. See the{' '}
-            <a href="/ai-engineering-visualized/rag/embeddings" className="text-blue-400 hover:underline">Embeddings guide</a>{' '}
+            <a href="#/rag/embeddings" className="text-blue-400 hover:underline">Embeddings guide</a>{' '}
             for how dense vectors solve it.
           </p>
         </div>
@@ -741,7 +741,7 @@ record = {ent.label_: ent.text for ent in doc.ents}`} />
           <p className="text-sm text-gray-400 leading-relaxed m-0">
             <strong className="text-white">Where this shows up in AI engineering:</strong> NER is how you extract
             metadata during{' '}
-            <a href="/ai-engineering-visualized/rag/data-prep" className="text-blue-400 hover:underline">RAG data prep</a>{' '}
+            <a href="#/rag/data-prep" className="text-blue-400 hover:underline">RAG data prep</a>{' '}
             — pulling dates, authors, and companies out of documents so you can filter on them at retrieval time. It is
             also the classic way to redact PII before sending text to a third-party model.
           </p>
@@ -1206,11 +1206,11 @@ print(lda.transform(X[0]).round(2))   # -> [[0.91 0.04 0.05]]`} />
             <strong className="text-white">These are not rivals in practice.</strong> A production system often uses
             regex to clean text, TF-IDF/BM25 for a fast first-pass filter, and a transformer only on the surviving
             candidates — the hybrid pattern described in{' '}
-            <a href="/ai-engineering-visualized/rag/advanced-retrieval" className="text-blue-400 hover:underline">
+            <a href="#/rag/advanced-retrieval" className="text-blue-400 hover:underline">
               Advanced Retrieval
             </a>
             . Next: see how the architecture itself works in the{' '}
-            <a href="/ai-engineering-visualized/ml/transformers" className="text-blue-400 hover:underline">
+            <a href="#/ml/transformers" className="text-blue-400 hover:underline">
               Transformers deep-dive
             </a>
             .

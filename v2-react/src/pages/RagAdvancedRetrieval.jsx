@@ -713,7 +713,7 @@ export default function RagAdvancedRetrieval() {
               <strong className="text-white">Measure, don't guess.</strong> Every one of these techniques is a
               hypothesis about why your retrieval is failing. Build an evaluation set first so you can tell whether a
               change actually helped — see the{' '}
-              <a href="/ai-engineering-visualized/rag/evaluation" className="text-blue-400 hover:underline">
+              <a href="#/rag/evaluation" className="text-blue-400 hover:underline">
                 Evaluation
               </a>{' '}
               guide.

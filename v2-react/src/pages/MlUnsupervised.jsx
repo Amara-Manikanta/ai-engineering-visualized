@@ -361,7 +361,7 @@ export default function MlUnsupervised() {
             <p className="text-sm text-gray-400 leading-relaxed m-0">
               They are often used together: run unsupervised clustering to <em>discover</em> segments, then train a
               supervised model to <em>predict</em> which segment a new customer belongs to. Compare with{' '}
-              <a href="/ai-engineering-visualized/ml/supervised" className="text-blue-400 hover:underline">
+              <a href="#/ml/supervised" className="text-blue-400 hover:underline">
                 Supervised Learning
               </a>
               .

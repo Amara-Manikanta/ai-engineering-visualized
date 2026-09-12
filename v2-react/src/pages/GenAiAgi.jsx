@@ -310,7 +310,7 @@ export default function GenAiAgi() {
             A model can be simultaneously state-of-the-art on one axis and second on another. "Is it AGI" and "is it
             the best model for my task" are different questions — and only the second one affects what you should
             build with. See the{' '}
-            <a href="/ai-engineering-visualized/models" className="text-blue-400 hover:underline">Models comparison</a>{' '}
+            <a href="#/models" className="text-blue-400 hover:underline">Models comparison</a>{' '}
             for the wider field.
           </p>
         </motion.section>
@@ -346,7 +346,7 @@ export default function GenAiAgi() {
               agent systems lean on — reading the model's stated reasoning to decide whether to trust a step. If the
               trace is not reliably faithful, verification has to move to <em>outcomes</em>: tests that must pass,
               schemas that must validate, permissions the agent simply does not hold. See{' '}
-              <a href="/ai-engineering-visualized/agents" className="text-blue-400 hover:underline">Guardrails</a>.
+              <a href="#/agents" className="text-blue-400 hover:underline">Guardrails</a>.
             </p>
           </div>
         </motion.section>

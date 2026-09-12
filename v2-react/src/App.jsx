@@ -78,6 +78,16 @@ const MlXgboost = lazy(() => import("./pages/MlXgboost"));
 const MlCnn = lazy(() => import("./pages/MlCnn"));
 const MlRnn = lazy(() => import("./pages/MlRnn"));
 const MlGans = lazy(() => import("./pages/MlGans"));
+const GenAiPeft = lazy(() => import("./pages/GenAiPeft"));
+const GenAiDistillation = lazy(() => import("./pages/GenAiDistillation"));
+const GenAiTokenization = lazy(() => import("./pages/GenAiTokenization"));
+const RagCompression = lazy(() => import("./pages/RagCompression"));
+const RagVsFineTuning = lazy(() => import("./pages/RagVsFineTuning"));
+const AgentsFrameworks = lazy(() => import("./pages/AgentsFrameworks"));
+const AgentsA2A = lazy(() => import("./pages/AgentsA2A"));
+const AgentsDebugging = lazy(() => import("./pages/AgentsDebugging"));
+const TopicGraph = lazy(() => import("./pages/TopicGraph"));
+const QuizIndex = lazy(() => import("./pages/QuizIndex"));
 const LlmMoe = lazy(() => import("./pages/LlmMoe"));
 const LlmLcm = lazy(() => import("./pages/LlmLcm"));
 const LlmLam = lazy(() => import("./pages/LlmLam"));
@@ -141,6 +151,9 @@ function App() {
         <Route path="/agents/multi-agent" element={<AgentsMultiAgent />} />
         <Route path="/agents/document-loaders" element={<DocumentLoaders />} />
         <Route path="/agents/langchain" element={<Langchain />} />
+        <Route path="/agents/frameworks" element={<AgentsFrameworks />} />
+        <Route path="/agents/a2a" element={<AgentsA2A />} />
+        <Route path="/agents/debugging" element={<AgentsDebugging />} />
         
         <Route path="/rag" element={<RagIndex />} />
         <Route path="/rag/fundamentals" element={<RagFundamentals />} />
@@ -163,6 +176,8 @@ function App() {
         <Route path="/rag/naive-rag" element={<RagNaive />} />
         <Route path="/rag/self-rag" element={<RagSelf />} />
         <Route path="/rag/embeddings" element={<RagEmbeddings />} />
+        <Route path="/rag/compression" element={<RagCompression />} />
+        <Route path="/rag/vs-fine-tuning" element={<RagVsFineTuning />} />
 
         <Route path="/llms" element={<LlmIndex />} />
         <Route path="/llms/llm-type" element={<LlmType />} />
@@ -176,6 +191,9 @@ function App() {
         <Route path="/genai/fine-tuning" element={<GenAiFineTuning />} />
         <Route path="/genai/quantization" element={<GenAiQuantization />} />
         <Route path="/genai/agi" element={<GenAiAgi />} />
+        <Route path="/genai/peft" element={<GenAiPeft />} />
+        <Route path="/genai/distillation" element={<GenAiDistillation />} />
+        <Route path="/genai/tokenization" element={<GenAiTokenization />} />
         
         <Route path="/python" element={<PythonIndex />} />
         <Route path="/python/foundations" element={<PythonFoundations />} />
@@ -256,6 +274,8 @@ function App() {
         <Route path="/safety" element={<SafetyIndex />} />
         <Route path="/system-design" element={<SystemDesignIndex />} />
         <Route path="/glossary" element={<GlossaryIndex />} />
+        <Route path="/graph" element={<TopicGraph />} />
+        <Route path="/quizzes" element={<QuizIndex />} />
         <Route path="/projects" element={<ProjectsIndex />} />
         <Route path="/resources" element={<ResourcesIndex />} />
 

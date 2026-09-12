@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import GuideLayout from "../components/GuideLayout";
+import KnowledgeCheck from "../components/KnowledgeCheck";
+import { questionsFor } from "../data/quizBank";
 import CodeBlock from "../components/CodeBlock";
 
 /* --------------------------------------------------------------------------
@@ -423,6 +425,7 @@ torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)`}
           </div>
         </div>
       </section>
+      <KnowledgeCheck questions={questionsFor("dl-rnn")} />
     </GuideLayout>
   );
 }

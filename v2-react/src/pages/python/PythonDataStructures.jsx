@@ -526,7 +526,7 @@ print(system_prompt.strip())`}</CodeSnippet>
         </p>
 
         <a
-          href="/ai-engineering-visualized/python/regex"
+          href="#/python/regex"
           className="flex items-center justify-between gap-3 p-4 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:border-rose-500/60 transition-colors mb-4 group"
         >
           <div>

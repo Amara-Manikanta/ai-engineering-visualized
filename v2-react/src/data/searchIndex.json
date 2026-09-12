@@ -53,6 +53,88 @@
       {
         "label": "Real-World Example",
         "hash": "realworld"
+      },
+      {
+        "label": "Where to Next",
+        "hash": "next"
+      }
+    ]
+  },
+  {
+    "path": "/agents/a2a",
+    "title": "A2A — Agent-to-Agent Protocol",
+    "intro": "An open protocol for agents built by different teams, on different stacks, to delegate work to each other without sharing code.",
+    "sections": [
+      {
+        "label": "The Problem",
+        "hash": "problem"
+      },
+      {
+        "label": "A2A vs MCP",
+        "hash": "vs-mcp"
+      },
+      {
+        "label": "The Agent Card",
+        "hash": "card"
+      },
+      {
+        "label": "Task Lifecycle",
+        "hash": "lifecycle"
+      },
+      {
+        "label": "Core Objects",
+        "hash": "objects"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Security",
+        "hash": "security"
+      },
+      {
+        "label": "Where It Stands",
+        "hash": "status"
+      }
+    ]
+  },
+  {
+    "path": "/agents/debugging",
+    "title": "Debugging Agents",
+    "intro": "Agents fail in ways ordinary programs do not: non-deterministically, mid-run, and often without raising anything. This is the observability you need before shipping one.",
+    "sections": [
+      {
+        "label": "Why It Is Different",
+        "hash": "different"
+      },
+      {
+        "label": "Compounding Failure",
+        "hash": "compounding"
+      },
+      {
+        "label": "Six Failure Modes",
+        "hash": "failures"
+      },
+      {
+        "label": "Tracing",
+        "hash": "tracing"
+      },
+      {
+        "label": "Making Runs Reproducible",
+        "hash": "repro"
+      },
+      {
+        "label": "Evaluation",
+        "hash": "eval"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "A Checklist",
+        "hash": "checklist"
       }
     ]
   },
@@ -104,6 +186,37 @@
       {
         "label": "9. Best Practices",
         "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/agents/frameworks",
+    "title": "CrewAI vs AutoGen vs LangGraph",
+    "intro": "Three multi-agent frameworks with genuinely different views of what an agent system is. The difference is how much control flow you write yourself.",
+    "sections": [
+      {
+        "label": "Three Philosophies",
+        "hash": "philosophies"
+      },
+      {
+        "label": "The Same Task, Three Ways",
+        "hash": "code"
+      },
+      {
+        "label": "Comparison Matrix",
+        "hash": "matrix"
+      },
+      {
+        "label": "How to Choose",
+        "hash": "choose"
+      },
+      {
+        "label": "The Cost Trap",
+        "hash": "cost"
+      },
+      {
+        "label": "Do You Need One",
+        "hash": "need"
       }
     ]
   },
@@ -939,6 +1052,41 @@
     ]
   },
   {
+    "path": "/genai/distillation",
+    "title": "Knowledge Distillation",
+    "intro": "Train a small model to imitate a large one. It reliably beats training the same small model on the original labels — and the reason why is worth understanding.",
+    "sections": [
+      {
+        "label": "The Idea",
+        "hash": "idea"
+      },
+      {
+        "label": "Dark Knowledge",
+        "hash": "dark"
+      },
+      {
+        "label": "The Loss Function",
+        "hash": "loss"
+      },
+      {
+        "label": "Kinds of Distillation",
+        "hash": "kinds"
+      },
+      {
+        "label": "Distilling LLMs",
+        "hash": "llms"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "What It Costs You",
+        "hash": "limits"
+      }
+    ]
+  },
+  {
     "path": "/genai/fine-tuning",
     "title": "Fine-tuning LLMs",
     "intro": "Adapting a pre-trained model's behavior, tone, or format to a specific task — without retraining it from scratch.",
@@ -962,6 +1110,45 @@
       {
         "label": "When to Fine-tune vs RAG",
         "hash": "when"
+      }
+    ]
+  },
+  {
+    "path": "/genai/peft",
+    "title": "PEFT & LoRA",
+    "intro": "Fine-tune a 70B model by training 0.1% of it. Parameter-efficient fine-tuning is what made customising large models something a small team can do.",
+    "sections": [
+      {
+        "label": "The Problem",
+        "hash": "problem"
+      },
+      {
+        "label": "The Low-Rank Idea",
+        "hash": "idea"
+      },
+      {
+        "label": "Do the Arithmetic",
+        "hash": "calc"
+      },
+      {
+        "label": "Choosing r and alpha",
+        "hash": "rank"
+      },
+      {
+        "label": "The PEFT Family",
+        "hash": "family"
+      },
+      {
+        "label": "Serving Many Adapters",
+        "hash": "serving"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When PEFT Is Not Enough",
+        "hash": "limits"
       }
     ]
   },
@@ -993,10 +1180,68 @@
     ]
   },
   {
+    "path": "/genai/tokenization",
+    "title": "Tokenization",
+    "intro": "Every model's first act is to chop your text into pieces. That choice sets the context limit, the bill, and a surprising number of the model's strangest failures.",
+    "sections": [
+      {
+        "label": "Why Not Words",
+        "hash": "why"
+      },
+      {
+        "label": "Byte Pair Encoding",
+        "hash": "bpe"
+      },
+      {
+        "label": "The Three Algorithms",
+        "hash": "algos"
+      },
+      {
+        "label": "SentencePiece",
+        "hash": "sentencepiece"
+      },
+      {
+        "label": "Special Tokens",
+        "hash": "special"
+      },
+      {
+        "label": "Where It Bites",
+        "hash": "bites"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Practical Rules",
+        "hash": "rules"
+      }
+    ]
+  },
+  {
     "path": "/glossary",
     "title": "AI Glossary",
     "intro": "",
     "sections": []
+  },
+  {
+    "path": "/graph",
+    "title": "Topic Map",
+    "intro": "Every topic on the site and what it connects to. The layout is computed from the links themselves, so clusters are real rather than drawn.",
+    "sections": [
+      {
+        "label": "The Map",
+        "hash": "map"
+      },
+      {
+        "label": "Reading It",
+        "hash": "reading"
+      },
+      {
+        "label": "Three Routes Through",
+        "hash": "routes"
+      }
+    ]
   },
   {
     "path": "/llm-inference",
@@ -2575,6 +2820,21 @@
     ]
   },
   {
+    "path": "/quizzes",
+    "title": "Knowledge Checks",
+    "intro": "",
+    "sections": [
+      {
+        "label": "Pick a Topic",
+        "hash": "pick"
+      },
+      {
+        "label": "How to Use These",
+        "hash": "how"
+      }
+    ]
+  },
+  {
     "path": "/rag",
     "title": "RAG from Scratch",
     "intro": "Index → Retrieve → Generate → Measure. A complete, visual walkthrough of Retrieval-Augmented Generation.",
@@ -2652,6 +2912,41 @@
       {
         "label": "Best Practices",
         "hash": "best-practices"
+      }
+    ]
+  },
+  {
+    "path": "/rag/compression",
+    "title": "Contextual Compression",
+    "intro": "Retrieval gives you chunks. Only a fraction of each chunk answers the question. Compression strips the rest before it reaches the model.",
+    "sections": [
+      {
+        "label": "The Problem",
+        "hash": "problem"
+      },
+      {
+        "label": "Count the Waste",
+        "hash": "budget"
+      },
+      {
+        "label": "Six Techniques",
+        "hash": "methods"
+      },
+      {
+        "label": "Where It Sits",
+        "hash": "pipeline"
+      },
+      {
+        "label": "Lost in the Middle",
+        "hash": "middle"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "The Risk",
+        "hash": "risk"
       }
     ]
   },
@@ -3057,6 +3352,37 @@
       {
         "label": "22. Summary",
         "hash": "summary"
+      }
+    ]
+  },
+  {
+    "path": "/rag/vs-fine-tuning",
+    "title": "RAG vs Fine-tuning",
+    "intro": "They solve different problems and are not alternatives. The useful question is what your baseline is getting wrong.",
+    "sections": [
+      {
+        "label": "The Wrong Question",
+        "hash": "wrong"
+      },
+      {
+        "label": "Decision Tree",
+        "hash": "tree"
+      },
+      {
+        "label": "Side by Side",
+        "hash": "table"
+      },
+      {
+        "label": "Using Both",
+        "hash": "both"
+      },
+      {
+        "label": "Cost in Practice",
+        "hash": "cost"
+      },
+      {
+        "label": "Common Mistakes",
+        "hash": "mistakes"
       }
     ]
   },

@@ -398,7 +398,7 @@ export default function AgentsMultiAgent() {
         </div>
         <p className="text-xs text-gray-500 mt-3">
           Tool access is a related but separate concern — see the{' '}
-          <a href="/ai-engineering-visualized/mcp" className="text-blue-400 hover:underline">MCP guide</a> for how
+          <a href="#/mcp" className="text-blue-400 hover:underline">MCP guide</a> for how
           agents connect to external systems in a standardized way.
         </p>
       </section>

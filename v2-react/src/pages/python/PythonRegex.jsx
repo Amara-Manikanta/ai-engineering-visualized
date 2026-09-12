@@ -549,7 +549,7 @@ phone = re.compile(r"""
           <h2 className="text-2xl font-bold mb-4 text-gray-100">Pattern Cookbook</h2>
           <p className="text-gray-300 mb-6 max-w-3xl">
             Practical patterns, several of which show up directly in the{' '}
-            <a href="/ai-engineering-visualized/ml/nlp" className="text-blue-400 hover:underline">NLP preprocessing pipeline</a>.
+            <a href="#/ml/nlp" className="text-blue-400 hover:underline">NLP preprocessing pipeline</a>.
           </p>
           <CodeBlock language="python" maxHeight="520px" code={`import re
 
