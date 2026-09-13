@@ -25,6 +25,19 @@ function scoreEntry(entry, q) {
   else if (path.includes(q)) best = 55;
   else if (intro.includes(q)) best = 35;
 
+  // Declared keywords: alternate names and acronyms that live in prose.
+  // Scored just under a section hit so a real section still wins.
+  for (const k of entry.keywords ?? []) {
+    const kw = k.toLowerCase();
+    let sc = 0;
+    // Scored below every section tier, so when a term is BOTH a keyword and a
+    // section label the result deep-links to the section instead of the page.
+    if (kw === q) sc = 58;
+    else if (kw.startsWith(q)) sc = 48;
+    else if (kw.includes(q)) sc = 40;
+    if (sc > best) best = sc;
+  }
+
   for (const s of entry.sections) {
     const label = s.label.toLowerCase();
     let sc = 0;

@@ -3,7 +3,8 @@
     "path": "/",
     "title": "Home",
     "intro": "",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/agents",
@@ -58,7 +59,8 @@
         "label": "Where to Next",
         "hash": "next"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/a2a",
@@ -97,7 +99,8 @@
         "label": "Where It Stands",
         "hash": "status"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/debugging",
@@ -136,7 +139,8 @@
         "label": "A Checklist",
         "hash": "checklist"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/document-loaders",
@@ -187,7 +191,8 @@
         "label": "9. Best Practices",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/frameworks",
@@ -218,7 +223,8 @@
         "label": "Do You Need One",
         "hash": "need"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/langchain",
@@ -317,7 +323,8 @@
         "label": "9.4 Agent Patterns",
         "hash": "langgraph-patterns"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/memory",
@@ -344,7 +351,8 @@
         "label": "Comparison Table",
         "hash": "comparison"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/multi-agent",
@@ -387,7 +395,8 @@
         "label": "Production Checklist",
         "hash": "checklist"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/agents/tool-calling",
@@ -414,13 +423,15 @@
         "label": "Best Practices",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/animations",
     "title": "Interactive",
     "intro": "Every hands-on tool and step-through animation on the site, in one place. Poke at the thing rather than reading about it.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/aws",
@@ -459,7 +470,8 @@
         "label": "8. Route 53 & DNS",
         "hash": "dns"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/basics",
@@ -482,7 +494,8 @@
         "label": "4. Top AWS Services",
         "hash": "top-services"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/dns",
@@ -501,7 +514,8 @@
         "label": "3. Domain Resolution Flow",
         "hash": "flow"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/ec2",
@@ -520,7 +534,8 @@
         "label": "3. Example & Connect",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/iam",
@@ -543,7 +558,8 @@
         "label": "4. Example Policy",
         "hash": "policy"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/infrastructure",
@@ -566,7 +582,8 @@
         "label": "4. Summary & Example",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/load-balancer",
@@ -589,7 +606,8 @@
         "label": "4. ALB vs NLB Comparison",
         "hash": "comparison"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/networking",
@@ -608,7 +626,8 @@
         "label": "3. Best Practices & Remember",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/aws/storage",
@@ -627,7 +646,8 @@
         "label": "3. When to Use Which?",
         "hash": "when-to-use"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure",
@@ -642,7 +662,8 @@
         "label": "Azure Topics",
         "hash": "topics"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/aks",
@@ -665,7 +686,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/app-service",
@@ -688,7 +710,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/architecture",
@@ -707,7 +730,8 @@
         "label": "3. Region Pair & DR",
         "hash": "dr"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/backup",
@@ -730,7 +754,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/basics",
@@ -761,7 +786,8 @@
         "label": "6. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/dns",
@@ -784,7 +810,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/identity",
@@ -807,7 +834,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/infrastructure",
@@ -842,7 +870,8 @@
         "label": "7. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/load-balancer",
@@ -865,7 +894,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/monitoring",
@@ -888,7 +918,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/networking",
@@ -915,7 +946,8 @@
         "label": "5. Best Practices",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/security",
@@ -938,7 +970,8 @@
         "label": "4. Threat Protection",
         "hash": "threat-protection"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/storage",
@@ -965,7 +998,8 @@
         "label": "5. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/azure/vms",
@@ -988,7 +1022,8 @@
         "label": "4. Summary & Best Practices",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/efficiency",
@@ -1008,6 +1043,50 @@
         "hash": "techniques"
       },
       {
+        "label": "Extreme weight quantization",
+        "hash": "quantization"
+      },
+      {
+        "label": "Knowledge distillation",
+        "hash": "distillation"
+      },
+      {
+        "label": "KV-cache compression",
+        "hash": "kv-cache"
+      },
+      {
+        "label": "Linear / sub-quadratic architecture",
+        "hash": "linear"
+      },
+      {
+        "label": "Selective compute activation",
+        "hash": "moe"
+      },
+      {
+        "label": "Early exit / adaptive depth",
+        "hash": "early-exit"
+      },
+      {
+        "label": "Draft-and-verify generation",
+        "hash": "speculative"
+      },
+      {
+        "label": "System prompt re-use",
+        "hash": "prompt-caching"
+      },
+      {
+        "label": "Memory-mapped SSD streaming",
+        "hash": "offloading"
+      },
+      {
+        "label": "Local swarm compute",
+        "hash": "swarm"
+      },
+      {
+        "label": "Agent scaffolding",
+        "hash": "scaffolding"
+      },
+      {
         "label": "What Composes",
         "hash": "compose"
       },
@@ -1023,6 +1102,61 @@
         "label": "In Code",
         "hash": "code"
       }
+    ],
+    "keywords": [
+      "PTQ",
+      "GGUF",
+      "AWQ",
+      "GPTQ",
+      "EXL2",
+      "BitNet",
+      "post-training quantization",
+      "KV cache",
+      "KV-cache compression",
+      "MLA",
+      "Multi-head Latent Attention",
+      "PagedAttention",
+      "GQA",
+      "grouped-query attention",
+      "KV quantization",
+      "state space model",
+      "SSM",
+      "Jamba",
+      "sub-quadratic",
+      "MoE",
+      "mixture of experts",
+      "sparse activation",
+      "speculative decoding",
+      "Medusa",
+      "EAGLE",
+      "draft and verify",
+      "prompt caching",
+      "prefix caching",
+      "RadixAttention",
+      "offloading",
+      "mmap",
+      "NVMe",
+      "AirLLM",
+      "DeepSpeed",
+      "layer paging",
+      "tiered memory",
+      "teacher-student",
+      "synthetic data",
+      "early exit",
+      "adaptive depth",
+      "layer skipping",
+      "CALM",
+      "distributed inference",
+      "Petals",
+      "Exo",
+      "pipeline parallelism",
+      "swarm",
+      "agent harness",
+      "scaffolding",
+      "LLMOps",
+      "edge AI",
+      "vLLM",
+      "continuous batching"
     ]
   },
   {
@@ -1046,7 +1180,8 @@
         "label": "Top Models",
         "hash": "models"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai",
@@ -1057,7 +1192,8 @@
         "label": "Core Concepts",
         "hash": "concepts"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai/agi",
@@ -1084,7 +1220,8 @@
         "label": "Reading an AGI Claim",
         "hash": "checklist"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai/distillation",
@@ -1119,7 +1256,8 @@
         "label": "What It Costs You",
         "hash": "limits"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai/fine-tuning",
@@ -1146,7 +1284,8 @@
         "label": "When to Fine-tune vs RAG",
         "hash": "when"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai/peft",
@@ -1185,7 +1324,8 @@
         "label": "When PEFT Is Not Enough",
         "hash": "limits"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai/quantization",
@@ -1212,7 +1352,8 @@
         "label": "Quality vs Size Tradeoff",
         "hash": "tradeoff"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/genai/tokenization",
@@ -1251,13 +1392,15 @@
         "label": "Practical Rules",
         "hash": "rules"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/glossary",
     "title": "AI Glossary",
     "intro": "",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/graph",
@@ -1276,13 +1419,15 @@
         "label": "Three Routes Through",
         "hash": "routes"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/interactive",
     "title": "Interactive",
     "intro": "Every hands-on tool and step-through animation on the site, in one place. Poke at the thing rather than reading about it.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/llm-inference",
@@ -1317,7 +1462,8 @@
         "label": "Steps 8 & 9: Streaming Output",
         "hash": "streaming"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms",
@@ -1404,7 +1550,8 @@
         "label": "20. Model Types in Depth",
         "hash": "model-types"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms/lam-type",
@@ -1419,7 +1566,8 @@
         "label": "Example",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms/lcm-type",
@@ -1434,7 +1582,8 @@
         "label": "Example",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms/llm-type",
@@ -1449,7 +1598,8 @@
         "label": "Example",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms/moe-type",
@@ -1464,7 +1614,8 @@
         "label": "Example",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms/slm-type",
@@ -1479,7 +1630,8 @@
         "label": "Example",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/llms/vlm-type",
@@ -1494,7 +1646,8 @@
         "label": "Example",
         "hash": "example"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/mcp",
@@ -1549,7 +1702,8 @@
         "label": "Best Practices",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml",
@@ -1576,7 +1730,8 @@
         "label": "Common Challenges",
         "hash": "common-challenges"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/cnn",
@@ -1615,13 +1770,15 @@
         "label": "Where CNNs Stand Now",
         "hash": "now"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/decision-trees",
     "title": "Decision Trees",
     "intro": "A supervised machine learning algorithm used for both classification and regression tasks.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/ml/deep-learning",
@@ -1652,7 +1809,8 @@
         "label": "Common Architectures",
         "hash": "architectures"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/gans",
@@ -1687,13 +1845,15 @@
         "label": "GANs vs Diffusion",
         "hash": "diffusion"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/knn",
     "title": "K-Nearest Neighbors (KNN)",
     "intro": "An instance-based learning algorithm that memorizes training data and makes predictions by comparing new data points to stored instances.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/ml/linear-regression",
@@ -1720,7 +1880,8 @@
         "label": "Assumptions & R²",
         "hash": "assumptions"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/logistic-regression",
@@ -1751,7 +1912,8 @@
         "label": "Pros & Cons",
         "hash": "pros-cons"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/mamba",
@@ -1794,7 +1956,8 @@
         "label": "Where It Stands",
         "hash": "status"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/multiple-regression",
@@ -1821,7 +1984,8 @@
         "label": "Feature Scaling",
         "hash": "scaling"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/nlp",
@@ -1880,7 +2044,8 @@
         "label": "Classical → Transformers",
         "hash": "modern"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/random-forests",
@@ -1919,7 +2084,8 @@
         "label": "When to reach for it",
         "hash": "when"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/rnn",
@@ -1958,7 +2124,8 @@
         "label": "Superseded, Not Obsolete",
         "hash": "now"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/rwkv",
@@ -1997,7 +2164,8 @@
         "label": "Versus Mamba",
         "hash": "versus"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/supervised",
@@ -2028,7 +2196,8 @@
         "label": "Evaluation & Cross-Validation",
         "hash": "evaluation"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/svm",
@@ -2067,7 +2236,8 @@
         "label": "When to Reach for It",
         "hash": "when"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/transformers",
@@ -2114,7 +2284,8 @@
         "label": "Full Pipeline Walkthrough",
         "hash": "pipeline-walkthrough"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/unsupervised",
@@ -2141,7 +2312,8 @@
         "label": "Supervised vs Unsupervised",
         "hash": "vs-supervised"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/ml/xgboost",
@@ -2180,7 +2352,8 @@
         "label": "When to Reach for It",
         "hash": "when"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models",
@@ -2207,7 +2380,8 @@
         "label": "Choosing a Model",
         "hash": "choosing"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/claude",
@@ -2242,7 +2416,8 @@
         "label": "Claude Code (Agent CLI)",
         "hash": "claude-code"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/command-r",
@@ -2273,7 +2448,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/deepseek",
@@ -2304,7 +2480,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/gemini",
@@ -2335,7 +2512,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/gemma",
@@ -2366,7 +2544,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/gpt",
@@ -2397,7 +2576,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/grok",
@@ -2428,7 +2608,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/llama",
@@ -2459,7 +2640,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/mistral",
@@ -2490,7 +2672,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/phi",
@@ -2521,7 +2704,8 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/models/qwen",
@@ -2552,19 +2736,22 @@
         "label": "Ideal Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/playgrounds",
     "title": "Interactive",
     "intro": "Every hands-on tool and step-through animation on the site, in one place. Poke at the thing rather than reading about it.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/projects",
     "title": "Projects Index",
     "intro": "",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/prompting",
@@ -2583,7 +2770,8 @@
         "label": "Best Practices",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python",
@@ -2598,7 +2786,8 @@
         "label": "Libraries Landscape",
         "hash": "libraries"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python/advanced",
@@ -2665,7 +2854,8 @@
         "label": "43. Profiling & Measuring Speed",
         "hash": "profiling"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python/data-science",
@@ -2716,7 +2906,8 @@
         "label": "69. Scikit-Learn Model Workflow",
         "hash": "sklearn-workflow"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python/data-structures",
@@ -2775,7 +2966,8 @@
         "label": "28. List & Dict Comprehensions",
         "hash": "comprehensions"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python/foundations",
@@ -2842,7 +3034,8 @@
         "label": "15. Structural Pattern Matching (match-case)",
         "hash": "match-case"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python/regex",
@@ -2877,7 +3070,8 @@
         "label": "Performance & Pitfalls",
         "hash": "pitfalls"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/python/tooling-async",
@@ -2944,7 +3138,8 @@
         "label": "58. Pytest Parameterization & Mocks",
         "hash": "pytest-mocks"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/quizzes",
@@ -2959,7 +3154,8 @@
         "label": "How to Use These",
         "hash": "how"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag",
@@ -2978,13 +3174,15 @@
         "label": "Advanced Architectures",
         "hash": "architectures"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/advanced-rag",
     "title": "Advanced RAG",
     "intro": "Fixes Naive RAG by optimizing the query before search, and re-ranking the results after search.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/advanced-retrieval",
@@ -3007,13 +3205,15 @@
         "label": "Choosing a Stack",
         "hash": "stack"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/agentic-rag",
     "title": "Agentic RAG",
     "intro": "An autonomous LLM agent uses Vector Search as a Tool, deciding when and how to search iteratively.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/chunking",
@@ -3040,7 +3240,8 @@
         "label": "Best Practices",
         "hash": "best-practices"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/compression",
@@ -3075,13 +3276,15 @@
         "label": "The Risk",
         "hash": "risk"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/crag",
     "title": "Corrective RAG (CRAG)",
     "intro": "Evaluates its own retrieval. If the DB lacks the answer, it triggers a web search fallback.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/data-prep",
@@ -3116,7 +3319,8 @@
         "label": "File Formats & Parsers",
         "hash": "formats"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/development",
@@ -3139,7 +3343,8 @@
         "label": "Production Checklist",
         "hash": "production"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/embeddings",
@@ -3202,7 +3407,8 @@
         "label": "14. Common Mistakes",
         "hash": "mistakes"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/evaluation",
@@ -3233,7 +3439,8 @@
         "label": "Building an Eval Set",
         "hash": "eval-set"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/fundamentals",
@@ -3272,7 +3479,8 @@
         "label": "Use Cases",
         "hash": "use-cases"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/generation",
@@ -3299,19 +3507,22 @@
         "label": "Hallucination Prevention",
         "hash": "hallucination"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/graph-rag",
     "title": "Graph RAG",
     "intro": "Retrieves connected entities (nodes and edges) from a Knowledge Graph rather than disjointed chunks.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/hybrid-rag",
     "title": "Hybrid RAG",
     "intro": "Combines semantic Vector search with exact keyword BM25 search to get the best of both worlds.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/indexing",
@@ -3334,19 +3545,22 @@
         "label": "Incremental Indexing",
         "hash": "incremental"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/multimodal-rag",
     "title": "Multi-modal RAG",
     "intro": "Retrieves images, video frames, and text simultaneously into a Vision-Language Model.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/naive-rag",
     "title": "Naive RAG",
     "intro": "The baseline Retrieve-Read-Generate loop. Simple, but prone to failure on complex queries.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/retrieval",
@@ -3373,19 +3587,22 @@
         "label": "Re-ranking",
         "hash": "reranking"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/self-rag",
     "title": "Self-RAG",
     "intro": "The model uses special reflection tokens to critique its own retrieval and generation.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/types-of-rag",
     "title": "Types of RAG",
     "intro": "The 10 most important RAG architectures — how each one works, when to reach for it, and what it costs you.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/rag/vector-dbs",
@@ -3480,7 +3697,8 @@
         "label": "22. Summary",
         "hash": "summary"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/rag/vs-fine-tuning",
@@ -3511,19 +3729,22 @@
         "label": "Common Mistakes",
         "hash": "mistakes"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/resources",
     "title": "Resources Index",
     "intro": "",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/roadmaps",
     "title": "Learning Paths",
     "intro": "Four ordered routes through the material, depending on what you're trying to become. Tick steps off as you go — progress is saved in your browser.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   },
   {
     "path": "/safety",
@@ -3550,12 +3771,14 @@
         "label": "Defence in Depth",
         "hash": "defence"
       }
-    ]
+    ],
+    "keywords": []
   },
   {
     "path": "/system-design",
     "title": "AI System Design Patterns",
     "intro": "Reference architectures for the five systems people actually build — with the design decisions and the mistake each one invites.",
-    "sections": []
+    "sections": [],
+    "keywords": []
   }
 ]

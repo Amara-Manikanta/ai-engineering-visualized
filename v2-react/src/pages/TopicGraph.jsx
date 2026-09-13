@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GuideLayout from "../components/GuideLayout";
 
@@ -264,6 +264,80 @@ function Graph() {
 
   const visible = useCallback((i) => activeGroups.has(pts[i].group), [activeGroups, pts]);
 
+  /* ---- pan and zoom -------------------------------------------------------
+     The viewBox is the camera. Zooming keeps the point under the cursor fixed
+     by scaling the box around it; panning converts pixel deltas into viewBox
+     units so the drag tracks the pointer exactly at any zoom level. -------- */
+  const svgRef = useRef(null);
+  const [view, setView] = useState({ x: 0, y: 0, w: W, h: H });
+  const drag = useRef(null);
+
+  const MIN_W = W / 6; // zoom in to 6x
+  const MAX_W = W * 1.6; // and a little wider than the whole graph
+
+  /** Pointer position in viewBox units. */
+  const toView = useCallback(
+    (e) => {
+      const r = svgRef.current.getBoundingClientRect();
+      return {
+        x: view.x + ((e.clientX - r.left) / r.width) * view.w,
+        y: view.y + ((e.clientY - r.top) / r.height) * view.h,
+      };
+    },
+    [view]
+  );
+
+  const zoomAt = useCallback(
+    (factor, anchor) => {
+      setView((v) => {
+        const w = Math.min(MAX_W, Math.max(MIN_W, v.w * factor));
+        const k = w / v.w; // actual applied factor after clamping
+        const h = v.h * k;
+        const a = anchor ?? { x: v.x + v.w / 2, y: v.y + v.h / 2 };
+        return { x: a.x - (a.x - v.x) * k, y: a.y - (a.y - v.y) * k, w, h };
+      });
+    },
+    [MIN_W, MAX_W]
+  );
+
+  const onWheel = (e) => {
+    e.preventDefault();
+    zoomAt(e.deltaY > 0 ? 1.12 : 1 / 1.12, toView(e));
+  };
+
+  const onPointerDown = (e) => {
+    if (e.button !== 0) return;
+    drag.current = { sx: e.clientX, sy: e.clientY, vx: view.x, vy: view.y, moved: false };
+    svgRef.current.setPointerCapture?.(e.pointerId);
+  };
+
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d) return;
+    const r = svgRef.current.getBoundingClientRect();
+    const dx = ((e.clientX - d.sx) / r.width) * view.w;
+    const dy = ((e.clientY - d.sy) / r.height) * view.h;
+    if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 4) d.moved = true;
+    setView((v) => ({ ...v, x: d.vx - dx, y: d.vy - dy }));
+  };
+
+  const endDrag = (e) => {
+    svgRef.current?.releasePointerCapture?.(e.pointerId);
+    // keep `moved` readable by the click handler for one tick
+    const d = drag.current;
+    drag.current = null;
+    if (d?.moved) {
+      lastDragEnd.current = Date.now();
+    }
+  };
+
+  // A drag that ends on a node must not also navigate.
+  const lastDragEnd = useRef(0);
+  const wasDragging = () => Date.now() - lastDragEnd.current < 150;
+
+  const zoomed = view.w !== W || view.x !== 0 || view.y !== 0;
+  const zoomPct = Math.round((W / view.w) * 100);
+
   const toggle = (g) =>
     setActiveGroups((prev) => {
       const next = new Set(prev);
@@ -294,8 +368,32 @@ function Graph() {
         ))}
       </div>
 
-      <div className="rounded-2xl bg-black/50 border border-white/10 p-2 overflow-x-auto">
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto min-w-[760px]" onMouseLeave={() => setHover(null)}>
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        <button onClick={() => zoomAt(1 / 1.35)} className="w-8 h-8 rounded-lg border border-white/15 bg-white/5 text-gray-300 hover:text-white hover:border-white/35 transition-colors font-bold">+</button>
+        <button onClick={() => zoomAt(1.35)} className="w-8 h-8 rounded-lg border border-white/15 bg-white/5 text-gray-300 hover:text-white hover:border-white/35 transition-colors font-bold">−</button>
+        <button
+          onClick={() => setView({ x: 0, y: 0, w: W, h: H })}
+          disabled={!zoomed}
+          className="px-3 h-8 rounded-lg border border-white/15 bg-white/5 text-xs font-semibold text-gray-300 hover:text-white hover:border-white/35 disabled:opacity-30 transition-colors"
+        >
+          Reset view
+        </button>
+        <span className="text-xs font-mono text-gray-600 ml-1">{zoomPct}%</span>
+        <span className="text-[11px] text-gray-600 ml-auto">scroll to zoom · drag to pan</span>
+      </div>
+
+      <div className="rounded-2xl bg-black/50 border border-white/10 p-2 overflow-hidden">
+        <svg
+          ref={svgRef}
+          viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
+          className={`w-full h-auto min-w-[760px] touch-none select-none ${drag.current ? "cursor-grabbing" : "cursor-grab"}`}
+          onMouseLeave={() => setHover(null)}
+          onWheel={onWheel}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+        >
           {/* edges */}
           {links.map(([a, b], i) => {
             const shown = visible(a) && visible(b);
@@ -325,7 +423,7 @@ function Graph() {
                 key={p.id}
                 opacity={dim ? 0.22 : 1}
                 onMouseEnter={() => setHover(i)}
-                onClick={() => navigate(p.path)}
+                onClick={() => { if (!wasDragging()) navigate(p.path); }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();

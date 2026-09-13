@@ -44,7 +44,14 @@ for (const { path, comp } of routes) {
     sections.push({ label: strip(m[1]), hash: m[2].replace(/^#/, "") });
   }
 
-  entries.push({ path, title: strip(title), intro: strip(intro), sections });
+  // A page may declare extra search terms — alternate names, acronyms, vendor
+  // labels — that appear in prose and would otherwise be unfindable, since
+  // only titles, intros and TOC labels are indexed.
+  //   export const SEARCH_KEYWORDS = ["AWQ", "GGUF", "PagedAttention"];
+  const kwBlock = src.match(/SEARCH_KEYWORDS\s*=\s*\[([\s\S]*?)\]/)?.[1] ?? "";
+  const keywords = [...kwBlock.matchAll(/["'`]([^"'`]+)["'`]/g)].map((m) => strip(m[1]));
+
+  entries.push({ path, title: strip(title), intro: strip(intro), sections, keywords });
 }
 
 entries.sort((a, b) => a.path.localeCompare(b.path));
@@ -53,4 +60,5 @@ writeFileSync(
   JSON.stringify(entries, null, 2) + "\n"
 );
 const secs = entries.reduce((n, e) => n + e.sections.length, 0);
-console.log(`search index: ${entries.length} pages, ${secs} sections`);
+const kws = entries.reduce((n, e) => n + e.keywords.length, 0);
+console.log(`search index: ${entries.length} pages, ${secs} sections, ${kws} keywords`);

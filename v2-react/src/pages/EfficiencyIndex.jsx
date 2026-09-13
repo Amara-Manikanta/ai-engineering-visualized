@@ -232,6 +232,23 @@ function BudgetCalculator() {
    same group often do not compose.
 -------------------------------------------------------------------------- */
 
+
+/** Alternate names and acronyms that live in prose, so search can find them. */
+export const SEARCH_KEYWORDS = [
+  "PTQ", "GGUF", "AWQ", "GPTQ", "EXL2", "BitNet", "post-training quantization",
+  "KV cache", "KV-cache compression", "MLA", "Multi-head Latent Attention",
+  "PagedAttention", "GQA", "grouped-query attention", "KV quantization",
+  "state space model", "SSM", "Jamba", "sub-quadratic",
+  "MoE", "mixture of experts", "sparse activation",
+  "speculative decoding", "Medusa", "EAGLE", "draft and verify",
+  "prompt caching", "prefix caching", "RadixAttention",
+  "offloading", "mmap", "NVMe", "AirLLM", "DeepSpeed", "layer paging", "tiered memory",
+  "teacher-student", "synthetic data",
+  "early exit", "adaptive depth", "layer skipping", "CALM",
+  "distributed inference", "Petals", "Exo", "pipeline parallelism", "swarm",
+  "agent harness", "scaffolding", "LLMOps", "edge AI", "vLLM", "continuous batching",
+];
+
 const GROUPS = [
   {
     n: "Shrink the weights",
@@ -240,16 +257,22 @@ const GROUPS = [
     label: "text-indigo-400",
     items: [
       {
+        id: "quantization",
         t: "Extreme weight quantization",
         real: "Post-training quantization — GGUF, AWQ, GPTQ, EXL2, BitNet",
         d: "Store each weight in 8, 4, or fewer bits instead of 16. A 70B model goes from 140 GB to about 35 GB at 4-bit. Quality holds surprisingly well down to 4-bit and degrades sharply below it; the sub-2-bit results require training that way from scratch, not converting afterwards.",
+        fails:
+          "Below 4-bit, quality falls off a cliff for models converted after training. The sub-2-bit results come from models trained that way from scratch, which you cannot do to a checkpoint you downloaded.",
         link: "#/genai/quantization",
         linkLabel: "Quantization",
       },
       {
+        id: "distillation",
         t: "Knowledge distillation",
         real: "Teacher–student distillation",
         d: "Train a small model to imitate a large one, often on synthetic reasoning traces. Unlike quantization this changes the architecture, so the savings are unbounded — but the student inherits the teacher's ceiling and its errors.",
+        fails:
+          "The student inherits the teacher's errors and its ceiling, and narrows to whatever distribution it was distilled on. It will be confidently wrong in exactly the places the teacher was.",
         link: "#/genai/distillation",
         linkLabel: "Distillation",
       },
@@ -262,14 +285,20 @@ const GROUPS = [
     label: "text-amber-400",
     items: [
       {
+        id: "kv-cache",
         t: "KV-cache compression",
         real: "GQA, Multi-head Latent Attention (MLA), KV quantization, PagedAttention",
         d: "The cache is the cost that surprises people: at long context it can exceed the weights. Grouped-query attention shares key/value heads across query heads. MLA projects KV into a small latent and reconstructs on the fly. PagedAttention does not shrink the cache but stops it fragmenting, which in practice recovers a similar amount.",
+        fails:
+          "MLA is an architectural choice, not something you can bolt onto an existing model. KV quantization below 4-bit degrades long-context recall noticeably, because early tokens are read through the most rounding.",
       },
       {
+        id: "linear",
         t: "Linear / sub-quadratic architecture",
         real: "State space models, Mamba, RWKV, Jamba hybrids",
         d: "Replace attention with a recurrence carrying a fixed-size state. The KV cache disappears entirely — memory per token becomes constant rather than linear. The cost is weaker exact recall, which is why production systems interleave a few attention layers.",
+        fails:
+          "Exact recall of a specific earlier token. A fixed-size state is a lossy summary, which is why hybrids keep a few attention layers rather than none.",
         link: "#/ml/mamba",
         linkLabel: "Mamba & SSMs",
       },
@@ -282,21 +311,30 @@ const GROUPS = [
     label: "text-emerald-400",
     items: [
       {
+        id: "moe",
         t: "Selective compute activation",
         real: "Mixture of Experts, sparse activation",
         d: "A router sends each token to a few of many expert subnetworks. Mixtral holds 46.7B parameters but runs about 12.9B per token. Read the trade carefully: every expert must still be in memory, so this buys compute, not RAM.",
+        fails:
+          "Every expert must be resident, so this saves no memory at all. It also makes batching lumpier, since tokens in one batch may route to different experts.",
         link: "#/llms/moe-type",
         linkLabel: "Mixture of Experts",
       },
       {
+        id: "early-exit",
         t: "Early exit / adaptive depth",
         real: "Early-exit inference, dynamic layer skipping, CALM",
         d: "Attach a classifier after intermediate layers; when it is confident enough, stop and emit. Most tokens in ordinary text are easy — punctuation, function words, the obvious continuation. The difficulty is that batching breaks down when different sequences exit at different depths.",
+        fails:
+          "Batching. If sequences in a batch exit at different depths you either pad to the deepest or break the batch, and both give the throughput back.",
       },
       {
+        id: "speculative",
         t: "Draft-and-verify generation",
         real: "Speculative decoding, Medusa heads, EAGLE",
         d: "A small model proposes several tokens; the large model checks them all in one parallel pass. Rejected drafts cost nothing but the wasted draft compute, and the output distribution is provably identical to the large model alone. Typically 2–3× faster.",
+        fails:
+          "A low acceptance rate makes it a net loss — you pay for the draft and throw it away. It also competes for memory bandwidth, so it fights offloading.",
         link: "#/llm-inference",
         linkLabel: "LLM Inference",
       },
@@ -309,9 +347,12 @@ const GROUPS = [
     label: "text-purple-400",
     items: [
       {
+        id: "prompt-caching",
         t: "System prompt re-use",
         real: "Prompt caching, prefix caching, RadixAttention",
         d: "A long system prompt produces the same KV entries every call. Cache them and the prefill for that span drops to nearly zero. It only works on an exact prefix match — one changed character near the start invalidates everything after it, so put the volatile parts last.",
+        fails:
+          "It matches an exact prefix. A timestamp, a session id, or a shuffled retrieval order near the start invalidates everything after it, silently, and you just pay full price.",
       },
     ],
   },
@@ -322,14 +363,20 @@ const GROUPS = [
     label: "text-rose-400",
     items: [
       {
+        id: "offloading",
         t: "Memory-mapped SSD streaming",
         real: "Tiered memory offloading, layer paging, mmap, AirLLM, DeepSpeed-Inference",
         d: "Keep the weights on NVMe and stream each layer in as it is needed. It genuinely lets a 70B model run on 16 GB of RAM, and it is slow — you are bounded by SSD bandwidth rather than memory bandwidth, so expect seconds per token rather than tens per second. Useful for batch work, painful for chat.",
+        fails:
+          "You become bound by SSD bandwidth rather than memory bandwidth, so expect seconds per token. Fine for batch work, unusable for chat.",
       },
       {
+        id: "swarm",
         t: "Local swarm compute",
         real: "Distributed edge inference, pipeline parallelism, Exo, Petals",
         d: "Split the layers across several machines on a LAN and pass activations between them. Pooled RAM is the win. Network latency per layer boundary is the cost, and it compounds with every token, so this works far better over Thunderbolt or 10GbE than over Wi-Fi.",
+        fails:
+          "Per-layer network latency compounds with every token. Over Wi-Fi this often ends up slower than a smaller model running locally.",
       },
     ],
   },
@@ -346,6 +393,17 @@ export default function EfficiencyIndex() {
     { label: "Three Budgets", hash: "budgets" },
     { label: "Memory Calculator", hash: "calc" },
     { label: "The Techniques", hash: "techniques" },
+    { label: "Extreme weight quantization", hash: "quantization", indent: true },
+    { label: "Knowledge distillation", hash: "distillation", indent: true },
+    { label: "KV-cache compression", hash: "kv-cache", indent: true },
+    { label: "Linear / sub-quadratic architecture", hash: "linear", indent: true },
+    { label: "Selective compute activation", hash: "moe", indent: true },
+    { label: "Early exit / adaptive depth", hash: "early-exit", indent: true },
+    { label: "Draft-and-verify generation", hash: "speculative", indent: true },
+    { label: "System prompt re-use", hash: "prompt-caching", indent: true },
+    { label: "Memory-mapped SSD streaming", hash: "offloading", indent: true },
+    { label: "Local swarm compute", hash: "swarm", indent: true },
+    { label: "Agent scaffolding", hash: "scaffolding", indent: true },
     { label: "What Composes", hash: "compose" },
     { label: "A Note on the Eleventh", hash: "scaffolding" },
     { label: "Picking a Stack", hash: "stacks" },
@@ -406,7 +464,7 @@ export default function EfficiencyIndex() {
               </div>
               <div className="space-y-3">
                 {g.items.map((it) => (
-                  <div key={it.t} className="p-4 rounded-xl bg-black/30 border border-white/10">
+                  <section key={it.t} id={it.id} className="p-4 rounded-xl bg-black/30 border border-white/10 scroll-mt-24">
                     <div className="flex flex-wrap items-baseline gap-2 mb-1">
                       <span className="text-sm font-semibold text-white">{it.t}</span>
                       {it.link && (
@@ -416,8 +474,14 @@ export default function EfficiencyIndex() {
                       )}
                     </div>
                     <div className="text-[11px] font-mono text-gray-500 mb-2">{it.real}</div>
-                    <p className="text-xs text-gray-300 leading-relaxed m-0">{it.d}</p>
-                  </div>
+                    <p className="text-xs text-gray-300 leading-relaxed mb-2">{it.d}</p>
+                    {it.fails && (
+                      <p className="text-xs text-rose-300/90 leading-relaxed m-0">
+                        <span className="text-gray-500 uppercase tracking-wide text-[10px]">Where it bites </span>
+                        {it.fails}
+                      </p>
+                    )}
+                  </section>
                 ))}
               </div>
             </div>
