@@ -1325,7 +1325,7 @@
         "hash": "benefits"
       },
       {
-        "label": "Choosing r and alpha",
+        "label": "Hyperparameters",
         "hash": "rank"
       },
       {

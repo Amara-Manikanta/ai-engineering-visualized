@@ -223,7 +223,7 @@ export default function GenAiPeft() {
     { label: "Worked Example", hash: "worked" },
     { label: "Do the Arithmetic", hash: "calc" },
     { label: "Key Benefits", hash: "benefits" },
-    { label: "Choosing r and alpha", hash: "rank" },
+    { label: "Hyperparameters", hash: "rank" },
     { label: "The PEFT Family", hash: "family" },
     { label: "Serving Many Adapters", hash: "serving" },
     { label: "In Code", hash: "code" },
@@ -239,10 +239,14 @@ export default function GenAiPeft() {
       <section id="what" className="mb-14 scroll-mt-24">
         <div className="p-6 rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.12] to-transparent mb-6">
           <div className="text-[10px] uppercase tracking-wider text-indigo-400 mb-2">Low-Rank Adaptation</div>
-          <p className="text-lg text-gray-100 leading-relaxed m-0">
-            Adapt a large pretrained model to a new task{" "}
-            <strong className="text-white">without updating a single one of its original weights.</strong> The base
-            model stays completely frozen; a tiny pair of trainable matrices is attached to the side.
+          <p className="text-lg text-gray-100 leading-relaxed mb-3">
+            <strong className="text-white">LoRA stands for Low-Rank Adaptation.</strong> It adapts a large
+            pretrained language model — Llama 3, DeepSeek, Qwen — to a custom task{" "}
+            <strong className="text-white">without updating the billions of weights of the original model.</strong>
+          </p>
+          <p className="text-base text-gray-300 leading-relaxed m-0">
+            Instead of retraining the entire model, LoRA keeps the original completely frozen and attaches a tiny
+            pair of trainable <span className="text-indigo-300">adapter</span> matrices to the side.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -261,21 +265,51 @@ export default function GenAiPeft() {
       </section>
 
       <section id="problem" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">The Problem</h2>
-        <p className="text-gray-300 leading-relaxed max-w-3xl mb-5">
-          Full fine-tuning updates every weight. That means holding, for each parameter, the weight itself, its
-          gradient, and two Adam moment estimates. In mixed precision that is roughly 14 to 16 bytes per parameter, so
-          a 7B model needs on the order of 100GB before you have loaded a single training example.
-        </p>
+        <h2 className="text-2xl font-bold text-white mb-4">The Core Problem LoRA Solves</h2>
         <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
-          There is a second problem that costs more in the long run. Each fully fine-tuned variant is a complete copy
-          of the model. Ten customers means ten times 14GB of weights and ten separate deployments.
+          When you perform full fine-tuning on a large language model, three costs arrive together.
         </p>
-        <div className="p-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.07]">
-          <p className="text-sm text-amber-200 leading-relaxed m-0">
-            <strong>The observation PEFT is built on:</strong> adapting a pretrained model to a new task does not
-            require large changes to its weights. The update matrix has low intrinsic rank — most of its information
-            fits in a handful of directions. So learn those directions directly instead of the whole matrix.
+        <div className="space-y-3 mb-5">
+          {[
+            {
+              n: "1",
+              t: "You update 100% of the weights",
+              d: "Gradients must be calculated for every parameter — all 8 billion, or all 70 billion. Nothing is held back, and nothing is shared between tasks.",
+              box: "border-rose-500/30 bg-rose-500/[0.08]",
+              tone: "text-rose-400",
+            },
+            {
+              n: "2",
+              t: "Enormous memory requirements",
+              d: "You need hundreds of gigabytes of VRAM — a GPU cluster — just to hold the optimizer states, the gradients and the model weights at the same time. In mixed precision that is roughly 14 to 16 bytes per parameter, so a 7B model passes 100 GB before you load a single training example.",
+              box: "border-amber-500/30 bg-amber-500/[0.08]",
+              tone: "text-amber-400",
+            },
+            {
+              n: "3",
+              t: "Storage nightmare",
+              d: "Every fine-tuned version of a 70B model produces another 140 GB file on disk. Ten customers means ten complete copies of the same model and ten separate deployments.",
+              box: "border-purple-500/30 bg-purple-500/[0.08]",
+              tone: "text-purple-400",
+            },
+          ].map((c) => (
+            <div key={c.n} className={`flex gap-4 p-5 rounded-xl border ${c.box}`}>
+              <div className={`shrink-0 w-8 h-8 rounded-lg bg-black/30 border border-white/10 font-bold flex items-center justify-center text-sm ${c.tone}`}>
+                {c.n}
+              </div>
+              <div>
+                <div className={`text-sm font-semibold mb-1 ${c.tone}`}>{c.t}</div>
+                <p className="text-xs text-gray-300 leading-relaxed m-0">{c.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+          <p className="text-sm text-gray-400 leading-relaxed m-0">
+            <strong className="text-white">The observation LoRA is built on:</strong> weight changes during
+            fine-tuning have a low <em>intrinsic rank</em>. The information required to adapt a model to a new task
+            compresses into a much smaller mathematical subspace than the weight matrix it modifies. So learn that
+            subspace directly instead of the whole matrix.
           </p>
         </div>
       </section>
@@ -397,7 +431,7 @@ export default function GenAiPeft() {
             {
               icon: "📦",
               t: "Tiny artefacts",
-              d: "A full fine-tune of a 70B model is another 140 GB file, per task. A LoRA adapter is tens of megabytes. You can version them in git, ship them over the wire, and keep hundreds around.",
+              d: "A full fine-tune of a 70B model is another 140 GB file, per task. A LoRA adapter file is typically only 10 MB to 100 MB. You can version them in git, ship them over the wire, and keep hundreds around.",
               box: "border-emerald-500/30 bg-emerald-500/[0.08]",
               tone: "text-emerald-400",
             },
@@ -435,32 +469,59 @@ export default function GenAiPeft() {
       </section>
 
       <section id="rank" className="mb-16 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Choosing r and α</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-          <div className="p-5 rounded-xl border border-white/10 bg-white/5">
-            <div className="text-sm font-semibold text-white mb-2">Rank r — how much capacity</div>
-            <p className="text-xs text-gray-400 leading-relaxed mb-3">
-              r = 8 to 16 handles style, tone, and format adaptation, which is most of what people actually want.
-              r = 32 to 64 is for teaching genuinely new task behaviour. Beyond 64 the returns are usually not there,
-              and you should question whether the problem is a fine-tuning problem at all.
+        <h2 className="text-2xl font-bold text-white mb-4">Important LoRA Hyperparameters</h2>
+        <div className="space-y-4 mb-5">
+          <div className="p-5 rounded-xl border border-indigo-500/30 bg-indigo-500/[0.08]">
+            <div className="flex flex-wrap items-baseline gap-3 mb-2">
+              <span className="font-bold text-indigo-400">Rank (r)</span>
+              <span className="font-mono text-xs text-gray-500">common values: 8, 16, 32, 64</span>
+            </div>
+            <p className="text-sm text-gray-300 leading-relaxed mb-2">
+              The inner dimension of the bottleneck. A higher rank lets the adapter learn a more complex task, and
+              increases memory use in proportion.
             </p>
-            <div className="text-[11px] text-gray-500 font-mono">start at 16, move only with evidence</div>
+            <p className="text-xs text-gray-500 leading-relaxed m-0">
+              In practice r = 8 to 16 handles style, tone and format — most of what people actually want. Reach for
+              32 to 64 only when teaching genuinely new task behaviour.
+            </p>
           </div>
-          <div className="p-5 rounded-xl border border-white/10 bg-white/5">
-            <div className="text-sm font-semibold text-white mb-2">α — how strongly it applies</div>
-            <p className="text-xs text-gray-400 leading-relaxed mb-3">
-              The update is scaled by α/r, so α controls the adapter's influence independently of its size. The common
-              convention is α = 2r, which keeps the effective scale constant as you change rank. Treat α/r as the real
-              knob, not α alone.
+
+          <div className="p-5 rounded-xl border border-amber-500/30 bg-amber-500/[0.08]">
+            <div className="flex flex-wrap items-baseline gap-3 mb-2">
+              <span className="font-bold text-amber-400">Alpha (α)</span>
+              <span className="font-mono text-xs text-gray-500">scales the adapter: (α / r) · ΔW</span>
+            </div>
+            <p className="text-sm text-gray-300 leading-relaxed mb-2">
+              A scaling factor applied to the LoRA output. It controls how strongly the adapter overrides the base
+              model's knowledge.
             </p>
-            <div className="text-[11px] text-gray-500 font-mono">alpha = 32 with r = 16</div>
+            <p className="text-xs text-gray-500 leading-relaxed m-0">
+              Because the scale is α/r, the convention α = 2r keeps the adapter's influence constant as you change
+              rank. Treat α/r as the real knob, not α alone.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-xl border border-emerald-500/30 bg-emerald-500/[0.08]">
+            <div className="flex flex-wrap items-baseline gap-3 mb-2">
+              <span className="font-bold text-emerald-400">Target Modules</span>
+              <span className="font-mono text-xs text-gray-500">q_proj, k_proj, v_proj, o_proj</span>
+            </div>
+            <p className="text-sm text-gray-300 leading-relaxed mb-2">
+              The specific projection layers inside the transformer where adapters are attached — typically the
+              attention projections.
+            </p>
+            <p className="text-xs text-gray-500 leading-relaxed m-0">
+              Extending to the MLP projections (gate_proj, up_proj, down_proj) is the usual next step, and published
+              ablations favour it over raising the rank on attention alone.
+            </p>
           </div>
         </div>
+
         <div className="p-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.07]">
           <p className="text-sm text-amber-200 leading-relaxed m-0">
-            <strong>Target breadth matters more than rank.</strong> Published ablations consistently find that
-            attaching a low-rank adapter to more modules beats raising the rank on fewer. If quality is short, add the
-            MLP projections before you double r.
+            <strong>Breadth beats depth.</strong> If quality is short, attach a low-rank adapter to more modules
+            before you double r. More target modules at the same rank consistently outperforms fewer at a higher one,
+            for a similar parameter budget.
           </p>
         </div>
       </section>
