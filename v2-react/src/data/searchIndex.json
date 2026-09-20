@@ -1293,6 +1293,10 @@
     "intro": "Fine-tune a 70B model by training 0.1% of it. Parameter-efficient fine-tuning is what made customising large models something a small team can do.",
     "sections": [
       {
+        "label": "What LoRA Is",
+        "hash": "what"
+      },
+      {
         "label": "The Problem",
         "hash": "problem"
       },
@@ -1301,8 +1305,24 @@
         "hash": "idea"
       },
       {
+        "label": "Matrix Decomposition",
+        "hash": "decomposition"
+      },
+      {
+        "label": "See It Flow",
+        "hash": "flow"
+      },
+      {
+        "label": "Worked Example",
+        "hash": "worked"
+      },
+      {
         "label": "Do the Arithmetic",
         "hash": "calc"
+      },
+      {
+        "label": "Key Benefits",
+        "hash": "benefits"
       },
       {
         "label": "Choosing r and alpha",

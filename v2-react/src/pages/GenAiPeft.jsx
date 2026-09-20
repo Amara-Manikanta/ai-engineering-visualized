@@ -3,6 +3,7 @@ import GuideLayout from "../components/GuideLayout";
 import KnowledgeCheck from "../components/KnowledgeCheck";
 import { questionsFor } from "../data/quizBank";
 import CodeBlock from "../components/CodeBlock";
+import LoraFlow from "../components/LoraFlow";
 
 /* --------------------------------------------------------------------------
    LoRA's whole argument is an arithmetic one, so the page does the arithmetic.
@@ -214,9 +215,14 @@ const METHODS = [
 
 export default function GenAiPeft() {
   const toc = [
+    { label: "What LoRA Is", hash: "what" },
     { label: "The Problem", hash: "problem" },
     { label: "The Low-Rank Idea", hash: "idea" },
+    { label: "Matrix Decomposition", hash: "decomposition" },
+    { label: "See It Flow", hash: "flow" },
+    { label: "Worked Example", hash: "worked" },
     { label: "Do the Arithmetic", hash: "calc" },
+    { label: "Key Benefits", hash: "benefits" },
     { label: "Choosing r and alpha", hash: "rank" },
     { label: "The PEFT Family", hash: "family" },
     { label: "Serving Many Adapters", hash: "serving" },
@@ -230,6 +236,30 @@ export default function GenAiPeft() {
       intro="Fine-tune a 70B model by training 0.1% of it. Parameter-efficient fine-tuning is what made customising large models something a small team can do."
       toc={toc}
     >
+      <section id="what" className="mb-14 scroll-mt-24">
+        <div className="p-6 rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.12] to-transparent mb-6">
+          <div className="text-[10px] uppercase tracking-wider text-indigo-400 mb-2">Low-Rank Adaptation</div>
+          <p className="text-lg text-gray-100 leading-relaxed m-0">
+            Adapt a large pretrained model to a new task{" "}
+            <strong className="text-white">without updating a single one of its original weights.</strong> The base
+            model stays completely frozen; a tiny pair of trainable matrices is attached to the side.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            ["❄️", "Base stays frozen", "No gradients, no optimiser state, no second copy of the weights."],
+            ["🔥", "Two thin matrices train", "A projects down to rank r, B projects back up. Typically under 1% of the layer."],
+            ["🔗", "Merge or swap", "Fold the adapter into the weights for zero overhead, or keep it separate and hot-swap per request."],
+          ].map(([icon, t, d]) => (
+            <div key={t} className="p-5 rounded-xl border border-white/10 bg-white/5">
+              <div className="text-2xl mb-2">{icon}</div>
+              <div className="text-sm font-semibold text-white mb-1">{t}</div>
+              <p className="text-xs text-gray-400 leading-relaxed m-0">{d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section id="problem" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">The Problem</h2>
         <p className="text-gray-300 leading-relaxed max-w-3xl mb-5">
@@ -281,9 +311,127 @@ export default function GenAiPeft() {
         </div>
       </section>
 
+      <section id="decomposition" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">The Matrix Decomposition</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          The whole method rests on one claim from linear algebra: the <em>change</em> a model needs in order to
+          learn a new task has low intrinsic rank. The adaptation fits in a far smaller subspace than the weight
+          matrix it modifies, so you never need to represent it at full size.
+        </p>
+
+        <div className="space-y-3 mb-5">
+          {[
+            ["Ordinary layer", "h = W₀ · x", "One matrix multiply. To fine-tune it you would update every entry of W₀.", "border-gray-600/40 bg-white/[0.03]", "text-gray-300"],
+            ["Add a parallel branch", "h = W₀ · x + ΔW · x", "Freeze W₀ and learn a separate correction ΔW. Mathematically identical so far, and no cheaper — ΔW is still full size.", "border-blue-500/30 bg-blue-500/[0.08]", "text-blue-400"],
+            ["Factorise the correction", "ΔW = B × A", "Here is the saving. Instead of one d×k matrix, store a d×r and an r×k, with r far smaller than either dimension.", "border-emerald-500/30 bg-emerald-500/[0.08]", "text-emerald-400"],
+            ["What actually runs", "h = W₀ · x + (α/r) · B · A · x", "The scaling factor α/r keeps the adapter's influence steady when you change rank.", "border-amber-500/30 bg-amber-500/[0.08]", "text-amber-400"],
+          ].map(([t, eq, d, box, tone]) => (
+            <div key={t} className={`p-5 rounded-xl border ${box}`}>
+              <div className="flex flex-wrap items-baseline gap-3 mb-2">
+                <span className={`text-sm font-semibold ${tone}`}>{t}</span>
+                <span className="font-mono text-base text-white">{eq}</span>
+              </div>
+              <p className="text-xs text-gray-400 leading-relaxed m-0">{d}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+          <p className="text-sm text-gray-400 leading-relaxed m-0">
+            Read the shapes and the constraint falls out: A is <span className="font-mono text-gray-300">d × r</span>,
+            B is <span className="font-mono text-gray-300">r × k</span>, and their product is{" "}
+            <span className="font-mono text-gray-300">d × k</span> — the same shape as W₀, so it can be added
+            directly. The rank r is the only free dimension, and it is where all the savings live.
+          </p>
+        </div>
+      </section>
+
+      <section id="flow" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">See It Flow</h2>
+        <LoraFlow d={4096} k={4096} rank={8} />
+      </section>
+
+      <section id="worked" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">Worked Example</h2>
+        <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
+          One attention projection in a typical 7B-class transformer, at rank 8.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+          <div className="p-5 rounded-xl border border-rose-500/30 bg-rose-500/[0.08]">
+            <div className="text-sm font-semibold text-rose-400 mb-3">Full fine-tuning</div>
+            <div className="font-mono text-xs text-gray-400 mb-2">W₀ = 4,096 × 4,096</div>
+            <div className="text-3xl font-bold font-mono text-rose-300 mb-1">16,777,216</div>
+            <div className="text-xs text-gray-500">trainable parameters, for this one matrix</div>
+          </div>
+          <div className="p-5 rounded-xl border border-emerald-500/30 bg-emerald-500/[0.08]">
+            <div className="text-sm font-semibold text-emerald-400 mb-3">LoRA at r = 8</div>
+            <div className="font-mono text-xs text-gray-400 mb-1">A = 4,096 × 8 = 32,768</div>
+            <div className="font-mono text-xs text-gray-400 mb-2">B = 8 × 4,096 = 32,768</div>
+            <div className="text-3xl font-bold font-mono text-emerald-300 mb-1">65,536</div>
+            <div className="text-xs text-gray-500">trainable parameters</div>
+          </div>
+        </div>
+        <div className="p-5 rounded-xl border border-amber-500/30 bg-amber-500/[0.1] text-center">
+          <div className="text-[10px] uppercase tracking-wider text-amber-400 mb-1">Reduction for this layer</div>
+          <div className="text-4xl font-bold font-mono text-amber-300">99.61%</div>
+          <div className="text-xs text-gray-500 mt-1 font-mono">65,536 / 16,777,216 = 0.39%</div>
+        </div>
+      </section>
+
       <section id="calc" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Do the Arithmetic</h2>
         <LoraCalculator />
+      </section>
+
+      <section id="benefits" className="mb-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-4">Key Benefits</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              icon: "💾",
+              t: "Drastic VRAM reduction",
+              d: "Gradients and optimiser state exist only for trainable parameters. At under 1% of the model, an 8B fine-tune fits on a single consumer GPU or a Mac with unified memory — hardware that could not hold the full-tuning state at all.",
+              box: "border-indigo-500/30 bg-indigo-500/[0.08]",
+              tone: "text-indigo-400",
+            },
+            {
+              icon: "📦",
+              t: "Tiny artefacts",
+              d: "A full fine-tune of a 70B model is another 140 GB file, per task. A LoRA adapter is tens of megabytes. You can version them in git, ship them over the wire, and keep hundreds around.",
+              box: "border-emerald-500/30 bg-emerald-500/[0.08]",
+              tone: "text-emerald-400",
+            },
+            {
+              icon: "⚡",
+              t: "Zero inference overhead",
+              d: "Compute W₀ + (α/r)·B·A once after training and store the result. The adapter stops existing as a separate thing, and the served model runs at exactly the speed of the original.",
+              box: "border-amber-500/30 bg-amber-500/[0.08]",
+              tone: "text-amber-400",
+            },
+            {
+              icon: "🔄",
+              t: "Dynamic adapter swapping",
+              d: "Keep one base model resident and attach a different adapter per request — a coding adapter for one user, a legal one for the next. Servers like vLLM batch requests for different adapters in a single forward pass.",
+              box: "border-purple-500/30 bg-purple-500/[0.08]",
+              tone: "text-purple-400",
+            },
+          ].map((b) => (
+            <div key={b.t} className={`p-5 rounded-xl border ${b.box}`}>
+              <div className="flex items-center gap-2.5 mb-2">
+                <span className="text-2xl">{b.icon}</span>
+                <span className={`font-bold ${b.tone}`}>{b.t}</span>
+              </div>
+              <p className="text-xs text-gray-300 leading-relaxed m-0">{b.d}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-5 p-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.07]">
+          <p className="text-sm text-amber-200 leading-relaxed m-0">
+            <strong>Merging and swapping are mutually exclusive.</strong> Once you fold an adapter into the base
+            weights you have one specialised model and the multi-tenant trick is gone. Merge when you serve a single
+            variant; keep adapters separate when you serve many.
+          </p>
+        </div>
       </section>
 
       <section id="rank" className="mb-16 scroll-mt-24">

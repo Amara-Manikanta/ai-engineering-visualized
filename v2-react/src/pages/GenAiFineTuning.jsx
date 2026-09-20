@@ -1,4 +1,4 @@
-import LoraAnimator from "../components/LoraAnimator";
+import React from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
 
@@ -54,110 +54,29 @@ export default function GenAiFineTuning() {
       </section>
 
       <section id="lora" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">How LoRA (Low-Rank Adaptation) Works</h2>
-        <p className="text-gray-300 mb-6 max-w-3xl leading-relaxed">
-          LoRA is a parameter-efficient fine-tuning technique that adapts pre-trained language models by keeping the base model's billions of weights completely frozen while learning a low-rank correction matrix <code className="text-indigo-300">ΔW = B × A</code> on the side.
+        <h2 className="text-2xl font-bold text-white mb-4">How LoRA Works</h2>
+        <p className="text-gray-300 mb-4 max-w-3xl">
+          LoRA (Low-Rank Adaptation) freezes the original weight matrix <code className="text-pink-400 bg-gray-800 px-1 rounded">W</code> and
+          learns a small correction on top of it, decomposed into two tiny low-rank matrices <code className="text-indigo-300">A</code> and <code className="text-indigo-300">B</code>:
         </p>
-
-        {/* 1. Core Problem Solved */}
-        <div className="bg-[#111118] border border-white/10 rounded-xl p-6 mb-6">
-          <h3 className="text-lg font-bold text-rose-400 mb-3">1. The Core Problem LoRA Solves</h3>
-          <p className="text-sm text-gray-300 leading-relaxed mb-4">
-            Standard <strong>Full Fine-Tuning</strong> updates 100% of an LLM's parameters during backpropagation. This introduces massive operational bottlenecks:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="bg-black/40 border border-white/5 p-4 rounded-lg">
-              <span className="text-rose-300 font-bold block mb-1">100% Weight Updates</span>
-              <span className="text-gray-400">Must track gradients and optimizer states for all 8B to 70B+ parameters.</span>
-            </div>
-            <div className="bg-black/40 border border-white/5 p-4 rounded-lg">
-              <span className="text-rose-300 font-bold block mb-1">Huge VRAM Memory Overhead</span>
-              <span className="text-gray-400">Requires massive GPU clusters (hundreds of GBs of VRAM) for intermediate states.</span>
-            </div>
-            <div className="bg-black/40 border border-white/5 p-4 rounded-lg">
-              <span className="text-rose-300 font-bold block mb-1">Storage Nightmare</span>
-              <span className="text-gray-400">Every fine-tuned checkpoint produces a new 140 GB file for a 70B model.</span>
-            </div>
-          </div>
+        <div className="bg-[#0f0f11] border border-gray-800 rounded-lg p-4 font-mono text-sm text-gray-200 mb-4">
+          h = Wx + (B · A)x &nbsp;&nbsp;&nbsp; where W ∈ ℝ^(d×d) frozen, A ∈ ℝ^(r×d), B ∈ ℝ^(d×r), r ≪ d
         </div>
-
-        {/* 2. Mathematical Concept & Interactive Animator */}
-        <div className="mb-8">
-          <h3 className="text-lg font-bold text-indigo-300 mb-2">2. Low-Rank Decomposition & Signal Flow</h3>
-          <p className="text-sm text-gray-300 leading-relaxed mb-4">
-            Weight updates during fine-tuning have a low <em className="text-white">intrinsic rank</em>. Instead of modifying <code className="text-blue-300">W₀</code> directly, LoRA adds a parallel path with two small matrices <code className="text-purple-300">A (d × r)</code> and <code className="text-pink-300">B (r × k)</code>, where <code className="text-indigo-300">r « min(d, k)</code>:
-          </p>
-
-          {/* Embedded Interactive LoraAnimator Component */}
-          <LoraAnimator />
-        </div>
-
-        {/* 3. Parameter Reduction Math */}
-        <div className="bg-[#0e111a] border border-indigo-500/20 rounded-xl p-6 mb-6">
-          <h3 className="text-lg font-bold text-emerald-400 mb-3">3. Parameter Reduction Math (Why It Saves &gt;99%)</h3>
-          <p className="text-sm text-gray-300 leading-relaxed mb-3">
-            Suppose a Transformer projection layer has a weight matrix size of <code className="text-white">4,096 × 4,096</code>:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono mb-4">
-            <div className="bg-black/40 border border-white/10 p-4 rounded-lg">
-              <span className="text-rose-400 font-bold block mb-1">Full Weight Matrix (W₀):</span>
-              4,096 × 4,096 = <span className="text-white font-bold">16,777,216 parameters</span>
-            </div>
-            <div className="bg-emerald-950/40 border border-emerald-500/30 p-4 rounded-lg">
-              <span className="text-emerald-400 font-bold block mb-1">LoRA Adapter (r = 8):</span>
-              (4,096 × 8) + (8 × 4,096) = <span className="text-emerald-300 font-bold">65,536 parameters</span>
-            </div>
+        <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-6 flex flex-col items-center gap-3">
+          <div className="flex items-center gap-3 text-sm font-mono">
+            <span className="bg-white/10 px-3 py-2 rounded-lg">Input x</span>
+            <span className="text-gray-500">→</span>
+            <span className="bg-gray-700/40 border border-gray-600 px-3 py-2 rounded-lg text-gray-300">Frozen W (❄️ not trained)</span>
           </div>
-          <p className="text-xs text-emerald-300/90 bg-emerald-900/20 border border-emerald-500/20 px-3 py-2 rounded-lg">
-            By setting rank <code className="text-white">r = 8</code>, the trainable parameter footprint for that layer is reduced by <strong>99.6%</strong>!
-          </p>
-        </div>
-
-        {/* 4. Key Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5">
-            <h4 className="text-indigo-400 font-bold text-sm mb-2">⚡ Drastic VRAM Reduction</h4>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Tracking gradients for &lt;1% of parameters enables fine-tuning 8B models on a single consumer GPU (e.g. RTX 4090 or Mac Unified Memory).
-            </p>
+          <div className="text-indigo-400 text-xs">+ (added on top)</div>
+          <div className="flex items-center gap-3 text-sm font-mono">
+            <span className="bg-white/10 px-3 py-2 rounded-lg">Input x</span>
+            <span className="text-gray-500">→</span>
+            <span className="bg-indigo-600/30 border border-indigo-500/50 px-3 py-2 rounded-lg text-indigo-300">A (r×d, trained)</span>
+            <span className="text-gray-500">→</span>
+            <span className="bg-purple-600/30 border border-purple-500/50 px-3 py-2 rounded-lg text-purple-300">B (d×r, trained)</span>
           </div>
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5">
-            <h4 className="text-indigo-400 font-bold text-sm mb-2">💾 Tiny Adapter File Sizes</h4>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Adapter checkpoints are just <strong>10 MB to 100 MB</strong> instead of multi-gigabyte full model weights.
-            </p>
-          </div>
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5">
-            <h4 className="text-indigo-400 font-bold text-sm mb-2">🚀 Zero Inference Latency Overhead</h4>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              At deployment time, compute <code className="text-indigo-300">W_final = W₀ + (B × A)</code> to permanently merge weights. Inference runs at 100% full original speed!
-            </p>
-          </div>
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5">
-            <h4 className="text-indigo-400 font-bold text-sm mb-2">🔄 Dynamic Adapter Swapping</h4>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Keep 1 base model in VRAM and dynamically swap LoRA adapters on the fly (e.g., Coding LoRA vs Support LoRA vs Legal LoRA).
-            </p>
-          </div>
-        </div>
-
-        {/* 5. Key Hyperparameters */}
-        <div className="bg-[#111118] border border-white/10 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-purple-300 mb-3">5. Important LoRA Hyperparameters</h3>
-          <div className="space-y-3 text-xs">
-            <div className="border-b border-white/5 pb-2">
-              <span className="text-indigo-400 font-bold font-mono">Rank (r):</span>
-              <span className="text-gray-300 ml-2">Controls the inner bottleneck dimension (e.g. 8, 16, 32, 64). Higher rank provides higher capacity for complex tasks.</span>
-            </div>
-            <div className="border-b border-white/5 pb-2">
-              <span className="text-indigo-400 font-bold font-mono">Alpha (α):</span>
-              <span className="text-gray-300 ml-2">Scaling factor applied to LoRA output: <code className="text-white">(α / r) · ΔW</code>. Controls adapter weighting over base weights.</span>
-            </div>
-            <div>
-              <span className="text-indigo-400 font-bold font-mono">Target Modules:</span>
-              <span className="text-gray-300 ml-2">Projection layers where adapters attach (typically attention layers: <code className="text-indigo-300">q_proj</code>, <code className="text-indigo-300">v_proj</code>, <code className="text-indigo-300">k_proj</code>, <code className="text-indigo-300">o_proj</code>).</span>
-            </div>
-          </div>
+          <p className="text-xs text-gray-500 mt-2">Rank <code className="text-indigo-300">r</code> is typically 4–64 — a fraction of the full hidden dimension, which is why LoRA trains &lt;1% of the parameters.</p>
         </div>
       </section>
 
