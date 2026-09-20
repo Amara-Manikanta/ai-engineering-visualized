@@ -1289,15 +1289,181 @@
   },
   {
     "path": "/genai/peft",
-    "title": "PEFT & LoRA",
-    "intro": "Fine-tune a 70B model by training 0.1% of it. Parameter-efficient fine-tuning is what made customising large models something a small team can do.",
+    "title": "PEFT — Parameter-Efficient Fine-Tuning",
+    "intro": "Six ways to adapt a large model without retraining it. They share one insight and differ in where they attach — which decides what each one costs you.",
+    "sections": [
+      {
+        "label": "What PEFT Is",
+        "hash": "what"
+      },
+      {
+        "label": "The Six Methods",
+        "hash": "methods"
+      },
+      {
+        "label": "Side by Side",
+        "hash": "compare"
+      },
+      {
+        "label": "Which One",
+        "hash": "choose"
+      },
+      {
+        "label": "The Common Skeleton",
+        "hash": "skeleton"
+      },
+      {
+        "label": "When PEFT Is Not Enough",
+        "hash": "limits"
+      }
+    ],
+    "keywords": [
+      "PEFT",
+      "parameter-efficient fine-tuning",
+      "LoRA",
+      "low-rank adaptation",
+      "QLoRA",
+      "NF4",
+      "double quantization",
+      "paged optimizers",
+      "bitsandbytes",
+      "DoRA",
+      "weight-decomposed",
+      "prefix tuning",
+      "p-tuning",
+      "prompt tuning",
+      "soft prompts",
+      "virtual tokens",
+      "IA3",
+      "(IA)3",
+      "adapter layers",
+      "Houlsby",
+      "bottleneck adapter",
+      "adapter",
+      "rank",
+      "alpha",
+      "target modules"
+    ]
+  },
+  {
+    "path": "/genai/peft/adapters",
+    "title": "Adapter Layers",
+    "intro": "The method that started parameter-efficient fine-tuning, in 2019. Largely displaced now — and the reason why is the most useful thing about it.",
+    "sections": [
+      {
+        "label": "The Original",
+        "hash": "original"
+      },
+      {
+        "label": "The Bottleneck Block",
+        "hash": "block"
+      },
+      {
+        "label": "Serial vs Parallel",
+        "hash": "serial"
+      },
+      {
+        "label": "The Latency Cost",
+        "hash": "latency"
+      },
+      {
+        "label": "What It Got Right",
+        "hash": "legacy"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Where It Stands",
+        "hash": "status"
+      }
+    ],
+    "keywords": []
+  },
+  {
+    "path": "/genai/peft/dora",
+    "title": "DoRA — Weight-Decomposed Low-Rank Adaptation",
+    "intro": "Split each weight into a magnitude and a direction, and let the low-rank update steer only the direction. A small change to LoRA that closes much of the gap to full fine-tuning at low rank.",
+    "sections": [
+      {
+        "label": "The Observation",
+        "hash": "observation"
+      },
+      {
+        "label": "The Decomposition",
+        "hash": "decomposition"
+      },
+      {
+        "label": "See the Geometry",
+        "hash": "geometry"
+      },
+      {
+        "label": "Why It Helps",
+        "hash": "why"
+      },
+      {
+        "label": "What It Costs",
+        "hash": "cost"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to Use It",
+        "hash": "when"
+      }
+    ],
+    "keywords": []
+  },
+  {
+    "path": "/genai/peft/ia3",
+    "title": "(IA)³ — Infused Adapter by Inhibiting and Amplifying Inner Activations",
+    "intro": "The smallest method in the family. Three learned vectors per layer, multiplied into the activations — no matrices, no added parameters in the forward path.",
+    "sections": [
+      {
+        "label": "The Idea",
+        "hash": "idea"
+      },
+      {
+        "label": "Three Vectors",
+        "hash": "vectors"
+      },
+      {
+        "label": "Scaling in Action",
+        "hash": "scaling"
+      },
+      {
+        "label": "Parameter Count",
+        "hash": "count"
+      },
+      {
+        "label": "Strengths and Limits",
+        "hash": "limits"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to Use It",
+        "hash": "when"
+      }
+    ],
+    "keywords": []
+  },
+  {
+    "path": "/genai/peft/lora",
+    "title": "LoRA — Low-Rank Adaptation",
+    "intro": "Fine-tune a 70B model by training 0.1% of it. The frozen base plus two thin matrices — the method the rest of PEFT is measured against.",
     "sections": [
       {
         "label": "What LoRA Is",
         "hash": "what"
       },
       {
-        "label": "The Problem",
+        "label": "The Core Problem",
         "hash": "problem"
       },
       {
@@ -1307,6 +1473,10 @@
       {
         "label": "Matrix Decomposition",
         "hash": "decomposition"
+      },
+      {
+        "label": "Hyperparameters",
+        "hash": "rank"
       },
       {
         "label": "See It Flow",
@@ -1325,14 +1495,6 @@
         "hash": "benefits"
       },
       {
-        "label": "Hyperparameters",
-        "hash": "rank"
-      },
-      {
-        "label": "The PEFT Family",
-        "hash": "family"
-      },
-      {
         "label": "Serving Many Adapters",
         "hash": "serving"
       },
@@ -1341,8 +1503,76 @@
         "hash": "code"
       },
       {
-        "label": "When PEFT Is Not Enough",
+        "label": "When LoRA Is Not Enough",
         "hash": "limits"
+      }
+    ],
+    "keywords": []
+  },
+  {
+    "path": "/genai/peft/prefix-tuning",
+    "title": "Prefix Tuning & P-Tuning",
+    "intro": "Leave every weight frozen and learn the input instead. Soft prompts are vectors the model reads as instructions, found by gradient descent rather than written by a human.",
+    "sections": [
+      {
+        "label": "A Different Idea",
+        "hash": "idea"
+      },
+      {
+        "label": "The Three Variants",
+        "hash": "variants"
+      },
+      {
+        "label": "The Context Cost",
+        "hash": "cost"
+      },
+      {
+        "label": "Why Reparameterisation",
+        "hash": "reparam"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Where It Stands",
+        "hash": "status"
+      }
+    ],
+    "keywords": []
+  },
+  {
+    "path": "/genai/peft/qlora",
+    "title": "QLoRA — Quantized LoRA",
+    "intro": "LoRA with the frozen base compressed to 4 bits. It is what moved fine-tuning a 70B model from a GPU cluster onto a single card.",
+    "sections": [
+      {
+        "label": "What QLoRA Adds",
+        "hash": "what"
+      },
+      {
+        "label": "Three Innovations",
+        "hash": "innovations"
+      },
+      {
+        "label": "Memory Breakdown",
+        "hash": "memory"
+      },
+      {
+        "label": "The Dequantise Dance",
+        "hash": "dance"
+      },
+      {
+        "label": "What It Costs",
+        "hash": "cost"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to Use It",
+        "hash": "when"
       }
     ],
     "keywords": []

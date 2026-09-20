@@ -81,6 +81,12 @@ const MlGans = lazy(() => import("./pages/MlGans"));
 const MlMamba = lazy(() => import("./pages/MlMamba"));
 const MlRwkv = lazy(() => import("./pages/MlRwkv"));
 const GenAiPeft = lazy(() => import("./pages/GenAiPeft"));
+const GenAiLora = lazy(() => import("./pages/GenAiLora"));
+const GenAiQlora = lazy(() => import("./pages/GenAiQlora"));
+const GenAiDora = lazy(() => import("./pages/GenAiDora"));
+const GenAiPrefixTuning = lazy(() => import("./pages/GenAiPrefixTuning"));
+const GenAiIa3 = lazy(() => import("./pages/GenAiIa3"));
+const GenAiAdapterLayers = lazy(() => import("./pages/GenAiAdapterLayers"));
 const GenAiDistillation = lazy(() => import("./pages/GenAiDistillation"));
 const GenAiTokenization = lazy(() => import("./pages/GenAiTokenization"));
 const RagCompression = lazy(() => import("./pages/RagCompression"));
@@ -194,6 +200,12 @@ function App() {
         <Route path="/genai/quantization" element={<GenAiQuantization />} />
         <Route path="/genai/agi" element={<GenAiAgi />} />
         <Route path="/genai/peft" element={<GenAiPeft />} />
+        <Route path="/genai/peft/lora" element={<GenAiLora />} />
+        <Route path="/genai/peft/qlora" element={<GenAiQlora />} />
+        <Route path="/genai/peft/dora" element={<GenAiDora />} />
+        <Route path="/genai/peft/prefix-tuning" element={<GenAiPrefixTuning />} />
+        <Route path="/genai/peft/ia3" element={<GenAiIa3 />} />
+        <Route path="/genai/peft/adapters" element={<GenAiAdapterLayers />} />
         <Route path="/genai/distillation" element={<GenAiDistillation />} />
         <Route path="/genai/tokenization" element={<GenAiTokenization />} />
         
