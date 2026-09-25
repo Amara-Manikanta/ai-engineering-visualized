@@ -93,7 +93,7 @@ function FrameworkExplorer() {
               }`}
             >
               <div className="text-xl mb-1">{f.icon}</div>
-              <div className={`text-[11px] font-semibold leading-tight ${isActive ? f.text : 'text-gray-400'}`}>
+              <div className={`text-[0.6875rem] font-semibold leading-tight ${isActive ? f.text : 'text-gray-400'}`}>
                 {f.name}
               </div>
             </motion.button>
@@ -116,17 +116,17 @@ function FrameworkExplorer() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div className="p-4 rounded-xl bg-black/30 border border-emerald-500/20">
-              <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1.5">Strength</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1.5">Strength</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{active.strength}</p>
             </div>
             <div className="p-4 rounded-xl bg-black/30 border border-rose-500/20">
-              <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1.5">Tradeoff</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1.5">Tradeoff</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{active.weakness}</p>
             </div>
           </div>
 
           <div className="p-3.5 rounded-xl bg-black/30 border border-white/10">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Reach for it when</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Reach for it when</div>
             <div className="text-xs text-gray-300 leading-relaxed">{active.pick}</div>
           </div>
         </motion.div>
@@ -218,7 +218,7 @@ function PipelineCode() {
             }`}
           >
             <div className="text-sm font-semibold">{t.label}</div>
-            <div className="text-[10px] opacity-70">{t.sub}</div>
+            <div className="text-[0.625rem] opacity-70">{t.sub}</div>
           </button>
         ))}
       </div>
@@ -395,7 +395,7 @@ export default function RagDevelopment() {
                 <div className="space-y-2.5">
                   {c.rows.map(([k, v]) => (
                     <div key={k} className="flex flex-col sm:flex-row sm:gap-3">
-                      <span className="text-[10px] uppercase tracking-wide text-gray-500 sm:w-32 shrink-0 pt-0.5">
+                      <span className="text-[0.625rem] uppercase tracking-wide text-gray-500 sm:w-32 shrink-0 pt-0.5">
                         {k}
                       </span>
                       <span className="text-xs text-gray-300 leading-relaxed">{v}</span>

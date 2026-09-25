@@ -44,7 +44,7 @@ function Trace({ values, color, label, zeroLine = false }) {
   const d = values.map((v, i) => `${i ? "L" : "M"}${px(i)},${py(v)}`).join(" ");
   return (
     <div className="rounded-xl bg-black/50 border border-white/10 p-2 mb-2">
-      <div className="text-[10px] uppercase tracking-wide text-gray-500 px-2 pt-1">{label}</div>
+      <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 px-2 pt-1">{label}</div>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto">
         <line x1={PAD} y1={py(0)} x2={W - PAD} y2={py(0)} stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
         <path d={d} fill="none" stroke={color} strokeWidth="2.2" />
@@ -115,23 +115,23 @@ function RecurrencePanel() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Ā = exp(ΔA)</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Ā = exp(ΔA)</div>
           <div className="text-2xl font-bold font-mono text-emerald-300">{Abar.toFixed(4)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">state kept per step</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">state kept per step</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Memory span</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Memory span</div>
           <div className="text-2xl font-bold font-mono text-gray-300">
             {Number.isFinite(halfLife) ? Math.round(halfLife) : "∞"}
           </div>
-          <div className="text-[11px] text-gray-600 mt-1">steps until 1% remains</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">steps until 1% remains</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Still present at t=39</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Still present at t=39</div>
           <div className="text-2xl font-bold font-mono text-amber-300">
             {peak > 0 ? ((atEnd / peak) * 100).toFixed(2) : "0.00"}%
           </div>
-          <div className="text-[11px] text-gray-600 mt-1">of the spike's peak</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">of the spike's peak</div>
         </div>
       </div>
 
@@ -225,10 +225,10 @@ function SelectivityPanel() {
             >
               {tok}
             </span>
-            <span className="w-14 shrink-0 text-right font-mono text-[10px] text-gray-600">
+            <span className="w-14 shrink-0 text-right font-mono text-[0.625rem] text-gray-600">
               Δ={result.deltas[i].toFixed(2)}
             </span>
-            <span className="w-16 shrink-0 text-right font-mono text-[10px] text-gray-600">
+            <span className="w-16 shrink-0 text-right font-mono text-[0.625rem] text-gray-600">
               keep {(result.keeps[i] * 100).toFixed(0)}%
             </span>
             <div className="flex-1 h-4 bg-black/40 rounded border border-white/5 overflow-hidden">
@@ -242,13 +242,13 @@ function SelectivityPanel() {
       </div>
 
       <div className="p-4 rounded-xl bg-black/40 border border-white/10 mb-4">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">
           "hunter2" still in the state when the question arrives
         </div>
         <div className={`text-3xl font-bold font-mono ${selective ? "text-emerald-300" : "text-rose-300"}`}>
           {(result.retained * 100).toFixed(1)}%
         </div>
-        <div className="text-[11px] text-gray-600 mt-1">of what that token originally wrote, 13 steps later</div>
+        <div className="text-[0.6875rem] text-gray-600 mt-1">of what that token originally wrote, 13 steps later</div>
       </div>
 
       <div
@@ -353,9 +353,9 @@ function ComplexityPanel() {
       </div>
 
       <div className="mt-4 p-4 rounded-xl bg-black/40 border border-white/10">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Ratio at this length</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Ratio at this length</div>
         <div className="text-3xl font-bold font-mono text-amber-300">{(attnOps / ssmOps).toFixed(0)}×</div>
-        <div className="text-[11px] text-gray-600 mt-1">
+        <div className="text-[0.6875rem] text-gray-600 mt-1">
           more attention operations than scan operations, and the gap doubles every time you double the sequence
         </div>
       </div>

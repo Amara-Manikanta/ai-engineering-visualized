@@ -232,7 +232,7 @@ export default function AzureIdentity() {
 
             {/* Right: Target */}
             <div className="bg-[#1a1a1a] border border-emerald-500/30 p-4 rounded-xl shrink-0 w-48 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded-bl">Secure Access</div>
+              <div className="absolute top-0 right-0 bg-emerald-500/20 text-emerald-400 text-[0.625rem] px-2 py-0.5 rounded-bl">Secure Access</div>
               <div className="flex flex-col gap-3 mt-4">
                 <div className="flex items-center gap-2 text-sm text-gray-300"><Cloud size={16} className="text-blue-400"/> Azure Portal</div>
                 <div className="flex items-center gap-2 text-sm text-gray-300"><Server size={16} className="text-purple-400"/> VM / AKS</div>

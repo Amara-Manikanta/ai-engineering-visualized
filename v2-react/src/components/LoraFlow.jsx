@@ -101,7 +101,7 @@ export default function LoraFlow({ d = 4096, k = 4096, rank = 8 }) {
               setPlaying(false);
               setI(idx);
             }}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors ${
+            className={`px-2.5 py-1 rounded-md text-[0.6875rem] font-medium border transition-colors ${
               idx === i
                 ? "border-indigo-500/50 bg-indigo-500/20 text-indigo-200"
                 : idx < i
@@ -219,27 +219,27 @@ export default function LoraFlow({ d = 4096, k = 4096, rank = 8 }) {
       </div>
 
       <div className="p-4 rounded-xl bg-black/40 border border-white/10 mb-4 min-h-[68px]">
-        <div className="text-[10px] uppercase tracking-wide text-indigo-400 mb-1.5">{step.label}</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-indigo-400 mb-1.5">{step.label}</div>
         <p className="text-sm text-gray-300 leading-relaxed m-0">{step.say}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Full matrix W₀</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Full matrix W₀</div>
           <div className="text-xl font-bold font-mono text-gray-300">{stats.full.toLocaleString()}</div>
-          <div className="text-[11px] text-gray-600 mt-1">{d} × {k} parameters</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{d} × {k} parameters</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Adapter A + B</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Adapter A + B</div>
           <div className="text-xl font-bold font-mono text-emerald-300">{stats.lora.toLocaleString()}</div>
-          <div className="text-[11px] text-gray-600 mt-1">
+          <div className="text-[0.6875rem] text-gray-600 mt-1">
             {rank}×{d} + {rank}×{k}
           </div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-amber-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-1">Reduction</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-1">Reduction</div>
           <div className="text-xl font-bold font-mono text-amber-300">{stats.saved.toFixed(2)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">trains {stats.pct.toFixed(2)}% of the layer</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">trains {stats.pct.toFixed(2)}% of the layer</div>
         </div>
       </div>
     </div>

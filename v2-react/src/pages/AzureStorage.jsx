@@ -188,9 +188,9 @@ export default function AzureStorage() {
               </div>
               <ArrowRightLeft className="text-gray-600" />
               <div className="flex flex-col gap-2">
-                <div className="bg-red-500/20 text-red-400 text-[10px] font-bold px-2 py-0.5 rounded text-center border border-red-500/30">Hot</div>
-                <div className="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded text-center border border-blue-500/30">Cool</div>
-                <div className="bg-cyan-500/20 text-cyan-400 text-[10px] font-bold px-2 py-0.5 rounded text-center border border-cyan-500/30">Archive</div>
+                <div className="bg-red-500/20 text-red-400 text-[0.625rem] font-bold px-2 py-0.5 rounded text-center border border-red-500/30">Hot</div>
+                <div className="bg-blue-500/20 text-blue-400 text-[0.625rem] font-bold px-2 py-0.5 rounded text-center border border-blue-500/30">Cool</div>
+                <div className="bg-cyan-500/20 text-cyan-400 text-[0.625rem] font-bold px-2 py-0.5 rounded text-center border border-cyan-500/30">Archive</div>
               </div>
             </div>
             

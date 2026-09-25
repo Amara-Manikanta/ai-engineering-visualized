@@ -50,13 +50,13 @@ function AsyncTimelineVisual() {
           const widthPct = (2 / total) * 100;
           return (
             <div key={c.name} className="flex items-center gap-3">
-              <span className="text-[11px] font-mono text-gray-400 w-24 shrink-0">{c.name}</span>
+              <span className="text-[0.6875rem] font-mono text-gray-400 w-24 shrink-0">{c.name}</span>
               <div className="flex-1 h-7 rounded bg-white/5 relative overflow-hidden">
                 <div
                   className={`absolute top-0 bottom-0 ${c.tone} opacity-70 rounded flex items-center justify-center transition-all duration-500`}
                   style={{ left: `${startPct}%`, width: `${widthPct}%` }}
                 >
-                  <span className="text-[9px] font-bold text-black/70">waiting on network</span>
+                  <span className="text-[0.5625rem] font-bold text-black/70">waiting on network</span>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@ function AsyncTimelineVisual() {
       {/* axis */}
       <div className="flex items-center gap-3 mb-4">
         <span className="w-24 shrink-0" />
-        <div className="flex-1 flex justify-between text-[9px] font-mono text-gray-600 border-t border-gray-800 pt-1">
+        <div className="flex-1 flex justify-between text-[0.5625rem] font-mono text-gray-600 border-t border-gray-800 pt-1">
           {Array.from({ length: total + 1 }).map((_, i) => (
             <span key={i}>{i}s</span>
           ))}
@@ -80,10 +80,10 @@ function AsyncTimelineVisual() {
           : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-200'
       }`}>
         total: {total}s
-        {!isSeq && <span className="text-[11px] opacity-70 ml-2">— 3× faster, same code count</span>}
+        {!isSeq && <span className="text-[0.6875rem] opacity-70 ml-2">— 3× faster, same code count</span>}
       </div>
 
-      <p className="text-[11px] text-gray-400 leading-relaxed mt-3 mb-0">
+      <p className="text-[0.6875rem] text-gray-400 leading-relaxed mt-3 mb-0">
         {isSeq
           ? 'Each await blocks until its call returns before the next one starts. The CPU sits idle the whole time — it is waiting on the network, not computing.'
           : 'All three requests are in flight at once. Async does not make any single call faster; it stops you from idling while one waits. This only helps for I/O-bound work.'}
@@ -138,7 +138,7 @@ export default function PythonToolingAsync() {
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 39_pathlib.py</span>
             <span>Python 3.11</span>
           </div>
@@ -151,8 +151,8 @@ base_dir.mkdir(exist_ok=True)
 file_path.write_text('{"status": "ready"}')
 
 print("Path Exists:", file_path.exists())`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Path Exists: True</code>
           </div>
         </div>
@@ -175,7 +175,7 @@ print("Path Exists:", file_path.exists())`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 40_file_io.py</span>
             <span>Python 3.11</span>
           </div>
@@ -188,8 +188,8 @@ with open("log.txt", "r") as f:
     lines = f.readlines()
 
 print("Line Count:", len(lines))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Line Count: 2</code>
           </div>
         </div>
@@ -212,7 +212,7 @@ print("Line Count:", len(lines))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 41_imports.py</span>
             <span>Python 3.11</span>
           </div>
@@ -223,8 +223,8 @@ now = datetime.now()
 val = m.sqrt(16)
 
 print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Sqrt: 4.0, Date: 2026-08-04</code>
           </div>
         </div>
@@ -299,7 +299,7 @@ print(f"Sqrt: {val}, Date: {now.strftime('%Y-%m-%d')}")`}</CodeSnippet>
         </motion.div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><Terminal size={12} /> Terminal Commands</span>
             <span>Virtual Environment Setup</span>
           </div>
@@ -313,8 +313,8 @@ $ source .venv/bin/activate        # macOS/Linux
 # 3. Install AI Dependencies & Secure Secrets
 $ pip install openai langchain python-dotenv
 $ pip freeze > requirements.txt`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Successfully installed openai-1.12.0 langchain-0.1.0 python-dotenv-1.0.0</code>
           </div>
         </div>
@@ -337,7 +337,7 @@ $ pip freeze > requirements.txt`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 44_api_requests.py</span>
             <span>Python 3.11</span>
           </div>
@@ -349,8 +349,8 @@ payload = {"prompt": "Explain RAG"}
 
 res = requests.post(url, json=payload, headers=headers, timeout=5)
 print("Status Code:", res.status_code)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Status Code: 200</code>
           </div>
         </div>
@@ -373,7 +373,7 @@ print("Status Code:", res.status_code)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 45_json.py</span>
             <span>Python 3.11</span>
           </div>
@@ -383,8 +383,8 @@ json_text = '{"name": "GPT-4o", "tokens": 128000}'
 data = json.loads(json_text)
 
 print("Parsed Name:", data["name"])`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Parsed Name: GPT-4o</code>
           </div>
         </div>
@@ -407,7 +407,7 @@ print("Parsed Name:", data["name"])`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 46_yaml.py</span>
             <span>Python 3.11</span>
           </div>
@@ -422,8 +422,8 @@ services:
 
 cfg = yaml.safe_load(yaml_text)
 print("Image:", cfg["services"]["app"]["image"])`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Image: python:3.11</code>
           </div>
         </div>
@@ -446,7 +446,7 @@ print("Image:", cfg["services"]["app"]["image"])`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 47_async_basics.py</span>
             <span>Python 3.11</span>
           </div>
@@ -461,8 +461,8 @@ async def main():
     print("Received:", token)
 
 asyncio.run(main())`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Received: token_sec_99</code>
           </div>
         </div>
@@ -487,7 +487,7 @@ asyncio.run(main())`}</CodeSnippet>
         <AsyncTimelineVisual />
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 48_async_gather.py</span>
             <span>Python 3.11</span>
           </div>
@@ -503,8 +503,8 @@ async def main():
     print("Parallel Batch:", results)
 
 asyncio.run(main())`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Parallel Batch: ['Response 0', 'Response 1', 'Response 2']</code>
           </div>
         </div>
@@ -532,7 +532,7 @@ asyncio.run(main())`}</CodeSnippet>
 
         <div className="bg-amber-950/20 border border-amber-500/30 p-4 rounded-xl mb-4">
           <div className="text-amber-300 font-bold text-xs mb-1.5">🔒 The GIL (Global Interpreter Lock)</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             CPython allows only <strong className="text-gray-100">one thread to execute Python bytecode at a time</strong>.
             Threads still help for I/O, because the GIL is released while a thread waits on the network — but they buy
             you nothing for pure computation, since only one can run regardless of how many cores you have. That single
@@ -578,7 +578,7 @@ asyncio.run(main())`}</CodeSnippet>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-orange-400"><FileCode size={12} /> 50_concurrency.py</span>
             <span>Python 3.11</span>
           </div>
@@ -600,8 +600,8 @@ with ProcessPoolExecutor() as pool:
 
 # WRONG: threads for CPU work. The GIL serializes them, and you pay
 # context-switching overhead on top -> often SLOWER than one thread.`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Rule of thumb:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Rule of thumb:</div>
             <code>Waiting? → asyncio. &nbsp; Computing? → multiprocessing.</code>
           </div>
         </div>
@@ -634,13 +634,13 @@ with ProcessPoolExecutor() as pool:
           ].map((c) => (
             <div key={c.t} className={`p-3.5 rounded-xl border ${c.tone}`}>
               <div className={`text-xs font-bold mb-1 ${c.label}`}>{c.t}</div>
-              <p className="text-[11px] text-gray-300 leading-relaxed m-0">{c.d}</p>
+              <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">{c.d}</p>
             </div>
           ))}
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 51_rate_limit.py</span>
             <span>Python 3.11</span>
           </div>
@@ -667,8 +667,8 @@ async def main(prompts):
         return await asyncio.gather(
             *(call_with_limit(client, p) for p in prompts)
         )`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Note:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Note:</div>
             <code>Use return_exceptions=True in gather() so one failure doesn't cancel the rest.</code>
           </div>
         </div>
@@ -693,7 +693,7 @@ async def main(prompts):
         </p>
 
         <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-4 mb-4">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-3">Levels, least to most severe</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-3">Levels, least to most severe</div>
           <div className="space-y-1.5">
             {[
               { l: 'DEBUG', d: 'Diagnostic detail. Off in production.', c: 'bg-gray-500', w: 20 },
@@ -703,18 +703,18 @@ async def main(prompts):
               { l: 'CRITICAL', d: 'The application itself cannot continue.', c: 'bg-rose-500', w: 100 },
             ].map((lv) => (
               <div key={lv.l} className="flex items-center gap-3">
-                <span className="text-[10px] font-mono font-bold text-gray-300 w-16 shrink-0">{lv.l}</span>
+                <span className="text-[0.625rem] font-mono font-bold text-gray-300 w-16 shrink-0">{lv.l}</span>
                 <div className="w-24 h-2 rounded bg-white/5 overflow-hidden shrink-0">
                   <div className={`h-full ${lv.c} opacity-70`} style={{ width: `${lv.w}%` }} />
                 </div>
-                <span className="text-[11px] text-gray-400">{lv.d}</span>
+                <span className="text-[0.6875rem] text-gray-400">{lv.d}</span>
               </div>
             ))}
           </div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 52_logging.py</span>
             <span>Python 3.11</span>
           </div>
@@ -740,15 +740,15 @@ def embed(texts):
 
 # Silence a noisy dependency without touching your own log level
 logging.getLogger("httpx").setLevel(logging.WARNING)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Output:</div>
             <code>2026-08-06 14:22:01 INFO&nbsp;&nbsp;&nbsp;&nbsp; __main__: embedding 128 texts</code>
           </div>
         </div>
 
         <div className="bg-teal-950/20 border border-teal-500/30 p-4 rounded-xl mt-4">
           <div className="text-teal-300 font-bold text-xs mb-1.5">Two habits worth forming</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             Use <strong className="text-gray-100">lazy formatting</strong> — <code className="text-teal-200">log.info("got %s", x)</code>{' '}
             not an f-string — so the string is only built if that level is actually enabled. And never log secrets,
             prompts containing user PII, or full API responses; logs get shipped to third-party platforms and retained
@@ -773,7 +773,7 @@ logging.getLogger("httpx").setLevel(logging.WARNING)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> test_fixtures.py</span>
             <span>Python 3.11</span>
           </div>
@@ -786,8 +786,8 @@ def sample_vector():
 def test_vector_dim(sample_vector):
     assert len(sample_vector) == 3
     assert sample_vector[0] == 0.1`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>test_fixtures.py . [100%] PASSED</code>
           </div>
         </div>
@@ -810,7 +810,7 @@ def test_vector_dim(sample_vector):
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> test_parametrize.py</span>
             <span>Python 3.11</span>
           </div>
@@ -825,8 +825,8 @@ def test_mock_api():
     mock_client = MagicMock()
     mock_client.generate.return_value = "Mocked Response"
     assert mock_client.generate("prompt") == "Mocked Response"`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>test_parametrize.py .... [100%] PASSED</code>
           </div>
         </div>

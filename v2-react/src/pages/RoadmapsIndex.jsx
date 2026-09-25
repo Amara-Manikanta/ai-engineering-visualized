@@ -181,7 +181,7 @@ export default function RoadmapsIndex() {
                 <span className="text-lg">{p.emoji}</span>
                 <span className={`font-bold text-sm ${on ? p.accent.text : "text-gray-300"}`}>{p.name}</span>
               </div>
-              <div className="text-[10px] text-gray-500 mb-2.5">{p.tagline}</div>
+              <div className="text-[0.625rem] text-gray-500 mb-2.5">{p.tagline}</div>
               <div className="h-1.5 rounded-full bg-black/40 overflow-hidden">
                 <motion.div
                   className={`h-full ${p.accent.dot}`}
@@ -189,7 +189,7 @@ export default function RoadmapsIndex() {
                   transition={{ type: "spring", stiffness: 80, damping: 18 }}
                 />
               </div>
-              <div className="text-[10px] text-gray-500 mt-1.5 font-mono">
+              <div className="text-[0.625rem] text-gray-500 mt-1.5 font-mono">
                 {c}/{p.steps.length} done
               </div>
             </button>
@@ -208,7 +208,7 @@ export default function RoadmapsIndex() {
             {completed > 0 && (
               <button
                 onClick={() => resetPath(path)}
-                className="text-[11px] px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:border-white/30 transition-colors"
+                className="text-[0.6875rem] px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:border-white/30 transition-colors"
               >
                 ↺ Reset path
               </button>
@@ -259,7 +259,7 @@ export default function RoadmapsIndex() {
                       >
                         {s.t}
                       </Link>
-                      <span className="text-[10px] font-mono text-gray-600">{s.p}</span>
+                      <span className="text-[0.625rem] font-mono text-gray-600">{s.p}</span>
                     </div>
                     <p className="text-xs text-gray-400 leading-relaxed m-0">{s.why}</p>
                   </div>

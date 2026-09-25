@@ -178,7 +178,7 @@ export default function AzureInfrastructure() {
 
               {/* Geo-Replication Arrow */}
               <div className="flex flex-col items-center justify-center h-full pt-20">
-                <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-2">Geo-Replication</div>
+                <div className="text-[0.625rem] text-gray-500 uppercase tracking-wider mb-2">Geo-Replication</div>
                 <div className="flex items-center text-gray-600">
                   <ArrowRightLeft className="w-4 h-4 mr-2" />
                   <div className="w-16 border-b border-dashed border-gray-600"></div>

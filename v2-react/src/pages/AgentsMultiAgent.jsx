@@ -189,14 +189,14 @@ function CostVisual() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, type: 'spring', stiffness: 60 }}
               >
-                <span className="text-[10px] font-bold text-black/70">≈{r.mult}×</span>
+                <span className="text-[0.625rem] font-bold text-black/70">≈{r.mult}×</span>
               </motion.div>
             </div>
-            <span className="text-[10px] text-gray-600 w-40 shrink-0 hidden sm:block">{r.note}</span>
+            <span className="text-[0.625rem] text-gray-600 w-40 shrink-0 hidden sm:block">{r.note}</span>
           </div>
         ))}
       </div>
-      <p className="text-[11px] text-gray-500 mt-4 leading-relaxed mb-0">
+      <p className="text-[0.6875rem] text-gray-500 mt-4 leading-relaxed mb-0">
         Rough token-cost multipliers relative to one agent doing the task. The multiplier is not just "more agents" —
         it is that <strong className="text-gray-300">every agent re-reads shared context</strong>. A debate pattern
         where three agents each read the others' answers grows superlinearly. Measure cost per resolved task, not per
@@ -311,7 +311,7 @@ export default function AgentsMultiAgent() {
               <PatternDiagram id={active} />
             </div>
             <div className="mb-5 p-3.5 rounded-lg bg-white/5 border border-white/10">
-              <span className="text-[10px] uppercase tracking-wide text-gray-500 mr-2">Use when</span>
+              <span className="text-[0.625rem] uppercase tracking-wide text-gray-500 mr-2">Use when</span>
               <span className="text-sm text-gray-300">{current.when}</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -388,7 +388,7 @@ export default function AgentsMultiAgent() {
             <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-5">
               <h3 className="font-bold text-gray-200 mb-2">{c.title}</h3>
               <p className="text-sm text-gray-400 mb-3">{c.desc}</p>
-              <div className="text-[11px] text-indigo-300 bg-black/30 rounded px-2.5 py-1.5 border border-indigo-500/20">
+              <div className="text-[0.6875rem] text-indigo-300 bg-black/30 rounded px-2.5 py-1.5 border border-indigo-500/20">
                 Best for: {c.best}
               </div>
             </div>
@@ -485,7 +485,7 @@ app.invoke({"messages": [...]}, config={"recursion_limit": 15})`} />
             <motion.div key={i} variants={fadeUp} className="bg-rose-900/10 border border-rose-500/20 rounded-lg p-4">
               <h4 className="text-rose-400 font-semibold mb-1">{f.title}</h4>
               <p className="text-sm text-gray-400 mb-2.5">{f.desc}</p>
-              <div className="text-[11px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/25 rounded px-2.5 py-1.5">
+              <div className="text-[0.6875rem] text-emerald-300 bg-emerald-500/10 border border-emerald-500/25 rounded px-2.5 py-1.5">
                 → {f.fix}
               </div>
             </motion.div>

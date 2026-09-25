@@ -68,8 +68,8 @@ function MetricsPlayground() {
           transition={{ type: 'spring', stiffness: 120, damping: 18 }}
         />
       </div>
-      <div className="text-[10px] font-mono text-gray-400 mb-1.5">{formula}</div>
-      <div className="text-[11px] text-gray-400 leading-relaxed">{explain}</div>
+      <div className="text-[0.625rem] font-mono text-gray-400 mb-1.5">{formula}</div>
+      <div className="text-[0.6875rem] text-gray-400 leading-relaxed">{explain}</div>
     </div>
   );
 
@@ -103,7 +103,7 @@ function MetricsPlayground() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-5">
         {/* Ranked list */}
         <div>
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">Retrieved, in rank order</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">Retrieved, in rank order</div>
           <div className="space-y-1.5">
             {docs.map((d, i) => {
               const inTopK = i < k;
@@ -117,7 +117,7 @@ function MetricsPlayground() {
                       : 'bg-white/5 border-white/10 hover:border-white/25'
                   } ${inTopK ? '' : 'opacity-35'}`}
                 >
-                  <span className="text-[10px] font-mono text-gray-500 w-4 shrink-0">{i + 1}</span>
+                  <span className="text-[0.625rem] font-mono text-gray-500 w-4 shrink-0">{i + 1}</span>
                   <span className={`text-sm shrink-0 ${d.relevant ? 'text-emerald-400' : 'text-gray-600'}`}>
                     {d.relevant ? '✓' : '○'}
                   </span>
@@ -125,16 +125,16 @@ function MetricsPlayground() {
                     <span className={`block text-xs truncate ${d.relevant ? 'text-emerald-100' : 'text-gray-400'}`}>
                       {d.title}
                     </span>
-                    <span className="block text-[10px] font-mono text-gray-600">{d.id}</span>
+                    <span className="block text-[0.625rem] font-mono text-gray-600">{d.id}</span>
                   </span>
                   {!inTopK && (
-                    <span className="text-[9px] uppercase tracking-wide text-gray-600 shrink-0">below k</span>
+                    <span className="text-[0.5625rem] uppercase tracking-wide text-gray-600 shrink-0">below k</span>
                   )}
                 </button>
               );
             })}
           </div>
-          <div className="mt-3 text-[11px] text-gray-500 leading-relaxed">
+          <div className="mt-3 text-[0.6875rem] text-gray-500 leading-relaxed">
             Assume <strong className="text-gray-300">{TOTAL_RELEVANT_IN_CORPUS} relevant documents</strong> exist in the
             corpus overall. That number is what makes recall computable — and why you need a labelled dataset to
             measure it honestly.
@@ -176,7 +176,7 @@ function MetricsPlayground() {
 
       <div className="mt-5 p-4 rounded-xl border border-white/10 bg-white/5">
         <div className="text-xs font-semibold text-white mb-1.5">Try this</div>
-        <p className="text-[11px] text-gray-400 leading-relaxed m-0">
+        <p className="text-[0.6875rem] text-gray-400 leading-relaxed m-0">
           Mark only <span className="font-mono text-gray-300">doc_77</span> (rank 6) as relevant, then set k=5.
           Precision and recall both collapse to zero even though the retriever <em>did</em> surface the right document —
           it just ranked it one position too low. That single scenario is why you tune <em>k</em> and why re-ranking
@@ -298,7 +298,7 @@ function RagasTriangle() {
                   x={x}
                   y={y + 4}
                   textAnchor="middle"
-                  className="text-[11px] font-semibold"
+                  className="text-[0.6875rem] font-semibold"
                   fill={on ? '#fff' : '#8b8b8b'}
                 >
                   {key === 'question' ? 'Question' : key === 'context' ? 'Context' : 'Answer'}
@@ -307,7 +307,7 @@ function RagasTriangle() {
             );
           })}
         </svg>
-        <p className="text-[11px] text-gray-500 text-center mt-3 mb-0 leading-relaxed">
+        <p className="text-[0.6875rem] text-gray-500 text-center mt-3 mb-0 leading-relaxed">
           Every RAGAS metric measures the relationship between <strong className="text-gray-300">two</strong> of these
           three. That's the whole framework.
         </p>
@@ -343,7 +343,7 @@ function RagasTriangle() {
             <div className="text-sm text-gray-200 italic mb-3">"{active.q}"</div>
             <p className="text-xs text-gray-300 leading-relaxed mb-3">{active.detail}</p>
             <div className="p-3 rounded-lg bg-black/30 border border-white/10">
-              <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">If the score is low</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">If the score is low</div>
               <div className="text-xs text-gray-300 leading-relaxed">{active.fix}</div>
             </div>
           </motion.div>
@@ -416,7 +416,7 @@ export default function RagEvaluation() {
                 Did we find the right chunks? Measured with classic search metrics — precision, recall, MRR, NDCG —
                 against a labelled set of question/document pairs.
               </p>
-              <div className="text-[11px] text-blue-300 bg-black/30 rounded px-2.5 py-1.5 border border-blue-500/20">
+              <div className="text-[0.6875rem] text-blue-300 bg-black/30 rounded px-2.5 py-1.5 border border-blue-500/20">
                 Fix with: chunking, hybrid search, re-ranking
               </div>
             </div>
@@ -426,7 +426,7 @@ export default function RagEvaluation() {
                 Given the chunks we found, did the model write a good answer? Measured with LLM-graded metrics —
                 faithfulness, answer relevancy — via frameworks like RAGAS or TruLens.
               </p>
-              <div className="text-[11px] text-amber-300 bg-black/30 rounded px-2.5 py-1.5 border border-amber-500/20">
+              <div className="text-[0.6875rem] text-amber-300 bg-black/30 rounded px-2.5 py-1.5 border border-amber-500/20">
                 Fix with: prompting, model choice, output constraints
               </div>
             </div>
@@ -571,10 +571,10 @@ export default function RagEvaluation() {
                 className="flex flex-col sm:flex-row gap-3 p-4 rounded-xl border border-white/10 bg-white/5"
               >
                 <div className="flex sm:flex-col items-center sm:items-start gap-2 shrink-0 sm:w-24">
-                  <span className="w-6 h-6 rounded-full bg-black/40 border border-white/15 flex items-center justify-center text-[11px] font-bold text-gray-400 shrink-0">
+                  <span className="w-6 h-6 rounded-full bg-black/40 border border-white/15 flex items-center justify-center text-[0.6875rem] font-bold text-gray-400 shrink-0">
                     {f.n}
                   </span>
-                  <span className={`text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border ${STAGE_TONE[f.stage]}`}>
+                  <span className={`text-[0.5625rem] font-bold uppercase tracking-wide px-2 py-0.5 rounded border ${STAGE_TONE[f.stage]}`}>
                     {f.stage}
                   </span>
                 </div>
@@ -583,7 +583,7 @@ export default function RagEvaluation() {
                   <p className="text-xs text-gray-400 leading-relaxed m-0">{f.desc}</p>
                 </div>
                 <div className="sm:w-52 shrink-0 flex items-center">
-                  <div className="text-[11px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/25 rounded px-2.5 py-1.5 w-full">
+                  <div className="text-[0.6875rem] text-emerald-300 bg-emerald-500/10 border border-emerald-500/25 rounded px-2.5 py-1.5 w-full">
                     → {f.fix}
                   </div>
                 </div>

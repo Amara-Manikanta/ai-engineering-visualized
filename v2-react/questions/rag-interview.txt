@@ -1,0 +1,21 @@
+# RAG Interview Questions
+
+Q: Your RAG system gives wrong answers. What do you measure first, and why?
+ANSWER: Retrieval quality on its own — for example recall at k against a small
+labelled set. End-to-end answer quality cannot tell you whether retrieval missed
+the right document or generation ignored it, and those have completely different
+fixes. Separate the two before changing anything.
+
+Q: When would you choose fine-tuning over RAG?
+ANSWER: When the model already has the knowledge but behaves wrongly — format,
+tone, domain conventions, structured output. RAG is for facts the model lacks,
+especially facts that change or must be cited. Many systems use both: RAG for
+knowledge, fine-tuning for behaviour.
+
+Q: Why combine dense vector search with keyword (BM25) search?
+- Keyword search is always more accurate
+* Dense search captures meaning but misses exact identifiers; keyword search catches them
+- It halves the index size
+- Vector databases cannot store text
+WHY: Embeddings blur rare tokens like product codes and error IDs. Hybrid search
+fuses both rankings so each covers the other's blind spot.

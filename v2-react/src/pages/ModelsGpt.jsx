@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -36,8 +37,10 @@ export default function ModelsGpt() {
 
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -57,26 +60,10 @@ export default function ModelsGpt() {
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Tier</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best For</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Tradeoff</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Flagship (e.g. GPT-5)</td><td className="px-4 py-2.5 border-b border-gray-900">Complex reasoning, agentic tool use, coding</td><td className="px-4 py-2.5 border-b border-gray-900">Highest cost & latency</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Mini / Small</td><td className="px-4 py-2.5 border-b border-gray-900">High-volume chat, summarization</td><td className="px-4 py-2.5 border-b border-gray-900">Weaker multi-step reasoning</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Nano / Turbo</td><td className="px-4 py-2.5 border-b border-gray-900">Classification, extraction, latency-critical</td><td className="px-4 py-2.5 border-b border-gray-900">Limited reasoning depth</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Reasoning (o-series)</td><td className="px-4 py-2.5 border-b border-gray-900">Math, science, deep chain-of-thought</td><td className="px-4 py-2.5 border-b border-gray-900">Slower, thinks before answering</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <ModelLineup id="gpt" />
+
+      <ModelWeights id="gpt" />
+
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>
@@ -94,6 +81,8 @@ export default function ModelsGpt() {
           ))}
         </div>
       </section>
+
+      <ModelPipeline id="gpt" name="GPT" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How GPT Models Are Trained</h2>
@@ -215,10 +204,10 @@ export default function ModelsGpt() {
                 transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
                 className="w-36 h-36 border-4 border-dashed border-emerald-500/30 rounded-full flex items-center justify-center relative"
               >
-                <div className="absolute top-0 -translate-y-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap">Predict</div>
-                <div className="absolute right-0 translate-x-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap">Compare</div>
-                <div className="absolute bottom-0 translate-y-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap">Loss</div>
-                <div className="absolute left-0 -translate-x-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-bold whitespace-nowrap">Adjust</div>
+                <div className="absolute top-0 -translate-y-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[0.625rem] font-bold whitespace-nowrap">Predict</div>
+                <div className="absolute right-0 translate-x-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[0.625rem] font-bold whitespace-nowrap">Compare</div>
+                <div className="absolute bottom-0 translate-y-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[0.625rem] font-bold whitespace-nowrap">Loss</div>
+                <div className="absolute left-0 -translate-x-1/2 bg-[#0a0a0a] border border-emerald-500/50 text-emerald-300 px-2 py-0.5 rounded-full text-[0.625rem] font-bold whitespace-nowrap">Adjust</div>
                 <div className="w-14 h-14 bg-emerald-500/20 rounded-full flex items-center justify-center text-2xl blur-[1px]">🎯</div>
               </motion.div>
             </div>

@@ -98,7 +98,7 @@ function WkvPanel() {
               >
                 {tok}
               </span>
-              <span className="w-20 shrink-0 text-right font-mono text-[10px] text-gray-600">
+              <span className="w-20 shrink-0 text-right font-mono text-[0.625rem] text-gray-600">
                 {i === t ? `u+k=${(u + KEYS[i]).toFixed(2)}` : `−${t - 1 - i}w+k`}
               </span>
               <div className="flex-1 h-5 bg-black/40 rounded border border-white/5 overflow-hidden">
@@ -109,7 +109,7 @@ function WkvPanel() {
                   style={{ width: `${Math.max((norm[i] / maxW) * 100, 0.5)}%` }}
                 />
               </div>
-              <span className="w-14 shrink-0 text-right font-mono text-[10px] text-gray-400">
+              <span className="w-14 shrink-0 text-right font-mono text-[0.625rem] text-gray-400">
                 {(norm[i] * 100).toFixed(1)}%
               </span>
             </div>
@@ -119,19 +119,19 @@ function WkvPanel() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-cyan-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-cyan-400 mb-1">wkv output</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-cyan-400 mb-1">wkv output</div>
           <div className="text-2xl font-bold font-mono text-cyan-300">{out.toFixed(4)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">weighted average of v</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">weighted average of v</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Weight on informative tokens</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Weight on informative tokens</div>
           <div className="text-2xl font-bold font-mono text-emerald-400">{(signal * 100).toFixed(1)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">"capital" + "France"</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">"capital" + "France"</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Effective window</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Effective window</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{Math.round(1 / w)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">≈ 1/w tokens before it fades</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">≈ 1/w tokens before it fades</div>
         </div>
       </div>
 
@@ -285,10 +285,10 @@ function ChannelDecay() {
           <div key={w} className="p-3 rounded-lg bg-black/40 border border-white/10">
             <div className="flex items-center gap-1.5 mb-1">
               <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: CHANNEL_COLOR[ci] }} />
-              <span className="text-[11px] font-mono text-gray-400">w={w}</span>
+              <span className="text-[0.6875rem] font-mono text-gray-400">w={w}</span>
             </div>
             <div className="text-sm font-bold font-mono text-gray-200">{Math.round(1 / w)}</div>
-            <div className="text-[10px] text-gray-600">token half-life</div>
+            <div className="text-[0.625rem] text-gray-600">token half-life</div>
           </div>
         ))}
       </div>
@@ -332,7 +332,7 @@ export default function MlRwkv() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="p-5 rounded-xl border border-rose-500/25 bg-rose-500/[0.07]">
             <div className="font-bold text-rose-400 mb-2">Attention</div>
-            <div className="font-mono text-[11px] text-gray-400 mb-2">weight(i,t) = softmax(qₜ·kᵢ)</div>
+            <div className="font-mono text-[0.6875rem] text-gray-400 mb-2">weight(i,t) = softmax(qₜ·kᵢ)</div>
             <p className="text-xs text-gray-300 leading-relaxed m-0">
               Depends on both positions, so nothing can be precomputed or accumulated. Every past key and value must
               be kept and re-read at each step.
@@ -340,7 +340,7 @@ export default function MlRwkv() {
           </div>
           <div className="p-5 rounded-xl border border-cyan-500/25 bg-cyan-500/[0.07]">
             <div className="font-bold text-cyan-400 mb-2">RWKV</div>
-            <div className="font-mono text-[11px] text-gray-400 mb-2">weight(i,t) = exp(−(t−1−i)·w + kᵢ)</div>
+            <div className="font-mono text-[0.6875rem] text-gray-400 mb-2">weight(i,t) = exp(−(t−1−i)·w + kᵢ)</div>
             <p className="text-xs text-gray-300 leading-relaxed m-0">
               Separates into a term for the past token and a decay in the gap. The sum telescopes, so two running
               numbers replace the entire history.
@@ -408,7 +408,7 @@ export default function MlRwkv() {
               Replaces attention. Computes the WKV weighted sum over history, then gates it with receptance. This is
               where information moves between positions.
             </p>
-            <div className="font-mono text-[11px] text-gray-500">out = σ(r) ⊙ wkv</div>
+            <div className="font-mono text-[0.6875rem] text-gray-500">out = σ(r) ⊙ wkv</div>
           </div>
           <div className="p-5 rounded-xl border border-purple-500/25 bg-purple-500/[0.07]">
             <div className="font-bold text-purple-400 mb-2">Channel-mixing</div>
@@ -416,7 +416,7 @@ export default function MlRwkv() {
               Replaces the feed-forward network. Mixes features within a position, with a squared-ReLU nonlinearity
               and its own receptance gate.
             </p>
-            <div className="font-mono text-[11px] text-gray-500">out = σ(r) ⊙ (W · ReLU(k)²)</div>
+            <div className="font-mono text-[0.6875rem] text-gray-500">out = σ(r) ⊙ (W · ReLU(k)²)</div>
           </div>
         </div>
         <div className="p-4 rounded-xl border border-white/10 bg-white/5">

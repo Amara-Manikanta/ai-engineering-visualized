@@ -56,14 +56,14 @@ export default function ModelBenchmarks() {
         <span className={`w-3 h-3 ${badgeColor} inline-block rounded-xs`}></span>
         {title}
       </h4>
-      <p className="text-[11px] text-gray-400 mb-6">{subtitle}</p>
+      <p className="text-[0.6875rem] text-gray-400 mb-6">{subtitle}</p>
       
       <div className="h-60 flex items-end gap-1.5 border-b border-gray-800 pb-1 relative pt-6">
         {data.map((d, i) => {
           const heightPercent = Math.max((d.value / maxVal) * 100, 3);
           return (
             <div key={i} className="flex-1 h-full flex flex-col justify-end items-center relative group">
-              <span className="text-[9px] font-semibold text-gray-300 mb-1 select-none whitespace-nowrap">
+              <span className="text-[0.5625rem] font-semibold text-gray-300 mb-1 select-none whitespace-nowrap">
                 {isCost ? `$${d.value.toFixed(2)}` : d.value}
               </span>
               <div 
@@ -73,7 +73,7 @@ export default function ModelBenchmarks() {
                   backgroundColor: d.hex
                 }}
               />
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 rotate-[-45deg] origin-top-left text-[9px] text-gray-400 whitespace-nowrap w-24 overflow-hidden text-ellipsis pointer-events-none">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 rotate-[-45deg] origin-top-left text-[0.5625rem] text-gray-400 whitespace-nowrap w-24 overflow-hidden text-ellipsis pointer-events-none">
                 {d.name}
               </div>
             </div>

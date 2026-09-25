@@ -140,7 +140,7 @@ const AgentsIndex = () => {
                 <div className="text-indigo-400">➔</div>
                 <div className="bg-indigo-500/20 border border-indigo-500/50 px-3 py-1.5 rounded-lg flex flex-col items-center">
                   <span className="text-xs">🧠 Model</span>
-                  <span className="text-[9px] text-gray-400">Generates</span>
+                  <span className="text-[0.5625rem] text-gray-400">Generates</span>
                 </div>
                 <div className="text-indigo-400">➔</div>
                 <div className="bg-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-1">✅ Output</div>
@@ -155,7 +155,7 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed mb-3">
                 The baseline LLM pattern. Input text is passed to the neural network model, which predicts the next tokens and returns a response in a single, stateless turn.
               </p>
-              <div className="space-y-1.5 text-[11px] text-gray-400">
+              <div className="space-y-1.5 text-[0.6875rem] text-gray-400">
                 <div className="flex items-start gap-1.5">
                   <span className="text-indigo-400 font-bold">•</span>
                   <span><strong>Stateless:</strong> Every request is isolated; no persistence between calls.</span>
@@ -196,7 +196,7 @@ const AgentsIndex = () => {
                   <div className="text-purple-400 text-xs">➔</div>
                   <div className="bg-purple-500/20 border border-purple-500/50 px-2.5 py-1 rounded-lg text-xs text-purple-300">👁️ Observe</div>
                 </div>
-                <div className="flex gap-1.5 mt-3 text-[10px] text-gray-400">
+                <div className="flex gap-1.5 mt-3 text-[0.625rem] text-gray-400">
                   <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">🔍 Search</span>
                   <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">☁️ API</span>
                   <span className="px-2 py-0.5 rounded bg-black/40 border border-white/5">🛢️ DB</span>
@@ -213,7 +213,7 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed mb-3">
                 Adds a control loop around the model allowing it to autonomously decide when to invoke external tools, process the execution results, and continue reasoning until the task is complete.
               </p>
-              <div className="space-y-1.5 text-[11px] text-gray-400">
+              <div className="space-y-1.5 text-[0.6875rem] text-gray-400">
                 <div className="flex items-start gap-1.5">
                   <span className="text-purple-400 font-bold">•</span>
                   <span><strong>ReAct Pattern:</strong> Interleaves reasoning thoughts with actionable tool invocations.</span>
@@ -248,12 +248,12 @@ const AgentsIndex = () => {
                 <div className="w-full flex flex-col items-center">
                   <div className="bg-white/10 px-3 py-1 rounded-lg text-xs text-gray-200 border border-white/10 mb-2 font-mono">&lt;/&gt; Your Agent Code</div>
                   <div className="flex gap-4 border-t border-cyan-500/30 pt-2 w-full justify-center text-xs text-gray-300 relative">
-                    <div className="bg-white/5 px-2 py-0.5 rounded border border-white/10 text-[10px]">🔗 Nodes</div>
-                    <div className="bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30 text-cyan-300 text-[10px]">🔧 Tools</div>
-                    <div className="bg-white/5 px-2 py-0.5 rounded border border-white/10 text-[10px]">🛢️ State</div>
+                    <div className="bg-white/5 px-2 py-0.5 rounded border border-white/10 text-[0.625rem]">🔗 Nodes</div>
+                    <div className="bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30 text-cyan-300 text-[0.625rem]">🔧 Tools</div>
+                    <div className="bg-white/5 px-2 py-0.5 rounded border border-white/10 text-[0.625rem]">🛢️ State</div>
                   </div>
-                  <div className="w-56 border border-gray-600 rounded-full mt-2 py-0.5 text-center text-[10px] text-gray-400 bg-black/40">Workflow / Directed Graph</div>
-                  <div className="text-[9px] text-gray-500 mt-1">LangGraph • AutoGen • CrewAI • Google ADK</div>
+                  <div className="w-56 border border-gray-600 rounded-full mt-2 py-0.5 text-center text-[0.625rem] text-gray-400 bg-black/40">Workflow / Directed Graph</div>
+                  <div className="text-[0.5625rem] text-gray-500 mt-1">LangGraph • AutoGen • CrewAI • Google ADK</div>
                 </div>
               </div>
             </div>
@@ -266,7 +266,7 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed mb-3">
                 Replaces ad-hoc while-loops with production frameworks. Developers structure agent interactions into directed state graphs with explicit nodes, conditional edges, and shared state objects.
               </p>
-              <div className="space-y-1.5 text-[11px] text-gray-400">
+              <div className="space-y-1.5 text-[0.6875rem] text-gray-400">
                 <div className="flex items-start gap-1.5">
                   <span className="text-cyan-400 font-bold">•</span>
                   <span><strong>Deterministic Control:</strong> Mixes hardcoded branching rules with dynamic LLM decisions.</span>
@@ -301,12 +301,12 @@ const AgentsIndex = () => {
                 <div className="flex items-center justify-center gap-2 w-full">
                   <div className="flex flex-col items-center shrink-0">
                     <div className="text-xl">🎯</div>
-                    <span className="text-[9px] text-gray-300 font-bold">Goal</span>
+                    <span className="text-[0.5625rem] text-gray-300 font-bold">Goal</span>
                   </div>
                   <div className="text-red-400 text-xs">➔</div>
                   <div className="flex-1 max-w-[170px] bg-red-900/10 border border-red-500/30 rounded-lg p-2 flex flex-col relative">
-                    <div className="text-[9px] font-bold text-red-400 uppercase text-center mb-1">AGENT HARNESS</div>
-                    <div className="grid grid-cols-2 gap-x-1 text-[8px] text-gray-300">
+                    <div className="text-[0.5625rem] font-bold text-red-400 uppercase text-center mb-1">AGENT HARNESS</div>
+                    <div className="grid grid-cols-2 gap-x-1 text-[0.5rem] text-gray-300">
                       <span>📄 Instructions</span>
                       <span>👤 Context</span>
                       <span>🔄 Tool Loop</span>
@@ -320,7 +320,7 @@ const AgentsIndex = () => {
                   <div className="text-red-400 text-xs">➔</div>
                   <div className="bg-white/10 p-1.5 rounded-lg border border-white/10 text-center shrink-0">
                     <div className="text-xl">🧠</div>
-                    <span className="text-[9px] text-gray-300 font-bold">Model</span>
+                    <span className="text-[0.5625rem] text-gray-300 font-bold">Model</span>
                   </div>
                 </div>
               </div>
@@ -334,7 +334,7 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed mb-3">
                 Establishes the fundamental distinction: <strong className="text-red-300">MODEL ≠ AGENT</strong>. The LLM provides intelligence, but the harness provides memory, environment context, skills, subagents, and boundaries.
               </p>
-              <div className="space-y-1.5 text-[11px] text-gray-400">
+              <div className="space-y-1.5 text-[0.6875rem] text-gray-400">
                 <div className="flex items-start gap-1.5">
                   <span className="text-red-400 font-bold">•</span>
                   <span><strong>Full Context Provision:</strong> Feeds instructions, skills, files, memory, and tools into every step.</span>
@@ -368,21 +368,21 @@ const AgentsIndex = () => {
               <div className="bg-black/30 p-4 rounded-xl border border-white/5 my-4">
                 <div className="flex flex-col items-center justify-center gap-1 w-full relative h-24">
                   <div className="flex gap-1.5 w-full justify-center absolute top-0">
-                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-11">📋 Task</div>
-                    <div className="text-emerald-400 mt-1 text-[10px]">➔</div>
-                    <div className="bg-emerald-900/20 p-1 rounded text-[8px] border border-emerald-500/30 text-center w-12 text-emerald-400">🛡️ Harness</div>
-                    <div className="text-emerald-400 mt-1 text-[10px]">➔</div>
-                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-11">📝 Plan</div>
-                    <div className="text-emerald-400 mt-1 text-[10px]">➔</div>
-                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-16">💻 Environment</div>
+                    <div className="bg-white/10 p-1 rounded text-[0.5rem] border border-white/10 text-center w-11">📋 Task</div>
+                    <div className="text-emerald-400 mt-1 text-[0.625rem]">➔</div>
+                    <div className="bg-emerald-900/20 p-1 rounded text-[0.5rem] border border-emerald-500/30 text-center w-12 text-emerald-400">🛡️ Harness</div>
+                    <div className="text-emerald-400 mt-1 text-[0.625rem]">➔</div>
+                    <div className="bg-white/10 p-1 rounded text-[0.5rem] border border-white/10 text-center w-11">📝 Plan</div>
+                    <div className="text-emerald-400 mt-1 text-[0.625rem]">➔</div>
+                    <div className="bg-white/10 p-1 rounded text-[0.5rem] border border-white/10 text-center w-16">💻 Environment</div>
                   </div>
 
                   <div className="flex gap-1.5 w-full justify-center absolute bottom-0">
-                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-14 leading-tight">🗜️ Compress Context</div>
-                    <div className="text-emerald-400 mt-2 rotate-180 text-[10px]">➔</div>
-                    <div className="bg-white/10 p-1 rounded text-[8px] border border-white/10 text-center w-12 leading-tight">📈 Check Progress</div>
-                    <div className="text-emerald-400 mt-2 rotate-180 text-[10px]">➔</div>
-                    <div className="bg-emerald-900/20 p-1 rounded text-[8px] border border-emerald-500/30 text-center w-14 text-emerald-400 leading-tight">👥 Spawn Subagents</div>
+                    <div className="bg-white/10 p-1 rounded text-[0.5rem] border border-white/10 text-center w-14 leading-tight">🗜️ Compress Context</div>
+                    <div className="text-emerald-400 mt-2 rotate-180 text-[0.625rem]">➔</div>
+                    <div className="bg-white/10 p-1 rounded text-[0.5rem] border border-white/10 text-center w-12 leading-tight">📈 Check Progress</div>
+                    <div className="text-emerald-400 mt-2 rotate-180 text-[0.625rem]">➔</div>
+                    <div className="bg-emerald-900/20 p-1 rounded text-[0.5rem] border border-emerald-500/30 text-center w-14 text-emerald-400 leading-tight">👥 Spawn Subagents</div>
                   </div>
                 </div>
               </div>
@@ -396,7 +396,7 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed mb-3">
                 Executes complex goals across dozens or hundreds of sequential steps without losing focus, filling token limits, or requiring constant user prompts.
               </p>
-              <div className="space-y-1.5 text-[11px] text-gray-400">
+              <div className="space-y-1.5 text-[0.6875rem] text-gray-400">
                 <div className="flex items-start gap-1.5">
                   <span className="text-emerald-400 font-bold">•</span>
                   <span><strong>Context Window Compaction:</strong> Summarizes older messages & truncates non-essential tool outputs.</span>
@@ -429,16 +429,16 @@ const AgentsIndex = () => {
               {/* Diagram */}
               <div className="bg-black/30 p-4 rounded-xl border border-white/5 my-4">
                 <div className="flex items-center justify-center gap-2 w-full mb-3">
-                  <div className="bg-white/10 p-1 rounded text-[8px] text-center border border-white/10">👤 User / Event</div>
-                  <div className="text-blue-400 text-[10px]">➔</div>
-                  <div className="bg-blue-900/20 p-1 rounded text-[8px] text-center border border-blue-500/30 text-blue-300 font-bold">🔄 Agent Runtime</div>
-                  <div className="text-blue-400 text-[10px]">➔</div>
-                  <div className="bg-white/10 p-1 rounded text-[8px] text-center border border-white/10">🛡️ Agent Harness</div>
+                  <div className="bg-white/10 p-1 rounded text-[0.5rem] text-center border border-white/10">👤 User / Event</div>
+                  <div className="text-blue-400 text-[0.625rem]">➔</div>
+                  <div className="bg-blue-900/20 p-1 rounded text-[0.5rem] text-center border border-blue-500/30 text-blue-300 font-bold">🔄 Agent Runtime</div>
+                  <div className="text-blue-400 text-[0.625rem]">➔</div>
+                  <div className="bg-white/10 p-1 rounded text-[0.5rem] text-center border border-white/10">🛡️ Agent Harness</div>
                 </div>
 
                 <div className="bg-blue-950/40 border border-blue-500/30 rounded-lg p-2">
-                  <div className="text-[9px] font-bold text-blue-300 text-center mb-1">CONTROL PLANE GOVERNANCE</div>
-                  <div className="grid grid-cols-4 gap-1 text-[8px] text-gray-300 text-center">
+                  <div className="text-[0.5625rem] font-bold text-blue-300 text-center mb-1">CONTROL PLANE GOVERNANCE</div>
+                  <div className="grid grid-cols-4 gap-1 text-[0.5rem] text-gray-300 text-center">
                     <span>👤 Identity</span>
                     <span>🛡️ Policy</span>
                     <span>🔐 Permissions</span>
@@ -460,7 +460,7 @@ const AgentsIndex = () => {
               <p className="text-xs text-gray-300 leading-relaxed mb-3">
                 Combines high autonomy with enterprise control planes. Ensures agents are <strong className="text-blue-300">capable enough to act</strong>, yet <strong className="text-blue-300">controlled enough to trust</strong> in production environments.
               </p>
-              <div className="space-y-1.5 text-[11px] text-gray-400">
+              <div className="space-y-1.5 text-[0.6875rem] text-gray-400">
                 <div className="flex items-start gap-1.5">
                   <span className="text-blue-400 font-bold">•</span>
                   <span><strong>Control Plane:</strong> Enforces IAM permissions, financial budget caps, human approvals, and security policies.</span>
@@ -591,16 +591,16 @@ const AgentsIndex = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div className="p-3.5 rounded-lg bg-black/30 border border-emerald-500/20">
-                <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Strength</div>
+                <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Strength</div>
                 <p className="text-xs text-gray-300 leading-relaxed m-0">{strategy.good}</p>
               </div>
               <div className="p-3.5 rounded-lg bg-black/30 border border-rose-500/20">
-                <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Weakness</div>
+                <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Weakness</div>
                 <p className="text-xs text-gray-300 leading-relaxed m-0">{strategy.bad}</p>
               </div>
             </div>
             <div className="p-3.5 rounded-lg bg-black/30 border border-white/10">
-              <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Use it when</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Use it when</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{strategy.use}</p>
             </div>
           </motion.div>
@@ -701,7 +701,7 @@ const AgentsIndex = () => {
               >
                 <div className="text-2xl mb-2">{sa.icon}</div>
                 <div className="font-bold text-sm text-gray-200 mb-2">{sa.title}</div>
-                <div className="text-[10px] text-gray-400 bg-white/5 px-2 py-1 rounded w-full">{sa.tools}</div>
+                <div className="text-[0.625rem] text-gray-400 bg-white/5 px-2 py-1 rounded w-full">{sa.tools}</div>
               </motion.div>
             ))}
           </div>

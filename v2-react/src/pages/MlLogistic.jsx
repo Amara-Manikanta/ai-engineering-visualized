@@ -73,7 +73,7 @@ function SigmoidPlayground() {
           </div>
         </div>
       </div>
-      <p className="text-[11px] text-gray-500 mt-4 leading-relaxed text-center max-w-md mx-auto mb-0">
+      <p className="text-[0.6875rem] text-gray-500 mt-4 leading-relaxed text-center max-w-md mx-auto mb-0">
         The linear part produces any number from −∞ to +∞. The sigmoid squashes it into a valid probability (0–1). A
         threshold (default 0.5) then turns that probability into a class.
       </p>
@@ -98,7 +98,7 @@ function WhyNotLinear() {
           {pts0.map((x, i) => <circle key={`z${i}`} cx={x} cy="60" r="2.4" fill="#9ca3af" />)}
           {pts1.map((x, i) => <circle key={`o${i}`} cx={x} cy="14" r="2.4" fill="#9ca3af" />)}
         </svg>
-        <div className="text-[11px] text-gray-500 mt-1 leading-relaxed">
+        <div className="text-[0.6875rem] text-gray-500 mt-1 leading-relaxed">
           The line shoots below 0 and above 1 — nonsensical as a probability, and outliers drag the boundary around.
         </div>
       </div>
@@ -110,7 +110,7 @@ function WhyNotLinear() {
           {pts0.map((x, i) => <circle key={`z${i}`} cx={x} cy="60" r="2.4" fill="#9ca3af" />)}
           {pts1.map((x, i) => <circle key={`o${i}`} cx={x} cy="14" r="2.4" fill="#9ca3af" />)}
         </svg>
-        <div className="text-[11px] text-gray-500 mt-1 leading-relaxed">
+        <div className="text-[0.6875rem] text-gray-500 mt-1 leading-relaxed">
           The S-curve stays inside 0–1, saturates at the extremes, and gives a smooth probability everywhere.
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function MlLogistic() {
               <div key={t} className="p-4 rounded-xl border border-white/10 bg-white/5">
                 <div className="text-xl mb-1.5">{icon}</div>
                 <div className="text-sm font-semibold text-white">{t}</div>
-                <div className="text-[11px] text-gray-500">{d}</div>
+                <div className="text-[0.6875rem] text-gray-500">{d}</div>
               </div>
             ))}
           </div>
@@ -200,7 +200,7 @@ export default function MlLogistic() {
               <div className="font-mono text-xs text-indigo-300 bg-black/30 p-3 rounded text-center">
                 −(1/N) Σ [ yᵢ·log(pᵢ) + (1−yᵢ)·log(1−pᵢ) ]
               </div>
-              <p className="text-[11px] text-gray-500 mt-3 leading-relaxed">
+              <p className="text-[0.6875rem] text-gray-500 mt-3 leading-relaxed">
                 For a positive example only the left term is active (reward high p); for a negative only the right
                 (reward low p).
               </p>

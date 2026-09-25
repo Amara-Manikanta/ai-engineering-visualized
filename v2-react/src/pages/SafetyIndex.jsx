@@ -91,20 +91,20 @@ function AlignmentComparison() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
             <div className="p-3.5 rounded-lg bg-black/30 border border-emerald-500/20">
-              <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Strength</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Strength</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{m.pro}</p>
             </div>
             <div className="p-3.5 rounded-lg bg-black/30 border border-rose-500/20">
-              <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Cost / limitation</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Cost / limitation</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{m.con}</p>
             </div>
           </div>
           <div className="p-3.5 rounded-lg bg-black/30 border border-amber-500/25 mb-3">
-            <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-1">Characteristic failure</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-1">Characteristic failure</div>
             <p className="text-xs text-gray-300 leading-relaxed m-0">{m.risk}</p>
           </div>
           <div className="p-3.5 rounded-lg bg-black/30 border border-white/10">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">What it needs from you</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">What it needs from you</div>
             <p className="text-xs text-gray-300 leading-relaxed m-0">{m.needs}</p>
           </div>
         </motion.div>
@@ -199,10 +199,10 @@ export default function SafetyIndex() {
               >
                 <div className="flex flex-wrap items-baseline gap-2 mb-1.5">
                   <span className="font-semibold text-white text-sm">{a.name}</span>
-                  <code className="text-[11px] text-rose-300 font-mono">{a.ex}</code>
+                  <code className="text-[0.6875rem] text-rose-300 font-mono">{a.ex}</code>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed mb-2">{a.why}</p>
-                <div className="text-[11px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/25 rounded px-2.5 py-1.5">
+                <div className="text-[0.6875rem] text-emerald-300 bg-emerald-500/10 border border-emerald-500/25 rounded px-2.5 py-1.5">
                   → {a.fix}
                 </div>
               </motion.div>

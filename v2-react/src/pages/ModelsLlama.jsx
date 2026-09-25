@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -11,8 +12,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsLlama() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -26,31 +29,16 @@ export default function ModelsLlama() {
           <span className="px-3 py-1 rounded-full bg-indigo-500/15 text-indigo-400 text-xs font-bold border border-indigo-500/30">Meta · Open Weights</span>
         </div>
         <p className="text-gray-300 leading-relaxed max-w-3xl">
-          Llama's weights are freely downloadable under a permissive community license, which made it the default
+          Llama's weights are freely downloadable under Meta's community license — commercial use allowed, with an acceptable-use policy and extra terms above 700 million monthly users — which made it the default
           starting point for teams that want to fine-tune a model on private data, run inference on their own GPUs,
           or avoid sending sensitive data to a third-party API at all.
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Size Class</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best For</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Hardware</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Large (400B+, MoE)</td><td className="px-4 py-2.5 border-b border-gray-900">Frontier-level reasoning, self-hosted at scale</td><td className="px-4 py-2.5 border-b border-gray-900">Multi-GPU cluster</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Mid (70B–100B)</td><td className="px-4 py-2.5 border-b border-gray-900">General assistant, RAG backends</td><td className="px-4 py-2.5 border-b border-gray-900">Single high-VRAM GPU / A100</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Small (7B–8B)</td><td className="px-4 py-2.5 border-b border-gray-900">Edge devices, cheap fine-tuning</td><td className="px-4 py-2.5 border-b border-gray-900">Consumer GPU</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <ModelLineup id="llama" />
+
+      <ModelWeights id="llama" />
+
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>
@@ -68,6 +56,8 @@ export default function ModelsLlama() {
           ))}
         </div>
       </section>
+
+      <ModelPipeline id="llama" name="Llama" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Llama Is Trained</h2>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -11,8 +12,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsQwen() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -32,25 +35,10 @@ export default function ModelsQwen() {
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Size Class</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best For</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Notes</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Flagship MoE (200B+ total)</td><td className="px-4 py-2.5 border-b border-gray-900">Frontier-competitive reasoning</td><td className="px-4 py-2.5 border-b border-gray-900">Sparse activation keeps inference cheap</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Mid (14B–32B)</td><td className="px-4 py-2.5 border-b border-gray-900">Self-hosted assistants</td><td className="px-4 py-2.5 border-b border-gray-900">Strong coding variants (Qwen-Coder)</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Small (0.5B–7B)</td><td className="px-4 py-2.5 border-b border-gray-900">Mobile & embedded devices</td><td className="px-4 py-2.5 border-b border-gray-900">Surprisingly capable for size</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <ModelLineup id="qwen" />
+
+      <ModelWeights id="qwen" />
+
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>
@@ -68,6 +56,8 @@ export default function ModelsQwen() {
           ))}
         </div>
       </section>
+
+      <ModelPipeline id="qwen" name="Qwen" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Qwen Is Trained</h2>

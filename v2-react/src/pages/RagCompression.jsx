@@ -70,12 +70,12 @@ function BudgetPanel() {
       <div className="mb-5">
         <div className="flex h-8 rounded-lg overflow-hidden border border-white/10">
           <div
-            className="bg-emerald-500/70 flex items-center justify-center text-[10px] font-mono text-black font-bold"
+            className="bg-emerald-500/70 flex items-center justify-center text-[0.625rem] font-mono text-black font-bold"
             style={{ width: `${relevantPct}%` }}
           >
             {relevantPct >= 12 ? "signal" : ""}
           </div>
-          <div className="bg-rose-500/30 flex items-center justify-center text-[10px] font-mono text-rose-200">
+          <div className="bg-rose-500/30 flex items-center justify-center text-[0.625rem] font-mono text-rose-200">
             {100 - relevantPct >= 12 ? "padding you pay for" : ""}
           </div>
         </div>
@@ -83,24 +83,24 @@ function BudgetPanel() {
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Sent uncompressed</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Sent uncompressed</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{stats.raw.toLocaleString()}</div>
-          <div className="text-[11px] text-gray-600 mt-1">tokens per query</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">tokens per query</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-rose-500/25">
-          <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Wasted</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Wasted</div>
           <div className="text-2xl font-bold font-mono text-rose-300">{stats.wasted.toLocaleString()}</div>
-          <div className="text-[11px] text-gray-600 mt-1">irrelevant tokens</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">irrelevant tokens</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">After compression</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">After compression</div>
           <div className="text-2xl font-bold font-mono text-emerald-300">{stats.compressed.toLocaleString()}</div>
-          <div className="text-[11px] text-gray-600 mt-1">{stats.ratio.toFixed(1)}× smaller</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{stats.ratio.toFixed(1)}× smaller</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Saved at 100k queries</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Saved at 100k queries</div>
           <div className="text-2xl font-bold font-mono text-emerald-400">${stats.monthly.toFixed(0)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">input tokens only</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">input tokens only</div>
         </div>
       </div>
 
@@ -205,7 +205,7 @@ export default function RagCompression() {
             <div key={m.n} className={`p-5 rounded-xl border ${m.box}`}>
               <div className="flex items-baseline justify-between gap-2 mb-1.5">
                 <div className={`font-semibold ${m.label}`}>{m.n}</div>
-                <div className="text-[10px] uppercase tracking-wide text-gray-500">{m.cost}</div>
+                <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">{m.cost}</div>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{m.d}</p>
             </div>

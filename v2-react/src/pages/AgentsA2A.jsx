@@ -100,13 +100,13 @@ function LifecycleStepper() {
       <div className={`p-5 rounded-xl border mb-4 ${s.tone}`}>
         <div className="flex items-baseline justify-between gap-3 mb-2">
           <div className={`font-bold ${s.label}`}>{s.n}</div>
-          <div className="text-[10px] uppercase tracking-wide text-gray-500">{s.actor}</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">{s.actor}</div>
         </div>
         <p className="text-sm text-gray-300 leading-relaxed m-0">{s.d}</p>
       </div>
 
       <div className="rounded-xl bg-black/50 border border-white/10 p-4 overflow-x-auto">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">On the wire</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">On the wire</div>
         <pre className="text-xs font-mono text-gray-300 m-0 whitespace-pre">{s.wire}</pre>
       </div>
 

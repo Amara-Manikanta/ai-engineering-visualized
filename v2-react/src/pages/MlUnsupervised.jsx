@@ -92,7 +92,7 @@ function ClusteringVisual() {
         ))}
       </svg>
 
-      <p className="text-[11px] text-gray-500 mt-3 leading-relaxed mb-0 text-center">
+      <p className="text-[0.6875rem] text-gray-500 mt-3 leading-relaxed mb-0 text-center">
         {clustered
           ? 'Each point is assigned to its nearest centroid (✛). The centroids are the mean of their members.'
           : 'The model sees only grey dots — no categories, no answers. Press run to let it discover the structure.'}
@@ -111,7 +111,7 @@ function DimReductionVisual() {
     <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
       <div className="flex items-center justify-center gap-4 sm:gap-8">
         <div className="flex flex-col gap-1.5">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1 text-center">8 features</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1 text-center">8 features</div>
           {features.map((f, i) => (
             <motion.div
               key={f}
@@ -119,7 +119,7 @@ function DimReductionVisual() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-gray-400 text-center w-24"
+              className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[0.625rem] font-mono text-gray-400 text-center w-24"
             >
               {f}
             </motion.div>
@@ -127,13 +127,13 @@ function DimReductionVisual() {
         </div>
 
         <div className="flex flex-col items-center text-gray-500 shrink-0">
-          <span className="text-[10px] whitespace-nowrap mb-1">PCA</span>
+          <span className="text-[0.625rem] whitespace-nowrap mb-1">PCA</span>
           <span className="text-2xl">→</span>
-          <span className="text-[10px] whitespace-nowrap mt-1">compress</span>
+          <span className="text-[0.625rem] whitespace-nowrap mt-1">compress</span>
         </div>
 
         <div className="flex flex-col gap-2">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1 text-center">2 components</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1 text-center">2 components</div>
           {['PC1', 'PC2'].map((f, i) => (
             <motion.div
               key={f}
@@ -148,7 +148,7 @@ function DimReductionVisual() {
           ))}
         </div>
       </div>
-      <p className="text-[11px] text-gray-500 mt-4 leading-relaxed mb-0 text-center max-w-md mx-auto">
+      <p className="text-[0.6875rem] text-gray-500 mt-4 leading-relaxed mb-0 text-center max-w-md mx-auto">
         Each new component is a weighted blend of the originals, chosen to capture as much variance as possible. You
         keep ~90% of the information in a fraction of the dimensions — enough to plot, and faster to compute on.
       </p>
@@ -297,7 +297,7 @@ export default function MlUnsupervised() {
                   <tr key={a.name} className={i % 2 ? 'bg-white/[0.02]' : ''}>
                     <td className="p-3 border-b border-white/5">
                       <div className="font-semibold text-gray-200">{a.name}</div>
-                      <div className="text-[10px] uppercase tracking-wide text-gray-600">{a.kind}</div>
+                      <div className="text-[0.625rem] uppercase tracking-wide text-gray-600">{a.kind}</div>
                     </td>
                     <td className="p-3 border-b border-white/5 text-xs">{a.idea}</td>
                     <td className="p-3 border-b border-white/5 text-xs">{a.pro}</td>

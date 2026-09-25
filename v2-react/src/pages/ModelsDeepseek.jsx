@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -11,8 +12,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsDeepseek() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -32,25 +35,10 @@ export default function ModelsDeepseek() {
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Line</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best For</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Notes</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">V-series (chat)</td><td className="px-4 py-2.5 border-b border-gray-900">General-purpose assistant, coding</td><td className="px-4 py-2.5 border-b border-gray-900">Sparse MoE, low cost per token</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">R-series (reasoning)</td><td className="px-4 py-2.5 border-b border-gray-900">Math, logic, multi-step problem solving</td><td className="px-4 py-2.5 border-b border-gray-900">RL-trained chain-of-thought, visible reasoning tokens</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Distilled variants</td><td className="px-4 py-2.5 border-b border-gray-900">Running reasoning quality on smaller hardware</td><td className="px-4 py-2.5 border-b border-gray-900">Reasoning traces distilled into 7B–70B dense models</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <ModelLineup id="deepseek" />
+
+      <ModelWeights id="deepseek" />
+
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>
@@ -69,11 +57,13 @@ export default function ModelsDeepseek() {
         </div>
       </section>
 
+      <ModelPipeline id="deepseek" name="DeepSeek" />
+
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How DeepSeek Is Trained</h2>
         <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
           DeepSeek's V-series follows the familiar pretrain → SFT → RLHF/DPO recipe, running on an ultra-sparse
-          Mixture-of-Experts architecture that activates only a fraction of its ~671B total parameters per token — a
+          Mixture-of-Experts architecture that activates only a fraction of its total parameters per token (V3: 37B of 671B; V4-Pro: 49B of 1.6 trillion) — a
           big part of how it trains and serves so cheaply. The <strong className="text-white">R-series (R1)</strong> is where it
           breaks from the standard playbook entirely, and it's the most influential open training recipe of the last
           two years: it showed reasoning ability can emerge from reinforcement learning

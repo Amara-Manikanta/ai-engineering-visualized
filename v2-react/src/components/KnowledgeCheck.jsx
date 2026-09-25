@@ -85,7 +85,7 @@ export default function KnowledgeCheck({ questions = [], title = "Check yourself
 
                 {hasAnswered && (
                   <div className="ml-9 mt-3 p-4 rounded-xl border border-white/10 bg-black/30">
-                    <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1.5">
+                    <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1.5">
                       {choice === q.answer ? "Correct" : "Not quite"}
                     </div>
                     <p className="text-xs text-gray-300 leading-relaxed m-0">{q.why}</p>

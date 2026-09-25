@@ -48,7 +48,7 @@ function ContextCostPanel() {
           >
             {Object.keys(VARIANTS).map((k) => <option key={k} value={k}>{k}</option>)}
           </select>
-          <span className="text-[11px] text-gray-600">{v.where}</span>
+          <span className="text-[0.6875rem] text-gray-600">{v.where}</span>
         </label>
         <label className="block">
           <span className="text-xs uppercase tracking-wide text-gray-500">Virtual tokens</span>
@@ -70,15 +70,15 @@ function ContextCostPanel() {
 
       {/* the sequence, with the prefix occupying the front */}
       <div className="mb-4">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">One sequence</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">One sequence</div>
         <div className="flex h-9 rounded-lg overflow-hidden border border-white/10 bg-black/40">
           <div
-            className="bg-amber-500/70 flex items-center justify-center text-[10px] font-mono text-black font-bold transition-all"
+            className="bg-amber-500/70 flex items-center justify-center text-[0.625rem] font-mono text-black font-bold transition-all"
             style={{ width: `${Math.max(calc.pctCtx, 1.5)}%` }}
           >
             {calc.pctCtx > 8 ? "prefix" : ""}
           </div>
-          <div className="flex-1 flex items-center justify-center text-[10px] font-mono text-gray-500">
+          <div className="flex-1 flex items-center justify-center text-[0.625rem] font-mono text-gray-500">
             your actual prompt — {calc.usable.toLocaleString()} tokens left
           </div>
         </div>
@@ -86,19 +86,19 @@ function ContextCostPanel() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-amber-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-1">Trainable parameters</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-1">Trainable parameters</div>
           <div className="text-2xl font-bold font-mono text-amber-300">{(calc.params / 1e6).toFixed(2)}M</div>
-          <div className="text-[11px] text-gray-600 mt-1">{calc.perToken.toLocaleString()} per virtual token</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{calc.perToken.toLocaleString()} per virtual token</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Context consumed</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Context consumed</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{calc.pctCtx.toFixed(2)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">every single request</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">every single request</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Depth of influence</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Depth of influence</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{v.layers === 1 ? "input" : "all layers"}</div>
-          <div className="text-[11px] text-gray-600 mt-1">{v.note}</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{v.note}</div>
         </div>
       </div>
 
@@ -172,7 +172,7 @@ export default function GenAiPrefixTuning() {
             <div key={n} className={`p-5 rounded-xl border ${box}`}>
               <div className="flex flex-wrap items-baseline gap-3 mb-2">
                 <span className={`font-bold ${tone}`}>{n}</span>
-                <span className="font-mono text-[11px] text-gray-500">{where}</span>
+                <span className="font-mono text-[0.6875rem] text-gray-500">{where}</span>
               </div>
               <p className="text-sm text-gray-300 leading-relaxed m-0">{d}</p>
             </div>

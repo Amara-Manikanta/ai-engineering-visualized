@@ -178,7 +178,7 @@ export default function MlNlp() {
                   className={`flex-1 rounded-xl border p-4 text-center ${s.tone}`}
                 >
                   <div className="font-bold text-sm mb-1">{s.t}</div>
-                  <div className="text-[10px] opacity-75 font-mono leading-snug">{s.d}</div>
+                  <div className="text-[0.625rem] opacity-75 font-mono leading-snug">{s.d}</div>
                 </motion.div>
                 {i < arr.length - 1 && <div className="flex items-center text-gray-600 text-xl shrink-0">→</div>}
               </React.Fragment>
@@ -230,7 +230,7 @@ export default function MlNlp() {
                 transition={{ delay: i * 0.07 }}
                 className="flex flex-col sm:flex-row sm:items-center gap-2"
               >
-                <span className="text-[10px] uppercase tracking-wide text-gray-500 sm:w-44 shrink-0">{r.step}</span>
+                <span className="text-[0.625rem] uppercase tracking-wide text-gray-500 sm:w-44 shrink-0">{r.step}</span>
                 <code className={`font-mono text-sm px-3 py-1.5 rounded bg-black/40 border border-white/10 ${r.tone}`}>
                   {r.text}
                 </code>
@@ -387,7 +387,7 @@ preprocess("The Cats aren't RUNNING quickly!! <br>")
             <div key={row.n} className="mb-4 last:mb-0">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm font-semibold text-gray-300">{row.name}</span>
-                <span className="text-[10px] font-mono text-gray-600">N={row.n} · {row.grams.length} features</span>
+                <span className="text-[0.625rem] font-mono text-gray-600">N={row.n} · {row.grams.length} features</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {row.grams.map((g, i) => (
@@ -407,7 +407,7 @@ preprocess("The Cats aren't RUNNING quickly!! <br>")
               </div>
             </div>
           ))}
-          <p className="text-[11px] text-gray-500 mt-4 mb-0 leading-relaxed">
+          <p className="text-[0.6875rem] text-gray-500 mt-4 mb-0 leading-relaxed">
             Notice the highlighted <code className="text-rose-300">"not good"</code> — it only exists as a feature once
             N ≥ 2. That single bigram is the difference between a sentiment model that works and one that reads this
             review as positive.
@@ -491,7 +491,7 @@ print(vec.get_feature_names_out())
               ))}
             </tbody>
           </table>
-          <p className="text-[11px] text-gray-500 mt-3 mb-0">
+          <p className="text-[0.6875rem] text-gray-500 mt-3 mb-0">
             One row per document, one column per vocabulary word. Real matrices are ~30,000 columns wide and over 99%
             zeros — which is why they are stored as sparse matrices.
           </p>
@@ -680,7 +680,7 @@ print(sorted(zip(names, row.round(3)), key=lambda p: -p[1])[:3])
                 {tok.t ? (
                   <>
                     <span className={`px-2 py-1 rounded-md border font-medium ${tok.c}`}>{tok.w}</span>
-                    <span className={`absolute -top-5 left-0 text-[9px] font-bold px-1.5 py-0.5 rounded ${tok.lc}`}>
+                    <span className={`absolute -top-5 left-0 text-[0.5625rem] font-bold px-1.5 py-0.5 rounded ${tok.lc}`}>
                       {tok.t}
                     </span>
                   </>
@@ -799,7 +799,7 @@ record = {ent.label_: ent.text for ent in doc.ents}`} />
                   <span className={`text-xs font-mono w-14 text-right shrink-0 ${r.s >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                     {r.s > 0 ? '+' : ''}{r.s.toFixed(2)}
                   </span>
-                  {r.note && <span className="text-[10px] text-rose-400 sm:w-44">⚠ {r.note}</span>}
+                  {r.note && <span className="text-[0.625rem] text-rose-400 sm:w-44">⚠ {r.note}</span>}
                 </motion.div>
               );
             })}
@@ -885,11 +885,11 @@ print(sentiment("The food was not good."))
             ].map((t, ti) => (
               <div key={t.name}>
                 <div className={`font-bold text-sm mb-0.5 ${t.tone}`}>{t.name}</div>
-                <div className="text-[10px] text-gray-600 mb-3 italic">{t.guess}</div>
+                <div className="text-[0.625rem] text-gray-600 mb-3 italic">{t.guess}</div>
                 <div className="space-y-1.5">
                   {t.words.map((w, wi) => (
                     <div key={w[0]} className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono text-gray-400 w-20 shrink-0">{w[0]}</span>
+                      <span className="text-[0.6875rem] font-mono text-gray-400 w-20 shrink-0">{w[0]}</span>
                       <div className="flex-1 h-3 rounded bg-white/5 overflow-hidden">
                         <motion.div
                           className={`h-full ${t.bar} opacity-70`}
@@ -899,14 +899,14 @@ print(sentiment("The food was not good."))
                           transition={{ delay: ti * 0.12 + wi * 0.05 }}
                         />
                       </div>
-                      <span className="text-[9px] font-mono text-gray-600 w-9 text-right">{w[1].toFixed(3)}</span>
+                      <span className="text-[0.5625rem] font-mono text-gray-600 w-9 text-right">{w[1].toFixed(3)}</span>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-[11px] text-gray-500 mt-4 mb-0 leading-relaxed">
+          <p className="text-[0.6875rem] text-gray-500 mt-4 mb-0 leading-relaxed">
             The algorithm never sees the labels "Finance" or "Sports" — it only finds that these words cluster
             together. Naming the topics is a human judgement call, which is why topic modeling is exploratory rather
             than a finished classifier.
@@ -1168,9 +1168,9 @@ print(lda.transform(X[0]).round(2))   # -> [[0.91 0.04 0.05]]`} />
                   transition={{ delay: i * 0.1 }}
                   className={`flex-1 rounded-xl border p-4 ${s.tone}`}
                 >
-                  <div className="text-[9px] font-mono uppercase tracking-wide opacity-60 mb-1">{s.era}</div>
+                  <div className="text-[0.5625rem] font-mono uppercase tracking-wide opacity-60 mb-1">{s.era}</div>
                   <div className="font-bold text-sm mb-1.5">{s.t}</div>
-                  <div className="text-[10px] opacity-80 leading-snug">{s.d}</div>
+                  <div className="text-[0.625rem] opacity-80 leading-snug">{s.d}</div>
                 </motion.div>
                 {i < arr.length - 1 && <div className="flex items-center text-gray-600 text-xl shrink-0">→</div>}
               </React.Fragment>

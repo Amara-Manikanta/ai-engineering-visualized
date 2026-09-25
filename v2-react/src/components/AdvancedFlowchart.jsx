@@ -164,7 +164,7 @@ export default function AdvancedFlowchart({ nodes, edges, currentStep = 0 }) {
               <div className={node.type === 'diamond' ? '-rotate-45 flex flex-col items-center justify-center w-[141%] h-[141%]' : 'w-full h-full flex flex-col items-center justify-center'}>
                 {node.icon && <span className="text-xl mb-1">{node.icon}</span>}
                 <span className="text-xs sm:text-sm font-semibold whitespace-pre-line leading-tight">{node.label}</span>
-                {node.content && <span className="text-[9px] text-gray-400 mt-1 leading-tight">{node.content}</span>}
+                {node.content && <span className="text-[0.5625rem] text-gray-400 mt-1 leading-tight">{node.content}</span>}
               </div>
             </motion.div>
           );

@@ -58,6 +58,8 @@ const NODES = [
   { id: "inference", label: "LLM Inference", group: "GenAI", path: "/llm-inference", size: 10 },
   { id: "safety", label: "Safety", group: "GenAI", path: "/safety", size: 10 },
   { id: "efficiency", label: "Efficiency", group: "GenAI", path: "/efficiency", size: 12 },
+  { id: "decision", label: "Decision Models", group: "GenAI", path: "/genai/decision-models", size: 10 },
+  { id: "training", label: "How Models Train", group: "Build", path: "/models/training", size: 11 },
 
   // RAG
   { id: "rag", label: "RAG", group: "RAG", path: "/rag", size: 15 },
@@ -128,6 +130,12 @@ const EDGES = [
   ["quant", "peft"],
   ["llms", "safety"],
   ["llms", "models"],
+  ["llms", "decision"],
+  ["efficiency", "decision"],
+  ["models", "training"],
+  ["finetune", "training"],
+  ["peft", "training"],
+  ["distill", "training"],
   ["prompting", "rag"],
   ["rag", "embeddings"],
   ["rag", "chunking"],
@@ -379,7 +387,7 @@ function Graph() {
           Reset view
         </button>
         <span className="text-xs font-mono text-gray-600 ml-1">{zoomPct}%</span>
-        <span className="text-[11px] text-gray-600 ml-auto">scroll to zoom · drag to pan</span>
+        <span className="text-[0.6875rem] text-gray-600 ml-auto">scroll to zoom · drag to pan</span>
       </div>
 
       <div className="rounded-2xl bg-black/50 border border-white/10 p-2 overflow-hidden">

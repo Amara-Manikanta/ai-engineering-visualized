@@ -73,28 +73,28 @@ function ReliabilityPanel() {
             />
           ))}
         </div>
-        <div className="text-[10px] text-gray-600 font-mono mt-2 text-center">
+        <div className="text-[0.625rem] text-gray-600 font-mono mt-2 text-center">
           probability the run is still correct, step by step
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-rose-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">End-to-end success</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">End-to-end success</div>
           <div className="text-2xl font-bold font-mono text-rose-300">{(endToEnd * 100).toFixed(1)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">
+          <div className="text-[0.6875rem] text-gray-600 mt-1">
             {p.toFixed(3)}<sup>{steps}</sup>
           </div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Runs that fail</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Runs that fail</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{((1 - endToEnd) * 100).toFixed(1)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">at least one bad step</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">at least one bad step</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/25">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Needed for 95% overall</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Needed for 95% overall</div>
           <div className="text-2xl font-bold font-mono text-emerald-300">{(needed * 100).toFixed(2)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">per step, at {steps} steps</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">per step, at {steps} steps</div>
         </div>
       </div>
 
@@ -204,11 +204,11 @@ export default function AgentsDebugging() {
             <div key={f.n} className={`p-5 rounded-xl border ${f.box}`}>
               <div className={`font-semibold mb-2 ${f.label}`}>{f.n}</div>
               <p className="text-xs text-gray-400 leading-relaxed mb-2.5">
-                <span className="text-gray-500 uppercase tracking-wide text-[10px]">Looks like </span>
+                <span className="text-gray-500 uppercase tracking-wide text-[0.625rem]">Looks like </span>
                 {f.sym}
               </p>
               <p className="text-xs text-gray-300 leading-relaxed m-0">
-                <span className="text-gray-500 uppercase tracking-wide text-[10px]">Fix </span>
+                <span className="text-gray-500 uppercase tracking-wide text-[0.625rem]">Fix </span>
                 {f.fix}
               </p>
             </div>

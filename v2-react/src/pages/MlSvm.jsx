@@ -192,13 +192,13 @@ function MarginExplorer() {
           </label>
 
           <div className="p-4 rounded-xl bg-black/40 border border-white/10 mb-3">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Margin (each side)</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Margin (each side)</div>
             <div className="text-3xl font-bold font-mono text-indigo-300">{geom.margin.toFixed(3)}</div>
-            <div className="text-[11px] text-gray-500 mt-1">distance to the closest point</div>
+            <div className="text-[0.6875rem] text-gray-500 mt-1">distance to the closest point</div>
           </div>
 
           <div className="p-4 rounded-xl bg-black/40 border border-white/10 mb-4">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Misclassified</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Misclassified</div>
             <div className={`text-3xl font-bold font-mono ${geom.misclassified ? "text-rose-400" : "text-emerald-400"}`}>
               {geom.misclassified}
             </div>
@@ -442,7 +442,7 @@ export default function MlSvm() {
           {KERNELS.map((k) => (
             <div key={k.n} className={`p-5 rounded-xl border ${k.box}`}>
               <div className={`font-bold mb-1 ${k.label}`}>{k.n}</div>
-              <div className="text-[11px] font-mono text-gray-500 mb-2.5">{k.f}</div>
+              <div className="text-[0.6875rem] font-mono text-gray-500 mb-2.5">{k.f}</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{k.d}</p>
             </div>
           ))}

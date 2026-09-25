@@ -130,7 +130,7 @@ function BudgetCalculator() {
               <option key={k} value={k}>{k}</option>
             ))}
           </select>
-          <span className="text-[11px] text-gray-600">{KV_MODES[kvName].note}</span>
+          <span className="text-[0.6875rem] text-gray-600">{KV_MODES[kvName].note}</span>
         </label>
         <label className="block">
           <span className="text-xs uppercase tracking-wide text-gray-500">Context length</span>
@@ -151,13 +151,13 @@ function BudgetCalculator() {
       <div className="mb-4">
         <div className="flex h-9 rounded-lg overflow-hidden border border-white/10 bg-black/40">
           <div
-            className="bg-indigo-500/70 flex items-center justify-center text-[10px] font-mono text-white font-bold"
+            className="bg-indigo-500/70 flex items-center justify-center text-[0.625rem] font-mono text-white font-bold"
             style={{ width: `${Math.max((calc.weights / calc.total) * 100, 0)}%` }}
           >
             {calc.weights / calc.total > 0.15 ? "weights" : ""}
           </div>
           <div
-            className="bg-amber-500/60 flex items-center justify-center text-[10px] font-mono text-black font-bold"
+            className="bg-amber-500/60 flex items-center justify-center text-[0.625rem] font-mono text-black font-bold"
             style={{ width: `${Math.max((calc.cache / calc.total) * 100, 0)}%` }}
           >
             {calc.cache / calc.total > 0.15 ? "KV cache" : ""}
@@ -167,26 +167,26 @@ function BudgetCalculator() {
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-indigo-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-indigo-400 mb-1">Weights</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-indigo-400 mb-1">Weights</div>
           <div className="text-2xl font-bold font-mono text-indigo-300">{GB(calc.weights).toFixed(1)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">GB</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">GB</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-amber-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-1">KV cache</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-1">KV cache</div>
           <div className="text-2xl font-bold font-mono text-amber-300">{GB(calc.cache).toFixed(1)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">
+          <div className="text-[0.6875rem] text-gray-600 mt-1">
             {(calc.perToken / 1024).toFixed(0)} KB per token
           </div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Total</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Total</div>
           <div className="text-2xl font-bold font-mono text-white">{GB(calc.total).toFixed(1)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">GB resident</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">GB resident</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">vs fp16 + MHA</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">vs fp16 + MHA</div>
           <div className="text-2xl font-bold font-mono text-emerald-300">{calc.saving.toFixed(1)}×</div>
-          <div className="text-[11px] text-gray-600 mt-1">
+          <div className="text-[0.6875rem] text-gray-600 mt-1">
             was {GB(calc.fp16Baseline).toFixed(0)} GB
           </div>
         </div>
@@ -460,7 +460,7 @@ export default function EfficiencyIndex() {
             <div key={g.n} className={`rounded-2xl border p-5 ${g.tone}`}>
               <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
                 <div className={`font-bold ${g.label}`}>{g.n}</div>
-                <div className="text-[10px] uppercase tracking-wide text-gray-500">Saves: {g.budget}</div>
+                <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">Saves: {g.budget}</div>
               </div>
               <div className="space-y-3">
                 {g.items.map((it) => (
@@ -468,16 +468,16 @@ export default function EfficiencyIndex() {
                     <div className="flex flex-wrap items-baseline gap-2 mb-1">
                       <span className="text-sm font-semibold text-white">{it.t}</span>
                       {it.link && (
-                        <a href={it.link} className="text-[11px] text-blue-400 hover:underline shrink-0">
+                        <a href={it.link} className="text-[0.6875rem] text-blue-400 hover:underline shrink-0">
                           {it.linkLabel} →
                         </a>
                       )}
                     </div>
-                    <div className="text-[11px] font-mono text-gray-500 mb-2">{it.real}</div>
+                    <div className="text-[0.6875rem] font-mono text-gray-500 mb-2">{it.real}</div>
                     <p className="text-xs text-gray-300 leading-relaxed mb-2">{it.d}</p>
                     {it.fails && (
                       <p className="text-xs text-rose-300/90 leading-relaxed m-0">
-                        <span className="text-gray-500 uppercase tracking-wide text-[10px]">Where it bites </span>
+                        <span className="text-gray-500 uppercase tracking-wide text-[0.625rem]">Where it bites </span>
                         {it.fails}
                       </p>
                     )}
@@ -532,7 +532,7 @@ export default function EfficiencyIndex() {
         </p>
         <div className="p-5 rounded-xl border border-cyan-500/25 bg-cyan-500/[0.07] mb-5">
           <div className="text-sm font-semibold text-white mb-1">{SCAFFOLD.t}</div>
-          <div className="text-[11px] font-mono text-gray-500 mb-2">{SCAFFOLD.real}</div>
+          <div className="text-[0.6875rem] font-mono text-gray-500 mb-2">{SCAFFOLD.real}</div>
           <p className="text-xs text-gray-300 leading-relaxed m-0">{SCAFFOLD.d}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

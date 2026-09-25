@@ -130,7 +130,7 @@ export default function AwsEc2() {
                 <Box className="text-purple-400" size={32}/>
               </div>
               <span className="font-bold text-white text-sm">AMI</span>
-              <span className="text-[10px] text-gray-500">(OS Template)</span>
+              <span className="text-[0.625rem] text-gray-500">(OS Template)</span>
             </div>
 
             <ArrowRight className="text-gray-600" />
@@ -140,7 +140,7 @@ export default function AwsEc2() {
                 <Cpu className="text-blue-400" size={32}/>
               </div>
               <span className="font-bold text-white text-sm">Instance Type</span>
-              <span className="text-[10px] text-gray-500">(Size)</span>
+              <span className="text-[0.625rem] text-gray-500">(Size)</span>
             </div>
 
             <ArrowRight className="text-gray-600" />
@@ -150,7 +150,7 @@ export default function AwsEc2() {
                 <Shield className="text-green-400" size={32}/>
               </div>
               <span className="font-bold text-white text-sm">Security Group</span>
-              <span className="text-[10px] text-gray-500">(Firewall)</span>
+              <span className="text-[0.625rem] text-gray-500">(Firewall)</span>
             </div>
 
             <ArrowRight className="text-gray-600" />
@@ -160,7 +160,7 @@ export default function AwsEc2() {
                 <Key className="text-yellow-400" size={32}/>
               </div>
               <span className="font-bold text-white text-sm">Key Pair</span>
-              <span className="text-[10px] text-gray-500">(Access)</span>
+              <span className="text-[0.625rem] text-gray-500">(Access)</span>
             </div>
 
             <ArrowRight className="text-gray-600" />
@@ -170,7 +170,7 @@ export default function AwsEc2() {
                 <Server className="text-orange-500" size={32}/>
               </div>
               <span className="font-bold text-orange-400 text-sm">EC2 Instance</span>
-              <span className="text-[10px] text-orange-300">(Running)</span>
+              <span className="text-[0.625rem] text-orange-300">(Running)</span>
             </div>
             
           </div>

@@ -122,7 +122,7 @@ function DecompositionPanel() {
               ["DoRA result", g.doraS, "text-purple-300"],
             ].map(([n, v, tone]) => (
               <div key={n} className="p-3 rounded-lg bg-black/40 border border-white/10">
-                <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">{n}</div>
+                <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">{n}</div>
                 <div className={`font-mono text-xs ${tone}`}>
                   ‖·‖ = {v.mag.toFixed(3)} · θ = {v.ang.toFixed(1)}°
                 </div>

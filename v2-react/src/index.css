@@ -16,3 +16,29 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+/* ---------------------------------------------------------------------------
+   Reading size.
+   Every text size on the site is in rem, so this single value scales all of
+   it — body copy, labels, code, stat tiles. --reading-scale is set by the
+   A−/A+ control in the header and persisted per device.
+   Phones start larger: the same rem reads smaller on a small screen held at
+   arm's length, which is what made the site hard to read on a phone.
+--------------------------------------------------------------------------- */
+:root { --reading-scale: 1; }
+html { font-size: calc(100% * var(--reading-scale)); }
+
+@media (max-width: 640px) {
+  html { font-size: calc(112.5% * var(--reading-scale)); } /* 18px at 1.0 */
+
+  /* Micro-labels (uppercase captions, units under stat tiles) were designed
+     for a desktop. Floor them on phones. Unlayered, so this beats Tailwind's
+     layered utilities without !important. */
+  .text-\[0\.5rem\],
+  .text-\[0\.5625rem\],
+  .text-\[0\.625rem\] { font-size: 0.6875rem; }
+
+  /* Long prose lines are harder to track on a narrow screen with larger
+     type; give them a little more air. */
+  p { line-height: 1.7; }
+}

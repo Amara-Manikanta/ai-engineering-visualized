@@ -389,8 +389,8 @@ chunks = splitter.split_text(document_text)`}</div>
                     <motion.span className="bg-cyan-600/30 border border-cyan-500/50 px-2 py-1 rounded-r-md text-cyan-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>d rapidly.</motion.span>
                   </div>
                   <div className="flex gap-2 mt-2">
-                    <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">⚠️ "Artificial" split into 2 chunks</span>
-                    <span className="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">⚠️ "world" split into 2 chunks</span>
+                    <span className="text-[0.625rem] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">⚠️ "Artificial" split into 2 chunks</span>
+                    <span className="text-[0.625rem] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">⚠️ "world" split into 2 chunks</span>
                   </div>
                 </div>
 

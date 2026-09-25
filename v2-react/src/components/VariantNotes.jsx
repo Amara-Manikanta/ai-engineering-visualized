@@ -50,7 +50,7 @@ export default function VariantNotes({ how = [], good = [], bad = [], cost, code
               ["Implementation effort", cost.complexity, "border-indigo-500/25 bg-indigo-500/[0.07]", "text-indigo-400"],
             ].map(([label, val, box, tone]) => (
               <div key={label} className={`p-5 rounded-xl border ${box}`}>
-                <div className={`text-[10px] uppercase tracking-wide mb-1.5 ${tone}`}>{label}</div>
+                <div className={`text-[0.625rem] uppercase tracking-wide mb-1.5 ${tone}`}>{label}</div>
                 <div className="text-sm text-gray-200 leading-relaxed">{val}</div>
               </div>
             ))}

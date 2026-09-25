@@ -177,7 +177,7 @@ const PythonLibrariesCheatSheet = () => {
           return (
             <div key={ring.id} className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
               <motion.div 
-                className={`absolute px-3 py-1 rounded-full border ${ring.color} flex items-center gap-2 backdrop-blur-md font-bold text-[11px] pointer-events-auto shadow-lg transition-all z-20 cursor-default`}
+                className={`absolute px-3 py-1 rounded-full border ${ring.color} flex items-center gap-2 backdrop-blur-md font-bold text-[0.6875rem] pointer-events-auto shadow-lg transition-all z-20 cursor-default`}
                 style={{
                   top: isTop ? `calc(50% - ${ring.radius}px - 14px)` : `calc(50% + ${ring.radius}px - 14px)`,
                 }}
@@ -214,10 +214,10 @@ const PythonLibrariesCheatSheet = () => {
                     animate={{ opacity, scale: isHovered ? 1.2 : 1 }}
                     transition={{ delay: rIdx * 0.1 + i * 0.02, type: 'spring' }}
                   >
-                    <div className={`w-9 h-9 rounded-full border flex items-center justify-center shadow-lg transition-colors font-mono font-bold text-[11px] leading-none ${isActive ? ring.color : 'border-gray-700 text-gray-300 bg-[#1a1a1a]'}`}>
+                    <div className={`w-9 h-9 rounded-full border flex items-center justify-center shadow-lg transition-colors font-mono font-bold text-[0.6875rem] leading-none ${isActive ? ring.color : 'border-gray-700 text-gray-300 bg-[#1a1a1a]'}`}>
                        {monogram(node)}
                     </div>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded transition-all ${isActive ? 'bg-[#222] text-white border border-[#444]' : 'text-gray-400 drop-shadow-md'}`}>
+                    <span className={`text-[0.625rem] font-bold px-2 py-0.5 rounded transition-all ${isActive ? 'bg-[#222] text-white border border-[#444]' : 'text-gray-400 drop-shadow-md'}`}>
                       {node}
                     </span>
                   </motion.div>

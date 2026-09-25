@@ -25,7 +25,7 @@ const Box = ({ children, tone = 'gray', className = '' }) => {
 
 const Arrow = ({ label, vertical = false }) => (
   <div className={`flex ${vertical ? 'flex-col' : 'flex-row'} items-center justify-center gap-1 text-gray-600 shrink-0`}>
-    {label && <span className="text-[10px] text-gray-500 whitespace-nowrap">{label}</span>}
+    {label && <span className="text-[0.625rem] text-gray-500 whitespace-nowrap">{label}</span>}
     <span className="text-lg leading-none">{vertical ? '↓' : '→'}</span>
   </div>
 );
@@ -38,14 +38,14 @@ function HybridVisual() {
         <div className="flex flex-col items-center gap-2">
           <Arrow vertical />
           <Box tone="blue">Dense / Vector</Box>
-          <div className="text-[10px] text-gray-500 text-center max-w-[130px]">
+          <div className="text-[0.625rem] text-gray-500 text-center max-w-[130px]">
             catches meaning:<br />"sign-in failure"
           </div>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Arrow vertical />
           <Box tone="amber">Sparse / BM25</Box>
-          <div className="text-[10px] text-gray-500 text-center max-w-[130px]">
+          <div className="text-[0.625rem] text-gray-500 text-center max-w-[130px]">
             catches exact token:<br /><span className="text-amber-300">"5012"</span>
           </div>
         </div>
@@ -60,16 +60,16 @@ function RewriteVisual() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
-        <span className="text-[10px] uppercase tracking-wide text-gray-500 w-16 shrink-0">Before</span>
+        <span className="text-[0.625rem] uppercase tracking-wide text-gray-500 w-16 shrink-0">Before</span>
         <Box tone="rose" className="flex-1">"whats it cost"</Box>
       </div>
       <div className="flex items-center gap-3">
         <span className="w-16 shrink-0" />
         <div className="text-gray-600 text-lg">↓</div>
-        <span className="text-[10px] text-gray-500">LLM rewrite, using chat history for context</span>
+        <span className="text-[0.625rem] text-gray-500">LLM rewrite, using chat history for context</span>
       </div>
       <div className="flex items-center gap-3">
-        <span className="text-[10px] uppercase tracking-wide text-gray-500 w-16 shrink-0">After</span>
+        <span className="text-[0.625rem] uppercase tracking-wide text-gray-500 w-16 shrink-0">After</span>
         <Box tone="emerald" className="flex-1">
           "What is the monthly pricing of the Enterprise plan?"
         </Box>
@@ -88,11 +88,11 @@ function DecompositionVisual() {
       <div className="flex flex-wrap gap-3 justify-center">
         <div className="flex flex-col items-center gap-1.5">
           <Box tone="blue">"Tesla 2023 revenue"</Box>
-          <span className="text-[10px] text-gray-500">retrieve →  $96.8B</span>
+          <span className="text-[0.625rem] text-gray-500">retrieve →  $96.8B</span>
         </div>
         <div className="flex flex-col items-center gap-1.5">
           <Box tone="blue">"Ford 2023 revenue"</Box>
-          <span className="text-[10px] text-gray-500">retrieve →  $176.2B</span>
+          <span className="text-[0.625rem] text-gray-500">retrieve →  $176.2B</span>
         </div>
       </div>
       <Arrow vertical label="synthesize both" />
@@ -107,7 +107,7 @@ function HydeVisual() {
       <Box tone="gray">"How do I rotate API keys?"</Box>
       <Arrow vertical label="LLM invents a plausible answer" />
       <div className="max-w-md p-3 rounded-lg border border-dashed border-purple-500/40 bg-purple-500/10">
-        <div className="text-[10px] uppercase tracking-wide text-purple-400 mb-1">Hypothetical document (may be factually wrong — that's fine)</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-purple-400 mb-1">Hypothetical document (may be factually wrong — that's fine)</div>
         <div className="text-xs text-gray-300 italic leading-relaxed">
           "To rotate an API key, open Settings → Credentials, click Regenerate, then update the secret in your deployment environment…"
         </div>
@@ -122,7 +122,7 @@ function ParentChildVisual() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-6">
       <div className="flex flex-col items-center gap-2">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500">Indexed: small chunks</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">Indexed: small chunks</div>
         <div className="grid grid-cols-3 gap-1.5">
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <motion.div
@@ -133,20 +133,20 @@ function ParentChildVisual() {
             />
           ))}
         </div>
-        <div className="text-[10px] text-gray-500">precise match ↑</div>
+        <div className="text-[0.625rem] text-gray-500">precise match ↑</div>
       </div>
 
       <div className="flex flex-col items-center text-gray-600">
-        <span className="text-[10px] text-gray-500 whitespace-nowrap mb-1">but return…</span>
+        <span className="text-[0.625rem] text-gray-500 whitespace-nowrap mb-1">but return…</span>
         <span className="text-2xl">→</span>
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500">Returned: whole parent</div>
-        <div className="w-40 h-[74px] rounded-lg border-2 border-emerald-500/60 bg-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200 text-center px-2">
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">Returned: whole parent</div>
+        <div className="w-40 h-[74px] rounded-lg border-2 border-emerald-500/60 bg-emerald-500/10 flex items-center justify-center text-[0.625rem] text-emerald-200 text-center px-2">
           full section, surrounding context intact
         </div>
-        <div className="text-[10px] text-gray-500">LLM sees the whole story ↑</div>
+        <div className="text-[0.625rem] text-gray-500">LLM sees the whole story ↑</div>
       </div>
     </div>
   );
@@ -156,19 +156,19 @@ function ContextualVisual() {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1.5">Naive chunk — ambiguous on its own</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1.5">Naive chunk — ambiguous on its own</div>
         <div className="p-3 rounded-lg border border-rose-500/30 bg-rose-500/10 text-xs text-gray-300 font-mono">
           "Revenue grew 12% year over year."
         </div>
-        <div className="text-[10px] text-gray-500 mt-1.5">Whose revenue? Which year? The embedding has no idea.</div>
+        <div className="text-[0.625rem] text-gray-500 mt-1.5">Whose revenue? Which year? The embedding has no idea.</div>
       </div>
       <div>
-        <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1.5">Contextualized chunk — self-describing</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1.5">Contextualized chunk — self-describing</div>
         <div className="p-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-xs font-mono">
           <span className="text-emerald-300">[From: Acme Corp FY2024 Q3 earnings report, Financials section]</span>{' '}
           <span className="text-gray-300">"Revenue grew 12% year over year."</span>
         </div>
-        <div className="text-[10px] text-gray-500 mt-1.5">An LLM writes that prefix once at index time, per chunk.</div>
+        <div className="text-[0.625rem] text-gray-500 mt-1.5">An LLM writes that prefix once at index time, per chunk.</div>
       </div>
     </div>
   );
@@ -192,8 +192,8 @@ function RerankVisual() {
 
   const Col = ({ title, sub, rows, tone }) => (
     <div className="flex-1 min-w-[150px]">
-      <div className={`text-[10px] uppercase tracking-wide mb-1 ${tone}`}>{title}</div>
-      <div className="text-[10px] text-gray-500 mb-2">{sub}</div>
+      <div className={`text-[0.625rem] uppercase tracking-wide mb-1 ${tone}`}>{title}</div>
+      <div className="text-[0.625rem] text-gray-500 mb-2">{sub}</div>
       <div className="space-y-1.5">
         {rows.map((r, i) => (
           <motion.div
@@ -202,7 +202,7 @@ function RerankVisual() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06 }}
-            className={`flex items-center justify-between px-2.5 py-1.5 rounded border text-[11px] font-mono ${
+            className={`flex items-center justify-between px-2.5 py-1.5 rounded border text-[0.6875rem] font-mono ${
               r.rel ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-200' : 'bg-white/5 border-white/10 text-gray-500'
             }`}
           >
@@ -219,12 +219,12 @@ function RerankVisual() {
       <div className="flex items-center gap-3">
         <Col title="Vector top-5" sub="scores bunched, order ~arbitrary" rows={before} tone="text-rose-400" />
         <div className="flex flex-col items-center text-gray-600 shrink-0 pt-8">
-          <span className="text-[10px] text-gray-500 whitespace-nowrap mb-1">cross-encoder</span>
+          <span className="text-[0.625rem] text-gray-500 whitespace-nowrap mb-1">cross-encoder</span>
           <span className="text-2xl">→</span>
         </div>
         <Col title="After re-rank" sub="clear separation, relevant on top" rows={after} tone="text-emerald-400" />
       </div>
-      <p className="text-[11px] text-gray-500 mt-3 leading-relaxed">
+      <p className="text-[0.6875rem] text-gray-500 mt-3 leading-relaxed">
         A bi-encoder embeds query and document <em>separately</em>, so it never directly compares them. A cross-encoder
         reads both together in one pass — far more accurate, far too slow to run over the whole corpus. So you use
         vector search to get 100 candidates, then the cross-encoder to pick the best 5.
@@ -504,7 +504,7 @@ export default function RagAdvancedRetrieval() {
                       className={`flex-1 rounded-xl border p-4 ${s.bg}`}
                     >
                       <div className={`text-xs font-bold uppercase tracking-wide mb-0.5 ${s.tone}`}>{s.label}</div>
-                      <div className="text-[10px] text-gray-500 mb-3">{stage.sub}</div>
+                      <div className="text-[0.625rem] text-gray-500 mb-3">{stage.sub}</div>
                       <div className="space-y-1.5">
                         {stage.items.map((it) => (
                           <button
@@ -514,7 +514,7 @@ export default function RagAdvancedRetrieval() {
                               if (t) setActive(t);
                               document.getElementById('techniques')?.scrollIntoView({ behavior: 'smooth' });
                             }}
-                            className="w-full text-left px-2.5 py-1.5 rounded bg-black/30 border border-white/10 text-[11px] text-gray-300 hover:border-white/40 hover:text-white transition-colors"
+                            className="w-full text-left px-2.5 py-1.5 rounded bg-black/30 border border-white/10 text-[0.6875rem] text-gray-300 hover:border-white/40 hover:text-white transition-colors"
                           >
                             {it}
                           </button>
@@ -578,7 +578,7 @@ export default function RagAdvancedRetrieval() {
               <div className="p-6 border-b border-white/10">
                 <div className="flex flex-wrap items-center gap-3 mb-2">
                   <h3 className="text-xl font-bold text-white">{active.name}</h3>
-                  <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${STAGES[active.stage].bg} ${STAGES[active.stage].tone}`}>
+                  <span className={`text-[0.625rem] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${STAGES[active.stage].bg} ${STAGES[active.stage].tone}`}>
                     {STAGES[active.stage].label}
                   </span>
                 </div>
@@ -614,15 +614,15 @@ export default function RagAdvancedRetrieval() {
                 {/* Tradeoffs */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="p-3.5 rounded-lg bg-white/5 border border-white/10">
-                    <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">When to use</div>
+                    <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">When to use</div>
                     <div className="text-xs text-gray-300 leading-relaxed">{active.when}</div>
                   </div>
                   <div className="p-3.5 rounded-lg bg-white/5 border border-white/10">
-                    <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Cost</div>
+                    <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Cost</div>
                     <div className="text-xs text-gray-300 leading-relaxed">{active.cost}</div>
                   </div>
                   <div className="p-3.5 rounded-lg bg-white/5 border border-white/10">
-                    <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Latency impact</div>
+                    <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Latency impact</div>
                     <div className="text-xs text-gray-300 leading-relaxed">{active.latency}</div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } } };
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
@@ -8,7 +9,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsPhi() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'The Small-Model Case', hash: 'small' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'How Phi Is Trained', hash: 'training' },
     { label: 'Data Quality vs Scale', hash: 'quality' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
@@ -34,6 +38,10 @@ export default function ModelsPhi() {
         </p>
       </section>
 
+      <ModelLineup id="phi" />
+
+      <ModelWeights id="phi" />
+
       <section id="small" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">The Small-Model Case</h2>
         <p className="text-gray-300 leading-relaxed max-w-3xl mb-6">
@@ -55,6 +63,8 @@ export default function ModelsPhi() {
           ))}
         </div>
       </section>
+
+      <ModelPipeline id="phi" name="Phi" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Phi Is Trained</h2>
@@ -111,12 +121,12 @@ export default function ModelsPhi() {
           <div className="p-5 rounded-xl border border-gray-600/40 bg-white/5">
             <div className="text-gray-300 font-semibold mb-2 text-sm">Scale-first</div>
             <p className="text-xs text-gray-400 leading-relaxed mb-3">More parameters, more tokens, minimal filtering. Broad knowledge, high cost, strong general capability.</p>
-            <div className="text-[11px] text-gray-500 font-mono">capability ≈ f(params, tokens)</div>
+            <div className="text-[0.6875rem] text-gray-500 font-mono">capability ≈ f(params, tokens)</div>
           </div>
           <div className="p-5 rounded-xl border border-blue-500/40 bg-blue-500/10">
             <div className="text-blue-300 font-semibold mb-2 text-sm">Data-first (Phi)</div>
             <p className="text-xs text-gray-300 leading-relaxed mb-3">Fewer parameters, curated tokens. Narrower knowledge, far lower cost, surprisingly strong reasoning.</p>
-            <div className="text-[11px] text-blue-300/70 font-mono">capability ≈ f(params, tokens, quality)</div>
+            <div className="text-[0.6875rem] text-blue-300/70 font-mono">capability ≈ f(params, tokens, quality)</div>
           </div>
         </div>
       </section>

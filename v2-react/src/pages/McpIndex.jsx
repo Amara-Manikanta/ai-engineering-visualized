@@ -169,7 +169,7 @@ export default function McpIndex() {
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-3">
             <h3 className="text-sm font-bold uppercase tracking-wide text-indigo-400">Server → Client</h3>
-            <span className="text-[11px] text-gray-500">what a server offers the agent</span>
+            <span className="text-[0.6875rem] text-gray-500">what a server offers the agent</span>
             <div className="flex-1 h-px bg-white/10" />
           </div>
           <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-4" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
@@ -182,7 +182,7 @@ export default function McpIndex() {
                 <span className="text-2xl block mb-2">{p.icon}</span>
                 <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                   <h3 className={`font-bold ${p.color}`}>{p.title}</h3>
-                  <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full bg-black/40 border border-white/10 text-gray-500">{p.ctrl}</span>
+                  <span className="text-[0.5625rem] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full bg-black/40 border border-white/10 text-gray-500">{p.ctrl}</span>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed m-0">{p.desc}</p>
               </motion.div>
@@ -193,7 +193,7 @@ export default function McpIndex() {
         <div>
           <div className="flex items-center gap-3 mb-3">
             <h3 className="text-sm font-bold uppercase tracking-wide text-rose-400">Client → Server</h3>
-            <span className="text-[11px] text-gray-500">what the agent offers back</span>
+            <span className="text-[0.6875rem] text-gray-500">what the agent offers back</span>
             <div className="flex-1 h-px bg-white/10" />
           </div>
           <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-4" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
@@ -303,14 +303,14 @@ export default function McpIndex() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div className="p-3 rounded-lg bg-black/30 border border-white/10">
-              <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">The risk</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">The risk</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">
                 A malicious server (or poisoned data through an honest one) can attempt to chain tool calls the user
                 never asked for — exfiltrating data via an innocuous-looking "fetch" tool.
               </p>
             </div>
             <div className="p-3 rounded-lg bg-black/30 border border-white/10">
-              <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">The mitigation</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">The mitigation</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">
                 Treat everything returned by a server as data, never instructions. Require confirmation for
                 side-effectful calls, and install servers only from sources you trust — an MCP server is code running
@@ -341,7 +341,7 @@ export default function McpIndex() {
               <React.Fragment key={s.t}>
                 <div className={`flex-1 px-3 py-2.5 rounded-lg border text-center ${s.tone}`}>
                   <div className="font-bold">{s.t}</div>
-                  <div className="text-[9px] opacity-70 mt-0.5">{s.s}</div>
+                  <div className="text-[0.5625rem] opacity-70 mt-0.5">{s.s}</div>
                 </div>
                 {i < arr.length - 1 && <span className="text-gray-600 shrink-0">→</span>}
               </React.Fragment>

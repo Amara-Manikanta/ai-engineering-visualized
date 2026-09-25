@@ -149,7 +149,7 @@ function BoostingLab() {
       </div>
 
       <div className="rounded-xl bg-black/50 border border-white/10 p-3 mb-5">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1 px-1">
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1 px-1">
           What is still wrong — the residuals the next round would fit
         </div>
         <svg viewBox={`0 0 ${W} ${RH}`} className="w-full h-auto">
@@ -171,17 +171,17 @@ function BoostingLab() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Baseline RMSE</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Baseline RMSE</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{fit.baseRmse.toFixed(3)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">predicting the mean</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">predicting the mean</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-amber-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-1">Current RMSE</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-1">Current RMSE</div>
           <div className="text-2xl font-bold font-mono text-amber-300">{fit.rmse.toFixed(3)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">after {rounds} stump{rounds === 1 ? "" : "s"}</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">after {rounds} stump{rounds === 1 ? "" : "s"}</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Error removed</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Error removed</div>
           <div className="text-2xl font-bold font-mono text-emerald-400">{improvement}%</div>
         </div>
       </div>
@@ -388,7 +388,7 @@ export default function MlXgboost() {
             <p className="text-xs text-gray-300 leading-relaxed mb-2">
               Grows level-wise. The most battle-tested and the most predictable to tune.
             </p>
-            <div className="text-[11px] text-gray-500">Default choice when you want no surprises.</div>
+            <div className="text-[0.6875rem] text-gray-500">Default choice when you want no surprises.</div>
           </div>
           <div className="p-5 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.07]">
             <div className="font-bold text-emerald-400 mb-2">LightGBM</div>
@@ -396,7 +396,7 @@ export default function MlXgboost() {
               Grows leaf-wise, splitting wherever loss drops most. Much faster on large data, and easier to overfit —
               cap num_leaves.
             </p>
-            <div className="text-[11px] text-gray-500">Best when rows run to millions.</div>
+            <div className="text-[0.6875rem] text-gray-500">Best when rows run to millions.</div>
           </div>
           <div className="p-5 rounded-xl border border-indigo-500/25 bg-indigo-500/[0.07]">
             <div className="font-bold text-indigo-400 mb-2">CatBoost</div>
@@ -404,7 +404,7 @@ export default function MlXgboost() {
               Ordered target statistics for categorical features, so no manual encoding and no target leakage.
               Strongest out-of-the-box defaults.
             </p>
-            <div className="text-[11px] text-gray-500">Best with many high-cardinality categories.</div>
+            <div className="text-[0.6875rem] text-gray-500">Best with many high-cardinality categories.</div>
           </div>
         </div>
       </section>

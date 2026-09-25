@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } } };
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
@@ -8,8 +9,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsGemma() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'How Gemma Is Trained', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -33,27 +36,10 @@ export default function ModelsGemma() {
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Size class</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Runs on</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best for</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">~2B</td><td className="px-4 py-2.5 border-b border-gray-900">Laptop CPU / mobile</td><td className="px-4 py-2.5 border-b border-gray-900">On-device features, classification, routing</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">~7–9B</td><td className="px-4 py-2.5 border-b border-gray-900">Single consumer GPU</td><td className="px-4 py-2.5 border-b border-gray-900">The practical default — chat, summarisation, RAG</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">~27B</td><td className="px-4 py-2.5 border-b border-gray-900">One datacentre GPU</td><td className="px-4 py-2.5 border-b border-gray-900">Highest quality while staying self-hosted</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Specialised</td><td className="px-4 py-2.5 border-b border-gray-900">Varies</td><td className="px-4 py-2.5 border-b border-gray-900">Code, vision and safety-classifier variants</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p className="text-xs text-gray-500 mt-3">Sizes are approximate and the lineup moves quickly — check the model card for current releases.</p>
-      </section>
+      <ModelLineup id="gemma" />
+
+      <ModelWeights id="gemma" />
+
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>
@@ -71,6 +57,8 @@ export default function ModelsGemma() {
           ))}
         </div>
       </section>
+
+      <ModelPipeline id="gemma" name="Gemma" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Gemma Is Trained</h2>

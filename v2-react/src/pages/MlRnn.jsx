@@ -120,7 +120,7 @@ function GradientDecay() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">
             Gradient reaching step 1 (of {steps})
           </div>
           <div className="text-2xl font-bold font-mono text-rose-300">
@@ -128,7 +128,7 @@ function GradientDecay() {
           </div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Steps until signal &lt; 0.001</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Steps until signal &lt; 0.001</div>
           <div className="text-2xl font-bold font-mono text-amber-300">
             {Number.isFinite(halfLife) && halfLife > 0 ? halfLife : "—"}
           </div>
@@ -169,9 +169,9 @@ function Unroller() {
             >
               {tok}
             </div>
-            <div className="text-[9px] text-gray-600 font-mono">x{i}</div>
+            <div className="text-[0.5625rem] text-gray-600 font-mono">x{i}</div>
             <div
-              className={`w-8 h-8 rounded-full border flex items-center justify-center text-[9px] font-mono transition-colors ${
+              className={`w-8 h-8 rounded-full border flex items-center justify-center text-[0.5625rem] font-mono transition-colors ${
                 i <= t ? "border-emerald-500/50 bg-emerald-500/15 text-emerald-300" : "border-white/10 text-gray-700"
               }`}
             >
@@ -328,7 +328,7 @@ export default function MlRnn() {
           {GATES.map((g) => (
             <div key={g.n} className={`p-5 rounded-xl border ${g.box}`}>
               <div className={`font-semibold mb-1 ${g.label}`}>{g.n}</div>
-              <div className="text-[11px] font-mono text-gray-500 mb-2.5">{g.f}</div>
+              <div className="text-[0.6875rem] font-mono text-gray-500 mb-2.5">{g.f}</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{g.d}</p>
             </div>
           ))}

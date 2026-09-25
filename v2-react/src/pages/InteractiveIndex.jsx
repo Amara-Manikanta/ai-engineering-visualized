@@ -69,7 +69,7 @@ export default function InteractiveIndex() {
               <span className={`w-2 h-2 rounded-full shrink-0 ${g.dot}`} />
               <h3 className={`text-xs font-bold uppercase tracking-wider ${g.accent}`}>{g.name}</h3>
               <div className="flex-1 h-px bg-white/10" />
-              <span className="text-[10px] text-gray-600 shrink-0">{g.items.length}</span>
+              <span className="text-[0.625rem] text-gray-600 shrink-0">{g.items.length}</span>
             </div>
             <p className="text-xs text-gray-500 mb-3 max-w-2xl">{g.blurb}</p>
             <div className="flex flex-wrap gap-2">

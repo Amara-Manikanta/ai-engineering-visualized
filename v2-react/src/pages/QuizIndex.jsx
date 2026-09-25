@@ -1,8 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import GuideLayout from "../components/GuideLayout";
 import KnowledgeCheck from "../components/KnowledgeCheck";
+import InterviewCards from "../components/InterviewCards";
+import QuestionEditor from "../components/QuestionEditor";
 import { QUIZZES } from "../data/quizBank";
+import { parseQuestions } from "../lib/questionFormat";
+
+/* Every .txt in the project's questions/ folder, bundled at build time.
+   Adding a file needs no code change — it is discovered by this glob. With
+   the dev server running, saving a file hot-reloads this page. */
+const FILES = import.meta.glob("/questions/*.txt", { query: "?raw", import: "default", eager: true });
+
+const fromFiles = Object.entries(FILES).map(([path, raw]) => {
+  const name = path.split("/").pop();
+  return { name, ...parseQuestions(raw, name) };
+});
+
+const STORE = "custom-questions";
+const loadCustom = () => {
+  try {
+    return localStorage.getItem(STORE) || "";
+  } catch {
+    return "";
+  }
+};
+
+const FILE_TONES = ["purple", "blue", "emerald", "amber", "rose", "indigo"];
 
 const TONES = {
   amber: "border-amber-500/30 bg-amber-500/[0.08] hover:border-amber-500/60",
@@ -15,26 +39,58 @@ const TONES = {
 
 export default function QuizIndex() {
   const [active, setActive] = useState(null);
-  const quiz = QUIZZES.find((q) => q.id === active);
+  const [custom, setCustom] = useState(loadCustom);
 
-  const total = QUIZZES.reduce((a, q) => a + q.questions.length, 0);
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORE, custom);
+    } catch {
+      /* private mode — questions last for this visit only */
+    }
+  }, [custom]);
+
+  const mine = useMemo(() => parseQuestions(custom, "your questions"), [custom]);
+
+  // Built-in quizzes, then one card per topic found in files, then yours.
+  const all = useMemo(() => {
+    const toCard = (t, i, origin) => ({
+      id: `${origin}:${t.id}`,
+      topic: t.name,
+      label: t.name,
+      icon: origin === "mine" ? "✍️" : "📄",
+      tone: FILE_TONES[i % FILE_TONES.length],
+      origin,
+      questions: t.questions,
+    });
+    const files = fromFiles.flatMap((f) => f.topics).map((t, i) => toCard(t, i, "file"));
+    const yours = mine.topics.map((t, i) => toCard(t, i + 2, "mine"));
+    return [...QUIZZES.map((q) => ({ ...q, origin: "builtin" })), ...files, ...yours];
+  }, [mine]);
+
+  const errors = [...fromFiles.flatMap((f) => f.errors), ...mine.errors];
+  const quiz = all.find((q) => q.id === active);
+  const mcq = quiz ? quiz.questions.filter((q) => q.type !== "open") : [];
+  const open = quiz ? quiz.questions.filter((q) => q.type === "open") : [];
+
+  const total = all.reduce((a, q) => a + q.questions.length, 0);
 
   const toc = [
     { label: "Pick a Topic", hash: "pick" },
     ...(quiz ? [{ label: quiz.label, hash: "quiz" }] : []),
+    { label: "Add Your Own", hash: "yours" },
     { label: "How to Use These", hash: "how" },
   ];
 
   return (
     <GuideLayout
       title="Knowledge Checks"
-      intro={`${total} questions across ${QUIZZES.length} topics. Each one tests whether the reasoning landed, not whether you memorised a term.`}
+      intro={`${total} questions across ${all.length} topics — built-in checks, interview questions from text files, and any you add yourself.`}
       toc={toc}
     >
       <section id="pick" className="mb-12 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-5">Pick a Topic</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {QUIZZES.map((q) => (
+          {all.map((q) => (
             <button
               key={q.id}
               onClick={() => {
@@ -53,6 +109,8 @@ export default function QuizIndex() {
               <div className="font-semibold text-white text-sm mb-1">{q.label}</div>
               <div className="text-xs text-gray-400">
                 {q.questions.length} question{q.questions.length === 1 ? "" : "s"}
+                {q.origin === "file" && " · from file"}
+                {q.origin === "mine" && " · added by you"}
               </div>
             </button>
           ))}
@@ -63,16 +121,42 @@ export default function QuizIndex() {
         <section id="quiz" className="mb-12 scroll-mt-24">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
             <h2 className="text-2xl font-bold text-white m-0">{quiz.label}</h2>
-            <Link
-              to={quiz.path}
-              className="text-xs font-semibold text-blue-400 hover:underline shrink-0"
-            >
-              Read the guide →
-            </Link>
+            {quiz.path && (
+              <Link to={quiz.path} className="text-xs font-semibold text-blue-400 hover:underline shrink-0">
+                Read the guide →
+              </Link>
+            )}
           </div>
-          <KnowledgeCheck key={quiz.id} questions={quiz.questions} title={`${quiz.icon} ${quiz.topic}`} />
+          <KnowledgeCheck key={quiz.id} questions={mcq} title={`${quiz.icon} ${quiz.topic}`} />
+          <InterviewCards key={quiz.id + ":open"} questions={open} />
         </section>
       )}
+
+      <section id="yours" className="mb-12 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-white mb-2">Add Your Own</h2>
+        <p className="text-gray-400 leading-relaxed max-w-3xl mb-5 text-sm">
+          Add quiz or interview questions here, import a text file, or put <span className="font-mono text-gray-300">.txt</span>{" "}
+          files in the project's <span className="font-mono text-gray-300">questions/</span> folder — every file there
+          is loaded automatically. Questions you add here are saved in this browser; export them to make them
+          permanent.
+        </p>
+        <QuestionEditor text={custom} onChange={setCustom} topicNames={all.map((q) => q.topic)} />
+
+        {errors.length > 0 && (
+          <div className="mt-5 rounded-xl border border-amber-500/30 bg-amber-500/[0.08] p-4">
+            <div className="text-sm font-semibold text-amber-300 mb-2">
+              {errors.length} problem{errors.length === 1 ? "" : "s"} in your question text
+            </div>
+            <ul className="space-y-1 m-0 pl-0 list-none">
+              {errors.slice(0, 12).map((e, i) => (
+                <li key={i} className="text-xs text-amber-100/90 font-mono">
+                  {e.source}, line {e.line}: {e.message}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
 
       <section id="how" className="mb-4 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How to Use These</h2>
@@ -88,7 +172,7 @@ export default function QuizIndex() {
             ],
             [
               "Nothing is scored",
-              "No persistence, no account, no tracking. The count resets when you leave the page, because the point is the reasoning rather than a number.",
+              "No account and no tracking. Scores reset when you leave the page, because the point is the reasoning rather than a number. Only questions you add are remembered, on this device.",
             ],
           ].map(([t, d]) => (
             <div key={t} className="p-5 rounded-xl border border-white/10 bg-white/5">

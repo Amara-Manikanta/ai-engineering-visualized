@@ -65,9 +65,9 @@ const ToyVectorVisualizer = () => {
               </marker>
             </defs>
           </svg>
-          <motion.div className="absolute text-[10px] font-bold text-indigo-400 bg-[#111] px-1 rounded z-20" style={{ right: '5%', bottom: '25%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }}>A: RAG</motion.div>
-          <motion.div className="absolute text-[10px] font-bold text-emerald-400 bg-[#111] px-1 rounded z-20" style={{ right: '15%', bottom: '10%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.8 }}>B: Retrieval...</motion.div>
-          <motion.div className="absolute text-[10px] font-bold text-amber-400 bg-[#111] px-1 rounded z-20" style={{ left: '16%', top: '12%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 2.1 }}>C: biryani</motion.div>
+          <motion.div className="absolute text-[0.625rem] font-bold text-indigo-400 bg-[#111] px-1 rounded z-20" style={{ right: '5%', bottom: '25%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }}>A: RAG</motion.div>
+          <motion.div className="absolute text-[0.625rem] font-bold text-emerald-400 bg-[#111] px-1 rounded z-20" style={{ right: '15%', bottom: '10%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.8 }}>B: Retrieval...</motion.div>
+          <motion.div className="absolute text-[0.625rem] font-bold text-amber-400 bg-[#111] px-1 rounded z-20" style={{ left: '16%', top: '12%' }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 2.1 }}>C: biryani</motion.div>
         </div>
       </div>
       <div className="mt-6 space-y-4 text-sm">
@@ -204,7 +204,7 @@ const RagEmbeddingFlow = () => {
           </motion.div>
           <div className="w-24 h-24 bg-purple-900/30 border-2 border-purple-500/50 rounded-full flex flex-col items-center justify-center text-purple-400 z-10 bg-[#111]">
             <Zap size={28} className="mb-1" />
-            <span className="text-[10px] font-bold text-center leading-tight">Embedding<br/>Model</span>
+            <span className="text-[0.625rem] font-bold text-center leading-tight">Embedding<br/>Model</span>
           </div>
           <motion.div animate={{ x: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }} className="text-gray-500 absolute translate-x-16">
             <ArrowRight size={24} />
@@ -226,7 +226,7 @@ const RagEmbeddingFlow = () => {
             <motion.div key="qry-3" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="flex flex-col items-center">
               <div className="w-20 h-24 bg-emerald-900/30 border-2 border-emerald-500/50 rounded-xl flex flex-col items-center justify-center text-emerald-400 mb-2 relative">
                  <RefreshCw size={32} className="mb-2" />
-                 <div className="text-[10px] text-center font-bold">Top-K<br/>Matches</div>
+                 <div className="text-[0.625rem] text-center font-bold">Top-K<br/>Matches</div>
               </div>
               <span className="text-xs font-semibold text-emerald-400">Vector DB (Search)</span>
             </motion.div>

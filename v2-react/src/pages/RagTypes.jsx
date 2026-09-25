@@ -137,7 +137,7 @@ function MiniCard({ label, tone, items, text }) {
   };
   return (
     <div className={`rounded-xl border p-4 ${tones[tone]}`}>
-      <div className="text-[10px] uppercase tracking-wide font-bold mb-2">{label}</div>
+      <div className="text-[0.625rem] uppercase tracking-wide font-bold mb-2">{label}</div>
       {items ? (
         <ul className="space-y-1.5">
           {items.map((it) => (
@@ -176,7 +176,7 @@ export default function RagTypes() {
         </p>
         <div className="flex flex-wrap gap-2">
           {Object.entries(COMPLEXITY).map(([label, tone]) => (
-            <span key={label} className={`text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full border ${tone}`}>
+            <span key={label} className={`text-[0.625rem] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full border ${tone}`}>
               {label}
             </span>
           ))}
@@ -196,7 +196,7 @@ export default function RagTypes() {
                 {t.n}
               </span>
               <h3 className="text-xl font-bold text-white">{t.title}</h3>
-              <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${COMPLEXITY[t.complexity]}`}>
+              <span className={`text-[0.625rem] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${COMPLEXITY[t.complexity]}`}>
                 {t.complexity}
               </span>
             </div>

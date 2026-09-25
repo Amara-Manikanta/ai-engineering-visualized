@@ -87,7 +87,7 @@ export default function AzureBasics() {
               {cloudServices.map((s, i) => (
                 <div key={i} className="flex flex-col items-center p-3 bg-[#1a1a1a] border border-[#333] rounded-lg min-w-[80px]">
                   <div className={`text-${s.color}-400 mb-2`}>{s.icon}</div>
-                  <span className="text-[10px] text-gray-400 uppercase tracking-wider">{s.name}</span>
+                  <span className="text-[0.625rem] text-gray-400 uppercase tracking-wider">{s.name}</span>
                 </div>
               ))}
             </div>

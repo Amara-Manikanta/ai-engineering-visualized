@@ -199,7 +199,7 @@ export function StepPlayer({ anim }) {
                 className={`rounded-xl border-2 p-3.5 ${on ? TONES[s.tone] : "border-gray-800 bg-transparent text-gray-500"}`}
               >
                 <div className="text-sm font-bold leading-tight">{s.label}</div>
-                <div className="text-[10px] opacity-75 mt-0.5 font-mono leading-snug">{s.sub}</div>
+                <div className="text-[0.625rem] opacity-75 mt-0.5 font-mono leading-snug">{s.sub}</div>
               </motion.div>
             );
           })}
@@ -216,7 +216,7 @@ export function StepPlayer({ anim }) {
           transition={{ duration: 0.2 }}
           className="rounded-xl border border-indigo-500/25 bg-indigo-500/10 p-4 mb-4 min-h-[86px]"
         >
-          <div className="text-[10px] uppercase tracking-wide text-indigo-400 mb-1.5">
+          <div className="text-[0.625rem] uppercase tracking-wide text-indigo-400 mb-1.5">
             Step {step + 1} of {anim.steps.length}
           </div>
           <p className="text-sm text-gray-200 leading-relaxed m-0">{anim.steps[step].note}</p>

@@ -100,7 +100,7 @@ const IndexingFlow = () => {
               className={`flex flex-col items-center gap-2 p-4 rounded-xl border bg-[#1a1a1a] ${s.color} w-32`}>
               {s.icon}
               <span className="text-xs font-bold text-center">{s.label}</span>
-              <span className="text-[10px] text-gray-500 text-center">{s.sub}</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">{s.sub}</span>
             </motion.div>
             {i < steps.length - 1 && (
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.2 + 0.1 }}>
@@ -131,7 +131,7 @@ const QueryFlow = () => {
               className={`flex flex-col items-center gap-2 p-4 rounded-xl border bg-[#1a1a1a] ${s.color} w-32`}>
               {s.icon}
               <span className="text-xs font-bold text-center">{s.label}</span>
-              <span className="text-[10px] text-gray-500 text-center">{s.sub}</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">{s.sub}</span>
             </motion.div>
             {i < steps.length - 1 && (
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.2 + 0.1 }}>

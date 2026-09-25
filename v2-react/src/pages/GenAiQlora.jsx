@@ -92,7 +92,7 @@ function MemoryStack() {
         {parts.map(([label, bytes, bg]) => (
           <div
             key={label}
-            className={`${bg} flex items-center justify-center text-[10px] font-mono text-black font-bold transition-all duration-300`}
+            className={`${bg} flex items-center justify-center text-[0.625rem] font-mono text-black font-bold transition-all duration-300`}
             style={{ width: `${(bytes / calc.total) * 100}%` }}
           >
             {bytes / calc.total > 0.12 ? label.split(" ")[0] : ""}
@@ -103,20 +103,20 @@ function MemoryStack() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
         {parts.map(([label, bytes, , tone]) => (
           <div key={label} className="p-3 rounded-xl bg-black/40 border border-white/10">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">{label}</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">{label}</div>
             <div className={`text-xl font-bold font-mono ${tone}`}>{GB(bytes).toFixed(1)}</div>
-            <div className="text-[10px] text-gray-600">GB</div>
+            <div className="text-[0.625rem] text-gray-600">GB</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Training footprint</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Training footprint</div>
           <div className="text-3xl font-bold font-mono text-emerald-300">{GB(calc.total).toFixed(1)} GB</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-rose-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Full fine-tuning would need</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Full fine-tuning would need</div>
           <div className="text-3xl font-bold font-mono text-rose-300">{GB(calc.fullFt).toFixed(0)} GB</div>
         </div>
       </div>

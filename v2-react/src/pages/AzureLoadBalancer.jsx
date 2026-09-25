@@ -194,7 +194,7 @@ export default function AzureLoadBalancer() {
                 <Globe className="text-purple-400" size={32} />
               </div>
               <span className="text-sm font-bold text-gray-300 text-center">Azure<br/>Front Door</span>
-              <span className="text-[10px] text-gray-500">Global entry via<br/>edge network</span>
+              <span className="text-[0.625rem] text-gray-500">Global entry via<br/>edge network</span>
             </div>
 
             <div className="flex-1 flex items-center px-2">
@@ -203,12 +203,12 @@ export default function AzureLoadBalancer() {
             </div>
 
             <div className="flex flex-col items-center gap-2 relative">
-              <div className="absolute -top-3 -right-3 text-red-500 bg-red-500/20 px-1 text-[10px] rounded font-bold border border-red-500/30">WAF</div>
+              <div className="absolute -top-3 -right-3 text-red-500 bg-red-500/20 px-1 text-[0.625rem] rounded font-bold border border-red-500/30">WAF</div>
               <div className="bg-emerald-500/20 p-4 rounded-xl border border-emerald-500/30">
                 <Route className="text-emerald-400" size={32} />
               </div>
               <span className="text-sm font-bold text-gray-300 text-center">Application<br/>Gateway</span>
-              <span className="text-[10px] text-gray-500">Layer 7 routing,<br/>SSL offload</span>
+              <span className="text-[0.625rem] text-gray-500">Layer 7 routing,<br/>SSL offload</span>
             </div>
 
             <div className="flex-1 flex items-center px-2">
@@ -221,7 +221,7 @@ export default function AzureLoadBalancer() {
                 <GitFork className="text-blue-400" size={32} />
               </div>
               <span className="text-sm font-bold text-gray-300 text-center">Load<br/>Balancer</span>
-              <span className="text-[10px] text-gray-500">Layer 4 load<br/>balancing</span>
+              <span className="text-[0.625rem] text-gray-500">Layer 4 load<br/>balancing</span>
             </div>
 
             <div className="flex-1 flex items-center px-2">

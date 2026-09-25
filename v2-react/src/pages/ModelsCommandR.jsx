@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } } };
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
@@ -8,8 +9,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsCommandR() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Built for RAG', hash: 'rag' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'How Command Is Trained', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -17,7 +20,7 @@ export default function ModelsCommandR() {
 
   return (
     <GuideLayout
-      title="Command R+ (Cohere)"
+      title="Cohere Command (A+ and R+)"
       intro="A model family designed around retrieval rather than adapted to it — grounded generation and inline citations are first-class, not prompt tricks."
       toc={toc}
     >
@@ -34,25 +37,10 @@ export default function ModelsCommandR() {
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">The Family</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            { n: 'Command R', d: 'The efficient workhorse. Built for high-throughput RAG and tool use at lower cost.', tone: 'border-teal-500/30 bg-teal-500/10', label: 'text-teal-400' },
-            { n: 'Command R+', d: 'The larger, more capable tier for complex multi-step reasoning and harder retrieval tasks.', tone: 'border-indigo-500/30 bg-indigo-500/10', label: 'text-indigo-400' },
-            { n: 'Embed & Rerank', d: 'Companion embedding and cross-encoder re-ranking models — the retrieval half of the stack.', tone: 'border-amber-500/30 bg-amber-500/10', label: 'text-amber-400' },
-          ].map((m) => (
-            <div key={m.n} className={`p-5 rounded-xl border ${m.tone}`}>
-              <h3 className={`font-bold mb-2 ${m.label}`}>{m.n}</h3>
-              <p className="text-sm text-gray-300 leading-relaxed m-0">{m.d}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-gray-500 mt-3">
-          The Rerank model is notable on its own — many teams use it to re-rank results from a completely different
-          retrieval stack. See <a href="#/rag/advanced-retrieval" className="text-blue-400 hover:underline">Advanced Retrieval</a>.
-        </p>
-      </section>
+      <ModelLineup id="commandr" />
+
+      <ModelWeights id="commandr" />
+
 
       <section id="rag" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Built for RAG</h2>
@@ -90,6 +78,8 @@ export default function ModelsCommandR() {
           <span className="px-3 py-1.5 bg-emerald-900/20 border border-emerald-500/40 rounded-full text-emerald-300">answer + citations[{'{'}start, end, doc_ids{'}'}]</span>
         </div>
       </section>
+
+      <ModelPipeline id="commandr" name="Command" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Command Is Trained</h2>
@@ -136,7 +126,7 @@ export default function ModelsCommandR() {
             <ul className="list-disc pl-5 text-sm text-gray-300 space-y-1.5">
               <li>Trails frontier models on general reasoning and coding.</li>
               <li>Smaller developer community than OpenAI or Anthropic.</li>
-              <li>Weights are open for research, but commercial use needs a licence.</li>
+              <li>Older Command R+ weights are non-commercial only; Command A+ fixed this with Apache 2.0.</li>
               <li>Optimised for RAG — less compelling if you aren't doing retrieval.</li>
             </ul>
           </div>

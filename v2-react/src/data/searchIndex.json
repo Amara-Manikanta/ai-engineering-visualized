@@ -1224,6 +1224,73 @@
     "keywords": []
   },
   {
+    "path": "/genai/decision-models",
+    "title": "Decision Models — Jev and Laya",
+    "intro": "A new kind of model that never writes text. You give it the possible answers; it picks one in a single forward pass and tells you how sure it is.",
+    "sections": [
+      {
+        "label": "Decisions, Not Text",
+        "hash": "what"
+      },
+      {
+        "label": "Two Ways to Answer",
+        "hash": "two-ways"
+      },
+      {
+        "label": "The Three Primitives",
+        "hash": "primitives"
+      },
+      {
+        "label": "How Laya Works",
+        "hash": "how"
+      },
+      {
+        "label": "Calibration",
+        "hash": "calibration"
+      },
+      {
+        "label": "Jev and Laya",
+        "hash": "compare"
+      },
+      {
+        "label": "Latency",
+        "hash": "latency"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "Limits",
+        "hash": "limits"
+      },
+      {
+        "label": "When to Use One",
+        "hash": "when"
+      }
+    ],
+    "keywords": [
+      "Laya",
+      "Jev",
+      "Jeev",
+      "TypeSafe",
+      "Convai Innovations",
+      "decision model",
+      "typed decisions",
+      "non-autoregressive",
+      "encoder classifier",
+      "choice score noul",
+      "noul",
+      "calibration",
+      "ECE",
+      "RLCD",
+      "ModernBERT",
+      "System 1",
+      "LLM as a judge",
+      "routing"
+    ]
+  },
+  {
     "path": "/genai/distillation",
     "title": "Knowledge Distillation",
     "intro": "Train a small model to imitate a large one. It reliably beats training the same small model on the original labels — and the reason why is worth understanding.",
@@ -2643,12 +2710,20 @@
         "hash": "overview"
       },
       {
-        "label": "How Claude Is Trained",
-        "hash": "training"
+        "label": "Current Lineup",
+        "hash": "lineup"
       },
       {
-        "label": "Model Lineup",
-        "hash": "lineup"
+        "label": "Model Weights",
+        "hash": "weights"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
+      },
+      {
+        "label": "How Claude Is Trained",
+        "hash": "training"
       },
       {
         "label": "Architecture",
@@ -2671,7 +2746,7 @@
   },
   {
     "path": "/models/command-r",
-    "title": "Command R+ (Cohere)",
+    "title": "Cohere Command (A+ and R+)",
     "intro": "A model family designed around retrieval rather than adapted to it — grounded generation and inline citations are first-class, not prompt tricks.",
     "sections": [
       {
@@ -2679,12 +2754,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Built for RAG",
         "hash": "rag"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "How Command Is Trained",
@@ -2711,12 +2794,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2743,12 +2834,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2775,12 +2874,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "How Gemma Is Trained",
@@ -2807,12 +2914,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2839,12 +2954,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2871,12 +2994,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2903,12 +3034,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2935,8 +3074,20 @@
         "hash": "overview"
       },
       {
+        "label": "Current Lineup",
+        "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
+      },
+      {
         "label": "The Small-Model Case",
         "hash": "small"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "How Phi Is Trained",
@@ -2967,12 +3118,20 @@
         "hash": "overview"
       },
       {
-        "label": "Model Lineup",
+        "label": "Current Lineup",
         "hash": "lineup"
+      },
+      {
+        "label": "Model Weights",
+        "hash": "weights"
       },
       {
         "label": "Architecture",
         "hash": "architecture"
+      },
+      {
+        "label": "Training Pipeline",
+        "hash": "pipeline"
       },
       {
         "label": "Training & Uniqueness",
@@ -2988,6 +3147,60 @@
       }
     ],
     "keywords": []
+  },
+  {
+    "path": "/models/training",
+    "title": "How Models Are Trained",
+    "intro": "Every major model family, side by side: which training methods each one uses, what its weights are and under which licence, and what its maker has not disclosed.",
+    "sections": [
+      {
+        "label": "The Four Stages",
+        "hash": "stages"
+      },
+      {
+        "label": "Method Explorer",
+        "hash": "explorer"
+      },
+      {
+        "label": "Who Uses What",
+        "hash": "matrix"
+      },
+      {
+        "label": "PPO vs DPO vs GRPO",
+        "hash": "rl"
+      },
+      {
+        "label": "Weights Compared",
+        "hash": "weights"
+      },
+      {
+        "label": "What Is Not Disclosed",
+        "hash": "disclosure"
+      }
+    ],
+    "keywords": [
+      "how LLMs are trained",
+      "training methods",
+      "RLHF",
+      "PPO",
+      "DPO",
+      "GRPO",
+      "Constitutional AI",
+      "RLAIF",
+      "SFT",
+      "supervised fine-tuning",
+      "pretraining",
+      "rejection sampling",
+      "distillation",
+      "reasoning RL",
+      "reward model",
+      "model weights",
+      "open weights",
+      "licence",
+      "license",
+      "Apache 2.0",
+      "MIT licence"
+    ]
   },
   {
     "path": "/playgrounds",
@@ -3399,6 +3612,10 @@
       {
         "label": "Pick a Topic",
         "hash": "pick"
+      },
+      {
+        "label": "Add Your Own",
+        "hash": "yours"
       },
       {
         "label": "How to Use These",

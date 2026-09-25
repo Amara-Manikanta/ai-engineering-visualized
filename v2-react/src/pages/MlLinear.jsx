@@ -145,7 +145,7 @@ export default function MlLinear() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
           <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-5">
             <div className="text-sm font-semibold text-white mb-1">Rolling downhill on the cost curve</div>
-            <div className="text-[11px] text-gray-500 mb-3">Each step moves against the gradient toward lower MSE.</div>
+            <div className="text-[0.6875rem] text-gray-500 mb-3">Each step moves against the gradient toward lower MSE.</div>
             <svg viewBox="0 0 200 130" className="w-full">
               {/* parabola (cost vs a parameter) */}
               <path d="M 20 20 Q 100 170 180 20" fill="none" stroke="#374151" strokeWidth="2" />
@@ -172,7 +172,7 @@ export default function MlLinear() {
               <text x="100" y="126" textAnchor="middle" fill="#6b7280" fontSize="8">parameter value →</text>
               <text x="12" y="16" fill="#6b7280" fontSize="8">cost</text>
             </svg>
-            <div className="text-[11px] text-gray-500 mt-1 leading-relaxed">
+            <div className="text-[0.6875rem] text-gray-500 mt-1 leading-relaxed">
               The <span className="text-emerald-400">green</span> point is the minimum — the best-fit line. The{' '}
               <strong className="text-gray-300">learning rate</strong> sets the step size: too small crawls, too large
               overshoots and diverges.

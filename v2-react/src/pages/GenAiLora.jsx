@@ -123,37 +123,37 @@ function LoraCalculator() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Full fine-tune of these</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Full fine-tune of these</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{fmt(stats.full)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">trainable parameters</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">trainable parameters</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-indigo-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-indigo-400 mb-1">With LoRA</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-indigo-400 mb-1">With LoRA</div>
           <div className="text-2xl font-bold font-mono text-indigo-300">{fmt(stats.lora)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">{stats.pctOfTargeted.toFixed(2)}% of the above</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{stats.pctOfTargeted.toFixed(2)}% of the above</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Of the whole model</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Of the whole model</div>
           <div className="text-2xl font-bold font-mono text-emerald-400">{stats.pctOfModel.toFixed(3)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">{fmt(m.total)} total parameters</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{fmt(m.total)} total parameters</div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Adapter file size</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Adapter file size</div>
           <div className="text-xl font-bold font-mono text-gray-300">{stats.adapterMB.toFixed(1)} MB</div>
-          <div className="text-[11px] text-gray-600 mt-1">fp16 weights only</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">fp16 weights only</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Optimiser state</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Optimiser state</div>
           <div className="text-xl font-bold font-mono text-gray-300">{stats.optimiserMB.toFixed(0)} MB</div>
-          <div className="text-[11px] text-gray-600 mt-1">Adam moments for the adapter</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">Adam moments for the adapter</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-rose-500/25">
-          <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Full fine-tune would need</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Full fine-tune would need</div>
           <div className="text-xl font-bold font-mono text-rose-300">~{stats.fullTuneGB.toFixed(0)} GB</div>
-          <div className="text-[11px] text-gray-600 mt-1">weights + gradients + Adam state</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">weights + gradients + Adam state</div>
         </div>
       </div>
 
@@ -193,7 +193,7 @@ export default function GenAiLora() {
     >
       <section id="what" className="mb-14 scroll-mt-24">
         <div className="p-6 rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.12] to-transparent mb-6">
-          <div className="text-[10px] uppercase tracking-wider text-indigo-400 mb-2">Low-Rank Adaptation</div>
+          <div className="text-[0.625rem] uppercase tracking-wider text-indigo-400 mb-2">Low-Rank Adaptation</div>
           <p className="text-lg text-gray-100 leading-relaxed mb-3">
             <strong className="text-white">LoRA stands for Low-Rank Adaptation.</strong> It adapts a large
             pretrained language model — Llama 3, DeepSeek, Qwen — to a custom task{" "}
@@ -419,7 +419,7 @@ export default function GenAiLora() {
           </div>
         </div>
         <div className="p-5 rounded-xl border border-amber-500/30 bg-amber-500/[0.1] text-center">
-          <div className="text-[10px] uppercase tracking-wider text-amber-400 mb-1">Reduction for this layer</div>
+          <div className="text-[0.625rem] uppercase tracking-wider text-amber-400 mb-1">Reduction for this layer</div>
           <div className="text-4xl font-bold font-mono text-amber-300">99.61%</div>
           <div className="text-xs text-gray-500 mt-1 font-mono">65,536 / 16,777,216 = 0.39%</div>
         </div>

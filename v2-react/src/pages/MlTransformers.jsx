@@ -409,7 +409,7 @@ export default function MlTransformers() {
                     <span className="px-2 py-1 bg-[#222] group-hover:bg-indigo-900/60 text-gray-200 border border-gray-700 group-hover:border-indigo-500/50 rounded font-mono text-sm transition-colors">
                       {t}
                     </span>
-                    <span className="text-[10px] text-gray-500 mt-1 font-mono">{Math.floor(Math.random() * 90000) + 10000}</span>
+                    <span className="text-[0.625rem] text-gray-500 mt-1 font-mono">{Math.floor(Math.random() * 90000) + 10000}</span>
                   </motion.div>
                 ))
               )}
@@ -670,7 +670,7 @@ export default function MlTransformers() {
                         animate={{ width: `${ATTENTION_WEIGHTS[selectedWord][i] * 100}%` }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
                       >
-                        <span className="text-[10px] font-bold text-white/90">{Math.round(ATTENTION_WEIGHTS[selectedWord][i] * 100)}%</span>
+                        <span className="text-[0.625rem] font-bold text-white/90">{Math.round(ATTENTION_WEIGHTS[selectedWord][i] * 100)}%</span>
                       </motion.div>
                     </div>
                   </div>
@@ -812,7 +812,7 @@ export default function MlTransformers() {
                   >
                     {pipelineStep > i + 1 ? '✓' : s.icon}
                   </motion.div>
-                  <span className="text-[10px] text-gray-500 font-mono hidden md:block">{i + 1}</span>
+                  <span className="text-[0.625rem] text-gray-500 font-mono hidden md:block">{i + 1}</span>
                 </button>
                 {i < PIPELINE_STEPS.length - 1 && (
                   <div className="flex-1 h-0.5 bg-gray-800 min-w-[12px] relative overflow-hidden">
@@ -896,7 +896,7 @@ export default function MlTransformers() {
                     <div className="bg-black/50 border border-gray-700 rounded-lg p-3 text-center">
                       <div className="text-gray-200 font-bold mb-1">{w}</div>
                       <div className="text-emerald-400">[{v}]</div>
-                      <div className="text-amber-400 text-[10px] mt-1">+ pos({i})</div>
+                      <div className="text-amber-400 text-[0.625rem] mt-1">+ pos({i})</div>
                     </div>
                     {i < 2 && <span className="text-gray-600">→</span>}
                   </React.Fragment>
@@ -908,13 +908,13 @@ export default function MlTransformers() {
                 {["Q", "K", "V"].map((label, i) => (
                   <div key={label} className={`px-5 py-4 rounded-lg border text-center ${['border-blue-500/40 bg-blue-900/20', 'border-emerald-500/40 bg-emerald-900/20', 'border-purple-500/40 bg-purple-900/20'][i]}`}>
                     <div className={`font-bold text-lg ${['text-blue-400', 'text-emerald-400', 'text-purple-400'][i]}`}>{label}</div>
-                    <div className="text-[10px] text-gray-400 mt-1">{['queries', 'keys', 'values'][i]}</div>
+                    <div className="text-[0.625rem] text-gray-400 mt-1">{['queries', 'keys', 'values'][i]}</div>
                   </div>
                 ))}
                 <div className="flex items-center px-2 text-gray-500">→ softmax(QKᵀ/√d)·V →</div>
                 <div className="px-5 py-4 rounded-lg border border-indigo-500/40 bg-indigo-900/20 text-center">
                   <div className="font-bold text-lg text-indigo-300">Context</div>
-                  <div className="text-[10px] text-gray-400 mt-1">blended vector</div>
+                  <div className="text-[0.625rem] text-gray-400 mt-1">blended vector</div>
                 </div>
               </div>
             )}

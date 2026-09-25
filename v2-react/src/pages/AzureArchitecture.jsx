@@ -44,7 +44,7 @@ export default function AzureArchitecture() {
         <div className="bg-[#111] border border-gray-800 rounded-xl p-8 overflow-x-auto relative">
           
           <div className="absolute top-4 left-4 border border-gray-700 bg-[#1a1a1a] rounded p-3 w-40">
-            <h4 className="text-[10px] text-gray-500 font-bold mb-2 uppercase border-b border-gray-800 pb-1">Networking Legend</h4>
+            <h4 className="text-[0.625rem] text-gray-500 font-bold mb-2 uppercase border-b border-gray-800 pb-1">Networking Legend</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs text-gray-400"><ArrowRightLeft size={14} className="text-blue-400"/> Virtual Network</div>
               <div className="flex items-center gap-2 text-xs text-gray-400"><div className="w-3 h-3 border border-dashed border-gray-500 rounded-sm"></div> Subnet</div>
@@ -112,19 +112,19 @@ export default function AzureArchitecture() {
                 <div className="flex justify-around items-center border-t border-gray-800 pt-4">
                   <div className="flex flex-col items-center gap-1">
                     <div className="bg-green-500/20 text-green-400 p-2 rounded"><Settings size={20}/></div>
-                    <span className="text-[10px] text-gray-400">Ingress<br/>NGINX</span>
+                    <span className="text-[0.625rem] text-gray-400">Ingress<br/>NGINX</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Network size={20} className="text-blue-400"/>
-                    <span className="text-[10px] text-gray-400">Services</span>
+                    <span className="text-[0.625rem] text-gray-400">Services</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Box size={20} className="text-purple-400"/>
-                    <span className="text-[10px] text-gray-400">Pods</span>
+                    <span className="text-[0.625rem] text-gray-400">Pods</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Activity size={20} className="text-cyan-400"/>
-                    <span className="text-[10px] text-gray-400">Auto Scaling</span>
+                    <span className="text-[0.625rem] text-gray-400">Auto Scaling</span>
                   </div>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function AzureArchitecture() {
                   <div key={i} className="flex flex-col items-center text-center gap-2">
                     {data.icon}
                     <h5 className="font-bold text-gray-300 text-xs">{data.title}</h5>
-                    <span className="text-[10px] text-gray-500">{data.desc}</span>
+                    <span className="text-[0.625rem] text-gray-500">{data.desc}</span>
                   </div>
                 ))}
               </div>
@@ -186,24 +186,24 @@ export default function AzureArchitecture() {
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#111] px-2 text-xs font-bold text-blue-400 border border-blue-500/30 rounded">Primary Region (Active)</div>
               
               <div className="flex justify-around items-center mb-6 mt-4">
-                <div className="flex flex-col items-center"><Cloud className="text-blue-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">Front Door</span></div>
-                <div className="flex flex-col items-center"><Flame className="text-red-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">WAF</span></div>
-                <div className="flex flex-col items-center"><Component className="text-green-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">App Gateway</span></div>
-                <div className="flex flex-col items-center"><Box className="text-purple-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">AKS</span></div>
+                <div className="flex flex-col items-center"><Cloud className="text-blue-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">Front Door</span></div>
+                <div className="flex flex-col items-center"><Flame className="text-red-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">WAF</span></div>
+                <div className="flex flex-col items-center"><Component className="text-green-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">App Gateway</span></div>
+                <div className="flex flex-col items-center"><Box className="text-purple-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">AKS</span></div>
               </div>
 
               <div className="flex justify-around items-center pt-6 border-t border-blue-500/20">
-                <div className="flex flex-col items-center"><Database className="text-blue-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">SQL</span></div>
-                <div className="flex flex-col items-center"><Globe className="text-cyan-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">Cosmos DB</span></div>
-                <div className="flex flex-col items-center"><Database className="text-red-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">Redis</span></div>
-                <div className="flex flex-col items-center"><Server className="text-emerald-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">Storage</span></div>
+                <div className="flex flex-col items-center"><Database className="text-blue-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">SQL</span></div>
+                <div className="flex flex-col items-center"><Globe className="text-cyan-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">Cosmos DB</span></div>
+                <div className="flex flex-col items-center"><Database className="text-red-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">Redis</span></div>
+                <div className="flex flex-col items-center"><Server className="text-emerald-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">Storage</span></div>
               </div>
 
               <div className="flex justify-around items-center pt-6 mt-6 border-t border-blue-500/20">
-                <div className="flex flex-col items-center"><Key className="text-yellow-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Key Vault</span></div>
-                <div className="flex flex-col items-center"><Activity className="text-blue-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Monitor</span></div>
-                <div className="flex flex-col items-center"><Database className="text-emerald-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Log Analytics</span></div>
-                <div className="flex flex-col items-center"><History className="text-indigo-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Backup</span></div>
+                <div className="flex flex-col items-center"><Key className="text-yellow-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Key Vault</span></div>
+                <div className="flex flex-col items-center"><Activity className="text-blue-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Monitor</span></div>
+                <div className="flex flex-col items-center"><Database className="text-emerald-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Log Analytics</span></div>
+                <div className="flex flex-col items-center"><History className="text-indigo-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Backup</span></div>
               </div>
             </div>
 
@@ -223,24 +223,24 @@ export default function AzureArchitecture() {
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#111] px-2 text-xs font-bold text-emerald-400 border border-emerald-500/30 rounded">Secondary Region (Standby)</div>
               
               <div className="flex justify-around items-center mb-6 mt-4">
-                <div className="flex flex-col items-center"><Cloud className="text-blue-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">Front Door</span></div>
-                <div className="flex flex-col items-center"><Flame className="text-red-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">WAF</span></div>
-                <div className="flex flex-col items-center"><Component className="text-green-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">App Gateway</span></div>
-                <div className="flex flex-col items-center"><Box className="text-purple-400" size={24}/><span className="text-[10px] text-gray-400 mt-1">AKS</span></div>
+                <div className="flex flex-col items-center"><Cloud className="text-blue-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">Front Door</span></div>
+                <div className="flex flex-col items-center"><Flame className="text-red-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">WAF</span></div>
+                <div className="flex flex-col items-center"><Component className="text-green-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">App Gateway</span></div>
+                <div className="flex flex-col items-center"><Box className="text-purple-400" size={24}/><span className="text-[0.625rem] text-gray-400 mt-1">AKS</span></div>
               </div>
 
               <div className="flex justify-around items-center pt-6 border-t border-emerald-500/20">
-                <div className="flex flex-col items-center"><Database className="text-blue-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">SQL</span></div>
-                <div className="flex flex-col items-center"><Globe className="text-cyan-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">Cosmos DB</span></div>
-                <div className="flex flex-col items-center"><Database className="text-red-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">Redis</span></div>
-                <div className="flex flex-col items-center"><Server className="text-emerald-400" size={20}/><span className="text-[10px] text-gray-400 mt-1">Storage</span></div>
+                <div className="flex flex-col items-center"><Database className="text-blue-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">SQL</span></div>
+                <div className="flex flex-col items-center"><Globe className="text-cyan-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">Cosmos DB</span></div>
+                <div className="flex flex-col items-center"><Database className="text-red-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">Redis</span></div>
+                <div className="flex flex-col items-center"><Server className="text-emerald-400" size={20}/><span className="text-[0.625rem] text-gray-400 mt-1">Storage</span></div>
               </div>
 
               <div className="flex justify-around items-center pt-6 mt-6 border-t border-emerald-500/20">
-                <div className="flex flex-col items-center"><Key className="text-yellow-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Key Vault</span></div>
-                <div className="flex flex-col items-center"><Activity className="text-blue-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Monitor</span></div>
-                <div className="flex flex-col items-center"><Database className="text-emerald-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Log Analytics</span></div>
-                <div className="flex flex-col items-center"><History className="text-indigo-400" size={16}/><span className="text-[10px] text-gray-400 mt-1">Backup</span></div>
+                <div className="flex flex-col items-center"><Key className="text-yellow-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Key Vault</span></div>
+                <div className="flex flex-col items-center"><Activity className="text-blue-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Monitor</span></div>
+                <div className="flex flex-col items-center"><Database className="text-emerald-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Log Analytics</span></div>
+                <div className="flex flex-col items-center"><History className="text-indigo-400" size={16}/><span className="text-[0.625rem] text-gray-400 mt-1">Backup</span></div>
               </div>
             </div>
 

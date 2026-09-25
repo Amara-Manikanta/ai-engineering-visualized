@@ -20,7 +20,7 @@ function GeneratorVisual() {
     const done = mode === 'generator' && i < consumed - 1;
     return (
       <div
-        className={`h-8 rounded flex items-center justify-center text-[10px] font-mono border transition-all ${
+        className={`h-8 rounded flex items-center justify-center text-[0.625rem] font-mono border transition-all ${
           exists
             ? mode === 'list'
               ? 'bg-rose-500/20 border-rose-500/50 text-rose-200'
@@ -44,13 +44,13 @@ function GeneratorVisual() {
         ].map((col) => (
           <div key={col.mode}>
             <div className={`text-sm font-bold mb-0.5 ${col.tone}`}>{col.title}</div>
-            <code className="text-[10px] text-gray-500 block mb-2.5">{col.sub}</code>
+            <code className="text-[0.625rem] text-gray-500 block mb-2.5">{col.sub}</code>
             <div className="grid grid-cols-8 gap-1 mb-2">
               {Array.from({ length: TOTAL_ITEMS }).map((_, i) => (
                 <Cell key={i} i={i} mode={col.mode} />
               ))}
             </div>
-            <div className={`text-[10px] font-mono ${col.tone}`}>
+            <div className={`text-[0.625rem] font-mono ${col.tone}`}>
               memory: {col.mode === 'list' ? col.mem : consumed === 0 ? 'nothing yet' : col.mem}
             </div>
           </div>
@@ -64,7 +64,7 @@ function GeneratorVisual() {
         >
           ↺ Reset
         </button>
-        <span className="text-[11px] text-gray-500 font-mono">consumed {consumed} / {TOTAL_ITEMS}</span>
+        <span className="text-[0.6875rem] text-gray-500 font-mono">consumed {consumed} / {TOTAL_ITEMS}</span>
         <button
           onClick={() => setConsumed((c) => Math.min(TOTAL_ITEMS, c + 1))}
           disabled={consumed >= TOTAL_ITEMS}
@@ -74,7 +74,7 @@ function GeneratorVisual() {
         </button>
       </div>
 
-      <p className="text-[11px] text-gray-400 leading-relaxed text-center mb-0">
+      <p className="text-[0.6875rem] text-gray-400 leading-relaxed text-center mb-0">
         {consumed === 0
           ? 'The list has already built all 8 items. The generator has produced nothing — calling it only created the object.'
           : consumed >= TOTAL_ITEMS
@@ -131,7 +131,7 @@ export default function PythonAdvanced() {
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-red-400"><FileCode size={12} /> 27_production_ai_error.py</span>
             <span>Production AI Pattern</span>
           </div>
@@ -145,8 +145,8 @@ except Exception as e:
     print("LLM call failed:", e)
 finally:
     print("Log telemetry & cleanup active API sessions.")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>LLM call failed: OpenAI API rate limit exceeded (429)<br/>Log telemetry & cleanup active API sessions.</code>
           </div>
         </div>
@@ -169,7 +169,7 @@ finally:
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 28_custom_exception.py</span>
             <span>Python 3.11</span>
           </div>
@@ -181,8 +181,8 @@ try:
     raise KeyError("Missing API Key")
 except KeyError as err:
     raise APIQuotaError("Authentication failed") from err`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>APIQuotaError: Authentication failed (The above exception was the direct cause)</code>
           </div>
         </div>
@@ -205,7 +205,7 @@ except KeyError as err:
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 29_class_init.py</span>
             <span>Python 3.11</span>
           </div>
@@ -219,8 +219,8 @@ except KeyError as err:
 
 bot = Agent("Devin", "Code Engineer")
 print(bot.execute("Refactor API"))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Devin (Code Engineer) is executing: Refactor API</code>
           </div>
         </div>
@@ -253,7 +253,7 @@ print(bot.execute("Refactor API"))`}</CodeSnippet>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 30_rag_retriever.py</span>
             <span>SimpleRetriever Class Example</span>
           </div>
@@ -270,8 +270,8 @@ class MockVectorDB:
 
 retriever = SimpleRetriever(MockVectorDB())
 print("Retrieved Docs:", retriever.retrieve("What is RAG?"))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Retrieved Docs: ['Matched Doc Chunk']</code>
           </div>
         </div>
@@ -294,7 +294,7 @@ print("Retrieved Docs:", retriever.retrieve("What is RAG?"))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 31_dataclass_rag.py</span>
             <span>Python 3.7+</span>
           </div>
@@ -310,8 +310,8 @@ class DocumentChunk:
 
 chunk = DocumentChunk(doc_id="chunk_01", content="RAG Architecture", score=0.95)
 print(chunk)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>DocumentChunk(doc_id='chunk_01', content='RAG Architecture', embedding=[], score=0.95)</code>
           </div>
         </div>
@@ -334,7 +334,7 @@ print(chunk)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 32_class_static.py</span>
             <span>Python 3.11</span>
           </div>
@@ -353,8 +353,8 @@ print(chunk)`}</CodeSnippet>
 cfg = ModelConfig.from_dict({"model_id": "gpt-4o"})
 print("Model ID:", cfg.model_id)
 print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Model ID: gpt-4o<br/>Valid: True</code>
           </div>
         </div>
@@ -377,7 +377,7 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 33_dunder.py</span>
             <span>Python 3.11</span>
           </div>
@@ -390,8 +390,8 @@ print("Valid:", ModelConfig.validate_id(cfg.model_id))`}</CodeSnippet>
 
 step = PipelineStep("Embedder")
 print(step("User Query"))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>[Embedder] ➔ User Query</code>
           </div>
         </div>
@@ -414,15 +414,15 @@ print(step("User Query"))`}</CodeSnippet>
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-4 text-xs font-mono">
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">str</span><span className="text-[10px] text-gray-400">Text</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">int / float</span><span className="text-[10px] text-gray-400">Numbers</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">list[float]</span><span className="text-[10px] text-gray-400">Embeddings</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">dict[str, str]</span><span className="text-[10px] text-gray-400">Payloads</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">Optional[T]</span><span className="text-[10px] text-gray-400">Nullable</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">str</span><span className="text-[0.625rem] text-gray-400">Text</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">int / float</span><span className="text-[0.625rem] text-gray-400">Numbers</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">list[float]</span><span className="text-[0.625rem] text-gray-400">Embeddings</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">dict[str, str]</span><span className="text-[0.625rem] text-gray-400">Payloads</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-teal-300 font-bold block">Optional[T]</span><span className="text-[0.625rem] text-gray-400">Nullable</span></div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 34_type_hints_ai.py</span>
             <span>FastAPI & AI Pattern</span>
           </div>
@@ -433,8 +433,8 @@ def embed_text(text: str) -> List[float]:
     return [0.12, 0.45, 0.98]
 
 print("Embedding Vector:", embed_text("What is RAG?"))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Embedding Vector: [0.12, 0.45, 0.98]</code>
           </div>
         </div>
@@ -457,7 +457,7 @@ print("Embedding Vector:", embed_text("What is RAG?"))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 35_pydantic.py</span>
             <span>Python 3.11</span>
           </div>
@@ -470,8 +470,8 @@ class SearchQuery(BaseModel):
 raw_input = {"query": "RAG architecture", "top_k": 10}
 parsed = SearchQuery.model_validate(raw_input)
 print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Validated Query: 'RAG architecture' with top_k=10</code>
           </div>
         </div>
@@ -494,7 +494,7 @@ print(f"Validated Query: '{parsed.query}' with top_k={parsed.top_k}")`}</CodeSni
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 36_iterators.py</span>
             <span>Python 3.11</span>
           </div>
@@ -503,8 +503,8 @@ it = iter(data)
 
 print(next(it))
 print(next(it))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>chunk1<br/>chunk2</code>
           </div>
         </div>
@@ -530,7 +530,7 @@ print(next(it))`}</CodeSnippet>
 
         <div className="bg-amber-950/20 border border-amber-500/30 p-4 rounded-xl mb-4">
           <div className="text-amber-300 font-bold text-xs mb-1.5">The tradeoff</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             A generator is <strong className="text-gray-100">single-pass</strong>. Once consumed it is exhausted — you
             cannot iterate it twice, take <code>len()</code> of it, or index into it. If you need any of those, either
             materialize it with <code className="text-emerald-300">list(gen)</code> or rebuild the generator. Reaching
@@ -539,7 +539,7 @@ print(next(it))`}</CodeSnippet>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 37_generators.py</span>
             <span>Python 3.11</span>
           </div>
@@ -549,8 +549,8 @@ print(next(it))`}</CodeSnippet>
 
 for vec in stream_embeddings(3):
     print("Streamed:", vec)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Streamed: vec_0<br/>Streamed: vec_1<br/>Streamed: vec_2</code>
           </div>
         </div>
@@ -573,7 +573,7 @@ for vec in stream_embeddings(3):
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 38_decorators.py</span>
             <span>Python 3.11</span>
           </div>
@@ -591,8 +591,8 @@ def query_index():
     return "Results"
 
 query_index()`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Calling: query_index</code>
           </div>
         </div>
@@ -615,7 +615,7 @@ query_index()`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 39_cache_property.py</span>
             <span>Python 3.11</span>
           </div>
@@ -629,8 +629,8 @@ def get_embedding(text: str):
 # First call computes; second call uses cached result
 get_embedding("hello")
 get_embedding("hello")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Computing embedding...</code>
           </div>
         </div>
@@ -665,7 +665,7 @@ get_embedding("hello")`}</CodeSnippet>
               <React.Fragment key={s.t}>
                 <div className={`flex-1 rounded-lg border p-3 text-center ${s.tone}`}>
                   <div className="font-mono font-bold text-xs mb-0.5">{s.t}</div>
-                  <div className="text-[10px] opacity-75">{s.d}</div>
+                  <div className="text-[0.625rem] opacity-75">{s.d}</div>
                 </div>
                 {i < arr.length - 1 && (
                   <div className="flex items-center justify-center text-gray-600 text-lg">↓</div>
@@ -673,14 +673,14 @@ get_embedding("hello")`}</CodeSnippet>
               </React.Fragment>
             ))}
           </div>
-          <p className="text-[11px] text-gray-500 text-center mt-3 mb-0">
+          <p className="text-[0.6875rem] text-gray-500 text-center mt-3 mb-0">
             The <code className="text-rose-300">__exit__</code> guarantee is the whole point — a bare{' '}
             <code>try/finally</code> does the same job, but a context manager makes it reusable.
           </p>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 40_context_managers.py</span>
             <span>Python 3.11</span>
           </div>
@@ -713,8 +713,8 @@ class Connection:
 
 with Connection() as conn:
     conn.query("SELECT 1")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Gotcha:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Gotcha:</div>
             <code>Returning True from __exit__ SWALLOWS the exception. Almost always return False.</code>
           </div>
         </div>
@@ -746,14 +746,14 @@ with Connection() as conn:
           ].map((c) => (
             <div key={c.t} className={`p-3.5 rounded-xl border ${c.tone}`}>
               <div className={`text-xs font-mono font-bold mb-1 ${c.label}`}>{c.t}</div>
-              <p className="text-[11px] text-gray-300 leading-relaxed mb-2">{c.d}</p>
-              <div className="text-[10px] text-gray-500">→ {c.use}</div>
+              <p className="text-[0.6875rem] text-gray-300 leading-relaxed mb-2">{c.d}</p>
+              <div className="text-[0.625rem] text-gray-500">→ {c.use}</div>
             </div>
           ))}
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 41_profiling.py</span>
             <span>Python 3.11</span>
           </div>
@@ -778,15 +778,15 @@ stats.print_stats(10)          # the 10 heaviest calls
 
 # From the CLI, no code changes needed:
 #   python -m cProfile -s cumulative my_script.py`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Reading it:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Reading it:</div>
             <code>tottime = time in that function alone. cumtime = including everything it calls.</code>
           </div>
         </div>
 
         <div className="bg-amber-950/20 border border-amber-500/30 p-4 rounded-xl mt-4">
           <div className="text-amber-300 font-bold text-xs mb-1.5">Measure before you optimize</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             In an LLM application the bottleneck is almost always the <strong className="text-gray-100">network call</strong>,
             not your Python. Profiling tells you whether to reach for{' '}
             <code className="text-amber-200">asyncio</code> and caching (usually) or to micro-optimize a hot loop

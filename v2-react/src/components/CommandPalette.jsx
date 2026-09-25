@@ -219,7 +219,7 @@ export default function CommandPalette() {
               placeholder="Search topics, sections, pages…"
               className="flex-1 bg-transparent py-4 text-sm text-gray-100 placeholder-gray-600 outline-none"
             />
-            <kbd className="text-[10px] font-mono text-gray-600 border border-white/10 rounded px-1.5 py-0.5 shrink-0">
+            <kbd className="text-[0.625rem] font-mono text-gray-600 border border-white/10 rounded px-1.5 py-0.5 shrink-0">
               esc
             </kbd>
           </div>
@@ -228,7 +228,7 @@ export default function CommandPalette() {
           <div ref={listRef} className="max-h-[55vh] overflow-y-auto custom-scrollbar py-2">
             {!query && (
               <>
-                <div className="px-4 py-1.5 text-[10px] uppercase tracking-wide text-gray-600">
+                <div className="px-4 py-1.5 text-[0.625rem] uppercase tracking-wide text-gray-600">
                   Jump to
                 </div>
                 {QUICK_LINKS.map((q, i) => (
@@ -245,7 +245,7 @@ export default function CommandPalette() {
                     }`}
                   >
                     <span className="text-sm text-gray-200">{q.label}</span>
-                    <span className="ml-auto text-[10px] font-mono text-gray-600">{q.path}</span>
+                    <span className="ml-auto text-[0.625rem] font-mono text-gray-600">{q.path}</span>
                   </button>
                 ))}
               </>
@@ -286,13 +286,13 @@ export default function CommandPalette() {
                       </>
                     )}
                   </div>
-                  <div className="text-[10px] font-mono text-gray-600 mt-0.5">{r.entry.path}</div>
+                  <div className="text-[0.625rem] font-mono text-gray-600 mt-0.5">{r.entry.path}</div>
                 </button>
               ))}
           </div>
 
           {/* footer */}
-          <div className="flex items-center gap-4 px-4 py-2 border-t border-white/10 text-[10px] text-gray-600">
+          <div className="flex items-center gap-4 px-4 py-2 border-t border-white/10 text-[0.625rem] text-gray-600">
             <span><kbd className="font-mono">↑↓</kbd> navigate</span>
             <span><kbd className="font-mono">↵</kbd> open</span>
             <span><kbd className="font-mono">esc</kbd> close</span>
@@ -318,7 +318,7 @@ function SearchTrigger({ onOpen }) {
         <path d="m21 21-4.3-4.3" />
       </svg>
       <span className="hidden sm:inline text-xs">Search</span>
-      <kbd className="hidden sm:inline text-[10px] font-mono border border-white/15 rounded px-1 py-0.5">
+      <kbd className="hidden sm:inline text-[0.625rem] font-mono border border-white/15 rounded px-1 py-0.5">
         {isMac ? "⌘" : "Ctrl"}K
       </kbd>
     </button>

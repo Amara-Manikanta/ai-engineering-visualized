@@ -134,7 +134,7 @@ function SystemDiagram({ sys }) {
             transition={{ delay: ri * 0.08 }}
             className="flex items-center gap-3"
           >
-            <div className="w-32 shrink-0 text-[10px] uppercase tracking-wide text-gray-500 text-right pr-1">
+            <div className="w-32 shrink-0 text-[0.625rem] uppercase tracking-wide text-gray-500 text-right pr-1">
               {row.name}
             </div>
             <div className="flex-1 flex flex-wrap gap-2">
@@ -148,7 +148,7 @@ function SystemDiagram({ sys }) {
         ))}
         <div className="flex items-center gap-3 pt-1">
           <div className="w-32 shrink-0" />
-          <div className="flex-1 text-[10px] text-gray-600">↓ data flows downward · each row is a layer you can scale or swap independently</div>
+          <div className="flex-1 text-[0.625rem] text-gray-600">↓ data flows downward · each row is a layer you can scale or swap independently</div>
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@ export default function SystemDesignIndex() {
                 transition={{ delay: i * 0.05 }}
                 className="flex gap-3 p-4 rounded-xl border border-white/10 bg-white/5"
               >
-                <span className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 flex items-center justify-center text-[11px] font-bold shrink-0">
+                <span className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 flex items-center justify-center text-[0.6875rem] font-bold shrink-0">
                   {i + 1}
                 </span>
                 <div>

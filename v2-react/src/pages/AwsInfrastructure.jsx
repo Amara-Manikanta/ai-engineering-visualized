@@ -43,22 +43,22 @@ export default function AwsInfrastructure() {
              <div className="relative w-full h-full">
                <div className="absolute top-[30%] left-[20%] flex flex-col items-center">
                  <MapPin className="text-purple-400" size={24} />
-                 <span className="text-[10px] text-gray-300 mt-1">N. Virginia<br/>(us-east-1)</span>
+                 <span className="text-[0.625rem] text-gray-300 mt-1">N. Virginia<br/>(us-east-1)</span>
                </div>
                
                <div className="absolute top-[25%] left-[50%] flex flex-col items-center">
                  <MapPin className="text-green-400" size={24} />
-                 <span className="text-[10px] text-gray-300 mt-1">Ireland<br/>(eu-west-1)</span>
+                 <span className="text-[0.625rem] text-gray-300 mt-1">Ireland<br/>(eu-west-1)</span>
                </div>
                
                <div className="absolute top-[45%] left-[70%] flex flex-col items-center">
                  <MapPin className="text-red-400" size={24} />
-                 <span className="text-[10px] text-gray-300 mt-1">Mumbai<br/>(ap-south-1)</span>
+                 <span className="text-[0.625rem] text-gray-300 mt-1">Mumbai<br/>(ap-south-1)</span>
                </div>
                
                <div className="absolute top-[75%] left-[85%] flex flex-col items-center">
                  <MapPin className="text-blue-400" size={24} />
-                 <span className="text-[10px] text-gray-300 mt-1">Sydney<br/>(ap-southeast-2)</span>
+                 <span className="text-[0.625rem] text-gray-300 mt-1">Sydney<br/>(ap-southeast-2)</span>
                </div>
              </div>
           </div>
@@ -89,7 +89,7 @@ export default function AwsInfrastructure() {
             <div className="flex justify-between items-center h-full mt-4">
               <div className="border border-emerald-500 border-dashed rounded-lg p-4 bg-emerald-900/10 flex flex-col items-center">
                 <span className="text-xs font-bold text-gray-300 mb-1">AZ A</span>
-                <span className="text-[10px] text-gray-500 mb-2">(use1-az1)</span>
+                <span className="text-[0.625rem] text-gray-500 mb-2">(use1-az1)</span>
                 <Building className="text-emerald-400" size={32} />
               </div>
               
@@ -97,7 +97,7 @@ export default function AwsInfrastructure() {
               
               <div className="border border-emerald-500 border-dashed rounded-lg p-4 bg-emerald-900/10 flex flex-col items-center">
                 <span className="text-xs font-bold text-gray-300 mb-1">AZ B</span>
-                <span className="text-[10px] text-gray-500 mb-2">(use1-az2)</span>
+                <span className="text-[0.625rem] text-gray-500 mb-2">(use1-az2)</span>
                 <Building className="text-emerald-400" size={32} />
               </div>
               
@@ -105,7 +105,7 @@ export default function AwsInfrastructure() {
               
               <div className="border border-emerald-500 border-dashed rounded-lg p-4 bg-emerald-900/10 flex flex-col items-center">
                 <span className="text-xs font-bold text-gray-300 mb-1">AZ C</span>
-                <span className="text-[10px] text-gray-500 mb-2">(use1-az3)</span>
+                <span className="text-[0.625rem] text-gray-500 mb-2">(use1-az3)</span>
                 <Building className="text-emerald-400" size={32} />
               </div>
             </div>
@@ -138,9 +138,9 @@ export default function AwsInfrastructure() {
               <div className="mt-6 border border-purple-500/30 rounded-lg p-4 bg-purple-900/10 flex justify-between items-center">
                 <div className="flex flex-col items-center"><User className="text-gray-400" size={24}/><span className="text-xs text-gray-400 mt-1">User</span></div>
                 <ArrowRight className="text-purple-400"/>
-                <div className="flex flex-col items-center"><Network className="text-purple-400" size={24}/><span className="text-[10px] text-purple-300 mt-1">Edge Locations</span></div>
+                <div className="flex flex-col items-center"><Network className="text-purple-400" size={24}/><span className="text-[0.625rem] text-purple-300 mt-1">Edge Locations</span></div>
                 <ArrowRight className="text-purple-400"/>
-                <div className="flex flex-col items-center"><Cloud className="text-orange-400" size={24}/><span className="text-[10px] text-orange-300 mt-1">AWS Region</span></div>
+                <div className="flex flex-col items-center"><Cloud className="text-orange-400" size={24}/><span className="text-[0.625rem] text-orange-300 mt-1">AWS Region</span></div>
               </div>
             </div>
           </div>
@@ -163,14 +163,14 @@ export default function AwsInfrastructure() {
                 <div className="flex flex-col items-center"><MapPin className="text-blue-400" size={24}/><span className="text-xs text-blue-300 mt-1">Local Zone</span></div>
                 
                 <div className="flex-1 flex flex-col items-center">
-                  <span className="text-[10px] text-orange-400">Low Latency</span>
+                  <span className="text-[0.625rem] text-orange-400">Low Latency</span>
                   <ArrowRight className="text-orange-500 border-dashed border-b border-orange-500 w-full" style={{height: 0}} />
                 </div>
                 
                 <div className="border border-dashed border-gray-500 p-2 rounded text-center">
-                  <span className="text-[10px] text-gray-400 block mb-1">Parent Region</span>
+                  <span className="text-[0.625rem] text-gray-400 block mb-1">Parent Region</span>
                   <Flag className="text-gray-300 mx-auto" size={16} />
-                  <span className="text-[10px] text-gray-500">(us-east-1)</span>
+                  <span className="text-[0.625rem] text-gray-500">(us-east-1)</span>
                 </div>
               </div>
             </div>

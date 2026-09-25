@@ -144,19 +144,19 @@ function ConvolutionLab() {
 
       <div className="flex flex-wrap items-start gap-6 justify-center mb-5">
         <div className="text-center">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">Input 10×10</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">Input 10×10</div>
           <Grid data={IMG} highlight={[clampR, clampC]} onHover={setPos} />
         </div>
 
         <div className="text-center">
-          <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-2">Kernel 3×3</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-2">Kernel 3×3</div>
           <div className="inline-block rounded-lg border border-amber-500/30 bg-black/40 p-1.5">
             {kernel.map((row, i) => (
               <div key={i} className="flex">
                 {row.map((v, j) => (
                   <div
                     key={j}
-                    className="w-11 h-11 flex items-center justify-center text-[11px] font-mono text-amber-200 border border-amber-500/20"
+                    className="w-11 h-11 flex items-center justify-center text-[0.6875rem] font-mono text-amber-200 border border-amber-500/20"
                   >
                     {Number.isInteger(v) ? v : v.toFixed(2)}
                   </div>
@@ -167,16 +167,16 @@ function ConvolutionLab() {
         </div>
 
         <div className="text-center">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">Output 8×8</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">Output 8×8</div>
           <Grid data={out} highlight={[clampR - 1, clampC - 1]} radius={0} />
         </div>
       </div>
 
       <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">
           Output pixel at row {clampR - 1}, col {clampC - 1}
         </div>
-        <div className="font-mono text-[11px] text-gray-400 leading-relaxed break-words">
+        <div className="font-mono text-[0.6875rem] text-gray-400 leading-relaxed break-words">
           {terms.map((t, i) => (
             <span key={i}>
               {i > 0 && " + "}
@@ -239,13 +239,13 @@ function ShapeCalculator() {
       </div>
 
       <div className="p-4 rounded-xl bg-black/40 border border-purple-500/30">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">
           {size}×{size} → convolution →
         </div>
         <div className={`text-3xl font-bold font-mono ${valid ? "text-purple-300" : "text-rose-400"}`}>
           {valid ? `${out}×${out}` : "invalid"}
         </div>
-        <div className="text-[11px] text-gray-500 mt-1 font-mono">
+        <div className="text-[0.6875rem] text-gray-500 mt-1 font-mono">
           ⌊({size} + 2·{pad} − {k}) / {stride}⌋ + 1
         </div>
       </div>

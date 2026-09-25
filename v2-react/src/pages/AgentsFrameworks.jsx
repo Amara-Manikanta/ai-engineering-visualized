@@ -210,7 +210,7 @@ export default function AgentsFrameworks() {
           ].map((f) => (
             <div key={f.n} className={`p-5 rounded-xl border ${f.box}`}>
               <div className={`font-bold mb-1 ${f.label}`}>{f.n}</div>
-              <div className="text-[11px] uppercase tracking-wide text-gray-500 mb-2.5">{f.m}</div>
+              <div className="text-[0.6875rem] uppercase tracking-wide text-gray-500 mb-2.5">{f.m}</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{f.d}</p>
             </div>
           ))}

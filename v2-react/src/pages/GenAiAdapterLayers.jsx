@@ -149,18 +149,18 @@ function LatencyPanel() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Base latency</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Base latency</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{base.toFixed(1)} ms</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-rose-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Added by adapters</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Added by adapters</div>
           <div className="text-2xl font-bold font-mono text-rose-300">+{added.toFixed(2)} ms</div>
-          <div className="text-[11px] text-gray-600 mt-1">{layers * 2} adapter passes</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{layers * 2} adapter passes</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-amber-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-amber-400 mb-1">Overhead</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-amber-400 mb-1">Overhead</div>
           <div className="text-2xl font-bold font-mono text-amber-300">{pct.toFixed(1)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">LoRA merged: 0%</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">LoRA merged: 0%</div>
         </div>
       </div>
     </div>

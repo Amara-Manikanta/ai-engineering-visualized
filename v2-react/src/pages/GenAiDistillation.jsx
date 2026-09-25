@@ -79,7 +79,7 @@ function TemperaturePanel() {
         {CLASSES.map((c, i) => (
           <div key={c.n} className="flex items-center gap-3">
             <div className="w-14 text-xs text-gray-400 text-right font-mono shrink-0">{c.n}</div>
-            <div className="w-12 text-[10px] text-gray-600 font-mono text-right shrink-0">z={c.z}</div>
+            <div className="w-12 text-[0.625rem] text-gray-600 font-mono text-right shrink-0">z={c.z}</div>
             <div className="flex-1 h-6 bg-black/40 rounded-md overflow-hidden border border-white/5">
               <div
                 className={`h-full ${BARS[i]} transition-all duration-200`}
@@ -95,21 +95,21 @@ function TemperaturePanel() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Entropy</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Entropy</div>
           <div className="text-2xl font-bold font-mono text-teal-300">{entropy.toFixed(3)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">max is {maxEntropy.toFixed(3)} for 6 classes</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">max is {maxEntropy.toFixed(3)} for 6 classes</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Top vs runner-up</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Top vs runner-up</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{top2Ratio.toFixed(1)}×</div>
-          <div className="text-[11px] text-gray-600 mt-1">how lopsided the answer is</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">how lopsided the answer is</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Signal in the tail</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Signal in the tail</div>
           <div className="text-2xl font-bold font-mono text-emerald-400">
             {((1 - probs[0]) * 100).toFixed(1)}%
           </div>
-          <div className="text-[11px] text-gray-600 mt-1">probability mass outside the top class</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">probability mass outside the top class</div>
         </div>
       </div>
 

@@ -157,10 +157,10 @@ function DecisionWalk() {
 
       {verdict && (
         <div className={`p-5 rounded-xl border ${verdict.tone}`}>
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Verdict</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Verdict</div>
           <div className={`text-2xl font-bold mb-3 ${verdict.label}`}>{verdict.title}</div>
           <p className="text-sm text-gray-300 leading-relaxed mb-4">{verdict.body}</p>
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">What to do next</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">What to do next</div>
           <ul className="list-disc pl-5 text-xs text-gray-400 space-y-1.5 m-0">
             {verdict.next.map((n) => (
               <li key={n}>{n}</li>

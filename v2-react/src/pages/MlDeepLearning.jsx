@@ -122,7 +122,7 @@ export default function MlDeepLearning() {
           <div className="mt-4 bg-[#0f0f11] border border-gray-800 rounded-lg p-3 font-mono text-sm text-gray-200 text-center">
             ŷ = f( w₁x₁ + w₂x₂ + w₃x₃ + b )
           </div>
-          <p className="text-[11px] text-gray-500 mt-3 text-center max-w-lg mx-auto leading-relaxed">
+          <p className="text-[0.6875rem] text-gray-500 mt-3 text-center max-w-lg mx-auto leading-relaxed">
             Notice the inside is exactly linear/logistic regression. The activation <code className="text-emerald-300">f</code>{' '}
             is what adds non-linearity — and stacking these is what lets networks model curves no single line can.
           </p>

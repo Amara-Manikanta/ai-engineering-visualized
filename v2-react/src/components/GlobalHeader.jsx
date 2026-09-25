@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import CommandPalette from "./CommandPalette";
+import ReadingSize from "./ReadingSize";
 
 const NAV_LINKS = [
   { 
@@ -58,6 +59,7 @@ const NAV_LINKS = [
       { name: "MoE — Experts", path: "/llms/moe-type" },
       { name: "LCM — Concept", path: "/llms/lcm-type" },
       { name: "LAM — Action", path: "/llms/lam-type" },
+      { name: "Decision Models (Jev, Laya)", path: "/genai/decision-models" },
       { name: "Core", isHeader: true },
       { name: "LLM Inference", path: "/llm-inference" },
       { name: "Efficient Inference", path: "/efficiency" },
@@ -122,6 +124,8 @@ const NAV_LINKS = [
     name: "🧩 Models",
     path: "/models",
     subLinks: [
+      { name: "How Models Are Trained", path: "/models/training" },
+      { name: "Families", isHeader: true },
       { name: "Claude", path: "/models/claude" },
       { name: "GPT", path: "/models/gpt" },
       { name: "Gemini", path: "/models/gemini" },
@@ -131,7 +135,7 @@ const NAV_LINKS = [
       { name: "Mistral", path: "/models/mistral" },
       { name: "Grok", path: "/models/grok" },
       { name: "Gemma", path: "/models/gemma" },
-      { name: "Command R+", path: "/models/command-r" },
+      { name: "Cohere Command", path: "/models/command-r" },
       { name: "Phi-4", path: "/models/phi" },
       { name: "Claude Code Features", path: "/models/claude#claude-code" },
     ],
@@ -247,7 +251,10 @@ export default function GlobalHeader() {
           </nav>
 
           {/* Global search — Cmd+K */}
-          <div className="ml-auto lg:ml-4 mr-2">
+          <div className="ml-auto lg:ml-4 mr-2 flex items-center gap-3">
+            <div className="hidden sm:block">
+              <ReadingSize compact />
+            </div>
             <CommandPalette />
           </div>
 
@@ -277,7 +284,7 @@ export default function GlobalHeader() {
             <div className="flex items-center justify-between px-4 h-16 border-b border-white/10 shrink-0">
               <Link to="/" className="flex items-center gap-2 text-lg font-bold text-white">
                 <span className="text-2xl">🧠</span>
-                <span>AI Engineering <span className="text-indigo-400">Visualized</span></span>
+                <span>Mani <span className="text-indigo-400">Notes</span></span>
               </Link>
               <button 
                 className="p-2 rounded-lg hover:bg-white/10 transition-colors text-white"
@@ -285,6 +292,12 @@ export default function GlobalHeader() {
               >
                 <X className="w-6 h-6" />
               </button>
+            </div>
+
+            {/* Text size — the first thing in the menu on a phone */}
+            <div className="flex items-center justify-between px-8 py-4 border-b border-white/10 shrink-0">
+              <span className="text-sm font-medium text-gray-300">Text size</span>
+              <ReadingSize />
             </div>
 
             {/* Nav links */}
@@ -345,7 +358,7 @@ export default function GlobalHeader() {
 
             {/* Footer */}
             <div className="px-8 py-6 border-t border-white/5 shrink-0">
-              <p className="text-xs text-gray-600 text-center">AI Engineering Visualized © 2026</p>
+              <p className="text-xs text-gray-600 text-center">Mani Notes © 2026</p>
             </div>
           </nav>
         </div>

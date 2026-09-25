@@ -42,6 +42,7 @@ const ModelsGrok = lazy(() => import("./pages/ModelsGrok"));
 const ModelsGemma = lazy(() => import("./pages/ModelsGemma"));
 const ModelsCommandR = lazy(() => import("./pages/ModelsCommandR"));
 const ModelsPhi = lazy(() => import("./pages/ModelsPhi"));
+const ModelsTraining = lazy(() => import("./pages/ModelsTraining"));
 const McpIndex = lazy(() => import("./pages/McpIndex"));
 const PromptingIndex = lazy(() => import("./pages/PromptingIndex"));
 const EmbeddingsIndex = lazy(() => import("./pages/EmbeddingsIndex"));
@@ -89,6 +90,7 @@ const GenAiIa3 = lazy(() => import("./pages/GenAiIa3"));
 const GenAiAdapterLayers = lazy(() => import("./pages/GenAiAdapterLayers"));
 const GenAiDistillation = lazy(() => import("./pages/GenAiDistillation"));
 const GenAiTokenization = lazy(() => import("./pages/GenAiTokenization"));
+const GenAiDecisionModels = lazy(() => import("./pages/GenAiDecisionModels"));
 const RagCompression = lazy(() => import("./pages/RagCompression"));
 const RagVsFineTuning = lazy(() => import("./pages/RagVsFineTuning"));
 const AgentsFrameworks = lazy(() => import("./pages/AgentsFrameworks"));
@@ -208,6 +210,7 @@ function App() {
         <Route path="/genai/peft/adapters" element={<GenAiAdapterLayers />} />
         <Route path="/genai/distillation" element={<GenAiDistillation />} />
         <Route path="/genai/tokenization" element={<GenAiTokenization />} />
+        <Route path="/genai/decision-models" element={<GenAiDecisionModels />} />
         
         <Route path="/python" element={<PythonIndex />} />
         <Route path="/python/foundations" element={<PythonFoundations />} />
@@ -249,6 +252,7 @@ function App() {
         <Route path="/models/gemma" element={<ModelsGemma />} />
         <Route path="/models/command-r" element={<ModelsCommandR />} />
         <Route path="/models/phi" element={<ModelsPhi />} />
+        <Route path="/models/training" element={<ModelsTraining />} />
 
         
         <Route path="/mcp" element={<McpIndex />} />

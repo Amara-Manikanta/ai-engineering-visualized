@@ -1,0 +1,55 @@
+// ============================================================================
+//  QUESTION FILE FORMAT — every .txt file in this folder is loaded
+//  automatically into the Knowledge Checks page.
+//
+//  # Topic name              starts a topic (a file may hold several)
+//  Q: question text          starts a question
+//  - option                  a wrong option
+//  * option                  THE correct option (exactly one per question)
+//  WHY: explanation          optional, shown after answering
+//  ANSWER: model answer      makes it an open interview question instead of
+//                            multiple-choice; may run over several lines
+//  // comment                ignored
+//
+//  Blank lines between questions are fine. Mistakes are reported on the
+//  Knowledge Checks page with the file name and line number.
+//  With `npm run dev` running, saving this file updates the page instantly.
+// ============================================================================
+
+# LLM Interview Questions
+
+Q: What is the difference between pretraining and fine-tuning?
+ANSWER: Pretraining teaches a model general language ability by predicting the
+next token over trillions of tokens of broad text. Fine-tuning then adapts that
+pretrained model to a narrower task or behaviour using a much smaller, curated
+dataset. Pretraining builds capability; fine-tuning shapes how it is used.
+
+Q: Why does a KV cache speed up generation?
+ANSWER: Each new token needs attention over every previous token. Without a
+cache the model would recompute the keys and values for the whole prefix at
+every step. The cache stores them once, so each step only computes K and V for
+the one new token.
+
+Q: Which setting makes sampling closer to always picking the most likely token?
+- Raising the temperature above 1
+* Lowering the temperature toward 0
+- Raising top-p to 1.0
+- Increasing the maximum output length
+WHY: Temperature divides the logits before the softmax. As it approaches 0 the
+distribution sharpens onto the single most likely token, approaching greedy decoding.
+
+Q: A model answers confidently with a made-up citation. What is this called?
+- Overfitting
+- Catastrophic forgetting
+* Hallucination
+- Mode collapse
+WHY: Hallucination is fluent output that is not grounded in the input or in fact.
+Retrieval with citation checking is the usual mitigation.
+
+Q: What does LoRA train instead of the full weight matrix?
+- The embeddings only
+* Two small low-rank matrices, B and A, added alongside the frozen weights
+- A copy of the model in 4-bit precision
+- Only the final output layer
+WHY: The base weights stay frozen and the update is factorised as B·A, cutting
+trainable parameters by well over 99% for a typical layer.

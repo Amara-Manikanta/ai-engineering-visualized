@@ -25,7 +25,7 @@ function RegVsClassVisual() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
         <div className="text-sm font-semibold text-emerald-400 mb-1">Regression → a number</div>
-        <div className="text-[11px] text-gray-500 mb-3">Fit a line; predict a continuous value.</div>
+        <div className="text-[0.6875rem] text-gray-500 mb-3">Fit a line; predict a continuous value.</div>
         <svg viewBox="0 0 100 100" className="w-full" style={{ aspectRatio: '1.4' }}>
           <line x1="8" y1="92" x2="96" y2="92" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
           <line x1="8" y1="8" x2="8" y2="92" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
@@ -34,12 +34,12 @@ function RegVsClassVisual() {
             <circle key={i} cx={x} cy={y} r="2.6" fill="#34d399" />
           ))}
         </svg>
-        <div className="text-[11px] text-gray-500 mt-1 text-center">e.g. "this house → $412,000"</div>
+        <div className="text-[0.6875rem] text-gray-500 mt-1 text-center">e.g. "this house → $412,000"</div>
       </div>
 
       <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
         <div className="text-sm font-semibold text-blue-400 mb-1">Classification → a category</div>
-        <div className="text-[11px] text-gray-500 mb-3">Draw a boundary; predict which side.</div>
+        <div className="text-[0.6875rem] text-gray-500 mb-3">Draw a boundary; predict which side.</div>
         <svg viewBox="0 0 100 100" className="w-full" style={{ aspectRatio: '1.4' }}>
           <line x1="8" y1="92" x2="96" y2="92" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
           <line x1="8" y1="8" x2="8" y2="92" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
@@ -51,7 +51,7 @@ function RegVsClassVisual() {
             <rect key={`b${i}`} x={x - 2.2} y={y - 2.2} width="4.4" height="4.4" rx="1" fill="#f472b6" />
           ))}
         </svg>
-        <div className="text-[11px] text-gray-500 mt-1 text-center">e.g. "this email → spam"</div>
+        <div className="text-[0.6875rem] text-gray-500 mt-1 text-center">e.g. "this email → spam"</div>
       </div>
     </div>
   );
@@ -79,7 +79,7 @@ function FitVisual() {
               <circle key={i} cx={x} cy={y} r="2.4" fill="#9ca3af" />
             ))}
           </svg>
-          <div className="text-[11px] text-gray-500 mt-1 leading-relaxed">{p.sub}</div>
+          <div className="text-[0.6875rem] text-gray-500 mt-1 leading-relaxed">{p.sub}</div>
         </div>
       ))}
     </div>
@@ -97,7 +97,7 @@ function KFoldVisual() {
       <div className="space-y-2">
         {Array.from({ length: k }).map((_, fold) => (
           <div key={fold} className="flex items-center gap-3">
-            <span className="text-[10px] font-mono text-gray-500 w-14 shrink-0">Round {fold + 1}</span>
+            <span className="text-[0.625rem] font-mono text-gray-500 w-14 shrink-0">Round {fold + 1}</span>
             <div className="flex-1 flex gap-1">
               {Array.from({ length: k }).map((_, i) => (
                 <motion.div
@@ -106,7 +106,7 @@ function KFoldVisual() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: fold * 0.08 + i * 0.02 }}
-                  className={`flex-1 h-7 rounded flex items-center justify-center text-[9px] font-bold ${
+                  className={`flex-1 h-7 rounded flex items-center justify-center text-[0.5625rem] font-bold ${
                     i === fold
                       ? 'bg-amber-500/25 border border-amber-500/50 text-amber-200'
                       : 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-300/70'
@@ -119,7 +119,7 @@ function KFoldVisual() {
           </div>
         ))}
       </div>
-      <p className="text-[11px] text-gray-500 mt-4 leading-relaxed mb-0">
+      <p className="text-[0.6875rem] text-gray-500 mt-4 leading-relaxed mb-0">
         The data is split into {k} folds. Each round holds out a different fold for testing and trains on the other
         four — so every row gets used for validation exactly once. Averaging the {k} scores gives a far more reliable
         estimate than a single train/test split.
@@ -206,7 +206,7 @@ export default function MlSupervised() {
               <div key={c.t} className={`p-5 rounded-xl border ${c.tone} bg-white/5`}>
                 <h3 className="font-semibold text-white mb-1">{c.t}</h3>
                 <p className="text-xs text-gray-400 leading-relaxed mb-2">{c.d}</p>
-                <div className="text-[11px] text-gray-500 italic">{c.ex}</div>
+                <div className="text-[0.6875rem] text-gray-500 italic">{c.ex}</div>
               </div>
             ))}
           </div>
@@ -229,7 +229,7 @@ export default function MlSupervised() {
                   <tr key={a.name} className={i % 2 ? 'bg-white/[0.02]' : ''}>
                     <td className="p-3 border-b border-white/5 font-semibold text-gray-200">{a.name}</td>
                     <td className="p-3 border-b border-white/5">
-                      <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full border ${
+                      <span className={`text-[0.625rem] font-bold uppercase px-2 py-0.5 rounded-full border ${
                         a.task === 'Classification' ? 'border-blue-500/40 text-blue-300' : a.task === 'Both' ? 'border-gray-500/40 text-gray-300' : 'border-emerald-500/40 text-emerald-300'
                       }`}>{a.task}</span>
                     </td>

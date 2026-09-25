@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -11,8 +12,10 @@ const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { stag
 export default function ModelsGrok() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
-    { label: 'Model Lineup', hash: 'lineup' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
     { label: 'Architecture', hash: 'architecture' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'Training & Uniqueness', hash: 'training' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -30,26 +33,10 @@ export default function ModelsGrok() {
         </p>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Model</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best For</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Access</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Grok-3 / Grok-2</td><td className="px-4 py-2.5 border-b border-gray-900">Frontier intelligence, real-time social data, reasoning</td><td className="px-4 py-2.5 border-b border-gray-900">Hosted API / X Premium</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Grok-2 mini</td><td className="px-4 py-2.5 border-b border-gray-900">Fast, cost-efficient chat and general assistance</td><td className="px-4 py-2.5 border-b border-gray-900">Hosted API</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Grok-1.5V</td><td className="px-4 py-2.5 border-b border-gray-900">Multimodal vision tasks (reading diagrams, documents)</td><td className="px-4 py-2.5 border-b border-gray-900">Hosted API</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Grok-1 (314B)</td><td className="px-4 py-2.5 border-b border-gray-900">Self-hosted research and massive MoE exploration</td><td className="px-4 py-2.5 border-b border-gray-900">Open Weights</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <ModelLineup id="grok" />
+
+      <ModelWeights id="grok" />
+
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>
@@ -67,6 +54,8 @@ export default function ModelsGrok() {
           ))}
         </div>
       </section>
+
+      <ModelPipeline id="grok" name="Grok" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Grok Is Trained</h2>

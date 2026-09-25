@@ -38,6 +38,7 @@ export default function LlmIndex() {
     { n: "MoE", full: "Mixture of Experts", p: "#/llms/moe-type", icon: "🧩", d: "Huge parameter count, only a fraction of it active per token.", box: "border-amber-500/30 bg-amber-500/[0.08]", label: "text-amber-400" },
     { n: "LCM", full: "Large Concept Model", p: "#/llms/lcm-type", icon: "🪐", d: "Predicts whole concepts rather than the next token.", box: "border-purple-500/30 bg-purple-500/[0.08]", label: "text-purple-400" },
     { n: "LAM", full: "Large Action Model", p: "#/llms/lam-type", icon: "🎬", d: "Trained to take actions in software, not just describe them.", box: "border-rose-500/30 bg-rose-500/[0.08]", label: "text-rose-400" },
+    { n: "Decision", full: "Decision Models — Jev, Laya", p: "#/genai/decision-models", icon: "🎯", d: "Picks from answers you supply in one forward pass, with a calibrated probability. Never writes text.", box: "border-emerald-500/30 bg-emerald-500/[0.08]", label: "text-emerald-400" },
   ];
 
   return (
@@ -63,7 +64,7 @@ export default function LlmIndex() {
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> next_token_prediction.py</span>
             <span>Mathematical Concept</span>
           </div>
@@ -73,8 +74,8 @@ context = "Retrieval Augmented Generation reduces"
 # P("hallucinations" | context) = 0.84
 # P("speed" | context)          = 0.09
 # P("cost" | context)           = 0.04`}</pre>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Sample Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Sample Output:</div>
             <code>Generated Next Token: "hallucinations" (Probability: 84%)</code>
           </div>
         </div>
@@ -99,16 +100,16 @@ context = "Retrieval Augmented Generation reduces"
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 text-xs">
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <span className="font-bold text-indigo-300 block mb-1">🏗️ Base Foundation Model</span>
-            <span className="text-[11px] text-gray-400 block mb-2">Raw next-token prediction without instruction alignment.</span>
-            <code className="text-gray-300 bg-black/60 p-2 rounded block font-mono text-[10px]">
+            <span className="text-[0.6875rem] text-gray-400 block mb-2">Raw next-token prediction without instruction alignment.</span>
+            <code className="text-gray-300 bg-black/60 p-2 rounded block font-mono text-[0.625rem]">
               Prompt: "Write a poem about Python"<br/>
               Output: "Write a poem about C++. Write a poem about Java..."
             </code>
           </div>
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-300 block mb-1">⚡ Post-Tuned Instruct Model</span>
-            <span className="text-[11px] text-gray-400 block mb-2">Aligned with SFT, DPO, and RLHF for direct task execution.</span>
-            <code className="text-gray-300 bg-black/60 p-2 rounded block font-mono text-[10px]">
+            <span className="text-[0.6875rem] text-gray-400 block mb-2">Aligned with SFT, DPO, and RLHF for direct task execution.</span>
+            <code className="text-gray-300 bg-black/60 p-2 rounded block font-mono text-[0.625rem]">
               Prompt: "Write a poem about Python"<br/>
               Output: "Indented blocks and readable code, Python leads the AI road..."
             </code>
@@ -135,35 +136,35 @@ context = "Retrieval Augmented Generation reduces"
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-green-400 block">GPT (OpenAI)</span>
-            <span className="text-[10px] text-gray-400">Industry standard proprietary models: GPT-4o, GPT-4o-mini, o1, o3-mini. Excellent API ecosystem & tool calling.</span>
+            <span className="text-[0.625rem] text-gray-400">Industry standard proprietary models: GPT-4o, GPT-4o-mini, o1, o3-mini. Excellent API ecosystem & tool calling.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-orange-400 block">Claude (Anthropic)</span>
-            <span className="text-[10px] text-gray-400">Premier coding & reasoning models: Claude 3.5 Sonnet, 3.5 Haiku, 3 Opus. Superior code syntax & computer use.</span>
+            <span className="text-[0.625rem] text-gray-400">Premier coding & reasoning models: Claude 3.5 Sonnet, 3.5 Haiku, 3 Opus. Superior code syntax & computer use.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-blue-400 block">Gemini (Google)</span>
-            <span className="text-[10px] text-gray-400">Massive 2M+ token context windows: Gemini 1.5 Pro, 1.5 Flash, 2.0 Flash. Native multimodal video & audio parsing.</span>
+            <span className="text-[0.625rem] text-gray-400">Massive 2M+ token context windows: Gemini 1.5 Pro, 1.5 Flash, 2.0 Flash. Native multimodal video & audio parsing.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-cyan-400 block">Llama (Meta)</span>
-            <span className="text-[10px] text-gray-400">Open-weight foundation series: Llama 3.3 70B, Llama 3.1 405B, 3.2 Vision. Powers open-source self-hosting.</span>
+            <span className="text-[0.625rem] text-gray-400">Open-weight foundation series: Llama 3.3 70B, Llama 3.1 405B, 3.2 Vision. Powers open-source self-hosting.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-purple-400 block">Qwen (Alibaba)</span>
-            <span className="text-[10px] text-gray-400">High-performance open weights: Qwen2.5 72B, Qwen2.5-Coder. Tops open coding & multilingual benchmarks.</span>
+            <span className="text-[0.625rem] text-gray-400">High-performance open weights: Qwen2.5 72B, Qwen2.5-Coder. Tops open coding & multilingual benchmarks.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-400 block">DeepSeek</span>
-            <span className="text-[10px] text-gray-400">Ultra-efficient MoE & reasoning models: DeepSeek-V3 (671B), DeepSeek-R1. Open weights with low training costs.</span>
+            <span className="text-[0.625rem] text-gray-400">Ultra-efficient MoE & reasoning models: DeepSeek-V3 (671B), DeepSeek-R1. Open weights with low training costs.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-amber-400 block">Mistral</span>
-            <span className="text-[10px] text-gray-400">High efficiency & European data sovereignty: Mistral Large, Mixtral 8x22B. Flexible open-weight and API models.</span>
+            <span className="text-[0.625rem] text-gray-400">High efficiency & European data sovereignty: Mistral Large, Mixtral 8x22B. Flexible open-weight and API models.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-slate-300 block">Grok (xAI)</span>
-            <span className="text-[10px] text-gray-400">Real-time social data & uncensored personality: Grok-2, Grok-3. Native X (Twitter) integration.</span>
+            <span className="text-[0.625rem] text-gray-400">Real-time social data & uncensored personality: Grok-2, Grok-3. Native X (Twitter) integration.</span>
           </div>
         </div>
       </section>
@@ -187,7 +188,7 @@ context = "Retrieval Augmented Generation reduces"
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 text-xs">
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-cyan-300 block mb-1">☁️ Closed Models (APIs)</span>
-            <ul className="list-disc list-inside text-[11px] text-gray-400 space-y-1">
+            <ul className="list-disc list-inside text-[0.6875rem] text-gray-400 space-y-1">
               <li>Zero GPU hardware required</li>
               <li>State-of-the-art reasoning benchmarks</li>
               <li>Pay-per-token API consumption cost</li>
@@ -196,7 +197,7 @@ context = "Retrieval Augmented Generation reduces"
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-300 block mb-1">💻 Open-Weight Models (Self-Hosted)</span>
-            <ul className="list-disc list-inside text-[11px] text-gray-400 space-y-1">
+            <ul className="list-disc list-inside text-[0.6875rem] text-gray-400 space-y-1">
               <li>100% data privacy & air-gapped security</li>
               <li>Custom LoRA / QLoRA fine-tuning flexibility</li>
               <li>Fixed hardware cost regardless of token volume</li>
@@ -240,7 +241,7 @@ context = "Retrieval Augmented Generation reduces"
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> reasoning_execution.py</span>
             <span>Reasoning Pattern</span>
           </div>
@@ -360,19 +361,19 @@ Result: 42 (Verified step-by-step)`}</pre>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="text-amber-300 font-bold block mb-1">🎯 Complex Reasoning / Math</span>
-            <span className="text-gray-400 text-[10px]">Choose: OpenAI o1 / o3-mini or DeepSeek-R1</span>
+            <span className="text-gray-400 text-[0.625rem]">Choose: OpenAI o1 / o3-mini or DeepSeek-R1</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="text-amber-300 font-bold block mb-1">💻 Heavy Coding & Refactoring</span>
-            <span className="text-gray-400 text-[10px]">Choose: Claude 3.5 Sonnet or Qwen2.5-Coder-32B</span>
+            <span className="text-gray-400 text-[0.625rem]">Choose: Claude 3.5 Sonnet or Qwen2.5-Coder-32B</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="text-amber-300 font-bold block mb-1">⚡ Fast / Low-Cost High-Volume</span>
-            <span className="text-gray-400 text-[10px]">Choose: GPT-4o-mini, Gemini 1.5 Flash, or Llama 3.2 3B</span>
+            <span className="text-gray-400 text-[0.625rem]">Choose: GPT-4o-mini, Gemini 1.5 Flash, or Llama 3.2 3B</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="text-amber-300 font-bold block mb-1">🔒 Air-Gapped Data Privacy</span>
-            <span className="text-gray-400 text-[10px]">Choose: Llama 3.3 70B, Qwen2.5 72B (Self-Hosted)</span>
+            <span className="text-gray-400 text-[0.625rem]">Choose: Llama 3.3 70B, Qwen2.5 72B (Self-Hosted)</span>
           </div>
         </div>
       </section>
@@ -428,7 +429,7 @@ Result: 42 (Verified step-by-step)`}</pre>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><Terminal size={12} /> Local Terminal Commands</span>
             <span>Ollama CLI</span>
           </div>
@@ -567,19 +568,19 @@ $ ollama run deepseek-r1:14b`}</pre>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <span className="font-bold text-red-400 block mb-1">❌ 1. Defaulting to Oversized Flagship Models</span>
-            <span className="text-gray-300 text-[11px]">Using expensive models like GPT-4o for simple classification or summarization tasks inflates latency and costs. Use smaller models like GPT-4o-mini or Llama 3.2 3B instead.</span>
+            <span className="text-gray-300 text-[0.6875rem]">Using expensive models like GPT-4o for simple classification or summarization tasks inflates latency and costs. Use smaller models like GPT-4o-mini or Llama 3.2 3B instead.</span>
           </div>
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <span className="font-bold text-red-400 block mb-1">❌ 2. Ignoring Prompt Context Caching</span>
-            <span className="text-gray-300 text-[11px]">Resending massive static system prompts or document context without enabling API prompt caching wastes 80%+ of token costs unnecessarily.</span>
+            <span className="text-gray-300 text-[0.6875rem]">Resending massive static system prompts or document context without enabling API prompt caching wastes 80%+ of token costs unnecessarily.</span>
           </div>
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <span className="font-bold text-red-400 block mb-1">❌ 3. Hardcoding Provider-Specific Prompts</span>
-            <span className="text-gray-300 text-[11px]">Tuning prompts tightly to one provider's specific quirk creates severe vendor lock-in. Use standardized system prompts and abstraction layers like LiteLLM.</span>
+            <span className="text-gray-300 text-[0.6875rem]">Tuning prompts tightly to one provider's specific quirk creates severe vendor lock-in. Use standardized system prompts and abstraction layers like LiteLLM.</span>
           </div>
           <div className="bg-black/40 p-4 rounded-xl border border-white/5">
             <span className="font-bold text-red-400 block mb-1">❌ 4. Neglecting Rate Limits & Retries</span>
-            <span className="text-gray-300 text-[11px]">Failing to wrap API calls in exponential backoff retry handlers (like `tenacity`) leads to application crashes when hitting 429 rate limits.</span>
+            <span className="text-gray-300 text-[0.6875rem]">Failing to wrap API calls in exponential backoff retry handlers (like `tenacity`) leads to application crashes when hitting 429 rate limits.</span>
           </div>
         </div>
       </section>
@@ -600,7 +601,7 @@ $ ollama run deepseek-r1:14b`}</pre>
             >
               <div className="text-2xl mb-2">{t.icon}</div>
               <div className={`font-bold ${t.label}`}>{t.n}</div>
-              <div className="text-[11px] uppercase tracking-wide text-gray-500 mb-2">{t.full}</div>
+              <div className="text-[0.6875rem] uppercase tracking-wide text-gray-500 mb-2">{t.full}</div>
               <p className="text-xs text-gray-300 leading-relaxed m-0">{t.d}</p>
             </a>
           ))}

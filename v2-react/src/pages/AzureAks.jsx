@@ -131,12 +131,12 @@ export default function AzureAks() {
             </div>
             
             <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg p-4 relative mb-4">
-              <div className="absolute top-2 left-2 text-[10px] text-gray-500 font-bold uppercase">Azure Region</div>
+              <div className="absolute top-2 left-2 text-[0.625rem] text-gray-500 font-bold uppercase">Azure Region</div>
               
               <div className="mt-4 bg-purple-500/20 border border-purple-500/30 rounded p-3 mb-4 text-center">
                 <Settings className="text-purple-400 mx-auto mb-1" size={20} />
                 <span className="text-xs text-purple-400 font-bold">Control Plane</span><br/>
-                <span className="text-[10px] text-gray-400">(Microsoft Managed)</span>
+                <span className="text-[0.625rem] text-gray-400">(Microsoft Managed)</span>
               </div>
               
               <div className="flex justify-center gap-2 mb-4">
@@ -145,7 +145,7 @@ export default function AzureAks() {
               </div>
               
               <div className="border border-dashed border-emerald-500/50 rounded p-3 mb-2">
-                <div className="text-[10px] text-emerald-500 font-bold mb-2 text-center uppercase">Node Pools (Worker Nodes)</div>
+                <div className="text-[0.625rem] text-emerald-500 font-bold mb-2 text-center uppercase">Node Pools (Worker Nodes)</div>
                 <div className="flex justify-between gap-2">
                   <div className="bg-emerald-500/20 border border-emerald-500/30 rounded p-2 flex-1 text-center text-emerald-400 text-xs">Node</div>
                   <div className="bg-emerald-500/20 border border-emerald-500/30 rounded p-2 flex-1 text-center text-emerald-400 text-xs">Node</div>

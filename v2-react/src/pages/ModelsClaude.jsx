@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
+import { ModelLineup, ModelWeights, ModelPipeline } from '../components/ModelProfile';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -49,8 +50,10 @@ const getHeaderColorClass = (color) => {
 export default function ModelsClaude() {
   const toc = [
     { label: 'Overview', hash: 'overview' },
+    { label: 'Current Lineup', hash: 'lineup' },
+    { label: 'Model Weights', hash: 'weights' },
+    { label: 'Training Pipeline', hash: 'pipeline' },
     { label: 'How Claude Is Trained', hash: 'training' },
-    { label: 'Model Lineup', hash: 'lineup' },
     { label: 'Architecture', hash: 'architecture' },
     { label: 'Strengths & Weaknesses', hash: 'strengths' },
     { label: 'Ideal Use Cases', hash: 'use-cases' },
@@ -71,6 +74,12 @@ export default function ModelsClaude() {
           use, and being purpose-built for agentic coding workflows like Claude Code.
         </p>
       </section>
+
+      <ModelLineup id="claude" />
+
+      <ModelWeights id="claude" />
+
+      <ModelPipeline id="claude" name="Claude" />
 
       <section id="training" className="mb-16 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">How Claude Is Trained</h2>
@@ -132,25 +141,6 @@ export default function ModelsClaude() {
         </div>
       </section>
 
-      <section id="lineup" className="mb-14 scroll-mt-24">
-        <h2 className="text-2xl font-bold text-white mb-4">Model Lineup</h2>
-        <div className="overflow-x-auto rounded-xl border border-gray-800">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-800/50">
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Tier</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Best For</th>
-                <th className="px-4 py-3 text-left text-gray-300 border-b border-gray-800">Tradeoff</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-400">
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Opus</td><td className="px-4 py-2.5 border-b border-gray-900">Deepest reasoning, hardest agentic/coding tasks</td><td className="px-4 py-2.5 border-b border-gray-900">Highest cost & latency</td></tr>
-              <tr className="bg-gray-900/30"><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Sonnet</td><td className="px-4 py-2.5 border-b border-gray-900">Balanced default for most production workloads</td><td className="px-4 py-2.5 border-b border-gray-900">Less headroom than Opus on the hardest tasks</td></tr>
-              <tr><td className="px-4 py-2.5 border-b border-gray-900 text-gray-200 font-semibold">Haiku</td><td className="px-4 py-2.5 border-b border-gray-900">High-volume, latency-sensitive, classification</td><td className="px-4 py-2.5 border-b border-gray-900">Weaker multi-step reasoning</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
 
       <section id="architecture" className="mb-14 scroll-mt-24">
         <h2 className="text-2xl font-bold text-white mb-4">Architecture Highlights</h2>

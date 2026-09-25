@@ -130,7 +130,7 @@ function MemoryModelVisual() {
         </defs>
       </svg>
 
-      <p className="text-[11px] text-gray-400 leading-relaxed text-center min-h-[32px] mb-3">{cur.note}</p>
+      <p className="text-[0.6875rem] text-gray-400 leading-relaxed text-center min-h-[32px] mb-3">{cur.note}</p>
 
       {/* controls */}
       <div className="flex items-center justify-center gap-3">
@@ -141,7 +141,7 @@ function MemoryModelVisual() {
         >
           ‹ Prev
         </button>
-        <span className="text-[11px] text-gray-500 font-mono">Step {step + 1} / {scenario.steps.length}</span>
+        <span className="text-[0.6875rem] text-gray-500 font-mono">Step {step + 1} / {scenario.steps.length}</span>
         <button
           onClick={() => setStep((s) => Math.min(scenario.steps.length - 1, s + 1))}
           disabled={step === scenario.steps.length - 1}
@@ -212,20 +212,20 @@ export default function PythonFoundations() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4 text-xs">
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-300 block mb-1">1. Code Editors & IDEs</span>
-            <span className="text-[10px] text-gray-400">VS Code & PyCharm provide syntax highlighting, linting, and debugging tools.</span>
+            <span className="text-[0.625rem] text-gray-400">VS Code & PyCharm provide syntax highlighting, linting, and debugging tools.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-300 block mb-1">2. Standalone `.py` Scripts</span>
-            <span className="text-[10px] text-gray-400">Standard text files containing Python instructions executed top-to-bottom.</span>
+            <span className="text-[0.625rem] text-gray-400">Standard text files containing Python instructions executed top-to-bottom.</span>
           </div>
           <div className="bg-black/40 p-3 rounded-xl border border-white/5">
             <span className="font-bold text-emerald-300 block mb-1">3. Jupyter Notebooks (`.ipynb`)</span>
-            <span className="text-[10px] text-gray-400">Interactive cells ideal for data science, prototyping, and inline visualization.</span>
+            <span className="text-[0.625rem] text-gray-400">Interactive cells ideal for data science, prototyping, and inline visualization.</span>
           </div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><Terminal size={12} /> Terminal Commands</span>
             <span>CLI Usage</span>
           </div>
@@ -235,8 +235,8 @@ Python 3.11.5
 
 # Run a Python Script File via Terminal
 $ python script.py`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Environment Ready! Python 3.11 activated.</code>
           </div>
         </div>
@@ -271,25 +271,25 @@ $ python script.py`}</CodeSnippet>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-center text-xs">
             <div className="bg-indigo-900/30 border border-indigo-500/40 px-4 py-3 rounded-xl w-full sm:w-auto">
               <span className="font-bold text-white block">Code Editor</span>
-              <span className="text-[10px] text-gray-400">VS Code / PyCharm</span>
+              <span className="text-[0.625rem] text-gray-400">VS Code / PyCharm</span>
             </div>
             <ArrowRight className="text-indigo-400 hidden sm:block shrink-0" size={20} />
             <div className="text-indigo-400 font-bold sm:hidden">↓</div>
             <div className="bg-purple-900/30 border border-purple-500/40 px-4 py-3 rounded-xl w-full sm:w-auto">
               <span className="font-bold text-white block">Python File</span>
-              <span className="text-[10px] text-gray-400">script.py</span>
+              <span className="text-[0.625rem] text-gray-400">script.py</span>
             </div>
             <ArrowRight className="text-purple-400 hidden sm:block shrink-0" size={20} />
             <div className="text-purple-400 font-bold sm:hidden">↓</div>
             <div className="bg-cyan-900/30 border border-cyan-500/40 px-4 py-3 rounded-xl w-full sm:w-auto">
               <span className="font-bold text-white block">Python Interpreter</span>
-              <span className="text-[10px] text-gray-400">CPython PVM</span>
+              <span className="text-[0.625rem] text-gray-400">CPython PVM</span>
             </div>
             <ArrowRight className="text-cyan-400 hidden sm:block shrink-0" size={20} />
             <div className="text-cyan-400 font-bold sm:hidden">↓</div>
             <div className="bg-emerald-900/30 border border-emerald-500/40 px-4 py-3 rounded-xl w-full sm:w-auto">
               <span className="font-bold text-white block">Terminal Output</span>
-              <span className="text-[10px] text-gray-400">Screen Output</span>
+              <span className="text-[0.625rem] text-gray-400">Screen Output</span>
             </div>
           </div>
         </motion.div>
@@ -317,7 +317,7 @@ $ python script.py`}</CodeSnippet>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 01_hello_world.py</span>
             <span>Python 3.11</span>
           </div>
@@ -325,8 +325,8 @@ $ python script.py`}</CodeSnippet>
 
 print("Hello, Python!")
 print("Python Version:", sys.version.split()[0])`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Hello, Python!<br/>Python Version: 3.11.5</code>
           </div>
         </div>
@@ -354,7 +354,7 @@ print("Python Version:", sys.version.split()[0])`}</CodeSnippet>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 03_indentation.py</span>
             <span>Python 3.11</span>
           </div>
@@ -367,8 +367,8 @@ print("Python Version:", sys.version.split()[0])`}</CodeSnippet>
         print("Non-positive")
 
 check_value(150)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Positive<br/>Large Positive</code>
           </div>
         </div>
@@ -395,7 +395,7 @@ check_value(150)`}</CodeSnippet>
 
         <div className="bg-amber-950/20 border border-amber-500/30 p-4 rounded-xl mb-4">
           <div className="text-amber-300 font-bold text-xs mb-1.5">Why this matters in practice</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             This is the root cause of Python's most notorious bug — the{' '}
             <strong className="text-gray-100">mutable default argument</strong>. Writing{' '}
             <code className="text-amber-200">def f(items=[])</code> creates that list <em>once</em>, when the function
@@ -405,7 +405,7 @@ check_value(150)`}</CodeSnippet>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 04_variables.py</span>
             <span>Python 3.11</span>
           </div>
@@ -415,8 +415,8 @@ is_learning_ai = True
 
 print(f"Name: {name}, Age: {age}, Learning AI: {is_learning_ai}")
 print("Memory address of name:", id(name))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Name: Manikanta, Age: 25, Learning AI: True<br/>Memory address of name: 140705892100416</code>
           </div>
         </div>
@@ -439,19 +439,19 @@ print("Memory address of name:", id(name))`}</CodeSnippet>
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-4 text-xs font-mono">
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">int</span><span className="text-[10px] text-gray-400">25</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">float</span><span className="text-[10px] text-gray-400">3.14</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">str</span><span className="text-[10px] text-gray-400">"AI"</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">bool</span><span className="text-[10px] text-gray-400">True</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">None</span><span className="text-[10px] text-gray-400">None</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">list</span><span className="text-[10px] text-gray-400">[1, 2]</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">tuple</span><span className="text-[10px] text-gray-400">(1, 2)</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">dict</span><span className="text-[10px] text-gray-400">{"{'k': 'v'}"}</span></div>
-          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">set</span><span className="text-[10px] text-gray-400">{"{'a', 'b'}"}</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">int</span><span className="text-[0.625rem] text-gray-400">25</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">float</span><span className="text-[0.625rem] text-gray-400">3.14</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">str</span><span className="text-[0.625rem] text-gray-400">"AI"</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">bool</span><span className="text-[0.625rem] text-gray-400">True</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-emerald-300 font-bold block">None</span><span className="text-[0.625rem] text-gray-400">None</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">list</span><span className="text-[0.625rem] text-gray-400">[1, 2]</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">tuple</span><span className="text-[0.625rem] text-gray-400">(1, 2)</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">dict</span><span className="text-[0.625rem] text-gray-400">{"{'k': 'v'}"}</span></div>
+          <div className="bg-black/40 p-2 rounded border border-white/5 text-center"><span className="text-purple-300 font-bold block">set</span><span className="text-[0.625rem] text-gray-400">{"{'a', 'b'}"}</span></div>
         </div>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 05_datatypes.py</span>
             <span>Python 3.11</span>
           </div>
@@ -462,8 +462,8 @@ d = True
 e = None
 
 print(type(a), type(b), type(c), type(d), type(e))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'bool'&gt; &lt;class 'NoneType'&gt;</code>
           </div>
         </div>
@@ -486,7 +486,7 @@ print(type(a), type(b), type(c), type(d), type(e))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 06_operators.py</span>
             <span>Python 3.11</span>
           </div>
@@ -497,8 +497,8 @@ print("Floor Division (a // b):", a // b)
 print("Modulo (a % b):", a % b)
 print("Power (a ** b):", a ** b)
 print("Bitwise AND (a & b):", a & b)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Float Division (a / b): 3.4<br/>Floor Division (a // b): 3<br/>Modulo (a % b): 2<br/>Power (a ** b): 1419857<br/>Bitwise AND (a & b): 1</code>
           </div>
         </div>
@@ -521,7 +521,7 @@ print("Bitwise AND (a & b):", a & b)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 07_logical_ops.py</span>
             <span>Python 3.11</span>
           </div>
@@ -529,8 +529,8 @@ print("Bitwise AND (a & b):", a & b)`}</CodeSnippet>
 
 if score >= 80 and score <= 100:
     print("Good score")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Good score</code>
           </div>
         </div>
@@ -553,7 +553,7 @@ if score >= 80 and score <= 100:
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 08_identity.py</span>
             <span>Python 3.11</span>
           </div>
@@ -564,8 +564,8 @@ print("list_a == list_b (Value):", list_a == list_b)
 print("list_a is list_b (Address):", list_a is list_b)
 
 print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>list_a == list_b (Value): True<br/>list_a is list_b (Address): False<br/>'vector' in 'vector_search': True</code>
           </div>
         </div>
@@ -588,7 +588,7 @@ print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</CodeSnippe
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 09_walrus.py</span>
             <span>Python 3.8+</span>
           </div>
@@ -597,8 +597,8 @@ print("'vector' in 'vector_search':", 'vector' in 'vector_search')`}</CodeSnippe
 # Evaluate length and assign to var 'n' inside the if expression
 if (n := len(query.split())) > 2:
     print(f"Query has {n} words.")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Query has 3 words.</code>
           </div>
         </div>
@@ -621,7 +621,7 @@ if (n := len(query.split())) > 2:
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 10_conditionals.py</span>
             <span>Python 3.11</span>
           </div>
@@ -639,8 +639,8 @@ else:
 status_label = "Success" if status_code == 200 else "Failure"
 
 print(f"Msg: {msg}, Label: {status_label}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Msg: OK, Label: Success</code>
           </div>
         </div>
@@ -663,7 +663,7 @@ print(f"Msg: {msg}, Label: {status_label}")`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 11_for_else.py</span>
             <span>Python 3.11</span>
           </div>
@@ -675,8 +675,8 @@ for item in items:
         break
 else:
     print("Loop completed without break.")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Found target!</code>
           </div>
         </div>
@@ -699,7 +699,7 @@ else:
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 12_while_loop.py</span>
             <span>Python 3.11</span>
           </div>
@@ -712,8 +712,8 @@ while attempts < 5:
     if attempts == 4:
         break     # Exit loop at 4
     print("Attempt:", attempts)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Attempt: 1<br/>Attempt: 3</code>
           </div>
         </div>
@@ -736,7 +736,7 @@ while attempts < 5:
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 13_enumerate_zip.py</span>
             <span>Python 3.11</span>
           </div>
@@ -746,8 +746,8 @@ scores = [0.95, 0.98]
 # Parallel iteration with zip and index tracking with enumerate
 for idx, (m, s) in enumerate(zip(models, scores), start=1):
     print(f"#{idx} {m}: {s}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>#1 GPT-4o: 0.95<br/>#2 Claude 3.5: 0.98</code>
           </div>
         </div>
@@ -770,7 +770,7 @@ for idx, (m, s) in enumerate(zip(models, scores), start=1):
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 14_match_case.py</span>
             <span>Python 3.10+</span>
           </div>
@@ -783,8 +783,8 @@ match response:
         print(f"Error Code: {err_code}")
     case _:
         print("Unknown payload")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Received Text: Success</code>
           </div>
         </div>

@@ -143,7 +143,7 @@ function Chooser() {
       </div>
       {a && (
         <div className="p-5 rounded-xl border border-white/15 bg-black/40">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Start with</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Start with</div>
           <div className={`text-2xl font-bold mb-2 ${a.tone}`}>{a.pick}</div>
           <p className="text-sm text-gray-300 leading-relaxed mb-3">{a.why}</p>
           <Link to={a.path} className="text-xs font-semibold text-blue-400 hover:underline">
@@ -173,7 +173,7 @@ export default function GenAiPeft() {
     >
       <section id="what" className="mb-14 scroll-mt-24">
         <div className="p-6 rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/[0.12] to-transparent mb-6">
-          <div className="text-[10px] uppercase tracking-wider text-indigo-400 mb-2">Parameter-Efficient Fine-Tuning</div>
+          <div className="text-[0.625rem] uppercase tracking-wider text-indigo-400 mb-2">Parameter-Efficient Fine-Tuning</div>
           <p className="text-lg text-gray-100 leading-relaxed m-0">
             Full fine-tuning updates every weight, which means holding gradients and optimiser state for all of
             them.{" "}
@@ -210,13 +210,13 @@ export default function GenAiPeft() {
                   <span className="text-2xl">{m.icon}</span>
                   <div>
                     <div className={`font-bold ${m.tone}`}>{m.n}</div>
-                    <div className="text-[10px] text-gray-500">{m.full}</div>
+                    <div className="text-[0.625rem] text-gray-500">{m.full}</div>
                   </div>
                 </div>
-                <span className="text-[10px] uppercase tracking-wide text-gray-500 shrink-0 mt-1">{m.tag}</span>
+                <span className="text-[0.625rem] uppercase tracking-wide text-gray-500 shrink-0 mt-1">{m.tag}</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed mb-3">{m.d}</p>
-              <div className="flex flex-wrap gap-3 text-[10px] font-mono text-gray-500">
+              <div className="flex flex-wrap gap-3 text-[0.625rem] font-mono text-gray-500">
                 <span>trains {m.params}</span>
                 <span>·</span>
                 <span>merges: {m.merge}</span>

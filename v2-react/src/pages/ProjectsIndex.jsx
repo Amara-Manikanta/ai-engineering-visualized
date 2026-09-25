@@ -68,7 +68,7 @@ export default function ProjectsIndex() {
                     <p className="text-sm text-gray-400 leading-relaxed mb-4">{p.desc}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {p.stack.map((s) => (
-                        <span key={s} className="text-[10px] font-semibold px-2 py-1 rounded bg-black/40 border border-white/10 text-gray-400">{s}</span>
+                        <span key={s} className="text-[0.625rem] font-semibold px-2 py-1 rounded bg-black/40 border border-white/10 text-gray-400">{s}</span>
                       ))}
                     </div>
                   </Link>

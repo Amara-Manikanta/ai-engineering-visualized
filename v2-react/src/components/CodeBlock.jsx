@@ -43,7 +43,7 @@ export function CodeSnippet({ className = '', children }) {
       <button
         onClick={handleCopy}
         aria-label="Copy code"
-        className={`absolute top-0 right-0 flex items-center gap-1 px-1.5 py-0.5 rounded border text-[10px] font-sans transition-all ${
+        className={`absolute top-0 right-0 flex items-center gap-1 px-1.5 py-0.5 rounded border text-[0.625rem] font-sans transition-all ${
           copied
             ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300 opacity-100'
             : 'border-gray-700 bg-black/70 text-gray-500 opacity-40 hover:opacity-100 hover:text-gray-200 hover:border-gray-500'
@@ -108,7 +108,7 @@ export default function CodeBlock({
           <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
           <span className="w-3 h-3 rounded-full bg-green-500/60" />
           {language && (
-            <span className="ml-2 text-[11px] font-mono text-gray-500 lowercase">{language}</span>
+            <span className="ml-2 text-[0.6875rem] font-mono text-gray-500 lowercase">{language}</span>
           )}
         </div>
         <button

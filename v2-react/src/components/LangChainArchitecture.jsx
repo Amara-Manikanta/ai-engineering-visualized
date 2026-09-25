@@ -109,7 +109,7 @@ export default function LangChainArchitecture() {
         <div className="flex-1 bg-[#0d0d0d] border border-white/10 rounded-2xl p-4 sm:p-6">
           {LAYERS.map((layer) => (
             <div key={layer.id} className="flex items-start gap-3 mb-3 last:mb-0">
-              <div className="hidden sm:flex w-24 shrink-0 text-[11px] uppercase tracking-wider text-gray-500 font-semibold pt-3 text-right pr-1">
+              <div className="hidden sm:flex w-24 shrink-0 text-[0.6875rem] uppercase tracking-wider text-gray-500 font-semibold pt-3 text-right pr-1">
                 {layer.label}
               </div>
               <div className="flex-1 flex flex-wrap gap-2">
@@ -128,7 +128,7 @@ export default function LangChainArchitecture() {
                       <div className="flex items-center gap-2">
                         <span className={`font-bold text-sm ${m.text}`}>{m.name}</span>
                         {m.tag && (
-                          <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-black/40 text-gray-400 border border-white/10">
+                          <span className="text-[0.5625rem] font-semibold px-1.5 py-0.5 rounded-full bg-black/40 text-gray-400 border border-white/10">
                             {m.tag}
                           </span>
                         )}

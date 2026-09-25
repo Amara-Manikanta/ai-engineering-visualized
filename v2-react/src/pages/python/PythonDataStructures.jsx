@@ -28,7 +28,7 @@ function LegbVisual() {
 
   return (
     <div className="bg-[#0a0a0a] border border-gray-800 rounded-xl p-5 mb-4">
-      <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-3">
+      <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-3">
         Looking up a name — click one to trace the search
       </div>
       <div className="flex flex-wrap gap-2 mb-5">
@@ -67,21 +67,21 @@ function LegbVisual() {
                   {layer.key}
                 </span>
                 <span className={`text-sm font-bold ${isHit ? '' : 'text-gray-400'}`}>{layer.name}</span>
-                <code className="text-[10px] font-mono text-gray-500">{layer.holds}</code>
+                <code className="text-[0.625rem] font-mono text-gray-500">{layer.holds}</code>
                 {searched && !isHit && (
-                  <span className="ml-auto text-[10px] text-gray-600 font-mono">not here → keep looking</span>
+                  <span className="ml-auto text-[0.625rem] text-gray-600 font-mono">not here → keep looking</span>
                 )}
                 {isHit && (
-                  <span className="ml-auto text-[10px] font-bold font-mono">✓ FOUND — search stops</span>
+                  <span className="ml-auto text-[0.625rem] font-bold font-mono">✓ FOUND — search stops</span>
                 )}
               </div>
-              <div className="text-[10px] text-gray-600 mt-0.5 ml-8">{layer.desc}</div>
+              <div className="text-[0.625rem] text-gray-600 mt-0.5 ml-8">{layer.desc}</div>
             </div>
           );
         })}
       </div>
 
-      <p className="text-[11px] text-gray-400 leading-relaxed mt-4 mb-0">{lookup.note}</p>
+      <p className="text-[0.6875rem] text-gray-400 leading-relaxed mt-4 mb-0">{lookup.note}</p>
     </div>
   );
 }
@@ -130,7 +130,7 @@ export default function PythonDataStructures() {
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 15_functions.py</span>
             <span>Python 3.11</span>
           </div>
@@ -142,8 +142,8 @@ def add_embedding(vec: list, store: list = None) -> list:
     return store
 
 print(add_embedding([0.1, 0.2]))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>[[0.1, 0.2]]</code>
           </div>
         </div>
@@ -166,7 +166,7 @@ print(add_embedding([0.1, 0.2]))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 16_args_kwargs.py</span>
             <span>Python 3.11</span>
           </div>
@@ -176,8 +176,8 @@ print(add_embedding([0.1, 0.2]))`}</CodeSnippet>
     print(f"Hyperparams: {hyperparams}")
 
 configure_agent("RAGBot", "search", "calculator", temp=0.2, top_p=0.9)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Agent: RAGBot<br/>Tools (2): ('search', 'calculator')<br/>Hyperparams: {"{'temp': 0.2, 'top_p': 0.9}"}</code>
           </div>
         </div>
@@ -202,7 +202,7 @@ configure_agent("RAGBot", "search", "calculator", temp=0.2, top_p=0.9)`}</CodeSn
         <LegbVisual />
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 17_legb_scope.py</span>
             <span>Python 3.11</span>
           </div>
@@ -217,8 +217,8 @@ def outer():
     return inner()
 
 print("Nested result:", outer())`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Nested result: 15</code>
           </div>
         </div>
@@ -241,7 +241,7 @@ print("Nested result:", outer())`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 18_lambda.py</span>
             <span>Python 3.11</span>
           </div>
@@ -250,8 +250,8 @@ print("Nested result:", outer())`}</CodeSnippet>
 # Sort list of dicts by score descending using lambda
 docs.sort(key=lambda d: d["score"], reverse=True)
 print("Top Document Score:", docs[0]["score"])`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Top Document Score: 0.99</code>
           </div>
         </div>
@@ -274,7 +274,7 @@ print("Top Document Score:", docs[0]["score"])`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 19_lists.py</span>
             <span>Python 3.11</span>
           </div>
@@ -285,8 +285,8 @@ last_token = tokens.pop()
 
 print("Tokens:", tokens)
 print("Popped Token:", last_token)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Tokens: ['AI', 'Model', 'Agent', 'RAG']<br/>Popped Token: LLM</code>
           </div>
         </div>
@@ -309,7 +309,7 @@ print("Popped Token:", last_token)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 20_tuples.py</span>
             <span>Python 3.11</span>
           </div>
@@ -317,8 +317,8 @@ print("Popped Token:", last_token)`}</CodeSnippet>
 batch, *middle, embed_dim = dimensions
 
 print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Batch: 1, Embed Dim: 1536</code>
           </div>
         </div>
@@ -341,7 +341,7 @@ print(f"Batch: {batch}, Embed Dim: {embed_dim}")`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 21_dicts.py</span>
             <span>Python 3.11</span>
           </div>
@@ -353,8 +353,8 @@ config.setdefault("top_p", 1.0)
 
 print(config)
 print("Temperature:", temp)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{'{\n  "model": "gpt-4o",\n  "top_p": 1.0\n}'}<br/>Temperature: 0.7</code>
           </div>
         </div>
@@ -377,7 +377,7 @@ print("Temperature:", temp)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-indigo-400"><FileCode size={12} /> 22_llm_message.py</span>
             <span>LLM API Payload Example</span>
           </div>
@@ -390,8 +390,8 @@ print("Temperature:", temp)`}</CodeSnippet>
 
 print(f"Role: {message['role']}")
 print(f"Prompt: {message['content']}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Role: user<br/>Prompt: Explain RAG</code>
           </div>
         </div>
@@ -414,7 +414,7 @@ print(f"Prompt: {message['content']}")`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 23_sets.py</span>
             <span>Python 3.11</span>
           </div>
@@ -423,8 +423,8 @@ set_b = {"ai", "ml", "dl"}
 
 print("Intersection:", set_a & set_b)
 print("Difference (A - B):", set_a - set_b)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Intersection: {'{\n  "ai"\n}'}<br/>Difference (A - B): {'{\n  "python", "rag"\n}'}</code>
           </div>
         </div>
@@ -447,7 +447,7 @@ print("Difference (A - B):", set_a - set_b)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 24_collections.py</span>
             <span>Python 3.11</span>
           </div>
@@ -463,8 +463,8 @@ queue.appendleft("priority_task")
 
 print(dict(graph))
 print(list(queue))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{'{\n  "node_a": ["node_b"]\n}'}<br/>['priority_task', 'task_1', 'task_2']</code>
           </div>
         </div>
@@ -487,7 +487,7 @@ print(list(queue))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 25_prompt_strings.py</span>
             <span>Python 3.11</span>
           </div>
@@ -502,8 +502,8 @@ Instruction: Provide a concise response.
 """
 
 print(system_prompt.strip())`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>System: You are an AI Assistant.<br/>User Query: What is RAG?<br/>Instruction: Provide a concise response.</code>
           </div>
         </div>
@@ -531,7 +531,7 @@ print(system_prompt.strip())`}</CodeSnippet>
         >
           <div>
             <div className="text-rose-300 font-bold text-xs mb-1">Full guide: Module 6 — Regular Expressions</div>
-            <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+            <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
               A live interactive tester, the complete syntax reference, greedy vs lazy, capture groups, lookarounds,
               the whole <code>re</code> API, and a practical cookbook.
             </p>
@@ -540,7 +540,7 @@ print(system_prompt.strip())`}</CodeSnippet>
         </a>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 26_regex.py</span>
             <span>Python 3.11</span>
           </div>
@@ -550,8 +550,8 @@ log = "ERROR 2026-08-04: Connection timeout in module X"
 date = re.search(r'\\d{4}-\\d{2}-\\d{2}', log).group()
 
 print("Extracted Date:", date)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Extracted Date: 2026-08-04</code>
           </div>
         </div>
@@ -574,7 +574,7 @@ print("Extracted Date:", date)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 27_comprehensions.py</span>
             <span>Python 3.11</span>
           </div>
@@ -584,8 +584,8 @@ print("Extracted Date:", date)`}</CodeSnippet>
 top_docs = {k: v for k, v in scores.items() if v >= 0.8}
 
 print("Top Docs Dict:", top_docs)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Top Docs Dict: {'{\n  "doc1": 0.82,\n  "doc2": 0.95\n}'}</code>
           </div>
         </div>

@@ -118,7 +118,7 @@ export default function MlIndex() {
               <motion.div key={i} whileHover={{ scale: 1.02 }} className="bg-[#111111] border border-white/10 p-6 rounded-xl hover:border-indigo-500/50 transition-colors">
                 <div className="flex items-center gap-2 mb-3">
                   <h3 className="text-xl font-semibold text-white">{lib.title}</h3>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 border border-white/10 text-gray-500">{lib.tag}</span>
+                  <span className="text-[0.625rem] font-mono px-2 py-0.5 rounded-full bg-black/40 border border-white/10 text-gray-500">{lib.tag}</span>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">{lib.desc}</p>
               </motion.div>

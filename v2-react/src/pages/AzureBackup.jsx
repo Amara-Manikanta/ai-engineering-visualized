@@ -185,7 +185,7 @@ export default function AzureBackup() {
               <div className="bg-[#1a1a1a] border border-gray-700 rounded p-2 text-xs text-gray-300 mb-2">
                 Geo-Redundant Storage<br/>(GRS/GZRS)
               </div>
-              <div className="flex justify-between items-center text-[10px] text-gray-500">
+              <div className="flex justify-between items-center text-[0.625rem] text-gray-500">
                 <span>Primary<br/>Region</span>
                 <span>← Sync →</span>
                 <span>Secondary<br/>Region</span>
@@ -225,37 +225,37 @@ export default function AzureBackup() {
             <div className="flex flex-col items-center gap-3 w-32 bg-[#111] p-2">
               <div className="bg-blue-500/20 p-4 rounded-full border border-blue-500/30"><Cloud className="text-blue-400" size={24}/></div>
               <span className="text-xs font-bold text-white text-center">Enable Replication</span>
-              <span className="text-[10px] text-gray-500 text-center">To secondary region.</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">To secondary region.</span>
             </div>
 
             <div className="flex flex-col items-center gap-3 w-32 bg-[#111] p-2">
               <div className="bg-cyan-500/20 p-4 rounded-full border border-cyan-500/30"><Database className="text-cyan-400" size={24}/></div>
               <span className="text-xs font-bold text-white text-center">Replicate Data</span>
-              <span className="text-[10px] text-gray-500 text-center">Continuous replication.</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">Continuous replication.</span>
             </div>
 
             <div className="flex flex-col items-center gap-3 w-32 bg-[#111] p-2">
               <div className="bg-emerald-500/20 p-4 rounded-full border border-emerald-500/30"><Shield className="text-emerald-400" size={24}/></div>
               <span className="text-xs font-bold text-white text-center">Monitor & Test</span>
-              <span className="text-[10px] text-gray-500 text-center">Perform test failover.</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">Perform test failover.</span>
             </div>
 
             <div className="flex flex-col items-center gap-3 w-32 bg-[#111] p-2">
               <div className="bg-orange-500/20 p-4 rounded-full border border-orange-500/30"><RotateCcw className="text-orange-400" size={24}/></div>
               <span className="text-xs font-bold text-white text-center">Failover</span>
-              <span className="text-[10px] text-gray-500 text-center">Initiate during disaster.</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">Initiate during disaster.</span>
             </div>
 
             <div className="flex flex-col items-center gap-3 w-32 bg-[#111] p-2">
               <div className="bg-purple-500/20 p-4 rounded-full border border-purple-500/30"><Server className="text-purple-400" size={24}/></div>
               <span className="text-xs font-bold text-white text-center">Run Apps</span>
-              <span className="text-[10px] text-gray-500 text-center">Minimal downtime.</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">Minimal downtime.</span>
             </div>
 
             <div className="flex flex-col items-center gap-3 w-32 bg-[#111] p-2">
               <div className="bg-green-500/20 p-4 rounded-full border border-green-500/30"><History className="text-green-400" size={24}/></div>
               <span className="text-xs font-bold text-white text-center">Failback</span>
-              <span className="text-[10px] text-gray-500 text-center">When primary is ready.</span>
+              <span className="text-[0.625rem] text-gray-500 text-center">When primary is ready.</span>
             </div>
 
           </div>

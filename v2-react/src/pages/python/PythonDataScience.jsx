@@ -59,7 +59,7 @@ function BroadcastVisual() {
             {row.map((v, ci) => (
               <div
                 key={ci}
-                className={`w-8 h-8 rounded flex items-center justify-center text-[11px] font-mono border ${tone} ${
+                className={`w-8 h-8 rounded flex items-center justify-center text-[0.6875rem] font-mono border ${tone} ${
                   dim ? 'opacity-45' : ''
                 }`}
               >
@@ -79,7 +79,7 @@ function BroadcastVisual() {
           <button
             key={bc.label}
             onClick={() => setPick(i)}
-            className={`px-3 py-1.5 rounded-lg border font-mono text-[11px] transition-colors ${
+            className={`px-3 py-1.5 rounded-lg border font-mono text-[0.6875rem] transition-colors ${
               pick === i
                 ? bc.ok
                   ? 'bg-purple-500/20 border-purple-500/50 text-purple-200'
@@ -94,14 +94,14 @@ function BroadcastVisual() {
 
       <div className="flex flex-wrap items-center justify-center gap-4">
         <div className="text-center">
-          <div className="text-[10px] text-gray-500 mb-1.5 font-mono">A (3,3)</div>
+          <div className="text-[0.625rem] text-gray-500 mb-1.5 font-mono">A (3,3)</div>
           <Grid data={c.a} tone="bg-blue-500/15 border-blue-500/40 text-blue-200" />
         </div>
 
         <div className="text-2xl text-gray-600 pt-4">+</div>
 
         <div className="text-center">
-          <div className="text-[10px] text-gray-500 mb-1.5 font-mono">
+          <div className="text-[0.625rem] text-gray-500 mb-1.5 font-mono">
             B {c.bShape === 'scalar' ? '()' : c.bShape === 'row' ? '(1,3)' : c.bShape === 'col' ? '(3,1)' : '(2,)'}
           </div>
           <Grid data={c.b} tone="bg-amber-500/20 border-amber-500/50 text-amber-200" />
@@ -110,13 +110,13 @@ function BroadcastVisual() {
         <div className={`text-2xl pt-4 ${c.ok ? 'text-gray-600' : 'text-rose-500'}`}>{c.ok ? '→' : '✗'}</div>
 
         <div className="text-center">
-          <div className="text-[10px] text-gray-500 mb-1.5 font-mono">
+          <div className="text-[0.625rem] text-gray-500 mb-1.5 font-mono">
             {c.ok ? 'B stretched to (3,3)' : 'ValueError'}
           </div>
           {c.ok ? (
             <Grid data={c.stretched} tone="bg-emerald-500/15 border-emerald-500/40 text-emerald-200" />
           ) : (
-            <div className="w-[104px] h-[104px] rounded border border-dashed border-rose-500/50 bg-rose-500/5 flex items-center justify-center text-[10px] text-rose-300 text-center px-2">
+            <div className="w-[104px] h-[104px] rounded border border-dashed border-rose-500/50 bg-rose-500/5 flex items-center justify-center text-[0.625rem] text-rose-300 text-center px-2">
               shapes not
               <br />
               alignable
@@ -125,13 +125,13 @@ function BroadcastVisual() {
         </div>
       </div>
 
-      <p className={`text-[11px] leading-relaxed mt-4 mb-0 text-center ${c.ok ? 'text-gray-400' : 'text-rose-300'}`}>
+      <p className={`text-[0.6875rem] leading-relaxed mt-4 mb-0 text-center ${c.ok ? 'text-gray-400' : 'text-rose-300'}`}>
         {c.note}
       </p>
 
       <div className="mt-4 pt-3 border-t border-white/10">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1.5">The rule</div>
-        <p className="text-[11px] text-gray-400 leading-relaxed m-0">
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1.5">The rule</div>
+        <p className="text-[0.6875rem] text-gray-400 leading-relaxed m-0">
           Compare shapes right to left. Two dimensions are compatible when they are{' '}
           <strong className="text-gray-200">equal</strong> or one of them is{' '}
           <strong className="text-gray-200">1</strong>. Anything else raises.
@@ -200,7 +200,7 @@ export default function PythonDataScience() {
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-indigo-400"><FileCode size={12} /> 52_numpy_shape.py</span>
             <span>Python 3.11</span>
           </div>
@@ -211,8 +211,8 @@ matrix = arr.reshape(3, 4)  # Reshape to 3 rows, 4 columns
 
 print("Matrix Shape:", matrix.shape)
 print("Dimensions:", matrix.ndim)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Matrix Shape: (3, 4)<br/>Dimensions: 2</code>
           </div>
         </div>
@@ -237,7 +237,7 @@ print("Dimensions:", matrix.ndim)`}</CodeSnippet>
         <BroadcastVisual />
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-purple-400"><FileCode size={12} /> 53_broadcasting.py</span>
             <span>Python 3.11</span>
           </div>
@@ -249,8 +249,8 @@ scalar = 5
 # Broadcasting scalar across all elements in C
 result = matrix * scalar
 print(result)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{`[[ 50 100]\n [150 200]]`}</code>
           </div>
         </div>
@@ -273,7 +273,7 @@ print(result)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-cyan-400"><FileCode size={12} /> 54_cosine.py</span>
             <span>Python 3.11</span>
           </div>
@@ -288,8 +288,8 @@ norm_b = np.linalg.norm(vec_b)
 
 sim = dot / (norm_a * norm_b)
 print(f"Cosine Similarity: {sim:.4f}")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Cosine Similarity: 0.9926</code>
           </div>
         </div>
@@ -312,7 +312,7 @@ print(f"Cosine Similarity: {sim:.4f}")`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 55_pandas.py</span>
             <span>Python 3.11</span>
           </div>
@@ -325,8 +325,8 @@ df = pd.DataFrame({
 
 # Selection by label (.loc) vs integer position (.iloc)
 print(df.loc["id_2", "score"])`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>92</code>
           </div>
         </div>
@@ -349,7 +349,7 @@ print(df.loc["id_2", "score"])`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-amber-400"><FileCode size={12} /> 56_cleaning.py</span>
             <span>Python 3.11</span>
           </div>
@@ -360,8 +360,8 @@ df = pd.DataFrame({"score": [90, np.nan, 80]})
 clean_df = df.fillna(df["score"].mean())
 
 print(clean_df)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{`   score\n0   90.0\n1   85.0\n2   80.0`}</code>
           </div>
         </div>
@@ -384,7 +384,7 @@ print(clean_df)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-teal-400"><FileCode size={12} /> 57_groupby.py</span>
             <span>Python 3.11</span>
           </div>
@@ -397,8 +397,8 @@ df = pd.DataFrame({
 
 res = df.groupby("cat")["val"].sum()
 print(res)`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>{`cat\nA    40\nB    60\nName: val, dtype: int64`}</code>
           </div>
         </div>
@@ -421,7 +421,7 @@ print(res)`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-rose-400"><FileCode size={12} /> 58_matplotlib.py</span>
             <span>Python 3.11</span>
           </div>
@@ -434,8 +434,8 @@ plt.ylabel("Score")
 plt.legend()
 plt.savefig("chart.png")
 print("Chart generated.")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Chart generated.</code>
           </div>
         </div>
@@ -458,7 +458,7 @@ print("Chart generated.")`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-pink-400"><FileCode size={12} /> 59_seaborn.py</span>
             <span>Python 3.11</span>
           </div>
@@ -470,8 +470,8 @@ matrix = np.random.rand(4, 4)
 sns.heatmap(matrix, annot=True, cmap="viridis")
 plt.savefig("heatmap.png")
 print("Heatmap saved.")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Heatmap saved.</code>
           </div>
         </div>
@@ -494,7 +494,7 @@ print("Heatmap saved.")`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-blue-400"><FileCode size={12} /> 60_scaler.py</span>
             <span>Python 3.11</span>
           </div>
@@ -506,8 +506,8 @@ scaler = StandardScaler()
 scaled = scaler.fit_transform(data)
 
 print("Scaled Mean:", scaled.mean(axis=0))`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Scaled Mean: [0. 0.]</code>
           </div>
         </div>
@@ -530,7 +530,7 @@ print("Scaled Mean:", scaled.mean(axis=0))`}</CodeSnippet>
         </p>
 
         <div className="bg-[#0e1117] rounded-xl border border-slate-700/60 p-4 font-mono text-xs">
-          <div className="flex items-center justify-between text-[10px] text-gray-500 pb-2 mb-2 border-b border-gray-800">
+          <div className="flex items-center justify-between text-[0.625rem] text-gray-500 pb-2 mb-2 border-b border-gray-800">
             <span className="flex items-center gap-1 text-emerald-400"><FileCode size={12} /> 61_workflow.py</span>
             <span>Python 3.11</span>
           </div>
@@ -546,8 +546,8 @@ model.fit(X_train, y_train)
 
 acc = model.score(X_test, y_test)
 print(f"Test Accuracy: {acc * 100:.0f}%")`}</CodeSnippet>
-          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[11px] text-gray-300">
-            <div className="text-[10px] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
+          <div className="bg-black/60 p-2.5 rounded border border-gray-800 text-[0.6875rem] text-gray-300">
+            <div className="text-[0.625rem] text-gray-500 mb-1 flex items-center gap-1"><Terminal size={10}/> Terminal Output:</div>
             <code>Test Accuracy: 100%</code>
           </div>
         </div>

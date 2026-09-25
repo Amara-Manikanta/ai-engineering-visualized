@@ -85,7 +85,7 @@ function PipelineVisual({ active, setActive }) {
               >
                 <div className="text-2xl mb-1.5">{s.icon}</div>
                 <div className={`text-sm font-bold ${isActive ? s.text : 'text-gray-300'}`}>{s.name}</div>
-                <div className="text-[10px] text-gray-500 mt-1 leading-snug">{s.one}</div>
+                <div className="text-[0.625rem] text-gray-500 mt-1 leading-snug">{s.one}</div>
               </motion.button>
               {i < STAGES.length - 1 && (
                 <div className="flex items-center text-gray-600 text-xl shrink-0">→</div>
@@ -95,7 +95,7 @@ function PipelineVisual({ active, setActive }) {
         })}
         <div className="flex items-center text-gray-600 text-xl shrink-0">→</div>
         <div className="flex items-center shrink-0">
-          <div className="px-3 py-2 rounded-lg border border-dashed border-white/20 text-[11px] text-gray-500 text-center">
+          <div className="px-3 py-2 rounded-lg border border-dashed border-white/20 text-[0.6875rem] text-gray-500 text-center">
             to Chunking
           </div>
         </div>
@@ -113,7 +113,7 @@ function PipelineVisual({ active, setActive }) {
           </div>
           <p className="text-sm text-gray-300 leading-relaxed mb-3">{active.detail}</p>
           <div className="p-3 rounded-lg bg-black/30 border border-white/10">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Watch out for</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Watch out for</div>
             <div className="text-xs text-gray-300 leading-relaxed">{active.watch}</div>
           </div>
         </motion.div>
@@ -185,7 +185,7 @@ function CleaningDemo() {
                 return (
                   <div key={i} className="flex items-center gap-2">
                     <span
-                      className={`text-[9px] uppercase tracking-wide px-1.5 py-0.5 rounded border shrink-0 w-28 text-center ${meta.tone}`}
+                      className={`text-[0.5625rem] uppercase tracking-wide px-1.5 py-0.5 rounded border shrink-0 w-28 text-center ${meta.tone}`}
                     >
                       {meta.label}
                     </span>
@@ -213,7 +213,7 @@ function CleaningDemo() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35 }}
-                className="pt-3 mt-3 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed not-italic"
+                className="pt-3 mt-3 border-t border-white/10 text-[0.6875rem] text-gray-500 leading-relaxed not-italic"
               >
                 Mojibake fixed (<span className="text-purple-400">Weâ€™ve</span> →{' '}
                 <span className="text-emerald-400">We've</span>), markup stripped, boilerplate dropped, whitespace
@@ -230,7 +230,7 @@ function CleaningDemo() {
           { label: 'Signal ratio', from: '20%', to: '100%' },
         ].map((s) => (
           <div key={s.label} className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">{s.label}</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">{s.label}</div>
             <div className="text-sm font-mono">
               <span className="text-gray-500">{s.from}</span>
               <span className="text-gray-600 mx-1.5">→</span>
@@ -247,7 +247,7 @@ function CleaningDemo() {
         ))}
       </div>
 
-      <p className="text-[11px] text-gray-500 mt-3 leading-relaxed mb-0">
+      <p className="text-[0.6875rem] text-gray-500 mt-3 leading-relaxed mb-0">
         The token reduction is the least interesting win. The real one is that the nav bar and footer no longer appear
         in <em>every single chunk</em> in your index — which was quietly making every document look similar to every
         other document.
@@ -304,7 +304,7 @@ export default function RagDataPrep() {
                 <React.Fragment key={s.l}>
                   <div className={`flex-1 rounded-lg border p-3.5 ${s.tone}`}>
                     <div className="text-xs font-bold mb-1">{s.l}</div>
-                    <div className="text-[10px] opacity-80 leading-snug">{s.d}</div>
+                    <div className="text-[0.625rem] opacity-80 leading-snug">{s.d}</div>
                   </div>
                   {i < arr.length - 1 && (
                     <div className="flex items-center justify-center text-gray-600 shrink-0">→</div>
@@ -368,7 +368,7 @@ export default function RagDataPrep() {
                 <div className="text-2xl mb-2.5">{c.icon}</div>
                 <div className="font-semibold text-white text-sm mb-1.5">{c.t}</div>
                 <p className="text-xs text-gray-400 leading-relaxed mb-2.5">{c.d}</p>
-                <div className="text-[10px] font-mono text-blue-300 bg-black/30 rounded px-2 py-1.5 border border-blue-500/20">
+                <div className="text-[0.625rem] font-mono text-blue-300 bg-black/30 rounded px-2 py-1.5 border border-blue-500/20">
                   {c.ex}
                 </div>
               </motion.div>
@@ -437,7 +437,7 @@ docs[0].metadata       # -> {'source': './docs/policy.pdf', 'page': 3}`}
                   ['Vision LLMs', 'Send the page image to a multimodal model and ask for Markdown. Excellent on messy layouts; slowest and priciest.'],
                 ].map(([t, d], i) => (
                   <div key={t} className="flex gap-2.5 items-start">
-                    <span className="text-[10px] font-mono text-emerald-400 bg-black/30 rounded px-1.5 py-0.5 border border-emerald-500/25 shrink-0 mt-0.5">
+                    <span className="text-[0.625rem] font-mono text-emerald-400 bg-black/30 rounded px-1.5 py-0.5 border border-emerald-500/25 shrink-0 mt-0.5">
                       {i + 1}
                     </span>
                     <span className="text-xs text-gray-300 leading-relaxed">

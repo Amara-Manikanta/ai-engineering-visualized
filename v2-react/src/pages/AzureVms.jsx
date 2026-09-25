@@ -227,7 +227,7 @@ export default function AzureVms() {
                   <ShieldCheck className="text-emerald-500 mx-2" />
                   <div className="flex-1 h-px bg-gray-600 border-b border-dashed border-gray-600"></div>
                 </div>
-                <span className="text-[10px] text-gray-500 mt-2 uppercase">SSL / HTTPS</span>
+                <span className="text-[0.625rem] text-gray-500 mt-2 uppercase">SSL / HTTPS</span>
               </div>
               
               <div className="flex flex-col items-center">

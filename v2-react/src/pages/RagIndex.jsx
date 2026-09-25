@@ -139,7 +139,7 @@ function PipelineHero({ active, setActive }) {
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[0.6875rem] font-bold shrink-0 ${
                         isActive ? `${a.dot} text-black` : 'bg-white/10 text-gray-400'
                       }`}
                     >
@@ -150,8 +150,8 @@ function PipelineHero({ active, setActive }) {
                   <div className={`font-bold text-sm mb-0.5 ${isActive ? 'text-white' : 'text-gray-300'}`}>
                     {s.name}
                   </div>
-                  <div className="text-[10px] text-gray-500 leading-snug">{s.sub}</div>
-                  <div className="text-[10px] text-gray-600 mt-2">
+                  <div className="text-[0.625rem] text-gray-500 leading-snug">{s.sub}</div>
+                  <div className="text-[0.625rem] text-gray-600 mt-2">
                     {s.topics.length} {s.topics.length === 1 ? 'guide' : 'guides'}
                   </div>
                 </motion.button>
@@ -276,7 +276,7 @@ export default function RagIndex() {
                     </span>
                     <div>
                       <h3 className={`font-bold text-lg leading-tight ${a.text}`}>{stage.name}</h3>
-                      <div className="text-[11px] text-gray-500">{stage.sub}</div>
+                      <div className="text-[0.6875rem] text-gray-500">{stage.sub}</div>
                     </div>
                     <div className={`flex-1 h-px ${a.bg}`} />
                   </div>
@@ -302,7 +302,7 @@ export default function RagIndex() {
                             </span>
                             {t.badge && (
                               <span
-                                className={`text-[9px] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${a.border} ${a.bg} ${a.text}`}
+                                className={`text-[0.5625rem] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${a.border} ${a.bg} ${a.text}`}
                               >
                                 {t.badge}
                               </span>
@@ -363,7 +363,7 @@ export default function RagIndex() {
                     <span className="text-xl">{arch.icon}</span>
                     <h4 className="font-bold text-white text-sm">{arch.title}</h4>
                     {arch.featured && (
-                      <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border border-indigo-500/40 text-indigo-300 ml-auto">
+                      <span className="text-[0.5625rem] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border border-indigo-500/40 text-indigo-300 ml-auto">
                         Start
                       </span>
                     )}

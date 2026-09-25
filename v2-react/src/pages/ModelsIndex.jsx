@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import GuideLayout from '../components/GuideLayout';
 import ModelBenchmarks from '../components/ModelBenchmarks';
+import { PROFILES, AS_OF } from '../data/modelProfiles';
 
 const MODELS = [
   {
@@ -18,12 +19,12 @@ const MODELS = [
   {
     id: 'gemini', name: 'Gemini', maker: 'Google DeepMind', path: '/models/gemini', icon: '♊',
     color: 'from-blue-500/20 to-blue-600/5', border: 'border-blue-500/30', text: 'text-blue-400',
-    access: 'Closed', context: 'up to 2M', strength: 'Native video/audio & massive context',
+    access: 'Closed', context: '1M', strength: 'Native video/audio & massive context',
   },
   {
     id: 'llama', name: 'Llama', maker: 'Meta', path: '/models/llama', icon: '🦙',
     color: 'from-indigo-500/20 to-indigo-600/5', border: 'border-indigo-500/30', text: 'text-indigo-400',
-    access: 'Open weights', context: '128K', strength: 'Self-hostable, fine-tune-friendly',
+    access: 'Mixed — Llama licence + Apache 2.0', context: '128K', strength: 'Self-hostable, fine-tune-friendly',
   },
   {
     id: 'qwen', name: 'Qwen', maker: 'Alibaba', path: '/models/qwen', icon: '🐉',
@@ -33,7 +34,7 @@ const MODELS = [
   {
     id: 'deepseek', name: 'DeepSeek', maker: 'DeepSeek AI', path: '/models/deepseek', icon: '🐋',
     color: 'from-cyan-500/20 to-cyan-600/5', border: 'border-cyan-500/30', text: 'text-cyan-400',
-    access: 'Open weights', context: '128K', strength: 'Efficient MoE training & reasoning (R1)',
+    access: 'Open weights (MIT)', context: '1M', strength: 'Efficient MoE training & reasoning (R1)',
   },
   {
     id: 'mistral', name: 'Mistral', maker: 'Mistral AI', path: '/models/mistral', icon: '🌬️',
@@ -43,22 +44,22 @@ const MODELS = [
   {
     id: 'grok', name: 'Grok', maker: 'xAI', path: '/models/grok', icon: '✖️',
     color: 'from-slate-500/20 to-slate-600/5', border: 'border-slate-500/30', text: 'text-slate-300',
-    access: 'Closed / Open (Early)', context: '128K', strength: 'Real-time social knowledge & uncensored personality',
+    access: 'Closed (older generations open)', context: '128K+', strength: 'Real-time social knowledge & uncensored personality',
   },
   {
     id: 'gemma', name: 'Gemma', maker: 'Google', path: '/models/gemma', icon: '💎',
     color: 'from-sky-500/20 to-sky-600/5', border: 'border-sky-500/30', text: 'text-sky-400',
-    access: 'Open weights', context: '128K', strength: 'Small models with high quality-per-parameter',
+    access: 'Open weights (Apache 2.0)', context: '256K', strength: 'Small models with high quality-per-parameter',
   },
   {
-    id: 'command-r', name: 'Command R+', maker: 'Cohere', path: '/models/command-r', icon: '🧭',
+    id: 'command-r', name: 'Cohere Command', maker: 'Cohere', path: '/models/command-r', icon: '🧭',
     color: 'from-teal-500/20 to-teal-600/5', border: 'border-teal-500/30', text: 'text-teal-400',
-    access: 'Enterprise / Open', context: '128K', strength: 'RAG-native with structured citations',
+    access: 'Open weights (Apache 2.0)', context: '128K', strength: 'RAG-native with structured citations',
   },
   {
-    id: 'phi', name: 'Phi-4', maker: 'Microsoft', path: '/models/phi', icon: '🔷',
+    id: 'phi', name: 'Phi', maker: 'Microsoft', path: '/models/phi', icon: '🔷',
     color: 'from-blue-500/20 to-blue-600/5', border: 'border-blue-500/30', text: 'text-blue-400',
-    access: 'Open weights', context: '16K', strength: 'Reasoning far above its parameter count',
+    access: 'Open weights (MIT)', context: '16K', strength: 'Reasoning far above its parameter count',
   },
 ];
 
@@ -112,12 +113,17 @@ export default function ModelsIndex() {
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-3xl">{m.icon}</span>
-                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full border ${m.border} ${m.text}`}>
+                  <span className={`text-[0.625rem] font-bold uppercase tracking-wider px-2 py-1 rounded-full border ${m.border} ${m.text}`}>
                     {m.access}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-1">{m.name}</h3>
                 <p className="text-xs text-gray-400 mb-3">{m.maker} · {m.context} context</p>
+                {PROFILES[m.id === 'command-r' ? 'commandr' : m.id] && (
+                  <p className="text-xs text-indigo-300 mb-3">
+                    Current: <span className="font-semibold">{PROFILES[m.id === 'command-r' ? 'commandr' : m.id].lineup[0].name}</span>
+                  </p>
+                )}
                 <p className="text-sm text-gray-300 leading-relaxed">{m.strength}</p>
               </Link>
             </motion.div>

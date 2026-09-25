@@ -215,23 +215,23 @@ export default function AzureMonitoring() {
                 <div className="flex justify-around items-center">
                   <div className="flex flex-col items-center gap-1">
                     <Database size={20} className="text-gray-400"/>
-                    <span className="text-[10px] text-gray-400">Collect</span>
+                    <span className="text-[0.625rem] text-gray-400">Collect</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Database size={20} className="text-gray-400"/>
-                    <span className="text-[10px] text-gray-400">Store</span>
+                    <span className="text-[0.625rem] text-gray-400">Store</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <BarChart2 size={20} className="text-gray-400"/>
-                    <span className="text-[10px] text-gray-400">Analyze</span>
+                    <span className="text-[0.625rem] text-gray-400">Analyze</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <LayoutDashboard size={20} className="text-gray-400"/>
-                    <span className="text-[10px] text-gray-400">Visualize</span>
+                    <span className="text-[0.625rem] text-gray-400">Visualize</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Settings size={20} className="text-gray-400"/>
-                    <span className="text-[10px] text-gray-400">Act</span>
+                    <span className="text-[0.625rem] text-gray-400">Act</span>
                   </div>
                 </div>
               </div>
@@ -243,23 +243,23 @@ export default function AzureMonitoring() {
                 <div className="flex justify-around items-center">
                   <div className="flex flex-col items-center gap-1">
                     <BarChart2 size={20} className="text-cyan-400"/>
-                    <span className="text-[10px] text-gray-400">Metrics</span>
+                    <span className="text-[0.625rem] text-gray-400">Metrics</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Database size={20} className="text-blue-400"/>
-                    <span className="text-[10px] text-gray-400">Logs</span>
+                    <span className="text-[0.625rem] text-gray-400">Logs</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Bulb size={20} className="text-purple-400"/>
-                    <span className="text-[10px] text-gray-400">Traces</span>
+                    <span className="text-[0.625rem] text-gray-400">Traces</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Activity size={20} className="text-green-400"/>
-                    <span className="text-[10px] text-gray-400">Activity Logs</span>
+                    <span className="text-[0.625rem] text-gray-400">Activity Logs</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Bell size={20} className="text-orange-400"/>
-                    <span className="text-[10px] text-gray-400">Alerts</span>
+                    <span className="text-[0.625rem] text-gray-400">Alerts</span>
                   </div>
                 </div>
               </div>

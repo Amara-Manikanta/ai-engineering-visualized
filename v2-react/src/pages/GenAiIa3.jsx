@@ -30,24 +30,24 @@ function ScalingPanel() {
       </p>
 
       <div className="grid grid-cols-[auto_1fr_auto_1fr_auto_1fr] gap-x-3 gap-y-2 items-center mb-5 text-xs">
-        <div className="text-[10px] uppercase tracking-wide text-gray-500">ch</div>
-        <div className="text-[10px] uppercase tracking-wide text-gray-500">activation</div>
-        <div className="text-[10px] uppercase tracking-wide text-blue-400">learned ℓ</div>
-        <div className="text-[10px] uppercase tracking-wide text-gray-500">scale</div>
-        <div className="text-[10px] uppercase tracking-wide text-emerald-400">result</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">ch</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">activation</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-blue-400">learned ℓ</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">scale</div>
+        <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400">result</div>
         <div />
         {acts.map((a, i) => (
           <React.Fragment key={i}>
-            <div className="font-mono text-[10px] text-gray-600">{i}</div>
+            <div className="font-mono text-[0.625rem] text-gray-600">{i}</div>
             <Bar v={a} max={1} color="bg-gray-500/70" />
-            <div className="font-mono text-[10px] text-blue-300 w-8 text-right">{l[i].toFixed(2)}</div>
+            <div className="font-mono text-[0.625rem] text-blue-300 w-8 text-right">{l[i].toFixed(2)}</div>
             <input
               type="range" min="0" max="2" step="0.05" value={l[i]}
               onChange={(e) => set(i, Number(e.target.value))}
               className="w-full accent-blue-500 h-1"
             />
             <Bar v={out[i]} max={2} color="bg-emerald-500/70" />
-            <div className="font-mono text-[10px] text-emerald-300 w-9 text-right">{out[i].toFixed(2)}</div>
+            <div className="font-mono text-[0.625rem] text-emerald-300 w-9 text-right">{out[i].toFixed(2)}</div>
           </React.Fragment>
         ))}
       </div>
@@ -88,19 +88,19 @@ function ParamCompare() {
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-black/40 border border-blue-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-blue-400 mb-1">(IA)³</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-blue-400 mb-1">(IA)³</div>
           <div className="text-2xl font-bold font-mono text-blue-300">{(ia3 / 1e3).toFixed(0)}K</div>
-          <div className="text-[11px] text-gray-600 mt-1">{((ia3 / full) * 100).toFixed(4)}% of the model</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{((ia3 / full) * 100).toFixed(4)}% of the model</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">LoRA at r=8</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">LoRA at r=8</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{(lora / 1e6).toFixed(1)}M</div>
-          <div className="text-[11px] text-gray-600 mt-1">{((lora / full) * 100).toFixed(3)}% of the model</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">{((lora / full) * 100).toFixed(3)}% of the model</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/30">
-          <div className="text-[10px] uppercase tracking-wide text-emerald-400 mb-1">Ratio</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-emerald-400 mb-1">Ratio</div>
           <div className="text-2xl font-bold font-mono text-emerald-300">{(lora / ia3).toFixed(0)}×</div>
-          <div className="text-[11px] text-gray-600 mt-1">smaller than LoRA</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">smaller than LoRA</div>
         </div>
       </div>
     </div>

@@ -118,7 +118,7 @@ function RegexTester() {
       </div>
 
       {/* pattern input */}
-      <label className="block text-[10px] uppercase tracking-wide text-gray-500 mb-1.5">Pattern</label>
+      <label className="block text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1.5">Pattern</label>
       <div className="flex items-center gap-2 mb-3">
         <span className="text-gray-600 font-mono text-lg">/</span>
         <input
@@ -140,7 +140,7 @@ function RegexTester() {
             key={f.f}
             onClick={() => toggleFlag(f.f)}
             title={f.desc}
-            className={`px-2.5 py-1 rounded-md border text-[11px] font-mono transition-colors ${
+            className={`px-2.5 py-1 rounded-md border text-[0.6875rem] font-mono transition-colors ${
               flags.includes(f.f)
                 ? 'bg-amber-500/20 border-amber-500/50 text-amber-200'
                 : 'bg-white/5 border-white/10 text-gray-500 hover:border-white/30'
@@ -152,7 +152,7 @@ function RegexTester() {
       </div>
 
       {/* test text */}
-      <label className="block text-[10px] uppercase tracking-wide text-gray-500 mb-1.5">Test string</label>
+      <label className="block text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1.5">Test string</label>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -169,7 +169,7 @@ function RegexTester() {
       ) : (
         <>
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] uppercase tracking-wide text-gray-500">Result</span>
+            <span className="text-[0.625rem] uppercase tracking-wide text-gray-500">Result</span>
             <span className={`text-xs font-mono ${matches.length ? 'text-emerald-400' : 'text-gray-600'}`}>
               {matches.length} match{matches.length === 1 ? '' : 'es'}
             </span>
@@ -189,7 +189,7 @@ function RegexTester() {
           {/* capture groups */}
           {matches.length > 0 && (matches[0].length > 1 || matches[0].groups) && (
             <div>
-              <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-2">Captured groups</div>
+              <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-2">Captured groups</div>
               <div className="space-y-1.5 max-h-48 overflow-y-auto custom-scrollbar">
                 {matches.slice(0, 8).map((m, mi) => (
                   <div key={mi} className="flex flex-wrap items-center gap-1.5 text-xs font-mono">
@@ -372,7 +372,7 @@ export default function PythonRegex() {
                         <tr key={sym} className={i % 2 ? 'bg-gray-900/30' : ''}>
                           <td className="px-4 py-2.5 border-b border-gray-900 font-mono text-indigo-300 whitespace-nowrap w-32">{sym}</td>
                           <td className="px-4 py-2.5 border-b border-gray-900 text-xs">{desc}</td>
-                          <td className="px-4 py-2.5 border-b border-gray-900 font-mono text-[11px] text-gray-600 whitespace-nowrap">{ex}</td>
+                          <td className="px-4 py-2.5 border-b border-gray-900 font-mono text-[0.6875rem] text-gray-600 whitespace-nowrap">{ex}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -402,7 +402,7 @@ export default function PythonRegex() {
               <div className="font-mono text-sm mb-2">
                 <mark className="bg-rose-500/30 text-rose-100 rounded px-0.5">&lt;b&gt;bold&lt;/b&gt;</mark>
               </div>
-              <p className="text-[11px] text-gray-500 leading-relaxed m-0">
+              <p className="text-[0.6875rem] text-gray-500 leading-relaxed m-0">
                 <code>.+</code> swallows everything to the last <code>&gt;</code> — one giant match spanning both tags.
               </p>
             </div>
@@ -416,7 +416,7 @@ export default function PythonRegex() {
                 <span className="text-gray-500">bold</span>
                 <mark className="bg-emerald-500/30 text-emerald-100 rounded px-0.5">&lt;/b&gt;</mark>
               </div>
-              <p className="text-[11px] text-gray-500 leading-relaxed m-0">
+              <p className="text-[0.6875rem] text-gray-500 leading-relaxed m-0">
                 <code>.+?</code> stops at the first <code>&gt;</code> — two separate, correct matches.
               </p>
             </div>

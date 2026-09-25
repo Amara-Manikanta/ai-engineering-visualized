@@ -162,17 +162,17 @@ function GanLab() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">JS divergence</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">JS divergence</div>
           <div className="text-2xl font-bold font-mono text-fuchsia-300">{fit.divergence.toFixed(4)}</div>
-          <div className="text-[11px] text-gray-600 mt-1">0 = distributions match</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">0 = distributions match</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Discriminator accuracy</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Discriminator accuracy</div>
           <div className="text-2xl font-bold font-mono text-gray-300">{(accuracy * 100).toFixed(1)}%</div>
-          <div className="text-[11px] text-gray-600 mt-1">50% = it is guessing</div>
+          <div className="text-[0.6875rem] text-gray-600 mt-1">50% = it is guessing</div>
         </div>
         <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-          <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">Generator</div>
+          <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">Generator</div>
           <div className="text-lg font-bold font-mono text-fuchsia-300">
             μ={fit.mu.toFixed(2)} σ={fit.sigma.toFixed(2)}
           </div>

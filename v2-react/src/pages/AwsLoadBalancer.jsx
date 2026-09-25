@@ -116,7 +116,7 @@ export default function AwsLoadBalancer() {
               <div className="border border-green-500/30 bg-green-900/10 p-4 rounded-lg flex flex-col items-center text-center">
                 <span className="text-xs text-green-400 font-bold mb-2">Target Tracking (Recommended)</span>
                 <Activity className="text-green-500 mb-2" size={24}/>
-                <ul className="text-[10px] text-gray-400 space-y-1">
+                <ul className="text-[0.625rem] text-gray-400 space-y-1">
                   <li>Maintain specific metric (e.g., CPU = 50%).</li>
                   <li>Automatically adjusts capacity.</li>
                 </ul>
@@ -125,7 +125,7 @@ export default function AwsLoadBalancer() {
               <div className="border border-blue-500/30 bg-blue-900/10 p-4 rounded-lg flex flex-col items-center text-center">
                 <span className="text-xs text-blue-400 font-bold mb-2">Step Scaling</span>
                 <Settings className="text-blue-500 mb-2" size={24}/>
-                <ul className="text-[10px] text-gray-400 space-y-1">
+                <ul className="text-[0.625rem] text-gray-400 space-y-1">
                   <li>Scale based on CloudWatch alarms.</li>
                   <li>Define steps for scale out or in.</li>
                 </ul>
@@ -160,7 +160,7 @@ export default function AwsLoadBalancer() {
                 <Scale className="text-indigo-400" size={32}/>
               </div>
               <span className="text-sm font-bold text-indigo-400">Load Balancer</span>
-              <span className="text-[10px] text-indigo-300">(ALB / NLB)</span>
+              <span className="text-[0.625rem] text-indigo-300">(ALB / NLB)</span>
             </div>
 
             <ArrowRight className="text-gray-600" />
@@ -195,7 +195,7 @@ export default function AwsLoadBalancer() {
                <div className="flex flex-col items-center text-center">
                  <Cloud className="text-blue-400 mb-1" size={24}/>
                  <span className="text-xs font-bold text-blue-400">CloudWatch</span>
-                 <span className="text-[10px] text-gray-500">(Monitoring)</span>
+                 <span className="text-[0.625rem] text-gray-500">(Monitoring)</span>
                </div>
                
                <div className="flex-1 border-t border-dashed border-red-500 mx-4 relative top-[-15px]"></div>
@@ -203,7 +203,7 @@ export default function AwsLoadBalancer() {
                <div className="flex flex-col items-center text-center">
                  <ShieldCheck className="text-red-400 mb-1" size={24}/>
                  <span className="text-xs font-bold text-red-400">Alarms</span>
-                 <span className="text-[10px] text-gray-500">(Triggers Scaling)</span>
+                 <span className="text-[0.625rem] text-gray-500">(Triggers Scaling)</span>
                </div>
             </div>
 

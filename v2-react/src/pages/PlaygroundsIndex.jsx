@@ -97,7 +97,7 @@ function TokenizerTool() {
           ["Tokens", tokens.length, "text-indigo-300"],
         ].map(([l, v, c]) => (
           <div key={l} className="p-3 rounded-xl border border-white/10 bg-white/5 text-center">
-            <div className="text-[10px] uppercase tracking-wide text-gray-500">{l}</div>
+            <div className="text-[0.625rem] uppercase tracking-wide text-gray-500">{l}</div>
             <motion.div key={v} initial={{ scale: 1.15, opacity: 0.6 }} animate={{ scale: 1, opacity: 1 }} className={`text-2xl font-bold font-mono ${c}`}>
               {v}
             </motion.div>
@@ -120,7 +120,7 @@ function TokenizerTool() {
         ))}
       </div>
 
-      <div className="flex flex-wrap gap-3 text-[11px] text-gray-500 mb-4">
+      <div className="flex flex-wrap gap-3 text-[0.6875rem] text-gray-500 mb-4">
         {Object.entries({ word: "whole word", sub: "subword fragment", num: "number chunk", punct: "punctuation" }).map(([k, label]) => (
           <span key={k} className="flex items-center gap-1.5">
             <span className={`w-3 h-3 rounded border ${TOK_COLORS[k]}`} />
@@ -197,7 +197,7 @@ function SamplingTool() {
             <span className="font-mono text-indigo-300">{temp.toFixed(2)}</span>
           </label>
           <input type="range" min="0.01" max="2" step="0.01" value={temp} onChange={(e) => setTemp(+e.target.value)} className="w-full accent-indigo-500" />
-          <div className="text-[10px] text-gray-600 mt-1">
+          <div className="text-[0.625rem] text-gray-600 mt-1">
             {temp < 0.4 ? "near-deterministic — picks the top token almost every time" : temp > 1.3 ? "high chaos — unlikely tokens become plausible" : "balanced"}
           </div>
         </div>
@@ -207,7 +207,7 @@ function SamplingTool() {
             <span className="font-mono text-emerald-300">{topP.toFixed(2)}</span>
           </label>
           <input type="range" min="0.05" max="1" step="0.01" value={topP} onChange={(e) => setTopP(+e.target.value)} className="w-full accent-emerald-500" />
-          <div className="text-[10px] text-gray-600 mt-1">keeping {kept} of {LOGITS.length} tokens in the nucleus</div>
+          <div className="text-[0.625rem] text-gray-600 mt-1">keeping {kept} of {LOGITS.length} tokens in the nucleus</div>
         </div>
       </div>
 
@@ -221,10 +221,10 @@ function SamplingTool() {
                 animate={{ width: `${(r.p / maxP) * 100}%` }}
                 transition={{ type: "spring", stiffness: 140, damping: 20 }}
               >
-                <span className="text-[10px] font-bold text-black/70">{(r.p * 100).toFixed(1)}%</span>
+                <span className="text-[0.625rem] font-bold text-black/70">{(r.p * 100).toFixed(1)}%</span>
               </motion.div>
             </div>
-            {!r.included && <span className="text-[9px] text-rose-400 w-14 shrink-0">excluded</span>}
+            {!r.included && <span className="text-[0.5625rem] text-rose-400 w-14 shrink-0">excluded</span>}
             {r.included && <span className="w-14 shrink-0" />}
           </div>
         ))}
@@ -233,14 +233,14 @@ function SamplingTool() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="p-4 rounded-xl border border-blue-500/25 bg-blue-500/10">
           <div className="text-blue-300 font-semibold text-xs mb-1">Temperature divides the logits</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             Low T exaggerates differences (the leader runs away with it); high T flattens them. At T→0 it becomes
             greedy decoding — always the top token, fully deterministic.
           </p>
         </div>
         <div className="p-4 rounded-xl border border-emerald-500/25 bg-emerald-500/10">
           <div className="text-emerald-300 font-semibold text-xs mb-1">Top-p truncates the tail</div>
-          <p className="text-[11px] text-gray-300 leading-relaxed m-0">
+          <p className="text-[0.6875rem] text-gray-300 leading-relaxed m-0">
             Keeps only the smallest group of tokens whose probabilities sum to p, then renormalises. It adapts: a
             confident step keeps 1–2 tokens, an uncertain one keeps many.
           </p>
@@ -301,12 +301,12 @@ function AttentionTool() {
           {/* column headers */}
           <div className="flex gap-1 mb-1 ml-[92px]">
             {words.map((w, j) => (
-              <div key={j} className="w-9 text-[9px] text-gray-500 text-center truncate" title={w}>{w.slice(0, 5)}</div>
+              <div key={j} className="w-9 text-[0.5625rem] text-gray-500 text-center truncate" title={w}>{w.slice(0, 5)}</div>
             ))}
           </div>
           {matrix.map((row, i) => (
             <div key={i} className="flex items-center gap-1 mb-1">
-              <div className="w-[88px] text-[10px] text-gray-400 text-right pr-2 truncate" title={words[i]}>{words[i]}</div>
+              <div className="w-[88px] text-[0.625rem] text-gray-400 text-right pr-2 truncate" title={words[i]}>{words[i]}</div>
               {row.map((v, j) => (
                 <div
                   key={j}
@@ -419,12 +419,12 @@ function CostTool() {
                 animate={{ width: `${(r.total / max) * 100}%` }}
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
               >
-                <span className="text-[10px] font-bold text-black/70 whitespace-nowrap">
+                <span className="text-[0.625rem] font-bold text-black/70 whitespace-nowrap">
                   ${r.total.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                 </span>
               </motion.div>
             </div>
-            <span className="text-[10px] font-mono text-gray-500 w-24 text-right shrink-0">
+            <span className="text-[0.625rem] font-mono text-gray-500 w-24 text-right shrink-0">
               ${r.per.toFixed(5)}/call
             </span>
           </div>
@@ -532,7 +532,7 @@ function EmbeddingTool() {
 
       <div className="flex flex-wrap gap-3 mb-4">
         {EMBED_GROUPS.map((g) => (
-          <span key={g.label} className="flex items-center gap-1.5 text-[11px] text-gray-400">
+          <span key={g.label} className="flex items-center gap-1.5 text-[0.6875rem] text-gray-400">
             <span className="w-3 h-3 rounded-full" style={{ background: g.color }} />
             {g.label}
           </span>

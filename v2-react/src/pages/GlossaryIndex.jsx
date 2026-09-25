@@ -70,7 +70,7 @@ export default function GlossaryIndex() {
           <h3 className="font-bold text-white text-sm m-0">
             <Highlight text={g.t} q={q} />
           </h3>
-          <span className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border ${tone.chip} ${tone.text}`}>
+          <span className={`text-[0.5625rem] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border ${tone.chip} ${tone.text}`}>
             {g.c}
           </span>
         </div>
@@ -78,7 +78,7 @@ export default function GlossaryIndex() {
           <Highlight text={g.d} q={q} />
         </p>
         {g.see && (
-          <Link to={g.see} className="inline-block mt-2 text-[11px] text-blue-400 hover:underline">
+          <Link to={g.see} className="inline-block mt-2 text-[0.6875rem] text-blue-400 hover:underline">
             Read more →
           </Link>
         )}
@@ -152,7 +152,7 @@ export default function GlossaryIndex() {
             <div className="flex items-center gap-3 mb-3">
               <h2 className="text-xl font-black text-indigo-400 m-0">{letter}</h2>
               <div className="flex-1 h-px bg-white/10" />
-              <span className="text-[10px] text-gray-600">{items.length}</span>
+              <span className="text-[0.625rem] text-gray-600">{items.length}</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {items.map((g) => <Term key={g.t} g={g} />)}

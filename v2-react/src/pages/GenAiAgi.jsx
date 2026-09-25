@@ -61,7 +61,7 @@ function HarnessGapVisual() {
           const active = pick === k;
           return (
             <div key={k} className="flex items-center gap-3">
-              <span className={`text-[11px] font-mono w-40 shrink-0 ${active ? tones[v.tone].text : 'text-gray-600'}`}>
+              <span className={`text-[0.6875rem] font-mono w-40 shrink-0 ${active ? tones[v.tone].text : 'text-gray-600'}`}>
                 {v.label}
               </span>
               <div className="flex-1 h-8 rounded bg-white/5 overflow-hidden relative">
@@ -71,10 +71,10 @@ function HarnessGapVisual() {
                   animate={{ width: `${v.score}%` }}
                   transition={{ type: 'spring', stiffness: 60, damping: 18 }}
                 >
-                  <span className="text-[11px] font-bold text-black/80">{v.score}%</span>
+                  <span className="text-[0.6875rem] font-bold text-black/80">{v.score}%</span>
                 </motion.div>
               </div>
-              <span className={`text-[10px] font-mono w-14 text-right shrink-0 ${active ? 'text-gray-300' : 'text-gray-600'}`}>
+              <span className={`text-[0.625rem] font-mono w-14 text-right shrink-0 ${active ? 'text-gray-300' : 'text-gray-600'}`}>
                 {v.cost}
               </span>
             </div>
@@ -85,7 +85,7 @@ function HarnessGapVisual() {
       <div className={`rounded-xl border p-4 ${t.border} ${t.bg}`}>
         <div className={`text-xs font-bold mb-1.5 ${t.text}`}>{h.label}</div>
         <p className="text-xs text-gray-300 leading-relaxed mb-2">{h.how}</p>
-        <p className="text-[11px] text-gray-400 leading-relaxed m-0 italic">{h.why}</p>
+        <p className="text-[0.6875rem] text-gray-400 leading-relaxed m-0 italic">{h.why}</p>
       </div>
 
       <div className="mt-4 p-4 rounded-xl border border-amber-500/30 bg-amber-500/10">
@@ -183,9 +183,9 @@ export default function GenAiAgi() {
               ['DeepSWE v1.1', '74.1%', 'software engineering'],
             ].map(([k, v, note]) => (
               <div key={k} className="p-4 rounded-xl border border-white/10 bg-white/5">
-                <div className="text-[10px] uppercase tracking-wide text-gray-500 mb-1">{k}</div>
+                <div className="text-[0.625rem] uppercase tracking-wide text-gray-500 mb-1">{k}</div>
                 <div className="text-xl font-bold text-white font-mono">{v}</div>
-                <div className="text-[10px] text-gray-500 mt-1 leading-snug">{note}</div>
+                <div className="text-[0.625rem] text-gray-500 mt-1 leading-snug">{note}</div>
               </div>
             ))}
           </div>
@@ -212,8 +212,8 @@ export default function GenAiAgi() {
                 <h3 className="font-bold text-white text-sm mb-2">{d.name}</h3>
                 <p className="text-xs text-gray-300 leading-relaxed mb-3">{d.body}</p>
                 <div className="p-2.5 rounded-lg bg-black/30 border border-rose-500/20">
-                  <div className="text-[10px] uppercase tracking-wide text-rose-400 mb-1">Where it breaks</div>
-                  <p className="text-[11px] text-gray-400 leading-relaxed m-0">{d.problem}</p>
+                  <div className="text-[0.625rem] uppercase tracking-wide text-rose-400 mb-1">Where it breaks</div>
+                  <p className="text-[0.6875rem] text-gray-400 leading-relaxed m-0">{d.problem}</p>
                 </div>
               </motion.div>
             ))}
