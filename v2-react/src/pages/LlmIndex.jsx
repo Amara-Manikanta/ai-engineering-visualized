@@ -32,12 +32,12 @@ export default function LlmIndex() {
   ];
 
   const MODEL_TYPES = [
-    { n: "LLM", full: "Large Language Model", p: "#/llms/llm-type", icon: "💬", d: "The general-purpose text model everything else is defined against.", box: "border-indigo-500/30 bg-indigo-500/[0.08]", label: "text-indigo-400" },
-    { n: "VLM", full: "Vision Language Model", p: "#/llms/vlm-type", icon: "👁️", d: "Reads images alongside text, in one shared representation.", box: "border-blue-500/30 bg-blue-500/[0.08]", label: "text-blue-400" },
-    { n: "SLM", full: "Small Language Model", p: "#/llms/slm-type", icon: "🐣", d: "Small enough to run on your own hardware, and surprisingly capable.", box: "border-emerald-500/30 bg-emerald-500/[0.08]", label: "text-emerald-400" },
-    { n: "MoE", full: "Mixture of Experts", p: "#/llms/moe-type", icon: "🧩", d: "Huge parameter count, only a fraction of it active per token.", box: "border-amber-500/30 bg-amber-500/[0.08]", label: "text-amber-400" },
-    { n: "LCM", full: "Large Concept Model", p: "#/llms/lcm-type", icon: "🪐", d: "Predicts whole concepts rather than the next token.", box: "border-purple-500/30 bg-purple-500/[0.08]", label: "text-purple-400" },
-    { n: "LAM", full: "Large Action Model", p: "#/llms/lam-type", icon: "🎬", d: "Trained to take actions in software, not just describe them.", box: "border-rose-500/30 bg-rose-500/[0.08]", label: "text-rose-400" },
+    { n: "LLM", full: "Large Language Model", p: "#/llms/types#llm", icon: "💬", d: "The general-purpose text model everything else is defined against.", box: "border-indigo-500/30 bg-indigo-500/[0.08]", label: "text-indigo-400" },
+    { n: "VLM", full: "Vision Language Model", p: "#/llms/types#vlm", icon: "👁️", d: "Reads images alongside text, in one shared representation.", box: "border-blue-500/30 bg-blue-500/[0.08]", label: "text-blue-400" },
+    { n: "SLM", full: "Small Language Model", p: "#/llms/types#slm", icon: "🐣", d: "Small enough to run on your own hardware, and surprisingly capable.", box: "border-emerald-500/30 bg-emerald-500/[0.08]", label: "text-emerald-400" },
+    { n: "MoE", full: "Mixture of Experts", p: "#/llms/types#moe", icon: "🧩", d: "Huge parameter count, only a fraction of it active per token.", box: "border-amber-500/30 bg-amber-500/[0.08]", label: "text-amber-400" },
+    { n: "LCM", full: "Large Concept Model", p: "#/llms/types#lcm", icon: "🪐", d: "Predicts whole concepts rather than the next token.", box: "border-purple-500/30 bg-purple-500/[0.08]", label: "text-purple-400" },
+    { n: "LAM", full: "Large Action Model", p: "#/llms/types#lam", icon: "🎬", d: "Trained to take actions in software, not just describe them.", box: "border-rose-500/30 bg-rose-500/[0.08]", label: "text-rose-400" },
     { n: "Decision", full: "Decision Models — Jev, Laya", p: "#/genai/decision-models", icon: "🎯", d: "Picks from answers you supply in one forward pass, with a calibrated probability. Never writes text.", box: "border-emerald-500/30 bg-emerald-500/[0.08]", label: "text-emerald-400" },
   ];
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import GlobalHeader from "./GlobalHeader";
@@ -16,6 +16,14 @@ export default function GuideLayout({ title, intro, toc, children, onTocClick })
   const [activeHash, setActiveHash] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+
+  // "#/page#section" links: once the page has rendered, bring the section into view.
+  useEffect(() => {
+    if (!location.hash) return undefined;
+    const id = decodeURIComponent(location.hash.slice(1));
+    const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: "start" }), 150);
+    return () => clearTimeout(t);
+  }, [location.pathname, location.hash]);
 
   let sidebarLinks = null;
   let sectionTitle = "";

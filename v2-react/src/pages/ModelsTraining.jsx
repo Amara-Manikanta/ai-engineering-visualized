@@ -12,6 +12,17 @@ export const SEARCH_KEYWORDS = [
   "reward model", "model weights", "open weights", "licence", "license", "Apache 2.0", "MIT licence",
 ];
 
+// Methods with a page of their own.
+const DEEP_DIVE = {
+  sft: ["/genai/fine-tuning", "Fine-tuning guide"],
+  "rlhf-ppo": ["/ml/rlhf", "RLHF, with a reward-model and reward-hacking demo"],
+  dpo: ["/ml/dpo", "DPO, derived and trained step by step"],
+  grpo: ["/ml/grpo", "GRPO and verifiable rewards, simulated"],
+  rlaif: ["/ml/rlaif", "RLAIF and Constitutional AI"],
+  "reasoning-rl": ["/ml/grpo", "How reasoning RL works (GRPO)"],
+  distill: ["/genai/distillation", "Distillation guide"],
+};
+
 const METHOD_ORDER = ["pretrain", "synthetic", "sft", "rlhf-ppo", "dpo", "grpo", "rlaif", "rejection-sampling", "reasoning-rl", "distill"];
 
 const uses = (fam, m) => PROFILES[fam].stages.some((s) => s.m === m);
@@ -115,7 +126,13 @@ function MethodExplorer() {
       <motion.div key={m} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
         <div className={`text-xl font-bold mb-1 ${t.text}`}>{METHODS[m].name}</div>
         <p className="text-base text-gray-200 leading-relaxed mb-2">{METHODS[m].short}</p>
-        <p className="text-sm text-gray-400 leading-relaxed mb-5">{METHODS[m].detail}</p>
+        <p className="text-sm text-gray-400 leading-relaxed mb-2">{METHODS[m].detail}</p>
+        {DEEP_DIVE[m] && (
+          <a href={`#${DEEP_DIVE[m][0]}`} className="inline-block text-sm text-blue-400 hover:underline mb-5">
+            {DEEP_DIVE[m][1]} →
+          </a>
+        )}
+        {!DEEP_DIVE[m] && <div className="mb-3" />}
         <div className="text-xs uppercase tracking-wide text-gray-500 mb-2">Documented in {users.length} of {FAMILY_ORDER.length} families</div>
         <div className="space-y-2">
           {users.map((f) => (

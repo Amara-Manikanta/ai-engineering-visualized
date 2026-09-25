@@ -1871,100 +1871,83 @@
     "keywords": []
   },
   {
-    "path": "/llms/lam-type",
-    "title": "Large Action Model (LAM)",
-    "intro": "Models built specifically to take actions across software interfaces.",
+    "path": "/llms/types",
+    "title": "Model Types",
+    "intro": "LLM, VLM, SLM, MoE, LCM, LAM — what each label means, how each works inside, and when to reach for it. One page, with a working demo for each.",
     "sections": [
       {
-        "label": "How it Works",
-        "hash": "how-it-works"
+        "label": "The Landscape",
+        "hash": "landscape"
       },
       {
-        "label": "Example",
-        "hash": "example"
-      }
-    ],
-    "keywords": []
-  },
-  {
-    "path": "/llms/lcm-type",
-    "title": "Large Concept Model (LCM)",
-    "intro": "Models that operate on abstract concepts rather than individual tokens.",
-    "sections": [
-      {
-        "label": "How it Works",
-        "hash": "how-it-works"
+        "label": "LLM — Large Language Model",
+        "hash": "llm"
       },
       {
-        "label": "Example",
-        "hash": "example"
-      }
-    ],
-    "keywords": []
-  },
-  {
-    "path": "/llms/llm-type",
-    "title": "Large Language Model (LLM)",
-    "intro": "Massive neural networks trained to understand and generate human-like text.",
-    "sections": [
-      {
-        "label": "How it Works",
-        "hash": "how-it-works"
+        "label": "VLM — Vision Language Model",
+        "hash": "vlm"
       },
       {
-        "label": "Example",
-        "hash": "example"
-      }
-    ],
-    "keywords": []
-  },
-  {
-    "path": "/llms/moe-type",
-    "title": "Mixture of Experts (MoE)",
-    "intro": "A sparse architecture that routes tokens to specific expert sub-networks.",
-    "sections": [
-      {
-        "label": "How it Works",
-        "hash": "how-it-works"
+        "label": "SLM — Small Language Model",
+        "hash": "slm"
       },
       {
-        "label": "Example",
-        "hash": "example"
-      }
-    ],
-    "keywords": []
-  },
-  {
-    "path": "/llms/slm-type",
-    "title": "Small Language Model (SLM)",
-    "intro": "Highly optimized models designed to run locally on consumer hardware.",
-    "sections": [
-      {
-        "label": "How it Works",
-        "hash": "how-it-works"
+        "label": "MoE — Mixture of Experts",
+        "hash": "moe"
       },
       {
-        "label": "Example",
-        "hash": "example"
-      }
-    ],
-    "keywords": []
-  },
-  {
-    "path": "/llms/vlm-type",
-    "title": "Vision Language Model (VLM)",
-    "intro": "Multimodal models that inherently understand both text and images.",
-    "sections": [
-      {
-        "label": "How it Works",
-        "hash": "how-it-works"
+        "label": "LCM — Large Concept Model",
+        "hash": "lcm"
       },
       {
-        "label": "Example",
-        "hash": "example"
+        "label": "LAM — Large Action Model",
+        "hash": "lam"
+      },
+      {
+        "label": "Decision Models",
+        "hash": "decision"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
       }
     ],
-    "keywords": []
+    "keywords": [
+      "model types",
+      "LLM",
+      "large language model",
+      "VLM",
+      "vision language model",
+      "multimodal",
+      "SLM",
+      "small language model",
+      "on-device model",
+      "MoE",
+      "mixture of experts",
+      "router",
+      "active parameters",
+      "LCM",
+      "large concept model",
+      "SONAR",
+      "LAM",
+      "large action model",
+      "computer use",
+      "next token prediction",
+      "temperature",
+      "top-p",
+      "parameter count",
+      "KV cache",
+      "image tokens",
+      "vision encoder",
+      "CLIP",
+      "SigLIP",
+      "patches",
+      "Chinchilla",
+      "tokens per parameter",
+      "distillation",
+      "load balancing",
+      "expert parallelism"
+    ]
   },
   {
     "path": "/mcp",
@@ -2051,6 +2034,112 @@
     "keywords": []
   },
   {
+    "path": "/ml/bivariate-analysis",
+    "title": "Correlation explorer",
+    "intro": "Two variables at a time: does one move with the other, how strongly, and is it real? The step between describing columns and building a model.",
+    "sections": [
+      {
+        "label": "Three Kinds of Pairs",
+        "hash": "pairs"
+      },
+      {
+        "label": "Correlation (interactive)",
+        "hash": "correlation"
+      },
+      {
+        "label": "Correlation ≠ Causation",
+        "hash": "causation"
+      },
+      {
+        "label": "Category vs Number",
+        "hash": "cat-num"
+      },
+      {
+        "label": "Category vs Category",
+        "hash": "cat-cat"
+      },
+      {
+        "label": "Correlation Matrix",
+        "hash": "matrix"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "bivariate analysis",
+      "bivariant analysis",
+      "correlation",
+      "Pearson correlation",
+      "Spearman correlation",
+      "scatter plot",
+      "Anscombe",
+      ",",
+      ",",
+      ",",
+      ",",
+      ",",
+      ",",
+      ",",
+      "s V",
+      "ANOVA",
+      "box plot by group",
+      "correlation matrix",
+      "heatmap",
+      "multicollinearity"
+    ]
+  },
+  {
+    "path": "/ml/central-limit-theorem",
+    "title": "The CLT machine",
+    "intro": "Average enough independent values and the average is approximately normally distributed — whatever the shape of the values themselves. It is why the bell curve is everywhere in statistics.",
+    "sections": [
+      {
+        "label": "The Theorem",
+        "hash": "theorem"
+      },
+      {
+        "label": "The CLT Machine",
+        "hash": "machine"
+      },
+      {
+        "label": "σ / √n",
+        "hash": "se"
+      },
+      {
+        "label": "How Big Must n Be?",
+        "hash": "n"
+      },
+      {
+        "label": "When It Fails",
+        "hash": "fails"
+      },
+      {
+        "label": "Why It Matters",
+        "hash": "why"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "central limit theorem",
+      "CLT",
+      "sampling distribution of the mean",
+      "standard error",
+      "sigma over root n",
+      "law of large numbers",
+      "sample mean",
+      "normal approximation",
+      "n = 30 rule",
+      "Cauchy distribution",
+      "heavy tails",
+      "why averages are normal"
+    ]
+  },
+  {
     "path": "/ml/cnn",
     "title": "Convolutional Neural Networks",
     "intro": "A small window of weights slid across an image, reused at every position. That one constraint is what made computer vision work.",
@@ -2089,6 +2178,185 @@
       }
     ],
     "keywords": []
+  },
+  {
+    "path": "/ml/data-analysis",
+    "title": "Move one salary and watch the summaries react",
+    "intro": "Exploratory data analysis is looking before you model: what each column contains, how it is distributed, and what surprises are hiding in it.",
+    "sections": [
+      {
+        "label": "What Data Analysis Is",
+        "hash": "what"
+      },
+      {
+        "label": "Types of Variables",
+        "hash": "types"
+      },
+      {
+        "label": "Centre & Spread",
+        "hash": "centre"
+      },
+      {
+        "label": "Shape of a Distribution",
+        "hash": "shape"
+      },
+      {
+        "label": "Categorical Columns",
+        "hash": "categorical"
+      },
+      {
+        "label": "Segmented Analysis",
+        "hash": "segmented"
+      },
+      {
+        "label": "EDA Checklist",
+        "hash": "checklist"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "data analysis",
+      "exploratory data analysis",
+      "EDA",
+      "univariate analysis",
+      "mean",
+      "median",
+      "mode",
+      "standard deviation",
+      "variance",
+      "IQR",
+      "interquartile range",
+      "skewness",
+      "right skewed",
+      "left skewed",
+      "bimodal",
+      "histogram",
+      "box plot",
+      "distribution",
+      "categorical variable",
+      "numerical variable",
+      "ordinal",
+      "nominal",
+      "segmented analysis",
+      "describe",
+      "value_counts"
+    ]
+  },
+  {
+    "path": "/ml/data-cleaning",
+    "title": "Clean a messy table, one step at a time",
+    "intro": "Real data arrives with typos, duplicates, gaps and impossible values. Cleaning turns it into something a model can learn from — without inventing what is not there.",
+    "sections": [
+      {
+        "label": "Why Cleaning Matters",
+        "hash": "why"
+      },
+      {
+        "label": "Step-by-step Pipeline",
+        "hash": "pipeline"
+      },
+      {
+        "label": "Missing Values",
+        "hash": "missing"
+      },
+      {
+        "label": "Outliers",
+        "hash": "outliers"
+      },
+      {
+        "label": "Other Problems",
+        "hash": "other"
+      },
+      {
+        "label": "Cleaning Checklist",
+        "hash": "checklist"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "data cleaning",
+      "data cleansing",
+      "missing values",
+      "imputation",
+      "mean imputation",
+      "median imputation",
+      "MCAR",
+      "MAR",
+      "MNAR",
+      "duplicates",
+      "outliers",
+      "IQR",
+      "z-score",
+      "winsorize",
+      "data types",
+      "standardise text",
+      "inconsistent categories",
+      "data quality",
+      "SimpleImputer",
+      "dropna",
+      "fillna"
+    ]
+  },
+  {
+    "path": "/ml/data-sourcing",
+    "title": "Same population, four ways to sample it",
+    "intro": "Every model is a summary of its data. Where that data came from — and who was left out — decides what the model can ever learn.",
+    "sections": [
+      {
+        "label": "Where Data Comes From",
+        "hash": "sources"
+      },
+      {
+        "label": "Sampling Bias (interactive)",
+        "hash": "sampling"
+      },
+      {
+        "label": "Labelling & Agreement",
+        "hash": "labelling"
+      },
+      {
+        "label": "How Much Data?",
+        "hash": "volume"
+      },
+      {
+        "label": "Split Before You Look",
+        "hash": "splits"
+      },
+      {
+        "label": "Legal & Ethical Checks",
+        "hash": "legal"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "data sourcing",
+      "data collection",
+      "sampling bias",
+      "selection bias",
+      "convenience sample",
+      "stratified sampling",
+      "voluntary response bias",
+      "public datasets",
+      "web scraping",
+      "labelling",
+      "annotation",
+      "Cohen",
+      ",",
+      ",",
+      ",",
+      ",",
+      ",",
+      ","
+    ]
   },
   {
     "path": "/ml/decision-trees",
@@ -2130,6 +2398,65 @@
     "keywords": []
   },
   {
+    "path": "/ml/dpo",
+    "title": "From RLHF to DPO in five lines",
+    "intro": "RLHF's goal without its machinery. A short piece of algebra shows the reward model and the RL loop can be skipped: train the language model directly on 'answer A is better than answer B' pairs.",
+    "sections": [
+      {
+        "label": "The Shortcut",
+        "hash": "idea"
+      },
+      {
+        "label": "The Derivation",
+        "hash": "derivation"
+      },
+      {
+        "label": "The Loss, Explored",
+        "hash": "loss"
+      },
+      {
+        "label": "Watch DPO Train",
+        "hash": "train"
+      },
+      {
+        "label": "RLHF (PPO) vs DPO",
+        "hash": "compare"
+      },
+      {
+        "label": "The Preference-Optimisation Family",
+        "hash": "family"
+      },
+      {
+        "label": "Practical Tips",
+        "hash": "tips"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "DPO",
+      "direct preference optimization",
+      "preference optimisation",
+      "implicit reward",
+      "reference model",
+      "beta",
+      "chosen",
+      "rejected",
+      "IPO",
+      "KTO",
+      "ORPO",
+      "SimPO",
+      "online DPO",
+      "iterative DPO",
+      "DPOTrainer",
+      "likelihood displacement",
+      "RLHF without reinforcement learning",
+      "Bradley-Terry"
+    ]
+  },
+  {
     "path": "/ml/gans",
     "title": "Generative Adversarial Networks",
     "intro": "Two networks trained against each other: one invents data, the other calls the fakes. Neither has a target to copy — the signal comes entirely from the opponent.",
@@ -2164,6 +2491,201 @@
       }
     ],
     "keywords": []
+  },
+  {
+    "path": "/ml/grpo",
+    "title": "Sample a group, score it, compare within the group",
+    "intro": "The method behind open reasoning models. Sample several answers to the same problem, check which are right with a program, and push the model toward the answers that beat their siblings — no reward model and no value model required.",
+    "sections": [
+      {
+        "label": "Why Not Just PPO?",
+        "hash": "why"
+      },
+      {
+        "label": "Group-Relative Advantage",
+        "hash": "group"
+      },
+      {
+        "label": "Where the Signal Lives",
+        "hash": "signal"
+      },
+      {
+        "label": "A Simulated Run",
+        "hash": "sim"
+      },
+      {
+        "label": "Verifiable Rewards (RLVR)",
+        "hash": "rlvr"
+      },
+      {
+        "label": "The DeepSeek-R1 Story",
+        "hash": "r1"
+      },
+      {
+        "label": "PPO vs GRPO",
+        "hash": "compare"
+      },
+      {
+        "label": "Refinements",
+        "hash": "variants"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "GRPO",
+      "group relative policy optimization",
+      "RLVR",
+      "reinforcement learning with verifiable rewards",
+      "verifiable rewards",
+      "reasoning models",
+      "DeepSeek-R1",
+      "R1-Zero",
+      "DeepSeekMath",
+      "aha moment",
+      "group advantage",
+      "no value model",
+      "DAPO",
+      "Dr. GRPO",
+      "GSPO",
+      "reward function",
+      "GRPOTrainer",
+      "chain of thought RL",
+      "thinking models"
+    ]
+  },
+  {
+    "path": "/ml/hypothesis-testing",
+    "title": "A delivery app claims deliveries average 30 minutes. You timed some.",
+    "intro": "A formal way to ask whether a pattern in a sample is real or could be chance: assume nothing is going on, and measure how surprising your data would be if that were true.",
+    "sections": [
+      {
+        "label": "The Logic",
+        "hash": "logic"
+      },
+      {
+        "label": "p-values (interactive)",
+        "hash": "pvalue"
+      },
+      {
+        "label": "Type I, Type II & Power",
+        "hash": "errors"
+      },
+      {
+        "label": "An A/B Test",
+        "hash": "ab"
+      },
+      {
+        "label": "Choosing a Test",
+        "hash": "choose"
+      },
+      {
+        "label": "Multiple Testing Trap",
+        "hash": "multiple"
+      },
+      {
+        "label": "What p-values Are Not",
+        "hash": "not"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "hypothesis testing",
+      "null hypothesis",
+      "alternative hypothesis",
+      "p-value",
+      "significance level",
+      "alpha",
+      "type I error",
+      "type II error",
+      "false positive",
+      "false negative",
+      "statistical power",
+      "effect size",
+      "z-test",
+      "t-test",
+      "paired t-test",
+      "Welch t-test",
+      "A/B test",
+      "two-proportion z-test",
+      "chi-square test",
+      "Mann-Whitney",
+      "multiple testing",
+      "Bonferroni",
+      "p-hacking",
+      "one-tailed",
+      "two-tailed",
+      "critical value"
+    ]
+  },
+  {
+    "path": "/ml/inferential-statistics",
+    "title": "Heights of adults — a normal distribution",
+    "intro": "Descriptive statistics summarise the data you have. Inferential statistics use that sample to say something — with a stated uncertainty — about everyone you did not measure.",
+    "sections": [
+      {
+        "label": "Describing vs Inferring",
+        "hash": "why"
+      },
+      {
+        "label": "Population, Sample, Parameter",
+        "hash": "vocab"
+      },
+      {
+        "label": "The Normal Distribution",
+        "hash": "normal"
+      },
+      {
+        "label": "Sampling Distributions & SE",
+        "hash": "se"
+      },
+      {
+        "label": "Confidence Intervals",
+        "hash": "ci"
+      },
+      {
+        "label": "z or t?",
+        "hash": "zt"
+      },
+      {
+        "label": "Sample Size",
+        "hash": "size"
+      },
+      {
+        "label": "In ML",
+        "hash": "ml"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "inferential statistics",
+      "descriptive statistics",
+      "population",
+      "sample",
+      "parameter",
+      "statistic",
+      "point estimate",
+      "confidence interval",
+      "margin of error",
+      "standard error",
+      "normal distribution",
+      "68-95-99.7 rule",
+      "empirical rule",
+      "z-score",
+      "t-distribution",
+      "binomial distribution",
+      "sampling distribution",
+      "estimation",
+      "sample size calculation"
+    ]
   },
   {
     "path": "/ml/knn",
@@ -2202,7 +2724,7 @@
   },
   {
     "path": "/ml/logistic-regression",
-    "title": "Logistic Regression",
+    "title": "Probability, odds and log-odds",
     "intro": "A supervised algorithm for classification — it predicts the probability that an example belongs to a class, then thresholds it into a decision.",
     "sections": [
       {
@@ -2218,19 +2740,64 @@
         "hash": "sigmoid"
       },
       {
+        "label": "Odds & Log-odds",
+        "hash": "odds"
+      },
+      {
         "label": "Training & Loss",
         "hash": "training"
+      },
+      {
+        "label": "Watch It Train",
+        "hash": "train-live"
+      },
+      {
+        "label": "Thresholds, Confusion Matrix & ROC",
+        "hash": "threshold"
       },
       {
         "label": "Interpreting Coefficients",
         "hash": "interpretation"
       },
       {
+        "label": "More Than Two Classes",
+        "hash": "multiclass"
+      },
+      {
+        "label": "Regularisation & Imbalance",
+        "hash": "regularisation"
+      },
+      {
         "label": "Pros & Cons",
         "hash": "pros-cons"
       }
     ],
-    "keywords": []
+    "keywords": [
+      "logistic regression",
+      "sigmoid",
+      "log loss",
+      "binary cross-entropy",
+      "odds",
+      "log-odds",
+      "logit",
+      "odds ratio",
+      "decision boundary",
+      "gradient descent",
+      "threshold",
+      "confusion matrix",
+      "precision",
+      "recall",
+      "F1 score",
+      "ROC curve",
+      "AUC",
+      "softmax",
+      "multinomial logistic regression",
+      "one-vs-rest",
+      "regularization",
+      "C parameter",
+      "class_weight",
+      "imbalanced classes"
+    ]
   },
   {
     "path": "/ml/mamba",
@@ -2278,7 +2845,7 @@
   },
   {
     "path": "/ml/multiple-regression",
-    "title": "Multiple Regression",
+    "title": "Fit a regression on thirty houses",
     "intro": "Predicting a value from several input features at once — the workhorse model behind pricing, forecasting, and scoring systems.",
     "sections": [
       {
@@ -2290,19 +2857,120 @@
         "hash": "interactive"
       },
       {
+        "label": "Fit It on Real Numbers",
+        "hash": "fit"
+      },
+      {
+        "label": "Holding Others Constant",
+        "hash": "holding"
+      },
+      {
         "label": "The Normal Equation",
         "hash": "normal-equation"
+      },
+      {
+        "label": "Assumptions & Residuals",
+        "hash": "assumptions"
       },
       {
         "label": "Multicollinearity",
         "hash": "multicollinearity"
       },
       {
+        "label": "Categorical Features",
+        "hash": "categorical"
+      },
+      {
         "label": "Feature Scaling",
         "hash": "scaling"
+      },
+      {
+        "label": "Reading statsmodels Output",
+        "hash": "statsmodels"
       }
     ],
-    "keywords": []
+    "keywords": [
+      "multiple linear regression",
+      "multi linear regression",
+      "multiple regression",
+      "OLS",
+      "ordinary least squares",
+      "normal equation",
+      "R squared",
+      "adjusted R squared",
+      "coefficients",
+      "holding other variables constant",
+      "residual plot",
+      "regression assumptions",
+      "heteroscedasticity",
+      "multicollinearity",
+      "VIF",
+      "variance inflation factor",
+      "dummy variables",
+      "dummy variable trap",
+      "one-hot encoding",
+      "ridge",
+      "lasso",
+      "statsmodels",
+      "p-value of coefficient"
+    ]
+  },
+  {
+    "path": "/ml/naive-bayes",
+    "title": "You test positive. How worried should you be?",
+    "intro": "A classifier built directly on Bayes' theorem, with one bold simplification: treat every feature as independent given the class. It trains in a single pass, needs little data, and is still a strong baseline for text.",
+    "sections": [
+      {
+        "label": "The Medical Test Puzzle",
+        "hash": "puzzle"
+      },
+      {
+        "label": "From Bayes to a Classifier",
+        "hash": "classifier"
+      },
+      {
+        "label": "Build a Spam Filter",
+        "hash": "spam"
+      },
+      {
+        "label": "Gaussian Naive Bayes",
+        "hash": "gaussian"
+      },
+      {
+        "label": "Variants",
+        "hash": "variants"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      },
+      {
+        "label": "When to Use It",
+        "hash": "when"
+      }
+    ],
+    "keywords": [
+      "naive bayes",
+      "naive bias",
+      "naïve bayes",
+      "Bayes theorem",
+      "prior",
+      "posterior",
+      "likelihood",
+      "evidence",
+      "conditional independence",
+      "spam filter",
+      "Laplace smoothing",
+      "additive smoothing",
+      "zero frequency problem",
+      "MultinomialNB",
+      "GaussianNB",
+      "BernoulliNB",
+      "ComplementNB",
+      "text classification",
+      "base rate fallacy",
+      "false positive paradox"
+    ]
   },
   {
     "path": "/ml/nlp",
@@ -2403,6 +3071,206 @@
       }
     ],
     "keywords": []
+  },
+  {
+    "path": "/ml/reinforcement-learning",
+    "title": "The loop every RL problem shares",
+    "intro": "Learning by trial and error. No labelled answers — an agent acts, the world responds with rewards, and over many attempts it learns which actions pay off in the long run.",
+    "sections": [
+      {
+        "label": "Learning From Reward",
+        "hash": "idea"
+      },
+      {
+        "label": "The Agent–Environment Loop",
+        "hash": "loop"
+      },
+      {
+        "label": "Explore vs Exploit",
+        "hash": "bandit"
+      },
+      {
+        "label": "Q-learning (interactive)",
+        "hash": "qlearning"
+      },
+      {
+        "label": "Discounting",
+        "hash": "discount"
+      },
+      {
+        "label": "Algorithm Families",
+        "hash": "families"
+      },
+      {
+        "label": "Policy Gradients & PPO",
+        "hash": "ppo"
+      },
+      {
+        "label": "Where RL Is Used",
+        "hash": "uses"
+      },
+      {
+        "label": "What Makes RL Hard",
+        "hash": "hard"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "reinforcement learning",
+      "RL",
+      "agent",
+      "environment",
+      "reward",
+      "policy",
+      "value function",
+      "Q-value",
+      "Q-learning",
+      "Bellman equation",
+      "exploration vs exploitation",
+      "epsilon-greedy",
+      "multi-armed bandit",
+      "discount factor",
+      "gamma",
+      "Markov decision process",
+      "MDP",
+      "policy gradient",
+      "REINFORCE",
+      "actor-critic",
+      "PPO",
+      "proximal policy optimization",
+      "clipped objective",
+      "DQN",
+      "gridworld",
+      "reward hacking",
+      "gymnasium"
+    ]
+  },
+  {
+    "path": "/ml/rlaif",
+    "title": "Critique → revise, against written principles",
+    "intro": "Replace most human preference labels with judgements from an AI model, guided by a written set of principles. Cheaper, faster and more consistent than human labelling — and the values being taught are written down where anyone can read them.",
+    "sections": [
+      {
+        "label": "The Labelling Bottleneck",
+        "hash": "why"
+      },
+      {
+        "label": "Constitutional AI",
+        "hash": "cai"
+      },
+      {
+        "label": "Phase 1: Critique & Revise",
+        "hash": "phase1"
+      },
+      {
+        "label": "Phase 2: AI Preferences",
+        "hash": "phase2"
+      },
+      {
+        "label": "AI Judges and Their Biases",
+        "hash": "judges"
+      },
+      {
+        "label": "Does It Work?",
+        "hash": "results"
+      },
+      {
+        "label": "Where It Is Used",
+        "hash": "uses"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "RLAIF",
+      "reinforcement learning from AI feedback",
+      "Constitutional AI",
+      "constitution",
+      "critique and revision",
+      "self-critique",
+      "AI feedback",
+      "LLM as a judge",
+      "LLM-as-a-judge",
+      "position bias",
+      "verbosity bias",
+      "self-preference bias",
+      "preference labels",
+      "UltraFeedback",
+      "harmlessness",
+      "Anthropic"
+    ]
+  },
+  {
+    "path": "/ml/rlhf",
+    "title": "RLHF in three stages",
+    "intro": "How a model that predicts text becomes an assistant people prefer: learn a reward from human comparisons, then use reinforcement learning to write answers that score well on it — without drifting too far from where it started.",
+    "sections": [
+      {
+        "label": "Why RLHF Exists",
+        "hash": "why"
+      },
+      {
+        "label": "The Three Stages",
+        "hash": "stages"
+      },
+      {
+        "label": "The Reward Model",
+        "hash": "reward"
+      },
+      {
+        "label": "Reward Hacking & the KL Leash",
+        "hash": "hacking"
+      },
+      {
+        "label": "Inside the PPO Step",
+        "hash": "ppo"
+      },
+      {
+        "label": "Memory Cost",
+        "hash": "memory"
+      },
+      {
+        "label": "What Goes Wrong",
+        "hash": "problems"
+      },
+      {
+        "label": "RLHF and Its Successors",
+        "hash": "family"
+      },
+      {
+        "label": "In Code",
+        "hash": "code"
+      }
+    ],
+    "keywords": [
+      "RLHF",
+      "rlhl",
+      "reinforcement learning from human feedback",
+      "reward model",
+      "preference data",
+      "Bradley-Terry",
+      "pairwise comparisons",
+      "PPO",
+      "KL penalty",
+      "reference model",
+      "InstructGPT",
+      "SFT",
+      "reward hacking",
+      "reward over-optimization",
+      "Goodhart",
+      ",",
+      ",",
+      ",",
+      ",",
+      ",",
+      ",",
+      ","
+    ]
   },
   {
     "path": "/ml/rnn",

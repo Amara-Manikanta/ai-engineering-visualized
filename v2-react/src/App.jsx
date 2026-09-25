@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 const DocumentLoaders = lazy(() => import("./pages/DocumentLoaders"));
@@ -8,9 +8,7 @@ const RagFundamentals = lazy(() => import("./pages/RagFundamentals"));
 const RagVectorDbs = lazy(() => import("./pages/RagVectorDbs"));
 const RagAdvanced = lazy(() => import("./pages/RagAdvanced"));
 const LlmIndex = lazy(() => import("./pages/LlmIndex"));
-const LlmType = lazy(() => import("./pages/LlmType"));
-const LlmVlm = lazy(() => import("./pages/LlmVlm"));
-const LlmSlm = lazy(() => import("./pages/LlmSlm"));
+const LlmModelTypes = lazy(() => import("./pages/LlmModelTypes"));
 const GenAiIndex = lazy(() => import("./pages/GenAiIndex"));
 const GenAiFineTuning = lazy(() => import("./pages/GenAiFineTuning"));
 const GenAiQuantization = lazy(() => import("./pages/GenAiQuantization"));
@@ -81,6 +79,19 @@ const MlRnn = lazy(() => import("./pages/MlRnn"));
 const MlGans = lazy(() => import("./pages/MlGans"));
 const MlMamba = lazy(() => import("./pages/MlMamba"));
 const MlRwkv = lazy(() => import("./pages/MlRwkv"));
+const DataSourcing = lazy(() => import("./pages/DataSourcing"));
+const MlNaiveBayes = lazy(() => import("./pages/MlNaiveBayes"));
+const MlReinforcement = lazy(() => import("./pages/MlReinforcement"));
+const MlRlhf = lazy(() => import("./pages/MlRlhf"));
+const MlDpo = lazy(() => import("./pages/MlDpo"));
+const MlGrpo = lazy(() => import("./pages/MlGrpo"));
+const MlRlaif = lazy(() => import("./pages/MlRlaif"));
+const DataCleaning = lazy(() => import("./pages/DataCleaning"));
+const DataAnalysis = lazy(() => import("./pages/DataAnalysis"));
+const BivariateAnalysis = lazy(() => import("./pages/BivariateAnalysis"));
+const InferentialStatistics = lazy(() => import("./pages/InferentialStatistics"));
+const CentralLimitTheorem = lazy(() => import("./pages/CentralLimitTheorem"));
+const HypothesisTesting = lazy(() => import("./pages/HypothesisTesting"));
 const GenAiPeft = lazy(() => import("./pages/GenAiPeft"));
 const GenAiLora = lazy(() => import("./pages/GenAiLora"));
 const GenAiQlora = lazy(() => import("./pages/GenAiQlora"));
@@ -98,9 +109,6 @@ const AgentsA2A = lazy(() => import("./pages/AgentsA2A"));
 const AgentsDebugging = lazy(() => import("./pages/AgentsDebugging"));
 const TopicGraph = lazy(() => import("./pages/TopicGraph"));
 const QuizIndex = lazy(() => import("./pages/QuizIndex"));
-const LlmMoe = lazy(() => import("./pages/LlmMoe"));
-const LlmLcm = lazy(() => import("./pages/LlmLcm"));
-const LlmLam = lazy(() => import("./pages/LlmLam"));
 
 const LlmInference = lazy(() => import("./pages/LlmInference"));
 const InteractiveIndex = lazy(() => import("./pages/InteractiveIndex"));
@@ -190,12 +198,11 @@ function App() {
         <Route path="/rag/vs-fine-tuning" element={<RagVsFineTuning />} />
 
         <Route path="/llms" element={<LlmIndex />} />
-        <Route path="/llms/llm-type" element={<LlmType />} />
-        <Route path="/llms/vlm-type" element={<LlmVlm />} />
-        <Route path="/llms/slm-type" element={<LlmSlm />} />
-        <Route path="/llms/moe-type" element={<LlmMoe />} />
-        <Route path="/llms/lcm-type" element={<LlmLcm />} />
-        <Route path="/llms/lam-type" element={<LlmLam />} />
+        <Route path="/llms/types" element={<LlmModelTypes />} />
+        {/* The six model types used to be separate pages; old links land on their section. */}
+        {["llm", "vlm", "slm", "moe", "lcm", "lam"].map((t) => (
+          <Route key={t} path={`/llms/${t}-type`} element={<Navigate to={`/llms/types#${t}`} replace />} />
+        ))}
 
         <Route path="/genai" element={<GenAiIndex />} />
         <Route path="/genai/fine-tuning" element={<GenAiFineTuning />} />
@@ -239,6 +246,19 @@ function App() {
         <Route path="/ml/gans" element={<MlGans />} />
         <Route path="/ml/mamba" element={<MlMamba />} />
         <Route path="/ml/rwkv" element={<MlRwkv />} />
+        <Route path="/ml/data-sourcing" element={<DataSourcing />} />
+        <Route path="/ml/naive-bayes" element={<MlNaiveBayes />} />
+        <Route path="/ml/reinforcement-learning" element={<MlReinforcement />} />
+        <Route path="/ml/rlhf" element={<MlRlhf />} />
+        <Route path="/ml/dpo" element={<MlDpo />} />
+        <Route path="/ml/grpo" element={<MlGrpo />} />
+        <Route path="/ml/rlaif" element={<MlRlaif />} />
+        <Route path="/ml/data-cleaning" element={<DataCleaning />} />
+        <Route path="/ml/data-analysis" element={<DataAnalysis />} />
+        <Route path="/ml/bivariate-analysis" element={<BivariateAnalysis />} />
+        <Route path="/ml/inferential-statistics" element={<InferentialStatistics />} />
+        <Route path="/ml/central-limit-theorem" element={<CentralLimitTheorem />} />
+        <Route path="/ml/hypothesis-testing" element={<HypothesisTesting />} />
 
         <Route path="/models" element={<ModelsIndex />} />
         <Route path="/models/claude" element={<ModelsClaude />} />

@@ -543,5 +543,442 @@ QUIZZES.push({
   ],
 });
 
+QUIZZES.push({
+  id: "data-prep",
+  topic: "Data",
+  label: "Data Sourcing, Cleaning & Analysis",
+  path: "/ml/data-sourcing",
+  icon: "🧹",
+  tone: "emerald",
+  questions: [
+    {
+      q: "Your survey only reaches customers who used the app this week. You grow it from 200 to 20,000 responses. What happens to the bias in your satisfaction estimate?",
+      options: [
+        "It shrinks by a factor of ten",
+        "It disappears once n passes 1,000",
+        "It stays the same — only the spread of the estimate shrinks",
+        "It grows, because big samples amplify bias",
+      ],
+      answer: 2,
+      why: "Sample size controls variance, not bias. Every one of those 20,000 people comes from the same filtered group, so the estimate converges — precisely — on the wrong number. Fix the sampling method, not the count.",
+    },
+    {
+      q: "Two annotators agree on 92% of fraud labels. About 95% of items are not fraud. What should you check before trusting the labels?",
+      options: [
+        "Nothing — 92% agreement is excellent",
+        "Cohen's kappa, because two people who both say 'not fraud' almost always will agree by chance",
+        "Whether the annotators were paid enough",
+        "The number of features in the dataset",
+      ],
+      answer: 1,
+      why: "When one class dominates, chance agreement is huge. Kappa subtracts it out. Agreement of 92% on a 95/5 split can correspond to a kappa near zero — the annotators may not agree on a single actual fraud case.",
+    },
+    {
+      q: "An income column has a mean of ₹5.4 lakh and a median of ₹67,000. What is the most likely explanation?",
+      options: [
+        "The data is left-skewed",
+        "A few extreme values (or errors) are dragging the mean up",
+        "The median was computed incorrectly",
+        "Income is normally distributed",
+      ],
+      answer: 1,
+      why: "The mean uses every value, so a handful of huge incomes — or a typo like an extra three zeros — pull it far above the typical value. The median ignores how extreme the extremes are. A gap this large is a cue to look for outliers.",
+    },
+    {
+      q: "You fill missing values with the column median, computed on the full dataset, then split into train and test. What is wrong?",
+      options: [
+        "Nothing, the median is robust",
+        "The median should have been the mean",
+        "Test-set values influenced a statistic used in training — a small leak",
+        "Imputation must always happen after model training",
+      ],
+      answer: 2,
+      why: "Any statistic learned from data — medians, scaling parameters, outlier fences — must be fitted on training data only and then reused on test data. Otherwise the test set is no longer unseen. Putting the imputer inside a scikit-learn Pipeline makes this automatic.",
+    },
+    {
+      q: "High earners tend to skip the income question. Which statement is right?",
+      options: [
+        "The data is missing completely at random, so dropping rows is fine",
+        "Median imputation will fix it",
+        "It is missing not at random: every simple method is biased, so flag it and state the limitation",
+        "It cannot affect a model",
+      ],
+      answer: 2,
+      why: "When missingness depends on the missing value itself (MNAR), the observed values are systematically lower than the truth, and anything estimated from them inherits that. Predicting from related columns helps partially; an indicator column lets the model use the missingness itself.",
+    },
+    {
+      q: "Pearson's r between two variables is 0.02. What can you conclude?",
+      options: [
+        "The variables are unrelated",
+        "There is no straight-line relationship — there could still be a strong curved one",
+        "One variable causes the other",
+        "The data contains outliers",
+      ],
+      answer: 1,
+      why: "Pearson's r only measures linear association. A perfect U-shape gives r ≈ 0 because the rising and falling halves cancel. Plot the scatter before concluding anything — Anscombe's quartet is the classic demonstration.",
+    },
+    {
+      q: "Ice cream sales strongly predict drownings. Which is true?",
+      options: [
+        "Reducing ice cream sales would reduce drownings",
+        "The correlation must be a data error",
+        "Both follow temperature — fine for prediction, useless for deciding what to change",
+        "Drownings cause ice cream sales",
+      ],
+      answer: 2,
+      why: "A confounder drives both. The correlation is real and can genuinely help predict drownings, but intervening on ice cream does nothing. Questions of the form 'if we change X, will Y change?' need causal evidence, usually an experiment.",
+    },
+  ],
+});
+
+QUIZZES.push({
+  id: "stats-inference",
+  topic: "Statistics",
+  label: "Inference, CLT & Hypothesis Tests",
+  path: "/ml/hypothesis-testing",
+  icon: "📊",
+  tone: "blue",
+  questions: [
+    {
+      q: "A 95% confidence interval for average commute is 48–56 minutes. What does the 95% refer to?",
+      options: [
+        "There is a 95% chance the true mean is between 48 and 56",
+        "95% of commuters take 48–56 minutes",
+        "95% of intervals built by this method would contain the true mean",
+        "The sample mean is 95% accurate",
+      ],
+      answer: 2,
+      why: "The true mean is fixed; this particular interval either contains it or not. The 95% describes the procedure's long-run hit rate. It is also not about individual commuters — that would be a much wider prediction interval.",
+    },
+    {
+      q: "You want to halve the margin of error of a survey. How many more people do you need?",
+      options: ["Twice as many", "Four times as many", "Ten times as many", "It depends on the population size"],
+      answer: 1,
+      why: "The margin of error scales with 1/√n. Halving it means √n must double, so n must quadruple. For a random sample the population size barely matters, which surprises most people.",
+    },
+    {
+      q: "What does the Central Limit Theorem actually promise?",
+      options: [
+        "Large datasets are normally distributed",
+        "The mean of a large enough sample is approximately normal, with spread σ/√n, whatever the population's shape (given finite variance)",
+        "Every statistic, including the median and max, becomes normal",
+        "Samples of 30 are always enough",
+      ],
+      answer: 1,
+      why: "It is a statement about averages, not about the data. Your incomes stay skewed; the average of many incomes becomes bell-shaped. It needs finite variance (the Cauchy distribution breaks it), and 30 is only a rough rule — skewed data needs more.",
+    },
+    {
+      q: "A test gives p = 0.03. Which reading is correct?",
+      options: [
+        "There is a 3% chance the null hypothesis is true",
+        "There is a 97% chance the effect is real",
+        "If there were no effect, data at least this extreme would turn up about 3% of the time",
+        "The effect is small",
+      ],
+      answer: 2,
+      why: "A p-value is P(data this extreme | H₀), not P(H₀ | data). Turning one into the other needs prior information the test does not use. It also says nothing about how large the effect is.",
+    },
+    {
+      q: "A team checks 20 metrics after an experiment. One shows p = 0.04 and gets reported as the win. What is the problem?",
+      options: [
+        "Nothing, 0.04 is below 0.05",
+        "With 20 tests, about one false positive is expected even if nothing changed",
+        "They should have used a one-sided test",
+        "p-values cannot be computed for 20 metrics",
+      ],
+      answer: 1,
+      why: "At α = 0.05, twenty independent tests of nothing produce at least one 'significant' result about 64% of the time. Choose one primary metric in advance, or correct for multiple comparisons (Bonferroni: use 0.05/20).",
+    },
+    {
+      q: "An A/B test with 800,000 users finds conversion rose from 10.0% to 10.2%, p = 0.003. What should you conclude?",
+      options: [
+        "The change is a huge success",
+        "The lift is probably real, but whether 0.2 points is worth it is a separate, practical question",
+        "The result is invalid because the sample is too large",
+        "Nothing, because p-values over 0.001 are unreliable",
+      ],
+      answer: 1,
+      why: "Statistical significance only says the effect is unlikely to be zero. With enough data, trivially small effects become significant. The confidence interval for the lift tells you the plausible size, which is what the business decision needs.",
+    },
+    {
+      q: "You lower α from 0.05 to 0.01 and keep the same sample size. What happens?",
+      options: [
+        "Both error rates fall",
+        "False positives become rarer, but you miss more real effects (power falls)",
+        "Power rises",
+        "Nothing changes except the p-value",
+      ],
+      answer: 1,
+      why: "A stricter threshold moves the critical value outward. Fewer false alarms, but more real effects fall short of it — Type II error rises. Only more data, or a larger true effect, reduces both at once.",
+    },
+  ],
+});
+
+QUIZZES.push({
+  id: "ml-classic",
+  topic: "Regression & Classification",
+  label: "Linear, Logistic & Naive Bayes",
+  path: "/ml/multiple-regression",
+  icon: "📈",
+  tone: "indigo",
+  questions: [
+    {
+      q: "In a house-price model, the bedrooms coefficient is +$68,000 on its own but −$12,000 once square feet is added. Which is right?",
+      options: [
+        "The first — the second is a fitting error",
+        "The second — the first is a fitting error",
+        "Both: the first compares houses of any size, the second holds size fixed",
+        "Neither, because the sign flipped",
+      ],
+      answer: 2,
+      why: "Bedrooms and area are correlated, so on its own the bedrooms coefficient mostly measures the value of extra space. In the multiple model it means one more bedroom for a house of the same size — smaller rooms — which can genuinely lower the price. Coefficients depend on what else is in the model.",
+    },
+    {
+      q: "You add a column of pure random numbers to a regression. What happens to R² and adjusted R² on the training data?",
+      options: [
+        "Both fall",
+        "R² rises slightly (or stays the same); adjusted R² usually falls",
+        "Both rise",
+        "Neither changes",
+      ],
+      answer: 1,
+      why: "Least squares can always use an extra column to shave a little training error, so R² never decreases. Adjusted R² charges a penalty per feature and only rises when a feature explains more than chance would. Held-out error is the honest judge.",
+    },
+    {
+      q: "Two features have VIFs of 7 and 7. What does that tell you?",
+      options: [
+        "The model's predictions are wrong",
+        "Each feature is largely predictable from the other, so their individual coefficients are unstable",
+        "Both features should be dropped",
+        "The residuals are not normal",
+      ],
+      answer: 1,
+      why: "VIF = 1/(1 − R²) from regressing a feature on the others; 7 means R² ≈ 0.86. Predictions can still be good, but the model cannot cleanly split credit between them, so their coefficients have wide intervals. Combine them, drop one, or regularise.",
+    },
+    {
+      q: "A logistic regression coefficient for 'number of support tickets' is 0.7. What does it mean?",
+      options: [
+        "Each extra ticket adds 0.7 to the churn probability",
+        "Each extra ticket adds 70 percentage points to churn probability",
+        "Each extra ticket multiplies the odds of churning by e^0.7 ≈ 2",
+        "Customers with tickets churn 70% of the time",
+      ],
+      answer: 2,
+      why: "The model is linear in log-odds, so β adds to the log-odds and multiplies the odds by e^β. The effect on probability depends on the starting point — near 0.5 it is large, near 0 or 1 it is small — which is why odds ratios are the standard way to report it.",
+    },
+    {
+      q: "Your fraud model has 95% accuracy on data where 5% of transactions are fraud. What should you check?",
+      options: [
+        "Nothing, 95% is excellent",
+        "Precision and recall on the fraud class — predicting 'never fraud' also scores 95%",
+        "Whether the learning rate was too high",
+        "The R² of the model",
+      ],
+      answer: 1,
+      why: "With imbalanced classes, accuracy is dominated by the majority. Recall tells you how much fraud you catch, precision how many of your flags are real. Then pick a threshold based on what a miss and a false alarm each cost.",
+    },
+    {
+      q: "A disease affects 1% of people. A test is 95% sensitive and 95% specific. You test positive. Roughly how likely are you to have it?",
+      options: ["95%", "About 50%", "About 16%", "1%"],
+      answer: 2,
+      why: "Of 10,000 people, 100 are sick and 95 test positive. Of the 9,900 healthy, 5% — 495 — also test positive. So 95 of 590 positives are real: about 16%. The prior matters enormously; ignoring it is the base-rate fallacy, and Bayes' theorem is the correction.",
+    },
+    {
+      q: "Why does Naive Bayes use Laplace smoothing?",
+      options: [
+        "To speed up training",
+        "So a word never seen with a class does not give that class a probability of exactly zero",
+        "To make the features independent",
+        "To normalise the features",
+      ],
+      answer: 1,
+      why: "Probabilities are multiplied, so a single zero wipes out all other evidence. Adding α to every count gives unseen words a small, non-zero probability. It is the fix for the zero-frequency problem.",
+    },
+    {
+      q: "Naive Bayes assumes words are independent given the class, which is clearly false. What is the usual consequence?",
+      options: [
+        "The classifier stops working",
+        "Class rankings stay good but the probabilities are overconfident",
+        "It becomes slower to train",
+        "It overfits badly on small data",
+      ],
+      answer: 1,
+      why: "Correlated words are counted as separate evidence, pushing scores to extremes. The most likely class is usually still right, so accuracy holds up, but the probabilities are poorly calibrated. Calibrate them, or use logistic regression when you need trustworthy probabilities.",
+    },
+  ],
+});
+
+QUIZZES.push({
+  id: "rl-alignment",
+  topic: "Reinforcement Learning",
+  label: "RL, RLHF, DPO & GRPO",
+  path: "/ml/rlhf",
+  icon: "🎯",
+  tone: "rose",
+  questions: [
+    {
+      q: "A bandit agent with ε = 0 keeps pulling machine 1, which pays 25% of the time, while machine 3 pays 62%. Why?",
+      options: [
+        "Its learning rate is too high",
+        "It never explores, so it never collects enough evidence about the better machine",
+        "Machine 3 is broken",
+        "Greedy agents always find the best arm eventually",
+      ],
+      answer: 1,
+      why: "A purely greedy agent exploits whatever currently looks best. If machine 1 paid early, its estimate beats the untried machines and they are never pulled again. Some exploration is the price of discovering something better.",
+    },
+    {
+      q: "Q-learning is called off-policy. What does that mean in practice?",
+      options: [
+        "It does not use a policy at all",
+        "It learns the value of the best (greedy) behaviour while acting with a different, exploratory one",
+        "It can only learn from a human's demonstrations",
+        "It must discard data after every update",
+      ],
+      answer: 1,
+      why: "The update uses max Q(s′, ·) — the value of the best next action — regardless of which action the ε-greedy agent actually takes next. So it learns the optimal route even while still taking random steps, and can learn from replayed old experience.",
+    },
+    {
+      q: "Why does RLHF collect comparisons ('A is better than B') instead of asking people to score answers from 1 to 10?",
+      options: [
+        "Scores cannot be used to train a model",
+        "Comparisons are faster and far more consistent between people than absolute scores",
+        "Comparisons need no labellers",
+        "PPO can only read comparisons",
+      ],
+      answer: 1,
+      why: "People disagree wildly on what a '7' means but agree much more on which of two answers is better. The Bradley–Terry model turns those comparisons into a scalar reward model, which is what RL needs.",
+    },
+    {
+      q: "What is the KL penalty in RLHF for?",
+      options: [
+        "It speeds up training",
+        "It keeps the policy close to the SFT model, limiting how far it can exploit the reward model's blind spots",
+        "It replaces the reward model",
+        "It reduces the size of the model",
+      ],
+      answer: 1,
+      why: "The reward model is an imperfect proxy. Optimise it without limit and the policy drifts into answers the proxy over-scores — length, flattery — while true quality falls. The KL term charges for every step away from the reference, so the policy only moves where the reward gain is worth it.",
+    },
+    {
+      q: "What does DPO remove from the RLHF pipeline?",
+      options: [
+        "The preference data",
+        "The reference model",
+        "The separate reward model and the RL sampling loop — the policy's own log-probabilities act as an implicit reward",
+        "The supervised fine-tuning stage",
+      ],
+      answer: 2,
+      why: "The RLHF objective has a closed-form optimum, so the reward can be written as β·log π/π_ref. Substituting into the Bradley–Terry model gives a supervised loss on preference pairs. You still need pairs, a reference model and usually an SFT starting point.",
+    },
+    {
+      q: "In GRPO, all 8 sampled answers to a prompt are correct and get the same reward. What does the model learn from that prompt?",
+      options: [
+        "A lot — every answer is reinforced",
+        "Nothing — every advantage is zero, because each answer equals the group average",
+        "It learns to make the answers longer",
+        "It is penalised for being too easy",
+      ],
+      answer: 1,
+      why: "GRPO's baseline is the group mean. If every answer scores the same, reward minus mean is zero for all of them. The same is true when all are wrong. Learning signal only exists on prompts the model sometimes solves, which is why training data is filtered by difficulty.",
+    },
+    {
+      q: "What does PPO's clipping of the probability ratio achieve?",
+      options: [
+        "It makes the policy deterministic",
+        "It removes the incentive to change the policy by more than a small amount in one update, keeping training stable",
+        "It normalises the rewards",
+        "It prevents the value model from overfitting",
+      ],
+      answer: 1,
+      why: "Once π_new/π_old moves outside [1−ε, 1+ε] in the direction the advantage favours, the objective goes flat and the gradient disappears. Large, destabilising jumps get no reward — the same mechanism used when PPO fine-tunes language models.",
+    },
+    {
+      q: "An AI judge picks the first answer it reads 70% of the time, whichever it is. How should you use it to label preference data?",
+      options: [
+        "Always put the better answer first",
+        "Ask twice with the order swapped and keep only verdicts that agree",
+        "Use a smaller judge model",
+        "Ignore it — position bias averages out",
+      ],
+      answer: 1,
+      why: "Position bias turns order into a hidden input. Evaluating both orders exposes it: consistent verdicts reflect the answers, inconsistent ones reflect the order and should be dropped or sent to a person.",
+    },
+  ],
+});
+
+QUIZZES.push({
+  id: "genai-model-types",
+  topic: "Model Types",
+  label: "LLM, VLM, SLM, MoE & more",
+  path: "/llms/types",
+  icon: "🧩",
+  tone: "purple",
+  questions: [
+    {
+      q: "Llama 4 Maverick has about 400B total parameters and 17B active per token. At 8-bit, roughly how much memory do its weights need?",
+      options: ["About 17 GB", "About 400 GB", "About 34 GB", "It depends only on context length"],
+      answer: 1,
+      why: "Any token can be routed to any expert, so every expert must be resident. MoE gives you the compute cost of the active size and the memory cost of the total size.",
+    },
+    {
+      q: "Why does a full-HD screenshot cost so many more tokens than a small thumbnail when sent to a VLM?",
+      options: [
+        "Larger files are billed by the megabyte",
+        "The image is cut into fixed-size patches, and each patch (or small group) becomes a token",
+        "Screenshots contain hidden text",
+        "VLMs re-encode images several times",
+      ],
+      answer: 1,
+      why: "Tokens scale with the number of patches, which scales with pixel area. That is why cropping to the relevant region is the cheapest optimisation for vision workloads.",
+    },
+    {
+      q: "Chinchilla suggests about 20 training tokens per parameter, yet Llama 3 8B was trained on 15 trillion tokens. Why?",
+      options: [
+        "Chinchilla was wrong",
+        "The extra data was mostly duplicates",
+        "Serving cost dominates: a smaller model trained longer is cheaper to run for billions of requests",
+        "Bigger datasets make models smaller",
+      ],
+      answer: 2,
+      why: "Chinchilla's rule optimises the training budget alone. Once a model will be used heavily, spending more on training to get a smaller model that is just as good saves far more at inference time.",
+    },
+    {
+      q: "In a large dense LLM such as Llama 3 70B, where do most of the parameters live?",
+      options: ["The embedding table", "The attention layers", "The MLP (feed-forward) layers", "The tokenizer"],
+      answer: 2,
+      why: "Each block's MLP expands to a hidden size several times the model width with three weight matrices, so the MLPs hold roughly two-thirds of the parameters. The vocabulary is a small share in big models.",
+    },
+    {
+      q: "What does a Large Concept Model predict at each step?",
+      options: [
+        "The next token",
+        "The next sentence, as a vector in a language-independent embedding space",
+        "The next action on screen",
+        "A probability for each answer you supply",
+      ],
+      answer: 1,
+      why: "Meta's LCM works on sentence embeddings (SONAR), then a decoder writes each sentence out — in any supported language. It is a research prototype, not a production architecture.",
+    },
+    {
+      q: "An action model completes each step correctly 95% of the time. Roughly how often does it finish a 20-step task?",
+      options: ["95%", "About 80%", "About 36%", "About 5%"],
+      answer: 2,
+      why: "Errors compound: 0.95²⁰ ≈ 0.36. This is why agents check the result of each action and recover from mistakes rather than relying on per-step accuracy alone.",
+    },
+    {
+      q: "Which statement about model 'types' is accurate?",
+      options: [
+        "A model is exactly one type — LLM, VLM, SLM or MoE",
+        "They describe different axes — size, architecture, input, output — so one model can be several at once",
+        "MoE models cannot read images",
+        "Small models are always dense",
+      ],
+      answer: 1,
+      why: "Gemma 4 26B A4B, for example, is a mixture of experts, relatively small, and multimodal. The labels answer different questions about the same model.",
+    },
+  ],
+});
+
 export const findQuiz = (id) => QUIZZES.find((q) => q.id === id);
 export const questionsFor = (id) => findQuiz(id)?.questions ?? [];

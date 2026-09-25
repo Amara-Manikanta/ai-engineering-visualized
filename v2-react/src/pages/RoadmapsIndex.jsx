@@ -32,6 +32,27 @@ const PATHS = [
     ],
   },
   {
+    id: "data",
+    emoji: "📊",
+    name: "Data & Statistics",
+    tagline: "Before any model",
+    blurb:
+      "The groundwork every model rests on: getting data, cleaning it, understanding it, and knowing when a pattern is real.",
+    accent: { text: "text-sky-400", bg: "bg-sky-500/10", border: "border-sky-500/40", dot: "bg-sky-500" },
+    steps: [
+      { t: "Data sourcing", p: "/ml/data-sourcing", why: "Where data comes from, sampling bias, and labeller agreement." },
+      { t: "Data cleaning", p: "/ml/data-cleaning", why: "Duplicates, types, impossible values, outliers and missing data." },
+      { t: "Data analysis (EDA)", p: "/ml/data-analysis", why: "Centre, spread and shape of every column, before you model." },
+      { t: "Bivariate analysis", p: "/ml/bivariate-analysis", why: "Correlation, crosstabs, ANOVA — and why correlation is not causation." },
+      { t: "Inferential statistics", p: "/ml/inferential-statistics", why: "From a sample to the population, with confidence intervals." },
+      { t: "Central limit theorem", p: "/ml/central-limit-theorem", why: "Why averages are bell-shaped, and when that fails." },
+      { t: "Hypothesis testing", p: "/ml/hypothesis-testing", why: "p-values, power, A/B tests and the multiple-testing trap." },
+      { t: "Multiple linear regression", p: "/ml/multiple-regression", why: "Your first model, with statistics you can now interpret." },
+      { t: "Logistic regression", p: "/ml/logistic-regression", why: "Probabilities, thresholds, confusion matrices and ROC." },
+      { t: "Naive Bayes", p: "/ml/naive-bayes", why: "Bayes' theorem turned into a fast text classifier." },
+    ],
+  },
+  {
     id: "ai-engineer",
     emoji: "🟡",
     name: "AI Engineer",
@@ -69,6 +90,8 @@ const PATHS = [
     steps: [
       { t: "Supervised learning", p: "/ml/supervised", why: "Bias/variance, cross-validation, and honest evaluation." },
       { t: "Linear & logistic regression", p: "/ml/linear-regression", why: "Gradient descent and the loss surface, on the simplest possible model." },
+      { t: "Multiple linear regression", p: "/ml/multiple-regression", why: "Fit real coefficients, read residual plots, and spot multicollinearity." },
+      { t: "Naive Bayes", p: "/ml/naive-bayes", why: "Bayes' theorem as a classifier — build a spam filter by counting words." },
       { t: "Unsupervised learning", p: "/ml/unsupervised", why: "Clustering and dimensionality reduction." },
       { t: "Decision trees & KNN", p: "/ml/decision-trees", why: "The non-parametric family, and why ensembles beat single trees." },
       { t: "Support vector machines", p: "/ml/svm", why: "Margin geometry and the kernel trick, both computed live." },
@@ -86,7 +109,10 @@ const PATHS = [
       { t: "PEFT & LoRA", p: "/genai/peft", why: "The parameter and memory arithmetic that makes large fine-tunes possible." },
       { t: "Quantization", p: "/genai/quantization", why: "Trading precision for memory, and where quality actually degrades." },
       { t: "Distillation", p: "/genai/distillation", why: "Teaching a small model from a large one, and what temperature exposes." },
-      { t: "RLHF & alignment", p: "/animations", why: "SFT → reward model → PPO, and why the KL penalty matters." },
+      { t: "Reinforcement learning", p: "/ml/reinforcement-learning", why: "Bandits, Q-learning and PPO — the machinery behind alignment." },
+      { t: "RLHF & alignment", p: "/ml/rlhf", why: "SFT → reward model → PPO, and why the KL penalty matters." },
+      { t: "DPO", p: "/ml/dpo", why: "The same goal as RLHF with a single supervised loss." },
+      { t: "GRPO & verifiable rewards", p: "/ml/grpo", why: "How reasoning models are trained with checkable answers." },
     ],
   },
   {

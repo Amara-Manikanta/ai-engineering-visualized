@@ -1,7 +1,18 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import GuideLayout from "../components/GuideLayout";
 import CodeBlock from "../components/CodeBlock";
+import KnowledgeCheck from "../components/KnowledgeCheck";
+import { questionsFor } from "../data/quizBank";
+import { Panel, Slider, Metric, Button, Scatter, Card } from "../components/VizKit";
+import { rng, randn, fmt, pct } from "../lib/stats";
+
+export const SEARCH_KEYWORDS = [
+  "logistic regression", "sigmoid", "log loss", "binary cross-entropy", "odds", "log-odds", "logit", "odds ratio",
+  "decision boundary", "gradient descent", "threshold", "confusion matrix", "precision", "recall", "F1 score",
+  "ROC curve", "AUC", "softmax", "multinomial logistic regression", "one-vs-rest", "regularization", "C parameter",
+  "class_weight", "imbalanced classes",
+];
 
 const sigmoid = (z) => 1 / (1 + Math.exp(-z));
 
@@ -118,13 +129,345 @@ function WhyNotLinear() {
   );
 }
 
+/* ---------------------------------------------------------------------------
+   Odds and log-odds: why coefficients multiply odds, not probabilities.
+--------------------------------------------------------------------------- */
+
+function OddsLab() {
+  const [p, setP] = useState(0.2);
+  const [beta, setBeta] = useState(0.7);
+  const odds = p / (1 - p);
+  const logit = Math.log(odds);
+  const or = Math.exp(beta);
+  const odds2 = odds * or;
+  const p2 = odds2 / (1 + odds2);
+  return (
+    <Panel tone="purple" title="Probability, odds and log-odds">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <Slider tone="purple" label="Starting probability p" value={p} min={0.02} max={0.98} step={0.01} onChange={setP} format={(v) => v.toFixed(2)} />
+        <Slider tone="purple" label="Coefficient β (per unit of x)" value={beta} min={-2} max={2} step={0.05} onChange={setBeta} format={(v) => v.toFixed(2)} />
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-3 items-center mb-4">
+        <div className="grid grid-cols-3 gap-2">
+          <Metric label="p" value={p.toFixed(2)} />
+          <Metric label="odds p/(1−p)" value={fmt(odds, 3)} />
+          <Metric label="log-odds" value={fmt(logit, 2)} tone="purple" />
+        </div>
+        <div className="text-center text-sm text-gray-400 font-mono">
+          x + 1 →<br />
+          <span className="text-purple-300">odds × e^β = × {fmt(or, 2)}</span>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          <Metric label="new p" value={p2.toFixed(3)} tone="emerald" />
+          <Metric label="new odds" value={fmt(odds2, 3)} />
+          <Metric label="new log-odds" value={fmt(logit + beta, 2)} tone="purple" />
+        </div>
+      </div>
+      <p className="text-xs text-gray-500 leading-relaxed m-0">
+        The model is linear in log-odds: one more unit of x always adds β to the log-odds, which always multiplies the
+        odds by e^β. What it does to the probability depends on where you start — try p = 0.5 and p = 0.95 with the
+        same β. That is why coefficients are reported as odds ratios.
+      </p>
+    </Panel>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Watch gradient descent fit a boundary on 2D data.
+--------------------------------------------------------------------------- */
+
+const STUDY = (() => {
+  const r = rng(17);
+  const pts = [];
+  for (let i = 0; i < 24; i++) pts.push({ x: 6.4 + 1.3 * randn(r), y: 6.2 + 1.3 * randn(r), c: 1 });
+  for (let i = 0; i < 24; i++) pts.push({ x: 3.6 + 1.3 * randn(r), y: 3.4 + 1.3 * randn(r), c: 0 });
+  return pts.map((p) => ({ ...p, x: Math.max(0.3, Math.min(9.7, p.x)), y: Math.max(0.3, Math.min(9.7, p.y)) }));
+})();
+// Standardise around (5, 5) with scale 2.5 so plain gradient descent behaves.
+const zx = (v) => (v - 5) / 2.5;
+
+function lossAndGrad(w) {
+  let loss = 0;
+  const g = [0, 0, 0];
+  let correct = 0;
+  STUDY.forEach((p) => {
+    const f = [1, zx(p.x), zx(p.y)];
+    const q = sigmoid(w[0] + w[1] * f[1] + w[2] * f[2]);
+    const e = Math.min(1 - 1e-12, Math.max(1e-12, q));
+    loss -= p.c * Math.log(e) + (1 - p.c) * Math.log(1 - e);
+    for (let j = 0; j < 3; j++) g[j] += (q - p.c) * f[j];
+    if ((q >= 0.5 ? 1 : 0) === p.c) correct++;
+  });
+  const n = STUDY.length;
+  return { loss: loss / n, grad: g.map((v) => v / n), acc: correct / n };
+}
+
+function TrainLab() {
+  const [lr, setLr] = useState(0.5);
+  const [state, setState] = useState({ w: [0, -1.5, 0.4], epoch: 0, hist: [] });
+  const [playing, setPlaying] = useState(false);
+
+  const stepN = (k) =>
+    setState((s) => {
+      let w = s.w;
+      const hist = [...s.hist];
+      for (let i = 0; i < k; i++) {
+        const { loss, grad } = lossAndGrad(w);
+        hist.push(loss);
+        w = w.map((v, j) => v - lr * grad[j]);
+      }
+      return { w, epoch: s.epoch + k, hist: hist.slice(-400) };
+    });
+
+  useEffect(() => {
+    if (!playing) return undefined;
+    if (state.epoch >= 400) {
+      setPlaying(false);
+      return undefined;
+    }
+    const id = setTimeout(() => stepN(4), 50);
+    return () => clearTimeout(id);
+  }, [playing, state.epoch]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const { loss, acc } = lossAndGrad(state.w);
+  const [b, w1, w2] = state.w;
+  // Boundary b + w1·zx(x) + w2·zx(y) = 0, drawn in raw units.
+  const yAt = (x) => 5 + (2.5 * -(b + w1 * zx(x))) / (w2 || 1e-9);
+  const cells = [];
+  for (let i = 0; i < 20; i++)
+    for (let j = 0; j < 20; j++) {
+      const cx = (i + 0.5) / 2;
+      const cy = (j + 0.5) / 2;
+      cells.push({ cx, cy, q: sigmoid(b + w1 * zx(cx) + w2 * zx(cy)) });
+    }
+  const hist = state.hist;
+  const hMax = Math.max(0.8, ...hist);
+
+  return (
+    <Panel
+      tone="emerald"
+      title="Watch gradient descent find the boundary"
+      actions={
+        <>
+          <Button tone="emerald" onClick={() => setPlaying((p) => !p)}>{playing ? "Pause" : "▶ Train"}</Button>
+          <Button tone="emerald" onClick={() => stepN(1)}>Step 1 epoch</Button>
+          <Button tone="emerald" onClick={() => { setPlaying(false); setState({ w: [0, -1.5, 0.4], epoch: 0, hist: [] }); }}>Reset</Button>
+        </>
+      }
+    >
+      <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+        48 students: hours studied (x) and practice tests taken (y); green passed, grey failed. The model starts with a
+        deliberately bad boundary. Each epoch computes the log-loss gradient over all students and takes one step
+        downhill. Background colour is the predicted probability of passing.
+      </p>
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-5 items-start">
+        <div className="rounded-xl bg-black/40 border border-white/10 p-2 max-w-xl">
+          <Scatter
+            points={[]}
+            x={[0, 10]}
+            y={[0, 10]}
+            xLabel="hours studied"
+            yLabel="practice tests"
+          >
+            {({ sx, sy }) => (
+              <>
+                {cells.map((c, i) => (
+                  <rect key={i} x={sx(c.cx - 0.25)} y={sy(c.cy + 0.25)} width={sx(0.5) - sx(0)} height={sy(0) - sy(0.5)} fill={`rgba(52,211,153,${(c.q * 0.35).toFixed(3)})`} />
+                ))}
+                <line x1={sx(0)} y1={sy(yAt(0))} x2={sx(10)} y2={sy(yAt(10))} stroke="#f472b6" strokeWidth="2.5" />
+                {STUDY.map((p, i) => (
+                  <circle key={`p${i}`} cx={sx(p.x)} cy={sy(p.y)} r="4.5" fill={p.c ? "#34d399" : "#94a3b8"} stroke="rgba(0,0,0,0.6)" />
+                ))}
+              </>
+            )}
+          </Scatter>
+        </div>
+        <div className="space-y-3">
+          <Slider tone="emerald" label="Learning rate" value={lr} min={0.05} max={3} step={0.05} onChange={setLr} format={(v) => v.toFixed(2)} />
+          <div className="grid grid-cols-3 lg:grid-cols-1 gap-2">
+            <Metric label="Epoch" value={state.epoch} />
+            <Metric label="Log loss" value={fmt(loss, 4)} tone="rose" />
+            <Metric label="Accuracy" value={pct(acc, 0)} tone="emerald" />
+          </div>
+          <svg viewBox="0 0 240 70" className="w-full h-auto block rounded-lg bg-black/40 border border-white/10">
+            {hist.length > 1 && (
+              <path
+                d={hist.map((h, i) => `${i ? "L" : "M"}${(4 + (i / Math.max(1, hist.length - 1)) * 232).toFixed(1)},${(64 - (h / hMax) * 58).toFixed(1)}`).join("")}
+                fill="none"
+                stroke="#fb7185"
+                strokeWidth="1.8"
+              />
+            )}
+            <text x="6" y="12" fill="#6b7280" fontSize="10">loss over epochs</text>
+          </svg>
+        </div>
+      </div>
+      <p className="text-xs text-gray-500 leading-relaxed mt-4 mb-0">
+        Log loss is convex, so there is one valley and gradient descent reaches it from any start. Reset and train at a
+        learning rate of 3: it gets there in far fewer epochs. On badly scaled features the same step size would
+        overshoot and diverge, which is why inputs are standardised first. Loss keeps falling after accuracy stops
+        changing — the model is growing more confident about points it already classifies correctly.
+      </p>
+    </Panel>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Thresholds, the confusion matrix and the ROC curve.
+--------------------------------------------------------------------------- */
+
+const SCORED = (() => {
+  const r = rng(5);
+  const out = [];
+  for (let i = 0; i < 40; i++) out.push({ y: 1, s: sigmoid(1.3 + 1.4 * randn(r)) });
+  for (let i = 0; i < 160; i++) out.push({ y: 0, s: sigmoid(-1.6 + 1.4 * randn(r)) });
+  return out;
+})();
+
+function confusion(t) {
+  let tp = 0, fp = 0, fn = 0, tn = 0;
+  SCORED.forEach((d) => {
+    const pred = d.s >= t ? 1 : 0;
+    if (pred && d.y) tp++;
+    else if (pred && !d.y) fp++;
+    else if (!pred && d.y) fn++;
+    else tn++;
+  });
+  return { tp, fp, fn, tn };
+}
+
+const ROC = (() => {
+  const ts = [...new Set(SCORED.map((d) => d.s))].sort((a, b) => b - a);
+  const pts = [{ fpr: 0, tpr: 0 }];
+  ts.forEach((t) => {
+    const c = confusion(t);
+    pts.push({ fpr: c.fp / (c.fp + c.tn), tpr: c.tp / (c.tp + c.fn) });
+  });
+  pts.push({ fpr: 1, tpr: 1 });
+  let auc = 0;
+  for (let i = 1; i < pts.length; i++) auc += (pts[i].fpr - pts[i - 1].fpr) * (pts[i].tpr + pts[i - 1].tpr) / 2;
+  return { pts, auc };
+})();
+
+function ThresholdLab() {
+  const [t, setT] = useState(0.5);
+  const c = confusion(t);
+  const precision = c.tp + c.fp ? c.tp / (c.tp + c.fp) : 1;
+  const recall = c.tp / (c.tp + c.fn);
+  const f1 = precision + recall ? (2 * precision * recall) / (precision + recall) : 0;
+  const acc = (c.tp + c.tn) / SCORED.length;
+  const fpr = c.fp / (c.fp + c.tn);
+  const S = 150;
+  const px = (v) => 22 + v * S;
+  const py = (v) => 8 + (1 - v) * S;
+
+  const cell = (label, v, tone) => (
+    <div className={`rounded-lg border p-2 text-center ${tone}`}>
+      <div className="text-[0.625rem] text-gray-400 uppercase tracking-wide">{label}</div>
+      <div className="text-xl font-mono text-white">{v}</div>
+    </div>
+  );
+
+  return (
+    <Panel tone="blue" title="Fraud detection: where do you draw the line?">
+      <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+        200 transactions, 40 of them fraud, each scored by a logistic regression. The model outputs probabilities; the
+        threshold turns them into decisions. Nothing about the model changes when you move it.
+      </p>
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_210px] gap-5 items-start">
+        <div>
+          <Slider tone="blue" label="Decision threshold" value={t} min={0.02} max={0.98} step={0.01} onChange={setT} format={(v) => v.toFixed(2)} />
+          <div className="grid grid-cols-2 gap-2 mt-4 mb-3 max-w-sm">
+            {cell("fraud caught (TP)", c.tp, "border-emerald-500/30 bg-emerald-500/10")}
+            {cell("false alarm (FP)", c.fp, "border-rose-500/30 bg-rose-500/10")}
+            {cell("fraud missed (FN)", c.fn, "border-amber-500/30 bg-amber-500/10")}
+            {cell("correctly cleared (TN)", c.tn, "border-white/10 bg-white/5")}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <Metric label="Precision" value={pct(precision, 0)} tone="blue" sub="flags that were fraud" />
+            <Metric label="Recall" value={pct(recall, 0)} tone="emerald" sub="fraud that was flagged" />
+            <Metric label="F1" value={fmt(f1, 2)} tone="purple" />
+            <Metric label="Accuracy" value={pct(acc, 0)} />
+          </div>
+        </div>
+        <div>
+          <svg viewBox="0 0 180 186" className="w-full h-auto block max-w-[240px] mx-auto">
+            <rect x={px(0)} y={py(1)} width={S} height={S} fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.12)" />
+            <line x1={px(0)} y1={py(0)} x2={px(1)} y2={py(1)} stroke="rgba(255,255,255,0.18)" strokeDasharray="3 3" />
+            <path d={ROC.pts.map((p, i) => `${i ? "L" : "M"}${px(p.fpr).toFixed(1)},${py(p.tpr).toFixed(1)}`).join("")} fill="none" stroke="#60a5fa" strokeWidth="2" />
+            <circle cx={px(fpr)} cy={py(recall)} r="5" fill="#fbbf24" stroke="#000" />
+            <text x={px(0.5)} y="184" fill="#6b7280" fontSize="10" textAnchor="middle">false positive rate</text>
+            <text x="10" y={py(0.5)} fill="#6b7280" fontSize="10" textAnchor="middle" transform={`rotate(-90 10 ${py(0.5)})`}>true positive rate</text>
+            <text x={px(0.55)} y={py(0.12)} fill="#93c5fd" fontSize="11">AUC {ROC.auc.toFixed(3)}</text>
+          </svg>
+        </div>
+      </div>
+      <p className="text-xs text-gray-500 leading-relaxed mt-4 mb-0">
+        Lower the threshold and recall rises while precision falls; raise it and the reverse. The ROC curve traces
+        every threshold at once and the yellow dot is yours. AUC is the probability that a random fraud scores higher
+        than a random genuine transaction — a threshold-free measure of the model. Note that accuracy is{" "}
+        {pct((SCORED.length - 40) / SCORED.length, 0)} even for a model that never flags anything; with imbalanced
+        classes, look at precision and recall.
+      </p>
+    </Panel>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Softmax for more than two classes.
+--------------------------------------------------------------------------- */
+
+function SoftmaxLab() {
+  const [z, setZ] = useState([2.0, 1.0, -0.5]);
+  const names = ["billing", "technical", "sales"];
+  const colors = ["bg-indigo-500/70", "bg-emerald-500/70", "bg-amber-500/70"];
+  const m = Math.max(...z);
+  const e = z.map((v) => Math.exp(v - m));
+  const s = e.reduce((a, b) => a + b, 0);
+  const p = e.map((v) => v / s);
+  return (
+    <Panel tone="indigo" title="Softmax: logistic regression for k classes">
+      <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+        Route a support ticket to one of three teams. Each class gets its own linear score zₖ = bₖ + wₖ·x; softmax
+        turns the scores into probabilities that sum to 1: pₖ = e^zₖ / Σ e^zⱼ.
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+        {z.map((v, i) => (
+          <Slider key={i} label={`score for ${names[i]}`} value={v} min={-4} max={4} step={0.1} onChange={(nv) => setZ((o) => o.map((x, j) => (j === i ? nv : x)))} format={(x) => x.toFixed(1)} />
+        ))}
+      </div>
+      <div className="space-y-2">
+        {p.map((v, i) => (
+          <div key={i} className="flex items-center gap-3">
+            <span className="text-xs text-gray-400 w-20 shrink-0">{names[i]}</span>
+            <div className="flex-1 h-5 rounded bg-white/5 overflow-hidden">
+              <div className={`h-full ${colors[i]}`} style={{ width: `${v * 100}%`, transition: "width 250ms" }} />
+            </div>
+            <span className="text-xs font-mono text-gray-300 w-14 text-right">{pct(v)}</span>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-gray-500 leading-relaxed mt-4 mb-0">
+        With two classes, softmax reduces exactly to the sigmoid of the difference between the two scores. Adding the
+        same number to every score changes nothing — only differences matter. The same function turns an LLM's
+        logits into next-token probabilities.
+      </p>
+    </Panel>
+  );
+}
+
 export default function MlLogistic() {
   const toc = [
     { label: "Overview & Use Cases", hash: "overview" },
     { label: "Why Not Linear Regression?", hash: "why-not-linear" },
     { label: "The Sigmoid (interactive)", hash: "sigmoid" },
+    { label: "Odds & Log-odds", hash: "odds" },
     { label: "Training & Loss", hash: "training" },
+    { label: "Watch It Train", hash: "train-live" },
+    { label: "Thresholds, Confusion Matrix & ROC", hash: "threshold" },
     { label: "Interpreting Coefficients", hash: "interpretation" },
+    { label: "More Than Two Classes", hash: "multiclass" },
+    { label: "Regularisation & Imbalance", hash: "regularisation" },
     { label: "Pros & Cons", hash: "pros-cons" },
   ];
 
@@ -187,6 +530,18 @@ export default function MlLogistic() {
         </motion.section>
 
         {/* --------------------------------------------------------------- */}
+        <section id="odds" className="scroll-mt-24">
+          <h2 className="text-2xl font-bold mb-4 text-gray-100">Odds and Log-odds</h2>
+          <p className="text-gray-300 mb-6 leading-relaxed max-w-3xl">
+            The linear score z is not a probability — it is the <strong className="text-white">log-odds</strong>.
+            Odds are p / (1 − p): a probability of 0.8 is odds of 4 to 1. Taking the log stretches odds from (0, ∞)
+            onto the whole number line, which is exactly the range a linear formula produces. The sigmoid is just the
+            inverse of that log-odds transform.
+          </p>
+          <OddsLab />
+        </section>
+
+        {/* --------------------------------------------------------------- */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} id="training" className="scroll-mt-24">
           <h2 className="text-2xl font-bold mb-4 text-gray-100">Training & Loss Function</h2>
           <p className="text-gray-300 mb-6 leading-relaxed max-w-3xl">
@@ -228,6 +583,23 @@ print("accuracy:", clf.score(X_test, y_test))`} />
         </motion.section>
 
         {/* --------------------------------------------------------------- */}
+        <section id="train-live" className="scroll-mt-24">
+          <h2 className="text-2xl font-bold mb-4 text-gray-100">Watch It Train</h2>
+          <TrainLab />
+        </section>
+
+        {/* --------------------------------------------------------------- */}
+        <section id="threshold" className="scroll-mt-24">
+          <h2 className="text-2xl font-bold mb-4 text-gray-100">Thresholds, the Confusion Matrix and ROC</h2>
+          <p className="text-gray-300 mb-6 leading-relaxed max-w-3xl">
+            0.5 is only a default. The right threshold depends on what each mistake costs: missing fraud is expensive,
+            so a bank flags at a lower probability and accepts more false alarms. A spam filter that must never lose a
+            real email does the opposite.
+          </p>
+          <ThresholdLab />
+        </section>
+
+        {/* --------------------------------------------------------------- */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} id="interpretation" className="scroll-mt-24">
           <h2 className="text-2xl font-bold mb-4 text-gray-100">Interpreting Coefficients</h2>
           <p className="text-gray-300 mb-4 leading-relaxed max-w-3xl">
@@ -246,6 +618,33 @@ print("accuracy:", clf.score(X_test, y_test))`} />
             </p>
           </div>
         </motion.section>
+
+        {/* --------------------------------------------------------------- */}
+        <section id="multiclass" className="scroll-mt-24">
+          <h2 className="text-2xl font-bold mb-4 text-gray-100">More Than Two Classes</h2>
+          <p className="text-gray-300 mb-6 leading-relaxed max-w-3xl">
+            Two standard extensions. <strong className="text-white">One-vs-rest</strong> trains one binary model per
+            class and picks the most confident. <strong className="text-white">Multinomial (softmax)</strong>{" "}
+            regression trains all classes jointly — scikit-learn's default for more than two classes.
+          </p>
+          <SoftmaxLab />
+        </section>
+
+        {/* --------------------------------------------------------------- */}
+        <section id="regularisation" className="scroll-mt-24">
+          <h2 className="text-2xl font-bold mb-4 text-gray-100">Regularisation and Imbalance</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card title="C — inverse regularisation strength" tone="indigo">
+              <p>scikit-learn applies an L2 penalty by default. Smaller C means a stronger penalty and smaller coefficients. If the classes are perfectly separable, an unregularised model pushes weights toward infinity.</p>
+            </Card>
+            <Card title="L1 for feature selection" tone="purple">
+              <p><span className="font-mono">penalty="l1"</span> (with the liblinear or saga solver) drives weak features to exactly zero, leaving a sparse, readable model.</p>
+            </Card>
+            <Card title="class_weight=&quot;balanced&quot;" tone="amber">
+              <p>With 1% positives the model can score 99% accuracy by predicting "no" forever. Reweighting the rare class, or moving the threshold, fixes what the loss pays attention to.</p>
+            </Card>
+          </div>
+        </section>
 
         {/* --------------------------------------------------------------- */}
         <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} id="pros-cons" className="scroll-mt-24">
@@ -272,6 +671,7 @@ print("accuracy:", clf.score(X_test, y_test))`} />
           </div>
         </motion.section>
       </div>
+      <KnowledgeCheck questions={questionsFor("ml-classic")} />
     </GuideLayout>
   );
 }

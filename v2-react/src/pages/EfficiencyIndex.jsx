@@ -317,7 +317,7 @@ const GROUPS = [
         d: "A router sends each token to a few of many expert subnetworks. Mixtral holds 46.7B parameters but runs about 12.9B per token. Read the trade carefully: every expert must still be in memory, so this buys compute, not RAM.",
         fails:
           "Every expert must be resident, so this saves no memory at all. It also makes batching lumpier, since tokens in one batch may route to different experts.",
-        link: "#/llms/moe-type",
+        link: "#/llms/types#moe",
         linkLabel: "Mixture of Experts",
       },
       {

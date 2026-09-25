@@ -13,16 +13,26 @@ const itemVariants = {
 };
 
 const TOPICS = [
+  { group: 'Data & Statistics', tone: 'text-teal-400', border: 'hover:border-teal-500/50', items: [
+    { t: 'Data Sourcing', d: 'Where data comes from, and who it leaves out.', path: '/ml/data-sourcing', icon: '📥' },
+    { t: 'Data Cleaning', d: 'Duplicates, gaps, outliers — fixed step by step.', path: '/ml/data-cleaning', icon: '🧹' },
+    { t: 'Data Analysis (EDA)', d: 'Centre, spread and shape of each column.', path: '/ml/data-analysis', icon: '🔎' },
+    { t: 'Bivariate Analysis', d: 'Correlation, crosstabs, and confounders.', path: '/ml/bivariate-analysis', icon: '🔗' },
+    { t: 'Inferential Statistics', d: 'From a sample to the population, with error bars.', path: '/ml/inferential-statistics', icon: '📏' },
+    { t: 'Central Limit Theorem', d: 'Why averages are always bell-shaped.', path: '/ml/central-limit-theorem', icon: '🔔' },
+    { t: 'Hypothesis Testing', d: 'p-values, power and A/B tests.', path: '/ml/hypothesis-testing', icon: '⚖️' },
+  ]},
   { group: 'Foundations', tone: 'text-indigo-400', border: 'hover:border-indigo-500/50', items: [
     { t: 'Supervised Learning', d: 'Learn from labelled examples.', path: '/ml/supervised', icon: '🎯' },
     { t: 'Unsupervised Learning', d: 'Find structure with no labels.', path: '/ml/unsupervised', icon: '🧭' },
   ]},
   { group: 'Regression', tone: 'text-emerald-400', border: 'hover:border-emerald-500/50', items: [
     { t: 'Linear Regression', d: 'Fit a line to predict a number.', path: '/ml/linear-regression', icon: '📈' },
-    { t: 'Multiple Regression', d: 'Many features, one prediction.', path: '/ml/multiple-regression', icon: '🧮' },
+    { t: 'Multiple Linear Regression', d: 'Many features, one prediction.', path: '/ml/multiple-regression', icon: '🧮' },
   ]},
   { group: 'Classification', tone: 'text-blue-400', border: 'hover:border-blue-500/50', items: [
     { t: 'Logistic Regression', d: 'Predict a probability, then a class.', path: '/ml/logistic-regression', icon: '🔀' },
+    { t: 'Naive Bayes', d: "Bayes' theorem plus one bold shortcut.", path: '/ml/naive-bayes', icon: '📨' },
     { t: 'Decision Trees', d: 'If/else splits you can read.', path: '/ml/decision-trees', icon: '🌳' },
     { t: 'k-Nearest Neighbours', d: 'Classify by closest examples.', path: '/ml/knn', icon: '📍' },
     { t: 'Support Vector Machines', d: 'The widest gap between classes.', path: '/ml/svm', icon: '📐' },
@@ -41,15 +51,22 @@ const TOPICS = [
     { t: 'Mamba & SSMs', d: 'Recurrence that trains in parallel.', path: '/ml/mamba', icon: '🐍' },
     { t: 'RWKV', d: 'Attention with the query removed.', path: '/ml/rwkv', icon: '🔄' },
   ]},
+  { group: 'Reinforcement Learning & Alignment', tone: 'text-rose-400', border: 'hover:border-rose-500/50', items: [
+    { t: 'Reinforcement Learning', d: 'Learn from reward: bandits, Q-learning, PPO.', path: '/ml/reinforcement-learning', icon: '🕹️' },
+    { t: 'RLHF', d: 'Reward model from human comparisons, then PPO.', path: '/ml/rlhf', icon: '👍' },
+    { t: 'DPO & Variants', d: 'Preference tuning without RL.', path: '/ml/dpo', icon: '⚖️' },
+    { t: 'GRPO & RLVR', d: 'Group baselines and checkable rewards.', path: '/ml/grpo', icon: '🧮' },
+    { t: 'RLAIF & Constitutional AI', d: 'AI feedback guided by written principles.', path: '/ml/rlaif', icon: '📜' },
+  ]},
 ];
 
 const WORKFLOW = [
-  { n: 1, t: 'Collect', d: 'Gather relevant, representative data.' },
-  { n: 2, t: 'Preprocess', d: 'Handle missing values, encode, scale.' },
+  { n: 1, t: 'Collect', d: 'Gather relevant, representative data.', path: '/ml/data-sourcing' },
+  { n: 2, t: 'Preprocess', d: 'Handle missing values, encode, scale.', path: '/ml/data-cleaning' },
   { n: 3, t: 'Feature engineer', d: 'Create and select informative inputs.' },
   { n: 4, t: 'Select model', d: 'Pick an algorithm for the task.' },
   { n: 5, t: 'Train', d: 'Fit the model to the training set.' },
-  { n: 6, t: 'Evaluate', d: 'Score on held-out data.' },
+  { n: 6, t: 'Evaluate', d: 'Score on held-out data.', path: '/ml/hypothesis-testing' },
   { n: 7, t: 'Tune', d: 'Adjust hyperparameters to generalise.' },
   { n: 8, t: 'Deploy', d: 'Ship it and monitor in production.' },
 ];
@@ -74,8 +91,8 @@ export default function MlIndex() {
         <motion.section variants={itemVariants} id="topics" className="scroll-mt-24">
           <h2 className="text-2xl font-bold mb-2 text-gray-100">Topics in This Section</h2>
           <p className="text-gray-400 mb-6 max-w-3xl text-sm">
-            The ML curriculum, grouped by what each model does. Foundations first, then the two problem shapes
-            (regression and classification), then deep learning.
+            The ML curriculum, in learning order: working with data and statistics first, then the two problem
+            shapes (regression and classification), ensembles, deep learning, and learning from reward.
           </p>
           <div className="space-y-6">
             {TOPICS.map((group) => (
@@ -129,8 +146,8 @@ export default function MlIndex() {
         {/* ------------------------------------------------------------- */}
         <motion.section variants={itemVariants} id="supervised-vs-unsupervised-learning" className="scroll-mt-24">
           <h2 className="text-2xl font-bold mb-6 text-gray-100">Supervised vs Unsupervised</h2>
-          <div className="bg-[#111111] border border-white/10 rounded-xl overflow-hidden">
-            <table className="w-full text-left text-sm">
+          <div className="bg-[#111111] border border-white/10 rounded-xl overflow-x-auto">
+            <table className="w-full text-left text-sm [&_td]:p-3 [&_th]:p-3 sm:[&_td]:p-4 sm:[&_th]:p-4">
               <thead>
                 <tr className="bg-indigo-500/15 text-white">
                   <th className="p-4 border-b border-white/10">Feature</th>
@@ -174,7 +191,9 @@ export default function MlIndex() {
                   <span className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 flex items-center justify-center text-xs font-bold shrink-0">
                     {s.n}
                   </span>
-                  <h3 className="font-semibold text-white text-sm">{s.t}</h3>
+                  <h3 className="font-semibold text-white text-sm">
+                    {s.path ? <Link to={s.path} className="hover:text-indigo-300">{s.t} →</Link> : s.t}
+                  </h3>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed m-0">{s.d}</p>
               </motion.div>

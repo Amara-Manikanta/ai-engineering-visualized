@@ -12,6 +12,7 @@ const CAT_TONE = {
   Agents:       { text: "text-indigo-300",  chip: "border-indigo-500/40 bg-indigo-500/10" },
   Serving:      { text: "text-cyan-300",    chip: "border-cyan-500/40 bg-cyan-500/10" },
   ML:           { text: "text-rose-300",    chip: "border-rose-500/40 bg-rose-500/10" },
+  "Data & Stats": { text: "text-teal-300",  chip: "border-teal-500/40 bg-teal-500/10" },
 };
 
 function Highlight({ text, q }) {
